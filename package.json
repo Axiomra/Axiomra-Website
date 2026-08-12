@@ -1,0 +1,14 @@
+{
+  "name": "axiomra-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Run this file's scripts from the ROOT axiomra folder. It installs and runs the client and server for you — you do NOT need to cd into client/ or server/ yourself.",
+  "scripts": {
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "setup": "npm run install:client && npm run install:server",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "cd client && npm run build"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/components.json",
+  "name": "axiomra",
+  "framework": "react",
+  "src": "./src",
+  "components": {
+    "navbar": {
+      "component": " Navbar",
+      "path": "components/ui/navbar.tsx"
+    }
+  }
+}
