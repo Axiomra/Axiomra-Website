@@ -11,8 +11,8 @@ const badges = [
 
 export default function Awards() {
   return (
-    <section className="py-16 border-y border-mist bg-mist-50">
-      <div className="max-w-5xl mx-auto px-6 flex flex-wrap justify-center gap-10">
+    <section className="border-y border-line bg-surface-subtle py-20">
+      <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-12 px-4 sm:px-6">
         {badges.map((b, i) => (
           <motion.div
             key={b.label}
@@ -20,13 +20,21 @@ export default function Awards() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.06 }}
-            whileHover={{ y: -4 }}
-            className="flex flex-col items-center gap-2 w-28 text-center"
+            whileHover={{ y: -6 }}
+            className="group flex w-44 flex-col items-center gap-4 text-center"
           >
-            <div className="w-16 h-16 rounded-full bg-white shadow-card border border-mist flex items-center justify-center">
-              <b.icon size={26} className="text-periwinkle" strokeWidth={1.5} />
+            {/* The badge lights up on hover: brand fill, brand ring and a soft
+                glow behind it. */}
+            <div className="flex h-24 w-24 items-center justify-center rounded-full border border-line bg-surface-card shadow-card transition-all duration-300 group-hover:scale-105 group-hover:border-brand group-hover:bg-brand/10 group-hover:shadow-glow">
+              <b.icon
+                size={42}
+                className="text-brand transition-colors duration-300 group-hover:text-accent"
+                strokeWidth={1.5}
+              />
             </div>
-            <span className="text-[11px] text-ink-faint whitespace-pre-line leading-tight">{b.label}</span>
+            <span className="whitespace-pre-line text-base font-medium leading-snug text-content-dim transition-colors duration-300 group-hover:text-brand">
+              {b.label}
+            </span>
           </motion.div>
         ))}
       </div>

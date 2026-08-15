@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, animate } from "framer-motion";
-import { TrendingUp, ShieldCheck, Users, Lock } from "lucide-react";
+import { Cpu, TrendingUp, Users, ShieldCheck } from "lucide-react";
+import SectionHeading from "../components/SectionHeading";
 
 const points = [
-  { icon: TrendingUp, title: "Production-Grade Engineering", desc: "We build robust AI systems that handle real-world data at scale — reliable, secure, enterprise-ready." },
-  { icon: ShieldCheck, title: "Result-Driven Methodology", desc: "Every solution is designed to deliver a proven ROI within the first two quarters." },
+  { icon: Cpu, title: "Production-Grade Engineering", desc: "We build robust AI systems that handle real-world data at scale — reliable, secure, enterprise-ready." },
+  { icon: TrendingUp, title: "Result-Driven Methodology", desc: "Every solution is designed to deliver a proven ROI within the first two quarters." },
   { icon: Users, title: "100% In-House Expertise", desc: "Our dedicated team of 25+ AI specialists works directly with you from strategy to launch." },
-  { icon: Lock, title: "Ethical & Secure AI", desc: "Advanced security protocols protect your proprietary data and ensure compliance." },
+  { icon: ShieldCheck, title: "Ethical & Secure AI", desc: "Advanced security protocols protect your proprietary data and ensure compliance." },
 ];
 
 const stats = [
@@ -20,25 +21,41 @@ function Counter({ value, suffix }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [display, setDisplay] = useState(0);
+
   useEffect(() => {
     if (!inView) return;
-    const controls = animate(0, value, { duration: 1.8, ease: "easeOut", onUpdate: (v) => setDisplay(Math.floor(v)) });
+    const controls = animate(0, value, {
+      duration: 1.8,
+      ease: "easeOut",
+      onUpdate: (v) => setDisplay(Math.floor(v)),
+    });
     return () => controls.stop();
   }, [inView, value]);
-  return <span ref={ref} className="font-display font-semibold text-4xl md:text-5xl text-navy">{display}{suffix}</span>;
+
+  return (
+    // The final value is what matters to assistive tech; the count-up is decoration.
+    <span ref={ref} className="font-display text-4xl font-semibold text-content md:text-5xl">
+      <span aria-hidden="true">{display}{suffix}</span>
+      <span className="sr-only">{value}{suffix}</span>
+    </span>
+  );
 }
 
 export default function WhyUs() {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-24">
-      <div className="text-center max-w-2xl mx-auto mb-14">
-        <p className="text-xs font-mono uppercase tracking-widest text-teal-dark mb-3">Why choose us for your next big project?</p>
-        <h2 className="font-display font-semibold text-3xl md:text-4xl">
-          Partnering With Us Is A <span className="text-periwinkle">Strategic Move For Future</span>
-        </h2>
-      </div>
+    <section className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
+      <SectionHeading
+        className="mb-16"
+        eyebrow="Why choose us for your next big project?"
+        title={
+          <>
+            Partnering With Us Is A <span className="text-brand">Strategic Move For Future</span>
+          </>
+        }
+        subtitle="Production engineering, an in-house team, and a bias toward numbers you can audit."
+      />
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-20">
+      <div className="mb-20 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {points.map((p, i) => (
           <motion.div
             key={p.title}
@@ -46,22 +63,29 @@ export default function WhyUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="bg-white border border-mist rounded-xl2 p-6 shadow-card"
+            whileHover={{ y: -8 }}
+            className="group flex flex-col items-center rounded-xl2 border border-line bg-surface-card p-8 text-center shadow-card transition-[border-color,background-color,box-shadow] duration-300 [perspective:900px] hover:border-brand hover:bg-brand/5 hover:shadow-glow"
           >
-            <div className="w-11 h-11 rounded-full bg-periwinkle/10 flex items-center justify-center mb-4">
-              <p.icon size={20} className="text-periwinkle" strokeWidth={1.6} />
+            {/* The badge is a real 3D tile: it tilts on two axes and lifts
+                toward the viewer on hover, with a stacked shadow doing the
+                depth cue. */}
+            <div
+              className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-vivid to-brand transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(20deg)_rotateY(-20deg)_translateZ(16px)]"
+              style={{ boxShadow: "0 12px 30px -10px rgba(120,139,227,0.75)" }}
+            >
+              <p.icon size={28} className="text-inverse-fg drop-shadow" strokeWidth={1.8} />
             </div>
-            <h3 className="font-display text-base mb-2">{p.title}</h3>
-            <p className="text-sm text-ink-dim leading-relaxed">{p.desc}</p>
+            <h3 className="mb-2 font-display text-xl text-content transition-colors duration-300 group-hover:text-brand">{p.title}</h3>
+            <p className="text-base leading-relaxed text-content-dim transition-colors duration-300 group-hover:text-content">{p.desc}</p>
           </motion.div>
         ))}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div className="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
         {stats.map((s) => (
           <div key={s.label}>
             <Counter value={s.value} suffix={s.suffix} />
-            <p className="mt-2 text-sm text-ink-dim">{s.label}</p>
+            <p className="mt-2 text-base text-content-dim">{s.label}</p>
           </div>
         ))}
       </div>

@@ -1,12 +1,31 @@
+/* Tokens first: every utility below resolves against these variables. */
+@import "./styles/tokens.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html { scroll-behavior: smooth; }
-::selection { background: #788BE3; color: #fff; }
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* The page owns its background so a theme change covers the whole
+     viewport, including the overscroll area. */
+  body {
+    @apply bg-surface text-content font-body antialiased;
+  }
+
+  ::selection {
+    background: rgb(var(--brand));
+    color: rgb(var(--on-inverse));
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -14,12 +33,25 @@ html { scroll-behavior: smooth; }
   }
 }
 
-.focus-ring:focus-visible { outline: 2px solid #788BE3; outline-offset: 3px; border-radius: 8px; }
-
-.text-gradient {
-  background: linear-gradient(90deg, #14D8C4 0%, #788BE3 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+.focus-ring:focus-visible {
+  outline: 2px solid rgb(var(--brand));
+  outline-offset: 3px;
+  border-radius: 8px;
 }
 
-.scrollbar-hide::-webkit-scrollbar { display: none; }
-.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+/* Gradient text keeps the fixed brand hues in both themes — it only sits
+   on surfaces where both stops stay legible. */
+.text-gradient {
+  background: linear-gradient(90deg, #14d8c4 0%, #788be3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

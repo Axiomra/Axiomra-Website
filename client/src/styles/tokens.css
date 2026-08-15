@@ -1,0 +1,100 @@
+/**
+ * AXIOMRA semantic design tokens
+ * ------------------------------------------------------------------
+ * Components never name a colour. They name a ROLE ("surface-card",
+ * "content-dim"), and this file decides what that role looks like in
+ * each theme. Switching theme swaps values here — no component changes.
+ *
+ * Values are bare "R G B" triplets so Tailwind can compose alpha:
+ *   bg-surface        -> rgb(var(--surface) / 1)
+ *   bg-surface/60     -> rgb(var(--surface) / 0.6)
+ *
+ * Three families:
+ *   surface-*  backgrounds, ordered by elevation
+ *   content-*  foreground text, ordered by emphasis
+ *   inverse-*  blocks that stay dark in BOTH themes (hero, footer,
+ *              dark CTAs). They shift just enough in dark mode to stay
+ *              visually separated from the page behind them.
+ *
+ * Deliberately not wrapped in @layer: these are plain custom-property
+ * declarations with no specificity conflicts, and the project has no
+ * postcss-import, so staying layer-free keeps the cascade predictable.
+ */
+
+:root {
+  /* ---- Elevation ---- */
+  --surface: 255 255 255;
+  --surface-subtle: 245 248 252;
+  --surface-card: 255 255 255;
+  --surface-inset: 245 248 252;
+
+  /* ---- Foreground ----
+     Every value here clears WCAG AA (4.5:1) against BOTH --surface and
+     --surface-subtle, so any content token is safe on any light surface. */
+  --content: 15 23 41;
+  --content-dim: 74 84 104;
+  --content-faint: 100 110 132;
+
+  /* ---- Lines ---- */
+  --line: 217 226 236;
+  --line-strong: 197 209 224;
+
+  /* ---- Brand ----
+     --brand and --accent double as TEXT colours (eyebrows, stat numbers,
+     highlighted words in headings), so the light-theme values are the
+     AA-safe shades of the brand hues rather than the display shades.
+     --accent-vivid keeps the bright original for use on dark surfaces. */
+  --brand: 59 79 191;
+  --brand-strong: 74 78 176;
+  --accent: 15 118 110;
+  --accent-vivid: 20 216 196;
+  /* Gold only ever fills star icons, which carry their own aria-label —
+     kept at the display shade rather than darkened into brown. */
+  --gold: 224 150 16;
+
+  /* ---- Always-dark blocks ---- */
+  --inverse: 10 20 40;
+  --inverse-soft: 16 27 51;
+  --inverse-card: 19 33 64;
+  --on-inverse: 255 255 255;
+
+  /* ---- Feedback ---- */
+  --danger: 185 28 28;
+  --success: 15 118 110;
+
+  color-scheme: light;
+}
+
+.dark {
+  /* Page sits BELOW the brand navy so inverse blocks still read as
+     raised rather than merging into the background. */
+  --surface: 7 14 28;
+  --surface-subtle: 12 22 42;
+  --surface-card: 16 27 51;
+  --surface-inset: 12 22 42;
+
+  --content: 232 237 245;
+  --content-dim: 160 170 192;
+  --content-faint: 132 143 166;
+
+  --line: 30 42 71;
+  --line-strong: 44 59 94;
+
+  /* Brand hues are lightened for AA contrast against a dark page —
+     the light-mode values fail on these backgrounds. */
+  --brand: 166 179 239;
+  --brand-strong: 140 156 233;
+  --accent: 45 232 213;
+  --accent-vivid: 20 216 196;
+  --gold: 255 190 71;
+
+  --inverse: 13 24 46;
+  --inverse-soft: 18 31 58;
+  --inverse-card: 24 40 73;
+  --on-inverse: 255 255 255;
+
+  --danger: 248 113 113;
+  --success: 45 232 213;
+
+  color-scheme: dark;
+}

@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import SectionHeading from "../components/SectionHeading";
 
 const cases = [
   { name: "Konnect", tag: "AI-Based Recommendation Engine", stats: [["50X", "Match accuracy"], ["30%", "Filters automated"], ["1M+", "Users connected"]] },
@@ -15,46 +16,63 @@ export default function Portfolio() {
   const scroll = (dir) => ref.current?.scrollBy({ left: dir * 380, behavior: "smooth" });
 
   return (
-    <section id="portfolio" className="max-w-7xl mx-auto px-6 py-24">
-      <div className="flex items-end justify-between mb-12 flex-wrap gap-6">
-        <div className="max-w-xl">
-          <p className="text-xs font-mono uppercase tracking-widest text-teal-dark mb-3">What have we built for businesses?</p>
-          <h2 className="font-display font-semibold text-3xl md:text-4xl">
-            Proven Results: <span className="text-periwinkle">How We Solve Complex Business Challenges</span>
-          </h2>
+    <section id="portfolio" className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
+      <SectionHeading
+        className="mb-12"
+        eyebrow="What have we built for businesses?"
+        title={
+          <>
+            Proven Results: <span className="text-brand">How We Solve Complex Business Challenges</span>
+          </>
+        }
+        subtitle="Five production systems, five very different industries — and one shared outcome: measurable lift within the first two quarters."
+      >
+        <div className="mt-8 flex gap-3">
+          <button type="button" onClick={() => scroll(-1)} className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring" aria-label="Previous case studies">
+            <ChevronLeft size={20} />
+          </button>
+          <button type="button" onClick={() => scroll(1)} className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring" aria-label="Next case studies">
+            <ChevronRight size={20} />
+          </button>
         </div>
-        <div className="flex gap-2">
-          <button onClick={() => scroll(-1)} className="p-2.5 rounded-full border border-ink/15 hover:bg-mist-50 focus-ring" aria-label="Previous"><ChevronLeft size={18} /></button>
-          <button onClick={() => scroll(1)} className="p-2.5 rounded-full border border-ink/15 hover:bg-mist-50 focus-ring" aria-label="Next"><ChevronRight size={18} /></button>
-        </div>
-      </div>
+      </SectionHeading>
 
-      <div ref={ref} className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 snap-x">
+      <div ref={ref} className="scrollbar-hide flex snap-x gap-6 overflow-x-auto pb-4 pt-2">
         {cases.map((c, i) => (
-          <motion.div
+          <motion.article
             key={c.name}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 36, rotateX: 6 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
             viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, delay: i * 0.06 }}
-            className="min-w-[360px] snap-start bg-white border border-mist rounded-xl2 shadow-card p-7 flex flex-col justify-between"
+            transition={{ duration: 0.55, delay: i * 0.08, ease: "easeOut" }}
+            whileHover={{ y: -10 }}
+            className="group relative flex min-w-[380px] snap-start flex-col justify-between overflow-hidden rounded-xl2 border border-line bg-surface-card p-8 shadow-card transition-[border-color,box-shadow] duration-300 hover:border-brand/50 hover:shadow-glow"
           >
-            <div>
-              <h3 className="font-display font-semibold text-xl">{c.name}</h3>
-              <p className="text-sm text-ink-dim mb-6">{c.tag}</p>
-              <div className="grid grid-cols-3 gap-3 mb-6">
+            {/* Light sweep that crosses the card on hover. */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-brand/10 to-transparent transition-transform duration-[900ms] ease-out group-hover:translate-x-full"
+            />
+            <div className="relative">
+              <h3 className="font-display text-2xl font-semibold text-content transition-colors duration-300 group-hover:text-brand">{c.name}</h3>
+              <p className="mb-7 mt-1 text-base text-content-dim">{c.tag}</p>
+              <div className="mb-7 grid grid-cols-3 gap-3">
                 {c.stats.map(([num, label]) => (
-                  <div key={label} className="bg-mist-50 rounded-lg p-3 text-center">
-                    <p className="font-display font-semibold text-periwinkle text-lg">{num}</p>
-                    <p className="text-[11px] text-ink-faint mt-1 leading-tight">{label}</p>
+                  <div
+                    key={label}
+                    className="rounded-lg bg-surface-inset p-4 text-center transition-transform duration-300 group-hover:-translate-y-1"
+                  >
+                    <p className="font-display text-xl font-semibold text-brand">{num}</p>
+                    <p className="mt-1.5 text-xs leading-tight text-content-faint">{label}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <a href="#contact" className="inline-flex items-center gap-1.5 text-sm font-medium text-navy hover:text-periwinkle transition-colors">
-              Read Full Case Study <ArrowUpRight size={15} />
+            <a href="#contact" className="relative inline-flex items-center gap-1.5 text-base font-medium text-content transition-colors hover:text-brand focus-ring">
+              Read Full Case Study
+              <ArrowUpRight size={17} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
-          </motion.div>
+          </motion.article>
         ))}
       </div>
     </section>

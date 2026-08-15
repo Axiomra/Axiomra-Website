@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import SectionHeading from "../components/SectionHeading";
+import { RESOURCE_IMAGES } from "../lib/media";
 
 const posts = [
   { title: "MVP vs. Full-Scale Custom AI Development", tag: "Strategy" },
@@ -9,32 +11,51 @@ const posts = [
 
 export default function Resources() {
   return (
-    <section className="max-w-6xl mx-auto px-6 py-24">
-      <div className="max-w-2xl mb-12">
-        <p className="text-xs font-mono uppercase tracking-widest text-teal-dark mb-3">Resources</p>
-        <h2 className="font-display font-semibold text-3xl md:text-4xl">
-          Know What's <span className="text-periwinkle">Trending In AI</span>
-        </h2>
-      </div>
+    <section className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
+      <SectionHeading
+        className="mb-14"
+        eyebrow="Resources"
+        title={
+          <>
+            Know What&rsquo;s <span className="text-brand">Trending In AI</span>
+          </>
+        }
+        subtitle="Field notes from the projects we ship — benchmarks, budgets, and the mistakes worth skipping."
+      />
 
-      <div className="grid sm:grid-cols-3 gap-6">
+      <div className="grid gap-8 sm:grid-cols-3">
         {posts.map((p, i) => (
           <motion.a
             href="#"
             key={p.title}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            whileHover={{ y: -6 }}
-            className="group rounded-xl2 overflow-hidden border border-mist shadow-card"
+            whileHover={{ y: -8 }}
+            className="group overflow-hidden rounded-xl2 border border-line shadow-card transition-[border-color,box-shadow] duration-300 hover:border-brand/50 hover:shadow-glow focus-ring"
           >
-            <div className="aspect-[16/10] bg-navy relative flex items-end p-5">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-teal bg-teal/10 border border-teal/30 px-2.5 py-1 rounded-full">{p.tag}</span>
+            <div className="relative flex aspect-[16/10] items-end overflow-hidden bg-inverse p-5">
+              <img
+                src={RESOURCE_IMAGES[p.title]}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-inverse via-inverse/50 to-inverse/10" />
+              <span className="relative rounded-full border border-accent-vivid/40 bg-accent-vivid/15 px-3 py-1.5 font-mono text-xs uppercase tracking-wider text-accent-vivid backdrop-blur-sm">
+                {p.tag}
+              </span>
             </div>
-            <div className="p-5 bg-white">
-              <h3 className="font-display text-base leading-snug group-hover:text-periwinkle transition-colors">{p.title}</h3>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs text-ink-faint">Read More <ArrowUpRight size={13} /></span>
+            <div className="bg-surface-card p-6">
+              <h3 className="font-display text-xl leading-snug text-content transition-colors group-hover:text-brand">
+                {p.title}
+              </h3>
+              <span className="mt-4 inline-flex items-center gap-1.5 text-sm text-content-faint transition-colors group-hover:text-brand">
+                Read More
+                <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </span>
             </div>
           </motion.a>
         ))}

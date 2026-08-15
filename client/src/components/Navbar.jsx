@@ -36,9 +36,9 @@ export default function Navbar() {
         scrolled ? "bg-white/95 backdrop-blur-xl shadow-card" : "bg-transparent"
       }`}
     >
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <nav className="max-w-8xl mx-auto flex items-center justify-between px-4 sm:px-6 py-4">
         <a href="#home" className="focus-ring">
-          <img src={isDark ? logoLight : logoDark} alt="Axiomra" className="h-10 w-auto transition-all duration-500" />
+          <img src={isDark ? logoLight : logoDark} alt="Axiomra" className="h-14 w-auto transition-all duration-500" />
         </a>
 
         <ul className="hidden lg:flex items-center gap-8 text-sm font-medium">

@@ -1,5 +1,8 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { HeartPulse, GraduationCap, Shirt, Building2, Trophy, ShoppingBag, Truck, Boxes, Landmark, ShieldCheck, Scale, Megaphone } from "lucide-react";
+import SectionHeading from "../components/SectionHeading";
+import { INDUSTRY_IMAGES } from "../lib/media";
 
 const industries = [
   { name: "Healthcare", icon: HeartPulse },
@@ -17,37 +20,98 @@ const industries = [
 ];
 
 export default function Industries() {
+  // Hovering a tile floods the whole panel with that industry's photo.
+  // The first tile is active by default so the panel is never bare.
+  const [active, setActive] = useState(industries[0].name);
+
   return (
     <section id="industries" className="py-24">
-      <div className="max-w-2xl mx-auto text-center px-6 mb-14">
-        <p className="text-xs font-mono uppercase tracking-widest text-teal-dark mb-3">What industries does Axiomra serve?</p>
-        <h2 className="font-display font-semibold text-3xl md:text-4xl">
-          <span className="text-periwinkle">Tailored AI Solutions</span> For Every Industry Vertical
-        </h2>
+      <div className="mx-auto mb-16 max-w-8xl px-4 sm:px-6">
+        <SectionHeading
+          eyebrow="What industries does Axiomra serve?"
+          title={
+            <>
+              <span className="text-brand">Tailored AI Solutions</span> For Every Industry Vertical
+            </>
+          }
+          subtitle="From clinical workflows to supply-chain forecasting, we ship AI that fits how your industry actually operates."
+        />
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-6">
-        <div className="relative rounded-xl2 overflow-hidden bg-navy">
-          <div className="absolute inset-0 opacity-40" style={{
+      <div className="relative mx-auto max-w-8xl px-4 sm:px-6">
+        {/* The grid panel is a brand surface — dark in both themes. */}
+        <div className="relative overflow-hidden rounded-xl2 bg-inverse">
+          {/* Default (not `wait`) mode so the outgoing photo stays put while the
+              new one fades over it — `wait` leaves a bare panel between tiles. */}
+          <AnimatePresence>
+            <motion.img
+              key={active}
+              src={INDUSTRY_IMAGES[active]}
+              alt=""
+              aria-hidden="true"
+              initial={{ opacity: 0, scale: 1.08 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </AnimatePresence>
+          {/* Just enough scrim to keep the tile labels legible — the photo
+              still has to read as the subject of the panel. */}
+          {/* Heavier than it used to be: the taller tiles expose more of the
+              photo, and the white labels need the extra scrim to stay AA. */}
+          <div className="absolute inset-0 bg-inverse/60" />
+          <div className="absolute inset-0 bg-gradient-to-br from-inverse/70 via-inverse/20 to-brand-strong/50" />
+          <div className="absolute inset-0 opacity-25" style={{
             backgroundImage: "linear-gradient(rgba(20,216,196,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(20,216,196,0.15) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }} />
+
           <div className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
-            {industries.map((ind, i) => (
-              <motion.div
-                key={ind.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
-                whileHover={{ backgroundColor: "rgba(120,139,227,0.15)" }}
-                className="border border-white/10 p-8 flex flex-col items-center justify-center text-center gap-3 min-h-[150px] cursor-pointer group"
-              >
-                <div className="w-12 h-12 rounded-full border border-teal/40 flex items-center justify-center group-hover:bg-teal/20 transition-colors">
-                  <ind.icon size={20} className="text-teal" strokeWidth={1.6} />
-                </div>
-                <span className="text-white font-medium text-sm">{ind.name}</span>
-              </motion.div>
+            {industries.map((ind, i) => {
+              const isActive = active === ind.name;
+              return (
+                <motion.button
+                  type="button"
+                  key={ind.name}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
+                  onMouseEnter={() => setActive(ind.name)}
+                  onFocus={() => setActive(ind.name)}
+                  aria-pressed={isActive}
+                  className={`group flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-4 border border-inverse-fg/10 p-10 text-center transition-colors duration-300 focus-ring sm:min-h-[260px] ${
+                    isActive ? "bg-accent-vivid/15" : "hover:bg-accent-vivid/10"
+                  }`}
+                >
+                  <div
+                    className={`flex h-20 w-20 items-center justify-center rounded-full border transition-all duration-300 ${
+                      isActive
+                        ? "scale-110 border-accent-vivid bg-accent-vivid/25"
+                        : "border-accent-vivid/40 group-hover:bg-accent-vivid/20"
+                    }`}
+                  >
+                    <ind.icon size={34} className="text-accent-vivid" strokeWidth={1.6} />
+                  </div>
+                  <span className="text-xl font-medium text-inverse-fg">{ind.name}</span>
+                </motion.button>
+              );
+            })}
+          </div>
+
+          {/* Proof strip closes the panel so the grid does not end on a hard
+              edge, and gives the section the extra height it was missing. */}
+          <div className="relative grid gap-6 border-t border-inverse-fg/10 bg-inverse/40 px-8 py-10 text-center backdrop-blur-sm sm:grid-cols-3">
+            {[
+              { value: "12+", label: "Verticals served end to end" },
+              { value: "300+", label: "Production deployments shipped" },
+              { value: "24", label: "Countries with live systems" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <p className="font-display text-4xl font-semibold text-accent-vivid md:text-5xl">{stat.value}</p>
+                <p className="mt-2 text-base text-inverse-fg/70">{stat.label}</p>
+              </div>
             ))}
           </div>
         </div>

@@ -1,54 +1,74 @@
 /**
- * AXIOMRA design tokens
- * Base palette supplied by client (coolors.co): 788BE3, 777ACF, D9E2EC
- * Extended with the logo's teal + the dark-navy / gold accents visible
- * in the tezeract.ai reference screenshots.
+ * AXIOMRA Tailwind config
+ *
+ * Colours here are SEMANTIC ROLES, not hues. Their actual values live in
+ * src/styles/tokens.css as CSS custom properties, defined once for light
+ * and once for `.dark`. That indirection is what makes theming a
+ * one-file change instead of a find-and-replace across every component.
+ *
+ * `<alpha-value>` is a Tailwind placeholder — it lets `bg-surface/60` keep
+ * working even though the colour comes from a variable.
  */
+const token = (name) => `rgb(var(--${name}) / <alpha-value>)`;
+
 export default {
   darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        navy: {
-          DEFAULT: "#0A1428",   // hero / footer background
-          soft: "#101B33",
-          card: "#132140",
+        surface: {
+          DEFAULT: token("surface"),
+          subtle: token("surface-subtle"),
+          card: token("surface-card"),
+          inset: token("surface-inset"),
         },
-        periwinkle: {
-          DEFAULT: "#788BE3",   // primary brand accent (client palette)
-          dark: "#777ACF",      // secondary / hover state
-          light: "#A6B3EF",
+        content: {
+          DEFAULT: token("content"),
+          dim: token("content-dim"),
+          faint: token("content-faint"),
         },
-        mist: {
-          DEFAULT: "#D9E2EC",   // light section tint (client palette)
-          50: "#F5F8FC",
+        line: {
+          DEFAULT: token("line"),
+          strong: token("line-strong"),
         },
-        teal: {
-          DEFAULT: "#14D8C4",   // logo icon teal
-          dark: "#0FAE9F",
+        brand: {
+          DEFAULT: token("brand"),
+          strong: token("brand-strong"),
         },
-        gold: {
-          DEFAULT: "#FFB020",   // star ratings / highlight numbers
+        accent: {
+          DEFAULT: token("accent"),
+          vivid: token("accent-vivid"),
         },
-        ink: {
-          DEFAULT: "#0F1729",
-          dim: "#5B6478",
-          faint: "#8A93A6",
+        inverse: {
+          DEFAULT: token("inverse"),
+          soft: token("inverse-soft"),
+          card: token("inverse-card"),
+          fg: token("on-inverse"),
         },
+        gold: token("gold"),
+        danger: token("danger"),
+        success: token("success"),
       },
       fontFamily: {
-        display: ["'Space Grotesk'", "sans-serif"],
-        body: ["'Inter'", "sans-serif"],
+        display: ["'Clash Grotesk'", "'Space Grotesk'", "sans-serif"],
+        body: ["'Satoshi'", "'Inter'", "sans-serif"],
         mono: ["'JetBrains Mono'", "monospace"],
       },
       borderRadius: { xl2: "1.25rem" },
+      maxWidth: {
+        "4xl": "64rem",
+        "5xl": "72rem",
+        "6xl": "84rem",
+        "7xl": "96rem",
+        "8xl": "110rem",
+      },
       boxShadow: {
         glow: "0 0 70px -15px rgba(120,139,227,0.55)",
         card: "0 10px 40px -15px rgba(10,20,40,0.15)",
       },
       backgroundImage: {
-        "hero-grid": "radial-gradient(circle at 50% 20%, rgba(120,139,227,0.25), transparent 60%)",
+        // Brand gradients are fixed by identity — they do not flip per theme.
         "cta-gradient": "linear-gradient(120deg, #14D8C4 0%, #788BE3 55%, #777ACF 100%)",
       },
       animation: {
@@ -64,4 +84,4 @@ export default {
     },
   },
   plugins: [],
-}
+};

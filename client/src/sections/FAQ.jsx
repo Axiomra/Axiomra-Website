@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
+import SectionHeading from "../components/SectionHeading";
 
 const faqs = [
   { q: "Who does Axiomra serve as an AI development partner?", a: "SMBs, growth-stage companies, and global enterprises — especially in healthcare, finance, and retail — moving from manual workflows to automated, data-driven operations." },
@@ -14,29 +15,58 @@ const faqs = [
 
 export default function FAQ() {
   const [open, setOpen] = useState(0);
+
   return (
-    <section id="faq" className="max-w-3xl mx-auto px-6 py-24">
-      <p className="text-xs font-mono uppercase tracking-widest text-teal-dark mb-3 text-center">Your questions answered here</p>
-      <h2 className="font-display font-semibold text-3xl md:text-4xl text-center mb-12">Frequently Asked Questions</h2>
+    <section id="faq" className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
+      <SectionHeading
+        className="mb-14"
+        eyebrow="Your questions answered here"
+        title="Frequently Asked Questions"
+      />
 
       <div className="space-y-3">
-        {faqs.map((f, i) => (
-          <div key={f.q} className="border border-mist rounded-xl2 bg-mist-50 overflow-hidden">
-            <button onClick={() => setOpen(open === i ? -1 : i)} className="w-full flex items-center justify-between px-6 py-5 text-left focus-ring">
-              <span className="font-medium text-sm md:text-base">{f.q}</span>
-              <motion.span animate={{ rotate: open === i ? 45 : 0 }} transition={{ duration: 0.25 }} className="text-periwinkle shrink-0 ml-4">
-                <Plus size={20} />
-              </motion.span>
-            </button>
-            <AnimatePresence initial={false}>
-              {open === i && (
-                <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }}>
-                  <p className="px-6 pb-5 text-sm text-ink-dim leading-relaxed">{f.a}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
+        {faqs.map((f, i) => {
+          const isOpen = open === i;
+          const panelId = `faq-panel-${i}`;
+          const buttonId = `faq-button-${i}`;
+          return (
+            <div key={f.q} className="overflow-hidden rounded-xl2 border border-line bg-surface-subtle">
+              <button
+                type="button"
+                id={buttonId}
+                aria-expanded={isOpen}
+                aria-controls={panelId}
+                onClick={() => setOpen(isOpen ? -1 : i)}
+                className="flex w-full items-center justify-between px-6 py-5 text-left focus-ring"
+              >
+                <span className="text-base font-medium text-content md:text-lg">{f.q}</span>
+                <motion.span
+                  animate={{ rotate: isOpen ? 45 : 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="ml-4 shrink-0 text-brand"
+                  aria-hidden="true"
+                >
+                  <Plus size={20} />
+                </motion.span>
+              </button>
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <p className="max-w-2xl px-6 pb-6 text-base leading-relaxed text-content-dim md:text-lg">{f.a}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

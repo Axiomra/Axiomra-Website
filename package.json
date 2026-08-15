@@ -9,6 +9,7 @@
     "setup": "npm run install:client && npm run install:server",
     "dev:client": "cd client && npm run dev",
     "dev:server": "cd server && npm run dev",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm run build",
+    "lint": "cd client && npm run lint"
   }
 }

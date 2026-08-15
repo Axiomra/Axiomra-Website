@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SectionHeading from "../components/SectionHeading";
 
 const steps = [
   { title: "Discovery & AI Strategy", desc: "We analyze your data to identify high-impact use cases that solve specific business inefficiencies." },
@@ -10,15 +11,21 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="process" className="max-w-5xl mx-auto px-6 py-24">
-      <div className="max-w-xl mb-16">
-        <p className="text-xs font-mono uppercase tracking-widest text-teal-dark mb-3">How do we build?</p>
-        <h2 className="font-display font-semibold text-3xl md:text-4xl">
-          A <span className="text-periwinkle">Transparent Approach</span> To Complex AI Development
-        </h2>
-      </div>
+    <section id="process" className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
+      <SectionHeading
+        className="mb-16"
+        eyebrow="How do we build?"
+        title={
+          <>
+            A <span className="text-brand">Transparent Approach</span> To Complex AI Development
+          </>
+        }
+        subtitle="Five stages, no black boxes. You see the plan, the data work, and the numbers at every step."
+      />
 
-      <div className="space-y-5">
+      {/* Narrower than the section container: full-width rows left the copy
+          floating with a huge gap before the step number. */}
+      <div className="mx-auto max-w-5xl space-y-5">
         {steps.map((s, i) => (
           <motion.div
             key={s.title}
@@ -26,13 +33,17 @@ export default function Process() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="flex items-start gap-6 bg-mist-50 border border-mist rounded-xl2 p-7"
+            whileHover={{ x: 6 }}
+            className="group flex items-start gap-6 rounded-xl2 border border-line bg-surface-subtle p-8 transition-colors duration-300 hover:border-brand hover:bg-brand/5 hover:shadow-glow"
           >
             <div className="flex-1">
-              <h3 className="font-display text-lg mb-2">{s.title}</h3>
-              <p className="text-sm text-ink-dim leading-relaxed max-w-2xl">{s.desc}</p>
+              <h3 className="mb-2 font-display text-xl text-content transition-colors duration-300 group-hover:text-brand">{s.title}</h3>
+              <p className="max-w-3xl text-base leading-relaxed text-content-dim transition-colors duration-300 group-hover:text-content md:text-lg">{s.desc}</p>
             </div>
-            <span className="font-display font-semibold text-3xl text-periwinkle/40 shrink-0">
+            <span
+              className="shrink-0 font-display text-4xl font-semibold text-brand/40 transition-all duration-300 group-hover:scale-110 group-hover:text-accent"
+              aria-hidden="true"
+            >
               0{i + 1}
             </span>
           </motion.div>

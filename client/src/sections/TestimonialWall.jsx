@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
+import SectionHeading from "../components/SectionHeading";
 
 const wall = [
   { name: "Adam Gawron", role: "Founder of Upstar", quote: "They communicated with me and we developed trust over the years. Project management is great — willingness to take any problem and get through it is impressive." },
@@ -8,35 +9,91 @@ const wall = [
   { name: "Andreas Remy", role: "CEO & Founder, NEONMONKI", quote: "Extremely impressed with the AI and automation expertise in automating our tagging system. Efficient communication made the experience exceptional." },
 ];
 
+const initials = (name) =>
+  name
+    .split(" ")
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("");
+
 export default function TestimonialWall() {
   return (
-    <section className="max-w-6xl mx-auto px-6 py-24">
-      <div className="text-center max-w-2xl mx-auto mb-14">
-        <p className="text-xs font-mono uppercase tracking-widest text-teal-dark mb-3">Simply the best AI development partner</p>
-        <h2 className="font-display font-semibold text-3xl md:text-4xl">
-          We Went From <span className="text-periwinkle">Operational Chaos To A Growth Machine</span> In Weeks
-        </h2>
-        <div className="mt-5 flex items-center justify-center gap-2 text-sm">
-          <span className="flex text-gold">{[...Array(5)].map((_, i) => <Star key={i} size={14} strokeWidth={0} fill="currentColor" />)}</span>
-          <span className="text-ink-dim">4.8/5 from 300+ companies</span>
+    <section className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
+      <SectionHeading
+        className="mb-16"
+        eyebrow="Simply the best AI development partner"
+        titleClassName="lg:whitespace-nowrap lg:text-[2.75vw]"
+        title={
+          <>
+            We Went From <span className="text-brand">Operational Chaos To A Growth Machine</span> In Weeks
+          </>
+        }
+      >
+        <div className="mt-7 inline-flex items-center gap-3 rounded-full border border-line-strong bg-surface-subtle px-6 py-3">
+          <span className="flex text-gold" role="img" aria-label="4.8 out of 5 stars">
+            {[...Array(5)].map((_, i) => <Star key={i} size={20} strokeWidth={0} fill="currentColor" />)}
+          </span>
+          <span className="font-display text-xl font-semibold text-content">4.8/5</span>
+          <span className="h-5 w-px bg-line-strong" aria-hidden="true" />
+          <span className="text-base text-content-dim">from 300+ companies</span>
         </div>
-      </div>
+      </SectionHeading>
 
-      <div className="grid sm:grid-cols-2 gap-5">
-        {wall.map((t, i) => (
-          <motion.div
-            key={t.name}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
-            className={`rounded-xl2 p-7 border ${i % 3 === 2 ? "bg-navy text-white border-navy" : "bg-mist-50 border-mist"}`}
-          >
-            <p className={`text-sm leading-relaxed mb-6 ${i % 3 === 2 ? "text-white/80" : "text-ink-dim"}`}>"{t.quote}"</p>
-            <p className="font-medium text-sm">{t.name}</p>
-            <p className={`text-xs ${i % 3 === 2 ? "text-white/50" : "text-ink-faint"}`}>{t.role}</p>
-          </motion.div>
-        ))}
+      <div className="grid gap-6 sm:grid-cols-2">
+        {wall.map((t, i) => {
+          // Every third card inverts, to break up the grid rhythm.
+          const inverted = i % 3 === 2;
+          return (
+            <motion.figure
+              key={t.name}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.55, delay: i * 0.1, ease: "easeOut" }}
+              whileHover={{ y: -8 }}
+              className={`group relative overflow-hidden rounded-xl2 border p-9 shadow-card transition-[border-color,box-shadow] duration-300 hover:shadow-glow ${
+                inverted
+                  ? "border-inverse bg-inverse hover:border-accent-vivid/60"
+                  : "border-line bg-surface-subtle hover:border-brand/50"
+              }`}
+            >
+              <Quote
+                aria-hidden="true"
+                size={80}
+                strokeWidth={1}
+                className={`pointer-events-none absolute -right-3 -top-3 transition-transform duration-500 group-hover:scale-110 ${
+                  inverted ? "text-accent-vivid/15" : "text-brand/10"
+                }`}
+              />
+
+              <div className="relative mb-5 flex text-gold" role="img" aria-label="5 out of 5 stars">
+                {[...Array(5)].map((_, idx) => <Star key={idx} size={18} strokeWidth={0} fill="currentColor" />)}
+              </div>
+
+              <blockquote className={`relative mb-8 text-lg leading-relaxed ${inverted ? "text-inverse-fg/85" : "text-content-dim"}`}>
+                &ldquo;{t.quote}&rdquo;
+              </blockquote>
+
+              <figcaption className="relative flex items-center gap-4">
+                <span
+                  aria-hidden="true"
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent-vivid to-brand font-display text-base font-semibold text-inverse"
+                >
+                  {initials(t.name)}
+                </span>
+                <span>
+                  <span className={`block text-base font-medium ${inverted ? "text-inverse-fg" : "text-content"}`}>{t.name}</span>
+                  <span className={`block text-sm ${inverted ? "text-inverse-fg/60" : "text-content-faint"}`}>{t.role}</span>
+                </span>
+              </figcaption>
+
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-accent-vivid to-brand transition-transform duration-500 group-hover:scale-x-100"
+              />
+            </motion.figure>
+          );
+        })}
       </div>
     </section>
   );

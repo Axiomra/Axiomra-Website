@@ -28,7 +28,7 @@ export default function App() {
         <FoundersSay />
         <Transformation />
         <VideoTestimonials />
-        {/* <GradientCTA
+        <GradientCTA
           title="Want These Results For Your Business?"
           subtitle="We've done it for 300+ clients. Book a discovery call today, and our AI development partner team will map out a custom AI roadmap to eliminate manual overhead and boost your bottom line."
         />
@@ -38,6 +38,7 @@ export default function App() {
           subtitle="In one strategic session, we will evaluate your goals, recommend the most impactful services, and provide a step-by-step plan."
           buttonText="Get Your Custom AI Roadmap"
           dark
+          three
         />
         <Industries />
         <TestimonialWall />
@@ -47,10 +48,11 @@ export default function App() {
           subtitle="We'll map the right AI services to your goals and deliver a clear plan to production."
           buttonText="Claim Your Free Consultation"
           dark
+          three
         />
         <Process />
-        <TechStack /> */}
-        {/* <WhyUs />
+        <TechStack />
+        <WhyUs />
         <Awards />
         <Resources />
         <FAQ />
@@ -59,9 +61,9 @@ export default function App() {
           title="Stop Guessing And Start Growing With Your Trusted AI Development Partner"
           subtitle="Book your complimentary AI Strategic Session (worth $1000) and discover how tailored AI solutions can unlock growth."
           buttonText="Get Your Project Done!"
-        /> */}
+        />
       </main>
-      {/* <Footer /> */}
+      <Footer />
       <BookCallModal />
     </div>
   );
