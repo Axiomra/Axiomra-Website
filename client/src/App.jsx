@@ -56,14 +56,14 @@ export default function App() {
         <Awards />
         <Resources />
         <FAQ />
-        {/* <Contact />
+        <Contact />
         <GradientCTA
           title="Stop Guessing And Start Growing With Your Trusted AI Development Partner"
           subtitle="Book your complimentary AI Strategic Session (worth $1000) and discover how tailored AI solutions can unlock growth."
           buttonText="Get Your Project Done!"
-        /> */}
+        />
       </main>
-      {/* <Footer /> */}
+      <Footer />
       <BookCallModal />
     </div>
   );

@@ -38,9 +38,9 @@ export default function Industries() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-8xl px-4 sm:px-6">
+      <div className="relative mx-auto max-w-none px-0 sm:px-0">
         {/* The grid panel is a brand surface — dark in both themes. */}
-        <div className="relative overflow-hidden rounded-xl2 bg-inverse">
+        <div className="relative overflow-hidden rounded-none bg-inverse sm:rounded-xl2">
           {/* Default (not `wait`) mode so the outgoing photo stays put while the
               new one fades over it — `wait` leaves a bare panel between tiles. */}
           <AnimatePresence>
@@ -81,7 +81,7 @@ export default function Industries() {
                   onMouseEnter={() => setActive(ind.name)}
                   onFocus={() => setActive(ind.name)}
                   aria-pressed={isActive}
-                  className={`group flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-4 border border-inverse-fg/10 p-10 text-center transition-colors duration-300 focus-ring sm:min-h-[260px] ${
+                  className={`group flex min-h-[280px] cursor-pointer flex-col items-center justify-center gap-4 border border-inverse-fg/10 p-10 text-center transition-colors duration-300 focus-ring sm:min-h-[360px] lg:min-h-[420px] ${
                     isActive ? "bg-accent-vivid/15" : "hover:bg-accent-vivid/10"
                   }`}
                 >
@@ -99,21 +99,23 @@ export default function Industries() {
               );
             })}
           </div>
+        </div>
+      </div>
 
-          {/* Proof strip closes the panel so the grid does not end on a hard
-              edge, and gives the section the extra height it was missing. */}
-          <div className="relative grid gap-6 border-t border-inverse-fg/10 bg-inverse/40 px-8 py-10 text-center backdrop-blur-sm sm:grid-cols-3">
-            {[
-              { value: "12+", label: "Verticals served end to end" },
-              { value: "300+", label: "Production deployments shipped" },
-              { value: "24", label: "Countries with live systems" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="font-display text-4xl font-semibold text-accent-vivid md:text-5xl">{stat.value}</p>
-                <p className="mt-2 text-base text-inverse-fg/70">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+      {/* Proof strip — standalone from the image panel so the numbers read as
+          their own statement. */}
+      <div className="relative mx-auto mt-16 max-w-none border-y border-line bg-surface-card px-4 py-12 backdrop-blur-sm sm:px-6">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 text-center sm:grid-cols-3">
+          {[
+            { value: "12+", label: "Verticals served end to end" },
+            { value: "300+", label: "Production deployments shipped" },
+            { value: "24", label: "Countries with live systems" },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <p className="font-display text-5xl font-semibold text-brand md:text-6xl">{stat.value}</p>
+              <p className="mt-2 text-base text-ink-dim md:text-lg">{stat.label}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

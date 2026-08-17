@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, CheckCircle2, Play, Mail, User, MessageSquare, ShieldCheck, Clock } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Play, Mail, User, MessageSquare, ShieldCheck, Clock, Crown, UserCheck } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import { INTRO_VIDEO } from "../lib/media";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const FIELD_CLASS =
-  "w-full rounded-xl border border-line bg-surface-card py-3.5 pl-11 pr-4 text-base text-content outline-none transition-all placeholder:text-content-faint focus:border-brand focus:ring-4 focus:ring-brand/15";
+  "w-full rounded-xl border border-line-strong bg-inverse-soft py-3.5 pl-11 pr-4 text-base text-inverse-fg outline-none transition-all placeholder:text-inverse-fg/35 focus:border-gold/70 focus:ring-4 focus:ring-gold/15";
 
 /** Click-to-load facade: the YouTube iframe only mounts after a real click,
     so the third-party player never costs us a page-load. */
@@ -140,85 +140,125 @@ export default function Contact() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative overflow-hidden rounded-xl2 border border-line bg-surface-card p-9 shadow-card"
+          className="relative overflow-hidden rounded-xl2 border border-inverse-card bg-inverse-card p-9 shadow-card"
         >
-          {/* Brand gradient hairline along the top edge of the card. */}
-          <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-vivid via-brand to-brand-strong" />
+          {/* Gold-to-brand hairline seals the card as the section's centerpiece. */}
+          <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-gold via-[#f7cf7e] to-brand" />
+          {/* Warm gold + cool brand glows keep the dark card from going flat. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+            style={{
+              backgroundImage:
+                "radial-gradient(520px 260px at 12% 0%, rgba(224,150,16,0.10), transparent 60%), radial-gradient(420px 300px at 100% 100%, rgba(20,216,196,0.10), transparent 60%)",
+            }}
+          />
+          {/* Faint crown watermark, bottom-right — premium without shouting. */}
+          <Crown
+            size={150}
+            strokeWidth={0.5}
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-8 -right-8 rotate-[-12deg] text-inverse-fg/5"
+          />
 
-          <h3 className="mb-1 font-display text-2xl font-semibold text-content">Tell us about your project</h3>
-          <p className="mb-7 text-base text-content-dim">No sales script — an engineer reads every message.</p>
-
-          <div className="space-y-5">
-            <div className="grid gap-5 sm:grid-cols-2">
+          <div className="relative">
+            <div className="mb-8 flex flex-wrap items-start justify-between gap-3">
               <div>
-                <label htmlFor="contact-name" className="mb-2 block text-sm font-medium text-content-dim">First Name</label>
-                <div className="relative">
-                  <User size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-content-faint" aria-hidden="true" />
-                  <input
-                    required
-                    id="contact-name"
-                    name="name"
-                    autoComplete="given-name"
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder="E.g. John"
-                    className={FIELD_CLASS}
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="contact-email" className="mb-2 block text-sm font-medium text-content-dim">Business Email</label>
-                <div className="relative">
-                  <Mail size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-content-faint" aria-hidden="true" />
-                  <input
-                    required
-                    type="email"
-                    id="contact-email"
-                    name="email"
-                    autoComplete="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="E.g. john@doe.com"
-                    className={FIELD_CLASS}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="contact-message" className="mb-2 block text-sm font-medium text-content-dim">Message</label>
-              <div className="relative">
-                <MessageSquare size={17} className="pointer-events-none absolute left-4 top-4 text-content-faint" aria-hidden="true" />
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  rows={5}
-                  placeholder="Project description"
-                  className={`${FIELD_CLASS} resize-none`}
-                />
-              </div>
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              disabled={status === "loading"}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent-vivid to-brand px-7 py-4 text-base font-medium text-inverse-fg transition-shadow hover:shadow-glow disabled:opacity-60 focus-ring"
-            >
-              {status === "loading" ? "Sending..." : "Send Message"} {status !== "loading" && <ArrowUpRight size={18} />}
-            </motion.button>
-
-            <p role="status" aria-live="polite" className="text-sm">
-              {status === "success" && (
-                <span className="flex items-center gap-1.5 text-accent">
-                  <CheckCircle2 size={16} /> Thanks — we&rsquo;ll be in touch within 24 hours.
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-xs uppercase tracking-[0.18em] text-gold">
+                  <Crown size={13} aria-hidden="true" /> VIP Priority Intake
                 </span>
-              )}
-              {status === "error" && <span className="text-danger">Something went wrong. Please try again.</span>}
-            </p>
+                <h3 className="mt-4 font-display text-2xl font-semibold text-inverse-fg">Tell us about your project</h3>
+              </div>
+              <span className="pt-2 font-mono text-xs uppercase tracking-[0.2em] text-inverse-fg/45">Concierge Desk</span>
+            </div>
+
+            <div className="space-y-5">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="contact-name" className="mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-inverse-fg/70">First Name</label>
+                  <div className="relative">
+                    <User size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gold/70" aria-hidden="true" />
+                    <input
+                      required
+                      id="contact-name"
+                      name="name"
+                      autoComplete="given-name"
+                      value={form.name}
+                      onChange={handleChange}
+                      placeholder="E.g. John"
+                      className={FIELD_CLASS}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="contact-email" className="mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-inverse-fg/70">Business Email</label>
+                  <div className="relative">
+                    <Mail size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gold/70" aria-hidden="true" />
+                    <input
+                      required
+                      type="email"
+                      id="contact-email"
+                      name="email"
+                      autoComplete="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="E.g. john@doe.com"
+                      className={FIELD_CLASS}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="contact-message" className="mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-inverse-fg/70">Message</label>
+                <div className="relative">
+                  <MessageSquare size={17} className="pointer-events-none absolute left-4 top-4 text-gold/70" aria-hidden="true" />
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    rows={5}
+                    placeholder="Project description"
+                    className={`${FIELD_CLASS} resize-none`}
+                  />
+                </div>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                disabled={status === "loading"}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#e0a52e] via-gold to-[#f7cf7e] px-7 py-4 text-base font-semibold text-[#10182b] transition-all hover:shadow-[0_0_55px_-12px_rgba(224,150,16,0.65)] focus-ring disabled:opacity-60"
+              >
+                {status === "loading" ? "Sending..." : "Request VIP Consultation"} {status !== "loading" && <ArrowUpRight size={18} />}
+              </motion.button>
+
+              <p role="status" aria-live="polite" className="text-sm">
+                {status === "success" && (
+                  <span className="flex items-center gap-1.5 text-accent-vivid">
+                    <CheckCircle2 size={16} /> Thanks — we&rsquo;ll be in touch within 24 hours.
+                  </span>
+                )}
+                {status === "error" && <span className="text-danger">Something went wrong. Please try again.</span>}
+              </p>
+
+              <div className="grid gap-3 border-t border-line-strong/50 pt-6 sm:grid-cols-3">
+                <div className="flex items-center gap-2.5">
+                  <Clock size={17} className="shrink-0 text-gold" aria-hidden="true" />
+                  <p className="text-sm text-inverse-fg/75">Reply in 24 hours</p>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <ShieldCheck size={17} className="shrink-0 text-gold" aria-hidden="true" />
+                  <p className="text-sm text-inverse-fg/75">NDA on request</p>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <UserCheck size={17} className="shrink-0 text-gold" aria-hidden="true" />
+                  <p className="text-sm text-inverse-fg/75">Engineer-led review</p>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.form>
         </div>

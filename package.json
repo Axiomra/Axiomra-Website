@@ -11,5 +11,8 @@
     "dev:server": "cd server && npm run dev",
     "build": "cd client && npm run build",
     "lint": "cd client && npm run lint"
+  },
+  "dependencies": {
+    "react-router-dom": "^7.18.2"
   }
 }

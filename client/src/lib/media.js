@@ -6,35 +6,35 @@
  * brand photography lands — every consumer reads through these maps, so a
  * single edit here changes the whole site.
  */
+import healthaiImg from "../assets/box/healthai.png";
+import eductionaiImg from "../assets/box/eductionai.webp";
+import fashionImg from "../assets/box/fashion.jpeg";
+import realestateImg from "../assets/box/realestate.jpeg";
+import sportImg from "../assets/box/sport ai.jpeg";
+import retailImg from "../assets/box/retail.jpeg";
+import transportationImg from "../assets/box/transportation-and-AI.webp";
+import supplyChainImg from "../assets/box/supply chain.jpeg";
+import financeImg from "../assets/box/finance.jpeg";
+import insuranceImg from "../assets/box/insurance.jpeg";
+import legalImg from "../assets/box/legal .jpeg";
+import marketingImg from "../assets/box/marketing ai.jpeg";
+
 const unsplash = (id, w = 900) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
 
-/** Service cards — one visual per offering, keyed by the card title. */
-export const SERVICE_IMAGES = {
-  "AI Development": unsplash("1518770660439-4636190af475"),
-  "Machine Learning": unsplash("1551288049-bebda4e38f71"),
-  "AI Agents & Agentic AI": unsplash("1620712943543-bcc4688e7485"),
-  "Business Process Automation": unsplash("1581091226825-a6a2a5aee158"),
-  "Natural Language Processing": unsplash("1526374965328-7f61d4dc18c5"),
-  "Computer Vision": unsplash("1555255707-c07966088b7b"),
-  "Business Intelligence": unsplash("1460925895917-afdab827c52f"),
-  "Generative AI": unsplash("1677442136019-21780ecad995"),
-};
-
-/** Industry tiles — the hover image that floods the whole grid panel. */
 export const INDUSTRY_IMAGES = {
-  Healthcare: unsplash("1576091160399-112ba8d25d1d", 1600),
-  Education: unsplash("1509062522246-3755977927d7", 1600),
-  Fashion: unsplash("1441984904996-e0b6ba687e04", 1600),
-  "Real Estate": unsplash("1560518883-ce09059eeffa", 1600),
-  Sports: unsplash("1546519638-68e109498ffc", 1600),
-  Retail: unsplash("1481437156560-3205f6a55735", 1600),
-  Transportation: unsplash("1494412574643-ff11b0a5c1c3", 1600),
-  "Supply Chain": unsplash("1494412651409-8963ce7935a7", 1600),
-  Finance: unsplash("1611974789855-9c2a0a7236a3", 1600),
-  Insurance: unsplash("1450101499163-c8848c66ca85", 1600),
-  "Legal Business": unsplash("1589829545856-d10d557cf95f", 1600),
-  Marketing: unsplash("1552664730-d307ca884978", 1600),
+  Healthcare: healthaiImg,
+  Education: eductionaiImg,
+  Fashion: fashionImg,
+  "Real Estate": realestateImg,
+  Sports: sportImg,
+  Retail: retailImg,
+  Transportation: transportationImg,
+  "Supply Chain": supplyChainImg,
+  Finance: financeImg,
+  Insurance: insuranceImg,
+  "Legal Business": legalImg,
+  Marketing: marketingImg,
 };
 
 /** Blog / resource cards. */
