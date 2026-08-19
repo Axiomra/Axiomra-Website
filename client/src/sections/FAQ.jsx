@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 
-const faqs = [
+const defaultFaqs = [
   { q: "Who does Axiomra serve as an AI development partner?", a: "SMBs, growth-stage companies, and global enterprises — especially in healthcare, finance, and retail — moving from manual workflows to automated, data-driven operations." },
   { q: "What makes Axiomra different from other AI development companies?", a: "We focus on production-grade engineering, not prototypes. A 100% in-house team of 25+ experts ensures every solution is scalable, secure, and delivers measurable ROI within two quarters." },
   { q: "Why should I choose an AI development company for my global project?", a: "You get access to elite engineering talent at a competitive price point, with 300+ successful projects delivered globally." },
@@ -13,22 +13,27 @@ const faqs = [
   { q: "How do I get started with Axiomra?", a: "Book a free strategy session. We'll analyze your business challenges and provide a clear roadmap for automating your processes." },
 ];
 
-export default function FAQ() {
+/**
+ * Defaults render the homepage FAQ unchanged; the services route passes its
+ * own `id` + `items` so the two pages can't collide on the same anchor.
+ */
+export default function FAQ({
+  id = "faq",
+  eyebrow = "Your questions answered here",
+  title = "Frequently Asked Questions",
+  items = defaultFaqs,
+}) {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
-      <SectionHeading
-        className="mb-14"
-        eyebrow="Your questions answered here"
-        title="Frequently Asked Questions"
-      />
+    <section id={id} className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
+      <SectionHeading className="mb-14" eyebrow={eyebrow} title={title} />
 
       <div className="space-y-3">
-        {faqs.map((f, i) => {
+        {items.map((f, i) => {
           const isOpen = open === i;
-          const panelId = `faq-panel-${i}`;
-          const buttonId = `faq-button-${i}`;
+          const panelId = `${id}-panel-${i}`;
+          const buttonId = `${id}-button-${i}`;
           return (
             <div key={f.q} className="overflow-hidden rounded-xl2 border border-line bg-surface-subtle">
               <button

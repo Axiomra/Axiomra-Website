@@ -38,6 +38,7 @@ export default function HomePage() {
         subtitle="In one strategic session, we will evaluate your goals, recommend the most impactful services, and provide a step-by-step plan."
         buttonText="Get Your Custom AI Roadmap"
         dark
+        three
       />
       <Industries />
       <TestimonialWall />
@@ -47,6 +48,7 @@ export default function HomePage() {
         subtitle="We'll map the right AI services to your goals and deliver a clear plan to production."
         buttonText="Claim Your Free Consultation"
         dark
+        three
       />
       <Process />
       <TechStack />

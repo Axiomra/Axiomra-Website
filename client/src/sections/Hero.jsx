@@ -22,7 +22,11 @@ const clients = [
 /** The hero is a brand surface — deliberately dark in both themes. */
 export default function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden bg-inverse pb-0 pt-36">
+    <section
+      id="home"
+      data-nav-tone="dark"
+      className="relative overflow-hidden bg-inverse pb-0 pt-36"
+    >
       <NetworkBackground className="opacity-70" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-inverse/40 to-inverse" />
 

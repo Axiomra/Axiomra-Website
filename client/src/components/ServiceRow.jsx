@@ -6,6 +6,10 @@ import { ChevronRight, ArrowUpRight } from "lucide-react";
  * One alternating image/copy row for the Services listing page.
  * Reused for every service category — pass in content via props so
  * nothing here is hard-coded per-service.
+ *
+ * `compact` is the sub-service variant used on a single service's detail page:
+ * the row is secondary content there, so it drops the index rule and steps the
+ * heading down a level rather than competing with the page's own h1.
  */
 export default function ServiceRow({
   id,
@@ -19,9 +23,11 @@ export default function ServiceRow({
   ctaHref,
   ctaText = "Explore service details",
   zebra = true,
+  compact = false,
 }) {
   const imageFirst = index % 2 === 1;
-  const bg = zebra && index % 2 === 1 ? "bg-mist-50" : "bg-page";
+  const bg = zebra && index % 2 === 1 ? "bg-surface-subtle" : "bg-surface";
+  const number = String(index + 1).padStart(2, "0");
 
   const Copy = (
     <motion.div
@@ -31,31 +37,72 @@ export default function ServiceRow({
       transition={{ duration: 0.55 }}
     >
       {eyebrow && (
-        <p className="text-xs font-mono uppercase tracking-widest text-teal-dark mb-3">{eyebrow}</p>
+        <p className="mb-5 font-mono text-sm uppercase tracking-widest text-accent">{eyebrow}</p>
       )}
-      <h2 className="font-display font-semibold text-2xl md:text-3xl text-periwinkle mb-4">{title}</h2>
-      <p className="text-sm md:text-base text-ink-dim leading-relaxed mb-6 max-w-xl">{description}</p>
 
-      <Link
-        to={ctaHref}
-        className="inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-full border border-mist hover:border-periwinkle/50 hover:text-periwinkle transition-colors focus-ring mb-7"
+      {!compact && (
+      <div className="mb-6 flex items-center gap-4">
+        <span
+          className="font-mono text-base font-semibold text-brand/70 tabular-nums"
+          aria-hidden="true"
+        >
+          {number}
+        </span>
+        <span className="h-px flex-1 bg-line" aria-hidden="true" />
+      </div>
+      )}
+
+      <h2
+        className={
+          compact
+            ? "mb-6 font-display text-3xl font-semibold leading-[1.15] tracking-tight text-content md:text-4xl"
+            : "mb-6 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-brand md:text-5xl lg:text-[3.5rem]"
+        }
       >
-        {ctaText} <ArrowUpRight size={16} />
-      </Link>
+        {title}
+      </h2>
 
-      <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5">
+      {/* Justified only in the compact (service-detail) variant: those rows carry
+          a long description beside a fixed-height photo, so flush edges keep the
+          two columns reading as one block. The listing rows stay ragged-right. */}
+      <p
+        className={
+          compact
+            ? "copy-justify mb-9 max-w-2xl text-xl leading-relaxed text-content-dim"
+            : "mb-9 max-w-2xl text-lg leading-relaxed text-content-dim md:text-xl md:leading-relaxed"
+        }
+      >
+        {description}
+      </p>
+
+      {/* Sub-services read as tappable chips rather than a dense bullet list —
+          each one is a full-size hit target on mobile. */}
+      <ul className="mb-10 flex flex-wrap gap-3">
         {links.map((l) => (
           <li key={l}>
             <Link
               to={ctaHref}
-              className="inline-flex items-center gap-1.5 text-xs md:text-sm text-ink-dim hover:text-periwinkle transition-colors focus-ring"
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-card px-4 py-2.5 text-sm font-medium text-content-dim transition-colors hover:border-brand/50 hover:text-brand md:text-base focus-ring"
             >
-              <ChevronRight size={13} className="text-teal shrink-0" />
+              <ChevronRight size={15} className="shrink-0 text-accent" aria-hidden="true" />
               <span>{l}</span>
             </Link>
           </li>
         ))}
       </ul>
+
+      {ctaHref && (
+        <Link
+          to={ctaHref}
+          className="group inline-flex items-center gap-2.5 rounded-full border border-line px-7 py-4 text-base font-semibold transition-colors hover:border-brand/50 hover:text-brand md:text-lg focus-ring"
+        >
+          {ctaText}
+          <ArrowUpRight
+            size={19}
+            className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          />
+        </Link>
+      )}
     </motion.div>
   );
 
@@ -65,19 +112,50 @@ export default function ServiceRow({
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.55 }}
-      className="relative"
+      className={`group relative ${compact ? "h-full" : ""}`}
     >
-      <div className="absolute -top-6 -right-6 w-28 h-28 bg-periwinkle/15 rounded-2xl blur-2xl" aria-hidden="true" />
-      <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-teal/15 rounded-full blur-2xl" aria-hidden="true" />
-      <div className="relative rounded-xl2 overflow-hidden shadow-card border border-mist">
-        <img src={image} alt={imageAlt} loading="lazy" className="w-full h-64 md:h-72 object-cover" />
+      <div
+        className="absolute -right-10 -top-10 h-44 w-44 rounded-2xl bg-brand/15 blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute -bottom-12 -left-12 h-40 w-40 rounded-full bg-accent/15 blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className={`relative overflow-hidden rounded-xl2 border border-line shadow-card ${
+          compact ? "h-full" : ""
+        }`}
+      >
+        <img
+          src={image}
+          alt={imageAlt}
+          loading="lazy"
+          className={
+            // Compact rows carry a long description, so the photo tracks the
+            // copy column's height instead of a fixed one — the two sides end
+            // flush and the row reads as a single filled block. The floor stops
+            // a short row from collapsing the image to a strip.
+            compact
+              ? "h-80 w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] md:h-full md:min-h-[24rem]"
+              : "h-80 w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] md:h-[26rem] lg:h-[32rem]"
+          }
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-inverse/45 via-transparent to-transparent"
+          aria-hidden="true"
+        />
       </div>
     </motion.div>
   );
 
   return (
-    <section id={id} className={`${bg} py-14 md:py-16`}>
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+    <section id={id} className={`${bg} py-20 md:py-28`}>
+      <div
+        className={`mx-auto grid max-w-8xl grid-cols-1 gap-14 px-6 md:grid-cols-2 md:gap-20 lg:gap-24 ${
+          compact ? "items-center md:items-stretch" : "items-center"
+        }`}
+      >
         {imageFirst ? (
           <>
             <div className="order-1">{Visual}</div>

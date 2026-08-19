@@ -16,28 +16,43 @@ const initials = (name) =>
     .slice(0, 2)
     .join("");
 
-export default function TestimonialWall() {
+export default function TestimonialWall({ showHeading = true }) {
   return (
     <section className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
-      <SectionHeading
-        className="mb-16"
-        eyebrow="Simply the best AI development partner"
-        titleClassName="lg:whitespace-nowrap lg:text-[2.75vw]"
-        title={
-          <>
-            We Went From <span className="text-brand">Operational Chaos To A Growth Machine</span> In Weeks
-          </>
-        }
-      >
-        <div className="mt-7 inline-flex items-center gap-3 rounded-full border border-line-strong bg-surface-subtle px-6 py-3">
-          <span className="flex text-gold" role="img" aria-label="4.8 out of 5 stars">
-            {[...Array(5)].map((_, i) => <Star key={i} size={20} strokeWidth={0} fill="currentColor" />)}
-          </span>
-          <span className="font-display text-xl font-semibold text-content">4.8/5</span>
-          <span className="h-5 w-px bg-line-strong" aria-hidden="true" />
-          <span className="text-base text-content-dim">from 300+ companies</span>
+      {/* The rating badge survives even when the host page drops the heading —
+          it is proof, not decoration. */}
+      {showHeading ? (
+        <SectionHeading
+          className="mb-16"
+          eyebrow="Simply the best AI development partner"
+          titleClassName="lg:whitespace-nowrap lg:text-[2.75vw]"
+          title={
+            <>
+              We Went From <span className="text-brand">Operational Chaos To A Growth Machine</span> In Weeks
+            </>
+          }
+        >
+          <div className="mt-7 inline-flex items-center gap-3 rounded-full border border-line-strong bg-surface-subtle px-6 py-3">
+            <span className="flex text-gold" role="img" aria-label="4.8 out of 5 stars">
+              {[...Array(5)].map((_, i) => <Star key={i} size={20} strokeWidth={0} fill="currentColor" />)}
+            </span>
+            <span className="font-display text-xl font-semibold text-content">4.8/5</span>
+            <span className="h-5 w-px bg-line-strong" aria-hidden="true" />
+            <span className="text-base text-content-dim">from 300+ companies</span>
+          </div>
+        </SectionHeading>
+      ) : (
+        <div className="mb-16 flex justify-center">
+          <div className="inline-flex items-center gap-3 rounded-full border border-line-strong bg-surface-subtle px-6 py-3">
+            <span className="flex text-gold" role="img" aria-label="4.8 out of 5 stars">
+              {[...Array(5)].map((_, i) => <Star key={i} size={20} strokeWidth={0} fill="currentColor" />)}
+            </span>
+            <span className="font-display text-xl font-semibold text-content">4.8/5</span>
+            <span className="h-5 w-px bg-line-strong" aria-hidden="true" />
+            <span className="text-base text-content-dim">from 300+ companies</span>
+          </div>
         </div>
-      </SectionHeading>
+      )}
 
       <div className="grid gap-6 sm:grid-cols-2">
         {wall.map((t, i) => {

@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
+import { Link } from "react-router-dom";
 
 const cases = [
   { name: "Konnect", tag: "AI-Based Recommendation Engine", stats: [["50X", "Match accuracy"], ["30%", "Filters automated"], ["1M+", "Users connected"]] },
@@ -11,23 +12,36 @@ const cases = [
   { name: "Pitchmark", tag: "AI Marketing Pitch Automation", stats: [["10X", "Report generation"], ["70%", "Fewer review edits"], ["10-15", "Pitches / day"]] },
 ];
 
-export default function Portfolio() {
+export default function Portfolio({ showHeading = true }) {
   const ref = useRef(null);
   const scroll = (dir) => ref.current?.scrollBy({ left: dir * 380, behavior: "smooth" });
 
   return (
     <section id="portfolio" className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
-      <SectionHeading
-        className="mb-12"
-        eyebrow="What have we built for businesses?"
-        title={
-          <>
-            Proven Results: <span className="text-brand">How We Solve Complex Business Challenges</span>
-          </>
-        }
-        subtitle="Five production systems, five very different industries — and one shared outcome: measurable lift within the first two quarters."
-      >
-        <div className="mt-8 flex gap-3">
+      {/* The arrows live inside the heading when there is one, and stand on
+          their own when the host page suppresses it. */}
+      {showHeading ? (
+        <SectionHeading
+          className="mb-12"
+          eyebrow="What have we built for businesses?"
+          title={
+            <>
+              Proven Results: <span className="text-brand">How We Solve Complex Business Challenges</span>
+            </>
+          }
+          subtitle="Five production systems, five very different industries — and one shared outcome: measurable lift within the first two quarters."
+        >
+          <div className="mt-8 flex gap-3">
+            <button type="button" onClick={() => scroll(-1)} className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring" aria-label="Previous case studies">
+              <ChevronLeft size={20} />
+            </button>
+            <button type="button" onClick={() => scroll(1)} className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring" aria-label="Next case studies">
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        </SectionHeading>
+      ) : (
+        <div className="mb-12 flex justify-center gap-3">
           <button type="button" onClick={() => scroll(-1)} className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring" aria-label="Previous case studies">
             <ChevronLeft size={20} />
           </button>
@@ -35,7 +49,7 @@ export default function Portfolio() {
             <ChevronRight size={20} />
           </button>
         </div>
-      </SectionHeading>
+      )}
 
       <div ref={ref} className="scrollbar-hide flex snap-x gap-6 overflow-x-auto pb-4 pt-2">
         {cases.map((c, i) => (
@@ -68,10 +82,10 @@ export default function Portfolio() {
                 ))}
               </div>
             </div>
-            <a href="#contact" className="relative inline-flex items-center gap-1.5 text-base font-medium text-content transition-colors hover:text-brand focus-ring">
+            <Link to="/#contact" className="relative inline-flex items-center gap-1.5 text-base font-medium text-content transition-colors hover:text-brand focus-ring">
               Read Full Case Study
               <ArrowUpRight size={17} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
+            </Link>
           </motion.article>
         ))}
       </div>

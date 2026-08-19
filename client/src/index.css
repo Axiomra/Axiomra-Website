@@ -55,3 +55,148 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* ── Justified body copy ──────────────────────────────────────────────────
+   Long-form paragraphs get flush left AND right edges so a copy column reads
+   as a solid block next to its image. Justification only switches on at `sm`
+   and up: on a narrow column the same rule opens rivers of white space
+   between words, so mobile stays ragged-right. `hyphens: auto` is what keeps
+   the word spacing tight enough for justification to look intentional. */
+.copy-justify {
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .copy-justify {
+    text-align: justify;
+    text-justify: inter-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    /* Only break words of 8+ characters, and never leave fewer than 4 letters
+       before or 3 after the hyphen — without this the browser hyphenates
+       almost every line and the column reads like a dictionary column. */
+    -webkit-hyphenate-limit-before: 4;
+    -webkit-hyphenate-limit-after: 3;
+    hyphenate-limit-chars: 8 4 3;
+  }
+}
+
+/* ── AI Development page ambient backdrop ─────────────────────────────────
+   A single fixed layer behind the whole page rather than one per section, so
+   the aurora drifts continuously as you scroll instead of restarting at every
+   band. It sits at `z-index: -1`: above the body background, below every
+   section. The sections themselves are made slightly translucent (below) —
+   without that the backdrop would be painted over and never seen.
+   Cards, chips and the dark CTA bands stay fully opaque so text contrast is
+   never traded away for the effect. */
+
+.ai-dev-page {
+  position: relative;
+}
+
+.ai-dev-page .bg-surface {
+  background-color: rgb(var(--surface) / 0.84);
+}
+
+.ai-dev-page .bg-surface-subtle {
+  background-color: rgb(var(--surface-subtle) / 0.84);
+}
+
+.ai-dev-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Drifting colour blooms. */
+.ai-dev-bg::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  background:
+    radial-gradient(40% 40% at 18% 22%, rgb(var(--accent-vivid) / 0.28), transparent 66%),
+    radial-gradient(36% 36% at 84% 16%, rgb(var(--brand) / 0.26), transparent 68%),
+    radial-gradient(44% 44% at 62% 86%, rgb(var(--brand-strong) / 0.22), transparent 70%);
+  background-size: 160% 160%, 150% 150%, 180% 180%;
+  filter: blur(10px);
+  animation: ai-dev-aurora 32s ease-in-out infinite alternate;
+}
+
+/* Slow circuit grid, faded out at the edges so it never meets the viewport. */
+.ai-dev-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(var(--brand) / 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--brand) / 0.22) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(72% 72% at 50% 40%, #000 8%, transparent 78%);
+  -webkit-mask-image: radial-gradient(72% 72% at 50% 40%, #000 8%, transparent 78%);
+  animation: ai-dev-grid 48s linear infinite;
+}
+
+@keyframes ai-dev-aurora {
+  0%   { background-position: 0% 25%, 100% 0%, 50% 100%; }
+  50%  { background-position: 35% 65%, 65% 35%, 25% 65%; }
+  100% { background-position: 65% 15%, 20% 70%, 75% 90%; }
+}
+
+@keyframes ai-dev-grid {
+  to { background-position: 72px 72px; }
+}
+
+/* ── TechStack heading backdrop ───────────────────────────────────────────
+   Three stacked decorative layers behind the "Expertise In Advanced
+   Development Technologies" block. Kept in CSS (not Framer) so the
+   prefers-reduced-motion block above freezes them for free. */
+
+.tech-aurora {
+  background:
+    radial-gradient(60% 55% at 12% 20%, rgb(var(--accent-vivid) / 0.18), transparent 62%),
+    radial-gradient(55% 50% at 82% 12%, rgb(var(--brand) / 0.20), transparent 65%),
+    radial-gradient(70% 60% at 50% 95%, rgb(var(--brand-strong) / 0.14), transparent 70%);
+  background-size: 180% 180%, 170% 170%, 200% 200%;
+  filter: blur(6px);
+  animation: tech-aurora-drift 26s ease-in-out infinite alternate;
+}
+
+@keyframes tech-aurora-drift {
+  0%   { background-position: 0% 30%, 100% 0%, 50% 100%; }
+  50%  { background-position: 30% 60%, 70% 30%, 30% 70%; }
+  100% { background-position: 60% 20%, 20% 60%, 70% 90%; }
+}
+
+.tech-grid {
+  background-image:
+    linear-gradient(rgb(var(--brand) / 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--brand) / 0.35) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(80% 70% at 50% 30%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(80% 70% at 50% 30%, #000 20%, transparent 78%);
+  animation: tech-grid-pan 40s linear infinite;
+}
+
+@keyframes tech-grid-pan {
+  to { background-position: 64px 64px; }
+}
+
+.tech-sweep {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--accent-vivid) / 0.9) 45%,
+    rgb(var(--brand) / 0.9) 55%,
+    transparent 100%
+  );
+  animation: tech-sweep-slide 9s ease-in-out infinite;
+}
+
+@keyframes tech-sweep-slide {
+  0%   { transform: translateX(-60%); opacity: 0; }
+  35%  { opacity: 1; }
+  65%  { opacity: 1; }
+  100% { transform: translateX(60%); opacity: 0; }
+}

@@ -17,6 +17,7 @@ export default function SectionHeading({
   // Escape hatch for the few headings that must hold a single line: they
   // trade the fixed type scale for a viewport-relative one.
   titleClassName = "",
+  subtitleClassName = "",
   children,
   onInverse = false,
 }) {
@@ -52,7 +53,7 @@ export default function SectionHeading({
         <p
           className={`mt-6 text-lg leading-relaxed md:text-xl ${
             centered ? "mx-auto max-w-4xl" : "max-w-4xl"
-          } ${onInverse ? "text-inverse-fg/80" : "text-content-dim"}`}
+          } ${onInverse ? "text-inverse-fg/80" : "text-content-dim"} ${subtitleClassName}`}
         >
           {subtitle}
         </p>

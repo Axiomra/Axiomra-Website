@@ -16,20 +16,32 @@ export default function TechStack() {
   const [active, setActive] = useState("Artificial Intelligence");
 
   return (
-    <section className="border-y border-line bg-surface-subtle py-24">
-      <div className="mx-auto mb-12 max-w-8xl px-4 sm:px-6">
+    <section className="relative overflow-hidden border-y border-line bg-surface-subtle py-24">
+      {/* Ambient backdrop for the heading block: a slow drifting colour wash,
+          a drifting grid, and a sweeping light line. All decorative, all
+          suppressed by the reduced-motion rule in index.css. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[720px]">
+        <div className="tech-aurora absolute inset-0 opacity-70" />
+        <div className="tech-grid absolute inset-0 opacity-[0.18]" />
+        <div className="tech-sweep absolute inset-x-0 top-0 h-px" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-surface-subtle" />
+      </div>
+
+      <div className="relative mx-auto mb-16 w-full max-w-[110rem] px-4 py-10 sm:px-10 lg:px-16 lg:py-16">
         <SectionHeading
           eyebrow="Our tech stack"
+          titleClassName="!text-5xl md:!text-6xl lg:!text-7xl xl:!text-[5rem]"
+          subtitleClassName="!max-w-5xl text-justify !text-xl !leading-[1.8] md:!text-2xl md:!leading-[1.85]"
           title={
             <>
               Expertise In <span className="text-brand">Advanced Development Technologies</span>
             </>
           }
-          subtitle="The models, frameworks, and infrastructure we reach for — chosen per project, never by fashion."
+          subtitle="The models, frameworks, and infrastructure we reach for — chosen per project, never by fashion. Every stack decision is made against your data, your integrations, and the load you actually expect in production, so what ships stays maintainable long after launch."
         />
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-8 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Technology categories">
           {Object.keys(tabs).map((tab) => (
             <button

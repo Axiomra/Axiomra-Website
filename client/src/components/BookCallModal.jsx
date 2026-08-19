@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 /** Exit-intent prompt: fires once, when the pointer leaves via the top edge. */
 export default function BookCallModal() {
@@ -71,13 +72,13 @@ export default function BookCallModal() {
               Your desired idea is just a phone call away. Just pitch us your idea, thought,
               design, or project, and we will deliver the best possible solution right to your inbox.
             </p>
-            <a
-              href="#contact"
+            <Link
+              to="/#contact"
               onClick={close}
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent-vivid to-brand px-6 py-3 font-medium text-inverse-fg transition-opacity hover:opacity-90 focus-ring"
             >
               Book My Free Consultation <ArrowUpRight size={16} />
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
       )}

@@ -18,21 +18,21 @@ export default function ServiceDetailPlaceholder() {
           <img
             src={service.image}
             alt={service.imageAlt}
-            className="w-full h-56 object-cover rounded-xl2 shadow-card border border-mist mb-10"
+            className="w-full h-56 object-cover rounded-xl2 shadow-card border border-line mb-10"
           />
         )}
-        <p className="text-xs font-mono uppercase tracking-widest text-teal-dark mb-3">Coming soon</p>
+        <p className="text-xs font-mono uppercase tracking-widest text-accent mb-3">Coming soon</p>
         <h1 className="font-display font-semibold text-3xl md:text-4xl mb-4">
           {service ? service.title : "This service page"} is on its way
         </h1>
-        <p className="text-ink-dim leading-relaxed mb-8">
+        <p className="text-content-dim leading-relaxed mb-8">
           {service
             ? service.description
             : "We couldn't find that service, but our full lineup is on the services page."}
         </p>
         <Link
           to={SERVICES_BASE_PATH}
-          className="inline-flex items-center gap-2 text-sm font-medium bg-navy text-white px-6 py-3 rounded-full hover:opacity-90 transition-opacity focus-ring"
+          className="inline-flex items-center gap-2 text-sm font-medium bg-inverse text-white px-6 py-3 rounded-full hover:opacity-90 transition-opacity focus-ring"
         >
           <ArrowLeft size={16} /> Back to all services
         </Link>

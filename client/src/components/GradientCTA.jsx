@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import NetworkBackground from "./NetworkBackground";
+import { Link } from "react-router-dom";
 
 /**
  * Two variants, both intentionally dark in either theme:
@@ -41,13 +42,13 @@ export default function GradientCTA({
         {subtitle && (
           <p className="mx-auto mt-6 max-w-4xl text-lg leading-relaxed text-inverse-fg/85 md:text-xl">{subtitle}</p>
         )}
-        <a
-          href="#contact"
+        <Link
+          to="/#contact"
           className="group mt-10 inline-flex items-center gap-2 rounded-full bg-inverse-fg px-8 py-4 text-base font-medium text-inverse transition-all hover:shadow-glow focus-ring md:text-lg"
         >
           {buttonText}
           <ArrowUpRight size={20} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-        </a>
+        </Link>
       </motion.div>
     </section>
   );

@@ -19,24 +19,26 @@ const industries = [
   { name: "Marketing", icon: Megaphone },
 ];
 
-export default function Industries() {
+export default function Industries({ showHeading = true, showStats = true }) {
   // Hovering a tile floods the whole panel with that industry's photo.
   // The first tile is active by default so the panel is never bare.
   const [active, setActive] = useState(industries[0].name);
 
   return (
     <section id="industries" className="py-24">
-      <div className="mx-auto mb-16 max-w-8xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="What industries does Axiomra serve?"
-          title={
-            <>
-              <span className="text-brand">Tailored AI Solutions</span> For Every Industry Vertical
-            </>
-          }
-          subtitle="From clinical workflows to supply-chain forecasting, we ship AI that fits how your industry actually operates."
-        />
-      </div>
+      {showHeading && (
+        <div className="mx-auto mb-16 max-w-8xl px-4 sm:px-6">
+          <SectionHeading
+            eyebrow="What industries does Axiomra serve?"
+            title={
+              <>
+                <span className="text-brand">Tailored AI Solutions</span> For Every Industry Vertical
+              </>
+            }
+            subtitle="From clinical workflows to supply-chain forecasting, we ship AI that fits how your industry actually operates."
+          />
+        </div>
+      )}
 
       <div className="relative mx-auto max-w-none px-0 sm:px-0">
         {/* The grid panel is a brand surface — dark in both themes. */}
@@ -104,20 +106,22 @@ export default function Industries() {
 
       {/* Proof strip — standalone from the image panel so the numbers read as
           their own statement. */}
-      <div className="relative mx-auto mt-16 max-w-none border-y border-line bg-surface-card px-4 py-12 backdrop-blur-sm sm:px-6">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 text-center sm:grid-cols-3">
-          {[
-            { value: "12+", label: "Verticals served end to end" },
-            { value: "300+", label: "Production deployments shipped" },
-            { value: "24", label: "Countries with live systems" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <p className="font-display text-5xl font-semibold text-brand md:text-6xl">{stat.value}</p>
-              <p className="mt-2 text-base text-ink-dim md:text-lg">{stat.label}</p>
-            </div>
-          ))}
+      {showStats && (
+        <div className="relative mx-auto mt-16 max-w-none border-y border-line bg-surface-card px-4 py-12 backdrop-blur-sm sm:px-6">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 text-center sm:grid-cols-3">
+            {[
+              { value: "12+", label: "Verticals served end to end" },
+              { value: "300+", label: "Production deployments shipped" },
+              { value: "24", label: "Countries with live systems" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <p className="font-display text-5xl font-semibold text-brand md:text-6xl">{stat.value}</p>
+                <p className="mt-2 text-base text-ink-dim md:text-lg">{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

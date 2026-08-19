@@ -1,6 +1,8 @@
-import { Facebook, Instagram, Linkedin, ArrowUp } from "lucide-react";
+import { Instagram, Linkedin, ArrowUp } from "lucide-react";
 import logoLight from "../assets/logo-light.webp";
+import iconTeal from "../assets/icon-teal.png";
 import NetworkBackground from "./NetworkBackground";
+import { Link } from "react-router-dom";
 
 const cols = [
   { title: "Services", links: ["Artificial Intelligence", "Computer Vision", "Software Development", "Generative AI", "AI Agent Development"] },
@@ -27,10 +29,7 @@ function WhatsAppIcon({ size = 26 }) {
   );
 }
 
-// Facebook has no public Axiomra handle yet — this points at the expected
-// vanity URL and should be corrected once the page exists.
 const socials = [
-  { Icon: Facebook, label: "Facebook", href: "https://www.facebook.com/axiomra.co" },
   { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/axiomra.co" },
   { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/axiomra.co" },
   { Icon: XIcon, label: "X (Twitter)", href: "https://x.com/Axiomra_co" },
@@ -39,7 +38,7 @@ const socials = [
 /* The rule wipes in from the left on hover/focus — `origin-left scale-x-0`
    rather than a width transition so it animates on the compositor. */
 const UNDERLINE_LINK =
-  "relative inline-block text-base text-inverse-fg/70 transition-colors duration-300 hover:text-inverse-fg focus-ring " +
+  "relative inline-block text-lg text-inverse-fg/70 transition-colors duration-300 hover:text-inverse-fg focus-ring " +
   "after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 " +
   "after:bg-gradient-to-r after:from-accent-vivid after:to-brand after:transition-transform after:duration-300 " +
   "hover:after:scale-x-100 focus-visible:after:scale-x-100";
@@ -54,23 +53,23 @@ export default function Footer() {
           animation underneath it. */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-inverse/85 via-inverse/45 to-inverse/80" />
 
-      <div className="relative z-10 mx-auto grid max-w-8xl gap-10 px-4 sm:px-6 md:grid-cols-4">
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-x-8 gap-y-12 px-4 sm:px-6 md:grid-cols-4">
         <div>
           <img src={logoLight} alt="Axiomra" className="mb-4 h-9 w-auto" width={500} height={91} />
-          <p className="max-w-xs text-base leading-relaxed text-inverse-fg/70">
+          <p className="max-w-xs text-lg leading-relaxed text-inverse-fg/70">
             We help businesses by automating their processes and developing customized
             end-to-end AI solutions that deliver proven ROI.
           </p>
-          <a
-            href="#contact"
-            className="mt-5 inline-block rounded-full bg-inverse-fg px-6 py-3 text-base font-medium text-inverse transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow focus-ring"
+          <Link
+            to="/#contact"
+            className="mt-5 inline-block rounded-full bg-inverse-fg px-6 py-3 text-lg font-medium text-inverse transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow focus-ring"
           >
             Let&apos;s Talk
-          </a>
+          </Link>
         </div>
         {cols.map((c) => (
           <div key={c.title}>
-            <h4 className="mb-5 font-display text-xl font-semibold text-inverse-fg">{c.title}</h4>
+            <h4 className="mb-5 font-display text-2xl font-semibold text-inverse-fg">{c.title}</h4>
             <ul className="space-y-3">
               {c.links.map((l) => (
                 <li key={l}>
@@ -84,8 +83,8 @@ export default function Footer() {
         ))}
       </div>
 
-      <div className="relative z-10 mx-auto mt-14 flex max-w-8xl flex-col items-center justify-between gap-4 border-t border-inverse-fg/10 px-4 pt-6 sm:flex-row sm:px-6">
-        <span className="text-sm text-inverse-fg/60">© 2026 Axiomra. All Rights Reserved.</span>
+      <div className="relative z-10 mx-auto mt-14 flex max-w-6xl flex-col items-center justify-between gap-4 border-t border-inverse-fg/10 px-4 pt-6 sm:flex-row sm:px-6">
+        <span className="text-base text-inverse-fg/60">© 2026 Axiomra. All Rights Reserved.</span>
         <div className="flex gap-3">
           {socials.map(({ Icon, label, href }) => (
             <a
@@ -103,13 +102,18 @@ export default function Footer() {
       </div>
 
       <a
-        href="https://wa.me/10000000000"
+        href="https://wa.me/16575203444"
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 left-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-glow transition-transform hover:scale-105 focus-ring"
-        aria-label="Chat on WhatsApp"
+        aria-label="Chat on WhatsApp: +1 (657) 520-3444"
       >
         <WhatsAppIcon />
+        {/* Axiomra mark rides the corner so the button is branded without
+            losing the WhatsApp glyph people actually recognise. */}
+        <span className="absolute -right-0.5 -top-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-white ring-2 ring-[#25D366]">
+          <img src={iconTeal} alt="" className="h-3.5 w-auto" width={83} height={91} />
+        </span>
       </a>
 
       <button
