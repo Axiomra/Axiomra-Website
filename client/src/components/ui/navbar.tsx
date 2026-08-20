@@ -9,6 +9,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { SERVICES_BASE_PATH } from "@/data/servicesData";
+import { GENERATIVE_AI_SLUG } from "@/data/generativeAiData";
 import { AI_DEVELOPMENT_SLUG } from "@/data/aiDevelopmentData";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import logoLight from "@/assets/logo-light.webp";
@@ -118,7 +119,7 @@ function useNavTone() {
 
 const serviceItems = [
   { label: "AI Development", description: "Custom AI software, agents & LLM integration", href: `${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}` },
-  { label: "Generative AI", description: "Text, image & video generation at scale", href: `${SERVICES_BASE_PATH}#generative-ai-services` },
+  { label: "Generative AI", description: "Text, image & video generation at scale", href: `${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}` },
   { label: "Agentic AI", description: "Autonomous agents for real workflows", href: `${SERVICES_BASE_PATH}#bot-automation-services` },
   { label: "Computer Vision", description: "Detection, recognition & visual inspection", href: `${SERVICES_BASE_PATH}#computer-vision-services` },
   { label: "NLP", description: "Search, chatbots & document understanding", href: `${SERVICES_BASE_PATH}#natural-language-processing-services` },

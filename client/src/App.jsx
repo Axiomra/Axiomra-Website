@@ -9,9 +9,11 @@ import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
 import ServiceDetailPlaceholder from "./pages/ServiceDetailPlaceholder";
 import AiDevelopmentPage from "./pages/AiDevelopmentPage";
+import GenerativeAiPage from "./pages/GenerativeAiPage";
 import ContactPage from "./pages/ContactPage";
 import { SERVICES_BASE_PATH } from "./data/servicesData";
 import { AI_DEVELOPMENT_SLUG } from "./data/aiDevelopmentData";
+import { GENERATIVE_AI_SLUG } from "./data/generativeAiData";
 
 /** Scrolls to a hash target on route change, or to the top of a fresh page. */
 function ScrollManager() {
@@ -55,6 +57,10 @@ export default function App() {
             <Route
               path={`${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`}
               element={<AiDevelopmentPage />}
+            />
+            <Route
+              path={`${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}`}
+              element={<GenerativeAiPage />}
             />
             <Route path={`${SERVICES_BASE_PATH}/:slug`} element={<ServiceDetailPlaceholder />} />
           </Routes>

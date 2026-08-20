@@ -46,6 +46,8 @@ export default [
       'src/components/FooterCanvas.jsx',
       'src/components/ContactCanvas.jsx',
       'src/components/BusinessTypeCanvas.jsx',
+      'src/components/gen-ai/LatentCanvas.jsx',
+      'src/components/gen-ai/TokenFlowCanvas.jsx',
     ],
     rules: { 'react/no-unknown-property': 'off' },
   },
