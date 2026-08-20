@@ -11,7 +11,7 @@ import deepLearning from "../assets/services/deep-learning-services.jpg";
 import dataScience from "../assets/services/data-science-analytics-services.jpg";
 import chatbotDevelopment from "../assets/services/chatbot-development-services.jpg";
 import dataExtraction from "../assets/services/data-extraction-services.jpg";
-import audioAnalysis from "../assets/services/audio-analysis-services.jpg";
+import voiceAssistant from "../assets/services/voice-assistant-services.jpg";
 import infoTechnology from "../assets/services/information-technology-services.jpg";
 import customSoftware from "../assets/services/custom-software-development-services.jpg";
 import webAppDevelopment from "../assets/services/web-app-development-services.jpg";
@@ -143,13 +143,13 @@ const services = [
     links: ["Email Data Extraction", "Website Data Extraction", "Data Extraction for AI and ML Models", "PDF Parsing and Extraction", "Document and Other File Extraction"],
   },
   {
-    slug: "audio-analysis-services",
-    title: "Audio Analysis",
-    image: audioAnalysis,
-    imageAlt: "Hands typing on a laptop as AI speech bubbles rise from a glowing assistant icon",
+    slug: "voice-assistant-services",
+    title: "Voice Assistant",
+    image: voiceAssistant,
+    imageAlt: "Hands at a laptop with an AI assistant icon and conversation bubbles floating above the keyboard",
     description:
-      "Our audio analysis services transform unstructured audio into actionable insight using AI and machine learning. From speech-to-text transcription and emotion detection to audio embeddings and voice biometrics, we help businesses unlock value from conversations, calls, and recordings with precision and scale.",
-    links: ["Voice Tone Analysis", "Audio Recognition and Moderation", "Audio Classification", "Text-to-Audio Processing", "Virtual Assistants", "Sentiment Analysis"],
+      "We build production voice assistants that answer calls, book appointments and resolve routine requests without a human on the line. Real-time speech-to-text, low-latency LLM reasoning and natural cloned voices wire straight into your CRM and calendar — so inbound and outbound calls run around the clock at a fraction of the cost of a call centre.",
+    links: ["Inbound Call Agents", "Outbound Voice Campaigns", "Appointment Booking Agents", "IVR Replacement", "Speech-to-Text & Text-to-Speech", "Multilingual Voice Agents"],
   },
   {
     slug: "information-technology-services",

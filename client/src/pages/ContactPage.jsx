@@ -9,7 +9,6 @@ import {
   FileSignature,
   Handshake,
   Mail,
-  MapPin,
   MessageSquare,
   Phone,
   Rocket,
@@ -24,22 +23,13 @@ import services from "../data/servicesData";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-const WHATSAPP_URL = "https://wa.me/923282324682";
-const PHONE = "+92 328 2324682";
+const WHATSAPP_URL = "https://wa.me/16575203444";
+const PHONE = "+1 (657) 520-3444";
 
 /* The category picker is generated from the same array the services page
    renders, so a new service becomes selectable here the moment it is added
    to servicesData — there is no second list to keep in sync. */
 const SERVICE_OPTIONS = services.map((s) => s.title);
-
-const BUDGET_OPTIONS = [
-  "Under $25k",
-  "$25k – $50k",
-  "$50k – $100k",
-  "$100k – $250k",
-  "$250k+",
-  "Not sure yet",
-];
 
 const CHANNELS = [
   {
@@ -53,8 +43,8 @@ const CHANNELS = [
     icon: Phone,
     label: "Call us",
     value: PHONE,
-    note: "Mon–Fri, 9am – 7pm PKT",
-    href: "tel:+923282324682",
+    note: "Same number on WhatsApp",
+    href: "tel:+16575203444",
   },
   {
     icon: MessageSquare,
@@ -101,24 +91,6 @@ const OPERATIONS = [
   },
 ];
 
-const OFFICES = [
-  {
-    city: "Karachi, Pakistan",
-    role: "Engineering & delivery HQ",
-    hours: "09:00 – 19:00 PKT",
-  },
-  {
-    city: "Dubai, UAE",
-    role: "Client partnerships — MENA",
-    hours: "09:00 – 18:00 GST",
-  },
-  {
-    city: "Remote — US & EU",
-    role: "Overlap hours for US and EU teams",
-    hours: "Up to 6 hours daily overlap",
-  },
-];
-
 const DESKS = [
   {
     title: "Info Queries",
@@ -154,7 +126,6 @@ function ContactForm() {
     name: "",
     email: "",
     company: "",
-    budget: "",
     service: "",
     message: "",
   });
@@ -173,7 +144,7 @@ function ContactForm() {
       });
       if (!res.ok) throw new Error("failed");
       setStatus("success");
-      setForm({ name: "", email: "", company: "", budget: "", service: "", message: "" });
+      setForm({ name: "", email: "", company: "", service: "", message: "" });
     } catch {
       setStatus("error");
     }
@@ -243,26 +214,6 @@ function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="cp-budget" className={LABEL_CLASS}>
-            Estimated budget
-          </label>
-          <select
-            id="cp-budget"
-            name="budget"
-            value={form.budget}
-            onChange={handleChange}
-            className={FIELD_CLASS}
-          >
-            <option value="">Select a range</option>
-            {BUDGET_OPTIONS.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="sm:col-span-2">
           <label htmlFor="cp-service" className={LABEL_CLASS}>
             Service category
           </label>
@@ -273,16 +224,13 @@ function ContactForm() {
             onChange={handleChange}
             className={FIELD_CLASS}
           >
-            <option value="">Which service are you interested in?</option>
+            <option value="">Select a category</option>
             {SERVICE_OPTIONS.map((title) => (
               <option key={title} value={title}>
                 {title}
               </option>
             ))}
           </select>
-          <p className="mt-2 text-sm text-content-faint">
-            Not sure which one fits? Pick the closest — we will steer you on the call.
-          </p>
         </div>
 
         <div className="sm:col-span-2">
@@ -471,7 +419,7 @@ export default function ContactPage() {
                 Chat on WhatsApp
               </a>
               <a
-                href="tel:+923282324682"
+                href="tel:+16575203444"
                 className="focus-ring flex items-center gap-3 rounded-xl text-base text-content-dim transition-colors hover:text-accent"
               >
                 <Phone size={18} className="text-accent" aria-hidden="true" />
@@ -524,29 +472,6 @@ export default function ContactPage() {
               </motion.div>
             ))}
           </div>
-
-          {/* Where the team physically sits — asked on every enterprise call. */}
-          <div className="mt-14 grid gap-5 md:grid-cols-3">
-            {OFFICES.map(({ city, role, hours }, i) => (
-              <motion.div
-                key={city}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
-                className="flex items-start gap-4 rounded-xl2 border border-line bg-surface-subtle p-6"
-              >
-                <MapPin size={20} className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />
-                <div>
-                  <p className="text-base font-semibold text-content">{city}</p>
-                  <p className="mt-1 text-sm text-content-dim">{role}</p>
-                  <p className="mt-2 font-mono text-xs uppercase tracking-[0.14em] text-content-faint">
-                    {hours}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -592,7 +517,7 @@ export default function ContactPage() {
 
       <GradientCTA
         title="Stop Guessing And Start Growing With Your Trusted AI Development Partner"
-        subtitle="Book your complimentary AI Strategic Session (worth $1000) and discover how tailored AI solutions can unlock growth."
+        subtitle="Book your complimentary AI Strategic Session, (worth $1000) just for free, and discover how tailored AI solutions can unlock growth."
         buttonText="Get Your Project Done!"
         dark
         three
