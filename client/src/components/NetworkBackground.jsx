@@ -4,6 +4,7 @@ import ErrorBoundary from "./ErrorBoundary";
 // three.js lives behind a dynamic import so it never blocks first paint.
 const NetworkCanvas = lazy(() => import("./NetworkCanvas"));
 const FooterCanvas = lazy(() => import("./FooterCanvas"));
+const ContactCanvas = lazy(() => import("./ContactCanvas"));
 
 function supportsWebGL() {
   try {
@@ -33,6 +34,7 @@ function StaticNetworkBackground({ className = "" }) {
  * `variant` picks the field:
  *  - "network": particle cloud with proximity links (hero, CTAs)
  *  - "wave":    animated point-lattice wave (footer)
+ *  - "orbit":   rotating point globe with signal rings (contact hero)
  */
 export default function NetworkBackground({ className = "", count = 140, variant = "network" }) {
   const [webgl] = useState(() => supportsWebGL());
@@ -49,7 +51,13 @@ export default function NetworkBackground({ className = "", count = 140, variant
       {webgl && !reducedMotion ? (
         <ErrorBoundary fallback={fallback}>
           <Suspense fallback={fallback}>
-            {variant === "wave" ? <FooterCanvas /> : <NetworkCanvas count={count} />}
+            {variant === "wave" ? (
+              <FooterCanvas />
+            ) : variant === "orbit" ? (
+              <ContactCanvas />
+            ) : (
+              <NetworkCanvas count={count} />
+            )}
           </Suspense>
         </ErrorBoundary>
       ) : (

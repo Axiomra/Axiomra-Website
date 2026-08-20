@@ -174,7 +174,7 @@ const NAV_LINKS = [
 ];
 
 /**
- * Internal destinations ("/", "/#contact", "/ai-services-and-solutions#slug")
+ * Internal destinations ("/", "/contact", "/ai-services-and-solutions#slug")
  * go through react-router so a cross-page jump stays a client-side navigation;
  * ScrollManager in App.jsx does the hash scroll once the route has mounted.
  * Anything else (bare "#anchor", external URL) falls back to a native <a>.
@@ -258,7 +258,7 @@ function FullWidthDropdown({
           <h4 className="font-display text-lg font-semibold text-inverse-fg">{cfg.ctaTitle}</h4>
           <p className="text-base leading-relaxed text-inverse-fg/60">{cfg.ctaSubtitle}</p>
           <NavLink
-            href="/#contact"
+            href="/contact"
             onClick={onNavigate}
             className="mt-auto inline-flex w-fit items-center gap-1.5 rounded-full bg-gradient-to-r from-accent-vivid to-brand px-5 py-2.5 text-base font-medium text-inverse-fg transition-opacity hover:opacity-90 focus-ring"
           >
@@ -432,14 +432,14 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
 
             <div className="mt-2 flex flex-col gap-2 border-t border-inverse-fg/15 pt-3">
               <NavLink
-                href="/#contact"
+                href="/contact"
                 onClick={close}
                 className="w-full rounded-full border border-inverse-fg/25 px-4 py-2.5 text-center text-base font-medium text-inverse-fg transition-colors hover:bg-inverse-fg/10 focus-ring"
               >
                 Contact us
               </NavLink>
               <NavLink
-                href="/#contact"
+                href="/contact"
                 onClick={close}
                 className="w-full rounded-full bg-gradient-to-r from-accent-vivid to-brand px-5 py-2.5 text-center text-base font-medium text-inverse-fg hover:opacity-90 focus-ring"
               >
@@ -506,7 +506,7 @@ export function Navbar({ className }: { className?: string }) {
         <div className="hidden items-center gap-3 lg:flex">
           <ThemeToggle className={cn(fg.border, fg.link)} />
           <NavLink
-            href="/#contact"
+            href="/contact"
             className={cn(
               "rounded-full border px-5 py-2.5 text-base font-medium transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-vivid hover:bg-accent-vivid/15 hover:text-accent-vivid focus-ring",
               fg.borderStrong,
@@ -518,7 +518,7 @@ export function Navbar({ className }: { className?: string }) {
           {/* The gradient is doubled in width and slid on hover, so the button
               shifts hue instead of just dimming its opacity. */}
           <NavLink
-            href="/#contact"
+            href="/contact"
             className="rounded-full bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid bg-[length:200%_100%] bg-left px-6 py-2.5 text-base font-medium text-inverse-fg transition-all duration-500 hover:-translate-y-0.5 hover:bg-right hover:shadow-glow focus-ring"
           >
             Book a call

@@ -86,7 +86,7 @@ export default function ServicesHero() {
             className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <a
-              href="/#contact"
+              href="/contact"
               className="group inline-flex items-center gap-2 rounded-full bg-cta-gradient px-9 py-4 text-base font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring"
             >
               Request A Free Consultation

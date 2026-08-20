@@ -43,7 +43,7 @@ export default function GradientCTA({
           <p className="mx-auto mt-6 max-w-4xl text-lg leading-relaxed text-inverse-fg/85 md:text-xl">{subtitle}</p>
         )}
         <Link
-          to="/#contact"
+          to="/contact"
           className="group mt-10 inline-flex items-center gap-2 rounded-full bg-inverse-fg px-8 py-4 text-base font-medium text-inverse transition-all hover:shadow-glow focus-ring md:text-lg"
         >
           {buttonText}

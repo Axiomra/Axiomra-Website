@@ -200,3 +200,65 @@
   65%  { opacity: 1; }
   100% { transform: translateX(60%); opacity: 0; }
 }
+
+/* ── ROI calculator sliders ───────────────────────────────────────────────
+   A range input cannot style the portion of its track left of the thumb, so
+   the fill is a gradient whose stop is driven by --roi-fill, set inline from
+   the current value. Track and thumb rules must stay in SEPARATE selectors:
+   browsers drop the whole rule if they do not recognise one of the
+   pseudo-elements in a selector list. */
+
+.roi-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    rgb(var(--accent-vivid)) 0%,
+    rgb(var(--accent-vivid)) var(--roi-fill, 50%),
+    rgb(var(--on-inverse) / 0.16) var(--roi-fill, 50%),
+    rgb(var(--on-inverse) / 0.16) 100%
+  );
+  cursor: pointer;
+}
+
+.roi-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border: none;
+  border-radius: 50%;
+  background: rgb(var(--accent-vivid));
+  box-shadow: 0 0 0 4px rgb(var(--accent-vivid) / 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.roi-slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border: none;
+  border-radius: 50%;
+  background: rgb(var(--accent-vivid));
+  box-shadow: 0 0 0 4px rgb(var(--accent-vivid) / 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.roi-slider:hover::-webkit-slider-thumb,
+.roi-slider:active::-webkit-slider-thumb {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 7px rgb(var(--accent-vivid) / 0.22);
+}
+
+.roi-slider:hover::-moz-range-thumb,
+.roi-slider:active::-moz-range-thumb {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 7px rgb(var(--accent-vivid) / 0.22);
+}
+
+.roi-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: transparent;
+}

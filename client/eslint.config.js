@@ -41,7 +41,12 @@ export default [
   {
     // react-three-fiber turns three.js objects into JSX intrinsics, so the
     // DOM-attribute whitelist behind this rule does not apply here.
-    files: ['src/components/NetworkCanvas.jsx', 'src/components/FooterCanvas.jsx'],
+    files: [
+      'src/components/NetworkCanvas.jsx',
+      'src/components/FooterCanvas.jsx',
+      'src/components/ContactCanvas.jsx',
+      'src/components/BusinessTypeCanvas.jsx',
+    ],
     rules: { 'react/no-unknown-property': 'off' },
   },
   {

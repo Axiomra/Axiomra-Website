@@ -12,6 +12,9 @@ import Process from "../sections/Process";
 import TestimonialWall from "../sections/TestimonialWall";
 import TechStack from "../sections/TechStack";
 import WhyUs from "../sections/WhyUs";
+import Certifications from "../sections/Certifications";
+import RoiCalculator from "../sections/RoiCalculator";
+import ProvenResults from "../sections/ProvenResults";
 import Awards from "../sections/Awards";
 import Resources from "../sections/Resources";
 import FAQ from "../sections/FAQ";
@@ -53,6 +56,9 @@ export default function HomePage() {
       <Process />
       <TechStack />
       <WhyUs />
+      <Certifications />
+      <RoiCalculator />
+      <ProvenResults />
       <Awards />
       <Resources />
       <FAQ />

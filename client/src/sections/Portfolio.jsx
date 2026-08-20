@@ -82,7 +82,7 @@ export default function Portfolio({ showHeading = true }) {
                 ))}
               </div>
             </div>
-            <Link to="/#contact" className="relative inline-flex items-center gap-1.5 text-base font-medium text-content transition-colors hover:text-brand focus-ring">
+            <Link to="/contact" className="relative inline-flex items-center gap-1.5 text-base font-medium text-content transition-colors hover:text-brand focus-ring">
               Read Full Case Study
               <ArrowUpRight size={17} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>

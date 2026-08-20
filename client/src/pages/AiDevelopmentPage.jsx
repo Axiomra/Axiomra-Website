@@ -13,8 +13,6 @@ import SectionHeading from "../components/SectionHeading";
 import ServiceRow from "../components/ServiceRow";
 import GradientCTA from "../components/GradientCTA";
 import Portfolio from "../sections/Portfolio";
-import TestimonialWall from "../sections/TestimonialWall";
-import Awards from "../sections/Awards";
 import FAQ from "../sections/FAQ";
 
 import { whatWeDo, subServices, faqs } from "../data/aiDevelopmentData";
@@ -68,7 +66,7 @@ export default function AiDevelopmentPage() {
             description={s.description}
             image={s.image}
             imageAlt={s.imageAlt}
-            ctaHref={s.ctaText ? "/#contact" : undefined}
+            ctaHref={s.ctaText ? "/contact" : undefined}
             ctaText={s.ctaText}
           />
         ))}
@@ -103,22 +101,6 @@ export default function AiDevelopmentPage() {
       </section>
       <Portfolio showHeading={false} />
 
-      <section className="bg-surface pt-20 md:pt-28">
-        <div className="mx-auto max-w-8xl px-6">
-          <SectionHeading
-            eyebrow="When we say we deliver ROI, we mean it"
-            title={
-              <>
-                See What Leaders{" "}
-                <span className="text-brand">With 10+ Years Of Experience</span> Have To Say
-              </>
-            }
-            subtitle="These aren't just testimonials — they are real-world results from companies that chose Axiomra for production-grade AI, not prototypes."
-          />
-        </div>
-      </section>
-      <TestimonialWall showHeading={false} />
-
       <AiDevIndustries />
 
       <GradientCTA
@@ -150,7 +132,6 @@ export default function AiDevelopmentPage() {
       />
 
       <AiDevBenefits />
-      <Awards />
 
       <GradientCTA
         dark

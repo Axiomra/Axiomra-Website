@@ -16,7 +16,6 @@ import infoTechnology from "../assets/services/information-technology-services.j
 import customSoftware from "../assets/services/custom-software-development-services.jpg";
 import webAppDevelopment from "../assets/services/web-app-development-services.jpg";
 import mobileAppDevelopment from "../assets/services/mobile-app-development-services.jpg";
-import uiUxDesign from "../assets/services/ui-ux-design-services.jpg";
 import recommendationSystems from "../assets/services/recommendation-systems-services.jpg";
 import webScraping from "../assets/services/web-scraping-services.jpg";
 import botAutomation from "../assets/services/bot-automation-services.jpg";
@@ -39,7 +38,7 @@ const services = [
     slug: "generative-ai-services",
     title: "Generative AI",
     image: generativeAi,
-    imageAlt: "Neural network visualization representing generative AI capabilities",
+    imageAlt: "Person holding a glowing AI sphere that generates text, prompt and settings panels around it",
     description:
       "Our generative AI services help teams create faster and stay ahead of the curve. From automated content generation to personalized customer experiences and design optimization, we combine deep technical expertise with your industry context to build solutions that boost creativity and measurably improve output.",
     links: ["Generative AI Consulting", "Generative AI Integration", "Generative AI Model Development", "Generative AI Development"],
@@ -57,7 +56,7 @@ const services = [
     slug: "process-automation-services",
     title: "Process Automation",
     image: processAutomation,
-    imageAlt: "Automated workflow interface representing process automation services",
+    imageAlt: "Robotic hand and human hand meeting over a board of automated task icons above a night skyline",
     description:
       "We use artificial intelligence and robotic process automation (RPA) to remove repetitive manual work and streamline entire workflows. Our automation platforms integrate cleanly with your existing systems — data entry, invoice processing, customer support, and supply chain — cutting errors while scaling output.",
     links: ["Process Automation Consulting", "Intelligent Automation Solutions", "RPA", "RPA Software Development", "Workflow Automation Consulting"],
@@ -75,7 +74,7 @@ const services = [
     slug: "machine-learning-services",
     title: "Machine Learning",
     image: machineLearning,
-    imageAlt: "Illuminated neural brain wired into a head, representing models learning from data",
+    imageAlt: "Glowing circuit-board brain held in two hands, representing a model learning from data",
     description:
       "We design machine learning solutions tailored to your business needs, covering supervised and unsupervised learning, predictive modeling, and real-time analytics. Whether it's building custom ML pipelines, fine-tuning pretrained models, or deploying scalable APIs, we help you forecast demand and personalize customer experience.",
     links: ["Machine Learning Strategy & Consulting", "ML Model Development", "MLOps Consulting Services", "Generative Models"],
@@ -84,7 +83,7 @@ const services = [
     slug: "natural-language-processing-services",
     title: "Natural Language Processing",
     image: nlp,
-    imageAlt: "AI-powered circuit board representing natural language processing",
+    imageAlt: "Wireframe human head resting in an open palm with a language-processing node graph branching out of it",
     description:
       "We build advanced natural language processing applications that go well beyond basic text analysis. Using large language models, transformers, and modern NLP techniques, our AI solutions deliver accurate sentiment analysis, entity recognition, and conversational intelligence for real-world business use cases.",
     links: ["Sentiment Analysis", "Text Summarization", "Language Translation", "Text Classification", "Speech Recognition", "Named Entity Recognition"],
@@ -111,7 +110,7 @@ const services = [
     slug: "deep-learning-services",
     title: "Deep Learning",
     image: deepLearning,
-    imageAlt: "Person analyzing multiple data screens representing deep learning systems",
+    imageAlt: "Two colleagues with a laptop standing in front of a wall-sized glowing neural network",
     description:
       "We deliver deep learning services that solve complex challenges through advanced neural networks and custom architectures. From computer vision and NLP to speech recognition and recommendation systems, our custom deep learning models are designed to maximize accuracy, performance, and efficiency across industries.",
     links: ["Video Analytics", "Image Classification", "Data Labelling", "Model Deployment and Support", "Speech Recognition"],
@@ -120,7 +119,7 @@ const services = [
     slug: "data-science-analytics-services",
     title: "Data Science & Analytics",
     image: dataScience,
-    imageAlt: "Glowing circuit board representing data science and analytics infrastructure",
+    imageAlt: "Analyst working across a laptop and tablet while holographic charts and data streams fan out above the desk",
     description:
       "Our data science and analytics services help organizations turn raw data into actionable insight. From data engineering and model development to interactive dashboards and visualization, we enable data-driven decisions that improve user experience, optimize operations, and boost measurable business outcomes.",
     links: ["Data Ingestion and Cleaning", "Predictive Analytics", "Data Visualization", "Data Analytics Consulting"],
@@ -138,7 +137,7 @@ const services = [
     slug: "data-extraction-services",
     title: "Data Extraction",
     image: dataExtraction,
-    imageAlt: "Circuit board close-up representing automated data extraction pipelines",
+    imageAlt: "Coloured data streams converging out of a dense grid of records and figures",
     description:
       "Our data extraction services pull relevant, structured information from diverse sources — documents, websites, and databases. These pipelines handle large volumes of data efficiently, ensuring accuracy and speeding up retrieval so your team spends less time hunting for information and more time using it.",
     links: ["Email Data Extraction", "Website Data Extraction", "Data Extraction for AI and ML Models", "PDF Parsing and Extraction", "Document and Other File Extraction"],
@@ -147,7 +146,7 @@ const services = [
     slug: "audio-analysis-services",
     title: "Audio Analysis",
     image: audioAnalysis,
-    imageAlt: "Sound wave and microphone visualization representing audio analysis technology",
+    imageAlt: "Hands typing on a laptop as AI speech bubbles rise from a glowing assistant icon",
     description:
       "Our audio analysis services transform unstructured audio into actionable insight using AI and machine learning. From speech-to-text transcription and emotion detection to audio embeddings and voice biometrics, we help businesses unlock value from conversations, calls, and recordings with precision and scale.",
     links: ["Voice Tone Analysis", "Audio Recognition and Moderation", "Audio Classification", "Text-to-Audio Processing", "Virtual Assistants", "Sentiment Analysis"],
@@ -156,7 +155,7 @@ const services = [
     slug: "information-technology-services",
     title: "Information Technology (IT)",
     image: infoTechnology,
-    imageAlt: "Illuminated processor chip representing IT consulting services",
+    imageAlt: "Light streaming down a data centre aisle lined with illuminated server racks",
     description:
       "Axiomra provides IT consulting services that align technology with business goals. We design future-ready IT strategies powered by cloud, AI, and automation to digitize operations, optimize enterprise software, and enhance mobility — giving businesses a scalable, secure technology roadmap for long-term growth.",
     links: ["IT Consulting", "Cloud Transition and Architecture Strategy", "Digital Transformation Consulting", "Optimized Software Portfolio"],
@@ -165,7 +164,7 @@ const services = [
     slug: "custom-software-development-services",
     title: "Custom Software Development",
     image: customSoftware,
-    imageAlt: "Glowing software interface icon representing custom software development",
+    imageAlt: "Developer working across two screens of application code and interface designs in a bright office",
     description:
       "As a hands-on AI development partner, we build custom software solutions designed to fit your exact business requirements. From AI-powered applications to enterprise-grade platforms across mobile and web, we cover the full development lifecycle — ensuring reliability, scalability, and measurable business impact.",
     links: ["AI Software Development", "Software Development Consulting", "SaaS Application Development", "Web Application Development", "Mobile Application Development"],
@@ -174,7 +173,7 @@ const services = [
     slug: "web-app-development-services",
     title: "Web App Development",
     image: webAppDevelopment,
-    imageAlt: "High-performance processor representing scalable web application development",
+    imageAlt: "Hands building an application interface on a laptop beside prompt and analytics panels",
     description:
       "Axiomra delivers robust web app development services tailored to your business objectives. Using modern frameworks, APIs, and cloud-native architectures, we create secure, high-performance applications that scale with your growth and deliver an exceptional user experience from day one.",
     links: ["Website Development", "Front-End Development", "Full-Stack Applications", "Back-End Development"],
@@ -189,19 +188,10 @@ const services = [
     links: ["Hybrid App Development", "Android Application Development", "Hybrid Architecture", "App/Soft Design", "iPhone App Development"],
   },
   {
-    slug: "ui-ux-design-services",
-    title: "UI/UX Designing",
-    image: uiUxDesign,
-    imageAlt: "Bold typographic AI design representing UI/UX design services",
-    description:
-      "Our UI/UX design services focus on creating intuitive, user-friendly, and visually engaging digital products. Whether redesigning existing platforms or building new ones, we combine user research, wireframing, and prototyping to deliver interfaces that align with your brand identity, business goals, and customer expectations.",
-    links: ["Graphic Design", "Website and App Design", "Product Prototyping", "Audit and Research", "UI/UX for Web & Mobile"],
-  },
-  {
     slug: "recommendation-systems-services",
     title: "Recommendation Systems",
     image: recommendationSystems,
-    imageAlt: "AI tablet interface representing personalized recommendation systems",
+    imageAlt: "Hand lifting an AI chip out of a laptop, ringed by product, user and search icons",
     description:
       "No matter your industry — e-commerce, fintech, or beyond — we specialize in building customized AI recommendation engines powered by artificial intelligence and machine learning. Using collaborative filtering, neural networks, and matrix factorization, we deliver AI-powered solutions that boost engagement, increase conversions, and drive measurable revenue growth.",
     links: ["Content Recommendation", "Product Recommendation", "Collaborative Filtering", "Content-Based Filtering", "Hybrid Recommendations", "Visual Search"],
@@ -210,7 +200,7 @@ const services = [
     slug: "web-scraping-services",
     title: "Web Scraping",
     image: webScraping,
-    imageAlt: "Abstract data texture representing large-scale web scraping infrastructure",
+    imageAlt: "Hands on a keyboard in the dark while code and extracted data readouts overlay the screen",
     description:
       "Our web scraping services use advanced technologies to extract and analyze valuable data from across the web reliably and at scale. Our data engineers deploy robust scrapers to gather critical business and product insight, empowering informed decision-making, increasing revenue, and enhancing operational efficiency across industries.",
     links: ["Retail and Web Scraping", "Social Media Web Scraping", "E-Commerce Price & Product Data Scraping"],
@@ -219,7 +209,7 @@ const services = [
     slug: "bot-automation-services",
     title: "Bot Automation",
     image: botAutomation,
-    imageAlt: "Robotic hand reaching into a glowing node network, representing autonomous agents at work",
+    imageAlt: "Humanoid robot seated at a workstation, working through tasks on a monitor",
     description:
       "Automate repetitive tasks with our bot automation services. We build intelligent bots that enhance productivity and efficiency across various processes. Our tailored automation solutions simplify workflows, reduce manual effort, and save valuable time so your team can focus on higher-value work.",
     links: ["Data Management Bots", "Website Bots", "Accounts Payable Bots"],

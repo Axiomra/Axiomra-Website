@@ -299,13 +299,13 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           <ThemeToggle />
           <a
-            href="/#contact"
+            href="/contact"
             className="text-sm font-medium px-4 py-2.5 rounded-full border border-white/25 text-white hover:bg-white/10 transition-colors focus-ring"
           >
             Contact us
           </a>
           <a
-            href="/#contact"
+            href="/contact"
             className="text-sm font-medium bg-gradient-to-r from-teal to-periwinkle text-white px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity focus-ring"
           >
             Book a call
@@ -343,7 +343,7 @@ export default function Navbar() {
               </NavItem>
             ))}
             <a
-              href="/#contact"
+              href="/contact"
               onClick={() => setOpen(false)}
               className="bg-gradient-to-r from-teal to-periwinkle text-white text-center py-2.5 rounded-full font-medium"
             >

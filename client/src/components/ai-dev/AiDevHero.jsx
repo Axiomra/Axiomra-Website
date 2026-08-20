@@ -76,7 +76,7 @@ export default function AiDevHero() {
             className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center"
           >
             <Link
-              to="/#contact"
+              to="/contact"
               className="group inline-flex items-center gap-2 rounded-full bg-cta-gradient px-8 py-4 text-lg font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring"
             >
               {hero.ctaText}

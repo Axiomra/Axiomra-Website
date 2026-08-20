@@ -39,7 +39,7 @@ export default function AiDevProcess() {
           </p>
 
           <Link
-            to="/#contact"
+            to="/contact"
             className="group mt-9 inline-flex items-center gap-2.5 rounded-full border border-line px-7 py-4 text-lg font-semibold transition-colors hover:border-brand/50 hover:text-brand focus-ring"
           >
             {process.ctaText}

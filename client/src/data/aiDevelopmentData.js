@@ -111,7 +111,7 @@ export const subServices = [
       "We design and build AI systems made for enterprise scale. From large-scale data pipelines to multi-model AI architectures, we help enterprises automate complex operations, improve decision-making, and reduce costs across departments. Our enterprise AI development services are built for security, compliance, and long-term performance. Role-based access, audit trails, data residency, and PII handling are designed in from the first sprint rather than bolted on before a security review, and every model decision stays traceable back to the data that produced it.",
     image: enterpriseAiDevelopment,
     imageAlt:
-      "Enterprise team in a dark boardroom analysing an AI dashboard of charts and KPIs on a wall display",
+      "Wide operations floor where teams monitor enterprise AI dashboards across a connected data landscape",
   },
   {
     id: "ai-poc-and-mvp",
@@ -129,7 +129,7 @@ export const subServices = [
       "Get access to production-ready AI capabilities without building an in-house team. Our AI as a Service model gives your business on-demand access to AI models, infrastructure, and expertise. Scale up or down based on your needs with predictable costs and zero overhead. You get managed hosting, versioned model endpoints, usage and spend dashboards, and an engineering team on call for the failures that matter — all on a monthly agreement instead of a hiring cycle. When you are ready to bring it in-house, we hand over the code, the pipelines, and the documentation.",
     image: aiAsAService,
     imageAlt:
-      "Blue-lit operations floor lined with workstations running managed AI infrastructure",
+      "Analysts monitoring a managed AI control room as robotic assembly lines and live model dashboards run on the wall displays",
     ctaText: "Learn more",
   },
   {

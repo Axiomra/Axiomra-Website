@@ -73,7 +73,7 @@ export default function BookCallModal() {
               design, or project, and we will deliver the best possible solution right to your inbox.
             </p>
             <Link
-              to="/#contact"
+              to="/contact"
               onClick={close}
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent-vivid to-brand px-6 py-3 font-medium text-inverse-fg transition-opacity hover:opacity-90 focus-ring"
             >

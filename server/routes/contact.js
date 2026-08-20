@@ -24,7 +24,7 @@ function requireAdmin(req, res, next) {
 
 router.post("/", async (req, res) => {
   try {
-    const { name, email, company, message } = req.body;
+    const { name, email, company, service, budget, message } = req.body;
     if (!name || !email) {
       return res.status(400).json({ error: "Name and email are required." });
     }
@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
     if (!emailPattern.test(email)) {
       return res.status(400).json({ error: "Please provide a valid email." });
     }
-    const contact = await Contact.create({ name, email, company, message });
+    const contact = await Contact.create({ name, email, company, service, budget, message });
     return res.status(201).json({ success: true, id: contact._id });
   } catch (err) {
     console.error("Contact creation failed:", err.message);

@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
 import ServiceDetailPlaceholder from "./pages/ServiceDetailPlaceholder";
 import AiDevelopmentPage from "./pages/AiDevelopmentPage";
+import ContactPage from "./pages/ContactPage";
 import { SERVICES_BASE_PATH } from "./data/servicesData";
 import { AI_DEVELOPMENT_SLUG } from "./data/aiDevelopmentData";
 
@@ -35,12 +36,18 @@ function ScrollManager() {
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="overflow-x-hidden">
+      {/* `clip`, not `hidden`: overflow-x:hidden makes this div a scroll
+          container, which silently breaks every `position: sticky` inside it
+          (the sticky element then resolves against a container that never
+          scrolls). `clip` cuts the horizontal overflow exactly the same way
+          without creating a scrollport. */}
+      <div className="overflow-x-clip">
         <Navbar />
         <ScrollManager />
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path={SERVICES_BASE_PATH} element={<ServicesPage />} />
             {/* Built-out detail pages sit ahead of the placeholder; the router
                 ranks the static segment above `:slug` regardless of order, but

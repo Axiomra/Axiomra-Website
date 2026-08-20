@@ -61,7 +61,7 @@ export default function Footer() {
             end-to-end AI solutions that deliver proven ROI.
           </p>
           <Link
-            to="/#contact"
+            to="/contact"
             className="mt-5 inline-block rounded-full bg-inverse-fg px-6 py-3 text-lg font-medium text-inverse transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow focus-ring"
           >
             Let&apos;s Talk

@@ -3,12 +3,9 @@ import ServicesHero from "../components/ServicesHero";
 import ServiceRow from "../components/ServiceRow";
 import BusinessTypes from "../components/BusinessTypes";
 import GradientCTA from "../components/GradientCTA";
-import Industries from "../sections/Industries";
 import Portfolio from "../sections/Portfolio";
 import TechStack from "../sections/TechStack";
-import TestimonialWall from "../sections/TestimonialWall";
 import WhyUs from "../sections/WhyUs";
-import Awards from "../sections/Awards";
 import FAQ from "../sections/FAQ";
 import services, { SERVICES_BASE_PATH } from "../data/servicesData";
 
@@ -82,17 +79,11 @@ export default function ServicesPage() {
 
       <TechStack />
 
-      <Industries />
-
       <Portfolio />
 
       <BusinessTypes />
 
-      <TestimonialWall />
-
       <WhyUs />
-
-      <Awards />
 
       <FAQ id="services-faq" items={servicesFaq} />
 
