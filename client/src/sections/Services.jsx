@@ -16,7 +16,7 @@ import nlpImg from "../assets/services/natural-language-processing-services.jpg"
 import cvImg from "../assets/services/computer-vision-services.jpg";
 import genaiBoxImg from "../assets/box/generative ai.jpg";
 import mlBoxImg from "../assets/box/machinelearning.jpg";
-import automationBoxImg from "../assets/box/Business process automation.jpg";
+import automationBoxImg from "../assets/box/business-process-automation.webp";
 import biBoxImg from "../assets/box/finances.jpeg";
 
 const services = [
@@ -81,7 +81,7 @@ export default function Services() {
           Reinvent Your Operations With Result-Driven AI Development Services
         </h2>
         <p className="mt-6 text-lg text-ink-dim md:text-xl">
-          We deliver a comprehensive suite of AI services designed to automate
+          We deliver a full range of AI services built to automate
           manual work, predict future trends, and scale your business.
         </p>
         <a

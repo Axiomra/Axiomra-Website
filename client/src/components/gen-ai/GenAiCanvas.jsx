@@ -1,8 +1,7 @@
 import { lazy, Suspense, useState } from "react";
 import ErrorBoundary from "../ErrorBoundary";
+import useInView from "../../hooks/useInView";
 
-/* Both fields are dynamic imports: three.js and @react-three/fiber are the
-   heaviest thing this page could pull in, and the page reads fine without them. */
 const LatentCanvas = lazy(() => import("./LatentCanvas"));
 const TokenFlowCanvas = lazy(() => import("./TokenFlowCanvas"));
 
@@ -15,8 +14,6 @@ function supportsWebGL() {
   }
 }
 
-/** Painted whenever WebGL is unavailable, the user asked for less motion, or
-    the canvas throws — same silhouette, no render loop. */
 function StaticField({ className = "" }) {
   return (
     <div
@@ -31,14 +28,7 @@ function StaticField({ className = "" }) {
   );
 }
 
-/**
- * Decorative WebGL backdrop for the Generative AI page.
- *
- *  - "latent": point cloud morphing between a sphere, knot, lattice and wave
- *  - "tokens": prompt streams converging on a pulsing model core
- *
- * Always `aria-hidden` — nothing here carries meaning that is not also in text.
- */
+/** Decorative WebGL backdrop for the Generative AI page. */
 export default function GenAiCanvas({ variant = "latent", className = "" }) {
   const [webgl] = useState(supportsWebGL);
   // A CSS media query cannot reach a WebGL render loop, so the opt-out is here.
@@ -47,6 +37,8 @@ export default function GenAiCanvas({ variant = "latent", className = "" }) {
   );
 
   const fallback = <StaticField className={className} />;
+  const [hostRef, inView] = useInView();
+  const frameloop = inView ? "always" : "never";
 
   if (!webgl || reducedMotion) {
     return (
@@ -57,10 +49,14 @@ export default function GenAiCanvas({ variant = "latent", className = "" }) {
   }
 
   return (
-    <div className={`absolute inset-0 ${className}`} aria-hidden="true">
+    <div ref={hostRef} className={`absolute inset-0 ${className}`} aria-hidden="true">
       <ErrorBoundary fallback={fallback}>
         <Suspense fallback={fallback}>
-          {variant === "tokens" ? <TokenFlowCanvas /> : <LatentCanvas />}
+          {variant === "tokens" ? (
+            <TokenFlowCanvas frameloop={frameloop} />
+          ) : (
+            <LatentCanvas frameloop={frameloop} />
+          )}
         </Suspense>
       </ErrorBoundary>
     </div>

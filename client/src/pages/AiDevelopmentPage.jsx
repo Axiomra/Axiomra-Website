@@ -19,19 +19,16 @@ import { whatWeDo, subServices, faqs } from "../data/aiDevelopmentData";
 
 const META_DESCRIPTION =
   "Axiomra's AI development services: custom AI software, AI agents, LLM integration, " +
-  "enterprise AI, PoC and MVP builds, AI integration, and AIOps — shipped to production.";
+  "enterprise AI, PoC and MVP builds, AI integration, and AIOps, shipped to production.";
 
 export default function AiDevelopmentPage() {
   useEffect(() => {
-    document.title = "AI Development Services Built For Business Results — Axiomra";
+    document.title = "AI Development Services Built For Business Results | Axiomra";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute("content", META_DESCRIPTION);
   }, []);
 
   return (
-    // `ai-dev-page` does two things, both defined in index.css: it hosts the
-    // fixed animated backdrop below, and it drops the opacity of this page's
-    // `bg-surface` bands just enough for that backdrop to read through them.
     <div className="ai-dev-page">
       <div className="ai-dev-bg" aria-hidden="true" />
 
@@ -53,8 +50,6 @@ export default function AiDevelopmentPage() {
         </div>
       </section>
 
-      {/* Rows alternate side and surface via `index`; row 0 resolves to `surface`,
-          so the heading above it carries the same surface and the two read as one band. */}
       <div>
         {subServices.map((s, i) => (
           <ServiceRow

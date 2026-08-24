@@ -2,15 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ChevronRight, ArrowUpRight } from "lucide-react";
 
-/**
- * One alternating image/copy row for the Services listing page.
- * Reused for every service category — pass in content via props so
- * nothing here is hard-coded per-service.
- *
- * `compact` is the sub-service variant used on a single service's detail page:
- * the row is secondary content there, so it drops the index rule and steps the
- * heading down a level rather than competing with the page's own h1.
- */
+/** One alternating image/copy row for the Services listing page. */
 export default function ServiceRow({
   id,
   index = 0,
@@ -21,7 +13,7 @@ export default function ServiceRow({
   imageAlt,
   links = [],
   ctaHref,
-  ctaText = "Explore service details",
+  ctaText,
   zebra = true,
   compact = false,
 }) {
@@ -62,9 +54,6 @@ export default function ServiceRow({
         {title}
       </h2>
 
-      {/* Justified only in the compact (service-detail) variant: those rows carry
-          a long description beside a fixed-height photo, so flush edges keep the
-          two columns reading as one block. The listing rows stay ragged-right. */}
       <p
         className={
           compact
@@ -75,9 +64,7 @@ export default function ServiceRow({
         {description}
       </p>
 
-      {/* Sub-services read as tappable chips rather than a dense bullet list —
-          each one is a full-size hit target on mobile. */}
-      <ul className="mb-10 flex flex-wrap gap-3">
+      <ul className={`flex flex-wrap gap-3 ${ctaHref && ctaText ? "mb-10" : ""}`}>
         {links.map((l) => (
           <li key={l}>
             <Link
@@ -91,7 +78,7 @@ export default function ServiceRow({
         ))}
       </ul>
 
-      {ctaHref && (
+      {ctaHref && ctaText && (
         <Link
           to={ctaHref}
           className="group inline-flex items-center gap-2.5 rounded-full border border-line px-7 py-4 text-base font-semibold transition-colors hover:border-brand/50 hover:text-brand md:text-lg focus-ring"
@@ -132,10 +119,6 @@ export default function ServiceRow({
           alt={imageAlt}
           loading="lazy"
           className={
-            // Compact rows carry a long description, so the photo tracks the
-            // copy column's height instead of a fixed one — the two sides end
-            // flush and the row reads as a single filled block. The floor stops
-            // a short row from collapsing the image to a strip.
             compact
               ? "h-80 w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] md:h-full md:min-h-[24rem]"
               : "h-80 w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] md:h-[26rem] lg:h-[32rem]"

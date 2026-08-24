@@ -3,40 +3,22 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { makeDotTexture } from "../lib/dotTexture";
 
-/**
- * The animated header inside the business-type modal.
- *
- * One scene per audience, chosen by `variant`, so the four modals do not all
- * open onto the same picture. Each variant is a single point cloud driven by a
- * closed-form function of (index, time) — no per-frame allocation, no
- * neighbour search — because this mounts and unmounts every time a card is
- * opened and has to be cheap enough to do that instantly.
- *
- * Loaded lazily by BusinessTypeModal: three.js is ~900 kB and nothing on the
- * page needs it until a card is actually clicked.
- */
+/** The animated header inside the business-type modal. */
 
 const BRAND = new THREE.Color("#14D8C4");
 const ACCENT = new THREE.Color("#788BE3");
 
 const COUNT = 900;
 
-/**
- * Per-variant layout. Each returns the *rest* position of point `i` plus the
- * scalar that `animate` uses to move it, so the geometry and the motion stay
- * described in one place.
- */
+/** Per-variant layout. */
 const LAYOUTS = {
-  // Startups: a launch plume — points spiral upward and recycle at the base,
-  // so the field reads as continuous lift-off rather than a static cone.
   launch: (i) => {
     const t = i / COUNT;
     const angle = t * Math.PI * 18;
     const radius = 0.4 + t * 2.9;
     return [Math.cos(angle) * radius, t * 8 - 4, Math.sin(angle) * radius];
   },
-  // Scale-ups: concentric rings expanding outward across a plane — growth
-  // spreading from a core into new territory.
+  // Scale-ups: concentric rings expanding outward across a plane, growth spreading from a core into new territory.
   growth: (i) => {
     const ring = Math.floor(i / 60);
     const step = (i % 60) / 60;
@@ -44,19 +26,15 @@ const LAYOUTS = {
     const angle = step * Math.PI * 2 + ring * 0.35;
     return [Math.cos(angle) * radius, Math.sin(angle) * radius * 0.55, ring * -0.18];
   },
-  // SMBs: a rectangular lattice — the legacy grid of systems that modernising
-  // work re-sorts, which the animation does by rippling through it.
   lattice: (i) => {
     const cols = 36;
     const x = (i % cols) - cols / 2;
     const y = Math.floor(i / cols) - COUNT / cols / 2;
     return [x * 0.32, y * 0.32, 0];
   },
-  // Enterprises: a sphere of departments, slowly rotating — one organisation,
-  // many connected surfaces.
+  // Enterprises: a sphere of departments, slowly rotating, one organisation, many connected surfaces.
   globe: (i) => {
-    // Fibonacci sphere: even coverage without the pole clustering that
-    // naive lat/long sampling produces.
+    // Fibonacci sphere: even coverage without the pole clustering that naive lat/long sampling produces.
     const phi = Math.acos(1 - (2 * (i + 0.5)) / COUNT);
     const theta = Math.PI * (1 + Math.sqrt(5)) * i;
     const r = 3.1;
@@ -123,8 +101,6 @@ function Field({ variant }) {
     return { positions: arr, base: arr.slice() };
   }, [variant]);
 
-  // Two-tone cloud: brand teal fading into the accent violet along the field,
-  // so the shape reads even when the points overlap.
   const colors = useMemo(() => {
     const arr = new Float32Array(COUNT * 3);
     const c = new THREE.Color();
@@ -143,8 +119,6 @@ function Field({ variant }) {
     const t = clock.getElapsedTime();
     const motion = MOTION[variant] ?? MOTION.globe;
     const attr = pointsRef.current.geometry.attributes.position;
-    // Two scratch triples reused across the whole loop, so the per-point work
-    // stays allocation-free at 900 points a frame.
     const basePoint = [0, 0, 0];
     const scratch = [0, 0, 0];
 
@@ -185,9 +159,9 @@ function Field({ variant }) {
   );
 }
 
-export default function BusinessTypeCanvas({ variant = "globe" }) {
+export default function BusinessTypeCanvas({ variant = "globe", frameloop = "always" }) {
   return (
-    <Canvas camera={{ position: [0, 0, 9], fov: 50 }} dpr={[1, 1.5]}>
+    <Canvas camera={{ position: [0, 0, 9], fov: 50 }} dpr={[1, 1.5]} frameloop={frameloop}>
       <Field variant={variant} />
     </Canvas>
   );

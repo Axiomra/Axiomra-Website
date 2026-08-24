@@ -12,11 +12,11 @@ import services, { SERVICES_BASE_PATH } from "../data/servicesData";
 const servicesFaq = [
   {
     q: "How can AI solutions benefit my business?",
-    a: "AI reduces manual, repetitive work, surfaces insight hidden in your data, and speeds up decision-making — most clients see measurable time and cost savings within the first two quarters.",
+    a: "AI reduces manual, repetitive work, surfaces insight hidden in your data, and speeds up decision-making. Most clients see measurable time and cost savings within the first two quarters.",
   },
   {
     q: "Do you provide customized AI solutions for specific business needs?",
-    a: "Yes. Every engagement starts with your workflows and goals — we don't ship off-the-shelf templates. Solutions are built around your data, systems, and constraints.",
+    a: "Yes. Every engagement starts with your workflows and goals. We don't ship off-the-shelf templates. Solutions are built around your data, systems, and constraints.",
   },
   {
     q: "How do I know if AI is right for my business?",
@@ -24,7 +24,7 @@ const servicesFaq = [
   },
   {
     q: "Do you provide a free consultation or project assessment?",
-    a: "Yes — book a free strategy session and we'll assess your challenges honestly, including whether AI is the right investment at your current stage.",
+    a: "Yes: book a free strategy session and we'll assess your challenges honestly, including whether AI is the right investment at your current stage.",
   },
   {
     q: "How do you ensure the scalability of AI solutions?",
@@ -40,18 +40,18 @@ const servicesFaq = [
   },
   {
     q: "What is the typical implementation timeline for an AI project?",
-    a: "Most focused AI projects move from discovery to a working pilot in 6–10 weeks, with full production rollout depending on integration complexity.",
+    a: "Most focused AI projects move from discovery to a working pilot in 6-10 weeks, with full production rollout depending on integration complexity.",
   },
 ];
 
 export default function ServicesPage() {
   useEffect(() => {
-    document.title = "AI Services & Solutions — Axiomra";
+    document.title = "AI Services & Solutions | Axiomra";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
       meta.setAttribute(
         "content",
-        "Explore Axiomra's full range of AI services — from generative AI and computer vision to custom software, chatbots, and process automation.",
+        "Explore Axiomra's full range of AI services: from generative AI and computer vision to custom software, chatbots, and process automation.",
       );
     }
   }, []);

@@ -1,13 +1,6 @@
 import * as THREE from "three";
 
-/**
- * A soft round sprite for three.js point clouds.
- *
- * `pointsMaterial` renders square quads by default, which reads as pixel
- * confetti once the points are big enough to see. Mapping this radial-gradient
- * texture turns every point into a soft dot. Built once and memoised — the
- * same texture is shared by every field on the page.
- */
+/** A soft round sprite for three.js point clouds. */
 let cached = null;
 
 export function makeDotTexture() {

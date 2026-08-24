@@ -1,5 +1,6 @@
 import { lazy, Suspense, useState } from "react";
 import ErrorBoundary from "./ErrorBoundary";
+import useInView from "../hooks/useInView";
 
 // three.js lives behind a dynamic import so it never blocks first paint.
 const NetworkCanvas = lazy(() => import("./NetworkCanvas"));
@@ -30,33 +31,30 @@ function StaticNetworkBackground({ className = "" }) {
   );
 }
 
-/**
- * `variant` picks the field:
- *  - "network": particle cloud with proximity links (hero, CTAs)
- *  - "wave":    animated point-lattice wave (footer)
- *  - "orbit":   rotating point globe with signal rings (contact hero)
- */
 export default function NetworkBackground({ className = "", count = 140, variant = "network" }) {
   const [webgl] = useState(() => supportsWebGL());
-  // The CSS reduced-motion rule can't reach a WebGL render loop, so opt out
-  // of the animated field here instead.
+  // The CSS reduced-motion rule can't reach a WebGL render loop, so opt out of the animated field here instead.
   const [reducedMotion] = useState(
     () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
   );
 
   const fallback = <StaticNetworkBackground className={className} />;
+  // Parks the render loop while the canvas is off screen. The footer canvas is
+  // mounted on every route, so without this it burns a frame budget forever.
+  const [hostRef, inView] = useInView();
+  const frameloop = inView ? "always" : "never";
 
   return (
-    <div className={`absolute inset-0 ${className}`} aria-hidden="true">
+    <div ref={hostRef} className={`absolute inset-0 ${className}`} aria-hidden="true">
       {webgl && !reducedMotion ? (
         <ErrorBoundary fallback={fallback}>
           <Suspense fallback={fallback}>
             {variant === "wave" ? (
-              <FooterCanvas />
+              <FooterCanvas frameloop={frameloop} />
             ) : variant === "orbit" ? (
-              <ContactCanvas />
+              <ContactCanvas frameloop={frameloop} />
             ) : (
-              <NetworkCanvas count={count} />
+              <NetworkCanvas count={count} frameloop={frameloop} />
             )}
           </Suspense>
         </ErrorBoundary>

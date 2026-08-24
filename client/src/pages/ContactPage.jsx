@@ -26,9 +26,6 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const WHATSAPP_URL = "https://wa.me/16575203444";
 const PHONE = "+1 (657) 520-3444";
 
-/* The category picker is generated from the same array the services page
-   renders, so a new service becomes selectable here the moment it is added
-   to servicesData — there is no second list to keep in sync. */
 const SERVICE_OPTIONS = services.map((s) => s.title);
 
 const CHANNELS = [
@@ -61,9 +58,7 @@ const CHANNELS = [
   },
 ];
 
-/* How the engagement actually runs after the form is sent. Prospects ask this
-   in the first call every time, so answering it on the page removes a round
-   trip instead of decorating the layout. */
+/* How the engagement actually runs after the form is sent. */
 const OPERATIONS = [
   {
     icon: FileSignature,
@@ -75,7 +70,7 @@ const OPERATIONS = [
     icon: Users,
     step: "02",
     title: "Team assembly",
-    body: "You get a named squad — an AI engineer, a full-stack developer and a delivery lead — not a rotating bench. The same people stay on the project through launch.",
+    body: "You get a named squad (an AI engineer, a full-stack developer and a delivery lead), not a rotating bench. The same people stay on the project through launch.",
   },
   {
     icon: Rocket,
@@ -243,7 +238,7 @@ function ContactForm() {
             rows={5}
             value={form.message}
             onChange={handleChange}
-            placeholder="The problem, the rough idea, the deadline — whatever you have."
+            placeholder="The problem, the rough idea, the deadline, whatever you have."
             className={`${FIELD_CLASS} resize-none`}
           />
         </div>
@@ -264,7 +259,7 @@ function ContactForm() {
         <p role="status" aria-live="polite" className="text-sm">
           {status === "success" && (
             <span className="flex items-center gap-1.5 text-success">
-              <CheckCircle2 size={16} aria-hidden="true" /> Thanks — we&rsquo;ll reply within one
+              <CheckCircle2 size={16} aria-hidden="true" /> Thanks, we&rsquo;ll reply within one
               business day.
             </span>
           )}
@@ -279,15 +274,14 @@ function ContactForm() {
 
 export default function ContactPage() {
   useEffect(() => {
-    document.title = "Contact Axiomra — Let's Build Something Remarkable";
+    document.title = "Contact Axiomra: Let's Build Something Remarkable";
   }, []);
 
   return (
     <>
-      {/* ---------------------------------------------------------------- Hero */}
+      {/* Hero */}
       <section className="relative isolate overflow-hidden bg-inverse px-4 pb-24 pt-32 sm:px-6 md:pt-40">
-        {/* The orbit field is the page's one WebGL surface. Everything below
-            is plain DOM, so the three.js chunk only ever pays for itself here. */}
+        {/* The orbit field is the page's one WebGL surface. */}
         <NetworkBackground variant="orbit" className="opacity-90" />
         <div
           aria-hidden="true"
@@ -312,7 +306,7 @@ export default function ContactPage() {
 
           <p className="mx-auto mt-7 max-w-3xl text-lg leading-relaxed text-inverse-fg/75 md:text-xl">
             Share the scope, the problem or the rough idea. We&rsquo;ll reply within one business
-            day with a clear next step — no sales script, no obligation.
+            day with a clear next step, no sales script, no obligation.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -329,7 +323,7 @@ export default function ContactPage() {
         </motion.div>
       </section>
 
-      {/* ------------------------------------------------------------ Channels */}
+      {/* Channels */}
       <section className="relative px-4 py-16 sm:px-6">
         <div className="mx-auto grid max-w-8xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {CHANNELS.map(({ icon: Icon, label, value, note, href }, i) => {
@@ -374,7 +368,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ---------------------------------------------------------------- Form */}
+      {/* Form */}
       <section id="contact-form" className="relative overflow-hidden bg-surface-subtle px-4 py-24 sm:px-6">
         <div
           aria-hidden="true"
@@ -398,7 +392,7 @@ export default function ContactPage() {
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-content-dim">
               Tell us the scope, the problem or the rough idea. An engineer reads every submission
-              — you get a real technical answer back, not a calendar link and a brochure.
+. You get a real technical answer back, not a calendar link and a brochure.
             </p>
 
             <div className="mt-9 space-y-4">
@@ -432,7 +426,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ---------------------------------------------------------- Operations */}
+      {/* Operations */}
       <section className="relative overflow-hidden px-4 py-24 sm:px-6">
         <div className="mx-auto max-w-8xl">
           <SectionHeading
@@ -475,7 +469,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* --------------------------------------------------------------- Desks */}
+      {/* Desks */}
       <section className="bg-surface-subtle px-4 py-24 sm:px-6">
         <div className="mx-auto max-w-8xl">
           <SectionHeading
@@ -517,7 +511,7 @@ export default function ContactPage() {
 
       <GradientCTA
         title="Stop Guessing And Start Growing With Your Trusted AI Development Partner"
-        subtitle="Book your complimentary AI Strategic Session, (worth $1000) just for free, and discover how tailored AI solutions can unlock growth."
+        subtitle="Book your complimentary AI Strategic Session, (worth $1000) just for free, and discover how tailored AI solutions can drive growth."
         buttonText="Get Your Project Done!"
         dark
         three

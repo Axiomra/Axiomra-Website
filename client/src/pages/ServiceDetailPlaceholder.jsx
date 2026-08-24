@@ -8,7 +8,7 @@ export default function ServiceDetailPlaceholder() {
   const service = services.find((s) => s.slug === slug);
 
   useEffect(() => {
-    document.title = service ? `${service.title} — Axiomra` : "Service — Axiomra";
+    document.title = service ? `${service.title} | Axiomra` : "Service | Axiomra";
   }, [service]);
 
   return (

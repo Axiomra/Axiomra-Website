@@ -22,7 +22,7 @@ import Contact from "../sections/Contact";
 
 export default function HomePage() {
   useEffect(() => {
-    document.title = "Axiomra — Result-Driven AI Development Company";
+    document.title = "Axiomra: Result-Driven AI Development Company";
   }, []);
 
   return (
@@ -65,7 +65,7 @@ export default function HomePage() {
       <Contact />
       <GradientCTA
         title="Stop Guessing And Start Growing With Your Trusted AI Development Partner"
-        subtitle="Book your complimentary AI Strategic Session, (worth $1000) just for free, and discover how tailored AI solutions can unlock growth."
+        subtitle="Book your complimentary AI Strategic Session, (worth $1000) just for free, and discover how tailored AI solutions can drive growth."
         buttonText="Get Your Project Done!"
       />
     </>

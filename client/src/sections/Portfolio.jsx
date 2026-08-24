@@ -18,8 +18,7 @@ export default function Portfolio({ showHeading = true }) {
 
   return (
     <section id="portfolio" className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
-      {/* The arrows live inside the heading when there is one, and stand on
-          their own when the host page suppresses it. */}
+      {/* The arrows live inside the heading when there is one, and stand on their own when the host page suppresses it. */}
       {showHeading ? (
         <SectionHeading
           className="mb-12"
@@ -29,7 +28,7 @@ export default function Portfolio({ showHeading = true }) {
               Proven Results: <span className="text-brand">How We Solve Complex Business Challenges</span>
             </>
           }
-          subtitle="Five production systems, five very different industries — and one shared outcome: measurable lift within the first two quarters."
+          subtitle="Five production systems, five very different industries, and one shared outcome: measurable lift within the first two quarters."
         >
           <div className="mt-8 flex gap-3">
             <button type="button" onClick={() => scroll(-1)} className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring" aria-label="Previous case studies">

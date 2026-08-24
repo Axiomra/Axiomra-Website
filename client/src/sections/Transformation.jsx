@@ -24,8 +24,6 @@ export default function Transformation() {
           <div className="absolute inset-0 bg-gradient-to-t from-inverse/70 via-transparent to-transparent" />
         </div>
 
-        {/* The 3.2X metric badge — a photo backdrop under the number so it
-            reads as a result card rather than a floating label. */}
         <motion.div
           animate={{ y: [0, -14, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}

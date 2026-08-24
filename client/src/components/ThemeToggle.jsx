@@ -2,13 +2,7 @@ import { Moon, Sun } from "lucide-react";
 import useTheme from "../theme/useTheme";
 import { cn } from "../lib/utils";
 
-/**
- * Light/dark switch.
- *
- * Defaults to `inverse` tokens because that is what the solid navbar needs.
- * The navbar overrides them via `className` when it is floating transparent
- * over a light hero — `cn` merges the conflict so the caller wins.
- */
+/** Light/dark switch. */
 export default function ThemeToggle({ className = "" }) {
   const { resolvedTheme, toggleTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
@@ -17,8 +11,7 @@ export default function ThemeToggle({ className = "" }) {
     <button
       type="button"
       onClick={toggleTheme}
-      // Announce the ACTION, not the state — a screen reader user needs to
-      // know what pressing it does.
+      // Announce the ACTION, not the state, a screen reader user needs to know what pressing it does.
       aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
       title={`Switch to ${isDark ? "light" : "dark"} theme`}
       className={cn(

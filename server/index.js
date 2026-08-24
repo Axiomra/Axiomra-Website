@@ -27,8 +27,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
-// Start serving the site immediately; MongoDB connects in the background so a
-// missing DB never blocks the website or the /api/health check.
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
 mongoose

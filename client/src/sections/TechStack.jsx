@@ -17,9 +17,6 @@ export default function TechStack() {
 
   return (
     <section className="relative overflow-hidden border-y border-line bg-surface-subtle py-24">
-      {/* Ambient backdrop for the heading block: a slow drifting colour wash,
-          a drifting grid, and a sweeping light line. All decorative, all
-          suppressed by the reduced-motion rule in index.css. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[720px]">
         <div className="tech-aurora absolute inset-0 opacity-70" />
         <div className="tech-grid absolute inset-0 opacity-[0.18]" />
@@ -37,7 +34,7 @@ export default function TechStack() {
               Expertise In <span className="text-brand">Advanced Development Technologies</span>
             </>
           }
-          subtitle="The models, frameworks, and infrastructure we reach for — chosen per project, never by fashion. Every stack decision is made against your data, your integrations, and the load you actually expect in production, so what ships stays maintainable long after launch."
+          subtitle="The models, frameworks, and infrastructure we reach for, chosen per project, never by fashion. Every stack decision is made against your data, your integrations, and the load you actually expect in production, so what ships stays maintainable long after launch."
         />
       </div>
 

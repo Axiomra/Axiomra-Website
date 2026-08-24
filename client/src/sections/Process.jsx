@@ -23,8 +23,6 @@ export default function Process() {
         subtitle="Five stages, no black boxes. You see the plan, the data work, and the numbers at every step."
       />
 
-      {/* Narrower than the section container: full-width rows left the copy
-          floating with a huge gap before the step number. */}
       <div className="mx-auto max-w-5xl space-y-5">
         {steps.map((s, i) => (
           <motion.div

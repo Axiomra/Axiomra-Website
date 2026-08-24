@@ -1,12 +1,5 @@
-/**
- * Remote imagery used across the marketing sections.
- *
- * These are Unsplash CDN URLs rather than bundled assets so the repo stays
- * light. Swap any entry for a local `import` from ../assets when the real
- * brand photography lands — every consumer reads through these maps, so a
- * single edit here changes the whole site.
- */
-import healthaiImg from "../assets/box/healthai.png";
+/** Remote imagery used across the marketing sections. */
+import healthaiImg from "../assets/box/healthai.webp";
 import eductionaiImg from "../assets/box/eductionai.webp";
 import fashionImg from "../assets/box/fashion.jpeg";
 import realestateImg from "../assets/box/realestate.jpeg";
@@ -39,10 +32,8 @@ export const INDUSTRY_IMAGES = {
 
 /** Blog / resource cards. */
 export const RESOURCE_IMAGES = {
-  // MVP vs full-scale: a product team mapping scope on a sprint board says
-  // more about the trade-off than a generic robot shot.
   "MVP vs. Full-Scale Custom AI Development": unsplash("1531403009284-440f080d1e12"),
-  "Custom AI Development Timeline — 2026 Benchmarks": unsplash("1518186285589-2f7649de83e0"),
+  "Custom AI Development Timeline: 2026 Benchmarks": unsplash("1518186285589-2f7649de83e0"),
   "Why AI Projects Fail: 10 Root Causes": unsplash("1454165804606-c3d57bc86b40"),
 };
 

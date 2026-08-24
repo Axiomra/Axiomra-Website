@@ -19,7 +19,7 @@ const clients = [
   { name: "Peersuma", Icon: Users },
 ];
 
-/** The hero is a brand surface — deliberately dark in both themes. */
+/** The hero is a brand surface, deliberately dark in both themes. */
 export default function Hero() {
   return (
     <section
@@ -72,8 +72,6 @@ export default function Hero() {
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-vivid/80 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent" />
         <p className="mb-6 text-center font-mono text-sm uppercase tracking-[0.35em] text-inverse-fg/70 md:text-base">Trusted by 300+ teams</p>
-        {/* Underscores are only valid inside Tailwind's arbitrary-value syntax;
-            the inline style needs real spaces or the mask silently no-ops. */}
         <div
           className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
           style={{ WebkitMaskImage: "linear-gradient(to right, transparent, black 12%, black 88%, transparent)" }}

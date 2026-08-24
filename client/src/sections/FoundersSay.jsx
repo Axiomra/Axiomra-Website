@@ -9,7 +9,7 @@ import img3 from "../assets/founder-3.webp";
 const items = [
   { name: "Randel Griff", role: "CEO & Founder, Doozoo", stars: 4.5, img: img1, quote: "Their advanced understanding and experience in AI and Machine Learning technology and understanding current trends and capabilities. All deliveries were on time and accurate." },
   { name: "Suleman Niazi", role: "CEO & Founder, Konnect", stars: 5, img: img2, quote: "We've been impressed with the team. Working with them does not feel like we're dealing with a business; it feels like we're dealing with a group of people who want us to be successful." },
-  { name: "David Milward", role: "Chairman of Metadataworks", stars: 5, img: img3, quote: "Very knowledgeable, and the team did what they promised — no bullshit, just good solid working through the requirements and suggesting good solutions." },
+  { name: "David Milward", role: "Chairman of Metadataworks", stars: 5, img: img3, quote: "Very knowledgeable, and the team did what they promised, no bullshit, just good solid working through the requirements and suggesting good solutions." },
 ];
 
 export default function FoundersSay() {
@@ -22,7 +22,7 @@ export default function FoundersSay() {
             <span className="text-brand">What Founders Say</span> About Our AI Development Company
           </>
         }
-        subtitle="We specialize in breaking down complex problems and building robust AI systems. These stories highlight how we've reinvented business operations for our global partners."
+        subtitle="We specialize in breaking down complex problems and building AI systems that hold up in production. These stories highlight how we've reinvented business operations for our global partners."
       >
         <a
           href="#portfolio"

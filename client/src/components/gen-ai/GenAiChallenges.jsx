@@ -3,13 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { challenges } from "../../data/generativeAiData";
 
-/**
- * Problem framing: photo left, four numbered pain points right.
- *
- * The four points are a numbered ladder rather than a card grid — they are read
- * in order (bottleneck → customers → speed → scale), and a grid would suggest
- * they are interchangeable.
- */
+/** Problem framing: photo left, four numbered pain points right. */
 export default function GenAiChallenges() {
   return (
     <section className="bg-surface py-20 md:py-28">
@@ -34,14 +28,14 @@ export default function GenAiChallenges() {
             />
           </div>
 
-          {/* Pulled out of the photo so the section carries one hard number. */}
-          <div className="absolute -bottom-8 right-4 rounded-xl2 border border-line bg-surface-card px-6 py-5 shadow-card md:right-10">
-            <span className="block font-display text-3xl font-semibold text-brand md:text-4xl">
-              6–10 weeks
-            </span>
-            <span className="text-sm text-content-dim md:text-base">
-              From first call to working pilot
-            </span>
+          {/* Small second photo overlapping the main one, so the frame is not a single flat rectangle. */}
+          <div className="absolute -bottom-8 right-4 overflow-hidden rounded-xl2 border border-line bg-surface-card shadow-card md:right-10">
+            <img
+              src={challenges.accentImage}
+              alt={challenges.accentImageAlt}
+              loading="lazy"
+              className="h-28 w-36 object-cover md:h-36 md:w-48"
+            />
           </div>
         </motion.div>
 

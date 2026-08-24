@@ -11,31 +11,21 @@ import { cn } from "@/lib/utils";
 import { SERVICES_BASE_PATH } from "@/data/servicesData";
 import { GENERATIVE_AI_SLUG } from "@/data/generativeAiData";
 import { AI_DEVELOPMENT_SLUG } from "@/data/aiDevelopmentData";
+import { AGENTIC_AI_SLUG } from "@/data/agenticAiData";
+import { COMPUTER_VISION_SLUG } from "@/data/computerVisionData";
+import { NLP_SLUG } from "@/data/nlpData";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import logoLight from "@/assets/logo-light.webp";
 import logoDark from "@/assets/logo-dark.webp";
 import ThemeToggle from "@/components/ThemeToggle";
 
-/**
- * The bar floats transparently over the hero and only turns into a solid
- * brand surface once the hero has scrolled past it. While transparent it has
- * to borrow its foreground colour from whatever is behind it, so heroes
- * declare their own backdrop with `data-nav-tone="dark" | "light"` — see
- * `TONE` below. Once solid, the bar is a brand surface that stays dark in
- * BOTH themes, which is why it uses `inverse-*` tokens. The mega-menu panel
- * is a content surface, so that one does follow the theme.
- */
 
-/** Bar height in px — `h-16`. Used to decide when the hero is fully behind it. */
+/** Bar height in px, `h-16`. Used to decide when the hero is fully behind it. */
 const NAV_HEIGHT = 64;
 
 type Tone = "dark" | "light";
 
-/**
- * Foreground class sets for the two backdrops the bar can sit on. Every
- * colour the bar paints is routed through here so a tone switch can never
- * leave half the bar readable and the other half invisible.
- */
+/** Foreground class sets for the two backdrops the bar can sit on. */
 const TONE: Record<Tone, {
   logo: string;
   link: string;
@@ -74,11 +64,7 @@ const TONE: Record<Tone, {
   },
 };
 
-/**
- * Tracks whether the bar is still floating over a tagged hero, and which tone
- * that hero wants. Pages with no `[data-nav-tone]` section simply keep the
- * solid bar — the safe default, since an untagged background could be anything.
- */
+/** Tracks whether the bar is still floating over a tagged hero, and which tone that hero wants. */
 function useNavTone() {
   const { pathname } = useLocation();
   const [state, setState] = useState<{ overHero: boolean; tone: Tone }>({
@@ -120,9 +106,9 @@ function useNavTone() {
 const serviceItems = [
   { label: "AI Development", description: "Custom AI software, agents & LLM integration", href: `${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}` },
   { label: "Generative AI", description: "Text, image & video generation at scale", href: `${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}` },
-  { label: "Agentic AI", description: "Autonomous agents for real workflows", href: `${SERVICES_BASE_PATH}#bot-automation-services` },
-  { label: "Computer Vision", description: "Detection, recognition & visual inspection", href: `${SERVICES_BASE_PATH}#computer-vision-services` },
-  { label: "NLP", description: "Search, chatbots & document understanding", href: `${SERVICES_BASE_PATH}#natural-language-processing-services` },
+  { label: "Agentic AI", description: "Autonomous agents for real workflows", href: `${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}` },
+  { label: "Computer Vision", description: "Detection, recognition & visual inspection", href: `${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}` },
+  { label: "NLP", description: "Search, chatbots & document understanding", href: `${SERVICES_BASE_PATH}/${NLP_SLUG}` },
 ];
 
 const industryItems = [
@@ -148,7 +134,7 @@ interface MegaConfig {
 const megaConfigs: Record<MegaSection, MegaConfig> = {
   services: {
     title: "Our Services",
-    subtitle: "End-to-end AI engineering — from strategy to production.",
+    subtitle: "End-to-end AI engineering, from strategy to production.",
     eyebrow: "What we do",
     viewAll: SERVICES_BASE_PATH,
     ctaTitle: "Need a custom solution?",
@@ -174,12 +160,6 @@ const NAV_LINKS = [
   { label: "Company", href: "/#process" },
 ];
 
-/**
- * Internal destinations ("/", "/contact", "/ai-services-and-solutions#slug")
- * go through react-router so a cross-page jump stays a client-side navigation;
- * ScrollManager in App.jsx does the hash scroll once the route has mounted.
- * Anything else (bare "#anchor", external URL) falls back to a native <a>.
- */
 function NavLink({
   href,
   className,
@@ -272,9 +252,6 @@ function FullWidthDropdown({
   );
 }
 
-/* Shared hover treatment for the top-level links: a brand rule that wipes in
-   from the left, plus a colour shift and a 1px lift. Kept as a constant so the
-   <button> and <a> branches below cannot drift apart. */
 const NAV_ITEM =
   "relative flex items-center gap-1 rounded-full px-4 py-2 text-base font-medium transition-all duration-300 hover:-translate-y-0.5 focus-ring " +
   "after:absolute after:bottom-0.5 after:left-4 after:right-4 after:h-[2px] after:origin-left after:scale-x-0 " +
@@ -296,9 +273,7 @@ function DesktopNav({
     <nav className="hidden items-center gap-2 lg:flex">
       {NAV_LINKS.map((l) =>
         "mega" in l && l.mega ? (
-          // A link, not a button: clicking "Services" has to actually land on
-          // the services route. Hover opens the mega panel for pointer users,
-          // focus opens it for keyboard users, and Escape closes it.
+          // A link, not a button: clicking "Services" has to actually land on the services route.
           <NavLink
             key={l.label}
             href={l.href}
@@ -345,8 +320,6 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
     setOpenSection(null);
   };
 
-  // The drawer is an opaque panel of its own, so its contents always use the
-  // panel's tone rather than the hero tone the closed bar is borrowing.
   const panelFg = TONE.dark;
 
   return (
@@ -459,13 +432,9 @@ export function Navbar({ className }: { className?: string }) {
   const rootRef = useRef<HTMLElement>(null);
   const { overHero, tone } = useNavTone();
 
-  // An open mega panel needs a solid bar above it — a transparent strip with a
-  // full-width panel hanging off it reads as two detached elements.
   const transparent = overHero && !active;
   const fg = TONE[transparent ? tone : "dark"];
 
-  // Escape closes the mega menu — without this, keyboard users who open it
-  // have no way out except tabbing through every item.
   useEffect(() => {
     if (!active) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -475,8 +444,6 @@ export function Navbar({ className }: { className?: string }) {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [active]);
 
-  // Moving focus outside the navbar closes the menu too, so it never lingers
-  // over the page after the user has tabbed past it.
   const handleBlur = (e: FocusEvent<HTMLElement>) => {
     if (!rootRef.current?.contains(e.relatedTarget as Node)) setActive(null);
   };
@@ -516,8 +483,6 @@ export function Navbar({ className }: { className?: string }) {
           >
             Contact us
           </NavLink>
-          {/* The gradient is doubled in width and slid on hover, so the button
-              shifts hue instead of just dimming its opacity. */}
           <NavLink
             href="/contact"
             className="rounded-full bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid bg-[length:200%_100%] bg-left px-6 py-2.5 text-base font-medium text-inverse-fg transition-all duration-500 hover:-translate-y-0.5 hover:bg-right hover:shadow-glow focus-ring"

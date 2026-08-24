@@ -1,11 +1,4 @@
-/**
- * Every string and image the Generative AI detail page renders lives here.
- *
- * Same contract as `aiDevelopmentData.js`: the page and its sections only lay
- * things out, so marketing edits never touch JSX. Imagery is dedicated to this
- * page (`assets/gen-ai/`) — nothing is shared with the services listing or the
- * AI Development page, so the two detail pages never read as the same page.
- */
+/** Every string and image the Generative AI detail page renders lives here. */
 import heroContent from "../assets/gen-ai/hero-content-generation.jpg";
 import heroCopilot from "../assets/gen-ai/hero-copilot-chat.jpg";
 import heroChip from "../assets/gen-ai/hero-model-chip.jpg";
@@ -27,7 +20,7 @@ import enterpriseIndustries from "../assets/gen-ai/enterprise-industries.jpg";
 import governance from "../assets/gen-ai/ai-governance-security.jpg";
 import horizon from "../assets/gen-ai/generative-ai-horizon.jpg";
 
-/** Route this page owns — imported by App.jsx and the navbar so they can't drift. */
+/** Route this page owns, imported by App.jsx and the navbar so they can't drift. */
 export const GENERATIVE_AI_SLUG = "generative-ai-services";
 
 export const hero = {
@@ -36,14 +29,14 @@ export const hero = {
   titleAccent: "Development Services",
   titleTail: "For Enterprises And Startups",
   body:
-    "We build production-ready generative AI systems on GPT-4o, Claude, Llama, Gemini, Mistral, Midjourney, and Stable Diffusion — systems that automate workflows, generate content on brand, and turn your own documents into answers your team can trust. Not a model demo: a system your people use on Monday morning.",
+    "We build production-ready generative AI systems on GPT-4o, Claude, Llama, Gemini, Mistral, Midjourney, and Stable Diffusion: systems that automate workflows, generate content on brand, and turn your own documents into answers your team can trust. Not a model demo: a system your people use on Monday morning.",
   ctaText: "Request A Free Consultation",
   secondaryCtaText: "See What We Build",
   proof: { rating: "4.8", reviews: "300+ companies", source: "Reviewed on Clutch" },
   stats: [
     { value: "300+", label: "AI projects delivered" },
-    { value: "60–70%", label: "Less time on manual tasks" },
-    { value: "6–10", label: "Weeks to a working pilot" },
+    { value: "60-70%", label: "Less time on manual tasks" },
+    { value: "6-10", label: "Weeks to a working pilot" },
   ],
   images: [
     { src: heroContent, alt: "Robotic hand and human hand exchanging generated content, video, email and ad assets" },
@@ -52,7 +45,7 @@ export const hero = {
   ],
 };
 
-/** Foundation models we build on — a wordmark ticker under the hero. */
+/** Foundation models we build on, a wordmark ticker under the hero. */
 export const modelMarquee = [
   "GPT-4o",
   "Claude 3.5 Sonnet",
@@ -73,9 +66,12 @@ export const challenges = {
   titleAccent: "Overcome Business Challenges",
   titleLead: "With Generative AI Solutions",
   body:
-    "Most teams are not short on ideas — they are short on hours. Repetitive writing, slow first drafts, support queues, and knowledge buried in PDFs quietly cost you a headcount or two every year. We build generative AI that removes that work instead of adding another tool nobody opens.",
+    "Most teams are not short on ideas: they are short on hours. Repetitive writing, slow first drafts, support queues, and knowledge buried in PDFs quietly cost you a headcount or two every year. We build generative AI that removes that work instead of adding another tool nobody opens.",
   image: businessChallenges,
-  imageAlt: "Two colleagues reviewing a model on a laptop in front of a large neural network visualisation",
+  imageAlt: "Business lead and a humanoid robot reviewing live analytics dashboards together at a desk",
+  /** Small overlapping photo pulled over the main one, replaces the old stat badge. */
+  accentImage: workflowAutomation,
+  accentImageAlt: "Automated workflow steps running end to end on a screen",
   items: [
     {
       title: "Reduce operational bottlenecks",
@@ -83,7 +79,7 @@ export const challenges = {
     },
     {
       title: "Answer customers instantly",
-      body: "AI-generated replies grounded in your own policies and product data — personal, consistent, and available at 2am without a night shift.",
+      body: "AI-generated replies grounded in your own policies and product data: personal, consistent, and available at 2am without a night shift.",
     },
     {
       title: "Ship products faster",
@@ -91,17 +87,17 @@ export const challenges = {
     },
     {
       title: "Scale without disruption",
-      body: "Systems that fit your existing CRM, ERP, and data stack — no rip-and-replace, no six-month migration before value shows up.",
+      body: "Systems that fit your existing CRM, ERP, and data stack, no rip-and-replace, no six-month migration before value shows up.",
     },
   ],
 };
 
 export const services = {
   eyebrow: "What generative AI services do we provide?",
-  titleAccent: "Leverage Our Cutting-Edge",
+  titleAccent: "What We Build With",
   titleLead: "Generative AI Development Services",
   subtitle:
-    "End-to-end generative AI services for businesses that want to build, deploy, and scale AI systems — strategy, model development, integration, automation, and post-deployment support.",
+    "End-to-end generative AI services for businesses that want to build, deploy, and scale AI systems: strategy, model development, integration, automation, and post-deployment support.",
   items: [
     {
       id: "generative-ai-consulting",
@@ -123,13 +119,13 @@ export const services = {
       body:
         "Adding AI to systems already carrying your business is where most projects stall. We integrate generative AI into your CRM, ERP, SaaS platforms, and internal tools with minimal disruption and a clear path to ROI.",
       bullets: [
-        "Seamless integration into existing systems",
+        "Integration into the systems you already run",
         "LLMOps setup for continuous model monitoring",
         "Scalable deployment on AWS, Azure, or GCP",
         "Ongoing performance and cost optimisation",
       ],
       image: genAiIntegration,
-      imageAlt: "Professional holding a glowing AI globe surrounded by prompt and command panels",
+      imageAlt: "Hands typing on a laptop while an AI brain connects out to surrounding API endpoints",
     },
     {
       id: "custom-llm-development",
@@ -143,13 +139,13 @@ export const services = {
         "Evaluation harness and quality benchmarks",
       ],
       image: customLlm,
-      imageAlt: "Wireframe head above an open palm, branching into a glowing model architecture graph",
+      imageAlt: "Phone held in an open palm showing a generative AI console for text, image, voice, video and code",
     },
     {
       id: "generative-ai-app-development",
       title: "Generative AI App Development",
       body:
-        "Businesses need AI-powered products but rarely have the team to build them from scratch. We build generative AI applications for web and mobile — writing tools, image generation platforms, AI search, and intelligent SaaS products.",
+        "Businesses need AI-powered products but rarely have the team to build them from scratch. We build generative AI applications for web and mobile, writing tools, image generation platforms, AI search, and intelligent SaaS products.",
       bullets: [
         "End-to-end generative AI app development",
         "AI-powered web and mobile applications",
@@ -185,7 +181,7 @@ export const services = {
         "Source-cited AI response generation",
       ],
       image: ragDevelopment,
-      imageAlt: "Streams of data converging through a retrieval pipeline into a single answer",
+      imageAlt: "Laptop feeding charts, records and documents into a central AI profile that returns one answer",
     },
     {
       id: "generative-ai-workflow-automation",
@@ -207,7 +203,7 @@ export const services = {
 export const modelTypes = {
   eyebrow: "What generative AI systems do we design and deploy?",
   titleAccent: "Transform Your Operations",
-  titleLead: "With State-Of-The-Art Generative AI",
+  titleLead: "With Production Generative AI",
   subtitle:
     "Six families of generative systems, each tuned to your data and your quality bar before a single user sees an output.",
   items: [
@@ -222,7 +218,7 @@ export const modelTypes = {
       icon: "image",
       name: "Image Generation Models",
       body:
-        "Image systems built on DALL·E, Stable Diffusion, and similar models, fine-tuned on your brand guidelines. On-demand mockups, marketing assets, and design variations — tuned to your visual identity before deployment.",
+        "Image systems built on DALL·E, Stable Diffusion, and similar models, fine-tuned on your brand guidelines. On-demand mockups, marketing assets, and design variations, tuned to your visual identity before deployment.",
       tags: ["Stable Diffusion", "DALL·E 3", "Midjourney", "LoRA"],
     },
     {
@@ -236,14 +232,14 @@ export const modelTypes = {
       icon: "video",
       name: "Video Generation Models",
       body:
-        "Video systems that combine visual, audio, and text input to generate and edit content without manual production overhead — marketing videos, training content, and personalised video messages at scale.",
+        "Video systems that combine visual, audio, and text input to generate and edit content without manual production overhead, marketing videos, training content, and personalised video messages at scale.",
       tags: ["Sora-class", "Runway", "Editing", "Dubbing"],
     },
     {
       icon: "code",
       name: "Code Generation Models",
       body:
-        "Coding assistants trained on your standards that write boilerplate, suggest implementations, and convert code between languages — reviewed and debugged against your own quality gates, not the public internet's.",
+        "Coding assistants trained on your standards that write boilerplate, suggest implementations, and convert code between languages, reviewed and debugged against your own quality gates, not the public internet's.",
       tags: ["Codex-class", "Refactoring", "Tests", "Migration"],
     },
     {
@@ -283,7 +279,7 @@ export const caseStudies = {
       problem:
         "Support agents answered the same product questions daily by searching four disconnected systems, and first-response time kept slipping past SLA.",
       solution:
-        "We shipped a support copilot with a cited RAG layer over their documentation, ticket history, and policy base — drafting replies in the agent's own tone with the source attached.",
+        "We shipped a support copilot with a cited RAG layer over their documentation, ticket history, and policy base, drafting replies in the agent's own tone with the source attached.",
       results: [
         { value: "68%", label: "Tickets auto-drafted" },
         { value: "3.4X", label: "Faster first response" },
@@ -361,7 +357,7 @@ export const techStack = {
   titleAccent: "Supercharge Your Business",
   titleLead: "With Our Generative AI Tech Stack",
   subtitle:
-    "We work with the most reliable and widely adopted generative AI technologies available today, and select tools per use case, infrastructure, and performance requirement — never the other way round.",
+    "We work with the most reliable and widely adopted generative AI technologies available today, and select tools per use case, infrastructure, and performance requirement, never the other way round.",
   image: infrastructure,
   imageAlt: "Data streaming through an illuminated data centre aisle",
   groups: [
@@ -384,7 +380,7 @@ export const process = {
   steps: [
     { title: "Discovery And Use Case Selection", body: "We map your workflows, data, and constraints, then rank candidate use cases by payback and risk. Output: a scoped use case with success metrics agreed in writing." },
     { title: "Data Readiness And Architecture", body: "We audit the documents, records, and systems the model will rely on, then design the retrieval, prompting, and serving architecture around them. Output: an architecture your engineers can review." },
-    { title: "Model Selection And Prototyping", body: "We benchmark candidate models on your data — quality, latency, and cost per task — and build a working prototype. Output: a prototype you can put in front of real users." },
+    { title: "Model Selection And Prototyping", body: "We benchmark candidate models on your data (quality, latency, and cost per task) and build a working prototype. Output: a prototype you can put in front of real users." },
     { title: "Fine-Tuning And Grounding", body: "We fine-tune or ground the chosen model on your corpus, add guardrails, and shape outputs to your tone and format rules. Output: a system that sounds like your business." },
     { title: "Testing And Validation", body: "We test for accuracy, reliability, and performance under real-world load, including bias checks and user acceptance testing with your team. Output: a quality report and full sign-off before go-live." },
     { title: "Deployment And Continuous Improvement", body: "We deploy into your environment, monitor quality and cost in production, and keep improving the system for 60 days at no extra cost. Output: a system your team owns." },
@@ -398,7 +394,7 @@ export const outcomes = {
   image: roi,
   imageAlt: "Robotic hand above rising stacks of coins and a growth curve",
   items: [
-    { value: "60–70%", title: "Increased Automation", body: "Generative AI handles repetitive content, data, and communication work so your team can focus on what drives growth. Businesses typically see a 60 to 70% reduction in time spent on manual, repeatable tasks after deployment." },
+    { value: "60-70%", title: "Increased Automation", body: "Generative AI handles repetitive content, data, and communication work so your team can focus on what drives growth. Businesses typically see a 60 to 70% reduction in time spent on manual, repeatable tasks after deployment." },
     { value: "40%", title: "Improved Productivity", body: "AI-assisted workflows speed up decision-making, cut bottlenecks, and give your team faster access to the information they need. Teams report completing projects up to 40% faster than before." },
     { value: "40%", title: "Significant Cost Reduction", body: "Automating tasks and reducing errors can cut operational costs by up to 40%. For most businesses, the ROI on generative AI development becomes visible inside the first six months." },
     { value: "10X", title: "Faster Output Generation", body: "Generative AI produces content, reports, code, and data summaries in a fraction of the time a human team needs. You increase output speed without increasing headcount." },
@@ -412,7 +408,7 @@ export const whyUs = {
   titleAccent: "What Makes Us Different",
   titleLead: "From Other Generative AI Companies",
   body:
-    "Most generative AI companies hand you a finished product and disappear. We stay involved from the first conversation to post-deployment, making sure your AI system actually works for your business — and keeps working as your data changes.",
+    "Most generative AI companies hand you a finished product and disappear. We stay involved from the first conversation to post-deployment, making sure your AI system actually works for your business, and keeps working as your data changes.",
   image: partnership,
   imageAlt: "Human hand and robotic hand shaking against a network of connected nodes",
   governanceImage: governance,
@@ -425,9 +421,9 @@ export const whyUs = {
     { value: "4+", label: "Years building production AI" },
   ],
   reasons: [
-    { title: "Clear And Consistent Communication", body: "You get a dedicated project manager from day one. No chasing updates, no unclear timelines — you always know what is being built, what stage it is at, and what is coming next." },
+    { title: "Clear And Consistent Communication", body: "You get a dedicated project manager from day one. No chasing updates, no unclear timelines. You always know what is being built, what stage it is at, and what is coming next." },
     { title: "Results You Can Measure", body: "We define success metrics before we write a line of code. Every solution is tied to a business outcome, whether that is cost reduction, faster output, or improved accuracy." },
-    { title: "Flexible Engagement Models", body: "Fixed-price projects, dedicated teams, and time-and-materials engagements — so you can work with us the way that fits your situation, not ours." },
+    { title: "Flexible Engagement Models", body: "Fixed-price projects, dedicated teams, and time-and-materials engagements, so you can work with us the way that fits your situation, not ours." },
     { title: "End-To-End Ownership", body: "We handle everything from strategy and model selection through development, integration, deployment, and monitoring. One partner, full accountability." },
     { title: "60 Days Of Post-Deployment Support", body: "After your solution goes live, we stay on for 60 days at no extra cost. We monitor performance, fix issues, and make adjustments based on real-world usage from day one." },
     { title: "Team Coaching And Handover", body: "We do not just build and leave. Our team trains your staff on how to use, manage, and get the most out of your new AI system, so your team walks away confident, not dependent." },
@@ -439,9 +435,9 @@ export const industriesBand = {
   titleAccent: "Generative AI Built For",
   titleLead: "The Way Your Industry Works",
   body:
-    "We have shipped generative AI for healthcare, finance, retail, education, logistics, legal, real estate, and manufacturing teams. Every one came with its own compliance rules, data shape, and tolerance for error — and the system was built around them.",
+    "We have shipped generative AI for healthcare, finance, retail, education, logistics, legal, real estate, and manufacturing teams. Every one came with its own compliance rules, data shape, and tolerance for error, and the system was built around them.",
   image: enterpriseIndustries,
-  imageAlt: "Modern enterprise workspace lit by screens of live AI dashboards",
+  imageAlt: "Holographic AI presenter walking a boardroom through live dashboards on a secure data wall",
   horizonImage: horizon,
   horizonImageAlt: "Robotic hand reaching towards a city skyline with an AI chip above the water",
   names: [
@@ -467,7 +463,7 @@ export const faqs = [
   },
   {
     q: "What generative AI services does Axiomra offer?",
-    a: "Consulting and strategy, custom LLM development, generative AI integration, AI app development, copilots and autonomous agents, custom RAG systems, and generative AI workflow automation — plus 60 days of post-deployment support on every build.",
+    a: "Consulting and strategy, custom LLM development, generative AI integration, AI app development, copilots and autonomous agents, custom RAG systems, and generative AI workflow automation, plus 60 days of post-deployment support on every build.",
   },
   {
     q: "How much does it cost to build a generative AI solution?",
@@ -479,7 +475,7 @@ export const faqs = [
   },
   {
     q: "What is the difference between fine-tuning and RAG?",
-    a: "Fine-tuning changes how a model writes and reasons by training it further on your examples — good for tone, format, and domain language. RAG leaves the model alone and retrieves your documents at question time — good for facts that change and answers that must cite a source. Most production systems use both.",
+    a: "Fine-tuning changes how a model writes and reasons by training it further on your examples: good for tone, format, and domain language. RAG leaves the model alone and retrieves your documents at question time, good for facts that change and answers that must cite a source. Most production systems use both.",
   },
   {
     q: "Can you integrate generative AI with our existing systems?",
@@ -495,7 +491,7 @@ export const faqs = [
   },
   {
     q: "What security and compliance standards do you follow?",
-    a: "We work within your compliance boundary — private deployments, VPC and on-premise serving, no training on your data by default, role-based access, full audit trails, and NDAs signed before any data moves.",
+    a: "We work within your compliance boundary: private deployments, VPC and on-premise serving, no training on your data by default, role-based access, full audit trails, and NDAs signed before any data moves.",
   },
   {
     q: "Which AI models do you work with?",
@@ -503,7 +499,7 @@ export const faqs = [
   },
   {
     q: "Which industries do you serve with generative AI?",
-    a: "Healthcare, finance, retail and e-commerce, education, manufacturing, logistics, legal, real estate, insurance, marketing, travel, and media — with compliance and data constraints handled per industry.",
+    a: "Healthcare, finance, retail and e-commerce, education, manufacturing, logistics, legal, real estate, insurance, marketing, travel, and media, with compliance and data constraints handled per industry.",
   },
   {
     q: "Do you offer post-deployment support?",

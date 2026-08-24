@@ -19,8 +19,6 @@ function XIcon({ size = 16 }) {
   );
 }
 
-/* lucide has no WhatsApp mark either — inlined so the floating chat button
-   reads as WhatsApp instead of a generic speech bubble. */
 function WhatsAppIcon({ size = 26 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="#fff" aria-hidden="true">
@@ -35,8 +33,6 @@ const socials = [
   { Icon: XIcon, label: "X (Twitter)", href: "https://x.com/Axiomra_co" },
 ];
 
-/* The rule wipes in from the left on hover/focus — `origin-left scale-x-0`
-   rather than a width transition so it animates on the compositor. */
 const UNDERLINE_LINK =
   "relative inline-block text-lg text-inverse-fg/70 transition-colors duration-300 hover:text-inverse-fg focus-ring " +
   "after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 " +
@@ -46,11 +42,8 @@ const UNDERLINE_LINK =
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-inverse pb-8 pt-16">
-      {/* Animated three.js wave lattice — falls back to the static dot field
-          when WebGL is unavailable or motion is reduced. */}
       <NetworkBackground variant="wave" className="opacity-95" />
-      {/* Light scrim only — enough to hold text contrast without erasing the
-          animation underneath it. */}
+      {/* Light scrim only, enough to hold text contrast without erasing the animation underneath it. */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-inverse/85 via-inverse/45 to-inverse/80" />
 
       <div className="relative z-10 mx-auto grid max-w-6xl gap-x-8 gap-y-12 px-4 sm:px-6 md:grid-cols-4">
@@ -109,8 +102,6 @@ export default function Footer() {
         aria-label="Chat on WhatsApp: +1 (657) 520-3444"
       >
         <WhatsAppIcon />
-        {/* Axiomra mark rides the corner so the button is branded without
-            losing the WhatsApp glyph people actually recognise. */}
         <span className="absolute -right-0.5 -top-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-white ring-2 ring-[#25D366]">
           <img src={iconTeal} alt="" className="h-3.5 w-auto" width={83} height={91} />
         </span>

@@ -3,21 +3,13 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { makeDotTexture } from "../../lib/dotTexture";
 
-/* Token-stream field: prompts flowing in from every direction, converging on a
-   model core, and leaving again as generated output.
-
-   Every curve is sampled once into a flat array at mount; the frame loop only
-   indexes into it, so nothing is allocated per frame and the whole field costs
-   a few hundred writes. */
 
 const STREAMS = 10;
 const PER_STREAM = 26;
 const SAMPLES = 220;
 const TOTAL = STREAMS * PER_STREAM;
 
-/* Deterministic stand-in for Math.random. Randomness during render is impure —
-   a re-render would reshuffle the whole field — so every jitter value is
-   derived from its own index instead, and the field is identical every run. */
+/* Deterministic stand-in for Math.random. */
 function jitter(n) {
   const x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
   return x - Math.floor(x);
@@ -68,8 +60,6 @@ function TokenField() {
   const positions = useMemo(() => new Float32Array(TOTAL * 3), []);
   const dotTexture = useMemo(() => makeDotTexture(), []);
 
-  /* Each particle keeps a fixed offset along its stream and a slightly different
-     speed, so the streams never fall into lockstep. */
   const offsets = useMemo(() => {
     const arr = new Float32Array(TOTAL);
     for (let i = 0; i < TOTAL; i++) arr[i] = (i % PER_STREAM) / PER_STREAM + jitter(i + 500) * 0.01;
@@ -158,9 +148,9 @@ function TokenField() {
   );
 }
 
-export default function TokenFlowCanvas() {
+export default function TokenFlowCanvas({ frameloop = "always" }) {
   return (
-    <Canvas camera={{ position: [0, 0, 12], fov: 55 }} dpr={[1, 1.5]}>
+    <Canvas camera={{ position: [0, 0, 12], fov: 55 }} dpr={[1, 1.5]} frameloop={frameloop}>
       <TokenField />
     </Canvas>
   );

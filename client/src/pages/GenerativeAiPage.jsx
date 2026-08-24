@@ -20,18 +20,16 @@ import { faqs } from "../data/generativeAiData";
 
 const META_DESCRIPTION =
   "Axiomra's generative AI development services: LLM strategy, custom model development, " +
-  "RAG systems, AI copilots and agents, and workflow automation — built, deployed, and supported.";
+  "RAG systems, AI copilots and agents, and workflow automation, all built, deployed, and supported.";
 
 export default function GenerativeAiPage() {
   useEffect(() => {
-    document.title = "Generative AI Development Services For Enterprises — Axiomra";
+    document.title = "Generative AI Development Services For Enterprises | Axiomra";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute("content", META_DESCRIPTION);
   }, []);
 
   return (
-    // Bands alternate light and inverse down the page, so each CTA below is
-    // given the variant that contrasts with the section it follows.
     <div>
       <GenAiHero />
       <GenAiModelBar />
@@ -47,7 +45,7 @@ export default function GenerativeAiPage() {
             Fits Your Use Case?
           </>
         }
-        subtitle="Bring us the workflow you want to automate. We will tell you which model class fits, what it costs to run at your volume, and whether generative AI is even the right answer — before you spend anything."
+        subtitle="Bring us the workflow you want to automate. We will tell you which model class fits, what it costs to run at your volume, and whether generative AI is even the right answer, before you spend anything."
         buttonText="Book A Free Generative AI Consultation"
       />
 
@@ -83,7 +81,7 @@ export default function GenerativeAiPage() {
             Not Another Pilot.
           </>
         }
-        subtitle="Most generative AI projects stall between demo and production. Ours do not, because we scope for deployment from the first call and stay on for 60 days after go-live. Start with a free strategy session — no commitment, no generic pitch."
+        subtitle="Most generative AI projects stall between demo and production. Ours do not, because we scope for deployment from the first call and stay on for 60 days after go-live. Start with a free strategy session, no commitment, no generic pitch."
         buttonText="Claim Your Free Strategy Session"
       />
 

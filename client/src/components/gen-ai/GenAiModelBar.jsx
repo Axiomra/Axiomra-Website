@@ -1,12 +1,6 @@
 import { modelMarquee } from "../../data/generativeAiData";
 
-/**
- * Foundation-model ticker under the hero.
- *
- * Text, not logo assets: model vendors change their marks often and most are
- * trademark-restricted, so wordmarks keep the strip crisp in both themes and
- * add nothing to the bundle. Hovering pauses it so a name can be read.
- */
+/** Foundation-model ticker under the hero. */
 export default function GenAiModelBar() {
   return (
     <section

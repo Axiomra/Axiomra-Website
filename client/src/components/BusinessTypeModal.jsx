@@ -32,25 +32,14 @@ function CanvasFallback() {
   );
 }
 
-/**
- * Detail dialog for one audience card.
- *
- * Rendered in a portal on `document.body`: the cards sit inside a section that
- * creates its own stacking context, and a `position: fixed` overlay nested in
- * one of those gets clipped to it instead of covering the viewport.
- *
- * The backdrop blurs the page behind it (`backdrop-blur-xl`) rather than just
- * darkening it, so the modal reads as a layer above the site instead of a
- * cut-out hole in it.
- */
+/** Detail dialog for one audience card. */
 export default function BusinessTypeModal({ item, onClose }) {
   const panelRef = useRef(null);
   const open = Boolean(item);
 
   const close = useCallback(() => onClose(), [onClose]);
 
-  // Escape closes, Tab stays inside the dialog. Without the trap, tabbing walks
-  // into the page behind the blur where nothing is visible.
+  // Escape closes, Tab stays inside the dialog.
   useEffect(() => {
     if (!open) return;
 
@@ -79,8 +68,7 @@ export default function BusinessTypeModal({ item, onClose }) {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open, close]);
 
-  // Lock the page behind the dialog. Padding replaces the scrollbar's width so
-  // the layout underneath doesn't jump sideways as it disappears.
+  // Lock the page behind the dialog.
   useEffect(() => {
     if (!open) return;
     const { body } = document;
@@ -100,8 +88,6 @@ export default function BusinessTypeModal({ item, onClose }) {
     if (open) panelRef.current?.focus();
   }, [open]);
 
-  // Probed once, not per render: supportsWebGL() builds a throwaway <canvas>,
-  // and the CSS reduced-motion rule cannot reach a WebGL render loop.
   const [canAnimate] = useState(
     () =>
       supportsWebGL() &&
@@ -142,8 +128,7 @@ export default function BusinessTypeModal({ item, onClose }) {
               <X size={18} />
             </button>
 
-            {/* Animated header. Fixed height so the dialog doesn't reflow when
-                the lazy canvas finishes loading. */}
+            {/* Animated header. Fixed height so the dialog doesn't reflow when the lazy canvas finishes loading. */}
             <div className="relative h-52 overflow-hidden bg-inverse sm:h-60">
               {useCanvas ? (
                 <ErrorBoundary fallback={<CanvasFallback />}>

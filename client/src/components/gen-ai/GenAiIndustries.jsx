@@ -1,12 +1,7 @@
 import { motion } from "framer-motion";
 import { industriesBand } from "../../data/generativeAiData";
 
-/**
- * Industry coverage as a single scannable band.
- *
- * The AI Development page already carries an industry tab panel; repeating it
- * here would cost a click for information that fits in one glance.
- */
+/** Industry coverage as a single scannable band. */
 export default function GenAiIndustries() {
   return (
     <section id="generative-ai-industries" className="bg-surface-subtle py-20 md:py-28">

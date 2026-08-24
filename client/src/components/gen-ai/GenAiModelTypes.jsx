@@ -3,8 +3,6 @@ import { Type, Image, Mic, Video, Code2, Layers } from "lucide-react";
 import GenAiCanvas from "./GenAiCanvas";
 import { modelTypes } from "../../data/generativeAiData";
 
-/* Icons are chosen here, not in the data file: the data describes what we
-   build, and swapping an icon set should not mean editing marketing copy. */
 const ICONS = {
   text: Type,
   image: Image,
@@ -14,13 +12,7 @@ const ICONS = {
   multimodal: Layers,
 };
 
-/**
- * The six families of generative system, on the page's second dark band.
- *
- * Dark on purpose: this is the midpoint of a long page, and the token-stream
- * field behind it — prompts converging on a model core — is the one place where
- * a WebGL backdrop is describing the actual subject rather than decorating it.
- */
+/** The six families of generative system, on the page's second dark band. */
 export default function GenAiModelTypes() {
   return (
     <section id="generative-ai-models" className="relative overflow-hidden bg-inverse py-20 md:py-28">
@@ -61,8 +53,7 @@ export default function GenAiModelTypes() {
                 transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
                 className="group relative overflow-hidden rounded-xl2 border border-white/12 bg-white/[0.04] p-7 backdrop-blur-sm transition-colors hover:border-accent-vivid/40 md:p-8"
               >
-                {/* Hover bloom, clipped by the card — cheaper and steadier than
-                    animating a shadow, and it never shifts layout. */}
+                {/* Hover bloom, clipped by the card, cheaper and steadier than animating a shadow, and it never shifts layout. */}
                 <span
                   className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-accent-vivid/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
                   aria-hidden="true"

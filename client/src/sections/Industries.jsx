@@ -21,7 +21,6 @@ const industries = [
 
 export default function Industries({ showHeading = true, showStats = true }) {
   // Hovering a tile floods the whole panel with that industry's photo.
-  // The first tile is active by default so the panel is never bare.
   const [active, setActive] = useState(industries[0].name);
 
   return (
@@ -41,10 +40,8 @@ export default function Industries({ showHeading = true, showStats = true }) {
       )}
 
       <div className="relative mx-auto max-w-none px-0 sm:px-0">
-        {/* The grid panel is a brand surface — dark in both themes. */}
+        {/* The grid panel is a brand surface, dark in both themes. */}
         <div className="relative overflow-hidden rounded-none bg-inverse sm:rounded-xl2">
-          {/* Default (not `wait`) mode so the outgoing photo stays put while the
-              new one fades over it — `wait` leaves a bare panel between tiles. */}
           <AnimatePresence>
             <motion.img
               key={active}
@@ -58,10 +55,7 @@ export default function Industries({ showHeading = true, showStats = true }) {
               className="absolute inset-0 h-full w-full object-cover"
             />
           </AnimatePresence>
-          {/* Just enough scrim to keep the tile labels legible — the photo
-              still has to read as the subject of the panel. */}
-          {/* Heavier than it used to be: the taller tiles expose more of the
-              photo, and the white labels need the extra scrim to stay AA. */}
+          {/* Just enough scrim to keep the tile labels legible, the photo still has to read as the subject of the panel. */}
           <div className="absolute inset-0 bg-inverse/60" />
           <div className="absolute inset-0 bg-gradient-to-br from-inverse/70 via-inverse/20 to-brand-strong/50" />
           <div className="absolute inset-0 opacity-25" style={{
@@ -104,8 +98,7 @@ export default function Industries({ showHeading = true, showStats = true }) {
         </div>
       </div>
 
-      {/* Proof strip — standalone from the image panel so the numbers read as
-          their own statement. */}
+      {/* Proof strip, standalone from the image panel so the numbers read as their own statement. */}
       {showStats && (
         <div className="relative mx-auto mt-16 max-w-none border-y border-line bg-surface-card px-4 py-12 backdrop-blur-sm sm:px-6">
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 text-center sm:grid-cols-3">

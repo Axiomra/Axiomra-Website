@@ -4,7 +4,7 @@ import { Cpu, TrendingUp, Users, ShieldCheck } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 
 const points = [
-  { icon: Cpu, title: "Production-Grade Engineering", desc: "We build robust AI systems that handle real-world data at scale — reliable, secure, enterprise-ready." },
+  { icon: Cpu, title: "Production-Grade Engineering", desc: "We build AI systems that hold up against real-world data at scale: reliable, secure, enterprise-ready." },
   { icon: TrendingUp, title: "Result-Driven Methodology", desc: "Every solution is designed to deliver a proven ROI within the first two quarters." },
   { icon: Users, title: "100% In-House Expertise", desc: "Our dedicated team of 25+ AI specialists works directly with you from strategy to launch." },
   { icon: ShieldCheck, title: "Ethical & Secure AI", desc: "Advanced security protocols protect your proprietary data and ensure compliance." },
@@ -66,9 +66,6 @@ export default function WhyUs() {
             whileHover={{ y: -8 }}
             className="group flex flex-col items-center rounded-xl2 border border-line bg-surface-card p-8 text-center shadow-card transition-[border-color,background-color,box-shadow] duration-300 [perspective:900px] hover:border-brand hover:bg-brand/5 hover:shadow-glow"
           >
-            {/* The badge is a real 3D tile: it tilts on two axes and lifts
-                toward the viewer on hover, with a stacked shadow doing the
-                depth cue. */}
             <div
               className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-vivid to-brand transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(20deg)_rotateY(-20deg)_translateZ(16px)]"
               style={{ boxShadow: "0 12px 30px -10px rgba(120,139,227,0.75)" }}

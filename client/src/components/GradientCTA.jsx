@@ -3,14 +3,6 @@ import { ArrowUpRight } from "lucide-react";
 import NetworkBackground from "./NetworkBackground";
 import { Link } from "react-router-dom";
 
-/**
- * Two variants, both intentionally dark in either theme:
- *  - default: the brand gradient
- *  - dark:    flat inverse surface, used to break up consecutive gradients
- *
- * `three` layers the lazily-loaded three.js particle field behind the copy.
- * It is opt-in per instance — the WebGL bundle should not load for every CTA.
- */
 export default function GradientCTA({
   title,
   subtitle,

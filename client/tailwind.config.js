@@ -1,14 +1,4 @@
-/**
- * AXIOMRA Tailwind config
- *
- * Colours here are SEMANTIC ROLES, not hues. Their actual values live in
- * src/styles/tokens.css as CSS custom properties, defined once for light
- * and once for `.dark`. That indirection is what makes theming a
- * one-file change instead of a find-and-replace across every component.
- *
- * `<alpha-value>` is a Tailwind placeholder — it lets `bg-surface/60` keep
- * working even though the colour comes from a variable.
- */
+/** AXIOMRA Tailwind config Colours here are SEMANTIC ROLES, not hues. */
 const token = (name) => `rgb(var(--${name}) / <alpha-value>)`;
 
 export default {
@@ -68,7 +58,7 @@ export default {
         card: "0 10px 40px -15px rgba(10,20,40,0.15)",
       },
       backgroundImage: {
-        // Brand gradients are fixed by identity — they do not flip per theme.
+        // Brand gradients are fixed by identity, they do not flip per theme.
         "cta-gradient": "linear-gradient(120deg, #14D8C4 0%, #788BE3 55%, #777ACF 100%)",
       },
       animation: {

@@ -3,18 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
-/**
- * Sticky intro on the left, self-stacking case cards on the right.
- *
- * Each card is `position: sticky` at a slightly larger top offset than the one
- * before it, so scrolling makes every card slide up and park on top of the
- * previous one — the deck builds itself as you read, and the header strip of
- * each parked card stays visible underneath. Cards are opaque for that reason:
- * a translucent card would show the text of the one it covers.
- *
- * The offset ladder is what makes the last card sit lowest on screen, so the
- * stack must be short — five cards at 1.75rem apart is already ~9rem of peek.
- */
+/** Sticky intro on the left, self-stacking case cards on the right. */
 const TOP_BASE_REM = 7; // clears the fixed navbar
 const TOP_STEP_REM = 1.75;
 
@@ -27,7 +16,7 @@ const cases = [
   },
   {
     challenge: "Decisions made on last month's numbers",
-    body: "Reporting arrived too late to act on. We consolidated the operational data into one warehouse, added forecasting on top of it and put the outputs in front of the people who actually make the call — same day, not next month.",
+    body: "Reporting arrived too late to act on. We consolidated the operational data into one warehouse, added forecasting on top of it and put the outputs in front of the people who actually make the call: same day, not next month.",
     metric: "4x",
     metricLabel: "faster reporting cycle",
   },
@@ -45,7 +34,7 @@ const cases = [
   },
   {
     challenge: "Models that worked in the demo, not in production",
-    body: "Accuracy drifted the moment real traffic hit. We rebuilt the pipeline with monitoring, automated retraining and rollback baked in, then benchmarked every release before it ships — so performance holds after launch, not just during it.",
+    body: "Accuracy drifted the moment real traffic hit. We rebuilt the pipeline with monitoring, automated retraining and rollback baked in, then benchmarked every release before it ships, so performance holds after launch, not just during it.",
     metric: "99.9%",
     metricLabel: "production uptime",
   },
@@ -54,10 +43,7 @@ const cases = [
 function CaseCard({ item, index }) {
   const ref = useRef(null);
 
-  // Dims the card as the next one climbs over it, so the stack reads as
-  // depth instead of a flat pile of rectangles. The fade is applied to the
-  // CONTENT, never the card: a translucent card would let the text of the
-  // card underneath ghost through the one covering it.
+  // Dims the card as the next one climbs over it, so the stack reads as depth instead of a flat pile of rectangles.
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 0.28", "end 0.1"],
@@ -110,8 +96,6 @@ export default function ProvenResults() {
   return (
     <section id="proven-results" className="bg-surface-subtle py-24">
       <div className="mx-auto grid max-w-8xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-20">
-        {/* `self-start` is required for the sticky column: a stretched grid
-            item is as tall as the row, leaving nothing to stick within. */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -148,8 +132,6 @@ export default function ProvenResults() {
           {cases.map((item, i) => (
             <CaseCard key={item.challenge} item={item} index={i} />
           ))}
-          {/* Scroll runway: without it the last card has nothing left to stick
-              through and the stack ends abruptly at the section edge. */}
           <div aria-hidden="true" className="h-[35vh]" />
         </div>
       </div>

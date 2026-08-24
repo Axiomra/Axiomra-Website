@@ -9,8 +9,6 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const FIELD_CLASS =
   "w-full rounded-xl border border-line-strong bg-inverse-soft py-3.5 pl-11 pr-4 text-base text-inverse-fg outline-none transition-all placeholder:text-inverse-fg/35 focus:border-gold/70 focus:ring-4 focus:ring-gold/15";
 
-/** Click-to-load facade: the YouTube iframe only mounts after a real click,
-    so the third-party player never costs us a page-load. */
 function IntroVideo() {
   const [playing, setPlaying] = useState(false);
 
@@ -78,8 +76,6 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative overflow-hidden px-4 py-24 sm:px-6">
-      {/* Two soft brand glows behind the heading — the section used to open on
-          flat white, which made the closing CTA read as an afterthought. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-[420px] opacity-70"
@@ -99,7 +95,7 @@ export default function Contact() {
               Partner With <span className="text-brand">Expert AI Service Providers</span> To Launch Your Project
             </>
           }
-          subtitle="Share the project details — like scope, mockups, or business challenges. We will carefully check and get back to you."
+          subtitle="Share the project details: like scope, mockups, or business challenges. We will carefully check and get back to you."
         />
 
         <div className="mb-16 flex flex-wrap items-center justify-center gap-3">
@@ -153,7 +149,7 @@ export default function Contact() {
                 "radial-gradient(520px 260px at 12% 0%, rgba(224,150,16,0.10), transparent 60%), radial-gradient(420px 300px at 100% 100%, rgba(20,216,196,0.10), transparent 60%)",
             }}
           />
-          {/* Faint crown watermark, bottom-right — premium without shouting. */}
+          {/* Faint crown watermark, bottom-right, premium without shouting. */}
           <Crown
             size={150}
             strokeWidth={0.5}
@@ -238,7 +234,7 @@ export default function Contact() {
               <p role="status" aria-live="polite" className="text-sm">
                 {status === "success" && (
                   <span className="flex items-center gap-1.5 text-accent-vivid">
-                    <CheckCircle2 size={16} /> Thanks — we&rsquo;ll be in touch within 24 hours.
+                    <CheckCircle2 size={16} /> Thanks: we&rsquo;ll be in touch within 24 hours.
                   </span>
                 )}
                 {status === "error" && <span className="text-danger">Something went wrong. Please try again.</span>}

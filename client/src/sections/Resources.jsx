@@ -5,7 +5,7 @@ import { RESOURCE_IMAGES } from "../lib/media";
 
 const posts = [
   { title: "MVP vs. Full-Scale Custom AI Development", tag: "Strategy" },
-  { title: "Custom AI Development Timeline — 2026 Benchmarks", tag: "Process" },
+  { title: "Custom AI Development Timeline: 2026 Benchmarks", tag: "Process" },
   { title: "Why AI Projects Fail: 10 Root Causes", tag: "Insights" },
 ];
 
@@ -20,7 +20,7 @@ export default function Resources() {
             Know What&rsquo;s <span className="text-brand">Trending In AI</span>
           </>
         }
-        subtitle="Field notes from the projects we ship — benchmarks, budgets, and the mistakes worth skipping."
+        subtitle="Field notes from the projects we ship: benchmarks, budgets, and the mistakes worth skipping."
       />
 
       <div className="grid gap-8 sm:grid-cols-3">

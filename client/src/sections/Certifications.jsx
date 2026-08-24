@@ -22,7 +22,7 @@ import {
  * read, and the whole thing freezes under prefers-reduced-motion via the
  * global rule in index.css.
  *
- * Icons stand in for real certification artwork — swap each `icon` for an
+ * Icons stand in for real certification artwork, swap each `icon` for an
  * <img> once the licensed badge files are cleared for use.
  */
 const certifications = [
@@ -53,10 +53,7 @@ function Badge({ icon: Icon, name, note }) {
   );
 }
 
-/**
- * One marquee lane. The list is rendered twice back to back and the track is
- * translated by exactly -50%, so the loop point lands on an identical frame.
- */
+/** One marquee lane. */
 function Lane({ reverse = false }) {
   return (
     <div
@@ -89,8 +86,7 @@ export default function Certifications() {
         Certifications &amp; Compliance
       </p>
 
-      {/* The duplicated list is decoration for screen readers; one plain list
-          below carries the actual content. */}
+      {/* The duplicated list is decoration for screen readers; one plain list below carries the actual content. */}
       <div aria-hidden="true" className="space-y-2">
         <Lane />
         <Lane reverse />
@@ -99,7 +95,7 @@ export default function Certifications() {
       <ul className="sr-only">
         {certifications.map((c) => (
           <li key={c.name}>
-            {c.name} — {c.note}
+            {c.name}: {c.note}
           </li>
         ))}
       </ul>

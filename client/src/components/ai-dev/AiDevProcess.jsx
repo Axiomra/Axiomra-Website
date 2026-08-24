@@ -4,13 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { process } from "../../data/aiDevelopmentData";
 
-/**
- * Sticky intro on the left, one advancing step on the right.
- *
- * A carousel rather than a stacked list because seven full step descriptions
- * stacked vertically buries the section that follows; stepping through keeps
- * the block a fixed height on every viewport.
- */
+/** Sticky intro on the left, one advancing step on the right. */
 export default function AiDevProcess() {
   const [step, setStep] = useState(0);
   const total = process.steps.length;

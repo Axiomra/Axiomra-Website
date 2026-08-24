@@ -12,13 +12,7 @@ const fadeUp = {
   }),
 };
 
-/**
- * Split hero: copy left, product imagery right.
- *
- * Deliberately a LIGHT surface — the services listing page already opens on the
- * dark `ServicesHero`, so a second dark hero one click deeper would flatten the
- * hierarchy between "all services" and "this service".
- */
+/** Split hero: copy left, product imagery right. */
 export default function AiDevHero() {
   return (
     <section

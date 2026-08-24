@@ -30,5 +30,12 @@ Thumbs.db
 node_modules/.vite/
 *.tsbuildinfo
 
-# Local Claude settings
+# Local editor/tooling settings
 .claude/settings.local.json
+
+# Video masters. Keep the ProRes source local; ship client/public/media/nlp-hero.mp4.
+*.mov
+*.ProRes.mp4
+
+# Unused stock video master. Too large for git; keep it local only.
+client/src/assets/agentic-ai/new/*.mp4

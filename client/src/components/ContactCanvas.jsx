@@ -3,16 +3,10 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { makeDotTexture } from "../lib/dotTexture";
 
-/* Orbiting signal globe for the contact hero.
-   Every animation here is O(1) per frame — the point cloud is a static
-   Fibonacci sphere that only ever gets rotated, and the rings are three
-   meshes. That matters because this canvas sits above the fold on a page
-   whose whole job is to load fast enough that people fill in the form. */
+/* Orbiting signal globe for the contact hero. */
 
 const POINTS = 900;
 const RADIUS = 3.2;
-/* Small satellites that ride the rings, so the globe reads as traffic moving
-   toward a hub rather than as decoration that happens to spin. */
 const SIGNALS = [
   { radius: 4.15, speed: 0.42, tilt: [1.25, 0, 0.35], color: "#14D8C4" },
   { radius: 4.85, speed: -0.3, tilt: [0.55, 0.4, -0.5], color: "#788BE3" },
@@ -26,8 +20,7 @@ function Globe() {
   const { positions, colors } = useMemo(() => {
     const positions = new Float32Array(POINTS * 3);
     const colors = new Float32Array(POINTS * 3);
-    // Fibonacci sphere: evenly spread without the pole clustering you get
-    // from naive lat/long sampling.
+    // Fibonacci sphere: evenly spread without the pole clustering you get from naive lat/long sampling.
     const golden = Math.PI * (3 - Math.sqrt(5));
     const near = new THREE.Color("#14D8C4");
     const far = new THREE.Color("#788BE3");
@@ -55,8 +48,6 @@ function Globe() {
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
     groupRef.current.rotation.y = t * 0.09;
-    // A shallow tilt oscillation keeps the silhouette from looking like a
-    // flat disc at the moments the rings line up with the camera.
     groupRef.current.rotation.x = Math.sin(t * 0.16) * 0.12;
     pointsRef.current.rotation.y = t * 0.05;
   });
@@ -118,9 +109,9 @@ function SignalRing({ radius, speed, tilt, color }) {
   );
 }
 
-export default function ContactCanvas() {
+export default function ContactCanvas({ frameloop = "always" }) {
   return (
-    <Canvas camera={{ position: [0, 1.2, 11.5], fov: 50 }} dpr={[1, 1.5]}>
+    <Canvas camera={{ position: [0, 1.2, 11.5], fov: 50 }} dpr={[1, 1.5]} frameloop={frameloop}>
       <Globe />
     </Canvas>
   );

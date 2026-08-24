@@ -4,7 +4,7 @@ import { ArrowRight, ShieldCheck } from "lucide-react";
 import { whyUs } from "../../data/generativeAiData";
 
 const GOVERNANCE_POINTS = [
-  "Your data stays in your cloud or ours — your call, written into the contract.",
+  "Your data stays in your cloud or ours. Your call, written into the contract.",
   "Guardrails, PII redaction, and output filtering built in, not bolted on.",
   "Full audit trail of prompts, retrievals, and responses for every request.",
   "SOC 2, GDPR, and HIPAA-aligned delivery when your industry requires it.",
@@ -30,8 +30,6 @@ export default function GenAiWhyUs() {
                 className="h-72 w-full object-cover sm:h-96 lg:h-[32rem]"
               />
             </div>
-            {/* Stats overlap the photo on desktop and drop below it on mobile,
-                where an absolutely positioned card would cover the subject. */}
             <dl className="relative mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl2 border border-line bg-line lg:absolute lg:-bottom-10 lg:right-6 lg:mt-0 lg:w-[22rem] lg:shadow-card">
               {whyUs.stats.map((s) => (
                 <div key={s.label} className="bg-surface-card px-5 py-6">

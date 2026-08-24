@@ -3,10 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { makeDotTexture } from "../lib/dotTexture";
 
-/* Animated wave grid for the footer.
-   Unlike NetworkCanvas this is O(n) per frame — a fixed lattice of points
-   displaced by two sine waves — so it can afford a much denser field while
-   staying cheap enough for a surface that is always mounted at page bottom. */
+/* Animated wave grid for the footer. */
 
 const COLS = 90;
 const ROWS = 36;
@@ -20,8 +17,6 @@ function WaveGrid() {
     const count = COLS * ROWS;
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
-    // Teal → indigo, mapped across the grid's depth so the field reads as
-    // one gradient sheet rather than a cloud of unrelated dots.
     const near = new THREE.Color("#14D8C4");
     const far = new THREE.Color("#788BE3");
     const mixed = new THREE.Color();
@@ -82,9 +77,9 @@ function WaveGrid() {
   );
 }
 
-export default function FooterCanvas() {
+export default function FooterCanvas({ frameloop = "always" }) {
   return (
-    <Canvas camera={{ position: [0, 3.4, 11], fov: 55 }} dpr={[1, 1.5]}>
+    <Canvas camera={{ position: [0, 3.4, 11], fov: 55 }} dpr={[1, 1.5]} frameloop={frameloop}>
       <WaveGrid />
     </Canvas>
   );

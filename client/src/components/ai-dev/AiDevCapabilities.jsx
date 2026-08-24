@@ -3,12 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "../SectionHeading";
 import { capabilities } from "../../data/aiDevelopmentData";
 
-/**
- * Vertical tab list on the left, numbered detail panel on the right.
- *
- * Uses the roving `aria-selected` tab pattern rather than plain buttons so the
- * panel is announced as the tab's content, not as an unrelated region.
- */
+/** Vertical tab list on the left, numbered detail panel on the right. */
 export default function AiDevCapabilities() {
   const [active, setActive] = useState(0);
   const current = capabilities.items[active];

@@ -1,21 +1,12 @@
 import { motion } from "framer-motion";
 
-/**
- * The single source of truth for section headers.
- *
- * Every section used to size its own eyebrow / h2 / lede, which meant the
- * type scale drifted section to section. Routing them all through here keeps
- * one scale: the heading spans the full container width (no max-w clamp) and
- * the supporting copy sits a step larger than body text.
- */
+/** The single source of truth for section headers. */
 export default function SectionHeading({
   eyebrow,
   title,
   subtitle,
   align = "center",
   className = "",
-  // Escape hatch for the few headings that must hold a single line: they
-  // trade the fixed type scale for a viewport-relative one.
   titleClassName = "",
   subtitleClassName = "",
   children,

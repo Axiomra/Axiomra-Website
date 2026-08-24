@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, Check } from "lucide-react";
 import { intro } from "../../data/aiDevelopmentData";
 
-/** "Stay Ahead In Tech" block — company positioning plus the capability list. */
+/** "Stay Ahead In Tech" block, company positioning plus the capability list. */
 export default function AiDevIntro() {
   return (
     <section className="bg-surface py-20 md:py-28">

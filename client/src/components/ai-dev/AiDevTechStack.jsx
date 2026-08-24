@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { techStack } from "../../data/aiDevelopmentData";
 
-/** Category chips over a tool-chip panel — one group visible at a time. */
+/** Category chips over a tool-chip panel, one group visible at a time. */
 export default function AiDevTechStack() {
   const [active, setActive] = useState(0);
   const current = techStack.groups[active];

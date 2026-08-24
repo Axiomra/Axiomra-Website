@@ -2,8 +2,6 @@ import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 
-// Same lazy-loaded Three.js particle network used on the homepage Hero —
-// reused here instead of rebuilt, keeping the animation consistent site-wide.
 const NetworkBackground = lazy(() => import("./NetworkBackground"));
 
 const fadeUp = {
@@ -11,13 +9,11 @@ const fadeUp = {
   show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.12, ease: "easeOut" } }),
 };
 
-// Same numbers the FAQ and WhyUs sections quote — kept in one shape here so
-// the hero band can't drift out of sync with the rest of the site copy.
 const stats = [
   { value: "300+", label: "Projects delivered" },
   { value: "25+", label: "In-house experts" },
   { value: "20+", label: "AI service lines" },
-  { value: "6–10", label: "Weeks to pilot" },
+  { value: "6-10", label: "Weeks to pilot" },
 ];
 
 export default function ServicesHero() {
@@ -60,8 +56,7 @@ export default function ServicesHero() {
             custom={1}
             className="font-display text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-5xl md:text-6xl"
           >
-            {/* Two deliberate lines — the old copy wrapped to three and pushed
-                the CTA row below the fold on laptop viewports. */}
+            {/* Two deliberate lines, the old copy wrapped to three and pushed the CTA row below the fold on laptop viewports. */}
             Tailored AI Services For{" "}
             <span className="block text-gradient">Growing Businesses</span>
           </motion.h1>
@@ -74,7 +69,7 @@ export default function ServicesHero() {
             className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-white/70 md:text-xl md:leading-relaxed"
           >
             Partner with Axiomra, a trusted artificial intelligence company delivering
-            intelligent solutions that streamline workflows and empower businesses to
+            intelligent solutions that streamline workflows and help businesses
             grow with confidence.
           </motion.p>
 

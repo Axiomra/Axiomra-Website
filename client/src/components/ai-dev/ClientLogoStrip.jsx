@@ -1,10 +1,6 @@
 import { clientLogos } from "../../data/aiDevelopmentData";
 
-/**
- * Wordmark strip under the hero. Rendered as type rather than image assets so
- * it stays crisp in both themes and adds nothing to the bundle; swap each entry
- * for an <img> once real client logos are cleared for use.
- */
+/** Wordmark strip under the hero. */
 export default function ClientLogoStrip() {
   return (
     <section className="border-y border-line bg-surface-subtle py-10" aria-label="Clients we have built for">

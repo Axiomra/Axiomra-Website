@@ -12,30 +12,11 @@ import {
   Wallet,
 } from "lucide-react";
 
-/**
- * Interactive savings estimator.
- *
- * The maths is deliberately conservative and every assumption is printed on
- * screen, because the number is a sales argument and an inflated one stops
- * being credible the moment a CFO checks it:
- *
- *   recovered hours = people x hours/week x 52 weeks x efficiency
- *   gross savings   = recovered hours x fully-loaded hourly cost
- *   run rate        = implementation budget x 15%      (hosting, monitoring, retraining)
- *   net per year    = gross savings - run rate         (steady state, year 2 onward)
- *   payback         = implementation budget / (net per year / 12)
- *   3-year net      = net per year x 3 - implementation budget
- *
- * `efficiency` is the "not everything automates cleanly" haircut and varies by
- * workflow — document extraction automates far more completely than sales ops,
- * and pretending otherwise is what makes these calculators worthless.
- */
+/** Interactive savings estimator. */
 const WORKING_WEEKS = 52;
 /** Annual run cost as a share of the build: hosting, monitoring, retraining. */
 const RUN_RATE_SHARE = 0.15;
 
-/* Each area carries its own haircut AND a starting point, so switching the
-   workflow reshapes the whole model rather than just relabelling it. */
 const AREAS = [
   {
     id: "support",
@@ -108,8 +89,7 @@ const INPUTS = [
   {
     key: "investment",
     icon: Wallet,
-    // Stored in thousands so the slider step stays readable; the model
-    // multiplies back up to dollars.
+    // Stored in thousands so the slider step stays readable; the model multiplies back up to dollars.
     label: "Implementation budget",
     hint: "One-off build cost for the first production release",
     min: 10,
@@ -121,20 +101,12 @@ const INPUTS = [
 
 const usd = (n) => `$${Math.round(n).toLocaleString("en-US")}`;
 
-/**
- * Counts to `value` on every change rather than snapping, so dragging a
- * slider reads as the number responding to you. Duration is short enough that
- * a fast drag never queues up a visible lag.
- */
 function AnimatedNumber({ value, prefix = "", suffix = "", decimals = 0, className = "" }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const from = useRef(0);
   const [display, setDisplay] = useState(0);
 
-  // The sign belongs outside the currency symbol — "$-361,564" reads as a
-  // typo, and a negative three-year value is exactly the case a prospect
-  // needs to see clearly rather than squint at.
   const render = (n) => {
     const body =
       decimals > 0
@@ -148,8 +120,6 @@ function AnimatedNumber({ value, prefix = "", suffix = "", decimals = 0, classNa
     const controls = animate(from.current, value, {
       duration: 0.55,
       ease: "easeOut",
-      // `from` tracks every frame, not just completion — otherwise a change
-      // that lands mid-animation restarts from a stale value and jumps back.
       onUpdate: (v) => {
         from.current = v;
         setDisplay(v);
@@ -198,9 +168,6 @@ export default function RoiCalculator() {
     const runRate = investment * RUN_RATE_SHARE;
     const netAnnual = grossSavings - runRate;
 
-    // A workflow small enough that the run rate eats the saving has no
-    // payback at all — show a dash rather than a nonsense negative month
-    // count that the prospect will (correctly) laugh at.
     const paybackMonths = netAnnual > 0 ? investment / (netAnnual / 12) : null;
     const threeYearNet = netAnnual * 3 - investment;
     const roiMultiple = threeYearNet / investment;
@@ -215,8 +182,6 @@ export default function RoiCalculator() {
       paybackMonths,
       threeYearNet,
       roiMultiple,
-      // Bar widths: what the same workflow costs before and after, so the two
-      // bars are directly comparable rather than independently scaled.
       afterCost: manualCost - grossSavings + runRate,
     };
   }, [values, area]);
@@ -232,8 +197,7 @@ export default function RoiCalculator() {
 
   return (
     <section id="roi-calculator" className="relative overflow-hidden bg-inverse px-4 py-24 sm:px-6">
-      {/* Ambient blooms, matched to the dark CTA bands so the page keeps one
-          visual language for its inverse sections. */}
+      {/* Ambient blooms, matched to the dark CTA bands so the page keeps one visual language for its inverse sections. */}
       <div className="pointer-events-none absolute -left-24 top-10 h-80 w-80 animate-float rounded-full bg-accent-vivid/10 blur-3xl" />
       <div
         className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 animate-float rounded-full bg-brand/10 blur-3xl"
@@ -262,7 +226,7 @@ export default function RoiCalculator() {
           </p>
         </div>
 
-        {/* ---------------------------------------------- Workflow selector */}
+        {/* Workflow selector */}
         <div className="mt-12">
           <p className="mb-4 text-center font-mono text-xs uppercase tracking-[0.18em] text-inverse-fg/45">
             Which workflow are you automating?
@@ -298,7 +262,7 @@ export default function RoiCalculator() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
-          {/* ------------------------------------------------------ Inputs */}
+          {/* Inputs */}
           <div className="rounded-[1.75rem] border border-inverse-fg/10 bg-inverse-soft/70 p-6 backdrop-blur-sm md:p-9">
             <div className="space-y-8">
               {INPUTS.map(({ key, icon: Icon, label, hint, min, max, step, format }) => {
@@ -323,9 +287,6 @@ export default function RoiCalculator() {
                       </span>
                     </div>
 
-                    {/* The filled portion of the track is painted with a
-                        gradient sized to the current value — a plain range
-                        input cannot style the left half of its own track. */}
                     <input
                       id={`roi-${key}`}
                       type="range"
@@ -342,7 +303,7 @@ export default function RoiCalculator() {
               })}
             </div>
 
-            {/* ------------------------------------------- Before / after */}
+            {/* Before / after */}
             <div className="mt-9 border-t border-inverse-fg/10 pt-7">
               <p className="mb-5 font-mono text-xs uppercase tracking-[0.18em] text-inverse-fg/45">
                 Annual cost of this workflow
@@ -384,7 +345,7 @@ export default function RoiCalculator() {
             </div>
           </div>
 
-          {/* ----------------------------------------------------- Results */}
+          {/* Results */}
           <div className="flex flex-col rounded-[1.75rem] border border-accent-vivid/25 bg-gradient-to-br from-accent-vivid/10 via-inverse-card/60 to-brand/10 p-6 md:p-9">
             <div className="text-center">
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-inverse-fg/60 md:text-sm">
@@ -434,7 +395,7 @@ export default function RoiCalculator() {
                 {Math.round(area.efficiency * 100)}% automatable = {" "}
                 {Math.round(model.recoveredHours).toLocaleString("en-US")} hours at $
                 {values.rate}/hour. Build cost {usd(model.investment)}, run cost{" "}
-                {Math.round(RUN_RATE_SHARE * 100)}% of build per year. Directional only — we
+                {Math.round(RUN_RATE_SHARE * 100)}% of build per year. Directional only: we
                 replace these with your real numbers in the scoping call.
               </p>
             </div>

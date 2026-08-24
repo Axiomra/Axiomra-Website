@@ -4,13 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { process } from "../../data/generativeAiData";
 
-/**
- * Six delivery stages on a rail that fills as the reader scrolls.
- *
- * `offset` is measured against the middle of the viewport in both directions,
- * so the fill tracks the step the reader is actually looking at rather than
- * racing ahead to the bottom of the section.
- */
+/** Six delivery stages on a rail that fills as the reader scrolls. */
 export default function GenAiProcess() {
   const railRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -43,8 +37,6 @@ export default function GenAiProcess() {
           </div>
 
           <div ref={railRef} className="relative pl-12 md:pl-16">
-            {/* Track and its progress fill share the same geometry; only the
-                fill is transformed, so nothing re-lays-out during scroll. */}
             <div className="absolute bottom-0 left-[13px] top-2 w-px bg-line md:left-[17px]" aria-hidden="true">
               <motion.div
                 style={{ scaleY: fill, transformOrigin: "top" }}

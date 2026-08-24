@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="/src/assets/icon-teal.png" />
-  <title>Axiomra — Result-Driven AI Development Company</title>
+  <title>Axiomra: Result-Driven AI Development Company</title>
   <meta name="description" content="Axiomra builds production-grade AI systems that automate operations and deliver measurable ROI for SMBs and enterprises." />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Axiomra — Result-Driven AI Development Company" />
+  <meta property="og:title" content="Axiomra, Result-Driven AI Development Company" />
   <meta property="og:description" content="Production-grade AI systems that automate operations and deliver measurable ROI. 300+ projects delivered." />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -17,7 +17,7 @@
   <meta name="theme-color" content="#070E1C" media="(prefers-color-scheme: dark)" />
 
   <!--
-    Theme boot script — must run BEFORE first paint, otherwise the page
+    Theme boot script: must run BEFORE first paint, otherwise the page
     renders light and then snaps to dark ("flash of wrong theme"). It is
     inline and synchronous for exactly that reason.
     The storage key here mirrors THEME_STORAGE_KEY in src/theme/theme-context.js.
@@ -31,15 +31,22 @@
           (stored !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
         document.documentElement.classList.toggle("dark", isDark);
       } catch (e) {
-        /* Storage blocked — fall through to the light default. */
+        /* Storage blocked: fall through to the light default. */
       }
     })();
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=clash-grotesk@500,600,700&display=swap" rel="stylesheet">
+  <!--
+    Fonts are served from our own origin. The CDN versions cost two extra DNS
+    lookups and TLS handshakes before the first heading can paint, which is the
+    single worst offender on a shared host.
+
+    The two faces below carry the above-the-fold copy, so they are fetched in
+    parallel with the stylesheet rather than after it.
+  -->
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/satoshi-400.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/clash-grotesk-600.woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts/fonts.css">
 </head>
 <body>
   <div id="root"></div>

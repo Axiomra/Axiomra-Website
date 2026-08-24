@@ -13,13 +13,7 @@ const fadeUp = {
   }),
 };
 
-/**
- * Deliberately a DARK hero, unlike the AI Development page's light one.
- *
- * The two detail pages sit at the same depth in the site, so they are separated
- * by tone rather than by layout: this one opens on the morphing latent field,
- * which is the whole subject of the page rendered literally.
- */
+/** Deliberately a DARK hero, unlike the AI Development page's light one. */
 export default function GenAiHero() {
   const [main, chat, chip] = hero.images;
 
@@ -30,8 +24,6 @@ export default function GenAiHero() {
     >
       <GenAiCanvas variant="latent" className="opacity-[0.85]" />
 
-      {/* Two washes plus a floor gradient so the headline never sits on bare
-          particles — the field reads as depth, the copy stays legible. */}
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-inverse/80 via-inverse/45 to-inverse"
         aria-hidden="true"
@@ -144,8 +136,6 @@ export default function GenAiHero() {
           </motion.div>
         </div>
 
-        {/* Image collage rather than one hero shot: three generated-output
-            surfaces stacked in depth, drifting on separate delays. */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}

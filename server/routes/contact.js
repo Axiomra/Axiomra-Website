@@ -4,9 +4,7 @@ import Contact from "../models/Contact.js";
 
 const router = Router();
 
-// Submissions contain PII (name, email, company, message), so reading them back
-// requires an admin token. If ADMIN_API_TOKEN is unset we fail closed rather
-// than silently serving the whole table to the public internet.
+// Submissions contain PII (name, email, company, message), so reading them back requires an admin token.
 function requireAdmin(req, res, next) {
   const expected = process.env.ADMIN_API_TOKEN;
   if (!expected) {

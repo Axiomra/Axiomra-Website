@@ -10,8 +10,7 @@
     scroll-behavior: smooth;
   }
 
-  /* The page owns its background so a theme change covers the whole
-     viewport, including the overscroll area. */
+  /* The page owns its background so a theme change covers the whole viewport, including the overscroll area. */
   body {
     @apply bg-surface text-content font-body antialiased;
   }
@@ -39,8 +38,6 @@
   border-radius: 8px;
 }
 
-/* Gradient text keeps the fixed brand hues in both themes — it only sits
-   on surfaces where both stops stay legible. */
 .text-gradient {
   background: linear-gradient(90deg, #14d8c4 0%, #788be3 100%);
   -webkit-background-clip: text;
@@ -56,12 +53,6 @@
   scrollbar-width: none;
 }
 
-/* ── Justified body copy ──────────────────────────────────────────────────
-   Long-form paragraphs get flush left AND right edges so a copy column reads
-   as a solid block next to its image. Justification only switches on at `sm`
-   and up: on a narrow column the same rule opens rivers of white space
-   between words, so mobile stays ragged-right. `hyphens: auto` is what keeps
-   the word spacing tight enough for justification to look intentional. */
 .copy-justify {
   text-align: left;
 }
@@ -72,23 +63,12 @@
     text-justify: inter-word;
     -webkit-hyphens: auto;
     hyphens: auto;
-    /* Only break words of 8+ characters, and never leave fewer than 4 letters
-       before or 3 after the hyphen — without this the browser hyphenates
-       almost every line and the column reads like a dictionary column. */
     -webkit-hyphenate-limit-before: 4;
     -webkit-hyphenate-limit-after: 3;
     hyphenate-limit-chars: 8 4 3;
   }
 }
 
-/* ── AI Development page ambient backdrop ─────────────────────────────────
-   A single fixed layer behind the whole page rather than one per section, so
-   the aurora drifts continuously as you scroll instead of restarting at every
-   band. It sits at `z-index: -1`: above the body background, below every
-   section. The sections themselves are made slightly translucent (below) —
-   without that the backdrop would be painted over and never seen.
-   Cards, chips and the dark CTA bands stay fully opaque so text contrast is
-   never traded away for the effect. */
 
 .ai-dev-page {
   position: relative;
@@ -148,10 +128,6 @@
   to { background-position: 72px 72px; }
 }
 
-/* ── TechStack heading backdrop ───────────────────────────────────────────
-   Three stacked decorative layers behind the "Expertise In Advanced
-   Development Technologies" block. Kept in CSS (not Framer) so the
-   prefers-reduced-motion block above freezes them for free. */
 
 .tech-aurora {
   background:
@@ -201,12 +177,6 @@
   100% { transform: translateX(60%); opacity: 0; }
 }
 
-/* ── ROI calculator sliders ───────────────────────────────────────────────
-   A range input cannot style the portion of its track left of the thumb, so
-   the fill is a gradient whose stop is driven by --roi-fill, set inline from
-   the current value. Track and thumb rules must stay in SEPARATE selectors:
-   browsers drop the whole rule if they do not recognise one of the
-   pseudo-elements in a selector list. */
 
 .roi-slider {
   -webkit-appearance: none;

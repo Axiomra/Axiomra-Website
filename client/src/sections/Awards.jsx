@@ -23,8 +23,7 @@ export default function Awards() {
             whileHover={{ y: -6 }}
             className="group flex w-44 flex-col items-center gap-4 text-center"
           >
-            {/* The badge lights up on hover: brand fill, brand ring and a soft
-                glow behind it. */}
+            {/* The badge lights up on hover: brand fill, brand ring and a soft glow behind it. */}
             <div className="flex h-24 w-24 items-center justify-center rounded-full border border-line bg-surface-card shadow-card transition-all duration-300 group-hover:scale-105 group-hover:border-brand group-hover:bg-brand/10 group-hover:shadow-glow">
               <b.icon
                 size={42}

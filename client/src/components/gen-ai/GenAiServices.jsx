@@ -4,14 +4,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { services } from "../../data/generativeAiData";
 
-/**
- * The seven generative AI service lines.
- *
- * Not `ServiceRow`: these rows carry a "what you get" deliverables grid, which
- * is the part a buyer actually scans, and the listing row has no slot for it.
- * The image is framed by a gradient hairline and hung off a large index
- * watermark so the rows are countable at a glance while scrolling.
- */
+/** The seven generative AI service lines. */
 function ServiceBlock({ item, index }) {
   const imageFirst = index % 2 === 1;
   const number = String(index + 1).padStart(2, "0");
@@ -33,8 +26,6 @@ function ServiceBlock({ item, index }) {
         aria-hidden="true"
       />
 
-      {/* One-pixel gradient frame: `p-px` + gradient background is the cheapest
-          way to get a brand-coloured hairline that survives both themes. */}
       <div className="relative rounded-xl2 bg-cta-gradient p-px shadow-card">
         <div className="overflow-hidden rounded-[calc(1.25rem-1px)]">
           <img

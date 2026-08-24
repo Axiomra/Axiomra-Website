@@ -1,17 +1,10 @@
 import { motion } from "framer-motion";
 import { outcomes } from "../../data/generativeAiData";
 
-/**
- * The payoff band: six outcomes, each led by the number, on dark.
- *
- * Sits between process and "why us" so the reader hits the return figures
- * immediately after seeing how the work is run.
- */
+/** The payoff band: six outcomes, each led by the number, on dark. */
 export default function GenAiOutcomes() {
   return (
     <section id="generative-ai-outcomes" className="relative overflow-hidden bg-inverse py-20 md:py-28">
-      {/* Photo is decorative here — the copy carries the section, so it stays
-          low-contrast behind the grid rather than competing with it. */}
       <img
         src={outcomes.image}
         alt=""

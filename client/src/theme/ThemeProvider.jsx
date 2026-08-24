@@ -9,7 +9,7 @@ function readStoredTheme() {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
     return THEME_OPTIONS.includes(stored) ? stored : "system";
   } catch {
-    // Private mode / blocked storage — degrade to following the OS.
+    // Private mode / blocked storage, degrade to following the OS.
     return "system";
   }
 }
@@ -32,8 +32,7 @@ export default function ThemeProvider({ children }) {
     return () => mql.removeEventListener("change", onChange);
   }, []);
 
-  // The single place that touches the DOM. The boot script in index.html
-  // applies the same class before first paint; this keeps it in sync after.
+  // The single place that touches the DOM.
   useEffect(() => {
     document.documentElement.classList.toggle("dark", resolvedTheme === "dark");
   }, [resolvedTheme]);
@@ -49,8 +48,6 @@ export default function ThemeProvider({ children }) {
     }
   }, []);
 
-  // Toggling is relative to what is on screen, so the first click always
-  // visibly flips even when the current preference is "system".
   const toggleTheme = useCallback(() => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   }, [resolvedTheme, setTheme]);

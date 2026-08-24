@@ -212,8 +212,6 @@ const links = [
   { label: "Company", href: "/#process" },
 ];
 
-/** Internal route paths use react-router's Link; plain "#anchor" hrefs use
- *  a native <a> so same-page jumps and cross-page "/#id" full loads both work. */
 function NavItem({ href, className, onClick, children }) {
   if (href.startsWith("/") && !href.includes("#")) {
     return (

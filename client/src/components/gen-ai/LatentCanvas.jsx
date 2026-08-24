@@ -3,18 +3,12 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { makeDotTexture } from "../../lib/dotTexture";
 
-/* Morphing latent-space point cloud — the hero field for the Generative AI page.
-   A generative model is a thing that reshapes noise into structure, so the field
-   does exactly that: one cloud of points continuously re-forms itself into a
-   sphere, a torus knot, a lattice and a wave, then dissolves and starts again.
-
-   Loaded lazily (see GenAiCanvas) because three.js is ~900 kB and nothing above
-   the fold depends on it. */
+/* Morphing latent-space point cloud, the hero field for the Generative AI page. */
 
 const COUNT = 3200;
 /** Seconds a shape is held, including the morph into the next one. */
 const CYCLE = 5.5;
-/** Seconds of the cycle spent morphing — the rest is a hold. */
+/** Seconds of the cycle spent morphing, the rest is a hold. */
 const MORPH = 2.2;
 
 /** Evenly distributed points on a sphere (Fibonacci spiral). */
@@ -30,7 +24,7 @@ function sphereTarget(out, radius) {
   }
 }
 
-/** A (2,3) torus knot — reads as a folded manifold rather than a plain ring. */
+/** A (2,3) torus knot, reads as a folded manifold rather than a plain ring. */
 function knotTarget(out, scale) {
   const p = 2;
   const q = 3;
@@ -45,7 +39,7 @@ function knotTarget(out, scale) {
   }
 }
 
-/** A cube lattice — the "structured data" end of the morph. */
+/** A cube lattice, the "structured data" end of the morph. */
 function latticeTarget(out, size) {
   const side = Math.ceil(Math.cbrt(COUNT));
   const step = size / (side - 1);
@@ -59,7 +53,7 @@ function latticeTarget(out, size) {
   }
 }
 
-/** A rippling plane — the field "flattening out" between structures. */
+/** A rippling plane, the field "flattening out" between structures. */
 function waveTarget(out, size) {
   const side = Math.ceil(Math.sqrt(COUNT));
   const step = size / (side - 1);
@@ -72,7 +66,7 @@ function waveTarget(out, size) {
   }
 }
 
-/** Smoothstep — eases both ends of the morph so shapes settle instead of snapping. */
+/** Smoothstep, eases both ends of the morph so shapes settle instead of snapping. */
 function ease(t) {
   const c = Math.min(1, Math.max(0, t));
   return c * c * (3 - 2 * c);
@@ -99,8 +93,6 @@ function LatentField({ pointer }) {
   // Start on the sphere; every frame writes the blended target into this buffer.
   const positions = useMemo(() => shapes[0].slice(), [shapes]);
 
-  /* Colour is baked per point rather than per frame: the gradient runs along the
-     point's index, so every shape keeps the same teal → indigo sweep. */
   const colors = useMemo(() => {
     const arr = new Float32Array(COUNT * 3);
     const from = new THREE.Color("#14D8C4");
@@ -168,12 +160,13 @@ function LatentField({ pointer }) {
   );
 }
 
-export default function LatentCanvas() {
+export default function LatentCanvas({ frameloop = "always" }) {
   // Pointer parallax lives in a ref so moving the mouse never re-renders React.
   const pointer = useRef({ x: 0, y: 0 });
 
   return (
     <Canvas
+      frameloop={frameloop}
       camera={{ position: [0, 0, 13], fov: 50 }}
       dpr={[1, 1.5]}
       onPointerMove={(e) => {

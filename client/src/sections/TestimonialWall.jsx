@@ -3,7 +3,7 @@ import { Star, Quote } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 
 const wall = [
-  { name: "Adam Gawron", role: "Founder of Upstar", quote: "They communicated with me and we developed trust over the years. Project management is great — willingness to take any problem and get through it is impressive." },
+  { name: "Adam Gawron", role: "Founder of Upstar", quote: "They communicated with me and we developed trust over the years. Project management is great: willingness to take any problem and get through it is impressive." },
   { name: "Abdullah", role: "CEO & Founder, Navex", quote: "Commendable work! Collaborated and communicated in a highly professional manner and delivered exactly what was asked in the desired time frame." },
   { name: "Susana Raj", role: "CEO & Founder, Minmini", quote: "Impressed with their dedication, exceeding expectations on scope. Prioritized quality, delivered on time, and communicated professionally throughout." },
   { name: "Andreas Remy", role: "CEO & Founder, NEONMONKI", quote: "Extremely impressed with the AI and automation expertise in automating our tagging system. Efficient communication made the experience exceptional." },
@@ -19,8 +19,7 @@ const initials = (name) =>
 export default function TestimonialWall({ showHeading = true }) {
   return (
     <section className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
-      {/* The rating badge survives even when the host page drops the heading —
-          it is proof, not decoration. */}
+      {/* The rating badge survives even when the host page drops the heading, it is proof, not decoration. */}
       {showHeading ? (
         <SectionHeading
           className="mb-16"

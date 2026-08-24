@@ -12,13 +12,7 @@ const ICONS = {
   legal: Scale,
 };
 
-/**
- * Use cases grouped by business function rather than by industry.
- *
- * Industry tabs are the usual pattern here, and the AI Development page already
- * carries one — but nobody buys "generative AI for retail", they buy something
- * for a team that is drowning. Function is the axis the buyer sits on.
- */
+/** Use cases grouped by business function rather than by industry. */
 export default function GenAiUseCases() {
   return (
     <section id="generative-ai-use-cases" className="bg-surface py-20 md:py-28">

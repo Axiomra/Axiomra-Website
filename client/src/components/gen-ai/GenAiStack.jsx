@@ -2,12 +2,7 @@ import { motion } from "framer-motion";
 import SectionHeading from "../SectionHeading";
 import { techStack } from "../../data/generativeAiData";
 
-/**
- * Every stack group visible at once, next to a sticky image column.
- *
- * Tabs would hide five sixths of this list, and a CTO scanning for "do they
- * know pgvector" should not have to click four times to find out.
- */
+/** Every stack group visible at once, next to a sticky image column. */
 export default function GenAiStack() {
   return (
     <section id="generative-ai-stack" className="bg-surface-subtle py-20 md:py-28">

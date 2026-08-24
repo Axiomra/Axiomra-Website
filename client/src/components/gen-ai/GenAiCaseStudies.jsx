@@ -4,13 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { caseStudies } from "../../data/generativeAiData";
 
-/**
- * Three shipped projects as full cards — problem, solution, then the numbers.
- *
- * Deliberately not a carousel: the proof is the only part of the page a
- * sceptical buyer reads twice, and hiding two thirds of it behind an arrow
- * means most visitors see one example.
- */
+/** Three shipped projects as full cards, problem, solution, then the numbers. */
 export default function GenAiCaseStudies() {
   return (
     <section id="generative-ai-work" className="bg-surface-subtle py-20 md:py-28">
@@ -64,8 +58,6 @@ export default function GenAiCaseStudies() {
                 </p>
                 <p className="mt-2 text-base leading-relaxed text-content-dim">{item.solution}</p>
 
-                {/* `mt-auto` pins the numbers to the card floor so all three
-                    cards line up their results row regardless of copy length. */}
                 <dl className="mt-auto grid grid-cols-3 gap-px overflow-hidden rounded-xl2 border border-line bg-line pt-px">
                   {item.results.map((r) => (
                     <div key={r.label} className="bg-surface-inset px-3 py-5 text-center">
