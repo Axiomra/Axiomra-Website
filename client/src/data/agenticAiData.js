@@ -15,7 +15,8 @@ import caseSupport from "../assets/agentic-ai/case-study-support.jpg";
 import caseFinance from "../assets/agentic-ai/case-study-finance.jpg";
 import caseSupplyChain from "../assets/agentic-ai/case-study-supply-chain.jpg";
 import trendsImage from "../assets/agentic-ai/agentic-trends.jpg";
-import stackImage from "../assets/agentic-ai/agentic-stack.jpg";
+import stackImage from "../assets/agentic-ai/agent-runtime-infra.jpg";
+import toolCalling from "../assets/agentic-ai/agent-tool-calling.jpg";
 import humanInTheLoop from "../assets/agentic-ai/human-in-the-loop.jpg";
 import whyAxiomra from "../assets/agentic-ai/why-axiomra-agents.jpg";
 import agentRoi from "../assets/agentic-ai/agent-roi.jpg";
@@ -45,7 +46,7 @@ export const hero = {
   images: [
     {
       src: heroAgent,
-      alt: "Operations team watching an autonomous agent coordinate robotic cells across a control-room wall",
+      alt: "Operator watching an autonomous agent run a live process across a control-room dashboard wall",
     },
     {
       src: heroGraph,
@@ -53,7 +54,7 @@ export const hero = {
     },
     {
       src: heroChat,
-      alt: "Conversational agent interface handing structured replies back to several users",
+      alt: "Hands typing a prompt into an agent interface open on a laptop",
     },
   ],
 };
@@ -81,7 +82,7 @@ export const challenges = {
   body:
     "They are slow because every multi-step process still needs a human to open the next tab. Copy from the CRM, check the policy, wait for an approval, paste into the ERP. RPA scripts break the moment a field moves. Agentic AI removes the handoffs, not the people.",
   image: businessChallenges,
-  imageAlt: "Two leaders reviewing an autonomous decision graph projected across a boardroom wall",
+  imageAlt: "Leadership team reviewing a stalled process together in a boardroom",
   items: [
     {
       title: "Work stalls between systems, not inside them",
@@ -117,7 +118,7 @@ export const services = {
       id: "agent-development",
       title: "Agent Development & Integration",
       image: agentDevelopment,
-      imageAlt: "Engineer wiring a custom agent into internal APIs and business dashboards",
+      imageAlt: "Developer building agent integrations across a dual-monitor workstation",
       body:
         "We design and build custom agents around your actual workflows, tools, and data, not a template. From a single-task agent that clears one queue to a reasoning system that handles a whole process, each one is wired into your APIs, databases, and enterprise platforms so it is doing real work from the first week.",
       bullets: [
@@ -131,7 +132,7 @@ export const services = {
       id: "enterprise-deployment",
       title: "Enterprise Agent Deployment",
       image: enterpriseDeployment,
-      imageAlt: "Data-centre aisle carrying the runtime for containerised production agents",
+      imageAlt: "Rack-mounted servers running containerised production agents in a data centre",
       body:
         "Most AI projects die between prototype and production. We treat deployment as part of the build: agents are containerised, secured, monitored, and scaled across cloud, on-premise, or hybrid environments, with rollout staged so nothing in your current operation stops working while it happens.",
       bullets: [
@@ -145,7 +146,7 @@ export const services = {
       id: "conversational-agents",
       title: "Conversational AI Agents",
       image: conversationalAgents,
-      imageAlt: "Support agent handling several live conversations alongside an AI assistant panel",
+      imageAlt: "AI assistant interface answering a live conversation across voice, chat, and search",
       body:
         "Agents that go past chat: they read intent, retrieve current facts through RAG, take action across your systems, and hold context across a long conversation. Ideal for customer support, internal helpdesks, sales assistants, and HR, anywhere the answer is only useful if something happens afterwards.",
       bullets: [
@@ -159,7 +160,7 @@ export const services = {
       id: "rag-as-a-service",
       title: "RAG As A Service",
       image: ragAsAService,
-      imageAlt: "Faceted retrieval core glowing at the centre of a dark knowledge lattice",
+      imageAlt: "Search query running over an internal knowledge base to retrieve the source behind an answer",
       body:
         "Hallucinations kill enterprise adoption faster than anything else. Our RAG service connects your agents to your proprietary documents, databases, knowledge bases, and APIs, so every answer is grounded in a source your team can open, with retrieval quality measured rather than assumed.",
       bullets: [
@@ -173,7 +174,7 @@ export const services = {
       id: "agent-orchestration",
       title: "Intelligent Agent Orchestration",
       image: orchestration,
-      imageAlt: "Network of linked nodes representing specialised agents delegating work between them",
+      imageAlt: "Linked node graph on screen showing specialised agents delegating work between them",
       body:
         "Complex processes need several agents working in sync. We architect multi-agent systems where specialised agents collaborate, delegate, share context, and resolve conflicts: supervisor patterns, hand-off protocols, and shared memory built on LangGraph, CrewAI, and AutoGen to deliver outcomes no single agent reaches alone.",
       bullets: [
@@ -187,7 +188,7 @@ export const services = {
       id: "adaptive-automation",
       title: "Adaptive Workflow Automation",
       image: adaptiveWorkflow,
-      imageAlt: "Branching data routes rerouting themselves around a blocked path",
+      imageAlt: "Analyst working with an AI assistant that routes files and tasks through a workflow automatically",
       body:
         "Unlike rigid RPA, our agentic workflows adapt to changing conditions, handle exceptions with judgement instead of failing, and improve as they run. We replace brittle rule trees with agents that read context, decide, and execute end-to-end, and that flag rather than guess when something is genuinely new.",
       bullets: [
@@ -201,7 +202,7 @@ export const services = {
       id: "agent-governance",
       title: "Agent Observability & Governance",
       image: observability,
-      imageAlt: "Operations desk with live monitoring walls tracking every agent decision",
+      imageAlt: "Profiler trace on a laptop showing an agent run measured step by step",
       body:
         "Enterprise AI needs accountability. We give you real-time monitoring, full decision and tool-call audit trails, explainability dashboards, and human-in-the-loop controls, so your agents stay inside defined boundaries, satisfy your regulators, and stay reviewable long after go-live.",
       bullets: [
@@ -215,7 +216,7 @@ export const services = {
       id: "agent-strategy",
       title: "Agentic AI Strategy & Consulting",
       image: strategyConsulting,
-      imageAlt: "Consultant mapping the highest-return automation candidates across a process board",
+      imageAlt: "Team mapping automation candidates across a wall of sticky notes in a workshop",
       body:
         "Not sure where to start? Our consultants work with your leadership and technical teams to find the highest-ROI automation candidates, define the agent architecture around them, and sequence a phased plan, so you invest in the right agents, in the right order, and can stop after phase one if the numbers do not hold.",
       bullets: [
@@ -350,6 +351,93 @@ export const reactLoop = {
   },
 };
 
+/**
+ * The agent cycle, one lap at a time. `reactLoop` above answers "what is the
+ * architecture"; this answers "what happens on a single run", with the trace
+ * lines an operator would actually see in the log.
+ */
+export const workflow = {
+  eyebrow: "Inside one agent cycle",
+  titleAccent: "Perceive, Reason, Act, Learn",
+  titleLead: "Then Round Again Until The Job Is Done",
+  body:
+    "An agent is not one call to a model. It is a loop: it reads the situation, decides the next move and writes down why, executes against your real systems, then measures what actually happened and carries that forward. Follow one supplier invoice through all four stages.",
+  image: toolCalling,
+  imageAlt:
+    "Agent console surrounded by the dashboards, chat panel, and command prompt it drives on each pass of the loop",
+  imageCaption: "One loop, four stages, every pass logged",
+  loopBackLabel: "Repeat",
+  scenario: "Worked example: a supplier invoice that does not match its purchase order",
+  footnote:
+    "The loop exits on one of two conditions: the goal is met, or the agent hits a boundary you defined and escalates to a named human with its full reasoning attached. It does not guess its way past a wall.",
+  stages: [
+    {
+      key: "perceive",
+      title: "Perceive",
+      caption: "Read the whole situation",
+      body:
+        "The agent takes in the trigger and everything around it: the inbound document, the matching records in your systems, the contract it sits under, and how similar cases went before. Structured rows and unstructured PDFs both, retrieved with the source kept attached.",
+      points: [
+        "Event, webhook, schedule, or document triggers",
+        "Structured records and unstructured files together",
+        "Context retrieved through RAG, with citations kept",
+      ],
+      trace: [
+        "invoice.received   vendor=NORTHWIND  total=48,210",
+        "retrieve           po_44192 · contract_v3 · 6mo exceptions",
+      ],
+    },
+    {
+      key: "reason",
+      title: "Reason",
+      caption: "Decide the next move, in writing",
+      body:
+        "It compares what it sees against the goal and the rules it was given, breaks the job into ordered steps, and picks the next one. The rationale is written to the trace before anything executes, so a reviewer can disagree with the thinking rather than guess at it.",
+      points: [
+        "Goal decomposed into ordered, checkable steps",
+        "Policy, budget, and permission checks before acting",
+        "A written rationale stored against every decision",
+      ],
+      trace: [
+        "compare            po_44192 ↔ invoice → qty ok, unit_price +6.2%",
+        "plan               1 verify clause · 2 notify vendor · 3 hold payment",
+      ],
+    },
+    {
+      key: "act",
+      title: "Act",
+      caption: "Call the real tools",
+      body:
+        "The agent executes through a permissioned tool layer wired into your ERP, CRM, ticketing, and data warehouse. Routine steps go straight through. Anything above the threshold you set stops at an approval gate with a named owner, not a silent auto-approve.",
+      points: [
+        "Function calls over your APIs, never screen scraping",
+        "Scoped credentials per agent and per action",
+        "Approval gate on every high-stakes step",
+      ],
+      trace: [
+        "tool               erp.hold_payment(inv_88301) → ok",
+        "gate               >25k requires approval → queued to finance lead",
+      ],
+    },
+    {
+      key: "learn",
+      title: "Learn",
+      caption: "Close the loop on the outcome",
+      body:
+        "It reads the real result, compares it against what it expected, and feeds the gap back: a corrected example, a tightened threshold, a new case in the evaluation suite. Every human correction is captured once and reused, so next month's run is measurably better than this one.",
+      points: [
+        "Outcome measured against expectation on every run",
+        "Human corrections captured as training examples",
+        "Regression suite re-run before any change ships",
+      ],
+      trace: [
+        "outcome            resolved in 4m12s (manual baseline 3d)",
+        "eval               price_tolerance 5% → 3% · suite 128/130 pass",
+      ],
+    },
+  ],
+};
+
 export const caseStudies = {
   eyebrow: "Real work, real numbers",
   titleLead: "Agentic AI Systems",
@@ -361,7 +449,7 @@ export const caseStudies = {
       name: "Customer operations",
       title: "Support Agent For A Subscription Platform",
       image: caseSupport,
-      imageAlt: "Support desk running an AI agent that resolves tickets end to end",
+      imageAlt: "Support agent working a live queue beside the AI agent that resolves tickets end to end",
       problem:
         "A subscription business was answering the same forty questions forever, and its chatbot could explain policy but never execute it. Every refund, plan change, and address update still landed in a human queue.",
       solution:
@@ -376,7 +464,7 @@ export const caseStudies = {
       name: "Finance operations",
       title: "Invoice And Exception Agent For A Distributor",
       image: caseFinance,
-      imageAlt: "Finance lead reviewing an agent-generated exception queue on a laptop",
+      imageAlt: "Advisors reviewing an agent-generated exception report in front of a live market board",
       problem:
         "Three-way matching between invoices, purchase orders, and receipts was manual. Exceptions piled up at month end, and the team was closing four days late every single quarter.",
       solution:
@@ -391,7 +479,7 @@ export const caseStudies = {
       name: "Supply chain",
       title: "Multi-Agent Replenishment For A Retail Group",
       image: caseSupplyChain,
-      imageAlt: "Logistics network with agents monitoring stock, suppliers, and shipping lanes",
+      imageAlt: "Warehouse operator checking stock the agents track across suppliers and shipping lanes",
       problem:
         "Stockouts were being noticed after they happened. Buyers watched dashboards, suppliers were compared by hand, and a delayed shipment surfaced days late.",
       solution:
@@ -515,7 +603,7 @@ export const industries = {
   subtitle:
     "We build agent systems for businesses across industries. Each one is designed around the specific workflows, data, and constraints of that sector, because a healthcare agent and a retail agent fail in completely different ways.",
   image: industriesImage,
-  imageAlt: "Robotic hand extending across a city skyline representing cross-industry agent deployment",
+  imageAlt: "Freight yard seen from above, one of the many industries running agents in production",
   items: [
     {
       name: "Healthcare",
@@ -639,7 +727,7 @@ export const techStack = {
   subtitle:
     "We build agent systems on proven, production-grade tooling. Every choice in this stack is made for reliability, observability, and how well it fits the agent architecture, not for how new it is.",
   image: stackImage,
-  imageAlt: "Engineering floor running the platform layer behind Axiomra's agent deployments",
+  imageAlt: "Agent runtime running on rack infrastructure inside a monitored data centre",
   groups: [
     {
       name: "Agent frameworks",
@@ -732,7 +820,7 @@ export const outcomes = {
   titleAccent: "What Changes",
   titleLead: "Once The Agents Are Running",
   image: agentRoi,
-  imageAlt: "",
+  imageAlt: "Lead reviewing agent performance on a wall-mounted operations dashboard",
   items: [
     {
       value: "60%",
@@ -781,7 +869,7 @@ export const whyUs = {
     "Plenty of companies say they build AI agents. Far fewer have the experience, the process, and the commitment to make them work in production, and to still be there sixty days after launch when the real edge cases arrive.",
   ctaText: "Book A Free Agentic AI Consultation",
   image: whyAxiomra,
-  imageAlt: "Axiomra team working through an agent architecture with a client",
+  imageAlt: "Axiomra team working through an agent architecture against live dashboards with a client",
   humanImage: humanInTheLoop,
   humanImageAlt: "Human hand and robotic hand meeting over a shared decision",
   stats: [

@@ -13,6 +13,7 @@
     "lint": "cd client && npm run lint"
   },
   "dependencies": {
+    "gsap": "^3.15.0",
     "react-router-dom": "^7.18.2"
   }
 }

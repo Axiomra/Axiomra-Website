@@ -1,53 +1,43 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-
 import SectionHeading from "../SectionHeading";
 import { outcomes } from "../../data/nlpData";
 
-/** Sticky intro on the left, self-stacking outcome cards on the right. */
-const TOP_BASE_REM = 7; // clears the fixed navbar
-const TOP_STEP_REM = 1.75;
+/**
+ * Sticky intro on the left. On the right each card pins one header-height lower
+ * than the last, so scrolling folds the read cards into a single stacked pile
+ * with only the live card open.
+ */
+const TOP_BASE_REM = 5.5; // clears the fixed navbar
+const HEADER_REM = 4; // visible height of a folded card
 
 function OutcomeCard({ item, index }) {
-  const ref = useRef(null);
-
-  // Dims the card as the next one climbs over it, so the stack reads as depth instead of a flat pile.
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.28", "end 0.1"],
-  });
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.55]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.965]);
-
   return (
     <div
-      ref={ref}
       className="sticky"
-      style={{ top: `${TOP_BASE_REM + index * TOP_STEP_REM}rem` }}
+      style={{ top: `${TOP_BASE_REM + index * HEADER_REM}rem` }}
     >
-      <motion.article
-        style={{ scale }}
-        className="group origin-top overflow-hidden rounded-[1.5rem] border border-line bg-surface-card shadow-card transition-colors duration-300 hover:border-brand"
-      >
-        <motion.div style={{ opacity }} className="p-7 md:p-10">
-          <div className="flex items-start justify-between gap-6">
-            <h3 className="font-display text-2xl font-semibold leading-snug text-content transition-colors duration-300 group-hover:text-brand md:text-3xl">
-              {item.title}
-            </h3>
-            <span
-              className="shrink-0 font-display text-4xl font-semibold tabular-nums text-accent md:text-5xl"
-              aria-hidden="true"
-            >
-              {String(index + 1).padStart(2, "0")}
-            </span>
-          </div>
+      <article className="group overflow-hidden rounded-[1.5rem] border border-line bg-surface-card shadow-card transition-colors duration-300 hover:border-brand">
+        <div
+          className="flex items-center justify-between gap-6 px-6 md:px-9"
+          style={{ height: `${HEADER_REM}rem` }}
+        >
+          <h3 className="font-display text-xl font-semibold leading-snug text-content transition-colors duration-300 group-hover:text-brand md:text-2xl">
+            {item.title}
+          </h3>
+          <span
+            className="shrink-0 font-display text-3xl font-semibold tabular-nums text-accent md:text-4xl"
+            aria-hidden="true"
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+        </div>
 
-          <p className="copy-justify mt-5 text-base leading-relaxed text-content-dim md:text-lg">
+        <div className="border-t border-line/70 px-6 pb-6 pt-5 md:px-9 md:pb-8">
+          <p className="copy-justify text-base leading-relaxed text-content-dim md:text-lg">
             {item.body}
           </p>
 
           {item.metric && (
-            <div className="mt-7 flex items-baseline gap-3 border-t border-line pt-5">
+            <div className="mt-5 flex items-baseline gap-3 border-t border-line pt-4">
               <span className="font-display text-3xl font-semibold text-brand md:text-4xl">
                 {item.metric}
               </span>
@@ -56,8 +46,8 @@ function OutcomeCard({ item, index }) {
               </span>
             </div>
           )}
-        </motion.div>
-      </motion.article>
+        </div>
+      </article>
     </div>
   );
 }
@@ -66,21 +56,23 @@ export default function NlpOutcomes() {
   return (
     <section
       id="nlp-outcomes"
-      className="relative scroll-mt-24 overflow-hidden bg-surface py-20 md:py-28"
+      className="relative isolate scroll-mt-24 bg-surface py-16 md:py-20"
     >
-      <img
-        src={outcomes.image}
-        alt={outcomes.imageAlt}
-        loading="lazy"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.06]"
-      />
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-surface via-surface/70 to-surface"
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
         aria-hidden="true"
-      />
+      >
+        <img
+          src={outcomes.image}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover opacity-[0.06]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/70 to-surface" />
+      </div>
 
-      <div className="relative z-10 mx-auto max-w-8xl px-6">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
+      <div className="mx-auto max-w-8xl px-6">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <SectionHeading
               align="left"
@@ -95,11 +87,11 @@ export default function NlpOutcomes() {
             />
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {outcomes.items.map((item, i) => (
               <OutcomeCard key={item.title} item={item} index={i} />
             ))}
-            <div aria-hidden="true" className="h-[35vh]" />
+            <div aria-hidden="true" className="h-[14vh]" />
           </div>
         </div>
       </div>

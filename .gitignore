@@ -39,3 +39,7 @@ node_modules/.vite/
 
 # Unused stock video master. Too large for git; keep it local only.
 client/src/assets/agentic-ai/new/*.mp4
+
+# Images no longer referenced by any component. Kept on disk for reference,
+# out of git so they never ship to Vercel. Recoverable from history if needed.
+unused-images/

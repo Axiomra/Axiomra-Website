@@ -4,6 +4,7 @@ import AgenticHero from "../components/agentic-ai/AgenticHero";
 import AgenticFrameworkBar from "../components/agentic-ai/AgenticFrameworkBar";
 import AgenticChallenges from "../components/agentic-ai/AgenticChallenges";
 import AgenticServices from "../components/agentic-ai/AgenticServices";
+import AgenticWorkflow from "../components/agentic-ai/AgenticWorkflow";
 import AgenticAgentTypes from "../components/agentic-ai/AgenticAgentTypes";
 import AgenticReasonLoop from "../components/agentic-ai/AgenticReasonLoop";
 import AgenticCaseStudies from "../components/agentic-ai/AgenticCaseStudies";
@@ -39,6 +40,7 @@ export default function AgenticAiPage() {
       <AgenticFrameworkBar />
       <AgenticChallenges />
       <AgenticServices />
+      <AgenticWorkflow />
       <AgenticAgentTypes />
       <AgenticReasonLoop />
 
