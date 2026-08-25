@@ -1,0 +1,12 @@
+# Vercel installs and builds on its side, so uploading either of these only
+# slows the deploy down.
+node_modules
+dist
+
+# The 1.6 GB ProRes master for nlp-hero.mp4. Nothing imports it; the shipped
+# encode lives in public/media.
+*.mov
+*.ProRes.mp4
+
+.vercel
+.env*

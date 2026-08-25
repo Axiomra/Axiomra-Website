@@ -21,10 +21,11 @@ app.use(
     origin(origin, callback) {
       // Same-origin and server-to-server calls send no Origin header.
       if (!origin) return callback(null, true);
-      if (allowedOrigins.includes("*") || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      return callback(new Error(`Origin ${origin} is not allowed.`));
+      const ok = allowedOrigins.includes("*") || allowedOrigins.includes(origin);
+      // Returning false rather than an Error omits the CORS headers, which is
+      // what the browser needs to see. Throwing would surface as a 500 and
+      // make a simple misconfiguration look like a server fault.
+      return callback(null, ok);
     },
   })
 );
