@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { timingSafeEqual } from "crypto";
 import Contact from "../models/Contact.js";
+import { sendContactNotification } from "../mailer.js";
 
 const router = Router();
 
@@ -31,7 +32,12 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Please provide a valid email." });
     }
     const contact = await Contact.create({ name, email, company, service, message });
-    return res.status(201).json({ success: true, id: contact._id });
+    // Awaited on purpose: a serverless function is frozen the moment the
+    // response is sent, so a fire-and-forget send would never reach Gmail.
+    // sendContactNotification swallows its own errors, so a mail outage
+    // still returns 201 for a lead that is already persisted.
+    const notified = await sendContactNotification(contact);
+    return res.status(201).json({ success: true, id: contact._id, notified });
   } catch (err) {
     console.error("Contact creation failed:", err.message);
     return res.status(500).json({ error: "Something went wrong. Please try again." });

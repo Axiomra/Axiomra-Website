@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import rateLimit from "express-rate-limit";
 import contactRoutes from "./routes/contact.js";
 import { connectDB } from "./db.js";
+import { mailerConfigured } from "./mailer.js";
 
 dotenv.config();
 
@@ -37,7 +38,11 @@ app.use(express.json());
 app.set("trust proxy", 1);
 app.use("/api", rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 
-app.get("/api/health", (req, res) => res.json({ status: "ok" }));
+// `mailer` makes a missing GMAIL/APP_PASSWORD visible without submitting a
+// real lead and waiting to see whether an email lands.
+app.get("/api/health", (req, res) =>
+  res.json({ status: "ok", mailer: mailerConfigured() ? "configured" : "disabled" })
+);
 
 // Connect lazily: a cold start should not pay for Mongo on /api/health.
 app.use("/api/contact", async (req, res, next) => {
