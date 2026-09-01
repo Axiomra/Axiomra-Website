@@ -1,13 +1,44 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, CheckCircle2, Play, Mail, User, MessageSquare, ShieldCheck, Clock, Crown, UserCheck } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Play, Mail, User, MessageSquare, ShieldCheck, Clock, Crown, UserCheck, Tag, Layers } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
+import PhoneField from "../components/PhoneField";
+import SelectField from "../components/SelectField";
+import FieldError from "../components/FieldError";
+import SubmissionModal from "../components/SubmissionModal";
+import services from "../data/servicesData";
+import { DEFAULT_COUNTRY } from "../data/countryCodes";
 import { INTRO_VIDEO } from "../lib/media";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import { submitContact } from "../lib/contactApi";
+import {
+  formatPhone,
+  validateContactForm,
+  validateEmail,
+  validateMessage,
+  validateName,
+  validatePhone,
+  validateSubject,
+} from "../lib/validation";
 
 const FIELD_CLASS =
   "w-full rounded-xl border border-line-strong bg-inverse-soft py-3.5 pl-11 pr-4 text-base text-inverse-fg outline-none transition-all placeholder:text-inverse-fg/35 focus:border-gold/70 focus:ring-4 focus:ring-gold/15";
+
+const LABEL_CLASS = "mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-inverse-fg/70";
+
+const FIELDS = ["name", "email", "phone", "subject", "message"];
+
+const SERVICE_OPTIONS = services.map((s) => s.title);
+
+/* Fields fade up one after another so the taller form reads as a sequence
+   rather than a wall that appears all at once. */
+const reveal = (i) => ({
+  initial: { opacity: 0, y: 14 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-40px" },
+  transition: { duration: 0.45, ease: "easeOut", delay: 0.12 + i * 0.07 },
+});
+
+const EMPTY_FORM = { name: "", email: "", phone: "", subject: "", service: "", message: "" };
 
 function IntroVideo() {
   const [playing, setPlaying] = useState(false);
@@ -51,28 +82,98 @@ function IntroVideo() {
   );
 }
 
-export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle");
+/* One validator per field so blur can check just the field that was left. */
+const VALIDATORS = {
+  name: (form) => validateName(form.name),
+  email: (form) => validateEmail(form.email),
+  phone: (form, country) => validatePhone(form.phone, country),
+  subject: (form) => validateSubject(form.subject),
+  message: (form) => validateMessage(form.message),
+};
 
-  const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+export default function Contact() {
+  const [form, setForm] = useState(EMPTY_FORM);
+  const [country, setCountry] = useState(DEFAULT_COUNTRY);
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState("");
+  const [sent, setSent] = useState(null);
+  const formRef = useRef(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    // Only re-check a field that is already flagged: validating as someone
+    // types their first character would call every half-typed email invalid.
+    setErrors((prev) => {
+      if (!prev[name]) return prev;
+      const next = VALIDATORS[name]?.({ ...form, [name]: value }, country) || "";
+      const copy = { ...prev };
+      if (next) copy[name] = next;
+      else delete copy[name];
+      return copy;
+    });
+  };
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    const message = VALIDATORS[name]?.(form, country) || "";
+    setErrors((prev) => {
+      const copy = { ...prev };
+      if (message) copy[name] = message;
+      else delete copy[name];
+      return copy;
+    });
+  };
+
+  // Switching country changes the expected digit count, so an already-typed
+  // number has to be re-checked against the new plan.
+  const handleCountryChange = (next) => {
+    setCountry(next);
+    setErrors((prev) => {
+      const message = validatePhone(form.phone, next);
+      const copy = { ...prev };
+      if (message) copy.phone = message;
+      else delete copy.phone;
+      return copy;
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const found = validateContactForm(form, country, { fields: FIELDS });
+    if (Object.keys(found).length) {
+      setErrors(found);
+      setStatus("idle");
+      setError("");
+      const first = FIELDS.find((f) => found[f]);
+      formRef.current?.querySelector(`[name="${first}"]`)?.focus();
+      return;
+    }
+
     setStatus("loading");
+    setError("");
+    // The dial code lives outside the text input, so it is joined back on just
+    // before submit; the team needs one dialable string, not two halves.
+    const payload = { ...form, phone: formatPhone(form.phone, country) };
     try {
-      const res = await fetch(`${API_URL}/api/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error("failed");
+      await submitContact(payload);
       setStatus("success");
-      setForm({ name: "", email: "", message: "" });
-    } catch {
+      // Snapshot first: the confirmation replays the payload, and the reset
+      // below would otherwise empty it out.
+      setSent(payload);
+      setForm(EMPTY_FORM);
+      setCountry(DEFAULT_COUNTRY);
+      setErrors({});
+    } catch (err) {
+      setError(err.message);
       setStatus("error");
     }
   };
+
+  const describe = (field) => (errors[field] ? `contact-${field}-error` : undefined);
+  const fieldClass = (field) => `${FIELD_CLASS} ${errors[field] ? "!border-danger" : ""}`;
 
   return (
     <section id="contact" className="relative overflow-hidden px-4 py-24 sm:px-6">
@@ -131,31 +232,35 @@ export default function Contact() {
         </motion.div>
 
         <motion.form
+          ref={formRef}
+          noValidate
           onSubmit={handleSubmit}
           initial={{ opacity: 0, x: 24 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative overflow-hidden rounded-xl2 border border-inverse-card bg-inverse-card p-9 shadow-card"
+          className="relative rounded-xl2 border border-inverse-card bg-inverse-card p-9 shadow-card"
         >
-          {/* Gold-to-brand hairline seals the card as the section's centerpiece. */}
-          <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-gold via-[#f7cf7e] to-brand" />
-          {/* Warm gold + cool brand glows keep the dark card from going flat. */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(520px 260px at 12% 0%, rgba(224,150,16,0.10), transparent 60%), radial-gradient(420px 300px at 100% 100%, rgba(20,216,196,0.10), transparent 60%)",
-            }}
-          />
-          {/* Faint crown watermark, bottom-right, premium without shouting. */}
-          <Crown
-            size={150}
-            strokeWidth={0.5}
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-8 -right-8 rotate-[-12deg] text-inverse-fg/5"
-          />
+          {/* Decoration lives in its own clipped layer: the form itself must not
+              clip, or the country / category dropdowns get cut off at the edge. */}
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl2">
+            {/* Gold-to-brand hairline seals the card as the section's centerpiece. */}
+            <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-gold via-[#f7cf7e] to-brand" />
+            {/* Warm gold + cool brand glows keep the dark card from going flat. */}
+            <span
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  "radial-gradient(520px 260px at 12% 0%, rgba(224,150,16,0.10), transparent 60%), radial-gradient(420px 300px at 100% 100%, rgba(20,216,196,0.10), transparent 60%)",
+              }}
+            />
+            {/* Faint crown watermark, bottom-right, premium without shouting. */}
+            <Crown
+              size={150}
+              strokeWidth={0.5}
+              className="absolute -bottom-8 -right-8 rotate-[-12deg] text-inverse-fg/5"
+            />
+          </span>
 
           <div className="relative">
             <div className="mb-8 flex flex-wrap items-start justify-between gap-3">
@@ -169,9 +274,9 @@ export default function Contact() {
             </div>
 
             <div className="space-y-5">
-              <div className="grid gap-5 sm:grid-cols-2">
+              <motion.div {...reveal(0)} className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="contact-name" className="mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-inverse-fg/70">First Name</label>
+                  <label htmlFor="contact-name" className={LABEL_CLASS}>First Name</label>
                   <div className="relative">
                     <User size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gold/70" aria-hidden="true" />
                     <input
@@ -181,13 +286,17 @@ export default function Contact() {
                       autoComplete="given-name"
                       value={form.name}
                       onChange={handleChange}
+                      onBlur={handleBlur}
+                      aria-invalid={errors.name ? true : undefined}
+                      aria-describedby={describe("name")}
                       placeholder="E.g. John"
-                      className={FIELD_CLASS}
+                      className={fieldClass("name")}
                     />
                   </div>
+                  <FieldError id="contact-name-error" message={errors.name} />
                 </div>
                 <div>
-                  <label htmlFor="contact-email" className="mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-inverse-fg/70">Business Email</label>
+                  <label htmlFor="contact-email" className={LABEL_CLASS}>Business Email</label>
                   <div className="relative">
                     <Mail size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gold/70" aria-hidden="true" />
                     <input
@@ -198,15 +307,70 @@ export default function Contact() {
                       autoComplete="email"
                       value={form.email}
                       onChange={handleChange}
+                      onBlur={handleBlur}
+                      aria-invalid={errors.email ? true : undefined}
+                      aria-describedby={describe("email")}
                       placeholder="E.g. john@doe.com"
-                      className={FIELD_CLASS}
+                      className={fieldClass("email")}
                     />
                   </div>
+                  <FieldError id="contact-email-error" message={errors.email} />
                 </div>
-              </div>
+              </motion.div>
 
-              <div>
-                <label htmlFor="contact-message" className="mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-inverse-fg/70">Message</label>
+              <motion.div {...reveal(1)} className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="contact-phone" className={LABEL_CLASS}>Phone Number</label>
+                  <PhoneField
+                    id="contact-phone"
+                    variant="dark"
+                    country={country}
+                    onCountryChange={handleCountryChange}
+                    value={form.phone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    invalid={Boolean(errors.phone)}
+                    describedBy={describe("phone")}
+                  />
+                  <FieldError id="contact-phone-error" message={errors.phone} />
+                </div>
+                <div>
+                  <label htmlFor="contact-subject" className={LABEL_CLASS}>Subject</label>
+                  <div className="relative">
+                    <Tag size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gold/70" aria-hidden="true" />
+                    <input
+                      id="contact-subject"
+                      name="subject"
+                      value={form.subject}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      maxLength={120}
+                      aria-invalid={errors.subject ? true : undefined}
+                      aria-describedby={describe("subject")}
+                      placeholder="E.g. AI chatbot for support"
+                      className={fieldClass("subject")}
+                    />
+                  </div>
+                  <FieldError id="contact-subject-error" message={errors.subject} />
+                </div>
+              </motion.div>
+
+              <motion.div {...reveal(2)}>
+                <label htmlFor="contact-service" className={LABEL_CLASS}>Service Category</label>
+                <SelectField
+                  id="contact-service"
+                  name="service"
+                  variant="dark"
+                  icon={Layers}
+                  value={form.service}
+                  onChange={handleChange}
+                  options={SERVICE_OPTIONS}
+                  placeholder="Select a category"
+                />
+              </motion.div>
+
+              <motion.div {...reveal(3)}>
+                <label htmlFor="contact-message" className={LABEL_CLASS}>Message</label>
                 <div className="relative">
                   <MessageSquare size={17} className="pointer-events-none absolute left-4 top-4 text-gold/70" aria-hidden="true" />
                   <textarea
@@ -214,12 +378,17 @@ export default function Contact() {
                     name="message"
                     value={form.message}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     rows={5}
+                    maxLength={4000}
+                    aria-invalid={errors.message ? true : undefined}
+                    aria-describedby={describe("message")}
                     placeholder="Project description"
-                    className={`${FIELD_CLASS} resize-none`}
+                    className={`${fieldClass("message")} resize-none`}
                   />
                 </div>
-              </div>
+                <FieldError id="contact-message-error" message={errors.message} />
+              </motion.div>
 
               <motion.button
                 whileHover={{ scale: 1.02 }}
@@ -231,13 +400,14 @@ export default function Contact() {
                 {status === "loading" ? "Sending..." : "Request VIP Consultation"} {status !== "loading" && <ArrowUpRight size={18} />}
               </motion.button>
 
+              {/* Success is confirmed in the modal below; this line is left for
+                  failures and for the screen-reader announcement. */}
               <p role="status" aria-live="polite" className="text-sm">
-                {status === "success" && (
-                  <span className="flex items-center gap-1.5 text-accent-vivid">
-                    <CheckCircle2 size={16} /> Thanks: we&rsquo;ll be in touch within 24 hours.
-                  </span>
+                {status === "success" && <span className="sr-only">Message sent.</span>}
+                {status === "error" && <span className="text-danger">{error}</span>}
+                {Object.keys(errors).length > 0 && (
+                  <span className="text-danger">Please fix the highlighted fields above.</span>
                 )}
-                {status === "error" && <span className="text-danger">Something went wrong. Please try again.</span>}
               </p>
 
               <div className="grid gap-3 border-t border-line-strong/50 pt-6 sm:grid-cols-3">
@@ -259,6 +429,15 @@ export default function Contact() {
         </motion.form>
         </div>
       </div>
+
+      <SubmissionModal
+        open={status === "success" && Boolean(sent)}
+        submission={sent}
+        onClose={() => {
+          setStatus("idle");
+          setSent(null);
+        }}
+      />
     </section>
   );
 }

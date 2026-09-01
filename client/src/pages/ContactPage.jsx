@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   Briefcase,
   CalendarClock,
-  CheckCircle2,
   Clock,
   FileSignature,
   Handshake,
@@ -13,15 +12,31 @@ import {
   Phone,
   Rocket,
   ShieldCheck,
+  Tag,
+  Layers,
   Users,
 } from "lucide-react";
 
 import NetworkBackground from "../components/NetworkBackground";
 import GradientCTA from "../components/GradientCTA";
 import SectionHeading from "../components/SectionHeading";
+import PhoneField from "../components/PhoneField";
+import SelectField from "../components/SelectField";
+import FieldError from "../components/FieldError";
+import SubmissionModal from "../components/SubmissionModal";
 import services from "../data/servicesData";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import { DEFAULT_COUNTRY } from "../data/countryCodes";
+import { submitContact } from "../lib/contactApi";
+import {
+  formatPhone,
+  validateCompany,
+  validateContactForm,
+  validateEmail,
+  validateMessage,
+  validateName,
+  validatePhone,
+  validateSubject,
+} from "../lib/validation";
 
 const WHATSAPP_URL = "https://wa.me/16575203444";
 const PHONE = "+1 (657) 520-3444";
@@ -116,51 +131,139 @@ const FIELD_CLASS =
 const LABEL_CLASS =
   "mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-content-faint";
 
-function ContactForm() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    company: "",
-    service: "",
-    message: "",
-  });
-  const [status, setStatus] = useState("idle");
+const EMPTY_FORM = {
+  name: "",
+  email: "",
+  phone: "",
+  company: "",
+  subject: "",
+  service: "",
+  message: "",
+};
 
-  const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+/* Staggered reveal so the field grid arrives in reading order. */
+const reveal = (i) => ({
+  initial: { opacity: 0, y: 14 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-40px" },
+  transition: { duration: 0.45, ease: "easeOut", delay: 0.15 + i * 0.06 },
+});
+
+const FIELDS = ["name", "email", "phone", "company", "subject", "message"];
+
+/* One validator per field so blur can check just the field that was left. */
+const VALIDATORS = {
+  name: (form) => validateName(form.name),
+  email: (form) => validateEmail(form.email),
+  phone: (form, country) => validatePhone(form.phone, country),
+  company: (form) => validateCompany(form.company),
+  subject: (form) => validateSubject(form.subject),
+  message: (form) => validateMessage(form.message),
+};
+
+function ContactForm() {
+  const [form, setForm] = useState(EMPTY_FORM);
+  const [country, setCountry] = useState(DEFAULT_COUNTRY);
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState("");
+  const [sent, setSent] = useState(null);
+  const formRef = useRef(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    // Only re-check a field that is already flagged: validating from the first
+    // keystroke would call every half-typed email invalid.
+    setErrors((prev) => {
+      if (!prev[name]) return prev;
+      const next = VALIDATORS[name]?.({ ...form, [name]: value }, country) || "";
+      const copy = { ...prev };
+      if (next) copy[name] = next;
+      else delete copy[name];
+      return copy;
+    });
+  };
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    const message = VALIDATORS[name]?.(form, country) || "";
+    setErrors((prev) => {
+      const copy = { ...prev };
+      if (message) copy[name] = message;
+      else delete copy[name];
+      return copy;
+    });
+  };
+
+  // Switching country changes the expected digit count, so an already-typed
+  // number has to be re-checked against the new plan.
+  const handleCountryChange = (next) => {
+    setCountry(next);
+    setErrors((prev) => {
+      const message = validatePhone(form.phone, next);
+      const copy = { ...prev };
+      if (message) copy.phone = message;
+      else delete copy.phone;
+      return copy;
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const found = validateContactForm(form, country, { fields: FIELDS });
+    if (Object.keys(found).length) {
+      setErrors(found);
+      setStatus("idle");
+      setError("");
+      const first = FIELDS.find((f) => found[f]);
+      formRef.current?.querySelector(`[name="${first}"]`)?.focus();
+      return;
+    }
+
     setStatus("loading");
+    setError("");
+    // Dial code is held outside the text input; rejoin it so the team gets one
+    // dialable string.
+    const payload = { ...form, phone: formatPhone(form.phone, country) };
     try {
-      const res = await fetch(`${API_URL}/api/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error("failed");
+      await submitContact(payload);
       setStatus("success");
-      setForm({ name: "", email: "", company: "", service: "", message: "" });
-    } catch {
+      // Snapshot first: the confirmation replays the payload, and the reset
+      // below would otherwise empty it out.
+      setSent(payload);
+      setForm(EMPTY_FORM);
+      setCountry(DEFAULT_COUNTRY);
+      setErrors({});
+    } catch (err) {
+      setError(err.message);
       setStatus("error");
     }
   };
 
+  const describe = (field) => (errors[field] ? `cp-${field}-error` : undefined);
+  const fieldClass = (field) => `${FIELD_CLASS} ${errors[field] ? "!border-danger" : ""}`;
+
   return (
     <motion.form
+      ref={formRef}
+      noValidate
       onSubmit={handleSubmit}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-      className="relative overflow-hidden rounded-[1.75rem] border border-line bg-surface-card p-6 shadow-card sm:p-9"
+      className="relative rounded-[1.75rem] border border-line bg-surface-card p-6 shadow-card sm:p-9"
     >
-      <span
-        aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid"
-      />
+      {/* Clipped decoration layer; the form itself must not clip or the country
+          and category dropdowns get cut off at the card edge. */}
+      <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[1.75rem]">
+        <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid" />
+      </span>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <div>
+        <motion.div {...reveal(0)}>
           <label htmlFor="cp-name" className={LABEL_CLASS}>
             Your name
           </label>
@@ -171,12 +274,16 @@ function ContactForm() {
             autoComplete="name"
             value={form.name}
             onChange={handleChange}
+            onBlur={handleBlur}
+            aria-invalid={errors.name ? true : undefined}
+            aria-describedby={describe("name")}
             placeholder="Jane Cooper"
-            className={FIELD_CLASS}
+            className={fieldClass("name")}
           />
-        </div>
+          <FieldError id="cp-name-error" message={errors.name} />
+        </motion.div>
 
-        <div>
+        <motion.div {...reveal(1)}>
           <label htmlFor="cp-email" className={LABEL_CLASS}>
             Work email
           </label>
@@ -188,12 +295,34 @@ function ContactForm() {
             autoComplete="email"
             value={form.email}
             onChange={handleChange}
+            onBlur={handleBlur}
+            aria-invalid={errors.email ? true : undefined}
+            aria-describedby={describe("email")}
             placeholder="jane@company.com"
-            className={FIELD_CLASS}
+            className={fieldClass("email")}
           />
-        </div>
+          <FieldError id="cp-email-error" message={errors.email} />
+        </motion.div>
 
-        <div>
+        <motion.div {...reveal(2)}>
+          <label htmlFor="cp-phone" className={LABEL_CLASS}>
+            Phone number
+          </label>
+          <PhoneField
+            id="cp-phone"
+            variant="light"
+            country={country}
+            onCountryChange={handleCountryChange}
+            value={form.phone}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            invalid={Boolean(errors.phone)}
+            describedBy={describe("phone")}
+          />
+          <FieldError id="cp-phone-error" message={errors.phone} />
+        </motion.div>
+
+        <motion.div {...reveal(3)}>
           <label htmlFor="cp-company" className={LABEL_CLASS}>
             Company
           </label>
@@ -203,32 +332,59 @@ function ContactForm() {
             autoComplete="organization"
             value={form.company}
             onChange={handleChange}
+            onBlur={handleBlur}
+            maxLength={100}
+            aria-invalid={errors.company ? true : undefined}
+            aria-describedby={describe("company")}
             placeholder="Company name"
-            className={FIELD_CLASS}
+            className={fieldClass("company")}
           />
-        </div>
+          <FieldError id="cp-company-error" message={errors.company} />
+        </motion.div>
 
-        <div>
+        <motion.div {...reveal(4)}>
+          <label htmlFor="cp-subject" className={LABEL_CLASS}>
+            Subject
+          </label>
+          <div className="relative">
+            <Tag
+              size={17}
+              aria-hidden="true"
+              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-accent opacity-80"
+            />
+            <input
+              id="cp-subject"
+              name="subject"
+              value={form.subject}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              maxLength={120}
+              aria-invalid={errors.subject ? true : undefined}
+              aria-describedby={describe("subject")}
+              placeholder="AI chatbot for support"
+              className={`${fieldClass("subject")} pl-11`}
+            />
+          </div>
+          <FieldError id="cp-subject-error" message={errors.subject} />
+        </motion.div>
+
+        <motion.div {...reveal(5)}>
           <label htmlFor="cp-service" className={LABEL_CLASS}>
             Service category
           </label>
-          <select
+          <SelectField
             id="cp-service"
             name="service"
+            variant="light"
+            icon={Layers}
             value={form.service}
             onChange={handleChange}
-            className={FIELD_CLASS}
-          >
-            <option value="">Select a category</option>
-            {SERVICE_OPTIONS.map((title) => (
-              <option key={title} value={title}>
-                {title}
-              </option>
-            ))}
-          </select>
-        </div>
+            options={SERVICE_OPTIONS}
+            placeholder="Select a category"
+          />
+        </motion.div>
 
-        <div className="sm:col-span-2">
+        <motion.div {...reveal(6)} className="sm:col-span-2">
           <label htmlFor="cp-message" className={LABEL_CLASS}>
             Tell us about your project
           </label>
@@ -238,10 +394,15 @@ function ContactForm() {
             rows={5}
             value={form.message}
             onChange={handleChange}
+            onBlur={handleBlur}
+            maxLength={4000}
+            aria-invalid={errors.message ? true : undefined}
+            aria-describedby={describe("message")}
             placeholder="The problem, the rough idea, the deadline, whatever you have."
-            className={`${FIELD_CLASS} resize-none`}
+            className={`${fieldClass("message")} resize-none`}
           />
-        </div>
+          <FieldError id="cp-message-error" message={errors.message} />
+        </motion.div>
       </div>
 
       <div className="mt-7 flex flex-wrap items-center gap-4">
@@ -256,18 +417,25 @@ function ContactForm() {
           {status !== "loading" && <ArrowUpRight size={18} />}
         </motion.button>
 
+        {/* Success is confirmed in the modal below; this line is left for
+            failures and for the screen-reader announcement. */}
         <p role="status" aria-live="polite" className="text-sm">
-          {status === "success" && (
-            <span className="flex items-center gap-1.5 text-success">
-              <CheckCircle2 size={16} aria-hidden="true" /> Thanks, we&rsquo;ll reply within one
-              business day.
-            </span>
-          )}
-          {status === "error" && (
-            <span className="text-danger">Something went wrong. Please try again.</span>
+          {status === "success" && <span className="sr-only">Message sent.</span>}
+          {status === "error" && <span className="text-danger">{error}</span>}
+          {Object.keys(errors).length > 0 && (
+            <span className="text-danger">Please fix the highlighted fields above.</span>
           )}
         </p>
       </div>
+
+      <SubmissionModal
+        open={status === "success" && Boolean(sent)}
+        submission={sent}
+        onClose={() => {
+          setStatus("idle");
+          setSent(null);
+        }}
+      />
     </motion.form>
   );
 }

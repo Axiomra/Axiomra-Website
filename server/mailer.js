@@ -59,7 +59,13 @@ export async function sendContactNotification(contact) {
   // The notification inbox defaults to the sending account itself.
   const to = process.env.CONTACT_NOTIFY_TO || from;
 
-  const { name, email, company, service, message, _id } = contact;
+  const { name, email, phone, company, subject, service, message, _id } = contact;
+
+  // The visitor's own subject line is the most useful thing to see in the
+  // inbox list, so it leads when present.
+  const mailSubject = subject
+    ? `${subject} — ${name}${company ? ` (${company})` : ""}`
+    : `New enquiry from ${name}${company ? ` (${company})` : ""}`;
 
   try {
     await transporter.sendMail({
@@ -67,11 +73,13 @@ export async function sendContactNotification(contact) {
       to,
       // Lets the team hit Reply and answer the lead directly.
       replyTo: email,
-      subject: `New enquiry from ${name}${company ? ` (${company})` : ""}`,
+      subject: mailSubject,
       text: [
         `Name: ${name}`,
         `Email: ${email}`,
+        phone ? `Phone: ${phone}` : null,
         company ? `Company: ${company}` : null,
+        subject ? `Subject: ${subject}` : null,
         service ? `Service: ${service}` : null,
         "",
         message || "(no message)",
@@ -86,7 +94,9 @@ export async function sendContactNotification(contact) {
           <table style="border-collapse:collapse;">
             ${row("Name", name)}
             ${row("Email", email)}
+            ${row("Phone", phone)}
             ${row("Company", company)}
+            ${row("Subject", subject)}
             ${row("Service", service)}
           </table>
           <p style="margin:16px 0 4px;color:#666;">Message</p>
