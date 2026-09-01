@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, ChevronDown, Phone, Search } from "lucide-react";
 import { COUNTRIES } from "../data/countryCodes";
@@ -46,14 +46,22 @@ export default function PhoneField({
     );
   }, [query]);
 
+  // Closing always clears the search, so the next open starts from the full
+  // list. Clearing it in an effect instead would render the stale query for
+  // a frame on the way back in.
+  const closeMenu = useCallback(() => {
+    setOpen(false);
+    setQuery("");
+  }, []);
+
   // Close on outside click and on Escape; both are expected of a popup.
   useEffect(() => {
     if (!open) return undefined;
     const onPointerDown = (e) => {
-      if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false);
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) closeMenu();
     };
     const onKeyDown = (e) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") closeMenu();
     };
     document.addEventListener("mousedown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);
@@ -61,16 +69,15 @@ export default function PhoneField({
       document.removeEventListener("mousedown", onPointerDown);
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [open]);
+  }, [open, closeMenu]);
 
   useEffect(() => {
     if (open) searchRef.current?.focus();
-    else setQuery("");
   }, [open]);
 
   const select = (c) => {
     onCountryChange(c);
-    setOpen(false);
+    closeMenu();
   };
 
   return (
@@ -82,7 +89,7 @@ export default function PhoneField({
       >
         <button
           type="button"
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => (open ? closeMenu() : setOpen(true))}
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-label={`Country calling code, currently ${country.name} ${country.dial}`}

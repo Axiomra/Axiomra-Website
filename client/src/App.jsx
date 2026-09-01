@@ -20,6 +20,17 @@ const ComputerVisionPage = lazy(() => import("./pages/ComputerVisionPage"));
 const NlpPage = lazy(() => import("./pages/NlpPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 
+// The admin panel shares nothing with the marketing site — its own chrome, its
+// own auth provider, its own table libraries. Splitting it here keeps all of
+// that out of the bundle a normal visitor downloads.
+const AdminLeadsPage = lazy(() => import("./pages/admin/AdminLeadsPage"));
+const AdminLoginPage = lazy(() => import("./pages/admin/AdminLoginPage"));
+const AdminForgotPasswordPage = lazy(() => import("./pages/admin/AdminForgotPasswordPage"));
+const AdminResetPasswordPage = lazy(() => import("./pages/admin/AdminResetPasswordPage"));
+
+import AdminAuthProvider from "./admin/AdminAuthProvider";
+import AdminGuard from "./admin/AdminGuard";
+
 import { SERVICES_BASE_PATH } from "./data/servicesData";
 import { AI_DEVELOPMENT_SLUG } from "./data/aiDevelopmentData";
 import { GENERATIVE_AI_SLUG } from "./data/generativeAiData";
@@ -55,46 +66,90 @@ function RouteFallback() {
   return <div className="min-h-[100svh] bg-surface" aria-busy="true" />;
 }
 
+/** The public marketing site: navbar, footer and the call modal. */
+function SiteRoutes() {
+  return (
+    <div className="overflow-x-clip">
+      <Navbar />
+      <ScrollManager />
+      <main>
+        <Suspense fallback={<RouteFallback />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path={SERVICES_BASE_PATH} element={<ServicesPage />} />
+            <Route
+              path={`${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`}
+              element={<AiDevelopmentPage />}
+            />
+            <Route
+              path={`${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}`}
+              element={<GenerativeAiPage />}
+            />
+            <Route
+              path={`${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`}
+              element={<AgenticAiPage />}
+            />
+            <Route
+              path={`${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}`}
+              element={<ComputerVisionPage />}
+            />
+            <Route path={`${SERVICES_BASE_PATH}/${NLP_SLUG}`} element={<NlpPage />} />
+            <Route
+              path="/service/nlp"
+              element={<Navigate to={`${SERVICES_BASE_PATH}/${NLP_SLUG}`} replace />}
+            />
+            <Route path={`${SERVICES_BASE_PATH}/:slug`} element={<ServiceDetailPlaceholder />} />
+          </Routes>
+        </Suspense>
+      </main>
+      <Footer />
+      <BookCallModal />
+    </div>
+  );
+}
+
+/**
+ * The admin panel. Deliberately outside the site chrome — the marketing navbar
+ * and the "Book a call" modal have no business on an internal tool.
+ *
+ * AdminGuard only decides what to render; the actual protection is the JWT
+ * check on every /api/leads request. Removing the guard in devtools reveals an
+ * empty table, not the data.
+ */
+function AdminRoutes() {
+  return (
+    <AdminAuthProvider>
+      <Suspense fallback={<RouteFallback />}>
+        {/* Paths here are relative to the parent's /admin/* match. An absolute
+            "/admin/login" would be matched against the leftover "login" and
+            never hit, leaving a blank page. */}
+        <Routes>
+          <Route path="login" element={<AdminLoginPage />} />
+          <Route path="forgot-password" element={<AdminForgotPasswordPage />} />
+          <Route path="reset-password" element={<AdminResetPasswordPage />} />
+          <Route
+            index
+            element={
+              <AdminGuard>
+                <AdminLeadsPage />
+              </AdminGuard>
+            }
+          />
+          <Route path="*" element={<Navigate to="/admin" replace />} />
+        </Routes>
+      </Suspense>
+    </AdminAuthProvider>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="overflow-x-clip">
-        <Navbar />
-        <ScrollManager />
-        <main>
-          <Suspense fallback={<RouteFallback />}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path={SERVICES_BASE_PATH} element={<ServicesPage />} />
-              <Route
-                path={`${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`}
-                element={<AiDevelopmentPage />}
-              />
-              <Route
-                path={`${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}`}
-                element={<GenerativeAiPage />}
-              />
-              <Route
-                path={`${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`}
-                element={<AgenticAiPage />}
-              />
-              <Route
-                path={`${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}`}
-                element={<ComputerVisionPage />}
-              />
-              <Route path={`${SERVICES_BASE_PATH}/${NLP_SLUG}`} element={<NlpPage />} />
-              <Route
-                path="/service/nlp"
-                element={<Navigate to={`${SERVICES_BASE_PATH}/${NLP_SLUG}`} replace />}
-              />
-              <Route path={`${SERVICES_BASE_PATH}/:slug`} element={<ServiceDetailPlaceholder />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
-        <BookCallModal />
-      </div>
+      <Routes>
+        <Route path="/admin/*" element={<AdminRoutes />} />
+        <Route path="*" element={<SiteRoutes />} />
+      </Routes>
     </BrowserRouter>
   );
 }

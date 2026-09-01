@@ -27,10 +27,40 @@ const ENDPOINTS = [
     auth: null,
   },
   {
+    method: "POST",
+    path: "/api/auth/login",
+    desc: "Admin sign-in. Sets an httpOnly session cookie.",
+    auth: null,
+  },
+  {
+    method: "POST",
+    path: "/api/auth/forgot-password",
+    desc: "Email a single-use password reset link.",
+    auth: null,
+  },
+  {
     method: "GET",
-    path: "/api/contact",
-    desc: "Read the 100 most recent submissions.",
-    auth: "Bearer token",
+    path: "/api/leads",
+    desc: "Search, filter and page through leads.",
+    auth: "Admin JWT",
+  },
+  {
+    method: "POST",
+    path: "/api/leads",
+    desc: "Create a lead by hand from the admin panel.",
+    auth: "Admin JWT",
+  },
+  {
+    method: "PATCH",
+    path: "/api/leads/:id",
+    desc: "Update one or more fields on a lead.",
+    auth: "Admin JWT",
+  },
+  {
+    method: "DELETE",
+    path: "/api/leads/:id",
+    desc: "Permanently remove a lead.",
+    auth: "Admin JWT",
   },
 ];
 
@@ -244,6 +274,8 @@ export function renderStatusPage() {
   }
   .verb-get  { background: rgba(20,216,196,0.14);  color: var(--teal);   border: 1px solid rgba(20,216,196,0.3); }
   .verb-post { background: rgba(120,139,227,0.16); color: var(--indigo); border: 1px solid rgba(120,139,227,0.32); }
+  .verb-patch { background: rgba(245,181,68,0.14);  color: var(--amber); border: 1px solid rgba(245,181,68,0.3); }
+  .verb-delete { background: rgba(242,85,90,0.13);  color: var(--red);   border: 1px solid rgba(242,85,90,0.3); }
   .path {
     font-family: "JetBrains Mono", ui-monospace, monospace;
     font-size: 13.5px; color: var(--fg);

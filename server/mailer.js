@@ -111,3 +111,62 @@ export async function sendContactNotification(contact) {
     return false;
   }
 }
+
+/**
+ * Send an admin password-reset link.
+ * Resolves to true when Gmail accepted the message. The caller relies on that:
+ * a false return means the token it just minted must be thrown away, because
+ * nobody can have received it.
+ */
+export async function sendPasswordResetEmail({ to, name, link, expiresInMinutes }) {
+  const transporter = getTransporter();
+  if (!transporter) {
+    console.error("Password reset email skipped: mailer is not configured.");
+    return false;
+  }
+
+  const from = process.env.GMAIL;
+  const greeting = name ? `Hi ${escapeHtml(name)},` : "Hi,";
+
+  try {
+    await transporter.sendMail({
+      from: `"Axiomra" <${from}>`,
+      to,
+      subject: "Reset your Axiomra admin password",
+      text: [
+        name ? `Hi ${name},` : "Hi,",
+        "",
+        "Use the link below to set a new password for the Axiomra lead panel.",
+        "",
+        link,
+        "",
+        `The link expires in ${expiresInMinutes} minutes and can only be used once.`,
+        "If you did not ask for this, you can ignore this email — your password stays as it is.",
+      ].join("\n"),
+      html: `
+        <div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:15px;color:#111;line-height:1.6;">
+          <h2 style="margin:0 0 16px;font-size:18px;">Reset your admin password</h2>
+          <p style="margin:0 0 16px;">${greeting}</p>
+          <p style="margin:0 0 22px;">Use the button below to set a new password for the Axiomra lead panel.</p>
+          <p style="margin:0 0 22px;">
+            <a href="${escapeHtml(link)}"
+               style="display:inline-block;padding:12px 22px;border-radius:10px;background:#14D8C4;color:#0A1428;font-weight:600;text-decoration:none;">
+              Set a new password
+            </a>
+          </p>
+          <p style="margin:0 0 8px;color:#666;font-size:13px;">
+            The link expires in ${expiresInMinutes} minutes and can only be used once.
+          </p>
+          <p style="margin:0;color:#666;font-size:13px;">
+            If you did not ask for this, ignore this email — your password stays as it is.
+          </p>
+        </div>
+      `,
+    });
+    return true;
+  } catch (err) {
+    // Never log the link: it is a working credential until it expires.
+    console.error("Password reset email failed:", err.message);
+    return false;
+  }
+}
