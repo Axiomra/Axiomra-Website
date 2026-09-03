@@ -1,5 +1,12 @@
 import { Router } from "express";
-import User, { hashResetToken, RESET_TOKEN_TTL_MINUTES } from "../models/User.js";
+import User, {
+  hashResetToken,
+  recoveryKeyProblem,
+  KEY_LOCK_MINUTES,
+  MAX_KEY_ATTEMPTS,
+  RECOVERY_KEY_LENGTH,
+  RESET_TOKEN_TTL_MINUTES,
+} from "../models/User.js";
 import { issueSession, clearSession, requireAuth } from "../lib/auth.js";
 import { sendPasswordResetEmail } from "../mailer.js";
 import { cleanString } from "../lib/sanitize.js";
@@ -10,6 +17,14 @@ const EMAIL_RE =
   /^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,24}$/;
 
 const MIN_PASSWORD = 10;
+
+/**
+ * Refuse a reset on an account that has no recovery key on file.
+ *
+ * Off by default, because turning it on before a key is set locks the only
+ * admin out of their own reset flow. Set it once the key is in the database.
+ */
+const KEY_REQUIRED_ALWAYS = process.env.ADMIN_RECOVERY_KEY_REQUIRED === "true";
 
 function passwordProblem(value) {
   const pw = String(value ?? "");
@@ -123,28 +138,76 @@ router.post("/forgot-password", async (req, res) => {
   }
 });
 
-/* POST /api/auth/reset-password */
+/* POST /api/auth/reset-password
+   Two factors, both required: the emailed token proves control of the mailbox,
+   the recovery key proves the person is the admin who holds it offline. */
 router.post("/reset-password", async (req, res) => {
   try {
     const token = cleanString(req.body?.token, 128);
     const password = String(req.body?.password ?? "");
+    // Not run through cleanString: it trims and collapses, and the key's own
+    // validator has to see the string exactly as it was typed.
+    const recoveryKey = String(req.body?.recoveryKey ?? "");
 
     if (!token) return res.status(400).json({ error: "This reset link is invalid." });
 
+    // Password shape is checked before the key so a mistyped password costs a
+    // round trip, not one of the five key attempts.
     const problem = passwordProblem(password);
     if (problem) return res.status(400).json({ error: problem });
 
     const user = await User.findOne({
       resetTokenHash: hashResetToken(token),
       resetTokenExpires: { $gt: new Date() },
-    }).select("+passwordHash +resetTokenHash +resetTokenExpires");
+    }).select(
+      "+passwordHash +resetTokenHash +resetTokenExpires +recoveryKeyHash +keyAttempts +keyLockedUntil"
+    );
 
     if (!user) {
       return res.status(400).json({ error: "This reset link has expired or already been used." });
     }
 
+    const lockedFor = user.keyLockMinutesLeft();
+    if (lockedFor > 0) {
+      return res.status(429).json({
+        error: `Too many incorrect recovery keys. Try again in ${lockedFor} minute${
+          lockedFor === 1 ? "" : "s"
+        }, starting from a fresh reset email.`,
+      });
+    }
+
+    if (user.hasRecoveryKey()) {
+      // The shape check is not a security control — it just turns an obvious
+      // paste error into a clear message instead of a wasted attempt.
+      const keyProblem = recoveryKeyProblem(recoveryKey);
+      if (keyProblem) return res.status(400).json({ error: keyProblem });
+
+      if (!(await user.verifyRecoveryKey(recoveryKey))) {
+        const left = user.registerKeyFailure();
+        await user.save();
+        return res.status(401).json({
+          error: left
+            ? `That recovery key is not correct. ${left} attempt${
+                left === 1 ? "" : "s"
+              } left before this link is cancelled.`
+            : `That recovery key is not correct. This link has been cancelled — wait ${KEY_LOCK_MINUTES} minutes, then request a new one.`,
+          attemptsLeft: left,
+        });
+      }
+    } else if (KEY_REQUIRED_ALWAYS) {
+      return res.status(403).json({
+        error: "This account has no recovery key on file, so it cannot be reset from the web.",
+      });
+    } else {
+      console.warn(
+        `Password reset for ${user.email} ran without a recovery key — none is set on the account.`
+      );
+    }
+
     // setPassword clears the token and moves sessionsValidFrom, so the link is
     // single-use and every session opened with the old password is dropped.
+    // The recovery key itself is left alone: it is a long-lived offline
+    // secret, not a one-time code.
     await user.setPassword(password);
     await user.save();
 
@@ -155,6 +218,31 @@ router.post("/reset-password", async (req, res) => {
   } catch (err) {
     console.error("Password reset failed:", err.message);
     return res.status(500).json({ error: "Could not reset the password. Please try again." });
+  }
+});
+
+/* GET /api/auth/reset-requirements
+   Lets the reset form know whether to ask for a key, without leaking anything:
+   the answer is the same for a valid token, an expired one and a forged one
+   whenever the account in question has a key, which is the intended state. */
+router.get("/reset-requirements", async (req, res) => {
+  try {
+    const token = cleanString(req.query?.token, 128);
+    const fallback = { recoveryKeyRequired: true, recoveryKeyLength: RECOVERY_KEY_LENGTH, maxAttempts: MAX_KEY_ATTEMPTS };
+    if (!token) return res.json(fallback);
+
+    const user = await User.findOne({
+      resetTokenHash: hashResetToken(token),
+      resetTokenExpires: { $gt: new Date() },
+    }).select("+recoveryKeyHash");
+
+    return res.json({
+      ...fallback,
+      recoveryKeyRequired: user ? user.hasRecoveryKey() || KEY_REQUIRED_ALWAYS : true,
+    });
+  } catch (err) {
+    console.error("Reset requirements lookup failed:", err.message);
+    return res.json({ recoveryKeyRequired: true, recoveryKeyLength: RECOVERY_KEY_LENGTH, maxAttempts: MAX_KEY_ATTEMPTS });
   }
 });
 

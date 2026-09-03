@@ -1,11 +1,44 @@
+import { useEffect, useRef, useState } from "react";
 import { ArrowDown, ArrowUp, ChevronsUpDown, Trash2 } from "lucide-react";
+import CompletionBadge from "./CompletionBadge";
+import DeadlineCell from "./DeadlineCell";
 import EditableCell from "./EditableCell";
 import ProgressBadge from "./ProgressBadge";
 import Avatar from "./Avatar";
-import { LEAD_COLUMNS, formatDate, formatDateTime } from "./leadColumns";
+import {
+  LEAD_COLUMNS,
+  cellPatch,
+  cellValue,
+  formatDate,
+  formatDateTime,
+  COLUMN_WIDTH_STORAGE_KEY,
+  MIN_COLUMN_WIDTH,
+  MAX_COLUMN_WIDTH,
+} from "./leadColumns";
+
+const ACTIONS_WIDTH = 52;
+
+/** Column widths survive reloads; a blocked localStorage just means defaults. */
+function readWidths() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(COLUMN_WIDTH_STORAGE_KEY));
+    return stored && typeof stored === "object" && !Array.isArray(stored) ? stored : {};
+  } catch {
+    return {};
+  }
+}
 
 /**
- * The desktop leads table. Every cell except "Received" edits in place.
+ * The desktop leads table.
+ *
+ * Identity fields (name, email, phone, company, requested service) are
+ * read-only here on purpose — they only change through the details panel, so
+ * a click anywhere in the row opens that panel instead of an inline input.
+ * Everything else (subject, message, progress, team, budget, remarks) still
+ * edits in place, exactly as before.
+ *
+ * Columns are user-resizable and the widths persist, so "Remarks" can be
+ * dragged wide enough to read in full without truncation.
  *
  * The mobile view is a separate component (LeadCards) rather than this table
  * with `overflow-x`: twelve columns on a phone is a table nobody can read, no
@@ -14,6 +47,9 @@ import { LEAD_COLUMNS, formatDate, formatDateTime } from "./leadColumns";
 export default function LeadTable({
   leads,
   columns,
+  // The built-in columns plus whatever the team has added. Defaulted so a
+  // caller that has not loaded the custom ones yet still renders.
+  allColumns = LEAD_COLUMNS,
   sort,
   dir,
   onSort,
@@ -22,11 +58,58 @@ export default function LeadTable({
   onPatch,
   onDelete,
 }) {
-  const visible = LEAD_COLUMNS.filter((c) => columns.includes(c.key));
+  const visible = allColumns.filter((c) => columns.includes(c.key));
+
+  const [widths, setWidths] = useState(readWidths);
+  useEffect(() => {
+    try {
+      localStorage.setItem(COLUMN_WIDTH_STORAGE_KEY, JSON.stringify(widths));
+    } catch {
+      // Preference just will not survive a reload; the table still works.
+    }
+  }, [widths]);
+
+  const widthFor = (col) => widths[col.key] ?? col.width;
+
+  const dragRef = useRef(null);
+
+  useEffect(() => {
+    const onMove = (e) => {
+      const drag = dragRef.current;
+      if (!drag) return;
+      const delta = e.clientX - drag.startX;
+      const next = Math.min(MAX_COLUMN_WIDTH, Math.max(MIN_COLUMN_WIDTH, drag.startWidth + delta));
+      setWidths((w) => ({ ...w, [drag.key]: next }));
+    };
+    const onUp = () => {
+      dragRef.current = null;
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+    };
+  }, []);
+
+  const startResize = (e, col) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragRef.current = { key: col.key, startX: e.clientX, startWidth: widthFor(col) };
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+  };
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-line bg-surface-card">
-      <table className="w-full border-collapse text-left">
+    // Frosted panel: scrolls in both directions inside itself so the header row
+    // stays stuck to the top while the page around it stays put.
+    // It sits on the same gutter as the header and the stats bar above it — a
+    // panel pinned to the viewport edge reads as a rendering fault rather than
+    // as extra width, and the columns scroll horizontally anyway.
+    <div className="mx-4 max-h-[72svh] overflow-auto rounded-xl border border-line/70 bg-surface-card/50 shadow-[0_30px_70px_-50px_rgba(10,20,40,0.6)] backdrop-blur-2xl sm:mx-6 lg:mx-8">
+      <table className="w-full border-collapse text-left" style={{ tableLayout: "fixed" }}>
         <thead>
           <tr className="border-b border-line">
             {visible.map((col) => {
@@ -36,57 +119,96 @@ export default function LeadTable({
                   key={col.key}
                   scope="col"
                   aria-sort={active ? (dir === "asc" ? "ascending" : "descending") : "none"}
-                  className={`sticky top-0 z-10 whitespace-nowrap border-b border-line bg-surface-card/95 px-3 py-3 backdrop-blur ${col.width}`}
+                  style={{ width: widthFor(col) }}
+                  className="sticky top-0 z-10 whitespace-nowrap border-b border-line bg-surface-card/80 px-3 py-3 backdrop-blur-xl relative"
                 >
-                  {col.sortable ? (
-                    <button
-                      type="button"
-                      onClick={() => onSort(col.key)}
-                      className="focus-ring inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.09em] text-content-faint transition-colors hover:text-content"
-                    >
-                      {col.label}
-                      {active ? (
-                        dir === "asc" ? (
-                          <ArrowUp size={12} className="text-accent" aria-hidden="true" />
+                  <div className="flex items-center justify-between gap-2">
+                    {col.sortable ? (
+                      <button
+                        type="button"
+                        onClick={() => onSort(col.key)}
+                        className="focus-ring inline-flex min-w-0 items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.09em] text-content-faint transition-colors hover:text-content"
+                      >
+                        <span className="truncate">{col.label}</span>
+                        {active ? (
+                          dir === "asc" ? (
+                            <ArrowUp size={12} className="shrink-0 text-accent" aria-hidden="true" />
+                          ) : (
+                            <ArrowDown size={12} className="shrink-0 text-accent" aria-hidden="true" />
+                          )
                         ) : (
-                          <ArrowDown size={12} className="text-accent" aria-hidden="true" />
-                        )
-                      ) : (
-                        <ChevronsUpDown size={12} className="opacity-40" aria-hidden="true" />
-                      )}
-                    </button>
-                  ) : (
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.09em] text-content-faint">
-                      {col.label}
-                    </span>
-                  )}
+                          <ChevronsUpDown size={12} className="shrink-0 opacity-40" aria-hidden="true" />
+                        )}
+                      </button>
+                    ) : (
+                      <span className="truncate text-[11px] font-semibold uppercase tracking-[0.09em] text-content-faint">
+                        {col.label}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Drag handle: widens/narrows this column, persisted per browser. */}
+                  <button
+                    type="button"
+                    tabIndex={-1}
+                    aria-label={`Resize ${col.label} column`}
+                    onMouseDown={(e) => startResize(e, col)}
+                    onDoubleClick={() => setWidths((w) => ({ ...w, [col.key]: col.width }))}
+                    className="group absolute right-0 top-0 z-20 h-full w-2 cursor-col-resize touch-none select-none"
+                  >
+                    <span className="mx-auto block h-full w-px bg-line transition-colors group-hover:bg-accent group-active:bg-accent" />
+                  </button>
                 </th>
               );
             })}
-            <th scope="col" className="sticky top-0 z-10 border-b border-line bg-surface-card/95 px-3 py-3 backdrop-blur">
+            <th
+              scope="col"
+              style={{ width: ACTIONS_WIDTH }}
+              className="sticky top-0 z-10 border-b border-line bg-surface-card/80 px-3 py-3 backdrop-blur-xl"
+            >
               <span className="sr-only">Actions</span>
             </th>
           </tr>
         </thead>
 
         <tbody>
-          {leads.map((lead) => {
+          {leads.map((lead, idx) => {
             const isSelected = lead._id === selectedId;
+            const zebra = idx % 2 === 1 ? "bg-surface-inset/50" : "bg-transparent";
             return (
               <tr
                 key={lead._id}
                 onClick={() => onSelect(lead)}
-                className={`group border-b border-line/70 align-top transition-colors last:border-0 ${
-                  isSelected ? "bg-accent/[0.055]" : "hover:bg-surface-inset/60"
+                className={`group relative cursor-pointer border-b border-line/70 align-top transition-colors last:border-0 ${
+                  isSelected ? "bg-accent/[0.07]" : `${zebra} hover:bg-surface-inset/70`
                 }`}
               >
                 {visible.map((col) => (
-                  <td key={col.key} className={`px-1.5 py-1.5 ${isSelected ? "" : col.tint}`}>
+                  <td
+                    key={col.key}
+                    style={{ width: widthFor(col) }}
+                    className={`overflow-hidden px-1.5 py-1.5 ${isSelected ? "" : col.tint}`}
+                  >
                     {col.kind === "stage" ? (
-                      <div className="px-1 py-0.5">
+                      <div className="px-1 py-0.5" onClick={(e) => e.stopPropagation()}>
                         <ProgressBadge
                           value={lead.progress}
                           onChange={(stage) => onPatch(lead._id, { progress: stage })}
+                        />
+                      </div>
+                    ) : col.kind === "completion" ? (
+                      <div className="px-1 py-0.5" onClick={(e) => e.stopPropagation()}>
+                        <CompletionBadge
+                          value={lead.completion}
+                          onChange={(state) => onPatch(lead._id, { completion: state })}
+                        />
+                      </div>
+                    ) : col.kind === "deadline" ? (
+                      <div onClick={(e) => e.stopPropagation()}>
+                        <DeadlineCell
+                          value={lead.deadline}
+                          done={lead.completion === "Completed" || lead.completion === "Closed"}
+                          onSave={(v) => onPatch(lead._id, { deadline: v })}
                         />
                       </div>
                     ) : col.kind === "date" ? (
@@ -96,25 +218,34 @@ export default function LeadTable({
                       >
                         {formatDate(lead[col.key])}
                       </span>
-                    ) : col.key === "name" ? (
-                      <div className="flex items-center gap-2">
-                        <Avatar name={lead.name} email={lead.email} size="sm" />
-                        <div className="min-w-0 flex-1">
-                          <EditableCell
-                            value={lead.name}
-                            ariaLabel={`Name for ${lead.name || lead.email}`}
-                            onSave={(v) => onPatch(lead._id, { name: v })}
-                          />
+                    ) : col.locked ? (
+                      col.key === "name" ? (
+                        <div className="flex items-center gap-2 px-1 py-1">
+                          <Avatar name={lead.name} email={lead.email} size="sm" />
+                          <span className="min-w-0 flex-1 truncate text-sm font-medium text-content">
+                            {lead.name || <span className="text-content-faint/60">—</span>}
+                          </span>
                         </div>
-                      </div>
+                      ) : (
+                        <span
+                          className="block truncate px-2 py-1.5 text-sm text-content"
+                          title={lead[col.key] || ""}
+                        >
+                          {lead[col.key] || <span className="text-content-faint/60">—</span>}
+                        </span>
+                      )
                     ) : (
-                      <EditableCell
-                        value={lead[col.key]}
-                        type={col.type}
-                        multiline={col.multiline}
-                        ariaLabel={`${col.label} for ${lead.name || lead.email}`}
-                        onSave={(v) => onPatch(lead._id, { [col.key]: v })}
-                      />
+                      <div onClick={(e) => e.stopPropagation()}>
+                        <EditableCell
+                          value={cellValue(lead, col)}
+                          type={col.type}
+                          multiline={col.multiline}
+                          formatting={col.formatting}
+                          clamp={false}
+                          ariaLabel={`${col.label} for ${lead.name || lead.email}`}
+                          onSave={(v) => onPatch(lead._id, cellPatch(col, v))}
+                        />
+                      </div>
                     )}
                   </td>
                 ))}

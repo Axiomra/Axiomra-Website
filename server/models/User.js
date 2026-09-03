@@ -7,6 +7,17 @@ const COST = 12;
 // link sitting in a mailbox is not a standing key to the account.
 const RESET_TTL_MS = 30 * 60 * 1000;
 
+/* --- Recovery key (the second factor on a password reset) ---
+   A long, high-entropy secret held only by the main admin, offline. The reset
+   email proves control of the mailbox; this proves the person is the admin.
+   One without the other resets nothing, so a compromised mailbox alone is no
+   longer enough to take the panel. */
+export const RECOVERY_KEY_LENGTH = 78;
+// A wrong key is either a typo or a guess. Five is generous for the first and
+// useless for the second, given the key's entropy.
+export const MAX_KEY_ATTEMPTS = 5;
+const KEY_LOCK_MS = 15 * 60 * 1000;
+
 /**
  * Admin accounts for the lead panel. There is no public sign-up: accounts are
  * created by scripts/seed-admin.js, run by hand.
@@ -34,6 +45,16 @@ const userSchema = new mongoose.Schema(
     resetTokenHash: { type: String, default: null, select: false },
     resetTokenExpires: { type: Date, default: null, select: false },
 
+    // Same reasoning as the password: only a hash is stored, so a database
+    // dump hands an attacker a reset link they still cannot use.
+    recoveryKeyHash: { type: String, default: null, select: false },
+    recoveryKeySetAt: { type: Date, default: null },
+
+    // Per-account, not per-token: burning the link on too many wrong keys
+    // would otherwise just mean requesting a fresh one and guessing again.
+    keyAttempts: { type: Number, default: 0, select: false },
+    keyLockedUntil: { type: Date, default: null, select: false },
+
     // Every JWT issued before this instant is rejected. Set on password change
     // so a reset actually kicks out sessions opened with the old password.
     sessionsValidFrom: { type: Date, default: () => new Date() },
@@ -48,6 +69,9 @@ userSchema.set("toJSON", {
     delete ret.passwordHash;
     delete ret.resetTokenHash;
     delete ret.resetTokenExpires;
+    delete ret.recoveryKeyHash;
+    delete ret.keyAttempts;
+    delete ret.keyLockedUntil;
     return ret;
   },
 });
@@ -66,6 +90,82 @@ userSchema.methods.setPassword = async function setPassword(plain) {
   this.resetTokenHash = null;
   this.resetTokenExpires = null;
   this.sessionsValidFrom = new Date();
+  // A completed reset is proof the key was right, so the counter starts clean.
+  this.keyAttempts = 0;
+  this.keyLockedUntil = null;
+};
+
+/**
+ * Why the key is folded through SHA-256 before bcrypt: bcrypt silently ignores
+ * everything past the 72nd byte of its input. A 78-character key would have
+ * its last six characters count for nothing. The digest is 44 characters, so
+ * every character of the key reaches the hash.
+ */
+function digestKey(raw) {
+  return createHash("sha256").update(String(raw), "utf8").digest("base64");
+}
+
+/** Explains why a candidate key is unacceptable, or "" if it is fine. */
+export function recoveryKeyProblem(value) {
+  const key = String(value ?? "");
+  if (!key) return "The recovery key is required.";
+  if (key.length !== RECOVERY_KEY_LENGTH) {
+    return `The recovery key must be exactly ${RECOVERY_KEY_LENGTH} characters.`;
+  }
+  // Whitespace is rejected rather than trimmed: a key pasted out of an email
+  // client often carries a stray newline, and silently "fixing" it would make
+  // two different strings both count as the key.
+  if (/\s/.test(key)) return "The recovery key cannot contain spaces or line breaks.";
+  if (/[^\x21-\x7E]/.test(key)) return "The recovery key contains an unsupported character.";
+  if (!/[a-z]/.test(key)) return "The recovery key needs a lowercase letter.";
+  if (!/[A-Z]/.test(key)) return "The recovery key needs an uppercase letter.";
+  if (!/\d/.test(key)) return "The recovery key needs a number.";
+  if (!/[^A-Za-z0-9]/.test(key)) return "The recovery key needs a special character.";
+  return "";
+}
+
+/** Caller is responsible for saving. */
+userSchema.methods.setRecoveryKey = async function setRecoveryKey(raw) {
+  const problem = recoveryKeyProblem(raw);
+  if (problem) throw new Error(problem);
+  this.recoveryKeyHash = await bcrypt.hash(digestKey(raw), COST);
+  this.recoveryKeySetAt = new Date();
+  this.keyAttempts = 0;
+  this.keyLockedUntil = null;
+};
+
+userSchema.methods.hasRecoveryKey = function hasRecoveryKey() {
+  return Boolean(this.recoveryKeyHash);
+};
+
+userSchema.methods.verifyRecoveryKey = function verifyRecoveryKey(raw) {
+  if (!this.recoveryKeyHash) return false;
+  return bcrypt.compare(digestKey(raw), this.recoveryKeyHash);
+};
+
+/** Minutes left on a key lockout, or 0 when the account is not locked. */
+userSchema.methods.keyLockMinutesLeft = function keyLockMinutesLeft() {
+  if (!this.keyLockedUntil) return 0;
+  const ms = this.keyLockedUntil.getTime() - Date.now();
+  return ms > 0 ? Math.ceil(ms / 60000) : 0;
+};
+
+/**
+ * Record a wrong key. Returns how many tries are left; at zero the account is
+ * locked out of resets for a cooldown. Caller is responsible for saving.
+ */
+userSchema.methods.registerKeyFailure = function registerKeyFailure() {
+  this.keyAttempts = (this.keyAttempts || 0) + 1;
+  const left = Math.max(0, MAX_KEY_ATTEMPTS - this.keyAttempts);
+  if (left === 0) {
+    this.keyLockedUntil = new Date(Date.now() + KEY_LOCK_MS);
+    this.keyAttempts = 0;
+    // The link dies with the lockout, so a guessing run cannot simply resume
+    // against the same token once the cooldown expires.
+    this.resetTokenHash = null;
+    this.resetTokenExpires = null;
+  }
+  return left;
 };
 
 /**
@@ -84,6 +184,7 @@ export function hashResetToken(raw) {
 }
 
 export const RESET_TOKEN_TTL_MINUTES = RESET_TTL_MS / 60000;
+export const KEY_LOCK_MINUTES = KEY_LOCK_MS / 60000;
 export const BCRYPT_COST = COST;
 
 export default mongoose.models.User || mongoose.model("User", userSchema);

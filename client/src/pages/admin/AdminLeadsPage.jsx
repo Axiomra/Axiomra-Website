@@ -5,13 +5,14 @@ import {
   ChevronRight,
   Download,
   LogOut,
-  PanelRightClose,
+  PanelLeftClose,
   Plus,
   RefreshCw,
   SlidersHorizontal,
   X,
 } from "lucide-react";
 
+import AdminAmbience from "../../components/admin/AdminAmbience";
 import AdminBackdrop from "../../components/admin/AdminBackdrop";
 import ColumnToggle from "../../components/admin/ColumnToggle";
 import ConfirmDialog from "../../components/admin/ConfirmDialog";
@@ -19,12 +20,19 @@ import LeadCards from "../../components/admin/LeadCards";
 import LeadFilters from "../../components/admin/LeadFilters";
 import LeadSidebar from "../../components/admin/LeadSidebar";
 import LeadTable from "../../components/admin/LeadTable";
+import NewColumnDialog from "../../components/admin/NewColumnDialog";
 import NewLeadDialog from "../../components/admin/NewLeadDialog";
-import StatsFooter from "../../components/admin/StatsFooter";
-import { COLUMN_STORAGE_KEY, DEFAULT_VISIBLE, LEAD_COLUMNS } from "../../components/admin/leadColumns";
+import StatsBar from "../../components/admin/StatsBar";
+import {
+  COLUMN_STORAGE_KEY,
+  DEFAULT_VISIBLE,
+  LEAD_COLUMNS,
+  isCustomKey,
+  toCustomColumn,
+} from "../../components/admin/leadColumns";
 import ThemeToggle from "../../components/ThemeToggle";
 import useAdminAuth from "../../admin/useAdminAuth";
-import { leadsApi } from "../../lib/adminApi";
+import { leadFieldsApi, leadsApi } from "../../lib/adminApi";
 import services from "../../data/servicesData";
 
 const SERVICE_OPTIONS = services.map((s) => s.title);
@@ -48,7 +56,9 @@ function readColumns() {
     const stored = JSON.parse(localStorage.getItem(COLUMN_STORAGE_KEY));
     if (!Array.isArray(stored) || !stored.length) return DEFAULT_VISIBLE;
     // Drop keys from an older build so a renamed column cannot wedge the table.
-    const valid = stored.filter((k) => LEAD_COLUMNS.some((c) => c.key === k));
+    // Custom keys are kept unvalidated: their definitions arrive from the
+    // server a moment later, and a deleted one is filtered out then.
+    const valid = stored.filter((k) => isCustomKey(k) || LEAD_COLUMNS.some((c) => c.key === k));
     return valid.length ? valid : DEFAULT_VISIBLE;
   } catch {
     return DEFAULT_VISIBLE;
@@ -68,12 +78,18 @@ export default function AdminLeadsPage() {
   const [error, setError] = useState("");
 
   const [columns, setColumns] = useState(readColumns);
+  // Columns the team added themselves. Shared across admins, so they come from
+  // the server rather than from this browser's stored preferences.
+  const [fields, setFields] = useState([]);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [newLeadOpen, setNewLeadOpen] = useState(false);
+  const [newColumnOpen, setNewColumnOpen] = useState(false);
   const [pendingDelete, setPendingDelete] = useState(null);
   const [deleting, setDeleting] = useState(false);
+  const [pendingColumnDelete, setPendingColumnDelete] = useState(null);
+  const [deletingColumn, setDeletingColumn] = useState(false);
 
   // Bumped to force a refetch without changing any filter.
   const [reloadKey, setReloadKey] = useState(0);
@@ -90,6 +106,35 @@ export default function AdminLeadsPage() {
       // Preference just will not survive a reload; the table still works.
     }
   }, [columns]);
+
+  const [fieldsLoaded, setFieldsLoaded] = useState(false);
+
+  // Custom columns load once. A failure is deliberately silent: the built-in
+  // table is still fully usable without them, and an error banner over a
+  // working table would be noise.
+  useEffect(() => {
+    const controller = new AbortController();
+    leadFieldsApi
+      .list(controller.signal)
+      .then((res) => {
+        setFields(res.items || []);
+        setFieldsLoaded(true);
+      })
+      .catch(() => {});
+    return () => controller.abort();
+  }, []);
+
+  const allColumns = useMemo(() => [...LEAD_COLUMNS, ...fields.map(toCustomColumn)], [fields]);
+
+  // A column deleted by someone else can still be in this browser's stored
+  // list. It is filtered out on the way to the table rather than written back
+  // to state, so nothing is pruned before the definitions have arrived — and
+  // the raw preference survives, which matters while they are still loading.
+  const visibleColumns = useMemo(() => {
+    if (!fieldsLoaded) return columns;
+    const known = new Set(allColumns.map((c) => c.key));
+    return columns.filter((k) => known.has(k));
+  }, [columns, allColumns, fieldsLoaded]);
 
   // Debounce the search box so typing "generative" is one request, not ten.
   useEffect(() => {
@@ -187,7 +232,12 @@ export default function AdminLeadsPage() {
       prev.map((l) => {
         if (l._id !== id) return l;
         rollback.current.set(id, l);
-        return { ...l, ...changes };
+        // A custom-column edit carries one key, so it has to merge into the
+        // existing bag — spreading it would blank every other custom column
+        // on the row until the server's answer landed.
+        return changes.custom
+          ? { ...l, ...changes, custom: { ...l.custom, ...changes.custom } }
+          : { ...l, ...changes };
       })
     );
 
@@ -217,6 +267,30 @@ export default function AdminLeadsPage() {
     setReloadKey((k) => k + 1);
   }, []);
 
+  /** Add a column for the whole team, and show it here straight away. */
+  const onCreateColumn = useCallback(async ({ label, type }) => {
+    const field = await leadFieldsApi.create({ label, type });
+    setFields((prev) => [...prev, field]);
+    setColumns((prev) => [...prev, toCustomColumn(field).key]);
+  }, []);
+
+  const confirmColumnDelete = useCallback(async () => {
+    if (!pendingColumnDelete) return;
+    setDeletingColumn(true);
+    try {
+      await leadFieldsApi.remove(pendingColumnDelete.id);
+      setFields((prev) => prev.filter((f) => f._id !== pendingColumnDelete.id));
+      setPendingColumnDelete(null);
+      // The values are gone server-side, so the rows on screen are now stale.
+      setReloadKey((k) => k + 1);
+    } catch (err) {
+      setError(err.message);
+      setPendingColumnDelete(null);
+    } finally {
+      setDeletingColumn(false);
+    }
+  }, [pendingColumnDelete]);
+
   const confirmDelete = useCallback(async () => {
     if (!pendingDelete) return;
     setDeleting(true);
@@ -236,11 +310,18 @@ export default function AdminLeadsPage() {
 
   const onExport = useCallback(async () => {
     try {
-      await leadsApi.exportCsv({ ...query, page: undefined, limit: undefined });
+      // The export mirrors what is on screen: hidden columns stay out of the
+      // file, and the ones that are shown keep the order they were dragged into.
+      await leadsApi.exportCsv({
+        ...query,
+        page: undefined,
+        limit: undefined,
+        columns: visibleColumns,
+      });
     } catch (err) {
       setError(err.message);
     }
-  }, [query]);
+  }, [query, visibleColumns]);
 
   const selectLead = useCallback((lead) => {
     setSelectedId(lead._id);
@@ -252,30 +333,29 @@ export default function AdminLeadsPage() {
 
   return (
     <div className="min-h-[100svh] bg-surface">
+      <AdminAmbience />
+
       {/* --- Heading --- */}
       <header className="relative overflow-hidden border-b border-line">
         <AdminBackdrop />
 
-        <div className="relative mx-auto max-w-8xl px-4 pb-8 pt-10 sm:px-6 sm:pb-10 sm:pt-14 lg:px-8">
-          <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-4">
+        <div className="relative mx-auto max-w-8xl px-4 pb-4 pt-5 sm:px-6 sm:pb-5 sm:pt-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
             <motion.div
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               className="min-w-0"
             >
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
-                Axiomra
-              </p>
-              {/* Sized as a page title, not a marketing hero: this heading sits
-                  above a working table that people read all day, and a display
-                  hero would push the first row below the fold on a laptop.
-                  Flagged for design sign-off. */}
-              <h1 className="mt-1.5 font-display text-[clamp(1.75rem,3.4vw,2.5rem)] font-semibold leading-[1.1] tracking-tight text-content">
+              {/* Deliberately short: this is a page title above a working table
+                  that people read all day, so every row of chrome it costs is a
+                  row of leads pushed under the fold. The tagline moved into the
+                  eyebrow rather than taking a third line of its own. */}
+              <h1 className="font-display text-[clamp(1.25rem,2.2vw,1.65rem)] font-semibold leading-tight tracking-tight text-content">
                 Lead Management{" "}
                 <span className="bg-cta-gradient bg-clip-text text-transparent">System</span>
               </h1>
-              <p className="mt-2 max-w-xl text-sm text-content-dim">
+              <p className="mt-0.5 text-[12px] text-content-dim">
                 Every enquiry from the website and the team, in one pipeline.
               </p>
             </motion.div>
@@ -316,9 +396,15 @@ export default function AdminLeadsPage() {
                 <span className="hidden sm:inline">Filters</span>
               </button>
 
-              <ColumnToggle columns={columns} onChange={setColumns} />
+              <ColumnToggle
+                columns={visibleColumns}
+                onChange={setColumns}
+                allColumns={allColumns}
+                onNewColumn={() => setNewColumnOpen(true)}
+                onDeleteColumn={setPendingColumnDelete}
+              />
 
-              <ThemeToggle />
+              <ThemeToggle variant="surface" />
 
               <button
                 type="button"
@@ -332,7 +418,7 @@ export default function AdminLeadsPage() {
             </div>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-3">
             <LeadFilters
               filters={filters}
               onChange={setFilters}
@@ -344,122 +430,115 @@ export default function AdminLeadsPage() {
         </div>
       </header>
 
-      {/* --- Body: sidebar + table --- */}
-      <div className="mx-auto max-w-8xl px-4 py-6 sm:px-6 lg:px-8">
-        {error && (
-          <div
-            role="alert"
-            className="mb-4 flex items-start justify-between gap-3 rounded-xl border border-danger/30 bg-danger/8 px-4 py-3 text-sm text-danger"
-          >
-            <span>{error}</span>
-            <button
-              type="button"
-              onClick={() => setError("")}
-              aria-label="Dismiss error"
-              className="focus-ring shrink-0 rounded p-0.5 hover:opacity-70"
+      {/* --- Body --- */}
+      {/* Only the framing content is width-capped and padded. The table itself
+          runs edge to edge below, because every pixel of gutter is a pixel of
+          column that has to be scrolled to instead. */}
+      <main className="relative py-4">
+        <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
+          {error && (
+            <div
+              role="alert"
+              className="mb-4 flex items-start justify-between gap-3 rounded-xl border border-danger/30 bg-danger/8 px-4 py-3 text-sm text-danger"
             >
-              <X size={15} aria-hidden="true" />
-            </button>
-          </div>
-        )}
-
-        <div className="flex gap-6">
-          {/* Docked on wide screens, a drawer below xl. */}
-          <aside className="hidden w-[19rem] shrink-0 xl:block">
-            <div className="sticky top-6 max-h-[calc(100svh-3rem)] overflow-hidden rounded-2xl border border-line bg-surface-card">
-              <LeadSidebar
-                lead={selected}
-                onClose={() => setSelectedId(null)}
-                onSelect={setSelectedId}
-              />
+              <span>{error}</span>
+              <button
+                type="button"
+                onClick={() => setError("")}
+                aria-label="Dismiss error"
+                className="focus-ring shrink-0 rounded p-0.5 hover:opacity-70"
+              >
+                <X size={15} aria-hidden="true" />
+              </button>
             </div>
-          </aside>
+          )}
 
-          <main className="min-w-0 flex-1">
-            {loading && leads.length === 0 ? (
-              <div className="grid place-items-center rounded-2xl border border-line bg-surface-card py-24">
-                <span className="h-7 w-7 animate-spin rounded-full border-2 border-line border-t-accent" />
-                <span className="sr-only">Loading leads…</span>
-              </div>
-            ) : leads.length === 0 ? (
-              <div className="rounded-2xl border border-line bg-surface-card px-6 py-20 text-center">
-                <p className="font-display text-lg font-semibold text-content">No leads found</p>
-                <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-content-dim">
-                  {activeFilterCount
-                    ? "Nothing matches the current filters. Try clearing a few."
-                    : "Enquiries from the website will appear here as soon as they arrive."}
-                </p>
-              </div>
-            ) : (
-              <>
-                <div className="hidden lg:block">
-                  <LeadTable
-                    leads={leads}
-                    columns={columns}
-                    sort={sort}
-                    dir={dir}
-                    onSort={onSort}
-                    selectedId={selectedId}
-                    onSelect={selectLead}
-                    onPatch={onPatch}
-                    onDelete={setPendingDelete}
-                  />
-                </div>
-
-                <div className="lg:hidden">
-                  <LeadCards
-                    leads={leads}
-                    columns={columns}
-                    selectedId={selectedId}
-                    onSelect={selectLead}
-                    onPatch={onPatch}
-                    onDelete={setPendingDelete}
-                  />
-                </div>
-
-                {meta.pages > 1 && (
-                  <nav
-                    aria-label="Pagination"
-                    className="mt-4 flex items-center justify-between gap-3"
-                  >
-                    <button
-                      type="button"
-                      disabled={meta.page <= 1}
-                      onClick={() => setFilters((f) => ({ ...f, page: f.page - 1 }))}
-                      className={actionButton}
-                    >
-                      <ChevronLeft size={15} aria-hidden="true" />
-                      Previous
-                    </button>
-                    <p className="text-sm text-content-dim">
-                      Page {meta.page} of {meta.pages}
-                    </p>
-                    <button
-                      type="button"
-                      disabled={meta.page >= meta.pages}
-                      onClick={() => setFilters((f) => ({ ...f, page: f.page + 1 }))}
-                      className={actionButton}
-                    >
-                      Next
-                      <ChevronRight size={15} aria-hidden="true" />
-                    </button>
-                  </nav>
-                )}
-              </>
-            )}
-
-            <StatsFooter
-              stats={stats}
-              filtered={activeFilterCount > 0}
-              showing={leads.length}
-            />
-          </main>
+          <StatsBar stats={stats} filtered={activeFilterCount > 0} showing={leads.length} />
         </div>
-      </div>
 
-      {/* Sidebar as a drawer below xl. */}
+        <div className="mt-4">
+          {loading && leads.length === 0 ? (
+            <div className="mx-4 grid place-items-center rounded-2xl border border-line bg-surface-card/55 py-24 backdrop-blur-xl sm:mx-6 lg:mx-8">
+              <span className="h-7 w-7 animate-spin rounded-full border-2 border-line border-t-accent" />
+              <span className="sr-only">Loading leads…</span>
+            </div>
+          ) : leads.length === 0 ? (
+            <div className="mx-4 rounded-2xl border border-line bg-surface-card/55 px-6 py-20 text-center backdrop-blur-xl sm:mx-6 lg:mx-8">
+              <p className="font-display text-lg font-semibold text-content">No leads found</p>
+              <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-content-dim">
+                {activeFilterCount
+                  ? "Nothing matches the current filters. Try clearing a few."
+                  : "Enquiries from the website will appear here as soon as they arrive."}
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="hidden lg:block">
+                <LeadTable
+                  leads={leads}
+                  columns={visibleColumns}
+                  allColumns={allColumns}
+                  sort={sort}
+                  dir={dir}
+                  onSort={onSort}
+                  selectedId={selectedId}
+                  onSelect={selectLead}
+                  onPatch={onPatch}
+                  onDelete={setPendingDelete}
+                />
+              </div>
+
+              <div className="px-4 sm:px-6 lg:hidden">
+                <LeadCards
+                  leads={leads}
+                  columns={visibleColumns}
+                  allColumns={allColumns}
+                  selectedId={selectedId}
+                  onSelect={selectLead}
+                  onPatch={onPatch}
+                  onDelete={setPendingDelete}
+                />
+              </div>
+
+              {meta.pages > 1 && (
+                <nav
+                  aria-label="Pagination"
+                  className="mx-auto mt-4 flex max-w-8xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8"
+                >
+                  <button
+                    type="button"
+                    disabled={meta.page <= 1}
+                    onClick={() => setFilters((f) => ({ ...f, page: f.page - 1 }))}
+                    className={actionButton}
+                  >
+                    <ChevronLeft size={15} aria-hidden="true" />
+                    Previous
+                  </button>
+                  <p className="text-sm text-content-dim">
+                    Page {meta.page} of {meta.pages}
+                  </p>
+                  <button
+                    type="button"
+                    disabled={meta.page >= meta.pages}
+                    onClick={() => setFilters((f) => ({ ...f, page: f.page + 1 }))}
+                    className={actionButton}
+                  >
+                    Next
+                    <ChevronRight size={15} aria-hidden="true" />
+                  </button>
+                </nav>
+              )}
+            </>
+          )}
+        </div>
+      </main>
+
+      {/* Details panel: a drawer that opens on click and closes on demand,
+          rather than a permanently docked sidebar eating table width. It slides
+          in from the left, where the docked sidebar used to sit, so the muscle
+          memory of "details live on that side" survives. */}
       {sidebarOpen && selected && (
-        <div className="fixed inset-0 z-[60] xl:hidden">
+        <div className="fixed inset-0 z-[60]">
           <button
             type="button"
             aria-label="Close details panel"
@@ -467,15 +546,15 @@ export default function AdminLeadsPage() {
             className="absolute inset-0 bg-[rgb(6_12_26_/_0.55)] backdrop-blur-sm"
           />
           <motion.div
-            initial={{ x: "100%" }}
+            initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-y-0 right-0 w-full max-w-sm border-l border-line bg-surface-card"
+            className="absolute inset-y-0 left-0 w-full max-w-sm border-r border-line bg-surface-card"
           >
             <LeadSidebar
               lead={selected}
               onClose={() => setSidebarOpen(false)}
-              onSelect={setSelectedId}
+              onPatch={onPatch}
             />
           </motion.div>
         </div>
@@ -486,9 +565,9 @@ export default function AdminLeadsPage() {
         <button
           type="button"
           onClick={() => setSidebarOpen(true)}
-          className="focus-ring fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full border border-line bg-surface-card px-4 py-2.5 text-sm font-medium text-content shadow-[0_18px_40px_-18px_rgba(10,20,40,0.5)] xl:hidden"
+          className="focus-ring fixed bottom-5 left-5 z-50 inline-flex items-center gap-2 rounded-full border border-line bg-surface-card px-4 py-2.5 text-sm font-medium text-content shadow-[0_18px_40px_-18px_rgba(10,20,40,0.5)]"
         >
-          <PanelRightClose size={15} aria-hidden="true" />
+          <PanelLeftClose size={15} aria-hidden="true" />
           Details
         </button>
       )}
@@ -498,6 +577,25 @@ export default function AdminLeadsPage() {
         onClose={() => setNewLeadOpen(false)}
         onCreate={onCreate}
         services={SERVICE_OPTIONS}
+      />
+
+      <NewColumnDialog
+        open={newColumnOpen}
+        onClose={() => setNewColumnOpen(false)}
+        onCreate={onCreateColumn}
+      />
+
+      <ConfirmDialog
+        open={Boolean(pendingColumnDelete)}
+        busy={deletingColumn}
+        title="Delete this column?"
+        body={
+          pendingColumnDelete
+            ? `"${pendingColumnDelete.label}" will be removed for everyone, along with every value entered in it. This cannot be undone.`
+            : ""
+        }
+        onConfirm={confirmColumnDelete}
+        onCancel={() => setPendingColumnDelete(null)}
       />
 
       <ConfirmDialog

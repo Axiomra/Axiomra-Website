@@ -1,6 +1,7 @@
 import { Router } from "express";
 import mongoose from "mongoose";
-import Lead, { PROGRESS_STAGES } from "../models/Lead.js";
+import Lead, { COMPLETION_STATES, PROGRESS_STAGES } from "../models/Lead.js";
+import LeadField from "../models/LeadField.js";
 import { requireAuth } from "../lib/auth.js";
 import { cleanString, csvCell } from "../lib/sanitize.js";
 
@@ -12,7 +13,9 @@ router.use(requireAuth);
 
 /* Field -> max length. Doubles as the allow-list for writes: anything not
    named here is dropped, so `progress` cannot be smuggled past its enum and
-   `_id`/`createdAt` cannot be overwritten from the client. */
+   `_id`/`createdAt` cannot be overwritten from the client.
+   `progress`, `completion` and `deadline` are handled separately below,
+   because an enum and a date are not length-capped strings. */
 const WRITABLE = {
   name: 60,
   email: 254,
@@ -26,6 +29,11 @@ const WRITABLE = {
   remarks: 8000,
 };
 
+/* Values for user-added columns are strings, capped at the same length as a
+   long note. The key is never trusted: it has to name a column that actually
+   exists, or the write is dropped. */
+const CUSTOM_VALUE_MAX = 2000;
+
 const SORTABLE = new Set([
   "createdAt",
   "updatedAt",
@@ -36,6 +44,8 @@ const SORTABLE = new Set([
   "teamAssigned",
   "budget",
   "service",
+  "deadline",
+  "completion",
 ]);
 
 const EMAIL_RE =
@@ -197,37 +207,104 @@ router.get("/stats", async (req, res) => {
   }
 });
 
-/* GET /api/leads/export — CSV of everything matching the current filter. */
+/* The export's built-in columns, keyed the same way the table keys them so a
+   `columns` list straight from the panel needs no translation. */
+const EXPORT_COLUMNS = [
+  ["name", "Name"],
+  ["email", "Email"],
+  ["phone", "Phone"],
+  ["company", "Company"],
+  ["subject", "Subject"],
+  ["service", "Requested service"],
+  ["message", "Message"],
+  ["progress", "Progress"],
+  ["teamAssigned", "Team assigned"],
+  ["budget", "Budget"],
+  ["remarks", "Remarks"],
+  ["completion", "Completion"],
+  ["deadline", "Deadline"],
+  ["createdAt", "Created"],
+  ["updatedAt", "Updated"],
+];
+
+const EXPORT_LABELS = new Map(EXPORT_COLUMNS);
+const CUSTOM_PREFIX = "custom:";
+
+/** Dates need formatting; everything else is already a plain scalar. */
+function exportValue(lead, key) {
+  if (key === "deadline") {
+    return lead.deadline ? lead.deadline.toISOString().slice(0, 10) : "";
+  }
+  if (key === "createdAt" || key === "updatedAt") {
+    return lead[key]?.toISOString?.() ?? "";
+  }
+  return lead[key];
+}
+
+/**
+ * Resolve the requested column keys into an ordered header/accessor list.
+ *
+ * Unknown keys are dropped rather than exported blank, and an empty or absent
+ * `columns` falls back to everything — so a direct call to the endpoint still
+ * gets a full export.
+ */
+function resolveExportColumns(raw, customFields) {
+  const customByKey = new Map(customFields.map((f) => [f.key, f]));
+  const requested = cleanString(raw, 4000)
+    .split(",")
+    .map((k) => k.trim())
+    .filter(Boolean);
+
+  if (!requested.length) {
+    return [
+      ...EXPORT_COLUMNS.map(([key, label]) => ({ label, get: (lead) => exportValue(lead, key) })),
+      ...customFields.map((f) => ({
+        label: f.label,
+        get: (lead) => lead.custom?.[f.key],
+      })),
+    ];
+  }
+
+  const seen = new Set();
+  const columns = [];
+  for (const key of requested) {
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    if (key.startsWith(CUSTOM_PREFIX)) {
+      const field = customByKey.get(key.slice(CUSTOM_PREFIX.length));
+      if (field) {
+        columns.push({ label: field.label, get: (lead) => lead.custom?.[field.key] });
+      }
+      continue;
+    }
+
+    if (EXPORT_LABELS.has(key)) {
+      columns.push({ label: EXPORT_LABELS.get(key), get: (lead) => exportValue(lead, key) });
+    }
+  }
+
+  // A list that resolved to nothing means the panel sent stale keys; a file
+  // with headers and no data reads as a bug, so fall back to the full set.
+  return columns.length ? columns : resolveExportColumns("", customFields);
+}
+
+/* GET /api/leads/export — CSV of everything matching the current filter.
+   `columns` narrows and orders it to what the admin actually has on screen. */
 router.get("/export", async (req, res) => {
   try {
     const filter = buildFilter(req.query);
     // Capped: an unbounded export is a memory cliff in a serverless function.
-    const leads = await Lead.find(filter).sort({ createdAt: -1 }).limit(5000).lean();
+    const [leads, customFields] = await Promise.all([
+      Lead.find(filter).sort({ createdAt: -1 }).limit(5000).lean(),
+      LeadField.find().sort({ order: 1, createdAt: 1 }).lean(),
+    ]);
 
-    const columns = [
-      ["Name", "name"],
-      ["Email", "email"],
-      ["Phone", "phone"],
-      ["Company", "company"],
-      ["Subject", "subject"],
-      ["Requested service", "service"],
-      ["Message", "message"],
-      ["Progress", "progress"],
-      ["Team assigned", "teamAssigned"],
-      ["Budget", "budget"],
-      ["Remarks", "remarks"],
-    ];
+    const columns = resolveExportColumns(req.query.columns, customFields);
 
     const rows = [
-      columns.map(([label]) => csvCell(label)).concat([csvCell("Created"), csvCell("Updated")]),
-      ...leads.map((lead) =>
-        columns
-          .map(([, key]) => csvCell(lead[key]))
-          .concat([
-            csvCell(lead.createdAt?.toISOString?.() ?? ""),
-            csvCell(lead.updatedAt?.toISOString?.() ?? ""),
-          ])
-      ),
+      columns.map((c) => csvCell(c.label)),
+      ...leads.map((lead) => columns.map((c) => csvCell(c.get(lead)))),
     ];
 
     const stamp = new Date().toISOString().slice(0, 10);
@@ -304,6 +381,30 @@ function buildUpdate(body, { partial }) {
     }
   }
 
+  if (Object.prototype.hasOwnProperty.call(body, "completion") || !partial) {
+    const state = cleanString(body.completion, 40);
+    if (state) {
+      if (!COMPLETION_STATES.includes(state)) {
+        errors.push(`Completion must be one of: ${COMPLETION_STATES.join(", ")}.`);
+      } else {
+        update.completion = state;
+      }
+    }
+  }
+
+  // A cleared deadline is a real value ("no date"), not a missing field, so an
+  // empty string has to store null rather than being skipped.
+  if (Object.prototype.hasOwnProperty.call(body, "deadline") || !partial) {
+    const raw = cleanString(body.deadline, 40);
+    if (!raw) {
+      update.deadline = null;
+    } else {
+      const date = new Date(raw);
+      if (Number.isNaN(date.valueOf())) errors.push("Deadline must be a valid date.");
+      else update.deadline = date;
+    }
+  }
+
   // Required fields are only enforced when they are actually being written,
   // so a PATCH that just moves the progress chip is not blocked by them.
   if ("name" in update && !update.name) errors.push("Name cannot be empty.");
@@ -316,12 +417,41 @@ function buildUpdate(body, { partial }) {
   return { update, errors };
 }
 
+/**
+ * Pull the values for user-added columns out of a body.
+ *
+ * `body.custom` is an object keyed by LeadField.key. Every key is checked
+ * against the columns that actually exist, so a client cannot invent a field
+ * and grow the document with arbitrary keys — and a column deleted in another
+ * tab cannot be written to after the fact.
+ */
+async function buildCustomUpdate(body) {
+  const custom = body?.custom;
+  if (!custom || typeof custom !== "object" || Array.isArray(custom)) return {};
+
+  const keys = Object.keys(custom);
+  if (!keys.length) return {};
+
+  const known = await LeadField.find({ key: { $in: keys } })
+    .select("key")
+    .lean();
+
+  const values = {};
+  for (const field of known) {
+    values[field.key] = cleanString(custom[field.key], CUSTOM_VALUE_MAX);
+  }
+  return values;
+}
+
 /* POST /api/leads — manual entry from the panel. The public contact form still
    posts to /api/contact, which writes into this same collection. */
 router.post("/", async (req, res) => {
   try {
     const { update, errors } = buildUpdate(req.body || {}, { partial: false });
     if (errors.length) return res.status(400).json({ error: errors[0] });
+
+    const custom = await buildCustomUpdate(req.body || {});
+    if (Object.keys(custom).length) update.custom = custom;
 
     const lead = await Lead.create(update);
     return res.status(201).json(lead.toObject());
@@ -336,9 +466,18 @@ async function applyUpdate(req, res, partial) {
 
   const { update, errors } = buildUpdate(req.body || {}, { partial });
   if (errors.length) return res.status(400).json({ error: errors[0] });
-  if (!Object.keys(update).length) return res.status(400).json({ error: "Nothing to update." });
 
   try {
+    // Written as dotted paths so editing one custom column never rewrites the
+    // whole bag — two people editing two columns on the same row would
+    // otherwise overwrite each other.
+    const custom = await buildCustomUpdate(req.body || {});
+    for (const [key, value] of Object.entries(custom)) update[`custom.${key}`] = value;
+
+    if (!Object.keys(update).length) {
+      return res.status(400).json({ error: "Nothing to update." });
+    }
+
     const lead = await Lead.findByIdAndUpdate(
       req.params.id,
       { $set: update },

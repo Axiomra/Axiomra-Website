@@ -36,3 +36,29 @@ export const STAGE_STYLES = {
 };
 
 export const FALLBACK_STAGE_STYLE = STAGE_STYLES.New;
+
+/**
+ * Delivery state. Deliberately a different hue family from the pipeline
+ * stages above — two columns of chips in the same colours would be read as
+ * the same information twice.
+ */
+export const COMPLETION_STYLES = {
+  Pending: {
+    chip: "bg-[hsl(38_92%_52%_/_0.16)] text-[hsl(30_86%_36%)] dark:text-[hsl(38_92%_72%)] ring-[hsl(38_92%_52%_/_0.35)]",
+    dot: "bg-[hsl(38_92%_52%)]",
+  },
+  Ongoing: {
+    chip: "bg-[hsl(206_84%_54%_/_0.15)] text-[hsl(206_78%_38%)] dark:text-[hsl(206_90%_76%)] ring-[hsl(206_84%_54%_/_0.35)]",
+    dot: "bg-[hsl(206_84%_54%)]",
+  },
+  Completed: {
+    chip: "bg-[hsl(152_62%_42%_/_0.16)] text-[hsl(152_70%_26%)] dark:text-[hsl(152_62%_66%)] ring-[hsl(152_62%_42%_/_0.35)]",
+    dot: "bg-[hsl(152_62%_42%)]",
+  },
+  Closed: {
+    chip: "bg-[hsl(232_18%_52%_/_0.16)] text-[hsl(232_16%_38%)] dark:text-[hsl(232_24%_78%)] ring-[hsl(232_18%_52%_/_0.32)]",
+    dot: "bg-[hsl(232_18%_52%)]",
+  },
+};
+
+export const FALLBACK_COMPLETION_STYLE = COMPLETION_STYLES.Pending;

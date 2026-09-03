@@ -2,13 +2,16 @@ import { PROGRESS_STAGES } from "../../lib/adminApi";
 import { STAGE_STYLES } from "./stageStyles";
 
 /**
- * Total count and a per-stage breakdown, at the bottom of the page.
+ * Total count and a per-stage breakdown, above the table.
  *
  * Counts come from a server-side aggregate over the *filtered* set, not from
- * the rows currently on screen — a footer that only counts page one is worse
- * than no footer.
+ * the rows currently on screen — a summary that only counts page one is worse
+ * than no summary.
+ *
+ * Spacing is left to the caller: this sits at the top of the working area, and
+ * a margin baked in here would fight whatever the page puts around it.
  */
-export default function StatsFooter({ stats, filtered, showing }) {
+export default function StatsBar({ stats, filtered, showing }) {
   const total = stats?.total ?? 0;
   const byProgress = stats?.byProgress || {};
   // A stage bar is meaningless at total 0 and dividing by it is worse.
@@ -17,7 +20,7 @@ export default function StatsFooter({ stats, filtered, showing }) {
   return (
     <section
       aria-label="Lead totals"
-      className="mt-8 rounded-2xl border border-line bg-surface-card p-5"
+      className="rounded-2xl border border-line/70 bg-surface-card/55 p-5 shadow-[0_24px_60px_-42px_rgba(10,20,40,0.55)] backdrop-blur-xl"
     >
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
         <div className="flex items-baseline gap-2.5">
@@ -40,7 +43,7 @@ export default function StatsFooter({ stats, filtered, showing }) {
           const count = byProgress[stage] || 0;
           const style = STAGE_STYLES[stage];
           return (
-            <div key={stage} className="rounded-xl border border-line/70 bg-surface p-3">
+            <div key={stage} className="rounded-xl border border-line/60 bg-surface/45 p-3 backdrop-blur-sm">
               <dt className="flex items-center gap-1.5 text-xs font-medium text-content-dim">
                 <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${style.dot}`} aria-hidden="true" />
                 {stage}

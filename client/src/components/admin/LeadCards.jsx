@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Trash2 } from "lucide-react";
+import CompletionBadge from "./CompletionBadge";
+import DeadlineCell from "./DeadlineCell";
 import EditableCell from "./EditableCell";
 import ProgressBadge from "./ProgressBadge";
 import Avatar from "./Avatar";
-import { LEAD_COLUMNS, formatDate } from "./leadColumns";
+import { LEAD_COLUMNS, cellPatch, cellValue, formatDate } from "./leadColumns";
 
 /**
  * The mobile view of the leads list.
@@ -17,7 +19,15 @@ import { LEAD_COLUMNS, formatDate } from "./leadColumns";
  * Respects the same column-visibility choice as the table, so hiding a column
  * on desktop hides it here too.
  */
-export default function LeadCards({ leads, columns, selectedId, onSelect, onPatch, onDelete }) {
+export default function LeadCards({
+  leads,
+  columns,
+  allColumns = LEAD_COLUMNS,
+  selectedId,
+  onSelect,
+  onPatch,
+  onDelete,
+}) {
   const [expanded, setExpanded] = useState(() => new Set());
 
   const toggle = (id) =>
@@ -30,7 +40,7 @@ export default function LeadCards({ leads, columns, selectedId, onSelect, onPatc
 
   // Name, email and progress are in the always-visible header, so the fold
   // holds everything else the user has chosen to keep.
-  const foldedColumns = LEAD_COLUMNS.filter(
+  const foldedColumns = allColumns.filter(
     (c) => columns.includes(c.key) && !["name", "email", "progress"].includes(c.key)
   );
 
@@ -58,19 +68,17 @@ export default function LeadCards({ leads, columns, selectedId, onSelect, onPatc
               </button>
 
               <div className="min-w-0 flex-1">
-                <EditableCell
-                  value={lead.name}
-                  ariaLabel="Name"
-                  className="!px-1 font-medium"
-                  onSave={(v) => onPatch(lead._id, { name: v })}
-                />
-                <EditableCell
-                  value={lead.email}
-                  type="email"
-                  ariaLabel="Email"
-                  className="!px-1 !text-[13px] !text-content-dim"
-                  onSave={(v) => onPatch(lead._id, { email: v })}
-                />
+                <button
+                  type="button"
+                  onClick={() => onSelect(lead)}
+                  aria-label={`Open details for ${lead.name || lead.email}`}
+                  className="focus-ring block w-full rounded-lg px-1 py-0.5 text-left"
+                >
+                  <p className="truncate text-sm font-medium text-content">
+                    {lead.name || <span className="text-content-faint/60">Unnamed lead</span>}
+                  </p>
+                  <p className="truncate text-[13px] text-content-dim">{lead.email}</p>
+                </button>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <ProgressBadge
                     value={lead.progress}
@@ -115,12 +123,34 @@ export default function LeadCards({ leads, columns, selectedId, onSelect, onPatc
                             <span className="block px-2 text-sm text-content-dim">
                               {formatDate(lead[col.key])}
                             </span>
+                          ) : col.kind === "completion" ? (
+                            <div className="px-1">
+                              <CompletionBadge
+                                value={lead.completion}
+                                onChange={(state) => onPatch(lead._id, { completion: state })}
+                              />
+                            </div>
+                          ) : col.kind === "deadline" ? (
+                            <DeadlineCell
+                              value={lead.deadline}
+                              done={
+                                lead.completion === "Completed" || lead.completion === "Closed"
+                              }
+                              onSave={(v) => onPatch(lead._id, { deadline: v })}
+                            />
+                          ) : col.locked ? (
+                            <span className="block px-2 py-1.5 text-sm text-content">
+                              {lead[col.key] || <span className="text-content-faint/60">—</span>}
+                            </span>
                           ) : (
                             <EditableCell
-                              value={lead[col.key]}
+                              value={cellValue(lead, col)}
+                              type={col.type}
                               multiline={col.multiline}
+                              formatting={col.formatting}
+                              clamp={false}
                               ariaLabel={col.label}
-                              onSave={(v) => onPatch(lead._id, { [col.key]: v })}
+                              onSave={(v) => onPatch(lead._id, cellPatch(col, v))}
                             />
                           )}
                         </dd>

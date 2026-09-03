@@ -1,12 +1,26 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Check, Eye, EyeOff, Loader2, Lock, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Check, Eye, EyeOff, KeyRound, Loader2, Lock, ShieldCheck } from "lucide-react";
 import AdminBackdrop from "../../components/admin/AdminBackdrop";
 import FieldError from "../../components/FieldError";
 import { adminAuth } from "../../lib/adminApi";
 
 const MIN_LENGTH = 10;
+const KEY_LENGTH = 78;
+
+/** Mirrors models/User.js#recoveryKeyProblem, so a bad paste is caught here. */
+function keyProblem(key) {
+  if (!key) return "Enter your recovery key.";
+  if (key.length !== KEY_LENGTH) {
+    return `The recovery key is ${KEY_LENGTH} characters — you have entered ${key.length}.`;
+  }
+  if (/\s/.test(key)) return "The recovery key cannot contain spaces or line breaks.";
+  if (!/[a-z]/.test(key) || !/[A-Z]/.test(key) || !/\d/.test(key) || !/[^A-Za-z0-9]/.test(key)) {
+    return "That does not look like a recovery key — it mixes letters, numbers and symbols.";
+  }
+  return "";
+}
 
 /** Mirrors the server's rule exactly, so the form never accepts what the API will reject. */
 const RULES = [
@@ -26,14 +40,31 @@ export default function AdminResetPasswordPage() {
 
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [recoveryKey, setRecoveryKey] = useState("");
   const [show, setShow] = useState(false);
+  const [showKey, setShowKey] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
+  // Assume the key is needed until the server says otherwise: rendering the
+  // field and removing it is a worse flicker than the reverse.
+  const [keyRequired, setKeyRequired] = useState(true);
 
   useEffect(() => {
     document.title = "Set a new password · Axiomra Lead Management";
   }, []);
+
+  useEffect(() => {
+    if (!token) return undefined;
+    const ac = new AbortController();
+    adminAuth
+      .resetRequirements(token, ac.signal)
+      .then((data) => setKeyRequired(data?.recoveryKeyRequired !== false))
+      // A failed probe leaves the field in place; the server is the one that
+      // actually enforces this, so guessing wrong here costs nothing.
+      .catch(() => {});
+    return () => ac.abort();
+  }, [token]);
 
   const checks = useMemo(() => RULES.map((r) => ({ ...r, ok: r.test(password) })), [password]);
   const allMet = checks.every((c) => c.ok);
@@ -50,10 +81,17 @@ export default function AdminResetPasswordPage() {
       setError("The two passwords do not match.");
       return;
     }
+    if (keyRequired) {
+      const problem = keyProblem(recoveryKey);
+      if (problem) {
+        setError(problem);
+        return;
+      }
+    }
 
     setBusy(true);
     try {
-      await adminAuth.resetPassword(token, password);
+      await adminAuth.resetPassword(token, password, recoveryKey);
       setDone(true);
       // The server deliberately does not sign them in, so send them to the
       // login form to prove the new password works.
@@ -184,6 +222,59 @@ export default function AdminResetPasswordPage() {
                   />
                 </div>
               </div>
+
+              {keyRequired && (
+                <div className="mt-5 rounded-xl border border-line bg-surface-inset/60 p-4">
+                  <label
+                    htmlFor="reset-key"
+                    className="mb-1.5 flex items-center gap-2 text-sm font-medium text-content"
+                  >
+                    <KeyRound size={15} aria-hidden="true" className="text-accent" />
+                    Admin recovery key
+                  </label>
+                  <p className="mb-3 text-xs leading-relaxed text-content-dim">
+                    The email alone cannot change this password. Paste the {KEY_LENGTH}-character
+                    key held by the main admin.
+                  </p>
+                  <div className="relative">
+                    <textarea
+                      id="reset-key"
+                      rows={3}
+                      spellCheck={false}
+                      autoComplete="off"
+                      autoCapitalize="off"
+                      autoCorrect="off"
+                      value={recoveryKey}
+                      // Pasting out of a mail client drags in newlines; they are
+                      // stripped rather than rejected because the key itself can
+                      // never contain one.
+                      onChange={(e) => setRecoveryKey(e.target.value.replace(/\s+/g, ""))}
+                      className={`w-full resize-none rounded-xl border border-line bg-surface p-3 pr-11 font-mono text-xs leading-relaxed text-content outline-none transition-colors placeholder:text-content-faint/70 focus:border-accent focus:ring-4 focus:ring-accent/12 ${
+                        showKey ? "" : "[-webkit-text-security:disc] [text-security:disc]"
+                      }`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowKey((v) => !v)}
+                      aria-label={showKey ? "Hide recovery key" : "Show recovery key"}
+                      className="focus-ring absolute right-2.5 top-2.5 rounded-lg p-1.5 text-content-faint transition-colors hover:bg-surface-inset hover:text-content"
+                    >
+                      {showKey ? (
+                        <EyeOff size={16} aria-hidden="true" />
+                      ) : (
+                        <Eye size={16} aria-hidden="true" />
+                      )}
+                    </button>
+                  </div>
+                  <p
+                    className={`mt-2 text-xs tabular-nums ${
+                      recoveryKey.length === KEY_LENGTH ? "text-success" : "text-content-faint"
+                    }`}
+                  >
+                    {recoveryKey.length} / {KEY_LENGTH} characters
+                  </p>
+                </div>
+              )}
 
               <FieldError id="reset-error" message={error} />
 

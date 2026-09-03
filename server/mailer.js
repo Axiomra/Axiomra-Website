@@ -141,6 +141,7 @@ export async function sendPasswordResetEmail({ to, name, link, expiresInMinutes 
         link,
         "",
         `The link expires in ${expiresInMinutes} minutes and can only be used once.`,
+        "You will also need your 78-character admin recovery key to finish the reset — the link on its own will not change the password.",
         "If you did not ask for this, you can ignore this email — your password stays as it is.",
       ].join("\n"),
       html: `
@@ -156,6 +157,10 @@ export async function sendPasswordResetEmail({ to, name, link, expiresInMinutes 
           </p>
           <p style="margin:0 0 8px;color:#666;font-size:13px;">
             The link expires in ${expiresInMinutes} minutes and can only be used once.
+          </p>
+          <p style="margin:0 0 8px;color:#666;font-size:13px;">
+            You will also need your 78-character admin recovery key to finish the reset — the link
+            on its own will not change the password.
           </p>
           <p style="margin:0;color:#666;font-size:13px;">
             If you did not ask for this, ignore this email — your password stays as it is.

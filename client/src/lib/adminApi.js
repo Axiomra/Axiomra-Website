@@ -66,8 +66,14 @@ export const adminAuth = {
   me: (signal) => request("/api/auth/me", { signal }),
   forgotPassword: (email) =>
     request("/api/auth/forgot-password", { method: "POST", body: { email } }),
-  resetPassword: (token, password) =>
-    request("/api/auth/reset-password", { method: "POST", body: { token, password } }),
+  resetPassword: (token, password, recoveryKey) =>
+    request("/api/auth/reset-password", {
+      method: "POST",
+      body: { token, password, recoveryKey },
+    }),
+  /** Whether this reset link's account has a recovery key to satisfy. */
+  resetRequirements: (token, signal) =>
+    request(`/api/auth/reset-requirements?token=${encodeURIComponent(token)}`, { signal }),
   changePassword: (currentPassword, newPassword) =>
     request("/api/auth/change-password", { method: "POST", body: { currentPassword, newPassword } }),
 };
@@ -107,6 +113,16 @@ export const leadsApi = {
   },
 };
 
+/* --- Custom columns ---
+   Shared, not per-browser: the whole point of adding a column is that the
+   value one person types is a column everyone else can see. */
+export const leadFieldsApi = {
+  list: (signal) => request("/api/lead-fields", { signal }),
+  create: (field) => request("/api/lead-fields", { method: "POST", body: field }),
+  patch: (id, changes) => request(`/api/lead-fields/${id}`, { method: "PATCH", body: changes }),
+  remove: (id) => request(`/api/lead-fields/${id}`, { method: "DELETE" }),
+};
+
 export const PROGRESS_STAGES = [
   "New",
   "Contacted",
@@ -115,3 +131,6 @@ export const PROGRESS_STAGES = [
   "Won",
   "Lost",
 ];
+
+/** Delivery state, tracked separately from the sales pipeline. */
+export const COMPLETION_STATES = ["Pending", "Ongoing", "Completed", "Closed"];

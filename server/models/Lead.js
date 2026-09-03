@@ -20,6 +20,15 @@ export const PROGRESS_STAGES = [
   "Lost",
 ];
 
+/**
+ * Delivery state, tracked separately from the sales pipeline.
+ *
+ * `progress` answers "where is this deal?"; `completion` answers "where is the
+ * work?". A Won lead can still be Pending, and a Lost one can be Closed, so
+ * folding them into one enum would lose information the team needs.
+ */
+export const COMPLETION_STATES = ["Pending", "Ongoing", "Completed", "Closed"];
+
 // Values written by the pre-panel schema, mapped onto the new pipeline.
 export const LEGACY_STATUS_MAP = {
   new: "New",
@@ -47,6 +56,18 @@ const leadSchema = new mongoose.Schema(
     // Free text on purpose: real answers are "50-70k", "TBC", "retainer".
     budget: { type: String, trim: true, default: "", maxlength: 60 },
     remarks: { type: String, trim: true, default: "", maxlength: 8000 },
+    // Null rather than "" so an unset deadline sorts and filters as a real
+    // absence instead of an empty string that Mongo orders before every date.
+    deadline: { type: Date, default: null },
+    completion: { type: String, enum: COMPLETION_STATES, default: "Pending", index: true },
+
+    /* --- Values for the columns the team added themselves --- */
+    // A flat bag keyed by LeadField.key, values stored as strings even for the
+    // number and date types: they are only ever displayed and edited as text,
+    // and a Mixed bag keeps a new column from needing a schema migration.
+    // Writes go through the `custom` allow-list in routes/leads.js, which
+    // checks every key against an existing LeadField first.
+    custom: { type: mongoose.Schema.Types.Mixed, default: () => ({}) },
   },
   {
     timestamps: true,

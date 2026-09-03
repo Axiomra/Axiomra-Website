@@ -35,17 +35,18 @@
 
 .dark {
   /* Page sits BELOW the brand navy so inverse blocks still read as raised rather than merging into the background. */
-  --surface: 7 14 28;
-  --surface-subtle: 12 22 42;
-  --surface-card: 16 27 51;
-  --surface-inset: 12 22 42;
+  /* Hue is indigo-violet rather than navy: the near-black blue read as flat under the frosted panels, and a warmer purple base gives the glass something to pick up. */
+  --surface: 12 10 30;
+  --surface-subtle: 20 17 44;
+  --surface-card: 27 22 56;
+  --surface-inset: 20 17 44;
 
-  --content: 232 237 245;
-  --content-dim: 160 170 192;
-  --content-faint: 132 143 166;
+  --content: 234 232 248;
+  --content-dim: 169 165 198;
+  --content-faint: 140 135 174;
 
-  --line: 30 42 71;
-  --line-strong: 44 59 94;
+  --line: 46 38 84;
+  --line-strong: 66 55 116;
 
   /* Brand hues are lightened for AA contrast against a dark page, the light-mode values fail on these backgrounds. */
   --brand: 166 179 239;
@@ -54,9 +55,9 @@
   --accent-vivid: 20 216 196;
   --gold: 255 190 71;
 
-  --inverse: 13 24 46;
-  --inverse-soft: 18 31 58;
-  --inverse-card: 24 40 73;
+  --inverse: 19 15 42;
+  --inverse-soft: 27 21 55;
+  --inverse-card: 36 29 72;
   --on-inverse: 255 255 255;
 
   --danger: 248 113 113;

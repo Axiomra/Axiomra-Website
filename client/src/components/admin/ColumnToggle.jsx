@@ -1,33 +1,30 @@
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Columns3, Eye, EyeOff, RotateCcw } from "lucide-react";
+import { useRef, useState } from "react";
+import { Columns3, Eye, EyeOff, Plus, RotateCcw, Trash2 } from "lucide-react";
+import AnchoredMenu from "./AnchoredMenu";
 import { LEAD_COLUMNS, DEFAULT_VISIBLE } from "./leadColumns";
 
 /**
- * Show/hide menu for table columns.
+ * Show/hide menu for table columns, and the entry point for adding new ones.
  *
  * The last visible column cannot be hidden — an empty table with no way back
  * except clearing localStorage is a trap, not a feature.
+ *
+ * Custom columns are listed under their own heading with a delete button:
+ * hiding one is a per-browser preference, deleting one removes the column and
+ * its values for the whole team, so the two must not look like the same action.
+ *
+ * Portalled: the page header sets `overflow: hidden` for its animated
+ * backdrop, which used to cut this menu off a few rows in.
  */
-export default function ColumnToggle({ columns, onChange }) {
+export default function ColumnToggle({
+  columns,
+  onChange,
+  allColumns = LEAD_COLUMNS,
+  onNewColumn,
+  onDeleteColumn,
+}) {
   const [open, setOpen] = useState(false);
-  const wrapRef = useRef(null);
-
-  useEffect(() => {
-    if (!open) return undefined;
-    const onPointerDown = (e) => {
-      if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false);
-    };
-    const onKeyDown = (e) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("mousedown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open]);
+  const triggerRef = useRef(null);
 
   const toggle = (key) => {
     const on = columns.includes(key);
@@ -35,11 +32,52 @@ export default function ColumnToggle({ columns, onChange }) {
     onChange(on ? columns.filter((k) => k !== key) : [...columns, key]);
   };
 
-  const hiddenCount = LEAD_COLUMNS.length - columns.length;
+  const custom = allColumns.filter((c) => c.customKey);
+  const hiddenCount = allColumns.length - columns.length;
+
+  const row = (col) => {
+    const on = columns.includes(col.key);
+    const lastOne = on && columns.length === 1;
+    return (
+      <li key={col.key} className="group/row flex items-center gap-1">
+        <button
+          type="button"
+          onClick={() => toggle(col.key)}
+          disabled={lastOne}
+          aria-pressed={on}
+          className="flex min-w-0 flex-1 items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors hover:bg-surface-inset disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {on ? (
+            <Eye size={14} className="shrink-0 text-accent" aria-hidden="true" />
+          ) : (
+            <EyeOff size={14} className="shrink-0 text-content-faint" aria-hidden="true" />
+          )}
+          <span className={`truncate ${on ? "text-content" : "text-content-faint"}`}>
+            {col.label}
+          </span>
+        </button>
+
+        {col.customKey && onDeleteColumn && (
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false);
+              onDeleteColumn(col);
+            }}
+            aria-label={`Delete the ${col.label} column`}
+            className="focus-ring mr-1 shrink-0 rounded-md p-1.5 text-content-faint opacity-0 transition-all hover:bg-danger/10 hover:text-danger focus-visible:opacity-100 group-hover/row:opacity-100"
+          >
+            <Trash2 size={13} aria-hidden="true" />
+          </button>
+        )}
+      </li>
+    );
+  };
 
   return (
-    <div ref={wrapRef} className="relative">
+    <>
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="true"
@@ -55,55 +93,54 @@ export default function ColumnToggle({ columns, onChange }) {
         )}
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -6, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -6, scale: 0.97 }}
-            transition={{ duration: 0.16, ease: "easeOut" }}
-            className="absolute right-0 top-[calc(100%+8px)] z-40 w-60 overflow-hidden rounded-2xl border border-line bg-surface-card p-1.5 shadow-[0_28px_70px_-24px_rgba(10,20,40,0.4)]"
+      <AnchoredMenu
+        anchorRef={triggerRef}
+        open={open}
+        onClose={() => setOpen(false)}
+        width={260}
+        align="right"
+        estimatedHeight={460}
+        className="p-1.5"
+      >
+        <div className="max-h-[min(58vh,400px)] overflow-y-auto">
+          <p className="px-2.5 py-2 text-[11px] font-semibold uppercase tracking-[0.09em] text-content-faint">
+            Visible columns
+          </p>
+          <ul>{allColumns.filter((c) => !c.customKey).map(row)}</ul>
+
+          {custom.length > 0 && (
+            <>
+              <p className="mt-1 border-t border-line px-2.5 pb-1 pt-2.5 text-[11px] font-semibold uppercase tracking-[0.09em] text-content-faint">
+                Your columns
+              </p>
+              <ul>{custom.map(row)}</ul>
+            </>
+          )}
+        </div>
+
+        {onNewColumn && (
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false);
+              onNewColumn();
+            }}
+            className="mt-1 flex w-full items-center gap-2 rounded-lg border-t border-line px-2.5 py-2 text-sm font-medium text-accent transition-colors hover:bg-surface-inset"
           >
-            <p className="px-2.5 py-2 text-[11px] font-semibold uppercase tracking-[0.09em] text-content-faint">
-              Visible columns
-            </p>
-
-            <ul className="max-h-[min(60vh,380px)] overflow-y-auto">
-              {LEAD_COLUMNS.map((col) => {
-                const on = columns.includes(col.key);
-                const locked = on && columns.length === 1;
-                return (
-                  <li key={col.key}>
-                    <button
-                      type="button"
-                      onClick={() => toggle(col.key)}
-                      disabled={locked}
-                      aria-pressed={on}
-                      className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors hover:bg-surface-inset disabled:cursor-not-allowed disabled:opacity-50"
-                    >
-                      {on ? (
-                        <Eye size={14} className="shrink-0 text-accent" aria-hidden="true" />
-                      ) : (
-                        <EyeOff size={14} className="shrink-0 text-content-faint" aria-hidden="true" />
-                      )}
-                      <span className={on ? "text-content" : "text-content-faint"}>{col.label}</span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <button
-              type="button"
-              onClick={() => onChange(DEFAULT_VISIBLE)}
-              className="mt-1 flex w-full items-center gap-2 rounded-lg border-t border-line px-2.5 py-2 text-sm text-content-dim transition-colors hover:bg-surface-inset"
-            >
-              <RotateCcw size={14} aria-hidden="true" />
-              Reset to default
-            </button>
-          </motion.div>
+            <Plus size={14} aria-hidden="true" />
+            New column
+          </button>
         )}
-      </AnimatePresence>
-    </div>
+
+        <button
+          type="button"
+          onClick={() => onChange(DEFAULT_VISIBLE)}
+          className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-sm text-content-dim transition-colors hover:bg-surface-inset"
+        >
+          <RotateCcw size={14} aria-hidden="true" />
+          Reset to default
+        </button>
+      </AnchoredMenu>
+    </>
   );
 }
