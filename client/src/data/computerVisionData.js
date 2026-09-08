@@ -5,8 +5,35 @@ import heroVisionGraph from "../assets/opencv/hero-vision-graph.webp";
 import heroRoboticHand from "../assets/opencv/hero-robotic-hand.jpg";
 import challengesMonitoring from "../assets/opencv/cv-challenges-monitoring.jpg";
 import caseStudyAnalytics from "../assets/opencv/cv-case-study-analytics.jpg";
-import industriesHumanoid from "../assets/opencv/cv-industries-humanoid.jpg";
 import modelPipeline from "../assets/opencv/cv-model-pipeline.png";
+
+/* Per-service photography: one frame per engagement type, so the detail
+   panel never renders against an empty right-hand column. */
+import serviceConsulting from "../assets/opencv/cv-service-consulting.webp";
+import serviceCustomSoftware from "../assets/opencv/cv-service-custom-software.webp";
+import serviceModelOptimization from "../assets/opencv/cv-service-model-optimization.webp";
+import serviceIntegration from "../assets/opencv/cv-service-integration.webp";
+import servicePoc from "../assets/opencv/cv-service-poc.webp";
+import serviceData from "../assets/opencv/cv-service-data.webp";
+
+/* Per-industry photography: each tab carries its own scene rather than one
+   shared stock frame behind every vertical. */
+import industryHealthcare from "../assets/opencv/cv-industry-healthcare.webp";
+import industryRetail from "../assets/opencv/cv-industry-retail.webp";
+import industryManufacturing from "../assets/opencv/cv-industry-manufacturing.webp";
+import industryFinance from "../assets/opencv/cv-industry-finance.webp";
+import industryLogistics from "../assets/opencv/cv-industry-logistics.webp";
+import industryConstruction from "../assets/opencv/cv-industry-construction.webp";
+
+/* Per-capability photography: each expertise row gets a real scene under the
+   wireframe motif, so the frame reads as a camera feed instead of a diagram. */
+import capObjectDetection from "../assets/cv/cv-cap-object-detection.webp";
+import capFacialRecognition from "../assets/cv/cv-cap-facial-recognition.webp";
+import capPoseEstimation from "../assets/cv/cv-cap-pose-estimation.webp";
+import capImageAnalytics from "../assets/cv/cv-cap-image-analytics.webp";
+import capVideoAnalytics from "../assets/cv/cv-cap-video-analytics.webp";
+import capOcr from "../assets/cv/cv-cap-ocr.webp";
+import capGan from "../assets/cv/cv-cap-gan.webp";
 
 /** Route this page owns, imported by App.jsx and the navbar so they can't drift. */
 export const COMPUTER_VISION_SLUG = "computer-vision-services";
@@ -131,6 +158,9 @@ export const services = {
   items: [
     {
       id: "computer-vision-consulting",
+      image: serviceConsulting,
+      imageAlt:
+        "Consultants reviewing charts and a roadmap on a whiteboard during a scoping workshop",
       title: "Computer Vision Consulting",
       body:
         "Not sure where to start? Our consultants review your business goals, existing data, and technical setup. You get a clear plan that tells you what to build, how long it will take, and what it will cost, plus which use cases are worth doing first, whether your data is ready, and which technology fits your budget and timeline. No guesswork, no overselling.",
@@ -138,6 +168,9 @@ export const services = {
     },
     {
       id: "custom-vision-software",
+      image: serviceCustomSoftware,
+      imageAlt:
+        "Developer writing production code across two monitors in a darkened studio",
       title: "Custom Computer Vision Software Development",
       body:
         "End-to-end builds: data pipeline, model, inference service, and the UI your team actually works in. We write production code: versioned, tested, containerised, and handed over with the repo, not a notebook.",
@@ -145,6 +178,9 @@ export const services = {
     },
     {
       id: "model-design-optimization",
+      image: serviceModelOptimization,
+      imageAlt:
+        "Processor seated in its socket on a motherboard, lit by the rig it trains on",
       title: "Computer Vision Model Design And Optimization",
       body:
         "Architecture selection, transfer learning, and hard-negative mining to get accuracy up, then quantisation, pruning, and TensorRT/ONNX conversion to get latency and GPU cost down without losing the accuracy you just paid for.",
@@ -152,6 +188,9 @@ export const services = {
     },
     {
       id: "system-integration",
+      image: serviceIntegration,
+      imageAlt:
+        "Operator watching a wall of live camera feeds inside a monitoring room",
       title: "Computer Vision System Integration",
       body:
         "The model is the easy part. We wire it into your cameras, PLCs, PACS, WMS, ERP, or CRM so detections become tickets, alerts, and records inside the systems your team already uses.",
@@ -159,6 +198,9 @@ export const services = {
     },
     {
       id: "proof-of-concept",
+      image: servicePoc,
+      imageAlt:
+        "Engineer testing a projected interface prototype on her own hand in the lab",
       title: "Computer Vision Proof Of Concept (PoC)",
       body:
         "A time-boxed build on your own data that answers one question honestly: is this technically possible at the accuracy your business needs? You get the numbers, the failure cases, and a straight recommendation, including when the answer is no.",
@@ -166,6 +208,9 @@ export const services = {
     },
     {
       id: "vision-data-services",
+      image: serviceData,
+      imageAlt:
+        "Annotator reviewing a contact sheet of candidate training images on screen",
       title: "Computer Vision Data Services",
       body:
         "Collection, cleaning, annotation, and augmentation, plus synthetic data generation when real-world samples are scarce, expensive, or legally restricted. Labelled to a written spec with QA sampling on every batch.",
@@ -186,9 +231,11 @@ export const expertise = {
     {
       id: "object-detection",
       motif: "boxes",
+      image: capObjectDetection,
+      imageAlt: "Warehouse camera feed with detected items outlined by bounding boxes",
       title: "Object Detection",
       body:
-        "Identify, locate, and track objects in images and video streams in real time. We build detection systems for quality control, security monitoring, inventory management, and logistics automation.",
+        "Identify, locate, and track objects in images and video streams in real time, with a confidence score attached to every prediction. We build detection systems for quality control, security monitoring, inventory management, and logistics automation, tuned to the cameras and lighting you already have on site. Models are trained on your own footage rather than generic public datasets, so they learn the exact parts, packaging, and edge cases your operation deals with. Everything runs on the edge or in the cloud depending on the latency and bandwidth your environment allows.",
       bullets: [
         "Real-time object detection and classification",
         "Bounding box annotation and labeling",
@@ -200,9 +247,11 @@ export const expertise = {
     {
       id: "facial-recognition",
       motif: "mesh",
+      image: capFacialRecognition,
+      imageAlt: "Face captured by an access-control camera during identity verification",
       title: "Facial Recognition",
       body:
-        "Secure facial recognition for identity verification, access control, and customer analytics. Our systems hold accuracy across lighting conditions and scale to millions of faces.",
+        "Secure facial recognition for identity verification, access control, and customer analytics, built to hold accuracy across lighting conditions, camera angles, masks, and ageing. Our matching pipelines scale from a single door reader to millions of enrolled faces without a drop in response time. Liveness checks sit in front of every match, so printed photos, screen replays, and deepfake attempts are rejected before they reach the database. Templates are encrypted and stored as irreversible vectors, which keeps deployments aligned with GDPR and regional biometric rules.",
       bullets: [
         "Face matching and verification",
         "Biometric identification",
@@ -215,9 +264,11 @@ export const expertise = {
     {
       id: "pose-estimation",
       motif: "skeleton",
+      image: capPoseEstimation,
+      imageAlt: "Person tracked by a camera while joint keypoints map their posture",
       title: "Pose Estimation",
       body:
-        "Detect body positions and movement with high accuracy, used in healthcare monitoring, sports analytics, gaming, and workplace safety compliance.",
+        "Detect body position, joint angles, and movement over time with keypoint-level accuracy, from a single camera or a multi-view rig. The same models power patient mobility monitoring, physiotherapy progress tracking, sports biomechanics, gesture-driven interfaces, and workplace safety compliance. We track posture across frames rather than scoring isolated images, so the system can flag a fall, a repetitive strain risk, or a missed safety step as it happens. Output streams as structured coordinates your own analytics tools can read directly.",
       bullets: [
         "2D and 3D pose estimation",
         "Gesture recognition",
@@ -230,9 +281,11 @@ export const expertise = {
     {
       id: "image-analytics",
       motif: "segments",
+      image: capImageAnalytics,
+      imageAlt: "High-resolution scan being segmented region by region for inspection",
       title: "Image Analytics",
       body:
-        "We segment images at the pixel level to support medical imaging, autonomous systems, and industrial inspection. Our models separate objects, backgrounds, and regions with precision.",
+        "We segment images at the pixel level so every region in a frame is classified, not just boxed. That precision is what medical imaging, autonomous systems, satellite analysis, and industrial inspection need when the difference between a pass and a defect is a few hundred pixels. Our models separate overlapping objects, backgrounds, and fine boundaries, and hold up on low-contrast, noisy, or high-resolution source images. Results are delivered as masks, measurements, and area statistics that plug straight into reporting.",
       bullets: [
         "Semantic segmentation",
         "Panoptic segmentation",
@@ -244,9 +297,11 @@ export const expertise = {
     {
       id: "video-analytics",
       motif: "timeline",
+      image: capVideoAnalytics,
+      imageAlt: "Video wall reviewing movement and behaviour across multiple camera feeds",
       title: "Video Analytics",
       body:
-        "Turn raw footage into structured business intelligence. Our video analytics monitor behaviour, detect anomalies, and automate reporting across retail, logistics, and security environments.",
+        "Turn raw footage into structured business intelligence instead of hours nobody has time to review. Our video analytics monitor behaviour across frames, detect anomalies, count and classify movement, and automate reporting across retail, logistics, transport, and security environments. Because the system understands sequence, it can tell the difference between someone waiting and someone loitering, or a stopped vehicle and a blocked exit. Alerts, dashboards, and forensic search over archives come as part of the delivery, not as a separate product.",
       bullets: [
         "Queue management and counting",
         "Automatic licence plate recognition",
@@ -258,9 +313,11 @@ export const expertise = {
     {
       id: "ocr",
       motif: "text",
+      image: capOcr,
+      imageAlt: "Scanned document being read line by line into structured fields",
       title: "Optical Character Recognition",
       body:
-        "Extract text from images, scanned documents, and video frames with high accuracy. We fine-tune deep learning models on your domain data for results off-the-shelf OCR tools cannot reach.",
+        "Extract text from photographs, scanned documents, handwritten forms, and video frames, then return it as structured, searchable data rather than a flat text dump. We fine-tune deep learning models on your own document types, fonts, and layouts, which is how we reach accuracy levels off-the-shelf OCR tools cannot get near on domain material. Tables, multi-column layouts, stamps, degraded scans, and multilingual pages are handled as first-class cases. The output maps to your fields, so downstream systems get values they can validate instead of paragraphs someone has to retype.",
       bullets: [
         "OCR clean-up services",
         "Document scanning and digitisation",
@@ -272,9 +329,11 @@ export const expertise = {
     {
       id: "gan-image-generation",
       motif: "noise",
+      image: capGan,
+      imageAlt: "Synthetic imagery generated to fill gaps in a vision training set",
       title: "GAN-Based Image Generation",
       body:
-        "We use generative adversarial networks to create synthetic training data, enhance image quality, and generate visual content at scale, especially useful when real-world data is limited, expensive, or restricted.",
+        "We use generative adversarial networks to create synthetic training data, enhance image quality, and generate visual content at scale. This matters most when real-world data is limited, expensive to capture, or legally restricted, such as rare manufacturing defects or patient imaging that cannot leave the hospital. Generated samples are balanced against your real distribution so the model learns the rare cases without drifting away from reality. The same techniques handle super-resolution, denoising, style transfer, and augmentation for pipelines that are starved of examples.",
       bullets: [
         "Synthetic data generation for training",
         "Style transfer and visual simulation",
@@ -347,14 +406,14 @@ export const industries = {
   titleLead: "Computer Vision Software",
   subtitle:
     "We have built and deployed computer vision systems across 12+ industries. Each solution is built around the specific workflows, data types, and compliance requirements of that industry.",
-  image: industriesHumanoid,
-  imageAlt:
-    "Humanoid robot standing in a bright modern conference room",
   imageCaption:
     "Same models, different rules, and the rules are where vision projects fail.",
   items: [
     {
       name: "Healthcare",
+      image: industryHealthcare,
+      imageAlt:
+        "Radiologist reading a set of scans across multiple diagnostic monitors",
       body:
         "Support clinical teams, reduce diagnostic errors, and automate time-consuming manual reviews.",
       bullets: [
@@ -369,6 +428,9 @@ export const industries = {
     },
     {
       name: "Retail And E-Commerce",
+      image: industryRetail,
+      imageAlt:
+        "Shoppers moving through a busy supermarket aisle stacked with product",
       body:
         "Understand what happens on the shop floor and in the catalogue, without adding headcount.",
       bullets: [
@@ -381,6 +443,9 @@ export const industries = {
     },
     {
       name: "Manufacturing",
+      image: industryManufacturing,
+      imageAlt:
+        "Robotic arm working a part on an automated assembly cell",
       body:
         "Catch defects in the same cycle they happen, not after the pallet is wrapped.",
       bullets: [
@@ -393,6 +458,9 @@ export const industries = {
     },
     {
       name: "Finance And Fintech",
+      image: industryFinance,
+      imageAlt:
+        "Hands capturing a printed document with a phone camera for automated extraction",
       body:
         "Verify identity and process documents without a manual review queue.",
       bullets: [
@@ -405,6 +473,9 @@ export const industries = {
     },
     {
       name: "Transportation And Logistics",
+      image: industryLogistics,
+      imageAlt:
+        "Aerial view of a container yard with trucks moving between stacked freight",
       body:
         "Track what moves through your yard, dock, and fleet without manual scanning.",
       bullets: [
@@ -417,6 +488,9 @@ export const industries = {
     },
     {
       name: "Real Estate And Construction",
+      image: industryConstruction,
+      imageAlt:
+        "Construction crew in helmets and high-vis riding a hoist up a building facade",
       body:
         "Measure progress and enforce safety from the footage you already capture.",
       bullets: [
@@ -477,48 +551,48 @@ export const process = {
   titleLead: "Our Process For Building",
   titleAccent: "Computer Vision Software",
   subtitle:
-    "A structured 8-step process that takes your project from the first conversation to a live, production-ready system. Every step has clear deliverables, so you always know what is happening and what comes next.",
+    "A structured 8-step process that takes your project from the first conversation to a live, production-ready system that your team can actually operate. Every step has named deliverables, a clear owner, and an exit condition, so you always know what has been done, what is happening now, and what comes next. Nothing moves forward on assumption, and nothing is handed over without documentation.",
   ctaText: "Contact Us Now",
   steps: [
     {
       title: "Discovery And Use-Case Definition",
       body:
-        "We start with your business problem, not the technology. We define what a correct prediction means, what an acceptable error rate looks like, and what the system must do when it is unsure.",
+        "We start with your business problem, not the technology. Together we define what a correct prediction actually means in your operation, what an acceptable error rate looks like in cost terms, and what the system must do when it is not confident enough to decide on its own. We map the people, cameras, and existing tools the solution has to live alongside, and we write down the cases where a human must stay in the loop. That definition becomes the contract every later stage is measured against.",
     },
     {
       title: "Feasibility And Success Metrics",
       body:
-        "We agree the accuracy, latency, and cost targets in writing before any model is trained, so success is measurable and nobody moves the goalposts later.",
+        "We agree the accuracy, latency, throughput, and cost targets in writing before a single model is trained, so success is measurable and nobody moves the goalposts later. If the data or the hardware cannot support the target, we say so at this stage rather than six weeks in. You get a feasibility summary that states what is realistic, what it will take, and what the honest risks are, which is often the point where scope gets sharpened and budget gets protected.",
     },
     {
       title: "Data Audit",
       body:
-        "We look at what visual data you already have: volume, quality, class balance, lighting conditions, and edge cases. You get an honest report on whether it is enough.",
+        "We audit the visual data you already hold: volume, resolution, label quality, class balance, lighting and weather conditions, camera placement, and the edge cases that are missing entirely. Most vision projects fail on data, not on modelling, so this step is deliberately thorough. You get a written report on whether what you have is enough, what needs to be collected or relabelled, and how much of the gap synthetic data can realistically close.",
     },
     {
       title: "Data Collection And Preparation",
       body:
-        "Good models need good data. We collect, clean, label, and structure your visual data for training. Where you do not have enough, we use synthetic generation and augmentation to fill the gaps. You get a cleaned and labelled dataset, a data pipeline, and a data quality report.",
+        "Good models need good data. We collect, clean, de-duplicate, label, and structure your visual data for training, with a review pass so labelling errors do not get baked into the model. Where you do not have enough real examples, we use synthetic generation and targeted augmentation to fill the gaps without distorting the underlying distribution. You keep the cleaned and labelled dataset, the repeatable data pipeline, and a quality report, all of which stay yours regardless of what happens with the engagement.",
     },
     {
       title: "Model Development And Training",
       body:
-        "Architecture selection, transfer learning, and iterative training runs. Every experiment tracked, every result reproducible from the repo.",
+        "Architecture selection, transfer learning, and iterative training runs against the metrics we agreed up front. We benchmark several candidate approaches instead of committing to the first one that works, and we weigh accuracy against inference cost and the hardware the system has to run on. Every experiment is tracked with its data version, parameters, and results, so any number we report can be reproduced from the repository months later by someone who was not in the room.",
     },
     {
       title: "Evaluation And Hardening",
       body:
-        "We test against held-out data and deliberately hostile cases: bad lighting, occlusion, motion blur, spoofing attempts. Failure modes get documented, not hidden.",
+        "We test against held-out data and deliberately hostile cases: bad lighting, occlusion, motion blur, dirty lenses, unusual angles, and spoofing attempts. We also check performance across subgroups, because a model with a good average score can still be unreliable for a specific shift, site, or demographic. Failure modes get documented, thresholds get tuned to your tolerance for false positives versus false negatives, and you receive the full evaluation report rather than a single headline accuracy number.",
     },
     {
       title: "Integration And Deployment",
       body:
-        "We deploy to edge, cloud, or both, wire the system into your existing tools, and set up monitoring so drift shows up on a dashboard rather than in a complaint.",
+        "We deploy to edge devices, cloud, or a hybrid of both, depending on the latency, bandwidth, and privacy constraints your environment imposes. The system is wired into the tools your team already uses, whether that is an ERP, a WMS, a VMS, or an internal dashboard, so nobody has to learn a second interface. Monitoring, logging, and alerting go live at the same time, which means accuracy drift shows up on a dashboard early instead of arriving as a customer complaint.",
     },
     {
       title: "Monitoring, Retraining, And Support",
       body:
-        "Vision models decay as cameras, lighting, and products change. We monitor accuracy in production and retrain on a schedule, with 60 days of free support after launch.",
+        "Vision models decay as cameras get replaced, lighting changes, packaging is redesigned, and new product lines appear. We monitor live accuracy against your baseline, flag drift as it develops, and retrain on an agreed schedule using the fresh data production generates. For 60 days after launch our team stays available at no extra cost to fix issues, answer questions, and coach your staff, and beyond that we offer a support arrangement sized to how critical the system is to your operation.",
     },
   ],
 };
@@ -563,10 +637,26 @@ export const whyUs = {
     "There are a lot of computer vision companies out there. Here is why businesses choose Axiomra and stay with us after the first project.",
   ctaText: "Request A Free Consultation",
   stats: [
-    { value: "300+", label: "Business apps developed" },
-    { value: "20+", label: "Countries served" },
-    { value: "7+", label: "Business partnerships" },
-    { value: "25+", label: "Team of experts" },
+    {
+      value: "300+",
+      label: "Business apps developed",
+      detail: "Shipped across vision, AI, web, and mobile, from first prototype to production rollout.",
+    },
+    {
+      value: "20+",
+      label: "Countries served",
+      detail: "Delivery across time zones with clients in North America, Europe, the Gulf, and Asia.",
+    },
+    {
+      value: "7+",
+      label: "Business partnerships",
+      detail: "Long-term technology partners covering cloud, edge hardware, and data infrastructure.",
+    },
+    {
+      value: "25+",
+      label: "Team of experts",
+      detail: "ML engineers, data scientists, MLOps, and product specialists working in one team.",
+    },
   ],
   reasons: [
     {

@@ -454,7 +454,11 @@ const VARIANTS = {
   noise: Noise,
 };
 
-export default function CvMotif({ variant = "boxes", className = "" }) {
+/**
+ * `showGrid` off is for the hybrid rows, where the wireframe sits over a photo
+ * and the blueprint grid would fight the image underneath.
+ */
+export default function CvMotif({ variant = "boxes", className = "", showGrid = true }) {
   const Shape = VARIANTS[variant] ?? Boxes;
 
   return (
@@ -472,7 +476,7 @@ export default function CvMotif({ variant = "boxes", className = "" }) {
           <path d="M20 0 H0 V20" fill="none" stroke={ACCENT} strokeOpacity="0.18" strokeWidth="0.6" />
         </pattern>
       </defs>
-      <rect width="400" height="280" fill={`url(#cv-grid-${variant})`} />
+      {showGrid && <rect width="400" height="280" fill={`url(#cv-grid-${variant})`} />}
       <Shape />
     </motion.svg>
   );

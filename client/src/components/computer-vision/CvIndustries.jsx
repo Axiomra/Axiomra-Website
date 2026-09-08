@@ -4,7 +4,7 @@ import { ShieldCheck } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { industries } from "../../data/computerVisionData";
 
-/** Industry coverage as tabs over the one humanoid photograph. */
+/** Industry coverage as tabs, each with its own frame. */
 export default function CvIndustries() {
   const [active, setActive] = useState(0);
   const item = industries.items[active];
@@ -94,13 +94,23 @@ export default function CvIndustries() {
             </motion.div>
           </AnimatePresence>
 
+          {/* One frame per vertical. The photo is keyed on the tab so it
+              cross-fades with the copy instead of staying put behind it. */}
           <div className="relative min-h-[20rem] overflow-hidden rounded-xl2 border border-line shadow-card lg:min-h-0">
-            <img
-              src={industries.image}
-              alt={industries.imageAlt}
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+            <AnimatePresence initial={false}>
+              <motion.img
+                key={item.name}
+                src={item.image}
+                alt={item.imageAlt}
+                loading="lazy"
+                decoding="async"
+                initial={{ opacity: 0, scale: 1.06 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </AnimatePresence>
             <div
               className="pointer-events-none absolute inset-0 bg-gradient-to-t from-inverse/90 via-inverse/25 to-transparent"
               aria-hidden="true"

@@ -2,12 +2,23 @@ import { Instagram, Linkedin, ArrowUp } from "lucide-react";
 import logoLight from "../assets/logo-light.webp";
 import iconTeal from "../assets/icon-teal.png";
 import NetworkBackground from "./NetworkBackground";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { ABOUT_PATH } from "../data/aboutData";
+import { TECH_PATH } from "../data/techStackData";
+import { FAQS_PATH } from "../data/faqsData";
+
+/* Footer labels that already have a route. Everything else still waits on a page. */
+const LINK_ROUTES = {
+  "About Us": ABOUT_PATH,
+  "Contact Us": "/contact",
+  "Tech Stack": TECH_PATH,
+  FAQs: FAQS_PATH,
+};
 
 const cols = [
   { title: "Services", links: ["Artificial Intelligence", "Computer Vision", "Software Development", "Generative AI", "AI Agent Development"] },
   { title: "Industries", links: ["Healthcare", "Fashion", "Real Estate", "Sports", "Education"] },
-  { title: "Quick Links", links: ["Blogs", "Contact Us", "About Us", "Teams", "Awards & Recognitions", "FAQs"] },
+  { title: "Quick Links", links: ["Blogs", "Contact Us", "About Us", "Tech Stack", "Awards & Recognitions", "FAQs"] },
 ];
 
 /* lucide ships no X (formerly Twitter) mark, so the brand glyph is inlined. */
@@ -40,60 +51,75 @@ const UNDERLINE_LINK =
   "hover:after:scale-x-100 focus-visible:after:scale-x-100";
 
 export default function Footer() {
+  // The contact page shows no footer at all — not even on hover.
+  const { pathname } = useLocation();
+  if (pathname === "/contact") return null;
+
   return (
-    <footer className="relative overflow-hidden bg-inverse pb-8 pt-16">
-      <NetworkBackground variant="wave" className="opacity-95" />
-      {/* Light scrim only, enough to hold text contrast without erasing the animation underneath it. */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-inverse/85 via-inverse/45 to-inverse/80" />
+    <div>
+      <footer className="relative overflow-hidden bg-inverse pb-8 pt-16">
+        <NetworkBackground variant="wave" className="opacity-95" />
+        {/* Light scrim only, enough to hold text contrast without erasing the animation underneath it. */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-inverse/85 via-inverse/45 to-inverse/80" />
 
-      <div className="relative z-10 mx-auto grid max-w-6xl gap-x-8 gap-y-12 px-4 sm:px-6 md:grid-cols-4">
-        <div>
-          <img src={logoLight} alt="Axiomra" className="mb-4 h-9 w-auto" width={500} height={91} />
-          <p className="max-w-xs text-lg leading-relaxed text-inverse-fg/70">
-            We help businesses by automating their processes and developing customized
-            end-to-end AI solutions that deliver proven ROI.
-          </p>
-          <Link
-            to="/contact"
-            className="mt-5 inline-block rounded-full bg-inverse-fg px-6 py-3 text-lg font-medium text-inverse transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow focus-ring"
-          >
-            Let&apos;s Talk
-          </Link>
-        </div>
-        {cols.map((c) => (
-          <div key={c.title}>
-            <h4 className="mb-5 font-display text-2xl font-semibold text-inverse-fg">{c.title}</h4>
-            <ul className="space-y-3">
-              {c.links.map((l) => (
-                <li key={l}>
-                  <a href="#" className={UNDERLINE_LINK}>
-                    {l}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      <div className="relative z-10 mx-auto mt-14 flex max-w-6xl flex-col items-center justify-between gap-4 border-t border-inverse-fg/10 px-4 pt-6 sm:flex-row sm:px-6">
-        <span className="text-base text-inverse-fg/60">© 2026 Axiomra. All Rights Reserved.</span>
-        <div className="flex gap-3">
-          {socials.map(({ Icon, label, href }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={label}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-inverse-fg/15 text-inverse-fg/60 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid hover:bg-accent-vivid/15 hover:text-accent-vivid focus-ring"
+        <div className="relative z-10 mx-auto grid max-w-6xl gap-x-8 gap-y-12 px-4 sm:px-6 md:grid-cols-4">
+          <div>
+            <img src={logoLight} alt="Axiomra" className="mb-4 h-9 w-auto" width={500} height={91} />
+            <p className="max-w-xs text-lg leading-relaxed text-inverse-fg/70">
+              We help businesses by automating their processes and developing customized
+              end-to-end AI solutions that deliver proven ROI.
+            </p>
+            <Link
+              to="/contact"
+              className="mt-5 inline-block rounded-full bg-inverse-fg px-6 py-3 text-lg font-medium text-inverse transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow focus-ring"
             >
-              <Icon size={18} />
-            </a>
+              Let&apos;s Talk
+            </Link>
+          </div>
+          {cols.map((c) => (
+            <div key={c.title}>
+              <h4 className="mb-5 font-display text-2xl font-semibold text-inverse-fg">{c.title}</h4>
+              <ul className="space-y-3">
+                {c.links.map((l) => (
+                  <li key={l}>
+                    {LINK_ROUTES[l] ? (
+                      <Link to={LINK_ROUTES[l]} className={UNDERLINE_LINK}>
+                        {l}
+                      </Link>
+                    ) : (
+                      <a href="#" className={UNDERLINE_LINK}>
+                        {l}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
-      </div>
 
+        <div className="relative z-10 mx-auto mt-14 flex max-w-6xl flex-col items-center justify-between gap-4 border-t border-inverse-fg/10 px-4 pt-6 sm:flex-row sm:px-6">
+          <span className="text-base text-inverse-fg/60">© 2026 Axiomra. All Rights Reserved.</span>
+          <div className="flex gap-3">
+            {socials.map(({ Icon, label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-inverse-fg/15 text-inverse-fg/60 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid hover:bg-accent-vivid/15 hover:text-accent-vivid focus-ring"
+              >
+                <Icon size={18} />
+              </a>
+            ))}
+          </div>
+        </div>
+      </footer>
+
+      {/* Floating buttons live outside the footer body so they stay on screen
+          on every page; the whole footer (these included) renders only when
+          the view is not /contact. */}
       <a
         href="https://wa.me/16575203444"
         target="_blank"
@@ -115,6 +141,6 @@ export default function Footer() {
       >
         <ArrowUp size={18} />
       </button>
-    </footer>
+    </div>
   );
 }

@@ -19,6 +19,9 @@ const AgenticAiPage = lazy(() => import("./pages/AgenticAiPage"));
 const ComputerVisionPage = lazy(() => import("./pages/ComputerVisionPage"));
 const NlpPage = lazy(() => import("./pages/NlpPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const TechStackPage = lazy(() => import("./pages/TechStackPage"));
+const FaqsPage = lazy(() => import("./pages/FaqsPage"));
 
 // The admin panel shares nothing with the marketing site — its own chrome, its
 // own auth provider, its own table libraries. Splitting it here keeps all of
@@ -32,6 +35,9 @@ import AdminAuthProvider from "./admin/AdminAuthProvider";
 import AdminGuard from "./admin/AdminGuard";
 
 import { SERVICES_BASE_PATH } from "./data/servicesData";
+import { ABOUT_PATH } from "./data/aboutData";
+import { TECH_PATH } from "./data/techStackData";
+import { FAQS_PATH } from "./data/faqsData";
 import { AI_DEVELOPMENT_SLUG } from "./data/aiDevelopmentData";
 import { GENERATIVE_AI_SLUG } from "./data/generativeAiData";
 import { AGENTIC_AI_SLUG } from "./data/agenticAiData";
@@ -77,6 +83,9 @@ function SiteRoutes() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path={ABOUT_PATH} element={<AboutPage />} />
+            <Route path={TECH_PATH} element={<TechStackPage />} />
+            <Route path={FAQS_PATH} element={<FaqsPage />} />
             <Route path={SERVICES_BASE_PATH} element={<ServicesPage />} />
             <Route
               path={`${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`}

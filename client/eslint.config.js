@@ -43,6 +43,8 @@ export default [
       'src/components/NetworkCanvas.jsx',
       'src/components/FooterCanvas.jsx',
       'src/components/ContactCanvas.jsx',
+      'src/components/AboutCanvas.jsx',
+      'src/components/TechCanvas.jsx',
       'src/components/BusinessTypeCanvas.jsx',
       'src/components/gen-ai/LatentCanvas.jsx',
       'src/components/gen-ai/TokenFlowCanvas.jsx',

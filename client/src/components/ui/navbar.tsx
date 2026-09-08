@@ -14,6 +14,9 @@ import { AI_DEVELOPMENT_SLUG } from "@/data/aiDevelopmentData";
 import { AGENTIC_AI_SLUG } from "@/data/agenticAiData";
 import { COMPUTER_VISION_SLUG } from "@/data/computerVisionData";
 import { NLP_SLUG } from "@/data/nlpData";
+import { ABOUT_PATH } from "@/data/aboutData";
+import { TECH_PATH } from "@/data/techStackData";
+import { FAQS_PATH } from "@/data/faqsData";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import logoLight from "@/assets/logo-light.webp";
 import logoDark from "@/assets/logo-dark.webp";
@@ -86,7 +89,6 @@ function useNavTone() {
           }
         : { overHero: false, tone: "dark" };
 
-      console.log("[navtone]", JSON.stringify(next), !!hero);
       setState((s) => (s.overHero === next.overHero && s.tone === next.tone ? s : next));
     };
 
@@ -119,7 +121,14 @@ const industryItems = [
   { label: "Education", description: "Adaptive learning & auto-grading", href: "/#industries" },
 ];
 
-type MegaSection = "services" | "industries";
+const companyItems = [
+  { label: "About Us", description: "Who we are and how we work", href: ABOUT_PATH },
+  { label: "Tech Stack", description: "The tools behind every system we ship", href: TECH_PATH },
+  { label: "FAQs", description: "Scope, cost, timelines & ownership, answered", href: FAQS_PATH },
+  { label: "Contact", description: "Talk to an engineer, not a sales desk", href: "/contact" },
+];
+
+type MegaSection = "services" | "industries" | "company";
 
 interface MegaConfig {
   title: string;
@@ -150,6 +159,15 @@ const megaConfigs: Record<MegaSection, MegaConfig> = {
     ctaSubtitle: "See how we ship results across verticals.",
     items: industryItems,
   },
+  company: {
+    title: "The Company",
+    subtitle: "How Axiomra works, what we build with, and what to expect.",
+    eyebrow: "Who we are",
+    viewAll: ABOUT_PATH,
+    ctaTitle: "Want the short version?",
+    ctaSubtitle: "Book a call and we will walk you through it.",
+    items: companyItems,
+  },
 };
 
 const NAV_LINKS = [
@@ -157,7 +175,7 @@ const NAV_LINKS = [
   { label: "Services", href: SERVICES_BASE_PATH, mega: "services" as MegaSection },
   { label: "Industries", href: "/#industries", mega: "industries" as MegaSection },
   { label: "Portfolio", href: "/#portfolio" },
-  { label: "Company", href: "/#process" },
+  { label: "Company", href: ABOUT_PATH, mega: "company" as MegaSection },
 ];
 
 function NavLink({
@@ -354,7 +372,7 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
               Home
             </NavLink>
 
-            {(["services", "industries"] as const).map((section) => {
+            {(["services", "industries", "company"] as const).map((section) => {
               const cfg = megaConfigs[section];
               const isOpen = openSection === section;
               return (
@@ -396,13 +414,6 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
             >
               Portfolio
             </NavLink>
-            <NavLink
-              href="/#process"
-              onClick={close}
-              className="block rounded-md px-3 py-2.5 text-base font-medium text-inverse-fg/85 hover:bg-inverse-fg/10 hover:text-accent-vivid focus-ring"
-            >
-              Company
-            </NavLink>
 
             <div className="mt-2 flex flex-col gap-2 border-t border-inverse-fg/15 pt-3">
               <NavLink
@@ -430,10 +441,16 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
 export function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<MegaSection | null>(null);
   const rootRef = useRef<HTMLElement>(null);
+  const { pathname } = useLocation();
   const { overHero, tone } = useNavTone();
 
   const transparent = overHero && !active;
   const fg = TONE[transparent ? tone : "dark"];
+
+  // On the contact page the whole bar is hidden until the cursor reaches the
+  // top edge, so the glass form stays the clear focus. Everywhere else it
+  // behaves as before (fixed, always visible).
+  const hoverReveal = pathname === "/contact";
 
   useEffect(() => {
     if (!active) return;
@@ -451,19 +468,27 @@ export function Navbar({ className }: { className?: string }) {
   const closeMenu = () => setActive(null);
 
   return (
-    <header
-      ref={rootRef}
-      onMouseLeave={closeMenu}
-      onBlur={handleBlur}
+    <div
       className={cn(
-        "fixed inset-x-0 top-0 z-50 w-full border-b transition-colors duration-300",
-        transparent
-          ? "border-transparent bg-transparent"
-          : "border-inverse-fg/10 bg-inverse/95 shadow-card backdrop-blur",
-        className
+        "fixed inset-x-0 top-0 z-50",
+        hoverReveal && "group/rev"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-8xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <header
+        ref={rootRef}
+        onMouseLeave={closeMenu}
+        onBlur={handleBlur}
+        className={cn(
+          "relative w-full border-b transition-all duration-300",
+          hoverReveal &&
+            "-translate-y-full opacity-0 group-hover/rev:translate-y-0 group-hover/rev:opacity-100 group-focus-within/rev:translate-y-0 group-focus-within/rev:opacity-100",
+          transparent
+            ? "border-transparent bg-transparent"
+            : "border-inverse-fg/10 bg-inverse/95 shadow-card backdrop-blur",
+          className
+        )}
+      >
+        <div className="mx-auto flex h-16 max-w-8xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to="/" className="focus-ring rounded-md">
           {/* h-8 keeps the wordmark inside the 4rem bar; the old h-32 overflowed it. */}
           <img src={fg.logo} alt="Axiomra" className="h-8 w-auto" width={500} height={91} />
@@ -495,6 +520,7 @@ export function Navbar({ className }: { className?: string }) {
       </div>
 
       {active && <FullWidthDropdown section={active} onNavigate={closeMenu} />}
-    </header>
+      </header>
+    </div>
   );
 }

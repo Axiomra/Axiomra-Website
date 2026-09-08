@@ -6,6 +6,8 @@ import useInView from "../hooks/useInView";
 const NetworkCanvas = lazy(() => import("./NetworkCanvas"));
 const FooterCanvas = lazy(() => import("./FooterCanvas"));
 const ContactCanvas = lazy(() => import("./ContactCanvas"));
+const AboutCanvas = lazy(() => import("./AboutCanvas"));
+const TechCanvas = lazy(() => import("./TechCanvas"));
 
 function supportsWebGL() {
   try {
@@ -53,6 +55,10 @@ export default function NetworkBackground({ className = "", count = 140, variant
               <FooterCanvas frameloop={frameloop} />
             ) : variant === "orbit" ? (
               <ContactCanvas frameloop={frameloop} />
+            ) : variant === "about" ? (
+              <AboutCanvas frameloop={frameloop} />
+            ) : variant === "tech" ? (
+              <TechCanvas frameloop={frameloop} />
             ) : (
               <NetworkCanvas count={count} frameloop={frameloop} />
             )}

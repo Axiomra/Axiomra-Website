@@ -32,15 +32,38 @@ export default function CvExpertise() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-70px" }}
                 transition={{ duration: 0.6 }}
-                className="grid scroll-mt-28 grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16"
+                className="grid scroll-mt-28 grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16"
               >
                 <div
-                  className={`relative overflow-hidden rounded-xl2 border border-line bg-surface-inset ${
+                  className={`relative overflow-hidden rounded-xl2 border border-line bg-surface-inset lg:sticky lg:top-28 ${
                     flipped ? "lg:order-2" : ""
                   }`}
                 >
-                  <div className="aspect-[400/280]">
-                    <CvMotif variant={item.motif} />
+                  {/* Hybrid frame: the photo grounds the capability in a real
+                      scene, the wireframe on top shows what the model actually
+                      returns. Rows without a photo fall back to the wireframe
+                      on its own blueprint grid. */}
+                  <div className="relative aspect-[400/280]">
+                    {item.image && (
+                      <>
+                        <img
+                          src={item.image}
+                          alt={item.imageAlt ?? ""}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                        {/* Scrim: without it the thin brand strokes disappear
+                            over bright or busy areas of the photo. */}
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-0 bg-gradient-to-br from-inverse/70 via-inverse/45 to-inverse/70"
+                        />
+                      </>
+                    )}
+                    <div className="absolute inset-0">
+                      <CvMotif variant={item.motif} showGrid={!item.image} />
+                    </div>
                   </div>
                   <span className="absolute left-5 top-4 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-content-faint">
                     output · {item.motif}
@@ -56,7 +79,7 @@ export default function CvExpertise() {
                     {item.title}
                   </h3>
 
-                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-content-dim md:text-lg">
+                  <p className="mt-5 text-justify text-base leading-relaxed text-content-dim md:text-lg">
                     {item.body}
                   </p>
 

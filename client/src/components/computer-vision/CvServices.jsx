@@ -72,30 +72,53 @@ export default function CvServices() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.28 }}
+                  /* Copy and photo share the panel so the right-hand half of the
+                     card carries the service rather than sitting empty. */
+                  className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] lg:gap-10"
                 >
-                  <span className="font-display text-5xl font-semibold text-brand md:text-6xl">
-                    {String(active + 1).padStart(2, "0")}
-                  </span>
+                  <div>
+                    <span className="font-display text-5xl font-semibold text-brand md:text-6xl">
+                      {String(active + 1).padStart(2, "0")}
+                    </span>
 
-                  <h3 className="mt-6 font-display text-2xl font-semibold text-content md:text-3xl">
-                    {item.title}
-                  </h3>
+                    <h3 className="mt-6 font-display text-2xl font-semibold text-content md:text-3xl">
+                      {item.title}
+                    </h3>
 
-                  <p className="mt-5 max-w-3xl text-base leading-relaxed text-content-dim md:text-lg">
-                    {item.body}
-                  </p>
+                    <p className="mt-5 max-w-3xl text-base leading-relaxed text-content-dim md:text-lg">
+                      {item.body}
+                    </p>
 
-                  <ul className="mt-8 grid grid-cols-1 gap-3 border-t border-line pt-7 sm:grid-cols-2">
-                    {item.deliverables.map((d) => (
-                      <li
-                        key={d}
-                        className="flex items-start gap-2.5 text-sm text-content-dim md:text-base"
-                      >
-                        <Check size={16} className="mt-1 shrink-0 text-brand" aria-hidden="true" />
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
+                    <ul className="mt-8 grid grid-cols-1 gap-3 border-t border-line pt-7 sm:grid-cols-2">
+                      {item.deliverables.map((d) => (
+                        <li
+                          key={d}
+                          className="flex items-start gap-2.5 text-sm text-content-dim md:text-base"
+                        >
+                          <Check size={16} className="mt-1 shrink-0 text-brand" aria-hidden="true" />
+                          {d}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <figure className="relative order-first overflow-hidden rounded-xl2 border border-line lg:order-none lg:min-h-[22rem]">
+                    <img
+                      src={item.image}
+                      alt={item.imageAlt}
+                      width={1200}
+                      height={900}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-52 w-full object-cover sm:h-64 lg:absolute lg:inset-0 lg:h-full"
+                    />
+                    {/* Same wash on every frame, so six different stock sources
+                        still read as one set. */}
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-inverse/55 via-inverse/5 to-transparent"
+                    />
+                  </figure>
                 </motion.div>
               </AnimatePresence>
             </div>

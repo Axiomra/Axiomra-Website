@@ -4,12 +4,8 @@ import {
   ArrowUpRight,
   Briefcase,
   CalendarClock,
-  Clock,
   FileSignature,
   Handshake,
-  Mail,
-  MessageSquare,
-  Phone,
   Rocket,
   ShieldCheck,
   Tag,
@@ -25,7 +21,7 @@ import SelectField from "../components/SelectField";
 import FieldError from "../components/FieldError";
 import SubmissionModal from "../components/SubmissionModal";
 import services from "../data/servicesData";
-import { DEFAULT_COUNTRY } from "../data/countryCodes";
+import { COUNTRIES, DEFAULT_COUNTRY } from "../data/countryCodes";
 import { submitContact } from "../lib/contactApi";
 import {
   formatPhone,
@@ -38,40 +34,7 @@ import {
   validateSubject,
 } from "../lib/validation";
 
-const WHATSAPP_URL = "https://wa.me/16575203444";
-const PHONE = "+1 (657) 520-3444";
-
 const SERVICE_OPTIONS = services.map((s) => s.title);
-
-const CHANNELS = [
-  {
-    icon: Mail,
-    label: "Email us",
-    value: "info@axiomra.co",
-    note: "For project inquiries and proposals",
-    href: "mailto:info@axiomra.co",
-  },
-  {
-    icon: Phone,
-    label: "Call us",
-    value: PHONE,
-    note: "Same number on WhatsApp",
-    href: "tel:+16575203444",
-  },
-  {
-    icon: MessageSquare,
-    label: "WhatsApp",
-    value: "Chat on WhatsApp",
-    note: "Quick questions & support",
-    href: WHATSAPP_URL,
-  },
-  {
-    icon: Clock,
-    label: "Response time",
-    value: "Within 1 business day",
-    note: "We reply fast, no sales scripts",
-  },
-];
 
 /* How the engagement actually runs after the form is sent. */
 const OPERATIONS = [
@@ -125,11 +88,18 @@ const TRUST_CHIPS = [
   { icon: Briefcase, label: "No obligation, no sales script" },
 ];
 
+/* Rotating band of delivered-project numbers shown above the contact form. */
+const DELIVERED_STATS = [
+  { value: "300+", label: "AI projects delivered" },
+  { value: "12+", label: "Industries served" },
+  { value: "4.9/5", label: "Average client rating" },
+];
+
 const FIELD_CLASS =
-  "w-full rounded-xl border border-line bg-surface px-4 py-3.5 text-base text-content outline-none transition-all placeholder:text-content-faint/70 focus:border-accent focus:ring-4 focus:ring-accent/15";
+  "w-full rounded-2xl border border-white/60 bg-white/95 px-5 py-4 text-lg text-content outline-none transition-all placeholder:text-content-faint/60 focus:border-accent focus:ring-4 focus:ring-accent/25";
 
 const LABEL_CLASS =
-  "mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-content-faint";
+  "mb-2.5 block font-mono text-sm uppercase tracking-[0.16em] text-white/85";
 
 const EMPTY_FORM = {
   name: "",
@@ -170,8 +140,34 @@ function ContactForm() {
   const [sent, setSent] = useState(null);
   const formRef = useRef(null);
 
+  /* Auto-detect the country when the visitor types "+<dial>" in the phone
+     input itself: switch the picker and drop the dial from the stored value. */
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "phone" && value.trim().startsWith("+")) {
+      const compact = value.replace(/\D/g, "");
+      // Longest dial wins: +1 (US) must not shadow +1809 (Dominican Republic).
+      const sorted = COUNTRIES.slice().sort((a, b) => b.dial.length - a.dial.length);
+      const hit = sorted.find((c) => {
+        const dial = c.dial.replace("+", "");
+        return compact.length > dial.length && compact.startsWith(dial);
+      });
+      if (hit) {
+        setCountry(hit);
+        setForm((prev) => ({
+          ...prev,
+          phone: compact.slice(hit.dial.replace("+", "").length),
+        }));
+        setErrors((prev) => {
+          const copy = { ...prev };
+          delete copy.phone;
+          return copy;
+        });
+        return;
+      }
+    }
+
     setForm((prev) => ({ ...prev, [name]: value }));
     // Only re-check a field that is already flagged: validating from the first
     // keystroke would call every half-typed email invalid.
@@ -254,15 +250,23 @@ function ContactForm() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-      className="relative rounded-[1.75rem] border border-line bg-surface-card p-6 shadow-card sm:p-9"
+      className="relative rounded-[2rem] border border-white/40 bg-white/[0.14] p-7 shadow-[0_30px_90px_-25px_rgba(0,0,0,0.7)] backdrop-blur-2xl sm:p-10 lg:p-12"
     >
-      {/* Clipped decoration layer; the form itself must not clip or the country
-          and category dropdowns get cut off at the card edge. */}
-      <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[1.75rem]">
+      {/* Soft glow blobs that breathe inside the frosted card — set the panel
+          apart from the crisp white inputs without killing the blur. */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 -top-28 h-72 w-72 rounded-full bg-accent-vivid/25 blur-3xl"
+      />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-28 -right-20 h-80 w-80 rounded-full bg-brand/30 blur-3xl"
+      />
+      <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
         <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid" />
       </span>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="relative grid gap-6 sm:grid-cols-2">
         <motion.div {...reveal(0)}>
           <label htmlFor="cp-name" className={LABEL_CLASS}>
             Your name
@@ -310,7 +314,7 @@ function ContactForm() {
           </label>
           <PhoneField
             id="cp-phone"
-            variant="light"
+            variant="glass"
             country={country}
             onCountryChange={handleCountryChange}
             value={form.phone}
@@ -348,9 +352,9 @@ function ContactForm() {
           </label>
           <div className="relative">
             <Tag
-              size={17}
+              size={18}
               aria-hidden="true"
-              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-accent opacity-80"
+              className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-accent opacity-80"
             />
             <input
               id="cp-subject"
@@ -362,7 +366,7 @@ function ContactForm() {
               aria-invalid={errors.subject ? true : undefined}
               aria-describedby={describe("subject")}
               placeholder="AI chatbot for support"
-              className={`${fieldClass("subject")} pl-11`}
+              className={`${fieldClass("subject")} pl-12`}
             />
           </div>
           <FieldError id="cp-subject-error" message={errors.subject} />
@@ -375,7 +379,7 @@ function ContactForm() {
           <SelectField
             id="cp-service"
             name="service"
-            variant="light"
+            variant="glass"
             icon={Layers}
             value={form.service}
             onChange={handleChange}
@@ -411,15 +415,14 @@ function ContactForm() {
           whileTap={{ scale: 0.98 }}
           type="submit"
           disabled={status === "loading"}
-          className="inline-flex items-center gap-2 rounded-full bg-inverse px-8 py-4 text-base font-semibold text-inverse-fg transition-all hover:shadow-glow focus-ring disabled:opacity-60"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid bg-[length:200%_100%] bg-left px-9 py-4 text-lg font-semibold text-inverse-fg transition-all duration-500 hover:-translate-y-0.5 hover:bg-right hover:shadow-glow focus-ring disabled:opacity-60"
         >
-          {status === "loading" ? "Sending…" : "Send message"}
-          {status !== "loading" && <ArrowUpRight size={18} />}
+          {status === "loading" ? "Sending…" : "Request My Free Consultation"}
         </motion.button>
 
         {/* Success is confirmed in the modal below; this line is left for
             failures and for the screen-reader announcement. */}
-        <p role="status" aria-live="polite" className="text-sm">
+        <p role="status" aria-live="polite" className="text-sm text-white/70">
           {status === "success" && <span className="sr-only">Message sent.</span>}
           {status === "error" && <span className="text-danger">{error}</span>}
           {Object.keys(errors).length > 0 && (
@@ -440,6 +443,45 @@ function ContactForm() {
   );
 }
 
+/* Auto-rotating trio of delivered-project figures, shown above the form. */
+function DeliveredStats() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActive((i) => (i + 1) % DELIVERED_STATS.length);
+    }, 3200);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="mx-auto grid w-full max-w-3xl grid-cols-3 gap-3 sm:gap-5">
+      {DELIVERED_STATS.map((s, i) => {
+        const isActive = i === active;
+        return (
+          <motion.div
+            key={s.label}
+            animate={
+              isActive
+                ? { scale: 1.06, opacity: 1, y: 0 }
+                : { scale: 0.96, opacity: 0.55, y: 4 }
+            }
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col items-center justify-center rounded-2xl border border-inverse-fg/15 bg-inverse-fg/5 px-3 py-6 text-center backdrop-blur-md sm:px-6 sm:py-8"
+          >
+            <span className="font-display text-3xl font-semibold text-gradient sm:text-5xl">
+              {s.value}
+            </span>
+            <span className="mt-2 text-sm font-medium text-inverse-fg/75 sm:text-base">
+              {s.label}
+            </span>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function ContactPage() {
   useEffect(() => {
     document.title = "Contact Axiomra: Let's Build Something Remarkable";
@@ -447,9 +489,9 @@ export default function ContactPage() {
 
   return (
     <>
-      {/* Hero */}
+      {/* Hero — COMMENTED OUT per request. The contact form now opens the page. */}
+      {/*
       <section className="relative isolate overflow-hidden bg-inverse px-4 pb-24 pt-32 sm:px-6 md:pt-40">
-        {/* The orbit field is the page's one WebGL surface. */}
         <NetworkBackground variant="orbit" className="opacity-90" />
         <div
           aria-hidden="true"
@@ -490,107 +532,44 @@ export default function ContactPage() {
           </div>
         </motion.div>
       </section>
+      */}
 
-      {/* Channels */}
-      <section className="relative px-4 py-16 sm:px-6">
-        <div className="mx-auto grid max-w-8xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {CHANNELS.map(({ icon: Icon, label, value, note, href }, i) => {
-            const inner = (
-              <>
-                <span className="mb-6 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-vivid/12 text-accent">
-                  <Icon size={20} strokeWidth={1.8} aria-hidden="true" />
-                </span>
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-content-faint">
-                  {label}
-                </p>
-                <p className="mt-2 text-base font-semibold text-content">{value}</p>
-                <p className="mt-2 text-sm text-content-faint">{note}</p>
-              </>
-            );
-
-            return (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, y: 22 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.07 }}
-              >
-                {href ? (
-                  <a
-                    href={href}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={href.startsWith("http") ? "noreferrer" : undefined}
-                    className="focus-ring block h-full rounded-xl2 border border-line bg-surface-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-card"
-                  >
-                    {inner}
-                  </a>
-                ) : (
-                  <div className="h-full rounded-xl2 border border-line bg-surface-card p-6">
-                    {inner}
-                  </div>
-                )}
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Form */}
-      <section id="contact-form" className="relative overflow-hidden bg-surface-subtle px-4 py-24 sm:px-6">
+      {/* Hero + form combined: the orbit animation runs behind the glass form. */}
+      <section className="relative isolate overflow-hidden bg-inverse px-4 pb-28 pt-32 sm:px-6 md:pt-40">
+        <NetworkBackground variant="orbit" className="opacity-90" />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -left-32 top-10 h-96 w-96 animate-float rounded-full bg-accent-vivid/10 blur-3xl"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-inverse/90 via-inverse/60 to-inverse"
         />
 
-        <div className="relative mx-auto grid max-w-8xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+        <div className="relative z-10 mx-auto w-full max-w-full px-4 sm:px-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="mb-12 text-center font-display text-4xl font-semibold leading-[1.1] tracking-tight text-inverse-fg md:text-6xl"
           >
-            <p className="mb-4 inline-flex items-center gap-2 font-mono text-sm uppercase tracking-[0.2em] text-accent md:text-base">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              Let&rsquo;s talk
-            </p>
-            <h2 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-content md:text-5xl">
-              Launch Your AI Project{" "}
-              <span className="text-accent">With A Team That Ships.</span>
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-content-dim">
-              Tell us the scope, the problem or the rough idea. An engineer reads every submission
-. You get a real technical answer back, not a calendar link and a brochure.
-            </p>
+            Let&rsquo;s Build Something{" "}
+            <span className="text-accent-vivid">Remarkable.</span>
+          </motion.h1>
 
-            <div className="mt-9 space-y-4">
-              <a
-                href="mailto:info@axiomra.co"
-                className="focus-ring flex items-center gap-3 rounded-xl text-base text-content-dim transition-colors hover:text-accent"
-              >
-                <Mail size={18} className="text-accent" aria-hidden="true" />
-                info@axiomra.co
-              </a>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="focus-ring flex items-center gap-3 rounded-xl text-base text-content-dim transition-colors hover:text-accent"
-              >
-                <MessageSquare size={18} className="text-accent" aria-hidden="true" />
-                Chat on WhatsApp
-              </a>
-              <a
-                href="tel:+16575203444"
-                className="focus-ring flex items-center gap-3 rounded-xl text-base text-content-dim transition-colors hover:text-accent"
-              >
-                <Phone size={18} className="text-accent" aria-hidden="true" />
-                {PHONE}
-              </a>
-            </div>
-          </motion.div>
+          <DeliveredStats />
 
-          <ContactForm />
+          <div className="mt-10 mx-auto w-full max-w-6xl">
+            <ContactForm />
+          </div>
+
+          <div className="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-3">
+            {TRUST_CHIPS.map(({ icon: Icon, label }) => (
+              <span
+                key={label}
+                className="inline-flex items-center gap-2 rounded-full border border-inverse-fg/15 bg-inverse-fg/5 px-5 py-2.5 text-sm text-inverse-fg/80 backdrop-blur-sm md:text-base"
+              >
+                <Icon size={16} className="text-accent-vivid" aria-hidden="true" />
+                {label}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
