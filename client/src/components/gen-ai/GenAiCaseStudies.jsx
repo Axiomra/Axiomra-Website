@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { caseStudies } from "../../data/generativeAiData";
+import { PORTFOLIO_PATH } from "../../data/portfolioData";
 
 /** Three shipped projects as full cards, problem, solution, then the numbers. */
 export default function GenAiCaseStudies() {
@@ -80,7 +81,7 @@ export default function GenAiCaseStudies() {
 
         <div className="mt-12 flex justify-center">
           <Link
-            to="/#portfolio"
+            to={PORTFOLIO_PATH}
             className="group inline-flex items-center gap-2.5 rounded-full border border-line px-7 py-4 text-base font-semibold transition-colors hover:border-brand/50 hover:text-brand focus-ring md:text-lg"
           >
             Check out our full portfolio

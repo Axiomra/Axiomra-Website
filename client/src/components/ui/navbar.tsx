@@ -17,6 +17,7 @@ import { NLP_SLUG } from "@/data/nlpData";
 import { ABOUT_PATH } from "@/data/aboutData";
 import { TECH_PATH } from "@/data/techStackData";
 import { FAQS_PATH } from "@/data/faqsData";
+import { PORTFOLIO_PATH } from "@/data/portfolioData";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import logoLight from "@/assets/logo-light.webp";
 import logoDark from "@/assets/logo-dark.webp";
@@ -174,7 +175,7 @@ const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Services", href: SERVICES_BASE_PATH, mega: "services" as MegaSection },
   { label: "Industries", href: "/#industries", mega: "industries" as MegaSection },
-  { label: "Portfolio", href: "/#portfolio" },
+  { label: "Portfolio", href: PORTFOLIO_PATH },
   { label: "Company", href: ABOUT_PATH, mega: "company" as MegaSection },
 ];
 
@@ -408,7 +409,7 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
             })}
 
             <NavLink
-              href="/#portfolio"
+              href={PORTFOLIO_PATH}
               onClick={close}
               className="block rounded-md px-3 py-2.5 text-base font-medium text-inverse-fg/85 hover:bg-inverse-fg/10 hover:text-accent-vivid focus-ring"
             >

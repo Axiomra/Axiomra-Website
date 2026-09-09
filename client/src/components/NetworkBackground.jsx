@@ -8,6 +8,7 @@ const FooterCanvas = lazy(() => import("./FooterCanvas"));
 const ContactCanvas = lazy(() => import("./ContactCanvas"));
 const AboutCanvas = lazy(() => import("./AboutCanvas"));
 const TechCanvas = lazy(() => import("./TechCanvas"));
+const PortfolioCanvas = lazy(() => import("./PortfolioCanvas"));
 
 function supportsWebGL() {
   try {
@@ -59,6 +60,8 @@ export default function NetworkBackground({ className = "", count = 140, variant
               <AboutCanvas frameloop={frameloop} />
             ) : variant === "tech" ? (
               <TechCanvas frameloop={frameloop} />
+            ) : variant === "portfolio" ? (
+              <PortfolioCanvas frameloop={frameloop} />
             ) : (
               <NetworkCanvas count={count} frameloop={frameloop} />
             )}
