@@ -9,9 +9,28 @@ export default function GradientCTA({
   buttonText = "Book My Strategy Call",
   dark = false,
   three = false,
+  image,
 }) {
   return (
     <section className={`relative overflow-hidden px-6 py-24 ${dark ? "bg-inverse" : "bg-cta-gradient"}`}>
+      {/* Optional photographic base coat. The scrim over it is what keeps the
+          headline readable, so the two always ship together. */}
+      {image && (
+        <>
+          <img
+            src={image}
+            alt=""
+            aria-hidden="true"
+            width={1800}
+            height={1200}
+            loading="lazy"
+            decoding="async"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-55"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-inverse/85 via-inverse/60 to-inverse/90" />
+        </>
+      )}
+
       {three && <NetworkBackground className="opacity-80" count={70} />}
       {three && <div className="absolute inset-0 bg-gradient-to-b from-inverse/70 via-inverse/40 to-inverse/80" />}
 

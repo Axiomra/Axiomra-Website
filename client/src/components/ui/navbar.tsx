@@ -18,6 +18,7 @@ import { ABOUT_PATH } from "@/data/aboutData";
 import { TECH_PATH } from "@/data/techStackData";
 import { FAQS_PATH } from "@/data/faqsData";
 import { PORTFOLIO_PATH } from "@/data/portfolioData";
+import { INDUSTRIES_PATH } from "@/data/industriesData";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import logoLight from "@/assets/logo-light.webp";
 import logoDark from "@/assets/logo-dark.webp";
@@ -114,12 +115,17 @@ const serviceItems = [
   { label: "NLP", description: "Search, chatbots & document understanding", href: `${SERVICES_BASE_PATH}/${NLP_SLUG}` },
 ];
 
+// Verticals with a built page link straight to it; the rest deep-link into the
+// industries index, so nobody lands on a placeholder from the top nav.
 const industryItems = [
-  { label: "Healthcare", description: "HIPAA-safe data & diagnosis AI", href: "/#industries" },
-  { label: "Fashion", description: "Design-to-catalog AI pipelines", href: "/#industries" },
-  { label: "Finance", description: "Fraud detection, forecasting & compliance", href: "/#industries" },
-  { label: "Retail", description: "Personalization & demand planning", href: "/#industries" },
-  { label: "Education", description: "Adaptive learning & auto-grading", href: "/#industries" },
+  { label: "Healthcare", description: "HIPAA-safe data & diagnosis AI", href: `${INDUSTRIES_PATH}#healthcare` },
+  { label: "Fashion", description: "Design-to-catalog AI pipelines", href: `${INDUSTRIES_PATH}/fashion` },
+  { label: "Marketing", description: "Campaign automation, RTB & attribution", href: `${INDUSTRIES_PATH}/marketing` },
+  { label: "Sports", description: "Athlete analytics, fan & league platforms", href: `${INDUSTRIES_PATH}/sports` },
+  { label: "Finance", description: "Fraud detection, forecasting & compliance", href: `${INDUSTRIES_PATH}#finance` },
+  { label: "Retail", description: "Personalization & demand planning", href: `${INDUSTRIES_PATH}#retail` },
+  { label: "Education", description: "Adaptive learning & auto-grading", href: `${INDUSTRIES_PATH}/education` },
+  { label: "Supply Chain", description: "Forecasting, routing & warehouse AI", href: `${INDUSTRIES_PATH}/supply-chain` },
 ];
 
 const companyItems = [
@@ -155,7 +161,7 @@ const megaConfigs: Record<MegaSection, MegaConfig> = {
     title: "Industries We Serve",
     subtitle: "Proven AI deployments across every major sector.",
     eyebrow: "Where we work",
-    viewAll: "/#industries",
+    viewAll: INDUSTRIES_PATH,
     ctaTitle: "Already in tech?",
     ctaSubtitle: "See how we ship results across verticals.",
     items: industryItems,
@@ -174,7 +180,7 @@ const megaConfigs: Record<MegaSection, MegaConfig> = {
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Services", href: SERVICES_BASE_PATH, mega: "services" as MegaSection },
-  { label: "Industries", href: "/#industries", mega: "industries" as MegaSection },
+  { label: "Industries", href: INDUSTRIES_PATH, mega: "industries" as MegaSection },
   { label: "Portfolio", href: PORTFOLIO_PATH },
   { label: "Company", href: ABOUT_PATH, mega: "company" as MegaSection },
 ];

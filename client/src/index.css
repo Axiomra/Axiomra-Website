@@ -232,3 +232,643 @@
   border-radius: 999px;
   background: transparent;
 }
+
+
+/* ── Marketing page: clip-path shapes ───────────────────────────────────────
+   The reference design leans on curved and notched edges rather than straight
+   section boundaries. These are plain classes, not Tailwind utilities, because
+   every one needs an ellipse() or a multi-point polygon() that arbitrary-value
+   syntax makes unreadable inline.
+
+   Curves scale with the element, so the arc depth is expressed in percent and
+   the section just reserves matching padding. */
+
+/* Convex bottom edge: the section bulges down into the one below it. */
+.clip-curve-bottom {
+  clip-path: ellipse(140% 100% at 50% 0%);
+}
+
+/* Concave top edge: the section scoops upward, pairing with the block above. */
+.clip-curve-top {
+  clip-path: ellipse(140% 100% at 50% 100%);
+}
+
+/* Angled band, used for the mid-page call to action. */
+.clip-slant {
+  clip-path: polygon(0 0, 100% 3.5%, 100% 100%, 0 96.5%);
+}
+
+/* Cut corner, top-right. The `--notch` custom property lets one class serve
+   both the large service cards and the smaller sub-industry tiles. */
+.clip-notch {
+  --notch: 2.75rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--notch)) 0,
+    100% var(--notch),
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Cut corner, bottom-left: mirrored so alternating rows do not read as a
+   repeating stamp. */
+.clip-notch-alt {
+  --notch: 2.75rem;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    var(--notch) 100%,
+    0 calc(100% - var(--notch))
+  );
+}
+
+/* Elongated hexagon, mirroring the hex motif in the reference artwork. */
+.clip-hex {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+@media (max-width: 767px) {
+  /* Deep arcs eat too much of a narrow card; flatten them on phones. */
+  .clip-curve-bottom {
+    clip-path: ellipse(190% 100% at 50% 0%);
+  }
+
+  .clip-curve-top {
+    clip-path: ellipse(190% 100% at 50% 100%);
+  }
+
+  .clip-notch,
+  .clip-notch-alt {
+    --notch: 1.75rem;
+  }
+}
+
+/* ── Marketing page: textured wallpaper band ────────────────────────────────
+   The "Build Your Custom AI Marketing Software" block sits on a printed-paper
+   texture in the reference. The photo supplies the grain; these layers tint it
+   to the brand and lay a faint hex lattice over the top so it reads as a
+   designed surface rather than a stock background. */
+
+.mk-texture {
+  background-color: rgb(var(--surface-subtle));
+  background-image:
+    radial-gradient(60% 70% at 15% 20%, rgb(var(--accent-vivid) / 0.16), transparent 60%),
+    radial-gradient(55% 60% at 85% 80%, rgb(var(--brand) / 0.14), transparent 65%);
+}
+
+.mk-hex-lattice {
+  background-image:
+    linear-gradient(60deg, rgb(var(--brand) / 0.16) 1px, transparent 1px),
+    linear-gradient(-60deg, rgb(var(--brand) / 0.16) 1px, transparent 1px),
+    linear-gradient(rgb(var(--brand) / 0.12) 1px, transparent 1px);
+  background-size: 46px 80px, 46px 80px, 46px 80px;
+  mask-image: radial-gradient(75% 75% at 50% 50%, #000 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(75% 75% at 50% 50%, #000 25%, transparent 80%);
+}
+
+/* ── Supply chain page: clip-path shapes ───────────────────────────────────
+   The supply chain reference leans on forward motion — chevrons, cut label
+   corners, hex badges — rather than the marketing page's soft arcs. These are
+   separate classes rather than variants of the marketing set so tuning one
+   page can never shift the other. */
+
+/* Band with a chevron pushed into its bottom edge: goods moving downstream. */
+.clip-chevron-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
+}
+
+/* The matching top edge, so the section below nests into the one above. */
+.clip-chevron-top {
+  clip-path: polygon(0 0, 50% 12%, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Shipping-label corners: opposite corners cut, so a card reads as a docket. */
+.clip-docket {
+  --docket: 2.25rem;
+  clip-path: polygon(
+    var(--docket) 0,
+    100% 0,
+    100% calc(100% - var(--docket)),
+    calc(100% - var(--docket)) 100%,
+    0 100%,
+    0 var(--docket)
+  );
+}
+
+/* Route marker: a tag with a pointed leading edge, used on the stat cards. */
+.clip-waybill {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 1.75rem 100%, 0 calc(100% - 1.75rem));
+}
+
+/* Lane arrow, for the mid-page call to action band. */
+.clip-lane {
+  clip-path: polygon(0 0, 97% 0, 100% 50%, 97% 100%, 0 100%, 3% 50%);
+}
+
+@media (max-width: 767px) {
+  /* Deep cuts eat too much of a narrow card; flatten them on phones. */
+  .clip-chevron-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% 94%, 50% 100%, 0 94%);
+  }
+
+  .clip-chevron-top {
+    clip-path: polygon(0 0, 50% 6%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .clip-docket {
+    --docket: 1.5rem;
+  }
+
+  .clip-lane {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+/* ── Supply chain page: lane-grid wallpaper ────────────────────────────────
+   The closing consultation band sits on a photographic texture. These layers
+   tint it to the brand and lay a faint routing grid over the top, so it reads
+   as a planning surface rather than a stock background. */
+
+.sc-texture {
+  background-color: rgb(var(--surface-subtle));
+  background-image:
+    radial-gradient(55% 65% at 12% 18%, rgb(var(--brand) / 0.16), transparent 62%),
+    radial-gradient(60% 70% at 88% 78%, rgb(var(--accent-vivid) / 0.14), transparent 66%);
+}
+
+.sc-lane-grid {
+  background-image:
+    linear-gradient(rgb(var(--brand) / 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--brand) / 0.14) 1px, transparent 1px),
+    linear-gradient(45deg, rgb(var(--accent-vivid) / 0.12) 1px, transparent 1px);
+  background-size: 64px 64px, 64px 64px, 90px 90px;
+  mask-image: radial-gradient(80% 80% at 50% 50%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(80% 80% at 50% 50%, #000 20%, transparent 78%);
+}
+
+/* ── Sports page: clip-path shapes ─────────────────────────────────────────
+   The sports reference cuts everything on a diagonal — angled card rails,
+   sheared stat blocks, a visor-shaped hero mask. Kept separate from the
+   marketing and supply chain sets so tuning one page never shifts another. */
+
+/* Sheared card, used for the sports rail. The lean is a custom property so a
+   mirrored pair can sit side by side without a second class. */
+.clip-blade {
+  --lean: 1.75rem;
+  clip-path: polygon(var(--lean) 0, 100% 0, calc(100% - var(--lean)) 100%, 0 100%);
+}
+
+.clip-blade-alt {
+  --lean: 1.75rem;
+  clip-path: polygon(0 0, calc(100% - var(--lean)) 0, 100% 100%, var(--lean) 100%);
+}
+
+/* Visor: a band whose bottom edge sweeps up to the right, like a stadium roof
+   line. Used where a section has to hand off to the one below it. */
+.clip-visor {
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+}
+
+.clip-visor-top {
+  clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Both leading corners cut: a track-lane chevron for the stat cards. */
+.clip-arrow {
+  --cut: 2.25rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--cut)) 0,
+    100% var(--cut),
+    100% 100%,
+    var(--cut) 100%,
+    0 calc(100% - var(--cut))
+  );
+}
+
+@media (max-width: 767px) {
+  .clip-blade,
+  .clip-blade-alt {
+    --lean: 0.9rem;
+  }
+
+  .clip-arrow {
+    --cut: 1.4rem;
+  }
+
+  /* A 8% shear on a tall phone band eats far too much of the copy. */
+  .clip-visor {
+    clip-path: polygon(0 0, 100% 0, 100% 97%, 0 100%);
+  }
+
+  .clip-visor-top {
+    clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+/* ── Sports page: pitch-marking wallpaper ──────────────────────────────────
+   The closing band sits on a photographic texture. These layers tint it to the
+   brand and lay faint pitch markings over the top, so it reads as a playing
+   surface rather than a stock background. */
+
+.sp-texture {
+  background-color: rgb(var(--surface-subtle));
+  background-image:
+    radial-gradient(58% 68% at 18% 22%, rgb(var(--accent-vivid) / 0.16), transparent 62%),
+    radial-gradient(58% 65% at 82% 78%, rgb(var(--brand) / 0.15), transparent 66%);
+}
+
+.sp-pitch-lines {
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgb(var(--brand) / 0.1) 0 2px,
+      transparent 2px 120px
+    ),
+    radial-gradient(circle at 50% 50%, transparent 0 116px, rgb(var(--brand) / 0.12) 116px 118px, transparent 118px);
+  mask-image: radial-gradient(80% 80% at 50% 50%, #000 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(80% 80% at 50% 50%, #000 20%, transparent 80%);
+}
+
+/* ── Real estate page: clip-path shapes ────────────────────────────────────
+   The real estate reference builds its edges from architecture: stepped
+   skylines between bands, plot-shaped cards with one surveyed corner, and a
+   keystone band for the mid-page call to action. Kept in its own set so
+   retuning a step depth here never moves the marketing, supply chain or
+   sports pages. */
+
+/* Stepped bottom edge: the band hands off to the next one as a low skyline. */
+.clip-skyline-bottom {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 88%,
+    82% 88%,
+    82% 96%,
+    58% 96%,
+    58% 90%,
+    34% 90%,
+    34% 100%,
+    0 100%
+  );
+}
+
+/* The same profile inverted, for a band that sits under a skyline edge. */
+.clip-skyline-top {
+  clip-path: polygon(
+    0 0,
+    34% 0,
+    34% 10%,
+    58% 10%,
+    58% 4%,
+    82% 4%,
+    82% 12%,
+    100% 12%,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Plot: a card with one surveyed corner cut, like a parcel on a site plan.
+   `--cut` is a custom property so large figures and small tiles share it. */
+.clip-plot {
+  --cut: 2.5rem;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--cut)),
+    calc(100% - var(--cut)) 100%,
+    0 100%
+  );
+}
+
+/* Mirrored parcel, so alternating rows do not read as a repeating stamp. */
+.clip-plot-alt {
+  --cut: 2.5rem;
+  clip-path: polygon(
+    var(--cut) 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 var(--cut)
+  );
+}
+
+/* Riser: a stepped left edge, borrowed from a stair section drawing. */
+.clip-riser {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%, 12% 62%, 5% 62%, 5% 30%, 0 30%);
+}
+
+/* Keystone: a band that narrows toward the top, used for the mid-page CTA. */
+.clip-keystone {
+  clip-path: polygon(0 4%, 100% 0, 100% 96%, 0 100%);
+}
+
+/* Tower: a tall figure with both top corners chamfered, echoing the glass
+   towers in the hero photography. */
+.clip-tower {
+  clip-path: polygon(0 9%, 50% 0, 100% 9%, 100% 100%, 0 100%);
+}
+
+@media (max-width: 767px) {
+  /* Deep steps eat too much of a narrow band; flatten the profile on phones. */
+  .clip-skyline-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% 94%, 60% 94%, 60% 100%, 0 100%);
+  }
+
+  .clip-skyline-top {
+    clip-path: polygon(0 0, 40% 0, 40% 6%, 100% 6%, 100% 100%, 0 100%);
+  }
+
+  .clip-plot,
+  .clip-plot-alt {
+    --cut: 1.25rem;
+  }
+
+  .clip-riser {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .clip-keystone {
+    clip-path: polygon(0 1.5%, 100% 0, 100% 98.5%, 0 100%);
+  }
+
+  .clip-tower {
+    clip-path: polygon(0 4%, 50% 0, 100% 4%, 100% 100%, 0 100%);
+  }
+}
+
+/* ── Real estate page: blueprint wallpaper ─────────────────────────────────
+   The closing consultation band sits on a concrete photograph. These layers
+   tint it to the brand and lay a faint measured grid over the top, so it
+   reads as a drawing board rather than a stock texture. */
+
+.re-texture {
+  background-color: rgb(var(--surface-subtle));
+  background-image:
+    radial-gradient(56% 66% at 16% 20%, rgb(var(--brand) / 0.16), transparent 62%),
+    radial-gradient(58% 68% at 84% 80%, rgb(var(--accent-vivid) / 0.15), transparent 66%);
+}
+
+.re-blueprint-grid {
+  background-image:
+    linear-gradient(rgb(var(--brand) / 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--brand) / 0.16) 1px, transparent 1px),
+    linear-gradient(rgb(var(--accent-vivid) / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--accent-vivid) / 0.08) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+  mask-image: radial-gradient(82% 82% at 50% 50%, #000 18%, transparent 78%);
+  -webkit-mask-image: radial-gradient(82% 82% at 50% 50%, #000 18%, transparent 78%);
+}
+
+/* ── Education page: clip-path shapes ──────────────────────────────────────
+   The education reference is built from paper and classroom forms: a turned
+   page corner, a slate with softened corners, an arched doorway over the
+   stakeholder portraits and an open-book crease across the full-bleed bands.
+   Kept as their own set so tuning this page never shifts marketing, supply
+   chain, sports or real estate. */
+
+/* Turned page corner, bottom-right. The `--fold` custom property lets the one
+   class serve both the large service rows and the smaller stat cards. */
+.clip-page {
+  --fold: 2.5rem;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--fold)),
+    calc(100% - var(--fold)) 100%,
+    0 100%
+  );
+}
+
+/* Mirrored fold, bottom-left, so alternating rows do not read as a stamp. */
+.clip-page-alt {
+  --fold: 2.5rem;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    var(--fold) 100%,
+    0 calc(100% - var(--fold))
+  );
+}
+
+/* Slate: every corner cut back, like a blackboard in its frame. */
+.clip-slate {
+  --chalk: 1.6rem;
+  clip-path: polygon(
+    var(--chalk) 0,
+    calc(100% - var(--chalk)) 0,
+    100% var(--chalk),
+    100% calc(100% - var(--chalk)),
+    calc(100% - var(--chalk)) 100%,
+    var(--chalk) 100%,
+    0 calc(100% - var(--chalk)),
+    0 var(--chalk)
+  );
+}
+
+/* Arched doorway, used on the stakeholder portraits. `inset()` is doing the
+   work rather than a polygon because the arch needs a real elliptical top. */
+.clip-arch {
+  clip-path: inset(0 round 48% 48% 1.25rem 1.25rem / 26% 26% 1.25rem 1.25rem);
+}
+
+/* Open-book crease: the bottom edge dips at the spine, so a full-bleed band
+   hands off to the section below the way a spread folds. */
+.clip-spine {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 93%, 0 100%);
+}
+
+/* The matching top edge, so the block below nests under that crease. */
+.clip-spine-top {
+  clip-path: polygon(0 0, 50% 7%, 100% 0, 100% 100%, 0 100%);
+}
+
+@media (max-width: 767px) {
+  /* Deep folds eat too much of a narrow card; flatten them on phones. */
+  .clip-page,
+  .clip-page-alt {
+    --fold: 1.5rem;
+  }
+
+  .clip-slate {
+    --chalk: 1rem;
+  }
+
+  .clip-arch {
+    clip-path: inset(0 round 46% 46% 1rem 1rem / 16% 16% 1rem 1rem);
+  }
+
+  .clip-spine {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 97%, 0 100%);
+  }
+
+  .clip-spine-top {
+    clip-path: polygon(0 0, 50% 3%, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+/* ── Education page: ruled-paper wallpaper ─────────────────────────────────
+   The "what AI can optimise" band sits on a chalk texture in the reference.
+   The photo supplies the grain; these layers tint it to the brand and lay
+   ruled lines and a margin rule over the top, so it reads as a worked page
+   rather than a stock background. */
+
+.edu-texture {
+  background-color: rgb(var(--surface-subtle));
+  background-image:
+    radial-gradient(58% 68% at 14% 18%, rgb(var(--accent-vivid) / 0.15), transparent 62%),
+    radial-gradient(56% 66% at 86% 82%, rgb(var(--brand) / 0.15), transparent 66%);
+}
+
+.edu-ruled-lines {
+  background-image:
+    linear-gradient(rgb(var(--brand) / 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--accent-vivid) / 0.22) 1.5px, transparent 1.5px);
+  background-size: 34px 34px, 100% 100%;
+  background-position: 0 0, 12% 0;
+  background-repeat: repeat, no-repeat;
+  mask-image: radial-gradient(85% 85% at 50% 50%, #000 22%, transparent 80%);
+  -webkit-mask-image: radial-gradient(85% 85% at 50% 50%, #000 22%, transparent 80%);
+}
+
+/* ── Finance page: clip-path shapes ────────────────────────────────────────
+   The finance reference is built from market and vault forms: a chamfered
+   ledger card, the stepped rise of a trend line across the full-bleed bands,
+   an arched vault door over the stakeholder portraits and a struck coin edge.
+   Kept as their own set so tuning this page never shifts marketing, supply
+   chain, sports, real estate or education. */
+
+/* Ledger card: the top-left and bottom-right corners are ruled off, the way a
+   statement is trimmed. `--rule` lets the one class serve the large service
+   rows and the smaller stat cards. */
+.clip-ledger {
+  --rule: 2.5rem;
+  clip-path: polygon(
+    var(--rule) 0,
+    100% 0,
+    100% calc(100% - var(--rule)),
+    calc(100% - var(--rule)) 100%,
+    0 100%,
+    0 var(--rule)
+  );
+}
+
+/* Mirrored chamfer, so alternating rows do not read as a stamped sheet. */
+.clip-ledger-alt {
+  --rule: 2.5rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--rule)) 0,
+    100% var(--rule),
+    100% 100%,
+    var(--rule) 100%,
+    0 calc(100% - var(--rule))
+  );
+}
+
+/* Trend line: the bottom edge steps up from left to right, so a full-bleed
+   band hands off to the section below along a rising chart rather than a
+   ruler. The steps are shallow on purpose — the copy has to clear them. */
+.clip-trend-bottom {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    72% 95%,
+    48% 99%,
+    24% 92%,
+    0 97%
+  );
+}
+
+/* The matching top edge, so the block below nests under that rise. */
+.clip-trend-top {
+  clip-path: polygon(
+    0 3%,
+    24% 8%,
+    48% 1%,
+    72% 5%,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Vault door: a real elliptical arch over the portraits, squared off at the
+   foot. `inset()` rather than a polygon because the top has to be a curve. */
+.clip-vault {
+  clip-path: inset(0 round 46% 46% 1.25rem 1.25rem / 24% 24% 1.25rem 1.25rem);
+}
+
+/* Struck coin: an octagon, used on the small figures and the loose accents. */
+.clip-coin {
+  clip-path: polygon(
+    30% 0,
+    70% 0,
+    100% 30%,
+    100% 70%,
+    70% 100%,
+    30% 100%,
+    0 70%,
+    0 30%
+  );
+}
+
+/* Candlestick body: the head and foot are pinched in, echoing the market
+   columns in the WebGL field behind the hero. */
+.clip-candle {
+  clip-path: polygon(0 6%, 50% 0, 100% 6%, 100% 94%, 50% 100%, 0 94%);
+}
+
+@media (max-width: 767px) {
+  /* Deep chamfers eat too much of a narrow card; flatten them on phones. */
+  .clip-ledger,
+  .clip-ledger-alt {
+    --rule: 1.5rem;
+  }
+
+  .clip-trend-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 72% 98%, 48% 100%, 24% 97%, 0 99%);
+  }
+
+  .clip-trend-top {
+    clip-path: polygon(0 1%, 24% 3%, 48% 0, 72% 2%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .clip-vault {
+    clip-path: inset(0 round 44% 44% 1rem 1rem / 15% 15% 1rem 1rem);
+  }
+
+  .clip-candle {
+    clip-path: polygon(0 3%, 50% 0, 100% 3%, 100% 97%, 50% 100%, 0 97%);
+  }
+}
+
+/* ── Finance page: market-paper wallpaper ──────────────────────────────────
+   The consultation band sits on a stucco texture in the reference. The photo
+   supplies the grain; these layers tint it to the brand and lay a trading
+   grid with a faint tape rule over the top, so it reads as a worked surface
+   rather than a stock background. */
+
+.fin-texture {
+  background-color: rgb(var(--surface-subtle));
+  background-image:
+    radial-gradient(60% 70% at 12% 16%, rgb(var(--brand) / 0.16), transparent 62%),
+    radial-gradient(56% 64% at 88% 84%, rgb(var(--accent-vivid) / 0.16), transparent 66%);
+}
+
+.fin-grid-lines {
+  background-image:
+    linear-gradient(rgb(var(--brand) / 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--brand) / 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--accent-vivid) / 0.2) 1.5px, transparent 1.5px);
+  background-size: 42px 42px, 42px 42px, 100% 100%;
+  background-position: 0 0, 0 0, 8% 0;
+  background-repeat: repeat, repeat, no-repeat;
+  mask-image: radial-gradient(88% 88% at 50% 50%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(88% 88% at 50% 50%, #000 20%, transparent 78%);
+}

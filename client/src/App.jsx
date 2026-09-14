@@ -23,6 +23,15 @@ const AboutPage = lazy(() => import("./pages/AboutPage"));
 const TechStackPage = lazy(() => import("./pages/TechStackPage"));
 const FaqsPage = lazy(() => import("./pages/FaqsPage"));
 const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
+const IndustriesPage = lazy(() => import("./pages/IndustriesPage"));
+const IndustryDetailPlaceholder = lazy(() => import("./pages/IndustryDetailPlaceholder"));
+const FashionPage = lazy(() => import("./pages/FashionPage"));
+const MarketingPage = lazy(() => import("./pages/MarketingPage"));
+const SupplyChainPage = lazy(() => import("./pages/SupplyChainPage"));
+const RealEstatePage = lazy(() => import("./pages/RealEstatePage"));
+const SportsPage = lazy(() => import("./pages/SportsPage"));
+const FinancePage = lazy(() => import("./pages/FinancePage"));
+const EducationPage = lazy(() => import("./pages/EducationPage"));
 
 // The admin panel shares nothing with the marketing site — its own chrome, its
 // own auth provider, its own table libraries. Splitting it here keeps all of
@@ -40,6 +49,7 @@ import { ABOUT_PATH } from "./data/aboutData";
 import { TECH_PATH } from "./data/techStackData";
 import { FAQS_PATH } from "./data/faqsData";
 import { PORTFOLIO_PATH } from "./data/portfolioData";
+import { INDUSTRIES_PATH } from "./data/industriesData";
 import { AI_DEVELOPMENT_SLUG } from "./data/aiDevelopmentData";
 import { GENERATIVE_AI_SLUG } from "./data/generativeAiData";
 import { AGENTIC_AI_SLUG } from "./data/agenticAiData";
@@ -89,6 +99,16 @@ function SiteRoutes() {
             <Route path={TECH_PATH} element={<TechStackPage />} />
             <Route path={FAQS_PATH} element={<FaqsPage />} />
             <Route path={PORTFOLIO_PATH} element={<PortfolioPage />} />
+            <Route path={INDUSTRIES_PATH} element={<IndustriesPage />} />
+            {/* Built industry pages go above the :slug fallback. */}
+            <Route path={`${INDUSTRIES_PATH}/fashion`} element={<FashionPage />} />
+            <Route path={`${INDUSTRIES_PATH}/marketing`} element={<MarketingPage />} />
+            <Route path={`${INDUSTRIES_PATH}/supply-chain`} element={<SupplyChainPage />} />
+            <Route path={`${INDUSTRIES_PATH}/real-estate`} element={<RealEstatePage />} />
+            <Route path={`${INDUSTRIES_PATH}/sports`} element={<SportsPage />} />
+            <Route path={`${INDUSTRIES_PATH}/finance`} element={<FinancePage />} />
+            <Route path={`${INDUSTRIES_PATH}/education`} element={<EducationPage />} />
+            <Route path={`${INDUSTRIES_PATH}/:slug`} element={<IndustryDetailPlaceholder />} />
             <Route path={SERVICES_BASE_PATH} element={<ServicesPage />} />
             <Route
               path={`${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`}

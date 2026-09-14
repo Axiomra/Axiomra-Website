@@ -9,6 +9,14 @@ const ContactCanvas = lazy(() => import("./ContactCanvas"));
 const AboutCanvas = lazy(() => import("./AboutCanvas"));
 const TechCanvas = lazy(() => import("./TechCanvas"));
 const PortfolioCanvas = lazy(() => import("./PortfolioCanvas"));
+const IndustriesCanvas = lazy(() => import("./IndustriesCanvas"));
+const FashionCanvas = lazy(() => import("./FashionCanvas"));
+const MarketingCanvas = lazy(() => import("./MarketingCanvas"));
+const SupplyChainCanvas = lazy(() => import("./SupplyChainCanvas"));
+const RealEstateCanvas = lazy(() => import("./RealEstateCanvas"));
+const SportsCanvas = lazy(() => import("./SportsCanvas"));
+const EducationCanvas = lazy(() => import("./EducationCanvas"));
+const FinanceCanvas = lazy(() => import("./FinanceCanvas"));
 
 function supportsWebGL() {
   try {
@@ -62,6 +70,22 @@ export default function NetworkBackground({ className = "", count = 140, variant
               <TechCanvas frameloop={frameloop} />
             ) : variant === "portfolio" ? (
               <PortfolioCanvas frameloop={frameloop} />
+            ) : variant === "industries" ? (
+              <IndustriesCanvas frameloop={frameloop} />
+            ) : variant === "fashion" ? (
+              <FashionCanvas frameloop={frameloop} />
+            ) : variant === "marketing" ? (
+              <MarketingCanvas frameloop={frameloop} />
+            ) : variant === "supply-chain" ? (
+              <SupplyChainCanvas frameloop={frameloop} />
+            ) : variant === "sports" ? (
+              <SportsCanvas frameloop={frameloop} />
+            ) : variant === "education" ? (
+              <EducationCanvas frameloop={frameloop} />
+            ) : variant === "finance" ? (
+              <FinanceCanvas frameloop={frameloop} />
+            ) : variant === "real-estate" ? (
+              <RealEstateCanvas frameloop={frameloop} />
             ) : (
               <NetworkCanvas count={count} frameloop={frameloop} />
             )}
