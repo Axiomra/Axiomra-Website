@@ -66,7 +66,7 @@ export const industries = [
     description:
       "From grassroots clubs to professional leagues, the admin and the analysis both pile up. We ship the tooling that runs the organisation and the models that make every athlete's data useful.",
     image: sportsImg,
-    alt: "A sprinter crouched in the starting blocks on a red running track",
+    alt: "College football players in action on the field during a packed stadium game",
     pains: [
       { problem: "Player records in spreadsheets", solution: "Registration and roster tools" },
       { problem: "Ticketing that breaks on match day", solution: "Event ticketing systems" },
@@ -83,7 +83,7 @@ export const industries = [
     description:
       "Teachers spend their evenings on grading and admin instead of teaching. We build the EdTech that hands that time back and gives every learner a path that adapts to them.",
     image: educationImg,
-    alt: "Tall library shelves filled with books, lit warmly from above",
+    alt: "A teacher guiding students working on laptops in a modern campus library",
     pains: [
       { problem: "Students disengaging mid-course", solution: "Personalised learning apps" },
       { problem: "Grading eating teaching hours", solution: "AI assessment tools" },
@@ -101,7 +101,7 @@ export const industries = [
     description:
       "Clinical teams are stretched, systems do not talk to each other and every shortcut has a compliance cost. We build healthcare AI that takes the administrative load off clinicians without taking any risk with patient data.",
     image: healthcareImg,
-    alt: "A doctor in a white coat with a stethoscope checking a smartphone",
+    alt: "A radiologist reviewing medical scans across multiple diagnostic monitors",
     pains: [
       { problem: "Staffing gaps on every rota", solution: "AI workforce planning tools" },
       { problem: "Clinician burnout from admin", solution: "Task and documentation automation" },
@@ -204,7 +204,7 @@ export const industries = [
     description:
       "Finance teams carry the compliance burden, the legacy stack and the fraud risk at the same time. We build the systems that automate the controls and surface the exceptions, with an audit trail for every decision.",
     image: financeImg,
-    alt: "Stock market charts displayed on a laptop screen",
+    alt: "A finance team reviewing figures beside trading desk monitors in an office",
     pains: [
       { problem: "Compliance consuming the team", solution: "AI compliance tooling" },
       { problem: "Legacy systems nobody dares touch", solution: "AI integration layers" },

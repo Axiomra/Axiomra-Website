@@ -57,7 +57,7 @@ export default function FinanceImpact() {
             <StaggerItem
               as="article"
               key={stat.value + stat.source}
-              className="clip-ledger relative flex flex-col overflow-hidden bg-gradient-to-br from-accent-vivid via-brand to-brand-strong p-8 shadow-card md:p-10"
+              className="clip-ledger lg-sheen relative flex flex-col overflow-hidden bg-gradient-to-br from-accent-vivid via-brand to-brand-strong p-8 shadow-card md:p-10"
             >
               <span
                 aria-hidden="true"

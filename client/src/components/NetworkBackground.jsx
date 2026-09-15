@@ -17,6 +17,11 @@ const RealEstateCanvas = lazy(() => import("./RealEstateCanvas"));
 const SportsCanvas = lazy(() => import("./SportsCanvas"));
 const EducationCanvas = lazy(() => import("./EducationCanvas"));
 const FinanceCanvas = lazy(() => import("./FinanceCanvas"));
+const InsuranceCanvas = lazy(() => import("./InsuranceCanvas"));
+const RetailCanvas = lazy(() => import("./RetailCanvas"));
+const LegalCanvas = lazy(() => import("./LegalCanvas"));
+const HealthcareCanvas = lazy(() => import("./HealthcareCanvas"));
+const TransportationCanvas = lazy(() => import("./TransportationCanvas"));
 
 function supportsWebGL() {
   try {
@@ -84,6 +89,16 @@ export default function NetworkBackground({ className = "", count = 140, variant
               <EducationCanvas frameloop={frameloop} />
             ) : variant === "finance" ? (
               <FinanceCanvas frameloop={frameloop} />
+            ) : variant === "insurance" ? (
+              <InsuranceCanvas frameloop={frameloop} />
+            ) : variant === "legal" ? (
+              <LegalCanvas frameloop={frameloop} />
+            ) : variant === "retail" ? (
+              <RetailCanvas frameloop={frameloop} />
+            ) : variant === "healthcare" ? (
+              <HealthcareCanvas frameloop={frameloop} />
+            ) : variant === "transportation" ? (
+              <TransportationCanvas frameloop={frameloop} />
             ) : variant === "real-estate" ? (
               <RealEstateCanvas frameloop={frameloop} />
             ) : (

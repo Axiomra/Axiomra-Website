@@ -1,0 +1,291 @@
+/* ── Liquid Glass UI kit ───────────────────────────────────────────────────
+   A small, composable set of classes for frosted panels. Four layers make a
+   pane read as glass rather than as a translucent box:
+
+     1. the refraction   — backdrop-filter blur + saturate, so whatever sits
+                           behind is bent and enriched, not just dimmed;
+     2. the body tint    — a directional gradient, lighter at the top-left,
+                           which is where a pane of glass catches a room;
+     3. the rim          — a 1px gradient edge, bright on the lit side and
+                           nearly gone on the shadowed one;
+     4. the specular     — a slow travelling sheen, the part that makes it
+                           feel liquid instead of frozen.
+
+   Every class is theme-aware through the `.dark` variables below, and each
+   one degrades to a plain translucent surface where backdrop-filter is
+   unsupported, so nothing ever renders as unreadable clear glass.
+
+   Composition:
+     .lg          the pane itself (tint + refraction + rim + depth)
+     .lg-dark     the same pane tuned for an always-dark block
+     .lg-soft     lighter refraction, for panes stacked over busy photography
+     .lg-strong   heavier refraction, for panes that carry small text
+     .lg-sheen    adds the travelling specular; isolates itself, so it can
+                  go on any pane, glass or not
+     .lg-rim      a wrapper that paints a 1px refracted edge, and is the only
+                  rim that survives a clip-path (see the note on that class)
+     .lg-hover    lifts the pane and brightens the tint on hover/focus
+   ------------------------------------------------------------------------ */
+
+:root {
+  /* Tint stops. Two values so the body gradient has somewhere to travel. */
+  --lg-tint-a: 255 255 255;
+  --lg-tint-b: 255 255 255;
+  --lg-tint-top: 0.72;
+  --lg-tint-bottom: 0.46;
+
+  /* Rim: the lit edge and the shadowed one. */
+  --lg-rim-lit: 255 255 255;
+  --lg-rim-lit-alpha: 0.95;
+  --lg-rim-shade: 15 23 41;
+  --lg-rim-shade-alpha: 0.07;
+
+  /* Depth cast underneath the pane. */
+  --lg-shadow: 15 23 41;
+  --lg-shadow-alpha: 0.1;
+
+  /* Refraction strength. */
+  --lg-blur: 20px;
+  --lg-saturate: 165%;
+  --lg-brightness: 1.04;
+
+  /* The specular sweep. */
+  --lg-sheen: 255 255 255;
+  --lg-sheen-alpha: 0.5;
+}
+
+.dark {
+  --lg-tint-a: 166 179 239;
+  --lg-tint-b: 20 216 196;
+  --lg-tint-top: 0.12;
+  --lg-tint-bottom: 0.05;
+
+  --lg-rim-lit: 255 255 255;
+  --lg-rim-lit-alpha: 0.3;
+  --lg-rim-shade: 255 255 255;
+  --lg-rim-shade-alpha: 0.04;
+
+  --lg-shadow: 0 0 0;
+  --lg-shadow-alpha: 0.42;
+
+  --lg-blur: 22px;
+  --lg-saturate: 150%;
+  --lg-brightness: 1.1;
+
+  --lg-sheen: 255 255 255;
+  --lg-sheen-alpha: 0.22;
+}
+
+/* ── The pane ───────────────────────────────────────────────────────────── */
+
+.lg {
+  position: relative;
+  isolation: isolate;
+  background-image: linear-gradient(
+    150deg,
+    rgb(var(--lg-tint-a) / var(--lg-tint-top)) 0%,
+    rgb(var(--lg-tint-a) / calc(var(--lg-tint-top) * 0.72)) 38%,
+    rgb(var(--lg-tint-b) / var(--lg-tint-bottom)) 100%
+  );
+  -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate))
+    brightness(var(--lg-brightness));
+  backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate))
+    brightness(var(--lg-brightness));
+  box-shadow:
+    /* the lit rim, along the top edge */
+    inset 0 1px 0 0 rgb(var(--lg-rim-lit) / var(--lg-rim-lit-alpha)),
+    /* the shadowed rim, along the bottom */
+    inset 0 -1px 0 0 rgb(var(--lg-rim-shade) / var(--lg-rim-shade-alpha)),
+    /* the pane's own thickness */
+    inset 0 0 0 1px rgb(var(--lg-rim-lit) / calc(var(--lg-rim-lit-alpha) * 0.28)),
+    /* what it casts on the page */
+    0 18px 48px -18px rgb(var(--lg-shadow) / var(--lg-shadow-alpha)),
+    0 2px 8px -4px rgb(var(--lg-shadow) / calc(var(--lg-shadow-alpha) * 0.7));
+}
+
+/* Always-dark blocks already sit on `--inverse`; a white tint there reads as
+   fog rather than glass, so the pane picks up the brand hues instead. */
+.lg-dark {
+  --lg-tint-a: 166 179 239;
+  --lg-tint-b: 20 216 196;
+  --lg-tint-top: 0.14;
+  --lg-tint-bottom: 0.06;
+  --lg-rim-lit: 255 255 255;
+  --lg-rim-lit-alpha: 0.28;
+  --lg-rim-shade: 255 255 255;
+  --lg-rim-shade-alpha: 0.05;
+  --lg-shadow: 0 0 0;
+  --lg-shadow-alpha: 0.45;
+  --lg-sheen-alpha: 0.13;
+}
+
+/* Over photography the full blur turns the picture to mud; this keeps enough
+   of the image readable to be worth having behind the pane. */
+.lg-soft {
+  --lg-blur: 10px;
+  --lg-saturate: 140%;
+  --lg-tint-top: 0.4;
+  --lg-tint-bottom: 0.22;
+}
+
+/* For panes carrying small or long-form text, where the ground has to go
+   quiet enough that contrast is not fighting the background. */
+.lg-strong {
+  --lg-blur: 34px;
+  --lg-saturate: 185%;
+  --lg-tint-top: 0.88;
+  --lg-tint-bottom: 0.68;
+}
+
+.dark .lg-strong,
+.lg-dark.lg-strong {
+  --lg-tint-top: 0.2;
+  --lg-tint-bottom: 0.1;
+}
+
+/* Where the browser cannot refract, the tint alone has to carry the contrast,
+   so it is pushed most of the way to opaque. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lg {
+    background-color: rgb(var(--surface-card) / 0.92);
+  }
+
+  .lg-dark {
+    background-color: rgb(var(--inverse-card) / 0.92);
+  }
+}
+
+/* ── The specular sweep ─────────────────────────────────────────────────── */
+
+/* A band of light travelling across the pane on a long loop.
+
+   The sweep sits at z-index -1 inside an isolated host, which puts it above
+   the pane's own tint but below its content. Sitting it at z-index 0 instead
+   would paint it in the positioned-descendant layer — above any bare text
+   node in the pane, which would then be read through the sheen. */
+.lg-sheen {
+  position: relative;
+  isolation: isolate;
+}
+
+.lg-sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgb(var(--lg-sheen) / calc(var(--lg-sheen-alpha) * 0.3)) 46%,
+    rgb(var(--lg-sheen) / var(--lg-sheen-alpha)) 50%,
+    rgb(var(--lg-sheen) / calc(var(--lg-sheen-alpha) * 0.3)) 54%,
+    transparent 62%
+  );
+  background-size: 260% 100%;
+  background-position: 200% 0;
+  animation: lg-sheen-travel 9s cubic-bezier(0.5, 0, 0.2, 1) infinite;
+}
+
+@keyframes lg-sheen-travel {
+  0% {
+    background-position: 200% 0;
+  }
+  /* The sweep itself takes a third of the loop; the rest is the pane at rest,
+     so the effect registers as an occasional catch of light, not a strobe. */
+  36%,
+  100% {
+    background-position: -60% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lg-sheen::before {
+    animation: none;
+    background-position: 62% 0;
+    opacity: 0.5;
+  }
+}
+
+/* ── The rim wrapper ────────────────────────────────────────────────────── */
+
+/* `.lg`'s rim comes from inset shadows, which follow the border box. Once a
+   pane is clipped — and this page clips nearly everything — those shadows are
+   drawn under the pane's own tint and go soft. This wrapper paints the rim on
+   top instead, as a 1px gradient ring, so a clipped pane keeps a crisp lit
+   edge along every axis-aligned side of the cut shape.
+
+   The ring lives on a pseudo-element rather than on the wrapper itself. A
+   `mask` applies to an element's whole subtree, so masking the wrapper down to
+   its padding ring would take the pane inside it with it; on the pseudo the
+   mask only cuts the pseudo. The wrapper's own `clip-path` then trims the ring
+   to the cut shape along with everything else.
+
+   Usage: put the clip on the wrapper, and the glass on the child. */
+.lg-rim {
+  position: relative;
+  padding: 1px;
+}
+
+.lg-rim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  padding: 1px;
+  background-image: linear-gradient(
+    150deg,
+    rgb(var(--lg-rim-lit) / var(--lg-rim-lit-alpha)) 0%,
+    rgb(var(--lg-rim-lit) / calc(var(--lg-rim-lit-alpha) * 0.22)) 46%,
+    rgb(var(--lg-rim-shade) / var(--lg-rim-shade-alpha)) 100%
+  );
+  -webkit-mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  -webkit-mask-clip: content-box, border-box;
+  -webkit-mask-composite: xor;
+  mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  mask-clip: content-box, border-box;
+  mask-composite: exclude;
+}
+
+/* Without the cut-out the gradient would flood the pane, and since the pane is
+   translucent it would read straight through as brushed metal. No rim is the
+   smaller loss. */
+@supports not ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
+  .lg-rim::after {
+    display: none;
+  }
+}
+
+/* Inside a rim wrapper the pane's own outline would double the edge. */
+.lg-rim > .lg {
+  box-shadow:
+    inset 0 1px 0 0 rgb(var(--lg-rim-lit) / calc(var(--lg-rim-lit-alpha) * 0.5)),
+    0 18px 48px -18px rgb(var(--lg-shadow) / var(--lg-shadow-alpha));
+}
+
+/* ── Interaction ────────────────────────────────────────────────────────── */
+
+.lg-hover {
+  transition:
+    transform 0.5s cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.lg-hover:hover,
+.lg-hover:focus-within {
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 1px 0 0 rgb(var(--lg-rim-lit) / var(--lg-rim-lit-alpha)),
+    inset 0 0 0 1px rgb(var(--lg-rim-lit) / calc(var(--lg-rim-lit-alpha) * 0.4)),
+    0 26px 60px -20px rgb(var(--lg-shadow) / calc(var(--lg-shadow-alpha) * 1.4));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lg-hover:hover,
+  .lg-hover:focus-within {
+    transform: none;
+  }
+}

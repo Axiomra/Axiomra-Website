@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../../SectionHeading";
 import { Stagger, StaggerItem } from "../../motion/Reveal";
 import { blogs } from "../../../data/financeData";
 
-/** Three article cards. They link to the blog index until the posts exist. */
+/** Three article cards. Static preview only - not clickable until the posts exist. */
 export default function FinanceBlogs() {
   return (
     <section className="border-t border-line bg-surface-subtle py-24 md:py-32">
@@ -14,9 +12,8 @@ export default function FinanceBlogs() {
         <Stagger as="ul" step={0.1} className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
           {blogs.posts.map((post) => (
             <StaggerItem as="li" key={post.title}>
-              <Link
-                to="/blog"
-                className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-line bg-surface-card transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-1 hover:shadow-card focus-ring"
+              <article
+                className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-line bg-surface-card transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]"
               >
                 <img
                   src={post.image}
@@ -25,19 +22,15 @@ export default function FinanceBlogs() {
                   height={750}
                   loading="lazy"
                   decoding="async"
-                  className="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
+                  className="aspect-[16/10] w-full object-cover"
                 />
                 <div className="flex flex-1 flex-col p-7">
                   <span className="font-mono text-xs uppercase tracking-[0.18em] text-accent">{post.tag}</span>
                   <h3 className="mt-3 font-display text-xl font-semibold leading-snug tracking-tight text-content">
                     {post.title}
                   </h3>
-                  <span className="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-medium text-content-dim transition-colors duration-300 group-hover:text-brand">
-                    Read article
-                    <ArrowUpRight size={15} aria-hidden="true" />
-                  </span>
                 </div>
-              </Link>
+              </article>
             </StaggerItem>
           ))}
         </Stagger>

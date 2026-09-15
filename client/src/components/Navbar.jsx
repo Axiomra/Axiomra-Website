@@ -171,6 +171,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import logoLight from "../assets/logo-light.png";
 import ThemeToggle from "./ThemeToggle";
 import { SERVICES_BASE_PATH } from "../data/servicesData";
+import { INDUSTRIES_PATH, industryPath } from "../data/industriesData";
 
 const links = [
   { label: "Home", href: "/" },
@@ -199,13 +200,14 @@ const links = [
   },
   {
     label: "Industries",
-    href: "#industries",
+    href: INDUSTRIES_PATH,
     dropdown: [
-      { label: "Healthcare", href: "#industries" },
-      { label: "Fashion", href: "#industries" },
-      { label: "Finance", href: "#industries" },
-      { label: "Retail", href: "#industries" },
-      { label: "Education", href: "#industries" },
+      { label: "AI for Fashion", href: industryPath("fashion") },
+      { label: "AI for Sports", href: industryPath("sports") },
+      { label: "AI for Education", href: industryPath("education") },
+      { label: "AI for Healthcare", href: industryPath("healthcare") },
+      { label: "AI for Finance", href: industryPath("finance") },
+      { label: "View all industries", href: INDUSTRIES_PATH },
     ],
   },
   { label: "Portfolio", href: "#portfolio" },

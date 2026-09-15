@@ -1,4 +1,4 @@
-import { Layers, ShieldCheck, Target } from "lucide-react";
+import { Layers, Route, ShieldCheck, Target } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import StatCounter from "../StatCounter";
 import { Stagger, StaggerItem } from "../motion/Reveal";
@@ -7,7 +7,7 @@ import { partner } from "../../data/industriesData";
 
 /* Icon names live in the data file as strings so the copy stays editable
    without importing lucide there. */
-const ICONS = { Layers, ShieldCheck, Target };
+const ICONS = { Layers, Route, ShieldCheck, Target };
 
 export default function IndustriesPartner({ data = partner }) {
   return (

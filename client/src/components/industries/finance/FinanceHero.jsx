@@ -66,7 +66,9 @@ export default function FinanceHero() {
         <div className="lg:col-span-7">
           <p
             data-hero
-            className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2 font-mono text-sm uppercase tracking-[0.18em] text-white/75 backdrop-blur-sm"
+            // Frosted over the photo and the WebGL field rather than a flat
+            // tint, so the pill picks up whatever is moving behind it.
+            className="lg lg-dark lg-soft lg-sheen mb-7 inline-flex items-center gap-2 rounded-full px-5 py-2 font-mono text-sm uppercase tracking-[0.18em] text-white/80"
           >
             <Landmark size={15} strokeWidth={1.5} className="text-accent-vivid" aria-hidden="true" />
             {hero.eyebrow}
@@ -94,7 +96,7 @@ export default function FinanceHero() {
               </span>
             </Link>
 
-            <div className="flex items-center gap-3 text-inverse-fg/80">
+            <div className="lg lg-dark lg-soft flex items-center gap-3 rounded-full px-5 py-2.5 text-inverse-fg/80">
               <span
                 className="flex text-gold"
                 role="img"

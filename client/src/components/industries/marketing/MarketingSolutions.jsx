@@ -1,11 +1,13 @@
 import { useLayoutEffect, useRef } from "react";
+import { Check } from "lucide-react";
 import SectionHeading from "../../SectionHeading";
 import { gsap, MOTION_OK } from "../../../lib/gsap";
 import { solutions } from "../../../data/marketingData";
 
 /**
- * Six service rows, image and copy swapping sides. Each photo is scrubbed a
- * little against the scroll so the column has depth without any pinning.
+ * Six service rows, image and copy swapping sides. The photo takes the
+ * narrower column so it stays in proportion with the copy beside it, and is
+ * scrubbed a little against the scroll so the column has depth without pinning.
  */
 export default function MarketingSolutions() {
   const scope = useRef(null);
@@ -66,7 +68,7 @@ export default function MarketingSolutions() {
               >
                 <figure
                   data-row-item
-                  className={`relative overflow-hidden md:col-span-6 ${
+                  className={`relative overflow-hidden md:col-span-5 ${
                     flipped ? "md:order-2" : ""
                   } ${flipped ? "clip-notch-alt" : "clip-notch"}`}
                 >
@@ -82,7 +84,7 @@ export default function MarketingSolutions() {
                   />
                 </figure>
 
-                <div className={`md:col-span-6 ${flipped ? "md:order-1" : ""}`}>
+                <div className={`md:col-span-7 ${flipped ? "md:order-1" : ""}`}>
                   <span data-row-item className="font-mono text-sm text-accent">
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -98,6 +100,33 @@ export default function MarketingSolutions() {
                   >
                     {item.body}
                   </p>
+                  {item.extra && (
+                    <p
+                      data-row-item
+                      className="mt-4 max-w-[62ch] text-base leading-relaxed text-content-dim md:text-lg"
+                    >
+                      {item.extra}
+                    </p>
+                  )}
+
+                  {item.points?.length > 0 && (
+                    <ul data-row-item className="mt-7 space-y-3">
+                      {item.points.map((point) => (
+                        <li
+                          key={point}
+                          className="flex items-start gap-3 rounded-xl border border-line bg-surface-card px-4 py-3"
+                        >
+                          <Check
+                            size={16}
+                            strokeWidth={2.4}
+                            aria-hidden="true"
+                            className="mt-1 shrink-0 text-accent-vivid"
+                          />
+                          <span className="text-base leading-relaxed text-content">{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </div>
             );

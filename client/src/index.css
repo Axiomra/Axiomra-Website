@@ -1,5 +1,7 @@
 /* Tokens first: every utility below resolves against these variables. */
 @import "./styles/tokens.css";
+/* The frosted-pane kit; resolves against the tokens above. */
+@import "./styles/liquid-glass.css";
 
 @tailwind base;
 @tailwind components;
@@ -871,4 +873,1328 @@
   background-repeat: repeat, repeat, no-repeat;
   mask-image: radial-gradient(88% 88% at 50% 50%, #000 20%, transparent 78%);
   -webkit-mask-image: radial-gradient(88% 88% at 50% 50%, #000 20%, transparent 78%);
+}
+
+/* ── Finance page: shape-outside text wrapping ─────────────────────────────
+   Flowed shapes are used only in the decorative signal band, never around the
+   page's body copy: an irregular measure is hard to read at length and near
+   impossible to keep honest across breakpoints. Each shape pairs a
+   `shape-outside` with an identical `clip-path`, so the glass pane the reader
+   sees is exactly the outline the text is wrapping — no invisible gutter, and
+   no line of text riding over the fill.
+
+   Every one of these unfloats below its breakpoint. A flowed shape needs a
+   column wide enough to leave a readable measure beside it; where there is
+   none, the shape becomes an ordinary stacked block and the copy goes back to
+   a straight edge. `--poly` is redeclared per breakpoint so the outline and
+   the clip stay in lockstep by construction. */
+
+/* Circle float: the struck-coin motif, carrying one figure, with the lead-in
+   line curving around it. */
+.fin-flow-coin {
+  width: 148px;
+  height: 148px;
+  shape-outside: circle(50%);
+  shape-margin: 10px;
+  /* A rounded border box, not a clip: `clip-path` would slice the pane's inset
+     rim into a chord, while `border-radius` lets the rim follow the circle. */
+  border-radius: 50%;
+  margin: 0 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .fin-flow-coin {
+    float: left;
+    width: 200px;
+    height: 200px;
+    margin: 0.35rem 1.5rem 1rem 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .fin-flow-coin {
+    width: 232px;
+    height: 232px;
+  }
+}
+
+/* Left-pointing wedge. Below the float breakpoint it is a full-width plinth
+   with a notched foot; above it, an arrowhead the copy tucks into. */
+.fin-flow-wedge {
+  --poly: polygon(0 0, 100% 0, 100% 78%, 50% 100%, 0 78%);
+  width: 100%;
+  height: 176px;
+  shape-outside: none;
+  clip-path: var(--poly);
+  shape-margin: 14px;
+  margin: 0 0 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .fin-flow-wedge {
+    --poly: polygon(100% 0, 100% 100%, 22% 100%, 0 50%, 22% 0);
+    float: right;
+    width: 240px;
+    height: 264px;
+    shape-outside: var(--poly);
+    margin: 0.35rem 0 1rem 1.5rem;
+  }
+}
+
+/* The inner pane of a rim wrapper. It carries only the clip: `--poly` is a
+   custom property, so it inherits from the floated wrapper and the two shapes
+   cannot drift apart. Sizing stays with Tailwind's `h-full w-full`, which
+   keeps the pane inside the wrapper's 1px gradient edge. */
+.fin-clip-poly {
+  clip-path: var(--poly);
+}
+
+/* The twin rails. Two floats with mirrored tapers leave a channel down the
+   middle that widens as it falls — the closest CSS gets to `shape-inside`
+   without the unshipped property. Held back to `lg`, because the channel
+   needs real width before the copy inside it reads as a column. */
+.fin-flow-rail-l,
+.fin-flow-rail-r {
+  --poly: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  width: 100%;
+  height: 128px;
+  shape-outside: none;
+  clip-path: var(--poly);
+  shape-margin: 20px;
+}
+
+@media (min-width: 1024px) {
+  .fin-flow-rail-l,
+  .fin-flow-rail-r {
+    width: 29%;
+    height: 248px;
+    shape-outside: var(--poly);
+  }
+
+  .fin-flow-rail-l {
+    --poly: polygon(0 0, 100% 0, 46% 100%, 0 100%);
+    float: left;
+  }
+
+  .fin-flow-rail-r {
+    --poly: polygon(0 0, 100% 0, 100% 100%, 54% 100%);
+    float: right;
+  }
+}
+
+
+/* ── Retail page: liquid glass kit ─────────────────────────────────────────
+   The retail reference leans on floating cards over photography, so the page
+   is built on one frosted panel treatment instead of a dozen ad-hoc
+   backgrounds. Three layers make the "liquid" read: a blurred, saturated
+   backdrop; a specular sheen along the top edge; and an inner rim light that
+   fakes the refraction you get at the edge of thick glass.
+
+   Tint and alpha are variables rather than literals so the same class serves a
+   white page, a dark band and the dark theme without a second ruleset. */
+
+.retail-page {
+  --glass-tint: 255 255 255;
+  --glass-alpha: 0.62;
+  --glass-rim: 255 255 255;
+  --glass-shadow: 10 20 40;
+}
+
+/* On a dark band the panel has to subtract light, not add it. */
+.retail-page .on-dark,
+.retail-page.on-dark {
+  --glass-tint: 255 255 255;
+  --glass-alpha: 0.08;
+  --glass-rim: 255 255 255;
+  --glass-shadow: 0 0 0;
+}
+
+.dark .retail-page {
+  --glass-tint: 255 255 255;
+  --glass-alpha: 0.06;
+  --glass-shadow: 0 0 0;
+}
+
+.liquid-glass {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(
+      145deg,
+      rgb(var(--glass-tint) / calc(var(--glass-alpha) + 0.12)),
+      rgb(var(--glass-tint) / calc(var(--glass-alpha) - 0.06))
+    );
+  border: 1px solid rgb(var(--glass-rim) / 0.35);
+  box-shadow:
+    0 24px 60px -30px rgb(var(--glass-shadow) / 0.55),
+    inset 0 1px 0 rgb(var(--glass-rim) / 0.6),
+    inset 0 -1px 0 rgb(var(--glass-rim) / 0.12);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .liquid-glass {
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    backdrop-filter: blur(18px) saturate(180%);
+  }
+}
+
+/* Specular sweep. Sits above the panel but below its content, and is purely
+   decorative, so it never takes a pointer event. */
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    rgb(var(--glass-rim) / 0.45) 0%,
+    rgb(var(--glass-rim) / 0.06) 32%,
+    transparent 58%
+  );
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* Rim light: a thin caustic along the lower right, where a real glass edge
+   would gather the light bending through it. */
+.liquid-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    120% 80% at 110% 110%,
+    rgb(20 216 196 / 0.28),
+    transparent 60%
+  );
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+/* Hover state for panels that are also links or buttons. The sheen travels
+   rather than brightening, which is what sells it as a surface. */
+.liquid-glass-hover {
+  transition:
+    transform 500ms cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 500ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.liquid-glass-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 34px 70px -28px rgb(var(--glass-shadow) / 0.6),
+    inset 0 1px 0 rgb(var(--glass-rim) / 0.75),
+    inset 0 -1px 0 rgb(var(--glass-rim) / 0.16);
+}
+
+.liquid-glass-hover:hover::before {
+  background: linear-gradient(
+    120deg,
+    rgb(var(--glass-rim) / 0.6) 0%,
+    rgb(var(--glass-rim) / 0.1) 42%,
+    transparent 68%
+  );
+}
+
+/* Colour blooms behind the glass. Without something saturated underneath, a
+   frosted panel on a white page just reads as a grey box. */
+.retail-bloom {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.retail-bloom::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(38% 38% at 16% 24%, rgb(var(--accent-vivid) / 0.3), transparent 66%),
+    radial-gradient(34% 34% at 86% 18%, rgb(var(--brand) / 0.28), transparent 68%),
+    radial-gradient(42% 42% at 58% 88%, rgb(var(--brand-strong) / 0.22), transparent 70%);
+  background-size: 160% 160%, 150% 150%, 180% 180%;
+  filter: blur(14px);
+  animation: retail-bloom-drift 34s ease-in-out infinite alternate;
+}
+
+@keyframes retail-bloom-drift {
+  0%   { background-position: 0% 25%, 100% 0%, 50% 100%; }
+  50%  { background-position: 38% 62%, 62% 38%, 22% 62%; }
+  100% { background-position: 68% 12%, 18% 72%, 78% 92%; }
+}
+
+/* ── Retail page: clip-path shapes ─────────────────────────────────────────
+   Built from the forms retail already owns: a price tag with its punched eyelet,
+   a torn receipt edge for the full-bleed bands, and a basket taper for the
+   portrait cards. Kept in their own block so tuning retail never moves
+   marketing, sports, finance or education. */
+
+/* Price tag: the left edge comes to a point, the way a swing ticket does.
+   `--nib` keeps one class usable on both the large service figures and the
+   smaller cards. */
+.clip-tag {
+  --nib: 2.75rem;
+  clip-path: polygon(
+    var(--nib) 0,
+    100% 0,
+    100% 100%,
+    var(--nib) 100%,
+    0 50%
+  );
+}
+
+/* Mirrored, so alternating rows do not read as a stamped sheet. */
+.clip-tag-alt {
+  --nib: 2.75rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--nib)) 0,
+    100% 50%,
+    calc(100% - var(--nib)) 100%,
+    0 100%
+  );
+}
+
+/* Docket: both right corners folded in. Quieter than the tag, for cards that
+   sit in a grid where five points in a row would be noise. */
+.clip-docket {
+  --fold: 1.75rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--fold)) 0,
+    100% var(--fold),
+    100% 100%,
+    var(--fold) 100%,
+    0 calc(100% - var(--fold))
+  );
+}
+
+/* Torn receipt edge, for a full-bleed band handing off to the section below.
+   Eleven teeth: enough to read as a tear, few enough that the copy above
+   still clears them. */
+.clip-receipt-bottom {
+  clip-path: polygon(
+    0 0, 100% 0, 100% 97%,
+    91% 100%, 82% 97%, 73% 100%, 64% 97%, 55% 100%,
+    46% 97%, 37% 100%, 28% 97%, 19% 100%, 10% 97%, 0 100%
+  );
+}
+
+/* The matching top edge, so the next block nests under that tear. */
+.clip-receipt-top {
+  clip-path: polygon(
+    0 3%, 10% 0, 19% 3%, 28% 0, 37% 3%, 46% 0,
+    55% 3%, 64% 0, 73% 3%, 82% 0, 91% 3%, 100% 0,
+    100% 100%, 0 100%
+  );
+}
+
+/* Basket: the sides taper in toward the base and the top corners are rounded,
+   which is what makes a portrait card read as a basket rather than a
+   trapezium. */
+.clip-basket {
+  clip-path: polygon(
+    0 4%, 4% 0, 96% 0, 100% 4%,
+    100% 92%, 94% 100%, 6% 100%, 0 92%
+  );
+}
+
+@media (max-width: 767px) {
+  /* A deep nib eats a quarter of a phone-width card; flatten everything. */
+  .clip-tag,
+  .clip-tag-alt {
+    --nib: 1.25rem;
+  }
+
+  .clip-docket {
+    --fold: 1rem;
+  }
+
+  .clip-receipt-bottom {
+    clip-path: polygon(
+      0 0, 100% 0, 100% 99%,
+      82% 100%, 64% 99%, 46% 100%, 28% 99%, 10% 100%, 0 99%
+    );
+  }
+
+  .clip-receipt-top {
+    clip-path: polygon(
+      0 1%, 10% 0, 28% 1%, 46% 0, 64% 1%, 82% 0, 100% 1%,
+      100% 100%, 0 100%
+    );
+  }
+}
+
+/* ── Retail page: shape-outside text wrapping ──────────────────────────────
+   Wrapping is confined to the decorative lead-in blocks: the intro standfirst
+   and the mid-page CTA. Body copy elsewhere stays in plain rectangles, because
+   a wrapped column is hard to keep readable across breakpoints — and every
+   float below is switched off under 768px for exactly that reason. */
+
+/* 1. A circular float the standfirst flows around. `shape-margin` is what
+      stops the text touching the disc at the widest point. */
+.shape-orb {
+  float: left;
+  width: 200px;
+  height: 200px;
+  shape-outside: circle(50%);
+  shape-margin: 10px;
+  clip-path: circle(50%);
+  margin: 0.35rem 1.25rem 0.75rem 0;
+}
+
+/* 2. A tag whose `shape-outside` and `clip-path` use identical polygons, so the
+      painted shape and the wrap contour are the same object. Change one and
+      you must change the other. */
+.shape-tag {
+  float: right;
+  width: 240px;
+  height: 260px;
+  shape-outside: polygon(28% 0, 100% 0, 100% 100%, 28% 100%, 0 52%);
+  clip-path: polygon(28% 0, 100% 0, 100% 100%, 28% 100%, 0 52%);
+  shape-margin: 14px;
+  margin: 0.35rem 0 0.75rem 1.25rem;
+}
+
+/* 4. Two facing floats that leave an aisle for the copy to run down. The
+      polygons lean toward each other, so the column narrows in the middle the
+      way a shelf run does. */
+.shape-aisle-left {
+  float: left;
+  width: 180px;
+  height: 340px;
+  shape-outside: polygon(0 0, 100% 12%, 100% 88%, 0 100%);
+  clip-path: polygon(0 0, 100% 12%, 100% 88%, 0 100%);
+  shape-margin: 18px;
+}
+
+.shape-aisle-right {
+  float: right;
+  width: 180px;
+  height: 340px;
+  shape-outside: polygon(0 12%, 100% 0, 100% 100%, 0 88%);
+  clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 88%);
+  shape-margin: 18px;
+}
+
+@media (max-width: 1023px) {
+  .shape-aisle-left,
+  .shape-aisle-right {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Below this the column is too narrow for anything to wrap around without
+     leaving two-word lines. */
+  .shape-orb,
+  .shape-tag {
+    float: none;
+    margin: 0 auto 1.5rem;
+  }
+
+  .shape-tag {
+    width: 180px;
+    height: 200px;
+  }
+}
+
+/* ── Healthcare page: clip-path shapes ─────────────────────────────────────
+   The healthcare reference is built from clinical forms: the lozenge of a
+   capsule, the aperture of a scanner, the trace off a monitor and the cross
+   on a door. Kept as their own set so tuning this page never shifts finance,
+   retail, sports, real estate or education. */
+
+/* Capsule: a deep lozenge for the service and solution figures. `--pill` lets
+   the one class serve a large 4:3 figure and a small portrait card. */
+.clip-capsule {
+  --pill: 3.5rem;
+  clip-path: inset(0 round var(--pill));
+}
+
+/* Half-capsule: the leading corners rounded off, the trailing pair squared.
+   Mirrored per row so an alternating stack does not read as a stamped sheet. */
+.clip-capsule-alt {
+  --pill: 3.5rem;
+  clip-path: inset(0 round var(--pill) 0.75rem var(--pill) 0.75rem);
+}
+
+/* Scanner aperture: a real elliptical arch over the portraits, squared off at
+   the foot. `inset()` rather than a polygon, because the top has to curve. */
+.clip-lens {
+  clip-path: inset(0 round 48% 48% 1.25rem 1.25rem / 26% 26% 1.25rem 1.25rem);
+}
+
+/* Vial: the shoulders are chamfered in, which is what makes a portrait card
+   read as a phial rather than a rectangle with two corners knocked off. */
+.clip-vial {
+  --neck: 14%;
+  clip-path: polygon(
+    0 8%,
+    var(--neck) 0,
+    calc(100% - var(--neck)) 0,
+    100% 8%,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Monitor trace: the bottom edge of a full-bleed band runs flat, then throws a
+   single QRS complex before settling. One beat, not a row of them — the copy
+   above has to clear the spike, and a repeating waveform reads as wallpaper. */
+.clip-pulse-bottom {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 95%,
+    70% 95%, 66% 99%, 62% 95%,
+    56% 95%, 52% 84%, 48% 100%, 44% 89%, 40% 95%,
+    0 95%
+  );
+}
+
+/* The matching top edge. The two are the same gesture at different depths
+   rather than a true interlock: the sections they sit on have independent
+   heights, so a percentage curve cannot nest exactly against its partner. */
+.clip-pulse-top {
+  clip-path: polygon(
+    0 6%,
+    40% 6%, 44% 3%, 48% 9%, 52% 0, 56% 6%,
+    62% 6%, 66% 8%, 70% 6%,
+    100% 6%,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* The cross. A true plus sign, so it is only ever used on small fixed-size
+   decorative accents — as a content card it would eat the four corners. */
+.clip-cross {
+  --arm: 34%;
+  clip-path: polygon(
+    var(--arm) 0,
+    calc(100% - var(--arm)) 0,
+    calc(100% - var(--arm)) var(--arm),
+    100% var(--arm),
+    100% calc(100% - var(--arm)),
+    calc(100% - var(--arm)) calc(100% - var(--arm)),
+    calc(100% - var(--arm)) 100%,
+    var(--arm) 100%,
+    var(--arm) calc(100% - var(--arm)),
+    0 calc(100% - var(--arm)),
+    0 var(--arm),
+    var(--arm) var(--arm)
+  );
+}
+
+/* Inverted clip: the leftover of a rectangle once the cross has been cut out
+   of it, so a glass pane reads as a plate with a cross punched through and
+   whatever sits behind shows through the hole.
+
+   The outer rectangle and the cross are one path joined by a zero-area bridge
+   from the origin; `evenodd` then drops the region the path encloses twice.
+   Where `polygon(<fill-rule>, …)` is unsupported the whole declaration is
+   dropped and the pane renders as a plain rectangle — a quiet degradation,
+   which is the right failure for a decorative cut-out. */
+.clip-cut-cross {
+  clip-path: polygon(
+    evenodd,
+    0 0, 100% 0, 100% 100%, 0 100%, 0 0,
+    42% 26%, 42% 42%, 26% 42%, 26% 58%, 42% 58%, 42% 74%,
+    58% 74%, 58% 58%, 74% 58%, 74% 42%, 58% 42%, 58% 26%, 42% 26%
+  );
+}
+
+@media (max-width: 767px) {
+  /* A deep pill eats too much of a narrow card, and a full-depth spike eats
+     the line of copy sitting above it. Flatten both on phones. */
+  .clip-capsule,
+  .clip-capsule-alt {
+    --pill: 1.75rem;
+  }
+
+  .clip-lens {
+    clip-path: inset(0 round 46% 46% 1rem 1rem / 16% 16% 1rem 1rem);
+  }
+
+  .clip-vial {
+    --neck: 9%;
+  }
+
+  .clip-pulse-bottom {
+    clip-path: polygon(
+      0 0, 100% 0, 100% 98%,
+      70% 98%, 66% 99%, 62% 98%,
+      56% 98%, 52% 94%, 48% 100%, 44% 96%, 40% 98%,
+      0 98%
+    );
+  }
+
+  .clip-pulse-top {
+    clip-path: polygon(
+      0 2%,
+      40% 2%, 44% 1%, 48% 3%, 52% 0, 56% 2%,
+      62% 2%, 66% 3%, 70% 2%,
+      100% 2%,
+      100% 100%, 0 100%
+    );
+  }
+}
+
+/* ── Healthcare page: monitor-paper wallpaper ──────────────────────────────
+   The consultation band sits on a lab texture in the reference. The photo
+   supplies the grain; these layers tint it to the brand and lay ECG graph
+   paper over the top — fine 1mm squares under a bolder 5mm rule, the way a
+   real rhythm strip is printed — so it reads as a clinical surface rather
+   than a stock background. */
+
+.med-texture {
+  background-color: rgb(var(--surface-subtle));
+  background-image:
+    radial-gradient(60% 70% at 14% 16%, rgb(var(--accent-vivid) / 0.16), transparent 62%),
+    radial-gradient(56% 64% at 86% 84%, rgb(var(--brand) / 0.16), transparent 66%);
+}
+
+.med-ecg-paper {
+  background-image:
+    linear-gradient(rgb(var(--brand) / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--brand) / 0.07) 1px, transparent 1px),
+    linear-gradient(rgb(var(--accent-vivid) / 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--accent-vivid) / 0.16) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 60px 60px, 60px 60px;
+  background-repeat: repeat;
+  mask-image: radial-gradient(88% 88% at 50% 50%, #000 18%, transparent 76%);
+  -webkit-mask-image: radial-gradient(88% 88% at 50% 50%, #000 18%, transparent 76%);
+}
+
+/* ── Healthcare page: shape-outside text wrapping ──────────────────────────
+   Flowed shapes are confined to the decorative blocks — the hero pledge, the
+   consultation note and the standards band — and never touch the page's body
+   copy. An irregular measure is hard to read at length and near impossible to
+   keep honest across breakpoints, so the long-form columns stay rectangular.
+
+   Each shape pairs a `shape-outside` with an identical `clip-path`, so the
+   glass pane the reader sees is exactly the outline the text wraps — no
+   invisible gutter, no line riding over the fill. `--poly` is redeclared per
+   breakpoint, which keeps the outline and the clip in lockstep by
+   construction, and every float unfloats below its breakpoint: a flowed shape
+   needs a column wide enough to leave a readable measure beside it. */
+
+/* 1. Circle float: the pill motif carrying one figure, with the pledge copy
+      curving around it. `shape-margin` is what stops the text touching the
+      disc at its widest point. */
+.med-flow-orb {
+  width: 148px;
+  height: 148px;
+  shape-outside: circle(50%);
+  shape-margin: 10px;
+  /* A rounded border box rather than a clip: `clip-path` would slice the
+     pane's inset rim into a chord, while `border-radius` lets it follow the
+     circle all the way round. */
+  border-radius: 50%;
+  margin: 0 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .med-flow-orb {
+    float: left;
+    width: 200px;
+    height: 200px;
+    margin: 0.35rem 1.5rem 1rem 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .med-flow-orb {
+    width: 224px;
+    height: 224px;
+  }
+}
+
+/* 2. The vial float: `shape-outside` and `clip-path` drive off one `--poly`,
+      so the painted pane and the wrap contour are the same object and cannot
+      drift apart. Below the breakpoint it is a full-width plinth with a
+      chamfered shoulder; above it, a phial the copy tucks against. */
+.med-flow-vial {
+  --poly: polygon(0 10%, 8% 0, 92% 0, 100% 10%, 100% 100%, 0 100%);
+  width: 100%;
+  height: 168px;
+  shape-outside: none;
+  clip-path: var(--poly);
+  shape-margin: 14px;
+  margin: 0 0 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .med-flow-vial {
+    --poly: polygon(30% 0, 70% 0, 70% 22%, 100% 44%, 100% 100%, 0 100%, 0 44%, 30% 22%);
+    float: right;
+    width: 236px;
+    height: 272px;
+    shape-outside: var(--poly);
+    margin: 0.35rem 0 1rem 1.5rem;
+  }
+}
+
+/* The inner pane of a `.lg-rim` wrapper. It carries only the clip: `--poly` is
+   a custom property, so it inherits from the floated wrapper and the two
+   shapes cannot fall out of step. Sizing stays with Tailwind's `h-full w-full`,
+   which keeps the pane inside the wrapper's 1px gradient edge. */
+.med-clip-poly {
+  clip-path: var(--poly);
+}
+
+/* 4. The twin rails. Two floats with mirrored tapers leave a channel down the
+      middle that narrows as it falls — the closest CSS gets to `shape-inside`
+      without the unshipped property. Held back to `lg`, because the channel
+      needs real width before the copy inside it reads as a column. */
+.med-flow-rail-l,
+.med-flow-rail-r {
+  --poly: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  width: 100%;
+  height: 120px;
+  shape-outside: none;
+  clip-path: var(--poly);
+  shape-margin: 20px;
+}
+
+@media (min-width: 1024px) {
+  .med-flow-rail-l,
+  .med-flow-rail-r {
+    width: 27%;
+    height: 264px;
+    shape-outside: var(--poly);
+  }
+
+  .med-flow-rail-l {
+    --poly: polygon(0 0, 100% 0, 78% 52%, 100% 100%, 0 100%);
+    float: left;
+  }
+
+  .med-flow-rail-r {
+    --poly: polygon(0 0, 100% 0, 100% 100%, 0 100%, 22% 52%);
+    float: right;
+  }
+}
+
+
+/* ── Legal page: clip-path shapes ──────────────────────────────────────────
+   The legal reference is built from the furniture of a practice: a docket
+   file with its corner turned down, the tilted beam of a balance scale across
+   the full-bleed bands, an arched portico over the stakeholder portraits and
+   a struck notary seal on the small figures. Their own set, so tuning this
+   page never shifts finance, education or any of the other industry pages. */
+
+/* Docket file: the top-right corner is folded away, the way a case file is
+   tabbed. `--fold` lets the one class serve the tall service cards and the
+   shorter stat panels. */
+.clip-docket {
+  --fold: 2.5rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--fold)) 0,
+    100% var(--fold),
+    100% 100%,
+    0 100%
+  );
+}
+
+/* The mirrored fold, so an alternating grid does not read as a stamped sheet. */
+.clip-docket-alt {
+  --fold: 2.5rem;
+  clip-path: polygon(
+    var(--fold) 0,
+    100% 0,
+    100% 100%,
+    var(--fold) 100%,
+    0 calc(100% - var(--fold))
+  );
+}
+
+/* Balance beam: the bottom edge tilts and carries a pivot notch at centre, so
+   a full-bleed band hands off to the section below along a weighing scale
+   rather than a ruler. Shallow on purpose — the copy has to clear it. */
+.clip-balance-bottom {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 93%,
+    54% 99%,
+    50% 94%,
+    46% 99%,
+    0 96%
+  );
+}
+
+/* The matching top edge, so the block below nests under that tilt. */
+.clip-balance-top {
+  clip-path: polygon(
+    0 4%,
+    46% 1%,
+    50% 6%,
+    54% 1%,
+    100% 7%,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Portico: a real arch over the portraits, squared at the foot. `inset()`
+   rather than a polygon, because the head of the arch has to be a curve. */
+.clip-portico {
+  clip-path: inset(0 round 48% 48% 1.25rem 1.25rem / 26% 26% 1.25rem 1.25rem);
+}
+
+/* Notary seal: a dodecagon, for the numerals and the loose accents. Twelve
+   sides rather than the coin's eight, so the two pages stay distinguishable
+   at a glance. */
+.clip-seal {
+  clip-path: polygon(
+    25% 2%,
+    75% 2%,
+    98% 25%,
+    98% 75%,
+    75% 98%,
+    25% 98%,
+    2% 75%,
+    2% 25%
+  );
+}
+
+/* Statute column: a plinth with a tapered head and foot, echoing the
+   colonnade standing behind the hero in the WebGL field. */
+.clip-column {
+  clip-path: polygon(8% 0, 92% 0, 100% 7%, 100% 93%, 92% 100%, 8% 100%, 0 93%, 0 7%);
+}
+
+@media (max-width: 767px) {
+  /* A deep fold eats too much of a narrow card; flatten it on phones. */
+  .clip-docket,
+  .clip-docket-alt {
+    --fold: 1.5rem;
+  }
+
+  .clip-balance-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% 97%, 54% 100%, 50% 97%, 46% 100%, 0 98%);
+  }
+
+  .clip-balance-top {
+    clip-path: polygon(0 2%, 46% 0, 50% 3%, 54% 0, 100% 3%, 100% 100%, 0 100%);
+  }
+
+  .clip-portico {
+    clip-path: inset(0 round 46% 46% 1rem 1rem / 16% 16% 1rem 1rem);
+  }
+
+  .clip-column {
+    clip-path: polygon(4% 0, 96% 0, 100% 4%, 100% 96%, 96% 100%, 4% 100%, 0 96%, 0 4%);
+  }
+}
+
+/* ── Legal page: case-paper wallpaper ──────────────────────────────────────
+   The consultation band sits on a grained surface in the reference. The photo
+   supplies the grain; these layers tint it to the brand and lay the ruled
+   lines and margin rule of a legal pad over the top, so it reads as a worked
+   surface rather than a stock background. */
+
+.legal-texture {
+  background-color: rgb(var(--surface-subtle));
+  background-image:
+    radial-gradient(58% 68% at 14% 18%, rgb(var(--accent-vivid) / 0.16), transparent 62%),
+    radial-gradient(56% 64% at 86% 82%, rgb(var(--brand) / 0.16), transparent 66%);
+}
+
+.legal-rule-lines {
+  background-image:
+    linear-gradient(rgb(var(--brand) / 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--accent-vivid) / 0.22) 1.5px, transparent 1.5px);
+  background-size: 34px 34px, 100% 100%;
+  background-position: 0 0, 12% 0;
+  background-repeat: repeat, no-repeat;
+  mask-image: radial-gradient(86% 86% at 50% 50%, #000 18%, transparent 80%);
+  -webkit-mask-image: radial-gradient(86% 86% at 50% 50%, #000 18%, transparent 80%);
+}
+
+/* ── Legal page: shape-outside text wrapping ───────────────────────────────
+   Flowed shapes appear only in the hero and the two decorative bands, never
+   around the page's body copy. An irregular measure is hard to read at length
+   and near impossible to hold honest across breakpoints, so the long-form
+   sections keep a straight edge and these shapes carry short lead-in copy.
+
+   Each shape pairs a `shape-outside` with an identical `clip-path`, so the
+   glass pane the reader sees is exactly the outline the text wraps — no
+   invisible gutter, and no line riding over the fill. `--poly` is redeclared
+   per breakpoint, which keeps the outline and the clip in lockstep by
+   construction, and every shape unfloats below its breakpoint: a flowed shape
+   needs a column wide enough to leave a readable measure beside it. */
+
+/* Circle float: the seal motif, carrying a portrait, with the lead-in line
+   curving around it. */
+.legal-flow-seal {
+  width: 150px;
+  height: 150px;
+  shape-outside: circle(50%);
+  shape-margin: 10px;
+  /* A rounded border box, not a clip: `clip-path` would slice the pane's inset
+     rim into a chord, while `border-radius` lets the rim follow the circle. */
+  border-radius: 50%;
+  margin: 0 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .legal-flow-seal {
+    float: left;
+    width: 200px;
+    height: 200px;
+    margin: 0.35rem 1.5rem 1rem 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .legal-flow-seal {
+    width: 228px;
+    height: 228px;
+  }
+}
+
+/* The gavel head. Below the float breakpoint it is a full-width plinth with a
+   tapered foot; above it, a struck block the copy tucks against. */
+.legal-flow-gavel {
+  --poly: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%);
+  width: 100%;
+  height: 168px;
+  shape-outside: none;
+  clip-path: var(--poly);
+  shape-margin: 14px;
+  margin: 0 0 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .legal-flow-gavel {
+    --poly: polygon(0 0, 78% 0, 100% 26%, 100% 74%, 78% 100%, 0 100%);
+    float: right;
+    width: 236px;
+    height: 260px;
+    shape-outside: var(--poly);
+    margin: 0.35rem 0 1rem 1.5rem;
+  }
+}
+
+/* The inner pane of a rim wrapper. It carries only the clip: `--poly` is a
+   custom property, so it inherits from the floated wrapper and the two shapes
+   cannot drift apart. Sizing stays with Tailwind's `h-full w-full`, which
+   keeps the pane inside the wrapper's 1px gradient edge. */
+.legal-clip-poly {
+  clip-path: var(--poly);
+}
+
+/* The colonnade. Two floated pillars with mirrored entasis leave a nave down
+   the middle — the closest CSS gets to `shape-inside` without the unshipped
+   property. Held back to `lg`, because the channel needs real width before
+   the statement inside it reads as a column. */
+.legal-flow-pillar-l,
+.legal-flow-pillar-r {
+  --poly: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  width: 100%;
+  height: 120px;
+  shape-outside: none;
+  clip-path: var(--poly);
+  shape-margin: 22px;
+}
+
+@media (min-width: 1024px) {
+  .legal-flow-pillar-l,
+  .legal-flow-pillar-r {
+    width: 27%;
+    height: 300px;
+    shape-outside: var(--poly);
+  }
+
+  .legal-flow-pillar-l {
+    --poly: polygon(0 0, 84% 0, 100% 12%, 100% 88%, 84% 100%, 0 100%);
+    float: left;
+  }
+
+  .legal-flow-pillar-r {
+    --poly: polygon(16% 0, 100% 0, 100% 100%, 16% 100%, 0 88%, 0 12%);
+    float: right;
+  }
+}
+
+/* The hero cut-out. An inverted polygon: the whole rectangle is traced
+   clockwise, then an inner arch is traced the same way, so the even-odd rule
+   drops the inner path and leaves the glass as the frame around a hole. The
+   photograph behind it shows through the cut, and the caption sits inside.
+   Decorative only — nothing load-bearing is ever inside the removed area. */
+.legal-cutout {
+  clip-path: polygon(
+    evenodd,
+    /* the outer slab */
+    0 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 0,
+    /* the arch removed from it, wound the same way. It occupies the upper
+       half only, so the foot of the slab stays solid for the caption. */
+    15% 26%,
+    50% 15%,
+    85% 26%,
+    85% 58%,
+    15% 58%,
+    15% 26%
+  );
+}
+
+@media (max-width: 1023px) {
+  /* Below the hero's two-column breakpoint the slab is too narrow to give the
+     cut-out a readable border, so it goes back to a solid pane. */
+  .legal-cutout {
+    clip-path: none;
+  }
+}
+
+
+/* ── Insurance page: the liquid ground ─────────────────────────────────────
+   The frosted panels on this page use the shared kit in styles/liquid-glass.css
+   (`.lg`, `.lg-dark`, `.lg-soft`, `.lg-strong`, `.lg-sheen`) rather than a
+   second one. What the page adds is something for those panes to refract:
+   without a ground that moves, a backdrop-filter over flat colour costs a
+   compositing layer and buys nothing. */
+
+.ins-liquid {
+  background:
+    radial-gradient(42% 44% at 18% 24%, rgb(var(--accent-vivid) / 0.3), transparent 66%),
+    radial-gradient(38% 40% at 82% 18%, rgb(var(--brand) / 0.32), transparent 68%),
+    radial-gradient(46% 46% at 58% 88%, rgb(var(--brand-strong) / 0.26), transparent 70%);
+  background-size: 165% 165%, 155% 155%, 185% 185%;
+  animation: ins-liquid-drift 34s ease-in-out infinite alternate;
+}
+
+@keyframes ins-liquid-drift {
+  0% { background-position: 0% 28%, 100% 0%, 50% 100%; }
+  50% { background-position: 38% 66%, 62% 34%, 22% 62%; }
+  100% { background-position: 68% 12%, 18% 72%, 78% 92%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ins-liquid {
+    animation: none;
+  }
+}
+
+/* ── Insurance page: clip-path shapes ──────────────────────────────────────
+   The insurance vocabulary is protection: a shield, an umbrella arc across
+   the full-bleed bands, a policy document with its corner turned and a
+   struck seal. Kept as their own set so tuning this page never shifts
+   finance, education, sports, real estate, marketing or supply chain. */
+
+/* Shield. Square shoulders, sides falling away to a point — the silhouette
+   the whole page is built on. */
+.clip-shield {
+  clip-path: polygon(0 0, 100% 0, 100% 56%, 50% 100%, 0 56%);
+}
+
+/* Policy document: the top-right corner is turned back, the way a signed
+   page sits. `--turn` lets the one class serve large rows and small cards. */
+.clip-policy {
+  --turn: 2.5rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--turn)) 0,
+    100% var(--turn),
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Mirrored turn, so alternating rows do not read as a stamped sheet. */
+.clip-policy-alt {
+  --turn: 2.5rem;
+  clip-path: polygon(
+    var(--turn) 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 var(--turn)
+  );
+}
+
+/* Umbrella arc: the bottom edge bows down at the centre, so a full-bleed
+   band hands off to the section below under a canopy rather than a ruler. */
+.clip-canopy-bottom {
+  clip-path: ellipse(150% 100% at 50% 0%);
+}
+
+/* The matching top edge, so the block below nests under that canopy. */
+.clip-canopy-top {
+  clip-path: ellipse(150% 100% at 50% 100%);
+}
+
+/* Struck crest: a twelve-sided rosette for the small figures and accents. */
+.clip-crest {
+  clip-path: polygon(
+    50% 0%, 79% 8%, 96% 29%, 100% 50%, 96% 71%, 79% 92%,
+    50% 100%, 21% 92%, 4% 71%, 0% 50%, 4% 29%, 21% 8%
+  );
+}
+
+/* Cover arch: a real elliptical head over the stakeholder portraits, squared
+   off at the foot. `inset()` rather than a polygon because the top curves. */
+.clip-cover {
+  clip-path: inset(0 round 46% 46% 1.25rem 1.25rem / 26% 26% 1.25rem 1.25rem);
+}
+
+@media (max-width: 767px) {
+  /* Deep turns eat too much of a narrow card; flatten them on phones. */
+  .clip-policy,
+  .clip-policy-alt {
+    --turn: 1.5rem;
+  }
+
+  .clip-canopy-bottom {
+    clip-path: ellipse(210% 100% at 50% 0%);
+  }
+
+  .clip-canopy-top {
+    clip-path: ellipse(210% 100% at 50% 100%);
+  }
+
+  .clip-cover {
+    clip-path: inset(0 round 44% 44% 1rem 1rem / 16% 16% 1rem 1rem);
+  }
+}
+
+/* ── Insurance page: shape-outside compositions ────────────────────────────
+   Three decorative folds run text against a real silhouette rather than a
+   rectangle. All three are display-scale copy in their own band — none of
+   them touches body text, because an irregular measure is hard to read and
+   harder to hold across breakpoints. Every rule is gated behind `lg`, so
+   below 1024px the floats drop out and the copy returns to a plain column. */
+
+/* 1. The pledge band: two mirrored wings, pinched at the middle, so the
+      statement between them takes the shape of a lens. */
+.ins-wing {
+  display: none;
+}
+
+/* 2. The roadmap band: one shield with a real background, wrapped by the
+      surrounding copy along its exact outline. `shape-outside` and
+      `clip-path` carry identical polygons — that is what makes the wrap and
+      the painted edge agree. */
+.ins-shape-shield {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  clip-path: polygon(0 0, 100% 0, 100% 56%, 50% 100%, 0 56%);
+}
+
+/* 3. The cut-out: the leftover of a rectangle with the shield removed. The
+      zero-width slit from the corner to the shield is what turns a single
+      polygon into a hole — CSS polygons have no second subpath. */
+.ins-cutout {
+  clip-path: polygon(
+    0 0, 100% 0, 100% 100%, 0 100%, 0 0,
+    58% 14%, 58% 55%, 74% 88%, 90% 55%, 90% 14%, 58% 14%, 0 0
+  );
+}
+
+@media (max-width: 1023px) {
+  /* Nothing is punched out of the panel on a narrow screen — the shield sits
+     beside the copy instead, so the band keeps a full-width text column. */
+  .ins-cutout {
+    clip-path: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ins-wing {
+    display: block;
+    /* Height is matched to the statement block, not chosen for looks: a wing
+       taller than the copy leaves the lens open at the bottom and the band
+       reads as two chevrons with a hole between them. */
+    width: 18rem;
+    height: 15.5rem;
+    shape-margin: 1.75rem;
+  }
+
+  .ins-wing-left {
+    float: left;
+    shape-outside: polygon(0 0, 100% 0, 18% 50%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 18% 50%, 100% 100%, 0 100%);
+  }
+
+  .ins-wing-right {
+    float: right;
+    shape-outside: polygon(0 0, 100% 0, 100% 100%, 0 100%, 82% 50%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 82% 50%);
+  }
+
+  .ins-shape-shield {
+    float: right;
+    width: 19rem;
+    height: 23rem;
+    aspect-ratio: auto;
+    margin-left: 1.5rem;
+    shape-margin: 1.25rem;
+    shape-outside: polygon(0 0, 100% 0, 100% 56%, 50% 100%, 0 56%);
+  }
+}
+
+@media (min-width: 1280px) {
+  .ins-wing {
+    width: 21rem;
+    height: 16.5rem;
+  }
+}
+
+/* ── Insurance page: policy-paper wallpaper ────────────────────────────────
+   The roadmap band sits on a stucco photograph. The photo supplies the
+   grain; these layers tint it to the brand and lay a faint actuarial rule
+   over the top, so it reads as a worked surface rather than a stock texture. */
+
+.ins-texture {
+  background-color: rgb(var(--surface-subtle));
+  background-image:
+    radial-gradient(58% 68% at 14% 18%, rgb(var(--accent-vivid) / 0.16), transparent 62%),
+    radial-gradient(56% 66% at 86% 82%, rgb(var(--brand) / 0.16), transparent 66%);
+}
+
+.ins-grid-lines {
+  background-image:
+    linear-gradient(rgb(var(--brand) / 0.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--brand) / 0.13) 1px, transparent 1px),
+    radial-gradient(circle, rgb(var(--accent-vivid) / 0.28) 1.5px, transparent 1.5px);
+  background-size: 48px 48px, 48px 48px, 48px 48px;
+  mask-image: radial-gradient(86% 86% at 50% 50%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(86% 86% at 50% 50%, #000 20%, transparent 78%);
+}
+
+/* ── Transportation page: clip-path shapes ─────────────────────────────────
+   Built from the forms a transport network already owns: the chevron painted
+   on a lane, the waypoint pin dropped on a route, the corner-clipped waybill
+   and the sloped nose of a trailer. Kept in their own block so tuning
+   transportation never moves retail, finance, sports or education. */
+
+/* Lane chevron, for a full-bleed band handing off to the section below. The
+   apex is shallow on purpose: anything deeper crops the last line of copy. */
+.clip-lane-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% 91%, 50% 100%, 0 91%);
+}
+
+/* The matching top edge, so the next block nests under that chevron. */
+.clip-lane-top {
+  clip-path: polygon(0 0, 50% 9%, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Directional card: entry edge notched in, exit edge drawn to a point, so a
+   row of these reads as flow rather than as a grid of boxes. */
+.clip-chevron {
+  --nose: 2rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--nose)) 0,
+    100% 50%,
+    calc(100% - var(--nose)) 100%,
+    0 100%,
+    var(--nose) 50%
+  );
+}
+
+/* Mirrored, for alternating rows. */
+.clip-chevron-alt {
+  --nose: 2rem;
+  clip-path: polygon(
+    var(--nose) 0,
+    100% 0,
+    calc(100% - var(--nose)) 50%,
+    100% 100%,
+    var(--nose) 100%,
+    0 50%
+  );
+}
+
+/* Waybill: two opposite corners clipped, the way a printed consignment note is
+   cut. Quiet enough for a glass pane carrying long-form copy. */
+.clip-waybill {
+  --cut: 1.9rem;
+  clip-path: polygon(
+    var(--cut) 0,
+    100% 0,
+    100% calc(100% - var(--cut)),
+    calc(100% - var(--cut)) 100%,
+    0 100%,
+    0 var(--cut)
+  );
+}
+
+/* Waypoint: a portrait card tapering to a point at its base, the map pin the
+   mode rail is built from. */
+.clip-waypoint {
+  clip-path: polygon(
+    0 3%, 3% 0, 97% 0, 100% 3%,
+    100% 86%, 50% 100%, 0 86%
+  );
+}
+
+/* Trailer nose: a single leaned edge for figures sitting beside copy. */
+.clip-trailer {
+  --lean: 2.25rem;
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--lean)) 100%, var(--lean) 100%);
+}
+
+@media (max-width: 767px) {
+  /* A deep nose eats a fifth of a phone-width card; flatten everything, and
+     shallow the full-bleed chevrons so short headings still clear them. */
+  .clip-chevron,
+  .clip-chevron-alt {
+    --nose: 1rem;
+  }
+
+  .clip-waybill {
+    --cut: 1.1rem;
+  }
+
+  .clip-trailer {
+    --lean: 1.1rem;
+  }
+
+  .clip-lane-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% 96%, 50% 100%, 0 96%);
+  }
+
+  .clip-lane-top {
+    clip-path: polygon(0 0, 50% 4%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .clip-waypoint {
+    clip-path: polygon(0 2%, 2% 0, 98% 0, 100% 2%, 100% 92%, 50% 100%, 0 92%);
+  }
+}
+
+/* Painted lane markings for the transportation build band: a few dashed lines
+   over the ground, faded out at both edges so they read as a road surface
+   rather than as borders. Each layer is a 2px-tall band tiled only along x
+   (`repeat-x`); tiling on y instead stacks a dash every 2px and the whole block
+   turns into a field of vertical stripes. The dash phases are offset per line
+   so the lines do not march in lockstep. */
+.tr-lane-markings {
+  background-image:
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.14) 0 3.5rem, transparent 3.5rem 7rem),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.09) 0 3.5rem, transparent 3.5rem 7rem),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.09) 0 3.5rem, transparent 3.5rem 7rem),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.14) 0 3.5rem, transparent 3.5rem 7rem);
+  background-size: 100% 2px;
+  background-repeat: repeat-x;
+  /* Kept inside the section's own vertical padding. A line crossing the middle
+     lands on the copy and reads as a strikethrough through the paragraph. */
+  background-position:
+    0 6%,
+    2.5rem 13%,
+    5rem 87%,
+    1.25rem 94%;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
 }

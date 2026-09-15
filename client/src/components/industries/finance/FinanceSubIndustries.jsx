@@ -92,10 +92,13 @@ export default function FinanceSubIndustries() {
                       aria-hidden="true"
                       className="pointer-events-none absolute inset-0 bg-gradient-to-t from-inverse via-inverse/35 to-transparent"
                     />
+                    {/* The open state frosts the photo instead of covering it,
+                        so the card still reads as the industry it belongs to
+                        once the detail copy is showing. */}
                     <span
                       aria-hidden="true"
-                      className={`pointer-events-none absolute inset-0 bg-inverse/80 transition-opacity duration-500 ${
-                        reduced ? "opacity-70" : "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+                      className={`lg lg-dark lg-strong pointer-events-none absolute inset-0 transition-opacity duration-500 ${
+                        reduced ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
                       }`}
                     />
 

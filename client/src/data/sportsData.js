@@ -25,7 +25,6 @@ import midCtaBgImg from "../assets/industries/sports/midcta-bg.webp";
 
 import solProductImg from "../assets/industries/sports/sol-product.webp";
 import solConsultingImg from "../assets/industries/sports/sol-consulting.webp";
-import solMobileImg from "../assets/industries/sports/sol-mobile.webp";
 import solVisionImg from "../assets/industries/sports/sol-vision.webp";
 import solIntegrationImg from "../assets/industries/sports/sol-integration.webp";
 import solInfraImg from "../assets/industries/sports/sol-infra.webp";
@@ -264,40 +263,61 @@ export const solutions = {
   titleLead: "Sports Software Development Services",
   titleAccent: "Built Around Your Season",
   body:
-    "Six ways we engage, from a scoped pilot before pre-season to a long-running platform partnership across competitions and venues.",
+    "Five ways we engage, from a scoped pilot before pre-season to a long-running platform partnership across competitions and venues. Every engagement is sized to a calendar you do not control, so delivery lands between fixtures rather than across them.",
   items: [
     {
       title: "Sports Product Engineering",
       body:
-        "End-to-end delivery of the platform itself: architecture, data model, services, interfaces and the release process behind them. You get working software in weekly increments, with the first usable capability live long before the full scope lands.",
+        "End-to-end delivery of the platform itself: architecture, data model, services, interfaces and the release process behind them. We start with the one workflow that costs your staff the most hours, ship it, and grow the system outward from something already in daily use.",
+      extra:
+        "You get working software in weekly increments, with the first usable capability live long before the full scope lands. Nothing is built behind a curtain for three months and revealed at the end, which is how sports projects usually miss a season.",
+      points: [
+        "Discovery, architecture and a costed backlog inside the first three weeks",
+        "Weekly releases to a staging environment your staff can actually open",
+        "Handover package: documentation, tests and the runbook your team keeps",
+      ],
       image: solProductImg,
       alt: "A development team working across a bank of monitors",
     },
     {
       title: "AI & Data Consulting",
       body:
-        "A short, honest engagement that maps your data estate, names the models worth building, and says plainly which ideas will not pay for themselves. You leave with a costed roadmap rather than a proposal.",
+        "A short, honest engagement that maps your data estate, names the models worth building, and says plainly which ideas will not pay for themselves. Most organisations already hold more signal than they use; far fewer hold enough for the model somebody sold them.",
+      extra:
+        "You leave with a costed roadmap rather than a proposal: what to build first, what it needs from your data, what it will cost to run, and the measurement that tells you whether it worked.",
+      points: [
+        "Audit of the tracking, medical, ticketing and league feeds you already hold",
+        "Model shortlist with expected accuracy, effort and running cost per item",
+        "A written case against the ideas that do not clear the bar",
+      ],
       image: solConsultingImg,
       alt: "A strategy workshop around a whiteboard",
     },
     {
-      title: "Mobile App Development",
-      body:
-        "Athlete, coach and supporter apps built native or cross-platform depending on what the feature set actually needs. Offline-first where connectivity at a venue cannot be assumed, and instrumented so product decisions rest on behaviour.",
-      image: solMobileImg,
-      alt: "A hand using an application on a smartphone",
-    },
-    {
       title: "Video & Computer Vision Pipelines",
       body:
-        "Automated event tagging, player tracking, pose estimation and brand detection, running on live feeds or a decade of archive. The output is structured data your other systems can query, not another video player.",
+        "Automated event tagging, player tracking, pose estimation and brand detection, running on live feeds or a decade of archive. The output is structured data your other systems can query, not another video player nobody logs into.",
+      extra:
+        "We train on your competition rather than a public dataset, because camera angles, kit colours and pitch markings are exactly what breaks a generic model. Accuracy is reported per event type, so you know which outputs to trust and which still need a human.",
+      points: [
+        "Live and archive pipelines sharing one model and one schema",
+        "Tagging, tracking, pose estimation and sponsorship exposure in a single pass",
+        "Per-event accuracy reporting, with human review only where it is needed",
+      ],
       image: solVisionImg,
-      alt: "A broadcast gallery lined with monitors",
+      alt: "An analysis console tracking motion data from a live video feed",
     },
     {
       title: "Platform Integration & Modernisation",
       body:
         "Most organisations do not start from nothing; they start from six systems that do not talk. We build the integration layer, migrate what deserves to survive, and retire the rest without taking match day offline.",
+      extra:
+        "The work is staged so every step is independently useful and independently reversible. If we stop halfway, you are still better off than when we started, which is the only honest way to modernise a system a season depends on.",
+      points: [
+        "One integration layer across GPS, optical tracking, ticketing, CRM and league feeds",
+        "Staged migration with rollback at every step, never a big-bang cutover",
+        "Legacy systems retired only once their replacement has run a full cycle",
+      ],
       image: solIntegrationImg,
       alt: "Racks of servers in a data centre aisle",
     },
@@ -305,8 +325,15 @@ export const solutions = {
       title: "Cloud & Real-Time Infrastructure",
       body:
         "Match day is a traffic spike with a fixed start time. We build the streaming, caching and autoscaling layer that survives it, plus the observability to prove it held and the cost controls to keep the quiet weeks cheap.",
+      extra:
+        "Capacity is load-tested against your own peak, not a vendor benchmark, and the same architecture scales down between fixtures so you are not paying stadium-day rates on a Tuesday in February.",
+      points: [
+        "Load tested against your real peak concurrency before the first fixture",
+        "Autoscaling and caching tuned for a spike with a known start time",
+        "Cost guardrails and alerting so quiet weeks cost what quiet weeks should",
+      ],
       image: solInfraImg,
-      alt: "Fibre optic cabling running into a network patch panel",
+      alt: "Rows of servers in a data centre lit by blue neon",
     },
   ],
 };
@@ -603,7 +630,7 @@ export const blogs = {
       title: "What Is Athlete Monitoring? Tools, Systems And Real Gains",
       tag: "Performance",
       image: blog2Img,
-      alt: "An athlete wearing monitoring sensors during a physiology test",
+      alt: "A coach reading live heart rate and VO2 metrics on a tablet during an athlete test",
     },
     {
       title: "AI Sports Video Analysis: How Computer Vision Improves Performance",

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ScrollTrigger } from "../lib/gsap";
 import FinanceHero from "../components/industries/finance/FinanceHero";
 import FinanceIntro from "../components/industries/finance/FinanceIntro";
+import FinanceSignal from "../components/industries/finance/FinanceSignal";
 import FinanceImpact from "../components/industries/finance/FinanceImpact";
 import FinanceChallenges from "../components/industries/finance/FinanceChallenges";
 import FinanceServices from "../components/industries/finance/FinanceServices";
@@ -62,6 +63,7 @@ export default function FinancePage() {
       <FinanceHero />
       <FinanceIntro />
       <FinanceImpact />
+      <FinanceSignal />
       <FinanceChallenges />
       <FinanceServices />
       <FinanceMidCta />

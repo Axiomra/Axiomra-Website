@@ -118,14 +118,18 @@ const serviceItems = [
 // Verticals with a built page link straight to it; the rest deep-link into the
 // industries index, so nobody lands on a placeholder from the top nav.
 const industryItems = [
-  { label: "Healthcare", description: "HIPAA-safe data & diagnosis AI", href: `${INDUSTRIES_PATH}#healthcare` },
   { label: "Fashion", description: "Design-to-catalog AI pipelines", href: `${INDUSTRIES_PATH}/fashion` },
   { label: "Marketing", description: "Campaign automation, RTB & attribution", href: `${INDUSTRIES_PATH}/marketing` },
+  { label: "Real Estate", description: "Valuation, listings, CRM & transactions", href: `${INDUSTRIES_PATH}/real-estate` },
   { label: "Sports", description: "Athlete analytics, fan & league platforms", href: `${INDUSTRIES_PATH}/sports` },
-  { label: "Finance", description: "Fraud detection, forecasting & compliance", href: `${INDUSTRIES_PATH}#finance` },
-  { label: "Retail", description: "Personalization & demand planning", href: `${INDUSTRIES_PATH}#retail` },
   { label: "Education", description: "Adaptive learning & auto-grading", href: `${INDUSTRIES_PATH}/education` },
   { label: "Supply Chain", description: "Forecasting, routing & warehouse AI", href: `${INDUSTRIES_PATH}/supply-chain` },
+  { label: "Finance", description: "Fraud detection, forecasting & compliance", href: `${INDUSTRIES_PATH}/finance` },
+  { label: "Insurance", description: "Claims automation & risk scoring", href: `${INDUSTRIES_PATH}/insurance` },
+  { label: "Healthcare", description: "HIPAA-safe data & diagnosis AI", href: `${INDUSTRIES_PATH}/healthcare` },
+  { label: "Transportation", description: "Fleet, route & telematics intelligence", href: `${INDUSTRIES_PATH}/transportation` },
+  { label: "Legal", description: "Contract review & case document AI", href: `${INDUSTRIES_PATH}/legal` },
+  { label: "Retail", description: "Personalization & demand planning", href: `${INDUSTRIES_PATH}/retail` },
 ];
 
 const companyItems = [

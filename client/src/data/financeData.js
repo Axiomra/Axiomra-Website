@@ -76,6 +76,31 @@ export const intro = {
   alt: "A finance lead reviewing performance figures on a tablet",
 };
 
+/**
+ * The signal band: a decorative editorial break between the positioning copy
+ * and the sourced statistics. It is the one place on the page where copy is
+ * flowed around shapes rather than set in a straight column, so the lines are
+ * deliberately short — the effect has to survive a re-flow, and long-form
+ * prose in a wrapped measure does not.
+ */
+export const signal = {
+  eyebrow: "Signal over noise",
+  titleLead: "A Financial Platform Is Only As Good As The",
+  titleAccent: "Signal It Can Act On",
+  coin: { value: "<40ms", caption: "Decision budget per transaction" },
+  lead:
+    "Every payment, claim and trade arrives as a question the platform has milliseconds to answer. Score it, clear it, or hold it for a human. Get that budget wrong and you are choosing between a fraud loss and an abandoned checkout.",
+  wedge: { value: "24/7", caption: "Continuous controls" },
+  aside:
+    "So we build for the answer, not the report. Models score in the request path, controls run continuously rather than at quarter end, and every decision leaves an auditable trail a regulator can follow without a data project.",
+  rails: [
+    { value: "Ingest", caption: "Streamed, not batched" },
+    { value: "Decide", caption: "Scored in the request path" },
+  ],
+  manifesto:
+    "Between the data coming in and the decision going out sits the part nobody sees and everybody depends on: the ledger that balances, the model that explains itself, and the control that holds when volume triples overnight.",
+};
+
 export const impact = {
   titleLead: "The Role Of AI In",
   titleAccent: "Modern Financial Operations",

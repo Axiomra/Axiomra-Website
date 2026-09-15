@@ -272,6 +272,13 @@ export const solutions = {
       title: "Digital Transformation in Marketing",
       body:
         "We work closely with stakeholders to identify automation opportunities, optimise workflows and design AI strategies aligned with business objectives. By leveraging AI insights, we help organisations improve decision-making and unlock operational efficiencies.",
+      extra:
+        "The work starts with the campaign process that costs your team the most hours, not with a platform rollout. We map how briefs, approvals, launches and reporting actually move today, then automate the steps that never needed a person in the first place.",
+      points: [
+        "Workflow audit across briefing, approval, launch and reporting cycles",
+        "A costed automation roadmap ranked by hours saved per quarter",
+        "Change plan and training so the new process survives the handover",
+      ],
       image: solTransformationImg,
       alt: "A strategist standing in front of a wall of projected data",
     },
@@ -279,6 +286,13 @@ export const solutions = {
       title: "AI Software Development Consulting",
       body:
         "Our experts guide marketing teams through every stage of AI adoption, from strategy to implementation. We identify high-impact automation opportunities, design tailored AI models for predictive insights and ensure seamless integration with your existing tools. The result is smarter marketing operations that reduce costs, enhance personalisation and maximise ROI.",
+      extra:
+        "You leave with a roadmap that has prices on it, including an honest case against the ideas that will not pay for themselves. Most marketing teams already hold more first-party signal than they use, and far less than the model somebody tried to sell them needs.",
+      points: [
+        "Audit of your CRM, web, ad platform and offline data before any model is scoped",
+        "Model shortlist with expected lift, build effort and monthly running cost",
+        "Integration plan for the martech stack you already pay for",
+      ],
       image: solConsultingImg,
       alt: "A developer working across multiple code monitors",
     },
@@ -286,6 +300,13 @@ export const solutions = {
       title: "Marketing Custom Product Development",
       body:
         "We build fully custom marketing products that fit your workflows, not the other way around. Whether it is campaign management software, performance analytics dashboards or data-driven recommendation engines, we develop solutions that integrate with your martech stack and evolve alongside your growth objectives.",
+      extra:
+        "Delivery runs in weekly increments, with the first usable capability live long before the full scope lands. Nothing is built behind a curtain for three months and revealed at the end, which is how most in-house marketing tools quietly die.",
+      points: [
+        "Architecture, data model and a costed backlog inside the first three weeks",
+        "Weekly staging releases your marketers can open and comment on",
+        "Documentation, tests and a runbook your own team can maintain",
+      ],
       image: solProductImg,
       alt: "A product team mapping a build on a studio whiteboard",
     },
@@ -293,6 +314,13 @@ export const solutions = {
       title: "Marketing Mobile App Development",
       body:
         "Our team designs and develops mobile-first marketing applications that enhance engagement, streamline campaign execution and deliver real-time insights on the go. From customer engagement tools to campaign performance trackers, our apps empower marketers to manage, monitor and optimise digital activities anytime and anywhere.",
+      extra:
+        "Approvals, budget shifts and creative sign-off are the moments that stall a campaign while someone is away from a desk, so those are the flows we build for the phone first. Everything else stays where it belongs, on the web.",
+      points: [
+        "Native or cross-platform builds sharing one API with your web tooling",
+        "Push-driven approvals, alerts and budget controls for time-critical calls",
+        "Offline-tolerant reporting with store release and update management included",
+      ],
       image: solMobileImg,
       alt: "Hands holding a smartphone above a desk with a keyboard",
     },
@@ -300,6 +328,13 @@ export const solutions = {
       title: "Custom CMS Integration",
       body:
         "We integrate and customise CMS platforms to align content operations with AI-powered insights and automated workflows. Our CMS integration services enhance content governance, speed up publishing cycles and improve personalisation across digital channels, whether you work with WordPress, Magento, Shopify, Contentful or a headless stack.",
+      extra:
+        "Content teams lose most of their time to the gap between writing and publishing: reformatting, re-approving and re-uploading the same asset per channel. We close that gap so one approved piece reaches every surface in the shape each one expects.",
+      points: [
+        "Headless or traditional CMS wired into your campaign and analytics tooling",
+        "Role-based governance, versioning and audit trails on every publish",
+        "Personalisation rules and localisation handled from a single content source",
+      ],
       image: solCmsImg,
       alt: "A content manager publishing a campaign page on a laptop",
     },
@@ -307,6 +342,13 @@ export const solutions = {
       title: "CRM Integration Services",
       body:
         "We connect your CRM to every marketing surface you run, so lead data, campaign attribution and lifecycle stage move in one direction and stay in sync. Clean handoffs between marketing and sales mean fewer lost leads, accurate reporting and a single customer record everyone can trust.",
+      extra:
+        "Sync direction is decided per field rather than per system, because the arguments between marketing and sales are almost always about which side owns a value. Once that is settled in the integration layer, attribution reporting stops being contested.",
+      points: [
+        "Two-way sync across CRM, ad platforms, email, web and support tooling",
+        "Deduplication and identity resolution so one person is one record",
+        "Attribution that reconciles to the numbers finance already reports",
+      ],
       image: solIntegrationImg,
       alt: "Teal fibre-optic cabling patched into a network switch",
     },

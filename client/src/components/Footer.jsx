@@ -6,9 +6,32 @@ import { Link, useLocation } from "react-router-dom";
 import { ABOUT_PATH } from "../data/aboutData";
 import { TECH_PATH } from "../data/techStackData";
 import { FAQS_PATH } from "../data/faqsData";
+import { INDUSTRIES_PATH, industryPath } from "../data/industriesData";
+import { SERVICES_BASE_PATH } from "../data/servicesData";
+import { AI_DEVELOPMENT_SLUG } from "../data/aiDevelopmentData";
+import { COMPUTER_VISION_SLUG } from "../data/computerVisionData";
+import { GENERATIVE_AI_SLUG } from "../data/generativeAiData";
+import { AGENTIC_AI_SLUG } from "../data/agenticAiData";
 
-/* Footer labels that already have a route. Everything else still waits on a page. */
+/**
+ * Footer labels that already have a route. Anything missing from here has no
+ * page yet and renders as plain text rather than an `href="#"` link, which is
+ * what used to leave a bare `#` hanging off the current URL.
+ */
 const LINK_ROUTES = {
+  "Artificial Intelligence": `${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`,
+  "Computer Vision": `${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}`,
+  "Generative AI": `${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}`,
+  "AI Agent Development": `${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`,
+  "Software Development": SERVICES_BASE_PATH,
+  "AI for Fashion": industryPath("fashion"),
+  "AI for Sports": industryPath("sports"),
+  "AI for Education": industryPath("education"),
+  "AI for Healthcare": industryPath("healthcare"),
+  "AI for Finance": industryPath("finance"),
+  "AI for Retail": industryPath("retail"),
+  "AI for Transportation": industryPath("transportation"),
+  "All Industries": INDUSTRIES_PATH,
   "About Us": ABOUT_PATH,
   "Contact Us": "/contact",
   "Tech Stack": TECH_PATH,
@@ -17,7 +40,7 @@ const LINK_ROUTES = {
 
 const cols = [
   { title: "Services", links: ["Artificial Intelligence", "Computer Vision", "Software Development", "Generative AI", "AI Agent Development"] },
-  { title: "Industries", links: ["Healthcare", "Fashion", "Real Estate", "Sports", "Education"] },
+  { title: "Industries", links: ["AI for Fashion", "AI for Sports", "AI for Transportation", "AI for Retail", "AI for Healthcare", "AI for Finance"] },
   { title: "Quick Links", links: ["Blogs", "Contact Us", "About Us", "Tech Stack", "Awards & Recognitions", "FAQs"] },
 ];
 
@@ -87,9 +110,7 @@ export default function Footer() {
                         {l}
                       </Link>
                     ) : (
-                      <a href="#" className={UNDERLINE_LINK}>
-                        {l}
-                      </a>
+                      <span className="text-lg text-inverse-fg/40">{l}</span>
                     )}
                   </li>
                 ))}

@@ -31,7 +31,10 @@ export default function FinanceMidCta() {
 
       <div className="mx-auto flex max-w-8xl flex-col items-start gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
         <div>
-          <p data-reveal className="mb-4 font-mono text-sm uppercase tracking-[0.18em] text-accent-vivid">
+          <p
+            data-reveal
+            className="lg lg-dark lg-soft lg-sheen mb-5 inline-block rounded-full px-5 py-2 font-mono text-sm uppercase tracking-[0.18em] text-accent-vivid"
+          >
             {midCta.eyebrow}
           </p>
           <h2

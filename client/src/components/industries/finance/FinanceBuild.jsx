@@ -32,15 +32,15 @@ export default function FinanceBuild() {
       {/* Loose coins, echoing the motif in the reference artwork. */}
       <span
         aria-hidden="true"
-        className="clip-coin pointer-events-none absolute -left-8 top-20 hidden h-24 w-24 bg-accent-vivid/25 md:block"
+        className="clip-coin lg lg-sheen pointer-events-none absolute -left-8 top-20 hidden h-24 w-24 md:block"
       />
       <span
         aria-hidden="true"
-        className="clip-coin pointer-events-none absolute bottom-24 left-20 hidden h-14 w-14 bg-brand/25 lg:block"
+        className="clip-coin lg lg-sheen pointer-events-none absolute bottom-24 left-20 hidden h-14 w-14 lg:block"
       />
       <span
         aria-hidden="true"
-        className="clip-coin pointer-events-none absolute right-10 top-28 hidden h-28 w-28 bg-brand/20 md:block"
+        className="clip-coin lg lg-sheen pointer-events-none absolute right-10 top-28 hidden h-28 w-28 md:block"
       />
 
       <div className="mx-auto grid max-w-8xl grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">

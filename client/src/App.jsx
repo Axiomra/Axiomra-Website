@@ -31,7 +31,12 @@ const SupplyChainPage = lazy(() => import("./pages/SupplyChainPage"));
 const RealEstatePage = lazy(() => import("./pages/RealEstatePage"));
 const SportsPage = lazy(() => import("./pages/SportsPage"));
 const FinancePage = lazy(() => import("./pages/FinancePage"));
+const InsurancePage = lazy(() => import("./pages/InsurancePage"));
+const HealthcarePage = lazy(() => import("./pages/HealthcarePage"));
 const EducationPage = lazy(() => import("./pages/EducationPage"));
+const LegalPage = lazy(() => import("./pages/LegalPage"));
+const RetailPage = lazy(() => import("./pages/RetailPage"));
+const TransportationPage = lazy(() => import("./pages/TransportationPage"));
 
 // The admin panel shares nothing with the marketing site — its own chrome, its
 // own auth provider, its own table libraries. Splitting it here keeps all of
@@ -107,7 +112,12 @@ function SiteRoutes() {
             <Route path={`${INDUSTRIES_PATH}/real-estate`} element={<RealEstatePage />} />
             <Route path={`${INDUSTRIES_PATH}/sports`} element={<SportsPage />} />
             <Route path={`${INDUSTRIES_PATH}/finance`} element={<FinancePage />} />
+            <Route path={`${INDUSTRIES_PATH}/insurance`} element={<InsurancePage />} />
             <Route path={`${INDUSTRIES_PATH}/education`} element={<EducationPage />} />
+            <Route path={`${INDUSTRIES_PATH}/retail`} element={<RetailPage />} />
+            <Route path={`${INDUSTRIES_PATH}/healthcare`} element={<HealthcarePage />} />
+            <Route path={`${INDUSTRIES_PATH}/legal`} element={<LegalPage />} />
+            <Route path={`${INDUSTRIES_PATH}/transportation`} element={<TransportationPage />} />
             <Route path={`${INDUSTRIES_PATH}/:slug`} element={<IndustryDetailPlaceholder />} />
             <Route path={SERVICES_BASE_PATH} element={<ServicesPage />} />
             <Route
