@@ -11,10 +11,10 @@ import { doctrine } from "../../../data/legalData";
  * polygon as its `clip-path`, so the text wraps the outline the reader can
  * actually see:
  *
- *   seal     — a circle float carrying the portrait, the notary motif the
+ *   seal:      a circle float carrying the portrait, the notary motif the
  *              page's numerals are struck on;
- *   gavel    — a struck block the copy tucks against on the opposite side;
- *   pillars  — two mirrored columns left and right, leaving a nave down the
+ *   gavel:     a struck block the copy tucks against on the opposite side;
+ *   pillars:   two mirrored columns left and right, leaving a nave down the
  *              middle for the statement.
  *
  * The copy here is short on purpose. A wrapped measure is hard to read at
@@ -113,7 +113,7 @@ export default function LegalDoctrine() {
         {/* ── Flow one: circle float and gavel float around the lead ──────── */}
         <div data-doctrine-flow className="mx-auto mt-14 max-w-5xl">
           {/* The seal. `lg-rim` is skipped here because a circle keeps its
-              inset rim — the pane is rounded, not clipped. */}
+              inset rim: the pane is rounded, not clipped. */}
           <div
             data-doctrine-item
             className="legal-flow-seal lg lg-dark lg-sheen relative overflow-hidden"

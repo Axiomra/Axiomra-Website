@@ -32,7 +32,7 @@ function readWidths() {
  * The desktop leads table.
  *
  * Identity fields (name, email, phone, company, requested service) are
- * read-only here on purpose — they only change through the details panel, so
+ * read-only here on purpose; they only change through the details panel, so
  * a click anywhere in the row opens that panel instead of an inline input.
  * Everything else (subject, message, progress, team, budget, remarks) still
  * edits in place, exactly as before.
@@ -105,7 +105,7 @@ export default function LeadTable({
   return (
     // Frosted panel: scrolls in both directions inside itself so the header row
     // stays stuck to the top while the page around it stays put.
-    // It sits on the same gutter as the header and the stats bar above it — a
+    // It sits on the same gutter as the header and the stats bar above it, because a
     // panel pinned to the viewport edge reads as a rendering fault rather than
     // as extra width, and the columns scroll horizontally anyway.
     <div className="mx-4 max-h-[72svh] overflow-auto rounded-xl border border-line/70 bg-surface-card/50 shadow-[0_30px_70px_-50px_rgba(10,20,40,0.6)] backdrop-blur-2xl sm:mx-6 lg:mx-8">
@@ -223,7 +223,7 @@ export default function LeadTable({
                         <div className="flex items-center gap-2 px-1 py-1">
                           <Avatar name={lead.name} email={lead.email} size="sm" />
                           <span className="min-w-0 flex-1 truncate text-sm font-medium text-content">
-                            {lead.name || <span className="text-content-faint/60">—</span>}
+                            {lead.name || <span className="text-content-faint/60">-</span>}
                           </span>
                         </div>
                       ) : (
@@ -231,7 +231,7 @@ export default function LeadTable({
                           className="block truncate px-2 py-1.5 text-sm text-content"
                           title={lead[col.key] || ""}
                         >
-                          {lead[col.key] || <span className="text-content-faint/60">—</span>}
+                          {lead[col.key] || <span className="text-content-faint/60">-</span>}
                         </span>
                       )
                     ) : (

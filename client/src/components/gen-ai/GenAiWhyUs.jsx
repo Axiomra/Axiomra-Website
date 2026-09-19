@@ -4,10 +4,11 @@ import { ArrowRight, ShieldCheck } from "lucide-react";
 import { whyUs } from "../../data/generativeAiData";
 
 const GOVERNANCE_POINTS = [
-  "Your data stays in your cloud or ours. Your call, written into the contract.",
-  "Guardrails, PII redaction, and output filtering built in, not bolted on.",
-  "Full audit trail of prompts, retrievals, and responses for every request.",
-  "SOC 2, GDPR, and HIPAA-aligned delivery when your industry requires it.",
+  "Agreed hosting and data access arrangements",
+  "Appropriate handling of personal and sensitive information",
+  "Output controls and human review where needed",
+  "Logging and retention suited to audit and privacy requirements",
+  "Assessment of applicable security and regulatory requirements with your team",
 ];
 
 export default function GenAiWhyUs() {
@@ -103,11 +104,12 @@ export default function GenAiWhyUs() {
                 <ShieldCheck size={24} aria-hidden="true" />
               </span>
               <h3 className="mt-6 font-display text-2xl font-semibold text-content md:text-3xl">
-                Security And Governance, Handled From Day One
+                Security and Governance Built Into the Project
               </h3>
               <p className="mt-4 text-base leading-relaxed text-content-dim md:text-lg">
-                Generative systems touch your most sensitive documents. We treat that as an
-                architecture requirement, not a policy document written after launch.
+                We agree on data handling, hosting, and access requirements before
+                implementation. Controls are selected for the data and risks involved in your
+                use case.
               </p>
               <ul className="mt-7 space-y-3.5">
                 {GOVERNANCE_POINTS.map((point) => (

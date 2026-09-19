@@ -1,12 +1,12 @@
 /**
- * Set the admin recovery key — the second factor on a password reset.
+ * Set the admin recovery key: the second factor on a password reset.
  *
  *   node scripts/set-recovery-key.js --generate
  *   node scripts/set-recovery-key.js                      (paste your own)
  *   node scripts/set-recovery-key.js --email a@b.com --clear
  *
  * The key is 78 characters of mixed case, digits and symbols. Only its hash is
- * written, so this run is the one and only moment the key is readable — copy it
+ * written, so this run is the one and only moment the key is readable, so copy it
  * into a password manager before closing the terminal. Losing it means the
  * emailed reset link stops working and the password can only be changed by
  * re-running seed-admin.js from a machine with database access.
@@ -69,7 +69,7 @@ function generateKey() {
 function askHidden(question) {
   return new Promise((resolve, reject) => {
     if (!process.stdin.isTTY) {
-      reject(new Error("Run this from an interactive terminal — it prompts for the key."));
+      reject(new Error("Run this from an interactive terminal; it prompts for the key."));
       return;
     }
 
@@ -114,7 +114,7 @@ async function main() {
 
   console.log(
     user.recoveryKeyHash
-      ? `\n  ${email} already has a recovery key — this REPLACES it. The old one stops working.`
+      ? `\n  ${email} already has a recovery key. This REPLACES it. The old one stops working.`
       : `\n  Setting the recovery key for ${email}.`
   );
 
@@ -134,7 +134,7 @@ async function main() {
   await user.save();
 
   if (has("--generate")) {
-    console.log("\n  Your recovery key — shown once, never recoverable:\n");
+    console.log("\n  Your recovery key, shown once and never recoverable:\n");
     console.log(`    ${key}\n`);
     console.log("  Store it in a password manager now, then clear this terminal.");
     console.log("  On Linux/macOS:  history -c && clear\n");

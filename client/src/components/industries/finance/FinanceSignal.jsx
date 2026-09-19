@@ -11,9 +11,9 @@ import { signal } from "../../../data/financeData";
  * polygon as its `clip-path`, so the text wraps the outline the reader can
  * actually see:
  *
- *   coin   — a circle float, the struck-coin motif the page opens with;
- *   wedge  — an arrowhead the copy tucks into on the opposite side;
- *   rails  — mirrored tapers left and right, leaving a channel down the
+ *   coin:    a circle float, the struck-coin motif the page opens with;
+ *   wedge:   an arrowhead the copy tucks into on the opposite side;
+ *   rails:   mirrored tapers left and right, leaving a channel down the
  *            middle that widens as it falls.
  *
  * The copy here is short on purpose. A wrapped measure is hard to read at

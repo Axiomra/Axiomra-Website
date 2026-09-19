@@ -22,7 +22,7 @@ const KEY_LOCK_MS = 15 * 60 * 1000;
  * Admin accounts for the lead panel. There is no public sign-up: accounts are
  * created by scripts/seed-admin.js, run by hand.
  *
- * The plaintext password exists only inside createAdmin/verifyPassword — it is
+ * The plaintext password exists only inside createAdmin/verifyPassword; it is
  * never assigned to a document field, so it cannot reach the database, a log
  * line, or a serialised error.
  */

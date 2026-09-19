@@ -6,12 +6,12 @@ import { makeDotTexture } from "../lib/dotTexture";
 /*
  * Backdrop for the Healthcare hero. Four ideas, one scene:
  *
- *   Vitals   — a floor of points carrying a slow swell, the graph paper a
+ *   Vitals:    a floor of points carrying a slow swell, the graph paper a
  *              rhythm strip is printed on, seen in perspective.
- *   Trace    — the monitor line itself, drawn left to right, held, cleared,
+ *   Trace:     the monitor line itself, drawn left to right, held, cleared,
  *              and redrawn, the way a bedside display sweeps.
- *   Helix    — two instanced strands of base pairs turning on a common axis.
- *   Cells    — instanced capsules drifting through the volume, each on its
+ *   Helix:     two instanced strands of base pairs turning on a common axis.
+ *   Cells:     instanced capsules drifting through the volume, each on its
  *              own phase so the field never pulses in unison.
  *
  * Decorative and cheap: geometry allocated once and mutated in place, two
@@ -264,7 +264,7 @@ const TRACE_A = [
   [9.2, 0.2, -1.4],
   [12, 0.2, -1.5],
 ];
-// A second, quieter channel — the respiratory line under the cardiac one.
+// A second, quieter channel: the respiratory line under the cardiac one.
 const TRACE_B = [
   [-11, 2.7, -1.8],
   [-6, 3.3, -1.2],

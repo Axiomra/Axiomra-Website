@@ -128,7 +128,7 @@ export default function AdminLeadsPage() {
 
   // A column deleted by someone else can still be in this browser's stored
   // list. It is filtered out on the way to the table rather than written back
-  // to state, so nothing is pruned before the definitions have arrived — and
+  // to state, so nothing is pruned before the definitions have arrived, and
   // the raw preference survives, which matters while they are still loading.
   const visibleColumns = useMemo(() => {
     if (!fieldsLoaded) return columns;
@@ -161,7 +161,7 @@ export default function AdminLeadsPage() {
   );
 
   // "Loading" is derived from which request has landed, not from a flag flipped
-  // before the request starts — a flag would mean setting state in the effect
+  // before the request starts; a flag would mean setting state in the effect
   // body and re-rendering the whole table twice per keystroke.
   const requestKey = useMemo(() => JSON.stringify([query, reloadKey]), [query, reloadKey]);
   const [loadedKey, setLoadedKey] = useState(null);
@@ -222,7 +222,7 @@ export default function AdminLeadsPage() {
 
   /**
    * Optimistic inline edit. The row updates immediately, then reverts to the
-   * server's version — a rejected email or an over-length note has to visibly
+   * server's version: a rejected email or an over-length note has to visibly
    * snap back rather than sitting on screen as if it saved.
    */
   const rollback = useRef(new Map());
@@ -233,7 +233,7 @@ export default function AdminLeadsPage() {
         if (l._id !== id) return l;
         rollback.current.set(id, l);
         // A custom-column edit carries one key, so it has to merge into the
-        // existing bag — spreading it would blank every other custom column
+        // existing bag, since spreading it would blank every other custom column
         // on the row until the server's answer landed.
         return changes.custom
           ? { ...l, ...changes, custom: { ...l.custom, ...changes.custom } }

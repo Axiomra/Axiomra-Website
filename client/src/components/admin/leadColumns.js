@@ -5,7 +5,7 @@
  *
  * `tint` gives each column a very faint wash pulled from the brand palette.
  * The purpose is to help the eye track across a wide row, so the values are
- * deliberately near-invisible — anything stronger turns the table into a
+ * deliberately near-invisible, since anything stronger turns the table into a
  * rainbow and stops the progress chips from being the loudest thing on screen.
  */
 
@@ -16,7 +16,7 @@ export const LEAD_COLUMNS = [
     width: 190,
     tint: "bg-[hsl(232_62%_60%_/_0.08)]",
     sortable: true,
-    // Identity fields only change through the details panel, never in place —
+    // Identity fields only change through the details panel, never in place;
     // a click here selects the row instead of opening an inline input.
     locked: true,
   },
@@ -94,7 +94,7 @@ export const LEAD_COLUMNS = [
     width: 260,
     tint: "bg-[hsl(152_62%_42%_/_0.05)]",
     multiline: true,
-    // Notes get written like notes — bold a name, bullet the next steps.
+    // Notes get written like notes: bold a name, bullet the next steps.
     formatting: true,
   },
   {
@@ -154,9 +154,9 @@ export const MAX_COLUMN_WIDTH = 640;
 export const CUSTOM_PREFIX = "custom:";
 
 export const CUSTOM_FIELD_TYPES = [
-  { value: "text", label: "Text", hint: "A short line — a name, a reference, a status." },
+  { value: "text", label: "Text", hint: "A short line: a name, a reference, a status." },
   { value: "longtext", label: "Long text", hint: "A paragraph that wraps across lines." },
-  { value: "number", label: "Number", hint: "Figures — a count, an amount, a score." },
+  { value: "number", label: "Number", hint: "Figures: a count, an amount, a score." },
   { value: "date", label: "Date", hint: "A single calendar date." },
 ];
 

@@ -137,7 +137,7 @@ export default function TransportationHero() {
                 ))}
               </ul>
               <p className="mt-7 text-sm leading-relaxed text-inverse-fg/65">
-                One data layer under dispatch, drivers and customers — so the answer to
+                One data layer under dispatch, drivers and customers, so the answer to
                 &ldquo;where is it?&rdquo; comes from the same record everywhere.
               </p>
             </div>

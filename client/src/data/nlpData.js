@@ -25,14 +25,14 @@ export const NLP_SLUG = "natural-language-processing-services";
 /* Hero */
 
 export const hero = {
-  eyebrow: "Natural Language Processing Company",
-  titleLead: "Tailored",
-  titleAccent: "Natural Language Processing",
-  titleTail: "Services For Businesses",
+  eyebrow: "Make Business Language Easier to Understand and Use",
+  titleLead: "Natural Language Processing",
+  titleAccent: "Solutions",
+  titleTail: "That Turn Language Into Insight",
   body:
-    "Most businesses struggle to turn massive amounts of text into decisions. Axiomra builds NLP systems that read your documents, tickets, calls, and conversations at scale, automating the analysis, personalising the experience, and surfacing what your team would never have had time to find.",
-  ctaText: "Request A Free Consultation",
-  secondaryCtaText: "See What We Build",
+    "Axiomra develops NLP solutions that analyse documents, support tickets, and transcribed conversations. Extract key information, identify intent and sentiment, and route requests more efficiently so your team can act on relevant insights.",
+  ctaText: "Book a Free NLP Consultation",
+  secondaryCtaText: "Explore NLP Solutions",
   proof: { rating: "4.9", reviews: "300+ companies", source: "Reviewed on Clutch" },
   stats: [
     { value: "120+", label: "NLP models in production" },
@@ -64,7 +64,7 @@ export const hero = {
 /* Framework / tooling bar */
 
 export const frameworkBar = {
-  label: "Built on the language tooling your engineers already trust",
+  label: "Tools and frameworks we work with",
   items: [
     "Hugging Face",
     "LangChain",
@@ -368,7 +368,7 @@ export const industries = {
         "Medical billing fraud detection",
         "Clinical trial document analysis",
       ],
-      note: "HIPAA-compliant deployments available for every healthcare build.",
+      note: "Data handling, hosting, and retention for healthcare builds are agreed with your compliance team before deployment.",
     },
     {
       name: "Finance And Fintech",
@@ -380,7 +380,7 @@ export const industries = {
         "Transaction narrative classification",
         "Complaint routing and regulatory reporting",
       ],
-      note: "Deployable in your own VPC so no financial text leaves your network.",
+      note: "Can be deployed inside your own VPC where financial text must stay on your network.",
     },
     {
       name: "Legal",
@@ -513,7 +513,7 @@ export const process = {
   titleAccent: "NLP Services",
   subtitle:
     "Every NLP project we take on follows a clear, structured process. You always know what is happening, what comes next, and what you will get at each stage. Here is exactly how we work.",
-  ctaText: "Contact Us Now",
+  ctaText: "Discuss Your Requirements",
   image: processWorkstation,
   imageAlt:
     "An engineer at a laptop with an NLP panel projected above the keyboard, showing a wireframe brain and a signal waveform",
@@ -548,7 +548,7 @@ export const process = {
     },
     {
       title: "Monitoring, Retraining, And Support",
-      body: "Language drifts as your products, customers, and vocabulary change. We monitor live accuracy against sampled ground truth, alert on drift, and retrain on an agreed schedule, with 60 days of free support after launch.",
+      body: "Language drifts as your products, customers, and vocabulary change. We monitor live accuracy against sampled ground truth, alert on drift, and retrain on an agreed schedule, with a post-launch support period included in the engagement.",
     },
   ],
 };
@@ -571,7 +571,7 @@ export const outcomes = {
       title: "Accuracy",
       body:
         "Our NLP development services apply advanced algorithms and machine learning models to analyse "
-        + "text with exceptional precision, reducing human error, improving decision-making, and uncovering "
+        + "text with high precision, reducing human error, improving decision-making, and uncovering "
         + "patterns traditional methods miss. Every model ships with a measured baseline on your own data, "
         + "not a public benchmark, and a confidence threshold that routes uncertain cases to a human instead "
         + "of guessing. Accuracy is monitored after launch too, so drift is caught in a dashboard rather than "
@@ -594,7 +594,7 @@ export const outcomes = {
       title: "Efficiency",
       body:
         "Processing large volumes of text manually is slow and expensive. Our NLP solutions automate the "
-        + "analysis, streamline repetitive tasks, and deliver insight faster, so teams focus on strategy "
+        + "analysis, shorten repetitive tasks, and deliver insight faster, so teams focus on strategy "
         + "instead of data handling. Work that took an analyst a full day, reading, tagging, routing, and "
         + "summarising, runs in seconds and scales with volume instead of headcount. Your people stay on the "
         + "judgement calls that actually need them.",
@@ -619,11 +619,11 @@ export const outcomes = {
 
 export const whyUs = {
   eyebrow: "Why choose us?",
-  titleAccent: "What Makes Us Different From",
-  titleLead: "Other NLP Development Companies",
+  titleAccent: "Why Choose Axiomra",
+  titleLead: "for NLP Development",
   subtitle:
-    "There are many NLP service providers out there. Here is why businesses across 25+ countries trust Axiomra to build, deploy, and maintain their NLP solutions.",
-  ctaText: "Request A Free Consultation",
+    "What clients tell us matters when they choose an NLP partner, and what we commit to on every engagement.",
+  ctaText: "Book a Free Consultation",
   stats: [
     { value: "300+", label: "AI and machine learning projects" },
     { value: "25+", label: "Engineers and data scientists" },
@@ -632,28 +632,28 @@ export const whyUs = {
   ],
   reasons: [
     {
-      title: "Proven Track Record",
-      body: "We have delivered 300+ AI and NLP projects across healthcare, finance, legal, and retail. Our work is rated 4.9/5 on Clutch and recognised as a top NLP provider. You are not our test case: you are our next case study.",
+      title: "Delivery Experience Across Sectors",
+      body: "We have delivered AI and NLP projects across healthcare, finance, legal, retail, and education. Each build starts from your own text and your own definition of a correct answer, not a reference implementation from another client.",
     },
     {
       title: "End-To-End NLP Delivery",
       body: "From data collection and model training to deployment and ongoing maintenance, we handle the full NLP lifecycle in-house. No handoffs, no gaps, no third-party dependencies. One team owns your project from day one to go-live.",
     },
     {
-      title: "Data Privacy And Security First",
-      body: "We follow GDPR-compliant data handling across all NLP projects. Your text, your models, and your outputs stay private. We sign NDAs before any project begins and apply strict access controls throughout development and deployment.",
+      title: "Data Handling Agreed Up Front",
+      body: "Hosting, access, retention, and redaction are agreed with your team before development starts, and the privacy requirements that apply to your data are assessed with you rather than assumed. We sign an NDA before any project begins and apply access controls throughout development and deployment.",
     },
     {
       title: "Transparent Communication Throughout",
       body: "You get a dedicated project manager from day one. Weekly progress updates, milestone reviews, and direct access to your development team are standard on every engagement. No black boxes, no surprises.",
     },
     {
-      title: "60 Days Of Post-Deployment Support",
-      body: "After delivery we stay with you for 60 days at no extra cost. If something needs fixing, adjusting, or explaining, our team resolves it fast. You go live knowing expert support is a message away.",
+      title: "Post-launch Engineering Support",
+      body: "A support period is included after delivery, covering fixes, adjustments, and questions from the people using the system. The length and scope are set out in the engagement before work begins.",
     },
     {
       title: "Team Coaching And Handover",
-      body: "We do not hand over a black box and leave. Once your NLP solution is live, we train your team to use it confidently (from walkthroughs to hands-on sessions) so your people get the most out of what we built.",
+      body: "Once your NLP solution is live, we run walkthroughs and hands-on sessions on how it works, how to read its outputs, and how to raise an issue early, so your team can operate and question the system without depending on us.",
     },
   ],
 };
@@ -671,11 +671,11 @@ export const faqs = [
   },
   {
     q: "How much do NLP development services cost?",
-    a: "A scoped proof of concept on your own data typically runs 4-6 weeks. A full production system depends on volume, language coverage, accuracy target, whether you need on-premise deployment, and how much labelled data already exists. We quote a costed range after the data audit rather than a headline number before it. Anyone pricing your project without seeing your text is guessing.",
+    a: "Cost depends on volume, language coverage, the accuracy target, whether you need on-premise deployment, and how much labelled data already exists. We quote a costed range after the data audit rather than a figure before it, so the estimate reflects your text rather than an average.",
   },
   {
     q: "How long does it take to build an NLP solution?",
-    a: "A proof of concept is usually 4-6 weeks. Most production deployments land in 3-5 months, with data preparation being the step that varies most. If you already have clean, labelled text in a single language, it moves considerably faster.",
+    a: "Timelines are set during scoping and depend mainly on the state of your data. Data preparation is the stage that varies most; where clean, labelled text in a single language already exists, the build moves considerably faster. We give an estimated schedule with the proposal.",
   },
   {
     q: "What is the difference between NLP and NLU?",
@@ -690,8 +690,8 @@ export const faqs = [
     a: "Yes, and that is usually the larger half of the work. We integrate with Salesforce, HubSpot, Zendesk, Dynamics, SAP, and custom internal tools via REST APIs, webhooks, and event streams, so a classification or extraction becomes a ticket, a field, or a record inside the system your team already uses.",
   },
   {
-    q: "Is my data secure with your NLP services?",
-    a: "We sign an NDA before the project starts, apply GDPR-compliant handling throughout, and redact PII before any training run. Where your text cannot leave your network (healthcare, finance, legal), we deploy inside your VPC or on-premise with open models so nothing is sent to a third-party API.",
+    q: "How is our data handled during an NLP project?",
+    a: "We sign an NDA before the project starts, agree handling and retention with your team, and redact personal information before any training run. Where your text cannot leave your network, as is common in healthcare, finance, and legal work, we deploy inside your VPC or on-premise with open models so nothing is sent to a third-party API. The privacy rules that apply to your data are assessed with your compliance team.",
   },
   {
     q: "How do you ensure NLP model accuracy over time?",

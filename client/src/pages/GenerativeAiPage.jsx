@@ -38,15 +38,9 @@ export default function GenerativeAiPage() {
       <GenAiModelTypes />
 
       <GradientCTA
-        title={
-          <>
-            Not Sure Which Model
-            <br />
-            Fits Your Use Case?
-          </>
-        }
-        subtitle="Bring us the workflow you want to automate. We will tell you which model class fits, what it costs to run at your volume, and whether generative AI is even the right answer, before you spend anything."
-        buttonText="Book A Free Generative AI Consultation"
+        title="Find the Right Generative AI Approach"
+        subtitle="Share the workflow you want to improve. We will assess suitable approaches, discuss estimated running costs, and help you decide whether generative AI fits your needs."
+        buttonText="Discuss Your Use Case"
       />
 
       <GenAiCaseStudies />
@@ -81,7 +75,7 @@ export default function GenerativeAiPage() {
             Not Another Pilot.
           </>
         }
-        subtitle="Most generative AI projects stall between demo and production. Ours do not, because we scope for deployment from the first call and stay on for 60 days after go-live. Start with a free strategy session, no commitment, no generic pitch."
+        subtitle="Most generative AI projects stall between demo and production. We scope for deployment from the first call and stay on for 60 days after go-live. Start with a free strategy session, no commitment, no generic pitch."
         buttonText="Claim Your Free Strategy Session"
       />
 

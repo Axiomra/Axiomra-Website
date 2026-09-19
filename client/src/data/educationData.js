@@ -35,11 +35,11 @@ export const EDUCATION_SLUG = "education";
 
 export const hero = {
   eyebrow: "AI for the education industry",
-  titleLead: "Revolutionising EdTech With AI-Powered",
+  titleLead: "Rebuilding EdTech With AI-Powered",
   titleAccent: "Education Software Development",
   titleTail: "Services",
   body:
-    "As a leading education app development company, Axiomra builds intelligent, AI-powered learning products that empower educators and students alike. Our custom education software development services deliver tools that improve learning engagement, streamline administrative work and support digital transformation across K-12 schools, colleges and universities.",
+    "As a leading education app development company, Axiomra builds intelligent, AI-powered learning products that give educators and students better tools. Our custom education software development services deliver tools that improve learning engagement, cut administrative work and support digital transformation across K-12 schools, colleges and universities.",
   ctaText: "Request a free consultation",
   image: heroImg,
   alt: "The reading room of a historic library lined with books",
@@ -51,7 +51,7 @@ export const intro = {
   titleAccent: "For Equitable Learning Outcomes",
   paragraphs: [
     "We design and build secure, interoperable learning platforms, adaptive courseware and analytics that measurably improve student outcomes. Our AI-powered education software closes the digital divide by design, with mobile-first, low-bandwidth experiences and offline sync, while upskilling educators through embedded coaching and just-in-time training.",
-    "By unifying LMS, SIS, content and assessment data, we streamline workflows, protect privacy by design and raise engagement with personalised paths, timely feedback and gamified nudges. Delivered through agile discovery, rapid prototyping, rigorous QA and phased rollouts, our solutions stay scalable, reliable and accessible across devices and contexts.",
+    "By unifying LMS, SIS, content and assessment data, we simplify workflows, protect privacy by design and raise engagement with personalised paths, timely feedback and gamified nudges. Delivered through agile discovery, rapid prototyping, rigorous QA and phased rollouts, our solutions stay scalable, reliable and accessible across devices and contexts.",
   ],
   ctaText: "Let's work together",
   image: introImg,
@@ -62,22 +62,22 @@ export const impact = {
   titleLead: "AI's Measurable Impact On",
   titleAccent: "Global Education Outcomes",
   body:
-    "AI is rapidly reshaping K-12, higher education and workforce training: streamlining instruction, grading and student support while personalising learning journeys, improving accessibility and delivering real-time insight that boosts engagement, equity and completion.",
+    "AI is rapidly reshaping K-12, higher education and workforce training: speeding up instruction, grading and student support while personalising learning journeys, improving accessibility and delivering real-time insight that boosts engagement, equity and completion.",
   stats: [
     {
       value: "92%",
       label: "of UK undergraduates now use AI tools in their studies.",
-      source: "HEPI — Student Generative AI Survey 2025",
+      source: "HEPI, Student Generative AI Survey 2025",
     },
     {
       value: "88%",
       label: "reported using generative AI for assessment-related tasks in 2025.",
-      source: "HEPI — Student Generative AI Survey 2025",
+      source: "HEPI, Student Generative AI Survey 2025",
     },
     {
-      value: "$7B",
+      value: "$7.6B",
       label: "global AI in education market size estimated for 2025.",
-      source: "The Business Research Company — 2025 market report",
+      source: "The Business Research Company, 2025 market report",
     },
   ],
 };
@@ -135,10 +135,10 @@ export const challenges = {
  */
 export const services = {
   eyebrow: "What types of education apps are we experts in?",
-  titleLead: "Comprehensive Education Software Development Services",
+  titleLead: "Education Software Development Services",
   titleAccent: "For Digital Transformation",
   body:
-    "Our team of expert education software developers builds custom software for K-12 schools and universities, ensuring each solution aligns with your institutional goals. Whether you want to enhance remote learning, improve student engagement or streamline administrative processes, our EdTech software development services deliver measurable results.",
+    "Our team of expert education software developers builds custom software for K-12 schools and universities, ensuring each solution aligns with your institutional goals. Whether you want to enhance remote learning, improve student engagement or cut down administrative processes, our EdTech software development services deliver measurable results.",
   items: [
     {
       title: "Educational Operations and Analytics Tools",
@@ -159,7 +159,7 @@ export const services = {
     {
       title: "Assessment and Feedback Systems",
       body:
-        "Our AI-based educational app development services offer powerful tools for quizzes, automated grading and performance analytics, streamlining the feedback process and giving teachers back the evenings they currently spend marking.",
+        "Our AI-based educational app development services offer powerful tools for quizzes, automated grading and performance analytics, shortening the feedback process and giving teachers back the evenings they currently spend marking.",
       points: ["Online Assessment Tools", "Automated Grading Systems", "Performance Analytics"],
       image: svcAssessmentImg,
       alt: "A pencil resting on a multiple-choice answer sheet",
@@ -199,7 +199,7 @@ export const services = {
 /** The product types we specialise in, shown as a pill rail over a photo band. */
 export const specialisms = {
   eyebrow: "What types of education apps do we specialise in?",
-  titleLead: "Leveraging The Power Of AI To Create Custom",
+  titleLead: "Using AI To Create Custom",
   titleAccent: "Education Software Solutions That Lead The Industry",
   background: specBgImg,
   items: [
@@ -234,10 +234,10 @@ export const specialisms = {
 /** The four technology pillars under every EdTech build. */
 export const technologies = {
   eyebrow: "Which technologies do we use for education solutions?",
-  titleLead: "Next-Gen Technologies For Robust",
+  titleLead: "Modern Technologies For Reliable",
   titleAccent: "EdTech And E-Learning Tools",
   body:
-    "As a leading e-learning development company, we specialise in EdTech software development and educational app development services to create robust educational applications. Our approach integrates various tech solutions to enhance user experiences, streamline operations and provide exceptional value in the education sector.",
+    "As a leading e-learning development company, we specialise in EdTech software development and educational app development services to create dependable educational applications. Our approach integrates various tech solutions to enhance user experiences, simplify operations and provide real value in the education sector.",
   ctaText: "View all services",
   background: techBgImg,
   items: [
@@ -254,21 +254,21 @@ export const technologies = {
     {
       title: "Generative AI",
       body:
-        "Generative AI accelerates content creation, automates curriculum design and supports personalised learning experiences. By leveraging this technology, educators focus on teaching while the software handles repetitive tasks and content adaptation.",
+        "Generative AI accelerates content creation, automates curriculum design and supports personalised learning experiences. With this technology, educators focus on teaching while the software handles repetitive tasks and content adaptation.",
     },
     {
       title: "Machine Learning",
       body:
-        "Machine learning converts large datasets into actionable insight. It helps tailor learning modules, improve student interactions and optimise administrative workflows, allowing schools to operate more efficiently and scale effectively.",
+        "Machine learning converts large datasets into insight teachers can act on. It helps tailor learning modules, improve student interactions and optimise administrative workflows, allowing schools to operate more efficiently and scale effectively.",
     },
   ],
 };
 
-/** Six outcomes AI unlocks for an institution. */
+/** Six outcomes AI opens up for an institution. */
 export const streamline = {
   eyebrow: "What can AI optimise for you?",
   titleLead: "Discover How AI Can",
-  titleAccent: "Streamline Your Education Industry",
+  titleAccent: "Simplify Your Education Operations",
   texture: textureBgImg,
   items: [
     {
@@ -307,14 +307,14 @@ export const streamline = {
 export const midCta = {
   title: "Craft Your Ideal AI-Powered EdTech Software Solution",
   body:
-    "Our AI-powered platforms enhance teaching, engage students and streamline administrative processes, enabling schools, universities and training centres to thrive in a digital-first world.",
+    "Our AI-powered platforms enhance teaching, engage students and take the weight out of administrative processes, enabling schools, universities and training centres to thrive in a digital-first world.",
   ctaText: "Get in touch now",
   background: midCtaBgImg,
 };
 
 export const stakeholders = {
-  eyebrow: "Who benefits from our expertise?",
-  titleLead: "Empowering Every",
+  eyebrow: "Who we build for",
+  titleLead: "Built For Every",
   titleAccent: "Stakeholder In Education",
   items: [
     {
@@ -391,7 +391,7 @@ export const blogs = {
 
 export const techStrip = {
   eyebrow: "Our tech stack",
-  titleLead: "Leveraging Innovative Technology",
+  titleLead: "Proven Technology",
   titleAccent: "Solutions For Your Institution",
   body:
     "The same production-grade toolchain sits under every learning platform we ship. Pick a layer to see what it is made of.",
@@ -517,13 +517,13 @@ export const partner = {
       icon: "Target",
       title: "Enhanced Training Adaptability",
       body:
-        "Educators need effective tools to convey concepts and reinforce learning. Our educational app development services integrate seamlessly with classroom and online programmes, providing interactive training modules that support teaching and assessment.",
+        "Educators need effective tools to convey concepts and reinforce learning. Our educational app development services integrate cleanly with classroom and online programmes, providing interactive training modules that support teaching and assessment.",
     },
     {
       icon: "Layers",
       title: "Enhanced Cost Efficiency",
       body:
-        "Investing in custom education software helps institutions maximise resources. By partnering with digital content providers and leveraging AI solutions, schools and universities expand what they offer while reducing operational costs.",
+        "Investing in custom education software helps institutions maximise resources. By partnering with digital content providers and using AI solutions, schools and universities expand what they offer while reducing operational costs.",
     },
     {
       icon: "ShieldCheck",
@@ -572,7 +572,7 @@ export const faqs = [
 ];
 
 export const finalCta = {
-  title: "Empower Your Institution With Your Trusted AI EdTech Company",
+  title: "Put AI To Work Across Your Institution",
   subtitle:
     "As a premier AI service provider, we are trusted by clients worldwide to deliver tailored AI solutions that drive success. Let's discuss your project.",
   buttonText: "Get your project done!",

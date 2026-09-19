@@ -5,7 +5,7 @@ import { AlertTriangle } from "lucide-react";
 /**
  * Modal confirmation for destructive actions.
  *
- * Focus lands on Cancel, not Confirm — a stray Enter after opening this should
+ * Focus lands on Cancel, not Confirm, because a stray Enter after opening this should
  * not delete a lead. Escape and a backdrop click both cancel.
  */
 export default function ConfirmDialog({

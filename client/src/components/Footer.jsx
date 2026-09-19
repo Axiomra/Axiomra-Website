@@ -22,7 +22,7 @@ const LINK_ROUTES = {
   "Artificial Intelligence": `${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`,
   "Computer Vision": `${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}`,
   "Generative AI": `${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}`,
-  "AI Agent Development": `${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`,
+  "Agentic AI Development": `${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`,
   "Software Development": SERVICES_BASE_PATH,
   "AI for Fashion": industryPath("fashion"),
   "AI for Sports": industryPath("sports"),
@@ -39,9 +39,9 @@ const LINK_ROUTES = {
 };
 
 const cols = [
-  { title: "Services", links: ["Artificial Intelligence", "Computer Vision", "Software Development", "Generative AI", "AI Agent Development"] },
+  { title: "Services", links: ["Artificial Intelligence", "Computer Vision", "Software Development", "Generative AI", "Agentic AI Development"] },
   { title: "Industries", links: ["AI for Fashion", "AI for Sports", "AI for Transportation", "AI for Retail", "AI for Healthcare", "AI for Finance"] },
-  { title: "Quick Links", links: ["Blogs", "Contact Us", "About Us", "Tech Stack", "Awards & Recognitions", "FAQs"] },
+  { title: "Quick Links", links: ["Blogs", "Contact Us", "About Us", "Tech Stack", "Awards and Recognition", "FAQs"] },
 ];
 
 /* lucide ships no X (formerly Twitter) mark, so the brand glyph is inlined. */
@@ -74,7 +74,7 @@ const UNDERLINE_LINK =
   "hover:after:scale-x-100 focus-visible:after:scale-x-100";
 
 export default function Footer() {
-  // The contact page shows no footer at all — not even on hover.
+  // The contact page shows no footer at all, not even on hover.
   const { pathname } = useLocation();
   if (pathname === "/contact") return null;
 
@@ -89,14 +89,14 @@ export default function Footer() {
           <div>
             <img src={logoLight} alt="Axiomra" className="mb-4 h-9 w-auto" width={500} height={91} />
             <p className="max-w-xs text-lg leading-relaxed text-inverse-fg/70">
-              We help businesses by automating their processes and developing customized
-              end-to-end AI solutions that deliver proven ROI.
+              We build custom AI solutions that simplify workflows, support better decisions,
+              and help businesses measure the value of automation.
             </p>
             <Link
               to="/contact"
               className="mt-5 inline-block rounded-full bg-inverse-fg px-6 py-3 text-lg font-medium text-inverse transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow focus-ring"
             >
-              Let&apos;s Talk
+              Discuss Your Project
             </Link>
           </div>
           {cols.map((c) => (

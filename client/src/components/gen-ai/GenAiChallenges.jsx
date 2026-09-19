@@ -89,7 +89,7 @@ export default function GenAiChallenges() {
             to="/contact"
             className="group mt-10 inline-flex items-center gap-2.5 rounded-full border border-line px-7 py-4 text-base font-semibold transition-colors hover:border-brand/50 hover:text-brand focus-ring md:text-lg"
           >
-            Request A Free Consultation
+            Book a Free Consultation
             <ArrowUpRight
               size={19}
               className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

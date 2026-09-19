@@ -6,7 +6,7 @@ import { sportsWeServe } from "../../../data/sportsData";
 
 /**
  * The sports rail. Twelve sheared cards on a track that drifts sideways as the
- * section passes through the viewport — the reference scrolls this rail rather
+ * section passes through the viewport; the reference scrolls this rail rather
  * than looping it, so the motion is scrubbed to scroll position instead of a
  * timer.
  *

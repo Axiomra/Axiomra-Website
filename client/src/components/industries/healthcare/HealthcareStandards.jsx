@@ -11,9 +11,9 @@ import { standards } from "../../../data/healthcareData";
  * polygon as its `clip-path`, so the text wraps the outline the reader can
  * actually see:
  *
- *   orb   — a circle float, the capsule motif reduced to one figure;
- *   vial  — a phial the copy tucks against on the opposite side;
- *   rails — mirrored tapers left and right, leaving a channel down the middle
+ *   orb:    a circle float, the capsule motif reduced to one figure;
+ *   vial:   a phial the copy tucks against on the opposite side;
+ *   rails:  mirrored tapers left and right, leaving a channel down the middle
  *           that narrows as it falls.
  *
  * The copy here is short on purpose. A wrapped measure is hard to read at

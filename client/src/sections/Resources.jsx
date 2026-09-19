@@ -23,7 +23,7 @@ export default function Resources() {
         subtitle="Field notes from the projects we ship: benchmarks, budgets, and the mistakes worth skipping."
       />
 
-      {/* No blog route exists yet, so these are cards rather than links — an
+      {/* No blog route exists yet, so these are cards rather than links, because an
           href="#" only left a bare hash hanging off the current URL. */}
       <div className="grid gap-8 sm:grid-cols-3">
         {posts.map((p, i) => (

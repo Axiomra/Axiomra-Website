@@ -88,23 +88,23 @@ export const impact = {
   titleLead: "How AI Is Reshaping Performance, Revenue",
   titleAccent: "And Safety In Sports",
   body:
-    "AI sports software is redefining how teams manage training load, reduce injury risk and unlock new revenue by unifying wearables, video, ticketing and CRM into real-time workflows that scale from academies to professional leagues.",
+    "AI sports software is redefining how teams manage training load, reduce injury risk and open new revenue by unifying wearables, video, ticketing and CRM into real-time workflows that scale from academies to professional leagues.",
   stats: [
     {
-      value: "$10B",
+      value: "$10.4B",
       label: "global AI in sports market size in 2025, on its way to roughly ten times that by the mid-2030s.",
-      source: "Precedence Research — AI In Sports Market 2025",
+      source: "Precedence Research, AI In Sports Market 2025",
     },
     {
       value: "38%",
       label: "of sports media executives said AI made content commercialisation easier in 2025.",
-      source: "Stats Perform — 2025 AI Trends",
+      source: "Stats Perform, 2025 AI Trends",
     },
     {
       value: "33%",
       label:
         "average positive shift in expectations for AI-driven audience and monetisation growth across sectors in 2025.",
-      source: "Stats Perform — 2025 Survey",
+      source: "Stats Perform, 2025 Survey",
     },
   ],
 };
@@ -425,7 +425,7 @@ export const benefits = {
         "Athletes get training prescribed against their own measured state: load history, movement quality and recovery, rather than a squad-wide plan that fits the average and nobody in particular.",
     },
     {
-      title: "Integrate With Cutting-Edge Technology",
+      title: "Integrate With The Tools You Already Run",
       body:
         "Wearables, optical tracking, AR and VR training environments and league data feeds all land in one model, so a new sensor becomes an input rather than another platform to log into.",
     },
@@ -546,8 +546,8 @@ export const businessTypes = {
 
 export const testimonials = {
   eyebrow: "Why is it worth working with us?",
-  titleLead: "Our Clients Trust Us For Top-Notch Sports Solutions",
-  titleAccent: "And Exceptional Results",
+  titleLead: "What Clubs And Leagues Say",
+  titleAccent: "About Building With Us",
   items: [
     {
       name: "Abdullah",
@@ -677,7 +677,7 @@ export const faqs = [
 ];
 
 export const finalCta = {
-  title: "Let's Build Your Custom AI Sports Software Together",
+  title: "Start With One Question About Your Season",
   subtitle:
     "Ready to raise performance, tighten operations and turn attention into revenue? Talk to our sports software engineers.",
   buttonText: "Get your project done!",

@@ -12,7 +12,7 @@ import { midCta } from "../../../data/insuranceData";
  * band behind, which is why the two are stacked rather than composited.
  *
  * `polygon()` has no second subpath, so the hole is cut with a zero-width slit
- * running from the top-left corner to the shield and back — one continuous
+ * running from the top-left corner to the shield and back: one continuous
  * outline, wound so the inner loop subtracts. The CSS drops the clip entirely
  * below 1024px, where a hole that size would eat the copy.
  */
@@ -43,7 +43,7 @@ export default function InsuranceMidCta() {
 
       <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
         <div className="relative">
-          {/* The pane. `lg-flat` is not a thing — what matters is that the
+          {/* The pane. `lg-flat` is not a thing; what matters is that the
               frosted ground is the element being clipped, so the hole is cut
               out of the glass itself and not out of a wrapper around it. */}
           <div className="lg lg-dark lg-strong ins-cutout relative overflow-hidden px-8 py-14 md:px-14 md:py-20 lg:min-h-[30rem]">
@@ -80,7 +80,7 @@ export default function InsuranceMidCta() {
           {/* What the hole looks onto. Sitting it behind the pane rather than
               inside it is what makes the shield read as a window: the picture
               is at full strength here and knocked back everywhere else.
-              Coordinates match the polygon in `.ins-cutout` exactly — change
+              Coordinates match the polygon in `.ins-cutout` exactly; change
               one and the other has to move with it. Hidden below lg, where the
               panel is not clipped at all. */}
           <span

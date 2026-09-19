@@ -331,8 +331,8 @@
 }
 
 /* ── Supply chain page: clip-path shapes ───────────────────────────────────
-   The supply chain reference leans on forward motion — chevrons, cut label
-   corners, hex badges — rather than the marketing page's soft arcs. These are
+   The supply chain reference leans on forward motion (chevrons, cut label
+   corners, hex badges) rather than the marketing page's soft arcs. These are
    separate classes rather than variants of the marketing set so tuning one
    page can never shift the other. */
 
@@ -411,7 +411,7 @@
 }
 
 /* ── Sports page: clip-path shapes ─────────────────────────────────────────
-   The sports reference cuts everything on a diagonal — angled card rails,
+   The sports reference cuts everything on a diagonal: angled card rails,
    sheared stat blocks, a visor-shaped hero mask. Kept separate from the
    marketing and supply chain sets so tuning one page never shifts another. */
 
@@ -774,7 +774,7 @@
 
 /* Trend line: the bottom edge steps up from left to right, so a full-bleed
    band hands off to the section below along a rising chart rather than a
-   ruler. The steps are shallow on purpose — the copy has to clear them. */
+   ruler. The steps are shallow on purpose, since the copy has to clear them. */
 .clip-trend-bottom {
   clip-path: polygon(
     0 0,
@@ -880,7 +880,7 @@
    page's body copy: an irregular measure is hard to read at length and near
    impossible to keep honest across breakpoints. Each shape pairs a
    `shape-outside` with an identical `clip-path`, so the glass pane the reader
-   sees is exactly the outline the text is wrapping — no invisible gutter, and
+   sees is exactly the outline the text is wrapping: no invisible gutter, and
    no line of text riding over the fill.
 
    Every one of these unfloats below its breakpoint. A flowed shape needs a
@@ -950,7 +950,7 @@
 }
 
 /* The twin rails. Two floats with mirrored tapers leave a channel down the
-   middle that widens as it falls — the closest CSS gets to `shape-inside`
+   middle that widens as it falls, which is the closest CSS gets to `shape-inside`
    without the unshipped property. Held back to `lg`, because the channel
    needs real width before the copy inside it reads as a column. */
 .fin-flow-rail-l,
@@ -1231,7 +1231,7 @@
 /* ── Retail page: shape-outside text wrapping ──────────────────────────────
    Wrapping is confined to the decorative lead-in blocks: the intro standfirst
    and the mid-page CTA. Body copy elsewhere stays in plain rectangles, because
-   a wrapped column is hard to keep readable across breakpoints — and every
+   a wrapped column is hard to keep readable across breakpoints, and every
    float below is switched off under 768px for exactly that reason. */
 
 /* 1. A circular float the standfirst flows around. `shape-margin` is what
@@ -1343,7 +1343,7 @@
 }
 
 /* Monitor trace: the bottom edge of a full-bleed band runs flat, then throws a
-   single QRS complex before settling. One beat, not a row of them — the copy
+   single QRS complex before settling. One beat, not a row of them; the copy
    above has to clear the spike, and a repeating waveform reads as wallpaper. */
 .clip-pulse-bottom {
   clip-path: polygon(
@@ -1371,7 +1371,7 @@
 }
 
 /* The cross. A true plus sign, so it is only ever used on small fixed-size
-   decorative accents — as a content card it would eat the four corners. */
+   decorative accents; as a content card it would eat the four corners. */
 .clip-cross {
   --arm: 34%;
   clip-path: polygon(
@@ -1397,7 +1397,7 @@
    The outer rectangle and the cross are one path joined by a zero-area bridge
    from the origin; `evenodd` then drops the region the path encloses twice.
    Where `polygon(<fill-rule>, …)` is unsupported the whole declaration is
-   dropped and the pane renders as a plain rectangle — a quiet degradation,
+   dropped and the pane renders as a plain rectangle, a quiet degradation,
    which is the right failure for a decorative cut-out. */
 .clip-cut-cross {
   clip-path: polygon(
@@ -1447,8 +1447,8 @@
 /* ── Healthcare page: monitor-paper wallpaper ──────────────────────────────
    The consultation band sits on a lab texture in the reference. The photo
    supplies the grain; these layers tint it to the brand and lay ECG graph
-   paper over the top — fine 1mm squares under a bolder 5mm rule, the way a
-   real rhythm strip is printed — so it reads as a clinical surface rather
+   paper over the top: fine 1mm squares under a bolder 5mm rule, the way a
+   real rhythm strip is printed, so it reads as a clinical surface rather
    than a stock background. */
 
 .med-texture {
@@ -1471,13 +1471,13 @@
 }
 
 /* ── Healthcare page: shape-outside text wrapping ──────────────────────────
-   Flowed shapes are confined to the decorative blocks — the hero pledge, the
-   consultation note and the standards band — and never touch the page's body
+   Flowed shapes are confined to the decorative blocks (the hero pledge, the
+   consultation note and the standards band) and never touch the page's body
    copy. An irregular measure is hard to read at length and near impossible to
    keep honest across breakpoints, so the long-form columns stay rectangular.
 
    Each shape pairs a `shape-outside` with an identical `clip-path`, so the
-   glass pane the reader sees is exactly the outline the text wraps — no
+   glass pane the reader sees is exactly the outline the text wraps: no
    invisible gutter, no line riding over the fill. `--poly` is redeclared per
    breakpoint, which keeps the outline and the clip in lockstep by
    construction, and every float unfloats below its breakpoint: a flowed shape
@@ -1548,7 +1548,7 @@
 }
 
 /* 4. The twin rails. Two floats with mirrored tapers leave a channel down the
-      middle that narrows as it falls — the closest CSS gets to `shape-inside`
+      middle that narrows as it falls, which is the closest CSS gets to `shape-inside`
       without the unshipped property. Held back to `lg`, because the channel
       needs real width before the copy inside it reads as a column. */
 .med-flow-rail-l,
@@ -1616,7 +1616,7 @@
 
 /* Balance beam: the bottom edge tilts and carries a pivot notch at centre, so
    a full-bleed band hands off to the section below along a weighing scale
-   rather than a ruler. Shallow on purpose — the copy has to clear it. */
+   rather than a ruler. Shallow on purpose, since the copy has to clear it. */
 .clip-balance-bottom {
   clip-path: polygon(
     0 0,
@@ -1725,7 +1725,7 @@
    sections keep a straight edge and these shapes carry short lead-in copy.
 
    Each shape pairs a `shape-outside` with an identical `clip-path`, so the
-   glass pane the reader sees is exactly the outline the text wraps — no
+   glass pane the reader sees is exactly the outline the text wraps: no
    invisible gutter, and no line riding over the fill. `--poly` is redeclared
    per breakpoint, which keeps the outline and the clip in lockstep by
    construction, and every shape unfloats below its breakpoint: a flowed shape
@@ -1792,7 +1792,7 @@
 }
 
 /* The colonnade. Two floated pillars with mirrored entasis leave a nave down
-   the middle — the closest CSS gets to `shape-inside` without the unshipped
+   the middle, which is the closest CSS gets to `shape-inside` without the unshipped
    property. Held back to `lg`, because the channel needs real width before
    the statement inside it reads as a column. */
 .legal-flow-pillar-l,
@@ -1828,7 +1828,7 @@
    clockwise, then an inner arch is traced the same way, so the even-odd rule
    drops the inner path and leaves the glass as the frame around a hole. The
    photograph behind it shows through the cut, and the caption sits inside.
-   Decorative only — nothing load-bearing is ever inside the removed area. */
+   Decorative only; nothing load-bearing is ever inside the removed area. */
 .legal-cutout {
   clip-path: polygon(
     evenodd,
@@ -1892,7 +1892,7 @@
    struck seal. Kept as their own set so tuning this page never shifts
    finance, education, sports, real estate, marketing or supply chain. */
 
-/* Shield. Square shoulders, sides falling away to a point — the silhouette
+/* Shield. Square shoulders, sides falling away to a point: the silhouette
    the whole page is built on. */
 .clip-shield {
   clip-path: polygon(0 0, 100% 0, 100% 56%, 50% 100%, 0 56%);
@@ -1970,7 +1970,7 @@
 
 /* ── Insurance page: shape-outside compositions ────────────────────────────
    Three decorative folds run text against a real silhouette rather than a
-   rectangle. All three are display-scale copy in their own band — none of
+   rectangle. All three are display-scale copy in their own band; none of
    them touches body text, because an irregular measure is hard to read and
    harder to hold across breakpoints. Every rule is gated behind `lg`, so
    below 1024px the floats drop out and the copy returns to a plain column. */
@@ -1983,7 +1983,7 @@
 
 /* 2. The roadmap band: one shield with a real background, wrapped by the
       surrounding copy along its exact outline. `shape-outside` and
-      `clip-path` carry identical polygons — that is what makes the wrap and
+      `clip-path` carry identical polygons, which is what makes the wrap and
       the painted edge agree. */
 .ins-shape-shield {
   width: 100%;
@@ -1993,7 +1993,7 @@
 
 /* 3. The cut-out: the leftover of a rectangle with the shield removed. The
       zero-width slit from the corner to the shield is what turns a single
-      polygon into a hole — CSS polygons have no second subpath. */
+      polygon into a hole, because CSS polygons have no second subpath. */
 .ins-cutout {
   clip-path: polygon(
     0 0, 100% 0, 100% 100%, 0 100%, 0 0,
@@ -2002,7 +2002,7 @@
 }
 
 @media (max-width: 1023px) {
-  /* Nothing is punched out of the panel on a narrow screen — the shield sits
+  /* Nothing is punched out of the panel on a narrow screen; the shield sits
      beside the copy instead, so the band keeps a full-width text column. */
   .ins-cutout {
     clip-path: none;

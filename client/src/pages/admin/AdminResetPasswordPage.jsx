@@ -13,11 +13,11 @@ const KEY_LENGTH = 78;
 function keyProblem(key) {
   if (!key) return "Enter your recovery key.";
   if (key.length !== KEY_LENGTH) {
-    return `The recovery key is ${KEY_LENGTH} characters — you have entered ${key.length}.`;
+    return `The recovery key is ${KEY_LENGTH} characters; you have entered ${key.length}.`;
   }
   if (/\s/.test(key)) return "The recovery key cannot contain spaces or line breaks.";
   if (!/[a-z]/.test(key) || !/[A-Z]/.test(key) || !/\d/.test(key) || !/[^A-Za-z0-9]/.test(key)) {
-    return "That does not look like a recovery key — it mixes letters, numbers and symbols.";
+    return "That does not look like a recovery key. It mixes letters, numbers and symbols.";
   }
   return "";
 }

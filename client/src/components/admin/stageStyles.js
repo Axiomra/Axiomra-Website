@@ -39,7 +39,7 @@ export const FALLBACK_STAGE_STYLE = STAGE_STYLES.New;
 
 /**
  * Delivery state. Deliberately a different hue family from the pipeline
- * stages above — two columns of chips in the same colours would be read as
+ * stages above; two columns of chips in the same colours would be read as
  * the same information twice.
  */
 export const COMPLETION_STYLES = {

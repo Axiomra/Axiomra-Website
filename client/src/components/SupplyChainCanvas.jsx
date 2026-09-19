@@ -6,10 +6,10 @@ import { makeDotTexture } from "../lib/dotTexture";
 /*
  * Backdrop for the Supply Chain hero. Three ideas, one scene:
  *
- *   Network  — a wireframe globe, the shared ground every lane is drawn on.
- *   Lanes    — great-circle arcs between fixed nodes, each carrying a pulse
+ *   Network:   a wireframe globe, the shared ground every lane is drawn on.
+ *   Lanes:     great-circle arcs between fixed nodes, each carrying a pulse
  *              that travels end to end, so the field reads as goods in motion.
- *   Stock    — an instanced grid of containers whose heights breathe like live
+ *   Stock:     an instanced grid of containers whose heights breathe like live
  *              inventory levels.
  *
  * Decorative and cheap: every arc is sampled once at mount and baked into a

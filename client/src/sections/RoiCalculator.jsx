@@ -22,7 +22,7 @@ const AREAS = [
     id: "support",
     label: "Customer Support",
     efficiency: 0.72,
-    note: "Tier-1 ticket deflection, reply drafting and automatic CRM updates.",
+    note: "Handle routine support enquiries, draft responses, and update CRM records.",
     preset: { people: 14, rate: 28, hours: 12, investment: 45 },
   },
   {
@@ -59,7 +59,7 @@ const INPUTS = [
   {
     key: "people",
     icon: Users,
-    label: "People doing this work",
+    label: "People Involved in This Workflow",
     hint: "Headcount touching the workflow today",
     min: 1,
     max: 200,
@@ -69,7 +69,7 @@ const INPUTS = [
   {
     key: "rate",
     icon: BadgeDollarSign,
-    label: "Fully-loaded hourly cost",
+    label: "Total Hourly Employment Cost",
     hint: "Salary, benefits and overhead per hour",
     min: 10,
     max: 150,
@@ -79,7 +79,7 @@ const INPUTS = [
   {
     key: "hours",
     icon: Clock,
-    label: "Automatable hours / person / week",
+    label: "Hours per Person Available for Automation Each Week",
     hint: "Repetitive work a system could take over",
     min: 1,
     max: 30,
@@ -90,7 +90,7 @@ const INPUTS = [
     key: "investment",
     icon: Wallet,
     // Stored in thousands so the slider step stays readable; the model multiplies back up to dollars.
-    label: "Implementation budget",
+    label: "Est Implementation Cost",
     hint: "One-off build cost for the first production release",
     min: 10,
     max: 250,
@@ -217,19 +217,19 @@ export default function RoiCalculator() {
             AI ROI Calculator
           </p>
           <h2 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-inverse-fg md:text-5xl lg:text-6xl">
-            See What Automation Could{" "}
-            <span className="text-accent-vivid">Save You Each Year.</span>
+            Estimate the Annual Value of{" "}
+            <span className="text-accent-vivid">Workflow Automation</span>
           </h2>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-inverse-fg/70 md:text-xl">
-            Pick the workflow, match the sliders to your team, and the model updates live. Every
-            assumption behind the number is printed below it.
+            Select a workflow and adjust the inputs to reflect your team. Explore potential savings,
+            time recovered, and payback using the assumptions shown below.
           </p>
         </div>
 
         {/* Workflow selector */}
         <div className="mt-12">
           <p className="mb-4 text-center font-mono text-xs uppercase tracking-[0.18em] text-inverse-fg/45">
-            Which workflow are you automating?
+            Which workflow would you like to automate?
           </p>
           <div
             role="tablist"
@@ -349,7 +349,7 @@ export default function RoiCalculator() {
           <div className="flex flex-col rounded-[1.75rem] border border-accent-vivid/25 bg-gradient-to-br from-accent-vivid/10 via-inverse-card/60 to-brand/10 p-6 md:p-9">
             <div className="text-center">
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-inverse-fg/60 md:text-sm">
-                Estimated Net Annual Savings
+                Est Annual Savings After Running Costs
               </p>
 
               <AnimatedNumber
@@ -365,11 +365,11 @@ export default function RoiCalculator() {
             </div>
 
             <div className="mt-8 grid gap-3.5 sm:grid-cols-2">
-              <Metric icon={Clock} label="Hours recovered" footnote="per year, across the team">
+              <Metric icon={Clock} label="Est Hours Recovered" footnote="per year, across the team">
                 <AnimatedNumber value={model.recoveredHours} suffix=" h" />
               </Metric>
 
-              <Metric icon={CalendarCheck} label="Payback period" footnote="to earn the build back">
+              <Metric icon={CalendarCheck} label="Est Payback Period" footnote="to earn the build back">
                 {model.paybackMonths === null ? (
                   <span className="text-inverse-fg/50">Not in year 1</span>
                 ) : model.paybackMonths < 1 ? (
@@ -379,11 +379,11 @@ export default function RoiCalculator() {
                 )}
               </Metric>
 
-              <Metric icon={LineChart} label="3-year net value" footnote="net of build and run cost">
+              <Metric icon={LineChart} label="Est Three Year Net Value" footnote="net of build and run cost">
                 <AnimatedNumber value={model.threeYearNet} prefix="$" />
               </Metric>
 
-              <Metric icon={BadgeDollarSign} label="Return on investment" footnote="over three years">
+              <Metric icon={BadgeDollarSign} label="Est Three Year ROI" footnote="net return over build cost">
                 <AnimatedNumber value={model.roiMultiple} decimals={1} suffix="x" />
               </Metric>
             </div>
@@ -404,12 +404,18 @@ export default function RoiCalculator() {
               to="/contact"
               className="group mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-accent-vivid px-7 py-4 text-base font-semibold text-inverse transition-all hover:shadow-glow focus-ring"
             >
-              Get your custom roadmap
+              Get a Tailored Automation Assessment
               <ArrowUpRight
                 size={18}
                 className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />
             </Link>
+
+            <p className="mt-5 text-center text-xs leading-relaxed text-inverse-fg/50">
+              These estimates use the inputs and assumptions shown. Actual results depend on
+              implementation scope, adoption, operating costs, and the proportion of work
+              successfully automated.
+            </p>
           </div>
         </div>
       </motion.div>

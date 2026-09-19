@@ -41,51 +41,51 @@ const OPERATIONS = [
   {
     icon: FileSignature,
     step: "01",
-    title: "Scoping & NDA",
-    body: "We sign an NDA before you share anything sensitive, then run a 60-minute scoping call to pin down the problem, the data you already hold, and the success metric.",
+    title: "Discovery and Confidentiality",
+    body: "We clarify your goals and arrange an NDA before sensitive information is shared. A discovery discussion establishes scope, available data, and success measures.",
   },
   {
     icon: Users,
     step: "02",
-    title: "Team assembly",
-    body: "You get a named squad (an AI engineer, a full-stack developer and a delivery lead), not a rotating bench. The same people stay on the project through launch.",
+    title: "Project Team and Plan",
+    body: "We identify the skills your project needs and agree on responsibilities, milestones, and communication.",
   },
   {
     icon: Rocket,
     step: "03",
-    title: "Two-week sprints",
-    body: "Working software every fortnight in your own staging environment. Demos are recorded, so stakeholders who miss the call still see the progress.",
+    title: "Development and Progress Reviews",
+    body: "We work in agreed delivery cycles and share demonstrations so your team can review progress and provide feedback.",
   },
   {
     icon: Handshake,
     step: "04",
-    title: "Handover & support",
-    body: "Source code, infrastructure and documentation transfer to you at launch. Support and model retraining continue on a rolling monthly agreement.",
+    title: "Handover and Support",
+    body: "We provide the agreed deliverables, documentation, and training. Post-launch support and any continuing maintenance are defined in your project agreement.",
   },
 ];
 
 const DESKS = [
   {
-    title: "Info Queries",
-    body: "Questions about our services, projects or a new idea you want to explore.",
+    title: "General Enquiries",
+    body: "Ask about our services or share an idea you would like to explore.",
     email: "info@axiomra.co",
   },
   {
     title: "Careers",
-    body: "Want to join the team? Send us your portfolio and we will be in touch.",
+    body: "Interested in working with us? Send your CV and relevant portfolio for consideration.",
     email: "career@axiomra.co",
   },
   {
-    title: "Sales",
-    body: "Ready to start or scale an AI project? Let's talk scope, pricing and timelines.",
+    title: "Project Enquiries",
+    body: "Discuss your requirements, budget, and timeline with our team.",
     email: "sales@axiomra.co",
   },
 ];
 
 const TRUST_CHIPS = [
-  { icon: ShieldCheck, label: "NDA signed before you share anything" },
-  { icon: CalendarClock, label: "Reply within one business day" },
-  { icon: Briefcase, label: "No obligation, no sales script" },
+  { icon: ShieldCheck, label: "NDA Available Before Sharing Sensitive Information" },
+  { icon: CalendarClock, label: "We Aim to Reply Within One Business Day" },
+  { icon: Briefcase, label: "Free Initial Consultation" },
 ];
 
 /* Rotating band of delivered-project numbers shown above the contact form. */
@@ -252,7 +252,7 @@ function ContactForm() {
       transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
       className="relative rounded-[2rem] border border-white/40 bg-white/[0.14] p-7 shadow-[0_30px_90px_-25px_rgba(0,0,0,0.7)] backdrop-blur-2xl sm:p-10 lg:p-12"
     >
-      {/* Soft glow blobs that breathe inside the frosted card — set the panel
+      {/* Soft glow blobs that breathe inside the frosted card. They set the panel
           apart from the crisp white inputs without killing the blur. */}
       <span
         aria-hidden="true"
@@ -484,12 +484,12 @@ function DeliveredStats() {
 
 export default function ContactPage() {
   useEffect(() => {
-    document.title = "Contact Axiomra: Let's Build Something Remarkable";
+    document.title = "Contact Axiomra: Let's Discuss Your Next AI Project";
   }, []);
 
   return (
     <>
-      {/* Hero — COMMENTED OUT per request. The contact form now opens the page. */}
+      {/* Hero, COMMENTED OUT per request. The contact form now opens the page. */}
       {/*
       <section className="relative isolate overflow-hidden bg-inverse px-4 pb-24 pt-32 sm:px-6 md:pt-40">
         <NetworkBackground variant="orbit" className="opacity-90" />
@@ -510,13 +510,13 @@ export default function ContactPage() {
           </p>
 
           <h1 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-inverse-fg md:text-6xl lg:text-7xl">
-            Let&rsquo;s Build Something{" "}
-            <span className="text-accent-vivid">Remarkable.</span>
+            Let&rsquo;s Discuss Your{" "}
+            <span className="text-accent-vivid">Next AI Project</span>
           </h1>
 
           <p className="mx-auto mt-7 max-w-3xl text-lg leading-relaxed text-inverse-fg/75 md:text-xl">
-            Share the scope, the problem or the rough idea. We&rsquo;ll reply within one business
-            day with a clear next step, no sales script, no obligation.
+            Tell us about your goals, challenge, or initial idea. Our team will review your
+            enquiry and help identify the next step.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -549,8 +549,8 @@ export default function ContactPage() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="mb-12 text-center font-display text-4xl font-semibold leading-[1.1] tracking-tight text-inverse-fg md:text-6xl"
           >
-            Let&rsquo;s Build Something{" "}
-            <span className="text-accent-vivid">Remarkable.</span>
+            Let&rsquo;s Discuss Your{" "}
+            <span className="text-accent-vivid">Next AI Project</span>
           </motion.h1>
 
           <DeliveredStats />
@@ -581,10 +581,10 @@ export default function ContactPage() {
             eyebrow="How we operate"
             title={
               <>
-                What Happens <span className="text-accent">After You Hit Send</span>
+                What Happens <span className="text-accent">After You Contact Us</span>
               </>
             }
-            subtitle="No black box. Here is the exact sequence every Axiomra engagement runs through, from the first reply to the handover."
+            subtitle="Here is how we move from your initial enquiry to an agreed project and delivery plan."
           />
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -624,10 +624,10 @@ export default function ContactPage() {
             eyebrow="Direct lines"
             title={
               <>
-                <span className="text-accent">Connect</span> With Us
+                <span className="text-accent">Contact</span> the Right Team
               </>
             }
-            subtitle="Skip the general inbox and write straight to the desk that owns your question."
+            subtitle="Choose the contact below that best matches your enquiry."
           />
 
           <div className="grid gap-5 md:grid-cols-3">
@@ -657,9 +657,9 @@ export default function ContactPage() {
       </section>
 
       <GradientCTA
-        title="Stop Guessing And Start Growing With Your Trusted AI Development Partner"
-        subtitle="Book your complimentary AI Strategic Session, (worth $1000) just for free, and discover how tailored AI solutions can drive growth."
-        buttonText="Get Your Project Done!"
+        title="Find the Right AI Opportunity for Your Business"
+        subtitle="Book a free AI strategy session to discuss your goals, assess relevant use cases, and identify a practical next step."
+        buttonText="Book Your Free AI Strategy Session"
         dark
         three
       />

@@ -247,7 +247,7 @@ export default function CaseStudyRow({ study, index }) {
                 below the fold ends up anchored to a stale scroll offset. */}
             <img
               src={study.image}
-              alt={`${study.name} — ${study.title}`}
+              alt={`${study.name}: ${study.title}`}
               width={study.width}
               height={study.height}
               loading="lazy"

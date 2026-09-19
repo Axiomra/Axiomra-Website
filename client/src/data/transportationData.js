@@ -55,7 +55,7 @@ export const hero = {
   titleAccent: "Transportation Software Development",
   titleTail: "For Networks That Never Stop",
   body:
-    "Fleet telematics, route optimisation, freight visibility and mobility platforms — engineered for operations where a delayed load, an idling truck or a missed slot is measured in money the same day.",
+    "Fleet telematics, route optimisation, freight visibility and mobility platforms, engineered for operations where a delayed load, an idling truck or a missed slot is measured in money the same day.",
   ctaText: "Request a free consultation",
   image: heroImg,
   alt: "An aerial night view of a multi-level motorway interchange traced by traffic light trails",
@@ -66,7 +66,7 @@ export const intro = {
   titleLead: "Transportation Software That Moves Freight, Fleets",
   titleAccent: "And People With Less Waste",
   paragraphs: [
-    "Most transport operations do not lack data; they lack one place where telematics, TMS, ELD, WMS and customer systems agree on where a load actually is. We build that layer, then put the decisions on top of it — dispatch, routing, capacity, maintenance and ETA — so planners stop reconciling four screens before making a call.",
+    "Most transport operations do not lack data; they lack one place where telematics, TMS, ELD, WMS and customer systems agree on where a load actually is. We build that layer, then put the decisions on top of it: dispatch, routing, capacity, maintenance and ETA, so planners stop reconciling four screens before making a call.",
     "Every platform we ship is built against the constraints your network really runs on: driver hours, dock windows, cold-chain tolerances, tariffs and fuel. The result is software your dispatchers open at 5am because it is faster than the phone, not because a policy says they must.",
   ],
   ctaText: "Book a free transportation tech consultation",
@@ -81,22 +81,22 @@ export const impact = {
     "The pressure on transport networks is not theoretical: demand is rising faster than capacity, and the margin sits in the miles, minutes and empty space nobody currently measures. These are the numbers that frame most of the projects we are asked to build.",
   stats: [
     {
-      value: "$1.5T",
+      value: "$1.54T",
       label:
-        "of value digitalisation is projected to unlock for logistics operators through the next decade of connected, data-led networks.",
-      source: "World Economic Forum — Digital Transformation Initiative, Logistics",
+        "of value digitalisation is projected to add for logistics operators through the next decade of connected, data-led networks.",
+      source: "World Economic Forum, Digital Transformation Initiative, Logistics",
     },
     {
       value: "78%",
       label:
         "projected growth in last-mile delivery demand across the world's 100 largest cities by 2030.",
-      source: "World Economic Forum — The Future of the Last-Mile Ecosystem",
+      source: "World Economic Forum, The Future of the Last-Mile Ecosystem",
     },
     {
       value: "21%",
       label:
         "rise in urban congestion by 2030 if delivery growth is absorbed without smarter routing and consolidation.",
-      source: "World Economic Forum — The Future of the Last-Mile Ecosystem",
+      source: "World Economic Forum, The Future of the Last-Mile Ecosystem",
     },
   ],
 };
@@ -118,7 +118,7 @@ export const challenges = {
     {
       title: "Routes Planned On Yesterday's Map",
       body:
-        "Static routes ignore traffic, weather, dock congestion and driver hours, then blow up at 3pm. Our optimisation engines replan continuously against live conditions and real constraints — HOS, vehicle class, cold-chain windows, tolls — and hand the driver a sequence that survives the day.",
+        "Static routes ignore traffic, weather, dock congestion and driver hours, then blow up at 3pm. Our optimisation engines replan continuously against live conditions and real constraints (HOS, vehicle class, cold-chain windows, tolls) and hand the driver a sequence that survives the day.",
     },
     {
       title: "Empty Miles Nobody Prices",
@@ -138,7 +138,7 @@ export const challenges = {
     {
       title: "Customers Who Only Hear From You When It's Late",
       body:
-        "Shippers churn over visibility more than price. We build the customer-facing layer — predictive ETAs, exception alerts, proof of delivery, self-service booking — so your account team spends its day selling rather than reading tracking numbers down a phone line.",
+        "Shippers churn over visibility more than price. We build the customer-facing layer of predictive ETAs, exception alerts, proof of delivery and self-service booking, so your account team spends its day selling rather than reading tracking numbers down a phone line.",
     },
     {
       title: "Systems That Cannot Absorb Another Integration",
@@ -153,7 +153,7 @@ export const solutions = {
   titleLead: "Tailored Transportation Software Solutions",
   titleAccent: "For Every Part Of The Network",
   body:
-    "From a transport management system that finally reflects how your dispatchers work, to the rider app that has to load on a weak signal at a bus stop — these are the platforms operators ask us for most.",
+    "From a transport management system that finally reflects how your dispatchers work, to the rider app that has to load on a weak signal at a bus stop: these are the platforms operators ask us for most.",
   items: [
     {
       title: "Transport Management Systems (TMS)",
@@ -200,7 +200,7 @@ export const solutions = {
     {
       title: "Ride-Hailing & Taxi Dispatch",
       body:
-        "Matching, dispatch, surge, driver supply and payments built for the density you actually operate at. We handle the hard parts properly — dispatch latency, fair allocation, fraud, driver earnings transparency — because those are what decide retention on both sides of the market.",
+        "Matching, dispatch, surge, driver supply and payments built for the density you actually operate at. We handle the hard parts properly: dispatch latency, fair allocation, fraud and driver earnings transparency. Those are what decide retention on both sides of the market.",
       image: solTaxiImg,
       alt: "A yellow ride-hailing taxi seen from above on asphalt",
     },
@@ -232,7 +232,7 @@ export const services = {
     {
       title: "Custom Transportation Software Development",
       body:
-        "End-to-end delivery of the platform itself: domain model, services, integrations, interfaces and the release process behind them. We start with the workflow costing your team the most hours — usually planning or exception handling — ship it, and grow the system outward from something already in daily use.",
+        "End-to-end delivery of the platform itself: domain model, services, integrations, interfaces and the release process behind them. We start with the workflow costing your team the most hours, usually planning or exception handling, ship it, and grow the system outward from something already in daily use.",
       extra:
         "You get working software in weekly increments, with the first usable capability live long before the full scope lands. Nothing is built behind a curtain for a quarter and unveiled at the end, which is how transport projects usually miss a peak season.",
       points: [
@@ -290,7 +290,7 @@ export const services = {
       body:
         "Most operators do not start from nothing; they start from a TMS older than half the fleet. We wrap it in a stable API, move capability out module by module, and retire the original only once its replacement has run a full peak.",
       extra:
-        "The work is staged so every step is independently useful and independently reversible. If we stop halfway, you are still better off than when we started — the only honest way to modernise a system dispatch depends on.",
+        "The work is staged so every step is independently useful and independently reversible. If we stop halfway, you are still better off than when we started. That is the only honest way to modernise a system dispatch depends on.",
       points: [
         "Strangler-pattern migration behind a stable API, never a big-bang cutover",
         "Data migration with reconciliation reports your finance team can sign off",
@@ -341,7 +341,7 @@ export const benefits = {
     {
       title: "Deliver On Promises You Can Keep",
       body:
-        "Predictive ETAs built on your own historical performance — not a straight-line average — let you quote windows you hit, and flag the exceptions early enough that a customer hears from you first.",
+        "Predictive ETAs built on your own historical performance, not a straight-line average, let you quote windows you hit, and flag the exceptions early enough that a customer hears from you first.",
     },
     {
       title: "Keep Assets Earning",
@@ -460,8 +460,8 @@ export const businessTypes = {
 
 export const testimonials = {
   eyebrow: "Why is it worth working with us?",
-  titleLead: "Our Clients Trust Us For Top-Notch Transportation Solutions",
-  titleAccent: "And Exceptional Results",
+  titleLead: "What Fleet Operators Say",
+  titleAccent: "After Their First Release",
   items: [
     {
       name: "Abdullah",
@@ -558,7 +558,7 @@ export const blogs = {
 export const faqs = [
   {
     q: "What types of transportation software development do you offer?",
-    a: "Transport management systems, fleet management and telematics, freight forwarding and brokerage platforms, asset and container tracking, public transit and mobility platforms, vehicle sharing, ride-hailing dispatch, and terminal operations — plus the driver, rider and field apps that sit on top of them. Most engagements start with one of those and grow into the data layer underneath.",
+    a: "Transport management systems, fleet management and telematics, freight forwarding and brokerage platforms, asset and container tracking, public transit and mobility platforms, vehicle sharing, ride-hailing dispatch, and terminal operations, plus the driver, rider and field apps that sit on top of them. Most engagements start with one of those and grow into the data layer underneath.",
   },
   {
     q: "How does AI actually improve transportation and logistics software?",
@@ -590,7 +590,7 @@ export const faqs = [
   },
   {
     q: "How long does a transportation platform build take?",
-    a: "A scoped MVP with one capability — a dispatch board, a tracking portal, a driver app — typically runs eight to twelve weeks. A full platform spanning planning, visibility, maintenance and customer self-service runs four to nine months, delivered in weekly increments you can use from the first sprint.",
+    a: "A scoped MVP with one capability (a dispatch board, a tracking portal, a driver app) typically runs eight to twelve weeks. A full platform spanning planning, visibility, maintenance and customer self-service runs four to nine months, delivered in weekly increments you can use from the first sprint.",
   },
   {
     q: "Can you replace our legacy TMS without stopping operations?",
@@ -607,7 +607,7 @@ export const faqs = [
 ];
 
 export const finalCta = {
-  title: "Let's Build Your Custom AI Transportation Software Together",
+  title: "Tell Us What Your Fleet Needs To Run Better",
   subtitle:
     "Ready to cut empty miles, keep assets earning and give customers an ETA they trust? Talk to our transportation software engineers.",
   buttonText: "Get your project done!",

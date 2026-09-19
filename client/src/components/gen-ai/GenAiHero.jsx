@@ -123,13 +123,25 @@ export default function GenAiHero() {
             <dl className="flex flex-wrap gap-x-10 gap-y-4">
               {hero.stats.map((s) => (
                 <div key={s.label}>
-                  <dt className="sr-only">{s.label}</dt>
-                  <dd>
-                    <span className="block font-display text-2xl font-semibold text-white md:text-3xl">
-                      {s.value}
-                    </span>
-                    <span className="text-sm text-white/55">{s.label}</span>
-                  </dd>
+                  {s.value ? (
+                    <>
+                      <dt className="sr-only">{s.label}</dt>
+                      <dd>
+                        <span className="block font-display text-2xl font-semibold text-white md:text-3xl">
+                          {s.value}
+                        </span>
+                        <span className="text-sm text-white/55">{s.label}</span>
+                      </dd>
+                    </>
+                  ) : (
+                    /* No verified figure for this item, so the label carries it alone. */
+                    <>
+                      <dt className="sr-only">Capability</dt>
+                      <dd className="font-display text-xl font-semibold text-white md:text-2xl">
+                        {s.label}
+                      </dd>
+                    </>
+                  )}
                 </div>
               ))}
             </dl>

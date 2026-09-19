@@ -9,7 +9,6 @@ const tabs = {
   Cloud: ["AWS", "GCP", "Azure", "Docker", "Digital Ocean", "Nginx", "EC2"],
   DevOps: ["GitHub", "GitLab", "CI/CD", "Docker", "Gunicorn"],
   SQA: ["Cypress", "Postman", "Selenium", "Playwright", "JMeter", "Burpsuite"],
-  "UI/UX": ["Figma", "Canva", "Photoshop", "After Effects", "Illustrator"],
 };
 
 export default function TechStack() {

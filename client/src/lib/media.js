@@ -1,16 +1,18 @@
 /** Remote imagery used across the marketing sections. */
-import healthaiImg from "../assets/box/healthai.webp";
-import eductionaiImg from "../assets/box/eductionai.webp";
-import fashionImg from "../assets/box/fashion.jpeg";
-import realestateImg from "../assets/box/realestate.jpeg";
-import sportImg from "../assets/box/sport ai.jpeg";
-import retailImg from "../assets/box/retail.jpeg";
-import transportationImg from "../assets/box/transportation-and-AI.webp";
-import supplyChainImg from "../assets/box/supply chain.jpeg";
-import financeImg from "../assets/box/finance.jpeg";
-import insuranceImg from "../assets/box/insurance.jpeg";
-import legalImg from "../assets/box/legal .jpeg";
-import marketingImg from "../assets/box/marketing ai.jpeg";
+// The industry panel is full-bleed, so it pulls the 1920px industry photos
+// rather than the small /box thumbnails, which visibly smeared when stretched.
+import healthaiImg from "../assets/industries/healthcare.webp";
+import eductionaiImg from "../assets/industries/education.webp";
+import fashionImg from "../assets/industries/fashion.webp";
+import realestateImg from "../assets/industries/real-estate.webp";
+import sportImg from "../assets/industries/sports.webp";
+import retailImg from "../assets/industries/retail.webp";
+import transportationImg from "../assets/industries/transportation.webp";
+import supplyChainImg from "../assets/industries/supply-chain.webp";
+import financeImg from "../assets/industries/finance.webp";
+import insuranceImg from "../assets/industries/insurance.webp";
+import legalImg from "../assets/industries/legal.webp";
+import marketingImg from "../assets/industries/marketing.webp";
 
 const unsplash = (id, w = 900) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;

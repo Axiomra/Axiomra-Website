@@ -78,25 +78,25 @@ export const impact = {
   titleLead: "The Role Of AI In",
   titleAccent: "Modern Insurance Operations",
   body:
-    "Insurance was always a data business; what changed is that the data now arrives faster than a manual process can read it. Telematics, imagery, medical records and open claims feeds only pay back when something can act on them in the moment — which is what AI insurance software development services are actually for.",
+    "Insurance was always a data business; what changed is that the data now arrives faster than a manual process can read it. Telematics, imagery, medical records and open claims feeds only pay back when something can act on them in the moment, which is what AI insurance software development services are actually for.",
   stats: [
     {
       value: "34%",
       label:
-        "of an average insurer's operating cost sits in underwriting, claims handling and policy servicing — the three processes automation reaches first.",
-      source: "McKinsey — Insurance Productivity Benchmark",
+        "of an average insurer's operating cost sits in underwriting, claims handling and policy servicing, the three processes automation reaches first.",
+      source: "McKinsey, Insurance Productivity Benchmark",
     },
     {
       value: "84%",
       label:
         "of carriers name claims automation and fraud analytics as their highest-priority AI investments for the next two years.",
-      source: "Deloitte — Global Insurance Outlook",
+      source: "Deloitte, Global Insurance Outlook",
     },
     {
       value: "7%",
       label:
         "of gross written premium is lost to claims leakage and undetected fraud across a typical general insurance book.",
-      source: "Insurance Europe — Fraud & Leakage Estimates",
+      source: "Insurance Europe, Fraud & Leakage Estimates",
     },
   ],
 };
@@ -129,7 +129,7 @@ export const challenges = {
     {
       title: "Fraud detection that only catches yesterday's pattern",
       body:
-        "A static rule set flags the schemes it was written for and floods the SIU with false positives on everything else. We deploy network and behavioural models that score a claim against the claimant, the repairer, the medical provider and the ring behind them — then feed every investigator decision back into the model, so the hit rate rises instead of the queue.",
+        "A static rule set flags the schemes it was written for and floods the SIU with false positives on everything else. We deploy network and behavioural models that score a claim against the claimant, the repairer, the medical provider and the ring behind them, then feed every investigator decision back into the model, so the hit rate rises instead of the queue.",
     },
     {
       title: "Underwriting bottlenecked on manual review",
@@ -154,7 +154,7 @@ export const challenges = {
     {
       title: "Customer service running on hold music",
       body:
-        "Most policyholder contact is status chasing that nobody enjoys on either end. We build assistants grounded in the policy wording and the live claim record — so they answer from the schedule rather than a guess, and escalate the moment the question turns into advice.",
+        "Most policyholder contact is status chasing that nobody enjoys on either end. We build assistants grounded in the policy wording and the live claim record, so they answer from the schedule rather than a guess, and escalate the moment the question turns into advice.",
     },
   ],
 };
@@ -189,7 +189,7 @@ export const valueChain = {
     {
       title: "Policy Administration & Servicing",
       body:
-        "Configuration-driven products, endorsements and renewals sitting over your system of record, with an event layer that keeps every downstream service — billing, documents, reporting — in step without a nightly batch.",
+        "Configuration-driven products, endorsements and renewals sitting over your system of record, with an event layer that keeps every downstream service (billing, documents, reporting) in step without a nightly batch.",
       metric: "New product without a core release",
       image: chainPolicyImg,
       alt: "Organised policy documentation in a modern office",
@@ -241,7 +241,7 @@ export const midCta = {
   eyebrow: "Ready to level up?",
   title: "Settle Faster, Price Sharper, Explain Everything",
   body:
-    "Bring us the process that costs you the most — the claims backlog, the referral queue, the submission mailbox — and we will scope what automation realistically moves, and what it will not. No pilot theatre.",
+    "Bring us the process that costs you the most, whether that is the claims backlog, the referral queue or the submission mailbox, and we will scope what automation realistically moves, and what it will not. No pilot theatre.",
   ctaText: "Get in touch",
   background: midCtaBgImg,
 };
@@ -260,7 +260,7 @@ export const solutions = {
     {
       title: "AI Consulting & Insurance Automation Strategy",
       body:
-        "We map the policy lifecycle against where your cost and leakage actually sit, then rank the automation candidates by return rather than by how demonstrable they are. Expect us to name the processes that are not worth automating yet — usually the ones with the prettiest demos.",
+        "We map the policy lifecycle against where your cost and leakage actually sit, then rank the automation candidates by return rather than by how demonstrable they are. Expect us to name the processes that are not worth automating yet, usually the ones with the prettiest demos.",
       image: solConsultingImg,
       alt: "Consultants mapping an insurance process on a whiteboard",
     },
@@ -324,7 +324,7 @@ export const stakeholders = {
     {
       title: "Insurtech Founders",
       body:
-        "A compliant ledger, a rating service and the reporting a regulator asks for on day one — built to survive the first capacity partner's due diligence.",
+        "A compliant ledger, a rating service and the reporting a regulator asks for on day one, built to survive the first capacity partner's due diligence.",
       image: stkFounderImg,
       alt: "An insurtech founder in a modern workspace",
     },
@@ -454,7 +454,7 @@ export const build = {
   // degrades to an ordinary right-aligned image.
   paragraphs: [
     "One session, your process map, and an honest read on what automation moves and what it does not. We will leave you with a sequenced plan whether or not you build it with us.",
-    "Bring the parts that hurt — the claims your adjusters argue about, the submissions that sit unread for a week, the renewals priced on instinct. We trace where the data already lives, where it is missing, and which decisions a model should be allowed near.",
+    "Bring the parts that hurt: the claims your adjusters argue about, the submissions that sit unread for a week, the renewals priced on instinct. We trace where the data already lives, where it is missing, and which decisions a model should be allowed near.",
     "No slide deck at the end of it. A sequenced plan, a cost range, and a plain list of the things we would leave to your people.",
   ],
   ctaText: "Hire insurance software developers",
@@ -537,15 +537,15 @@ export const businessTypes = {
     },
     {
       label: "Global insurers and reinsurers",
-      body: "We partner on governed data layers, core integration and AI systems that clear security, model risk and procurement before they ever reach production — and keep clearing them afterwards.",
+      body: "We partner on governed data layers, core integration and AI systems that clear security, model risk and procurement before they ever reach production, and keep clearing them afterwards.",
     },
   ],
 };
 
 export const testimonials = {
   eyebrow: "Why is it worth working with us?",
-  titleLead: "Our Clients Trust Us For Top-Notch AI Solutions",
-  titleAccent: "And Exceptional Results",
+  titleLead: "Why Insurers Keep Working With Us",
+  titleAccent: "In Their Own Words",
   items: [
     {
       name: "Abdullah",
@@ -576,7 +576,7 @@ export const showcase = {
   titleLead: "Showcasing Our",
   titleAccent: "AI Development Projects",
   body:
-    "Discover our portfolio showcasing our expertise as an AI development company, delivering state-of-the-art solutions to address complex operational challenges.",
+    "Work delivered for insurers, MGAs and brokers, with the number each build had to move.",
   ctaText: "Check out our full portfolio",
 };
 
@@ -589,7 +589,7 @@ export const partner = {
       icon: "Target",
       title: "We solve problems, not ship features",
       body:
-        "Every system is scoped against a number it has to move — cycle time, leakage, loss ratio, straight-through rate. If a piece of work cannot name its number, we will tell you rather than build it.",
+        "Every system is scoped against a number it has to move: cycle time, leakage, loss ratio, straight-through rate. If a piece of work cannot name its number, we will tell you rather than build it.",
     },
     {
       icon: "Layers",
@@ -666,7 +666,7 @@ export const faqs = [
   },
   {
     q: "How long before an insurance AI project shows a measurable result?",
-    a: "A scoped claims-triage or submission-ingestion build usually shows a measurable movement within one to two quarters, because both have a clean baseline to compare against. Pricing and portfolio work takes longer to prove — the feedback loop is the experience period, and no amount of engineering shortens that.",
+    a: "A scoped claims-triage or submission-ingestion build usually shows a measurable movement within one to two quarters, because both have a clean baseline to compare against. Pricing and portfolio work takes longer to prove, because the feedback loop is the experience period, and no amount of engineering shortens that.",
   },
   {
     q: "Can you work alongside our existing vendors and internal team?",
@@ -674,7 +674,7 @@ export const faqs = [
   },
   {
     q: "How much does custom insurance software development cost?",
-    a: "It depends on the line of business, the regulatory surface and the state of your data — the last one moves the number more than anything else. A scoped pilot is the fastest route to a real figure. Book a free session and we will size it honestly, including the parts we would not build.",
+    a: "It depends on the line of business, the regulatory surface and the state of your data. The last one moves the number more than anything else. A scoped pilot is the fastest route to a real figure. Book a free session and we will size it honestly, including the parts we would not build.",
   },
 ];
 

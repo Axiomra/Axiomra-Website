@@ -2,13 +2,13 @@
    A small, composable set of classes for frosted panels. Four layers make a
    pane read as glass rather than as a translucent box:
 
-     1. the refraction   — backdrop-filter blur + saturate, so whatever sits
+     1. the refraction:   backdrop-filter blur + saturate, so whatever sits
                            behind is bent and enriched, not just dimmed;
-     2. the body tint    — a directional gradient, lighter at the top-left,
+     2. the body tint:    a directional gradient, lighter at the top-left,
                            which is where a pane of glass catches a room;
-     3. the rim          — a 1px gradient edge, bright on the lit side and
+     3. the rim:          a 1px gradient edge, bright on the lit side and
                            nearly gone on the shadowed one;
-     4. the specular     — a slow travelling sheen, the part that makes it
+     4. the specular:     a slow travelling sheen, the part that makes it
                            feel liquid instead of frozen.
 
    Every class is theme-aware through the `.dark` variables below, and each
@@ -161,7 +161,7 @@
 
    The sweep sits at z-index -1 inside an isolated host, which puts it above
    the pane's own tint but below its content. Sitting it at z-index 0 instead
-   would paint it in the positioned-descendant layer — above any bare text
+   would paint it in the positioned-descendant layer, above any bare text
    node in the pane, which would then be read through the sheen. */
 .lg-sheen {
   position: relative;
@@ -211,7 +211,7 @@
 /* ── The rim wrapper ────────────────────────────────────────────────────── */
 
 /* `.lg`'s rim comes from inset shadows, which follow the border box. Once a
-   pane is clipped — and this page clips nearly everything — those shadows are
+   pane is clipped (and this page clips nearly everything), those shadows are
    drawn under the pane's own tint and go soft. This wrapper paints the rim on
    top instead, as a 1px gradient ring, so a clipped pane keeps a crisp lit
    edge along every axis-aligned side of the cut shape.

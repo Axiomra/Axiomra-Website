@@ -18,7 +18,7 @@ const FORMAT_BUTTONS = [
  *   take Enter as a newline and save with Cmd/Ctrl+Enter instead.
  * - Only fires onSave when the value actually changed, so tabbing across a row
  *   does not issue a PATCH per column.
- * - The textarea grows to fit its content — "adjustable text boxes" is the
+ * - The textarea grows to fit its content, since "adjustable text boxes" is the
  *   point; a fixed 1-line box hides most of a message.
  * - `value` is re-synced from props when the row is not being edited, so an
  *   optimistic update that the server rejects visibly snaps back.
@@ -27,7 +27,7 @@ export default function EditableCell({
   value,
   onSave,
   multiline = false,
-  placeholder = "—",
+  placeholder = "-",
   type = "text",
   align = "left",
   className = "",
@@ -189,7 +189,7 @@ export default function EditableCell({
   );
 
   // A formatted value contains block-level nodes (bullet rows), which a
-  // <button> may not legally hold — so that variant is a div with the button
+  // <button> may not legally hold, so that variant is a div with the button
   // role and keyboard handling wired up by hand.
   if (formatting && !empty) {
     return (

@@ -2,7 +2,7 @@ import { frameworkBar } from "../../data/nlpData";
 
 /** The trust strip directly under the hero. */
 export default function NlpTechBar() {
-  // Rendered twice so the -50% keyframe loops seamlessly.
+  // Rendered twice so the -50% keyframe loops with no visible join.
   const track = [...frameworkBar.items, ...frameworkBar.items];
 
   return (

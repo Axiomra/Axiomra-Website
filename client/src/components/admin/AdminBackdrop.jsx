@@ -6,7 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
  *
  * The smoke is three elongated, heavily blurred ellipses on long offset
  * cycles, plus one static fractal-noise layer for grain. Turbulence is only
- * rasterised once — animating an SVG filter would re-run it every frame right
+ * rasterised once; animating an SVG filter would re-run it every frame right
  * above a data table that already re-renders on every keystroke. Everything
  * that moves here moves on transform and opacity, so it stays on the
  * compositor.
@@ -44,13 +44,13 @@ export default function AdminBackdrop() {
         className="absolute -right-32 -top-24 h-[30rem] w-[30rem] rounded-full opacity-[0.28] blur-[100px]"
         style={{ background: "radial-gradient(circle, #788BE3 0%, transparent 68%)" }}
       />
-      {/* Violet, centre — the colour the dark theme is built around. */}
+      {/* Violet, centre: the colour the dark theme is built around. */}
       <motion.div
         {...drift(50, -20, 1.12, 32)}
         className="absolute -bottom-40 left-1/4 h-[28rem] w-[28rem] rounded-full opacity-[0.22] blur-[110px]"
         style={{ background: "radial-gradient(circle, #8B5CF6 0%, transparent 70%)" }}
       />
-      {/* Gold, low and small — an accent, not a third light source. */}
+      {/* Gold, low and small: an accent, not a third light source. */}
       <motion.div
         {...drift(40, -26, 1.16)}
         className="absolute -bottom-28 left-2/3 h-64 w-64 rounded-full opacity-[0.16] blur-[80px]"

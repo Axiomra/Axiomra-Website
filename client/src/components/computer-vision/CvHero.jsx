@@ -172,13 +172,25 @@ export default function CvHero() {
         >
           {hero.stats.map((s) => (
             <div key={s.label} className="px-6 py-7 text-center">
-              <dt className="sr-only">{s.label}</dt>
-              <dd>
-                <span className="block font-display text-3xl font-semibold text-white md:text-4xl">
-                  {s.value}
-                </span>
-                <span className="mt-1 block text-sm text-white/55 md:text-base">{s.label}</span>
-              </dd>
+              {/* Entries without a `value` are capability labels, not statistics. */}
+              {s.value ? (
+                <>
+                  <dt className="sr-only">{s.label}</dt>
+                  <dd>
+                    <span className="block font-display text-3xl font-semibold text-white md:text-4xl">
+                      {s.value}
+                    </span>
+                    <span className="mt-1 block text-sm text-white/55 md:text-base">{s.label}</span>
+                  </dd>
+                </>
+              ) : (
+                <>
+                  <dt className="sr-only">Capability</dt>
+                  <dd className="font-display text-lg font-semibold text-white md:text-xl">
+                    {s.label}
+                  </dd>
+                </>
+              )}
             </div>
           ))}
         </motion.dl>

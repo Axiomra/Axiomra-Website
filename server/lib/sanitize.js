@@ -9,7 +9,7 @@
  *    stripped everywhere.
  *
  * 2. Stored XSS. React escapes text nodes, so a `<script>` in a lead's remarks
- *    is inert in the panel — but the same field is also rendered into a
+ *    is inert in the panel, but the same field is also rendered into a
  *    notification email as HTML, and may be exported to CSV and opened in a
  *    spreadsheet. Tags are stripped on write rather than trusting every
  *    downstream consumer to escape.

@@ -65,7 +65,7 @@ const ENDPOINTS = [
 ];
 
 // A deployed backend answers to anyone who knows its URL, and the client
-// bundle inlines that URL at build time — so treat every deployment as public.
+// bundle inlines that URL at build time, so treat every deployment as public.
 function isPublicDeployment() {
   return process.env.NODE_ENV === "production" || Boolean(process.env.VERCEL);
 }
@@ -134,7 +134,7 @@ export function renderStatusPage() {
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
-<title>Axiomra API — Operational</title>
+<title>Axiomra API Status</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 <style>
   :root {
@@ -307,13 +307,13 @@ export function renderStatusPage() {
 
   <h1>Axiomra <span class="grad">API</span></h1>
   <p class="lede">
-    Backend service for the Axiomra website — contact intake, lead persistence and
+    Backend service for the Axiomra website: contact intake, lead persistence and
     team notifications. This page is the service itself reporting on its own health;
     the public site lives on a separate origin.
   </p>
 
   <section class="cards">
-    ${statCard("Uptime", "—", "since " + new Date(Date.now() - s.uptimeMs).toUTCString(), "up")}
+    ${statCard("Uptime", "-", "since " + new Date(Date.now() - s.uptimeMs).toUTCString(), "up")}
     ${statCard("Database", s.database.state, s.database.host ? "MongoDB · " + s.database.host : "MongoDB Atlas", s.database.tone)}
     ${statCard("Mail transport", s.mailer.state, "Gmail SMTP", s.mailer.tone)}
     ${statCard("Environment", s.environment, s.platform, null)}

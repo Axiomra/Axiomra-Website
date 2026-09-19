@@ -6,17 +6,17 @@ import { makeDotTexture } from "../lib/dotTexture";
 /*
  * Backdrop for the Legal hero. Five ideas, one scene:
  *
- *   Floor      — a plane of points carrying a slow swell, the ruled paper a
+ *   Floor:       a plane of points carrying a slow swell, the ruled paper a
  *                case is written on, seen in perspective.
- *   Colonnade  — one instanced mesh of columns standing in two ranks, each
+ *   Colonnade:   one instanced mesh of columns standing in two ranks, each
  *                breathing on its own phase so the row reads as depth rather
  *                than as a bar chart.
- *   Scale      — a balance: a beam rocking about its pivot with a pan hung at
+ *   Scale:       a balance: a beam rocking about its pivot with a pan hung at
  *                each end, the whole thing settling toward level and never
  *                quite arriving.
- *   Documents  — thin instanced planes drifting up through the volume, turning
+ *   Documents:   thin instanced planes drifting up through the volume, turning
  *                edge-on as they rise, like paper caught in a draught.
- *   Seal       — a tilted torus, to give the composition an axis.
+ *   Seal:        a tilted torus, to give the composition an axis.
  *
  * Decorative and cheap: geometry allocated once and mutated in place, two
  * instanced meshes, no lights, and nothing allocated inside the frame loop.
@@ -133,7 +133,7 @@ function Colonnade() {
 
 /**
  * The balance. The beam rocks about its pivot on a decaying swing, and each
- * pan hangs plumb from its own end — the pan groups counter-rotate by exactly
+ * pan hangs plumb from its own end: the pan groups counter-rotate by exactly
  * the beam's angle, which is what keeps them level as the beam tilts.
  */
 function Scale() {

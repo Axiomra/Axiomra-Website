@@ -6,11 +6,11 @@ import { makeDotTexture } from "../lib/dotTexture";
 /*
  * Backdrop for the Marketing hero. Three ideas, one scene:
  *
- *   Reach   — a point field displaced by radial waves, so signal appears to
+ *   Reach:    a point field displaced by radial waves, so signal appears to
  *             broadcast outward from a single origin.
- *   Signal  — a row of instanced bars that rise and fall like a live campaign
+ *   Signal:   a row of instanced bars that rise and fall like a live campaign
  *             readout, drawn from the same waveform as the field.
- *   Orbit   — one thin ring, tilted, to give the composition an axis.
+ *   Orbit:    one thin ring, tilted, to give the composition an axis.
  *
  * Decorative and cheap: one shared geometry mutated in place, one instanced
  * mesh, no lights, and nothing allocated inside the frame loop.

@@ -8,7 +8,7 @@ import { build } from "../../../data/insuranceData";
  *
  * The shield floats right carrying a photograph, and the copy wraps along its
  * exact silhouette: `.ins-shape-shield` sets `shape-outside` and `clip-path` to
- * the same polygon, which is the whole trick — the painted edge and the wrap
+ * the same polygon, which is the whole trick: the painted edge and the wrap
  * boundary are literally the same coordinates, so the text follows the shape
  * rather than its bounding box, with `shape-margin` holding them apart.
  *

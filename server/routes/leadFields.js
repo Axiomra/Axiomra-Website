@@ -44,7 +44,7 @@ async function uniqueKey(base) {
   return "";
 }
 
-/* GET /api/lead-fields — every custom column, in display order. */
+/* GET /api/lead-fields: every custom column, in display order. */
 router.get("/", async (req, res) => {
   try {
     const items = await LeadField.find().sort({ order: 1, createdAt: 1 }).lean();
@@ -55,7 +55,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-/* POST /api/lead-fields — add a column. */
+/* POST /api/lead-fields: add a column. */
 router.post("/", async (req, res) => {
   try {
     const label = cleanString(req.body?.label, 40);
@@ -91,7 +91,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-/* PATCH /api/lead-fields/:id — rename or resize. The key never changes. */
+/* PATCH /api/lead-fields/:id: rename or resize. The key never changes. */
 router.patch("/:id", async (req, res) => {
   if (!isValidId(req.params.id)) return res.status(400).json({ error: "Invalid column id." });
 
@@ -129,7 +129,7 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-/* DELETE /api/lead-fields/:id — drops the column and every value in it. */
+/* DELETE /api/lead-fields/:id: drops the column and every value in it. */
 router.delete("/:id", async (req, res) => {
   if (!isValidId(req.params.id)) return res.status(400).json({ error: "Invalid column id." });
   try {

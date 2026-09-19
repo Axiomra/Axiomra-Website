@@ -7,7 +7,7 @@ import mongoose from "mongoose";
  *
  * Deliberately bound to the existing `contacts` collection. This model
  * replaced models/Contact.js, and every submission taken before the lead
- * panel existed has to keep showing up in it — a fresh `leads` collection
+ * panel existed has to keep showing up in it; a fresh `leads` collection
  * would have orphaned all of them.
  */
 

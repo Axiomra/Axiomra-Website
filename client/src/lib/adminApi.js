@@ -4,7 +4,7 @@
  * Every call sends `credentials: "include"` because the session is an httpOnly
  * cookie. That is the whole point of the design: this file cannot read the
  * token, so nothing injected into the page can steal it either. It also means
- * there is no token to attach by hand — the browser does it.
+ * there is no token to attach by hand; the browser does it.
  */
 
 const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/+$/, "");

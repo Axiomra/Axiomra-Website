@@ -28,7 +28,7 @@ async function main() {
     .toArray();
 
   if (!stale.length) {
-    console.log("\n  Nothing to migrate — every lead already has a progress stage.\n");
+    console.log("\n  Nothing to migrate; every lead already has a progress stage.\n");
     return;
   }
 

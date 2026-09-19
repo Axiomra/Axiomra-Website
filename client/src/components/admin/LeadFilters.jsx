@@ -162,7 +162,7 @@ export default function LeadFilters({ filters, onChange, open, services, activeC
                     className={inputClass}
                   />
                   <span className="text-content-faint" aria-hidden="true">
-                    –
+                    -
                   </span>
                   <input
                     type="date"
@@ -187,7 +187,7 @@ export default function LeadFilters({ filters, onChange, open, services, activeC
                     className={inputClass}
                   />
                   <span className="text-content-faint" aria-hidden="true">
-                    –
+                    -
                   </span>
                   <input
                     type="number"
@@ -204,7 +204,7 @@ export default function LeadFilters({ filters, onChange, open, services, activeC
                     Saying so beats a count that quietly disagrees with the
                     total underneath it. */}
                 <p className="mt-1.5 text-[11px] leading-snug text-content-faint">
-                  Applied to the current page only — budgets are free text.
+                  Applied to the current page only, since budgets are free text.
                 </p>
               </div>
             </div>

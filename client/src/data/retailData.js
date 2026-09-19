@@ -46,7 +46,7 @@ export const intro = {
   titleLead: "AI Retail Software Development For",
   titleAccent: "Every Channel You Sell Through",
   paragraphs: [
-    "We work as the engineering partner behind data-driven retail operations: a modular, cloud-native platform that fuses demand sensing, inventory optimisation, workforce intelligence and unified commerce. It goes straight at the things that quietly erode loyalty and margin — supply chain disruption, mismanaged inventory, understaffed shifts and channels that never quite agree with each other.",
+    "We work as the engineering partner behind data-driven retail operations: a modular, cloud-native platform that fuses demand sensing, inventory optimisation, workforce intelligence and unified commerce. It goes straight at the things that quietly erode loyalty and margin: supply chain disruption, mismanaged inventory, understaffed shifts and channels that never quite agree with each other.",
     "From grocery to fashion, big-box to DTC, we help retailers under real cost pressure automate low-value work, accelerate replenishment and pricing decisions, and modernise without ripping out the systems that already run the business. Accelerators, change management and training come with the build, so the digital transformation lag closes in weeks rather than quarters.",
   ],
   image: introImg,
@@ -66,17 +66,17 @@ export const impact = {
     {
       value: "89%",
       label: "of retailers are using or assessing AI across their operations, signalling mainstream adoption.",
-      source: "NVIDIA — State of AI in Retail and CPG, 2025",
+      source: "NVIDIA, State of AI in Retail and CPG, 2025",
     },
     {
-      value: "$14B",
+      value: "$14.2B",
       label: "global AI-in-retail market size in 2025, projected to compound at 23% through 2030.",
-      source: "Grand View Research — AI in Retail, 2025-2030",
+      source: "Grand View Research, AI in Retail, 2025-2030",
     },
     {
       value: "51%",
       label: "of global shoppers now use AI for price comparison, reshaping discovery and value shopping.",
-      source: "Forbes — How AI Is Reshaping Retail, 2025",
+      source: "Forbes, How AI Is Reshaping Retail, 2025",
     },
   ],
 };
@@ -86,7 +86,7 @@ export const challenges = {
   titleLead: "The Problems We",
   titleAccent: "Engineer Away",
   body:
-    "Every retailer we meet is losing money in the same six places. None of them are solved by a dashboard — they are solved by models wired into the systems that already take the decisions.",
+    "Every retailer we meet is losing money in the same six places. None of them are solved by a dashboard. They are solved by models wired into the systems that already take the decisions.",
   items: [
     {
       icon: "PackageX",
@@ -137,7 +137,7 @@ export const services = {
     {
       title: "Retail Operations and Analytics",
       body:
-        "Streamline operations and take smarter decisions with AI-driven retail platforms. Real-time visibility across inventory, supply and production, so cost, stockouts and idle capital all come down together.",
+        "Simplify operations and take smarter decisions with AI-driven retail platforms. Real-time visibility across inventory, supply and production, so cost, stockouts and idle capital all come down together.",
       image: svcOperationsImg,
       alt: "A long supermarket aisle stocked with packaged goods on both sides",
       points: [
@@ -230,7 +230,7 @@ export const services = {
 export const appTypes = {
   eyebrow: "What retail apps do we specialise in?",
   titleLead: "We Develop Custom AI-Powered Retail Software",
-  titleAccent: "Using Cutting-Edge Technology",
+  titleAccent: "Using Proven Technology",
   items: [
     {
       id: "order",
@@ -287,7 +287,7 @@ export const technologies = {
     {
       title: "Artificial Intelligence",
       body:
-        "AI powers smarter decisioning and streamlined operations — optimising inventory, pricing and service quality across the estate rather than one store at a time.",
+        "AI powers smarter decisioning and tighter operations, optimising inventory, pricing and service quality across the estate rather than one store at a time.",
     },
     {
       title: "Data Analytics",
@@ -315,7 +315,7 @@ export const technologies = {
 export const solutions = {
   eyebrow: "What can custom retail software optimise for you?",
   titleLead: "Explore AI-Powered Retail Solutions",
-  titleAccent: "For Streamlining Retail Operations",
+  titleAccent: "For Simplifying Retail Operations",
   texture: textureBgImg,
   items: [
     {
@@ -331,7 +331,7 @@ export const solutions = {
     {
       title: "Enhanced customer engagement",
       body:
-        "Tailored suggestions, smarter search, responsive assistants and loyalty programmes that adapt — engagement that keeps shoppers coming back to you, not the marketplace.",
+        "Tailored suggestions, smarter search, responsive assistants and loyalty programmes that adapt. Engagement that keeps shoppers coming back to you, not the marketplace.",
     },
     {
       title: "Mitigated fraud and risk",
@@ -339,7 +339,7 @@ export const solutions = {
         "Models detect suspicious patterns and anomalies across transactions and returns, protecting margin while keeping legitimate customers out of the friction.",
     },
     {
-      title: "Streamlined supply chain",
+      title: "A tighter supply chain",
       body:
         "AI refines supplier planning, forecasts delivery timelines and optimises replenishment schedules, cutting cost and preventing the delays customers actually notice.",
     },
@@ -352,16 +352,16 @@ export const solutions = {
 };
 
 export const midCta = {
-  title: "Transform Your Retail Game with AI",
+  title: "Rebuild Your Retail Operation with AI",
   body:
-    "Tell us the number that hurts — shrink, stockouts, return rate, conversion — and we will come back with the system, the timeline and the metric it has to hit.",
+    "Tell us the number that hurts, whether that is shrink, stockouts, return rate or conversion, and we will come back with the system, the timeline and the metric it has to hit.",
   buttonText: "Get in Touch Now",
   background: midCtaBgImg,
 };
 
 export const stakeholders = {
-  eyebrow: "Who benefits from our expertise?",
-  titleLead: "Empowering Every",
+  eyebrow: "Who this is built for",
+  titleLead: "Every",
   titleAccent: "Stakeholder in Retail",
   items: [
     {
@@ -395,10 +395,10 @@ export const blogs = {
   eyebrow: "What can our expertise teach you?",
   title: "Insights on AI and Retail Innovation",
   body:
-    "What we have learned shipping retail AI into live estates — written for the people who have to run the store on Monday.",
+    "What we have learned shipping retail AI into live estates, written for the people who have to run the store on Monday.",
   posts: [
     {
-      title: "How to leverage AI for beauty and cosmetics e-commerce",
+      title: "How to use AI for beauty and cosmetics e-commerce",
       excerpt:
         "Shade matching, virtual try-on and review mining: where AI moves conversion in a category built on trust.",
       image: blog1Img,
@@ -409,7 +409,7 @@ export const blogs = {
     {
       title: "Retail conversational AI: five must-know secrets for amazing CX",
       excerpt:
-        "What separates an assistant shoppers use from one they abandon — grounding, escalation and knowing when to stop talking.",
+        "What separates an assistant shoppers use from one they abandon: grounding, escalation and knowing when to stop talking.",
       image: blog2Img,
       alt: "A monitoring screen displaying conversion and quality score metrics",
       tag: "Customer experience",
@@ -559,7 +559,7 @@ export const partner = {
   cards: [
     {
       icon: "Layers",
-      title: "Comprehensive commerce development",
+      title: "Commerce development",
       body: "End-to-end retail and e-commerce delivery: architecture, UX, back end, front end, QA and the support that follows the launch.",
     },
     {
@@ -570,7 +570,7 @@ export const partner = {
     {
       icon: "Target",
       title: "Judged on your metric",
-      body: "We agree the number that defines success before we start — shrink, availability, conversion — and report against it every week.",
+      body: "We agree the number that defines success before we start, be it shrink, availability or conversion, and report against it every week.",
     },
   ],
   stats: [
@@ -592,7 +592,7 @@ export const faqs = [
   },
   {
     q: "What types of data do retailers typically collect, and how can it be used?",
-    a: "Transactions, basket composition, loyalty and CRM records, web and app behaviour, stock movements, supplier lead times, labour rosters, footfall and increasingly video. Used together they support demand forecasting, elasticity-based pricing, personalisation, shrink detection and labour planning — the same data serving several models rather than one report each.",
+    a: "Transactions, basket composition, loyalty and CRM records, web and app behaviour, stock movements, supplier lead times, labour rosters, footfall and increasingly video. Used together they support demand forecasting, elasticity-based pricing, personalisation, shrink detection and labour planning, with the same data serving several models rather than one report each.",
   },
   {
     q: "What challenges do retailers face in data engineering?",

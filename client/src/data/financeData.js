@@ -57,7 +57,7 @@ export const hero = {
   titleAccent: "AI Financial Software Development",
   titleTail: "Services",
   body:
-    "We build secure, scalable financial systems that streamline operations and accelerate performance. Our AI financial software development services help banks, fintechs and financial enterprises overcome inefficiencies, compliance bottlenecks and manual risk processes through intelligent automation and predictive analytics, reducing operational risk, improving accuracy and building lasting trust across every financial transaction.",
+    "We build secure, scalable financial systems that simplify operations and lift performance. Our AI financial software development services help banks, fintechs and financial enterprises overcome inefficiencies, compliance bottlenecks and manual risk processes through intelligent automation and predictive analytics, reducing operational risk, improving accuracy and building lasting trust across every financial transaction.",
   ctaText: "Request a free consultation",
   image: heroImg,
   alt: "A humanoid robot lit in blue against a digital network",
@@ -65,11 +65,11 @@ export const hero = {
 };
 
 export const intro = {
-  titleLead: "Empowering Financial Firms With Custom",
+  titleLead: "What Financial Firms Get From Custom",
   titleAccent: "AI Financial Software Development Services",
   paragraphs: [
-    "Axiomra is a custom financial software development company that helps banks, fintechs and financial enterprises transform their operations through intelligent automation and secure AI systems. As a trusted technology partner, we design and build scalable solutions that optimise decision-making, streamline risk management and ensure regulatory compliance.",
-    "Our AI financial software development services leverage advanced analytics, automation and predictive modelling to enhance accuracy, prevent fraud and optimise overall performance. Each solution is crafted from the ground up with a consultative approach, so it aligns with your commercial goals, your operational realities and the market conditions you actually trade in.",
+    "Axiomra is a custom financial software development company that helps banks, fintechs and financial enterprises transform their operations through intelligent automation and secure AI systems. As a trusted technology partner, we design and build scalable solutions that optimise decision-making, tighten risk management and ensure regulatory compliance.",
+    "Our AI financial software development services use advanced analytics, automation and predictive modelling to enhance accuracy, prevent fraud and optimise overall performance. Each solution is crafted from the ground up with a consultative approach, so it aligns with your commercial goals, your operational realities and the market conditions you actually trade in.",
   ],
   ctaText: "Book a Free Tech Consultation",
   image: introImg,
@@ -80,7 +80,7 @@ export const intro = {
  * The signal band: a decorative editorial break between the positioning copy
  * and the sourced statistics. It is the one place on the page where copy is
  * flowed around shapes rather than set in a straight column, so the lines are
- * deliberately short — the effect has to survive a re-flow, and long-form
+ * deliberately short, because the effect has to survive a re-flow, and long-form
  * prose in a wrapped measure does not.
  */
 export const signal = {
@@ -110,17 +110,17 @@ export const impact = {
     {
       value: "85%",
       label: "of financial services firms were actively applying AI in fraud detection, IT operations and risk modelling in 2025.",
-      source: "PwC — Global AI in Finance Report 2025",
+      source: "PwC, Global AI in Finance Report 2025",
     },
     {
       value: "75%",
       label: "of banks with assets over US$100 billion expect to have fully integrated AI strategies in place by 2025.",
-      source: "Deloitte — Financial Services AI Outlook 2025",
+      source: "Deloitte, Financial Services AI Outlook 2025",
     },
     {
       value: "51%",
       label: "of financial services firms in 2025 are using AI or machine learning for fraud detection and cybersecurity frameworks.",
-      source: "McKinsey — AI in Banking Survey 2025",
+      source: "McKinsey, AI in Banking Survey 2025",
     },
   ],
 };
@@ -175,7 +175,7 @@ export const services = {
   titleLead: "AI-Based Custom Financial Software Development Solutions",
   titleAccent: "For Modern Finance Challenges",
   body:
-    "In today's digital economy, financial organisations need intelligent, secure and scalable systems that do more than just manage transactions. Our custom software development for finance focuses on solving the industry's toughest challenges, from data silos to compliance, with precision-built automation and AI.",
+    "Financial organisations now need intelligent, secure and scalable systems that do more than just manage transactions. Our custom software development for finance focuses on solving the industry's toughest challenges, from data silos to compliance, with precision-built automation and AI.",
   items: [
     {
       title: "Accounting & Financial Management Software",
@@ -236,7 +236,7 @@ export const services = {
     {
       title: "Digital Wallet & eWallet Development",
       body:
-        "Security and scalability remain critical for e-wallet systems. We design digital wallet solutions that combine multi-layer encryption, biometric authentication and AI-driven fraud monitoring, so users get a secure, seamless and consistent experience across every device.",
+        "Security and scalability remain critical for e-wallet systems. We design digital wallet solutions that combine multi-layer encryption, biometric authentication and AI-driven fraud monitoring, so users get a secure, uninterrupted and consistent experience across every device.",
       image: svcWalletImg,
       alt: "A smartphone wallet app beside a payment card",
     },
@@ -252,7 +252,7 @@ export const services = {
 
 export const midCta = {
   eyebrow: "Ready to level up?",
-  title: "Transform Your Financial Operations With AI-Powered Precision",
+  title: "Rebuild Your Financial Operations With AI-Powered Precision",
   body:
     "Partner with us to build secure, scalable and compliant systems that drive efficiency and growth. Schedule a consultation with our experts to explore custom financial software development solutions built around your ledger, not a template.",
   ctaText: "Get in Touch",
@@ -260,7 +260,7 @@ export const midCta = {
 };
 
 /**
- * The "comprehensive services" fold: four alternating photo/copy rows.
+ * The services fold: four alternating photo/copy rows.
  */
 export const solutions = {
   eyebrow: "What types of finance apps are we experts in?",
@@ -272,28 +272,28 @@ export const solutions = {
     {
       title: "AI Consulting & Strategy for Finance",
       body:
-        "We work closely with stakeholders to identify automation opportunities, optimise workflows and design AI strategies aligned with business objectives. By leveraging AI insights, we help organisations improve decision-making and unlock operational efficiencies, and we will tell you plainly which processes are not worth automating yet.",
+        "We work closely with stakeholders to identify automation opportunities, optimise workflows and design AI strategies aligned with business objectives. Using AI insights, we help organisations improve decision-making and cut operational waste, and we will tell you plainly which processes are not worth automating yet.",
       image: solConsultingImg,
       alt: "An adviser walking clients through a financial plan",
     },
     {
       title: "AI Custom Financial Software Development",
       body:
-        "Our team builds bespoke financial software solutions from scratch, addressing legacy system limitations, fragmented datasets and regulatory challenges. We ensure secure, scalable and compliant platforms for modern finance operations, delivered in increments you can put in front of a regulator.",
+        "Our team builds custom financial software solutions from scratch, addressing legacy system limitations, fragmented datasets and regulatory challenges. We ensure secure, scalable and compliant platforms for modern finance operations, delivered in increments you can put in front of a regulator.",
       image: solDevelopmentImg,
       alt: "An engineer working on platform code beside server racks",
     },
     {
       title: "Data Analytics & Business Intelligence",
       body:
-        "We deliver financial software development solutions that turn complex financial data into actionable insights. Real-time dashboards, predictive analytics and reporting frameworks empower better investment, risk and operational decisions, all reading from one governed set of figures.",
+        "We deliver financial software development solutions that turn complex financial data into decisions you can defend. Real-time dashboards, predictive analytics and reporting frameworks support better investment, risk and operational decisions, all reading from one governed set of figures.",
       image: solAnalyticsImg,
       alt: "A laptop showing a financial analytics dashboard",
     },
     {
       title: "Intelligent Automation & Workflow Optimisation",
       body:
-        "Through AI-powered automation, we streamline repetitive processes like reconciliation, approvals and reporting. This reduces errors, accelerates workflows and improves overall productivity across financial operations, with a full audit trail behind every automated decision.",
+        "Through AI-powered automation, we shorten repetitive processes like reconciliation, approvals and reporting. This reduces errors, accelerates workflows and improves overall productivity across financial operations, with a full audit trail behind every automated decision.",
       image: solWorkflowImg,
       alt: "A robotic hand reaching into a connected data network",
     },
@@ -454,7 +454,7 @@ export const benefits = {
 export const build = {
   title: "Schedule a Consultation Call",
   body:
-    "Discover how AI financial software development services can transform your operations and accelerate growth. Speak with our experts to explore tailored solutions for your business.",
+    "Discover how AI financial software development services can rebuild your operations and speed up growth. Speak with our experts to explore what a custom build would look like for your business.",
   ctaText: "Hire financial software developers",
   texture: textureBgImg,
   image: buildVisualImg,
@@ -545,8 +545,8 @@ export const businessTypes = {
 
 export const testimonials = {
   eyebrow: "Why is it worth working with us?",
-  titleLead: "Our Clients Trust Us For Top-Notch Financial Solutions",
-  titleAccent: "And Exceptional Results",
+  titleLead: "What Finance Teams Say",
+  titleAccent: "About Working With Us",
   items: [
     {
       name: "Abdullah",
@@ -577,7 +577,7 @@ export const showcase = {
   titleLead: "Showcasing Our",
   titleAccent: "AI Development Projects",
   body:
-    "Discover our portfolio showcasing our expertise as an AI development company, delivering state-of-the-art solutions to address complex financial challenges.",
+    "Projects delivered for banks, fintechs and financial enterprises, and what each one changed.",
   ctaText: "Check Out Our Full Portfolio",
 };
 
@@ -596,7 +596,7 @@ export const partner = {
       icon: "Layers",
       title: "Tailored To Your Workflows And Systems",
       body:
-        "Our software is built around your workflows, your controls and your core systems. By creating custom AI financial software development solutions, we ensure seamless integration and operational efficiency rather than a migration nobody asked for.",
+        "Our software is built around your workflows, your controls and your core systems. By creating custom AI financial software development solutions, we keep integration clean and operations efficient rather than a migration nobody asked for.",
     },
     {
       icon: "ShieldCheck",
@@ -686,7 +686,7 @@ export const faqs = [
 export const finalCta = {
   title: "Get Your Free AI Financial Software Consultation",
   subtitle:
-    "Talk to our experts and discover how custom AI financial software development services can streamline your operations, reduce risk and accelerate growth.",
+    "Talk to our experts and discover how custom AI financial software development services can simplify your operations, reduce risk and accelerate growth.",
   buttonText: "Get your project done!",
   background: finalCtaBgImg,
 };

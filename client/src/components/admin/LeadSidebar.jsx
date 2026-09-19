@@ -11,7 +11,7 @@ import { formatDateTime } from "./leadColumns";
  * Client details panel for the selected lead.
  *
  * This is the only place identity fields (name, email, phone, company,
- * requested service) can be changed — the table shows them read-only so a
+ * requested service) can be changed; the table shows them read-only so a
  * stray click never edits a lead's contact details by accident.
  */
 

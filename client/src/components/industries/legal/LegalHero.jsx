@@ -15,7 +15,7 @@ const NetworkBackground = lazy(() => import("../../NetworkBackground"));
  *
  * The glass slab on the right is the page's one inverted clip: the pane is a
  * frame with an arch removed from it, so the photograph reads through the hole
- * rather than behind a tint. Nothing load-bearing sits inside the cut — the
+ * rather than behind a tint. Nothing load-bearing sits inside the cut: the
  * marks are laid over the frame, and the shape collapses below `lg`.
  */
 export default function LegalHero() {

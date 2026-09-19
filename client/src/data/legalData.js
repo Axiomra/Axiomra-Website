@@ -92,17 +92,17 @@ export const impact = {
     {
       value: "79%",
       label: "of legal professionals now use AI tools in some part of their day-to-day work.",
-      source: "Clio — Legal Trends Report 2025",
+      source: "Clio, Legal Trends Report 2025",
     },
     {
       value: "74%",
       label: "of hourly billable work in a typical practice is automatable with current technology.",
-      source: "Thomson Reuters — Future of Professionals 2025",
+      source: "Thomson Reuters, Future of Professionals 2025",
     },
     {
       value: "5hrs",
       label: "per lawyer per week freed by AI assistance, the equivalent of an extra fee earner in a small firm.",
-      source: "Thomson Reuters — Future of Professionals 2025",
+      source: "Thomson Reuters, Future of Professionals 2025",
     },
   ],
 };
@@ -230,7 +230,7 @@ export const services = {
     {
       title: "Legal Analytics Software",
       body:
-        "We design AI-powered analytics that turn matter, billing and outcome data into actionable insight. Predictive analytics assist with resource planning, matter pricing and settlement posture, so strategy is argued from the firm's own record rather than from instinct.",
+        "We design AI-powered analytics that turn matter, billing and outcome data into insight partners can act on. Predictive analytics assist with resource planning, matter pricing and settlement posture, so strategy is argued from the firm's own record rather than from instinct.",
       image: svcAnalyticsImg,
       alt: "A analyst reviewing performance charts on a tablet",
     },
@@ -239,7 +239,7 @@ export const services = {
 
 export const midCta = {
   eyebrow: "Ready to level up?",
-  title: "Let's Build Your Custom Legal Software Together",
+  title: "Bring Us The Legal Workflow You Want Fixed",
   body:
     "We help law firms and legal departments modernise their operations through custom-built, AI-powered software designed for accuracy, compliance and agility. Our team turns complex workflows into efficient, data-driven processes that drive measurable results.",
   ctaText: "Get in Touch",
@@ -248,7 +248,7 @@ export const midCta = {
 
 /**
  * The decorative doctrine band: the only section whose copy is flowed around
- * shapes. Deliberately short — see the note in LegalDoctrine.jsx.
+ * shapes. Deliberately short; see the note in LegalDoctrine.jsx.
  */
 export const doctrine = {
   eyebrow: "The principle we build on",
@@ -271,7 +271,7 @@ export const doctrine = {
 };
 
 /**
- * The "comprehensive services" fold: five alternating photo/copy rows.
+ * The services fold: five alternating photo/copy rows.
  */
 export const solutions = {
   eyebrow: "What types of legal solutions are we experts in?",
@@ -283,7 +283,7 @@ export const solutions = {
     {
       title: "Custom Legal Software Development",
       body:
-        "We design and build enterprise legal software that streamlines workflows and strengthens data management. Our custom solutions help firms automate repetitive tasks, reduce document processing time and improve client service quality, with the privilege and retention model designed in from the first sprint rather than retrofitted before launch.",
+        "We design and build enterprise legal software that simplifies workflows and strengthens data management. Our custom solutions help firms automate repetitive tasks, reduce document processing time and improve client service quality, with the privilege and retention model designed in from the first sprint rather than retrofitted before launch.",
       image: solDevelopmentImg,
       alt: "Code running across a developer's screen",
     },
@@ -319,8 +319,8 @@ export const solutions = {
 };
 
 export const stakeholders = {
-  eyebrow: "Whom do we build custom solutions for?",
-  titleLead: "Empowering Every Legal",
+  eyebrow: "Who we build for in law",
+  titleLead: "Every Legal",
   titleAccent: "Stakeholder We Partner With",
   items: [
     {
@@ -449,7 +449,7 @@ export const benefits = {
     {
       title: "Smarter Decision Intelligence",
       body:
-        "Analytics and reporting turn matter and billing data into actionable insight, supporting confident pricing, staffing and settlement decisions.",
+        "Analytics and reporting turn matter and billing data into usable insight, supporting confident pricing, staffing and settlement decisions.",
     },
     {
       title: "Enhanced Client Transparency",
@@ -470,7 +470,7 @@ export const benefits = {
 };
 
 export const build = {
-  title: "Transform Your Legal Operations",
+  title: "Rebuild Your Legal Operations",
   body:
     "Discover how our custom legal software and automation solutions can modernise your workflows, eliminate bottlenecks and improve decision-making accuracy, so your legal team can focus on strategy rather than repetitive process.",
   ctaText: "Book a Consultation",
@@ -570,8 +570,8 @@ export const businessTypes = {
 
 export const testimonials = {
   eyebrow: "Why is it worth working with us?",
-  titleLead: "Our Clients Trust Us For Top-Notch Legal Solutions",
-  titleAccent: "And Exceptional Results",
+  titleLead: "What Legal Teams Say",
+  titleAccent: "After The Handover",
   items: [
     {
       name: "Abdullah",
@@ -602,7 +602,7 @@ export const showcase = {
   titleLead: "Showcasing Our",
   titleAccent: "AI Development Projects",
   body:
-    "Discover our portfolio showcasing our expertise as an AI development company, delivering state-of-the-art solutions to address complex operational challenges.",
+    "Selected work for law firms and in-house teams, with the problem each build was pointed at.",
   ctaText: "Check Out Our Full Portfolio",
 };
 

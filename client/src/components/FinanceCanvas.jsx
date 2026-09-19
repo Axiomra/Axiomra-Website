@@ -6,13 +6,13 @@ import { makeDotTexture } from "../lib/dotTexture";
 /*
  * Backdrop for the Finance hero. Four ideas, one scene:
  *
- *   Grid     — a floor of points carrying a slow swell, the trading grid a
+ *   Grid:      a floor of points carrying a slow swell, the trading grid a
  *              chart is drawn on, seen in perspective.
- *   Candles  — one instanced mesh of market columns, each breathing on its
+ *   Candles:   one instanced mesh of market columns, each breathing on its
  *              own phase so the row reads as a live series, not a bar chart.
- *   Tape     — a price line threading above the columns, drawn and cleared on
+ *   Tape:      a price line threading above the columns, drawn and cleared on
  *              a loop the way a ticker redraws.
- *   Coins    — thin instanced discs orbiting the volume, edge-on and turning.
+ *   Coins:     thin instanced discs orbiting the volume, edge-on and turning.
  *
  * Decorative and cheap: geometry allocated once and mutated in place, two
  * instanced meshes, no lights, and nothing allocated inside the frame loop.

@@ -42,15 +42,9 @@ export default function NlpPage() {
       <NlpSolutions />
 
       <GradientCTA
-        title={
-          <>
-            Not Sure Which Capability
-            <br />
-            Your Problem Needs?
-          </>
-        }
-        subtitle="Most teams know they are drowning in text. Far fewer know whether the answer is classification, retrieval, extraction, or a fine-tuned model. Book a free 30-minute call. We will look at your actual documents and tell you which one it is, and what it would cost. No sales pitch, no commitment."
-        buttonText="Book A Free Strategy Call"
+        title="Not Sure Which Capability Your Problem Needs?"
+        subtitle="Classification, retrieval, extraction, or a fine-tuned model each suit different problems. Book a free consultation and we will look at your actual documents, say which approach fits, and set out what it would take to build."
+        buttonText="Book a Free NLP Consultation"
       />
 
       <NlpCaseStudies />
@@ -60,15 +54,9 @@ export default function NlpPage() {
 
       <GradientCTA
         dark
-        title={
-          <>
-            Your Language Is Not
-            <br />
-            English Only?
-          </>
-        }
-        subtitle="We deliver in 40+ languages, and we will tell you before the contract is signed which of yours are well covered by pretrained models and which need labelled data first. Code-switched text gets tested explicitly, because that is how real customers actually write."
-        buttonText="Talk To An NLP Engineer"
+        title="Your Language Is Not English Only?"
+        subtitle="We work across a wide range of languages and will tell you during scoping which of yours are well covered by pretrained models and which need labelled data first. Code-switched text is tested explicitly, because that is how many customers write."
+        buttonText="Discuss Your Use Case"
       />
 
       <NlpOutcomes />
@@ -77,18 +65,12 @@ export default function NlpPage() {
       <GradientCTA
         three
         dark
-        title={
-          <>
-            Show Us Your Text.
-            <br />
-            We Will Show You The Numbers.
-          </>
-        }
-        subtitle="We do not ask you to take our word for it. Book a free consultation and we will run a scoped assessment on a sample of your own documents: real accuracy on your data, real timelines, and an honest answer if NLP is the wrong tool for the job."
-        buttonText="Get A Free Project Assessment"
+        title="Your Next NLP Project Starts With a Clear Plan"
+        subtitle="Book a free consultation and we will run a scoped assessment on a sample of your own documents: measured accuracy on your data, an indicative timeline, and an honest answer if NLP is the wrong tool for the job."
+        buttonText="Book a Free NLP Consultation"
       />
 
-      <FAQ id="nlp-faq" eyebrow="NLP, answered" items={faqs} />
+      <FAQ id="nlp-faq" eyebrow="NLP questions" items={faqs} />
     </div>
   );
 }

@@ -17,7 +17,7 @@ const NAME_ALLOWED = /^[\p{L}][\p{L}\p{M}'’.\- ]*$/u;
 const NAME_LETTER = /\p{L}/gu;
 
 /* Deliberately stricter than the browser's type="email" check, which happily
-   accepts "a@b" — a TLD-less address bounces and the lead is lost. */
+   accepts "a@b"; a TLD-less address bounces and the lead is lost. */
 const EMAIL_RE = /^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,24}$/;
 
 /** Digits only; the visitor may type spaces, dashes or brackets. */
@@ -71,7 +71,7 @@ export function validatePhone(value, country, { required = false } = {}) {
   const label = country?.name ? `${country.name} (${country.dial})` : "this country";
 
   if (digits.length < min || digits.length > max) {
-    const expected = min === max ? `${min} digits` : `${min}–${max} digits`;
+    const expected = min === max ? `${min} digits` : `${min}-${max} digits`;
     return `A ${label} number needs ${expected}; you entered ${digits.length}.`;
   }
   return "";

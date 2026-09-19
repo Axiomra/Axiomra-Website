@@ -19,16 +19,16 @@ export default function FoundersSay() {
         className="mb-16"
         title={
           <>
-            <span className="text-brand">What Founders Say</span> About Our AI Development Company
+            <span className="text-brand">What Our Clients Say</span> About Working With Axiomra
           </>
         }
-        subtitle="We specialize in breaking down complex problems and building AI systems that hold up in production. These stories highlight how we've reinvented business operations for our global partners."
+        subtitle="Discover how our clients approach business challenges with AI and what they value about working with our team."
       >
         <a
           href="#portfolio"
           className="mt-8 inline-flex items-center gap-2 rounded-full border border-line-strong px-6 py-3 text-base font-medium text-content transition-colors hover:bg-surface-subtle focus-ring"
         >
-          Get these results <ArrowUpRight size={17} />
+          Explore Client Stories <ArrowUpRight size={17} />
         </a>
       </SectionHeading>
 

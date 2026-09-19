@@ -64,9 +64,9 @@ export default function HomePage() {
       <FAQ />
       <Contact />
       <GradientCTA
-        title="Stop Guessing And Start Growing With Your Trusted AI Development Partner"
-        subtitle="Book your complimentary AI Strategic Session, (worth $1000) just for free, and discover how tailored AI solutions can drive growth."
-        buttonText="Get Your Project Done!"
+        title="Find the Right AI Opportunity for Your Business"
+        subtitle="Book a free AI strategy session to discuss your goals, assess relevant use cases, and identify a practical next step."
+        buttonText="Book Your Free AI Strategy Session"
       />
     </>
   );

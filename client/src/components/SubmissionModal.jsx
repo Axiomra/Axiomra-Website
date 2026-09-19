@@ -8,7 +8,7 @@ import { CheckCircle2, Clock, Mail, X } from "lucide-react";
  *
  * A one-line "Thanks, we'll be in touch" gives the visitor no way to tell a
  * successful send from a typo'd email address. Showing the stored record back
- * makes the send verifiable — if the email is wrong, they see it here and can
+ * makes the send verifiable: if the email is wrong, they see it here and can
  * resubmit while the intent is still fresh.
  *
  * `submission` is a frozen snapshot taken before the form resets; passing the

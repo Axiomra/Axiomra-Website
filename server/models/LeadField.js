@@ -11,7 +11,7 @@ import mongoose from "mongoose";
  * The values themselves live under `custom` on the lead, keyed by `key`.
  */
 
-/** Types an admin can pick. Deliberately few — this is a table, not a CRM. */
+/** Types an admin can pick. Deliberately few: this is a table, not a CRM. */
 export const FIELD_TYPES = ["text", "longtext", "number", "date"];
 
 /** Lowercase slug. No dots: mongoSanitize strips dotted keys from bodies. */

@@ -5,12 +5,12 @@ import * as THREE from "three";
 /*
  * Backdrop for the Transportation hero. Three ideas, one scene:
  *
- *   Corridor — a perspective grid of lanes and cross streets, the network every
+ *   Corridor:  a perspective grid of lanes and cross streets, the network every
  *              other element is measured against.
- *   Traffic  — instanced light streaks running the lanes at their own speeds,
+ *   Traffic:   instanced light streaks running the lanes at their own speeds,
  *              half of them counter-flowing, so the field reads as movement
  *              rather than decoration.
- *   Nodes    — a handful of pulsing rings at junctions, the waypoints a routing
+ *   Nodes:     a handful of pulsing rings at junctions, the waypoints a routing
  *              engine actually optimises around.
  *
  * Decorative and cheap: the grid is baked once into a single lineSegments

@@ -101,7 +101,7 @@ export default function NlpStats() {
 
           <dl className="lg:-mt-3">
             {hero.stats.map((s) => {
-              const match = s.value.match(/^(\d+)(.*)$/);
+              const match = s.value ? s.value.match(/^(\d+)(.*)$/) : null;
               return (
                 <div
                   key={s.label}

@@ -11,7 +11,7 @@ import { validateEmail } from "../../lib/validation";
  * Step one of the reset flow.
  *
  * The confirmation is deliberately the same whether or not the address has an
- * account — the server answers identically, and a page that said "no such
+ * account: the server answers identically, and a page that said "no such
  * account" would hand an attacker a list of which staff emails are admins.
  */
 export default function AdminForgotPasswordPage() {

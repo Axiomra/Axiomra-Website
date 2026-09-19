@@ -33,26 +33,26 @@ export default function Hero() {
       <div className="relative z-10 mx-auto max-w-8xl px-4 pb-24 text-center sm:px-6">
         <motion.p variants={fadeUp} initial="hidden" animate="show" custom={0}
           className="mb-5 text-lg font-medium text-inverse-fg/75 md:text-xl">
-          Stop Guessing. Start Growing with AI That Actually Works
+          Practical AI. Measurable Business Progress.
         </motion.p>
 
         <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1}
           className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-inverse-fg md:text-7xl">
-          The Result-Driven AI Development Company That Acts As Your{" "}
-          <span className="text-gradient">Growth Engine</span>
+          Custom AI Development That{" "}
+          <span className="text-gradient">Moves Your Business Forward</span>
         </motion.h1>
 
         <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
           className="mx-auto mt-7 max-w-4xl text-lg leading-relaxed text-inverse-fg/75 md:text-xl">
-          Since before ChatGPT existed, we&apos;ve been building production-grade AI systems
-          for businesses that need results, not buzzwords. With 300+ delivered projects,
-          we automate processes and develop customized end-to-end AI solutions that reduce
-          costs, accelerate decision-making, and deliver proven ROI.
+          Axiomra builds AI solutions around your business goals, data, and workflows.
+          From process automation to predictive insights, we help your team work more
+          efficiently, make informed decisions, and measure the value of AI in everyday
+          operations.
         </motion.p>
 
         <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="mt-9">
           <a href="#contact" className="group inline-flex items-center gap-2 rounded-full bg-inverse-fg px-9 py-4 text-lg font-semibold text-inverse transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow focus-ring md:text-xl">
-            Book Your FREE AI Strategy Session (Worth $1000)
+            Book Your Free AI Strategy Session
             <ArrowUpRight size={22} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
         </motion.div>

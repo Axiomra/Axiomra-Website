@@ -6,7 +6,7 @@ import { pledge } from "../../../data/insuranceData";
  *
  * Two mirrored wings float to either side of one short block of display copy,
  * each carrying a `shape-outside` polygon that pinches toward the middle. The
- * lines between them take the shape of a lens rather than a rectangle — the
+ * lines between them take the shape of a lens rather than a rectangle: the
  * shape-inside effect, built out of two shape-outside floats because
  * `shape-inside` still has no browser support worth shipping.
  *
@@ -41,7 +41,7 @@ export default function InsurancePledge() {
         </p>
 
         {/* The floats must precede the text they shape, and must live in the
-            same block formatting context — hence both wings before the copy. */}
+            same block formatting context, hence both wings before the copy. */}
         <div
           aria-hidden="true"
           className="ins-wing ins-wing-left lg lg-dark lg-sheen"

@@ -9,7 +9,7 @@ function BigNumber({ value }) {
   const ref = useRef(null);
 
   useLayoutEffect(() => {
-    // Handles both "92%" and "$7B": any prefix, the digits, any suffix.
+    // Handles both "92%" and "$7.6B": any prefix, the digits, any suffix.
     const match = /^(\D*)(\d+)(.*)$/.exec(value);
     if (!match) return;
     if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;

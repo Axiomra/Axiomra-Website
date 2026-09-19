@@ -57,7 +57,7 @@ export const hero = {
   titleAccent: "AI Healthcare Software Development",
   titleTail: "Services",
   body:
-    "We build clinical-grade systems that give time back to the people delivering care. Our AI healthcare software development services help hospitals, telehealth providers, labs and health-tech companies remove documentation load, shorten diagnostic turnaround and close the gaps between EHR, imaging and billing — without ever putting protected health information at risk.",
+    "We build clinical-grade systems that give time back to the people delivering care. Our AI healthcare software development services help hospitals, telehealth providers, labs and health-tech companies remove documentation load, shorten diagnostic turnaround and close the gaps between EHR, imaging and billing, without ever putting protected health information at risk.",
   ctaText: "Request a free consultation",
   image: heroImg,
   alt: "A surgical microscope in a theatre lit in clinical blue",
@@ -87,7 +87,7 @@ export const standards = {
   titleAccent: "Record It Can Be Trusted With",
   orb: { value: "PHI", caption: "Encrypted at rest and in transit" },
   lead:
-    "Every order, result and note arrives as a claim about a real person, and the system has one chance to attach it to the right record. Match it wrongly and the failure is not a bad row in a table — it is a medication given to someone it was never meant for.",
+    "Every order, result and note arrives as a claim about a real person, and the system has one chance to attach it to the right record. Match it wrongly and the failure is not a bad row in a table. It is a medication given to someone it was never meant for.",
   vial: { value: "FHIR", caption: "R4 native, not bolted on" },
   aside:
     "So we build for the record first and the feature second. Identity resolution runs before anything is written, terminology is mapped rather than assumed, and every access leaves a trail an information governance lead can follow without opening a ticket.",
@@ -109,19 +109,19 @@ export const impact = {
       value: "1016",
       label:
         "AI-enabled medical devices have now been authorised by the FDA, with radiology accounting for roughly three quarters of them.",
-      source: "FDA — AI/ML-Enabled Medical Device List 2025",
+      source: "FDA, AI/ML-Enabled Medical Device List 2025",
     },
     {
       value: "29%",
       label:
         "average reduction in clinical documentation time reported by health systems deploying ambient AI scribes across ambulatory care.",
-      source: "Peterson Health Technology Institute — Ambient Scribes Review 2025",
+      source: "Peterson Health Technology Institute, Ambient Scribes Review 2025",
     },
     {
       value: "90%",
       label:
         "of hospitals could use AI to improve early diagnosis and shorten patient wait times, according to sector modelling.",
-      source: "WHO — Digital Health and AI Readiness Report 2025",
+      source: "WHO, Digital Health and AI Readiness Report 2025",
     },
   ],
 };
@@ -148,7 +148,7 @@ export const challenges = {
     {
       title: "Diagnostic Backlogs And Reporting Delays",
       body:
-        "Imaging and pathology volumes keep rising while specialist headcount does not. We deploy triage models that reorder the worklist by likelihood of critical finding, pre-populate structured reports and flag discrepancies for a second read — so the urgent study is seen first rather than in the order it arrived.",
+        "Imaging and pathology volumes keep rising while specialist headcount does not. We deploy triage models that reorder the worklist by likelihood of critical finding, pre-populate structured reports and flag discrepancies for a second read, so the urgent study is seen first rather than in the order it arrived.",
     },
     {
       title: "HIPAA, GDPR And Audit Exposure",
@@ -195,7 +195,7 @@ export const services = {
     {
       title: "Medical Imaging & Diagnostic AI",
       body:
-        "Radiology, pathology and ophthalmology models that integrate with PACS through DICOM rather than sitting in a separate viewer. We handle worklist triage, measurement automation, structured reporting and second-read flags — and we are explicit with you about where a model's performance falls off.",
+        "Radiology, pathology and ophthalmology models that integrate with PACS through DICOM rather than sitting in a separate viewer. We handle worklist triage, measurement automation, structured reporting and second-read flags. We are also explicit with you about where a model's performance falls off.",
       image: svcImagingImg,
       alt: "A doctor examining brain MRI scans on a lightbox",
     },
@@ -216,7 +216,7 @@ export const services = {
     {
       title: "Patient Engagement & mHealth Apps",
       body:
-        "Booking, results, medication reminders, care-plan tracking and secure messaging in an app people over sixty can actually use. Accessibility and reading level are requirements here, not polish — adherence collapses the moment the interface asks too much.",
+        "Booking, results, medication reminders, care-plan tracking and secure messaging in an app people over sixty can actually use. Accessibility and reading level are requirements here, not polish. Adherence collapses the moment the interface asks too much.",
       image: svcPatientImg,
       alt: "A patient tracking health data in a smartphone app",
     },
@@ -255,13 +255,13 @@ export const midCta = {
   eyebrow: "Ready to reduce the load?",
   title: "We Develop Custom AI-Powered Healthcare Software Solutions Using Clinical-Grade Engineering",
   body:
-    "Partner with us to build compliant, interoperable systems that shorten diagnosis, cut documentation time and hold up under a security review. Book a consultation and we will scope it against your own workflows — including the parts we would not automate yet.",
+    "Partner with us to build compliant, interoperable systems that shorten diagnosis, cut documentation time and hold up under a security review. Book a consultation and we will scope it against your own workflows, including the parts we would not automate yet.",
   ctaText: "Get in Touch",
   background: midCtaBgImg,
 };
 
 /**
- * The "comprehensive services" fold: four alternating photo/copy rows.
+ * The services fold: four alternating photo/copy rows.
  */
 export const solutions = {
   eyebrow: "See your workflow mapped before you commit",
@@ -273,14 +273,14 @@ export const solutions = {
     {
       title: "AI Consulting & Clinical Strategy",
       body:
-        "We sit with clinicians and operations leads to map where the time and the risk actually go, then rank the candidates by value and feasibility. You get a costed roadmap with a governance and model-risk plan attached — and a clear statement of which processes are not worth automating yet.",
+        "We sit with clinicians and operations leads to map where the time and the risk actually go, then rank the candidates by value and feasibility. You get a costed roadmap with a governance and model-risk plan attached, plus a clear statement of which processes are not worth automating yet.",
       image: solConsultingImg,
       alt: "Healthcare workers in discussion during a ward meeting",
     },
     {
       title: "Custom Healthcare Software Development",
       body:
-        "Bespoke clinical platforms built from the compliance surface inwards: HIPAA and GDPR controls, SOC 2 readiness, HL7 and FHIR interfaces, and an architecture that keeps new services away from the systems of record. Delivered in increments you can validate clinically, not as one long build.",
+        "Custom clinical platforms built from the compliance surface inwards: HIPAA and GDPR controls, SOC 2 readiness, HL7 and FHIR interfaces, and an architecture that keeps new services away from the systems of record. Delivered in increments you can validate clinically, not as one long build.",
       image: solDevelopmentImg,
       alt: "An abstract visualisation of a neural network",
     },
@@ -465,7 +465,7 @@ export const benefits = {
 export const build = {
   title: "Built For Healthcare From Day One, Not Adapted To It",
   body:
-    "Discover how AI healthcare software development services can lift the administrative load off your clinical teams and shorten time to treatment. Speak with our engineers about a scoped pilot on your own data — and about what we would leave alone.",
+    "Discover how AI healthcare software development services can lift the administrative load off your clinical teams and shorten time to treatment. Speak with our engineers about a scoped pilot on your own data, and about what we would leave alone.",
   ctaText: "Hire healthcare software developers",
   texture: textureBgImg,
   image: buildVisualImg,
@@ -569,8 +569,8 @@ export const businessTypes = {
 
 export const testimonials = {
   eyebrow: "Why is it worth working with us?",
-  titleLead: "What Our Clients Say About Our AI Development Company",
-  titleAccent: "And Exceptional Results",
+  titleLead: "What Care Providers Say",
+  titleAccent: "After The Rollout",
   items: [
     {
       name: "Abdullah",
@@ -667,7 +667,7 @@ export const blogs = {
 export const faqs = [
   {
     q: "How do AI healthcare software development services reduce clinician burnout?",
-    a: "By removing the typing rather than adding another screen. Ambient capture drafts the encounter note, clinical NLP codes it and pre-fills the order set, and the clinician reviews and signs. The measured gains in published evaluations sit around a quarter to a third of documentation time — meaningful, but not the 80% figure vendors quote.",
+    a: "By removing the typing rather than adding another screen. Ambient capture drafts the encounter note, clinical NLP codes it and pre-fills the order set, and the clinician reviews and signs. The measured gains in published evaluations sit around a quarter to a third of documentation time. Meaningful, but not the 80% figure vendors quote.",
   },
   {
     q: "Is a custom healthcare platform HIPAA compliant out of the box?",
@@ -675,11 +675,11 @@ export const faqs = [
   },
   {
     q: "Can you integrate with Epic, Cerner or our existing EHR?",
-    a: "Yes, through HL7 v2 interfaces, FHIR R4 APIs and SMART on FHIR apps, depending on what your vendor exposes and what your integration team will approve. We design the layer so the EHR stays the system of record and our services stay outside it — that is what keeps the integration approvable and the upgrade path intact.",
+    a: "Yes, through HL7 v2 interfaces, FHIR R4 APIs and SMART on FHIR apps, depending on what your vendor exposes and what your integration team will approve. We design the layer so the EHR stays the system of record and our services stay outside it. That is what keeps the integration approvable and the upgrade path intact.",
   },
   {
     q: "How accurate is AI in medical imaging, honestly?",
-    a: "On narrow, well-defined tasks with good training data — screening mammography, diabetic retinopathy, intracranial haemorrhage triage — performance is genuinely at or near specialist level. It degrades on rare presentations, unusual scanner protocols and populations under-represented in training. We report performance by subgroup and design the workflow so the model triages and flags rather than decides.",
+    a: "On narrow, well-defined tasks with good training data (screening mammography, diabetic retinopathy, intracranial haemorrhage triage), performance is genuinely at or near specialist level. It degrades on rare presentations, unusual scanner protocols and populations under-represented in training. We report performance by subgroup and design the workflow so the model triages and flags rather than decides.",
   },
   {
     q: "What does interoperability actually require beyond supporting FHIR?",
@@ -695,7 +695,7 @@ export const faqs = [
   },
   {
     q: "How long does it take to deliver a healthcare software platform?",
-    a: "A scoped pilot on de-identified data typically runs eight to twelve weeks. A production clinical deployment depends far more on your governance, security review and integration approvals than on engineering time — plan for those in parallel from week one rather than discovering them at go-live.",
+    a: "A scoped pilot on de-identified data typically runs eight to twelve weeks. A production clinical deployment depends far more on your governance, security review and integration approvals than on engineering time. Plan for those in parallel from week one rather than discovering them at go-live.",
   },
   {
     q: "Do you build software that needs FDA or MHRA clearance?",

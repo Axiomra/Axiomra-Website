@@ -37,13 +37,13 @@ export const vision = {
   titleLead: "Building An",
   titleAccent: "Unbiased World",
   body:
-    "We envision a world where AI decisions can be explained, audited and trusted. We aim to stay at the forefront of technical advancement while building a workplace where that expertise drives positive change, solving hard problems and leaving behind systems people are willing to rely on.",
+    "We envision a world where AI decisions can be explained, audited and trusted. We aim to stay current with where the field is moving while building a workplace where that expertise drives positive change, solving hard problems and leaving behind systems people are willing to rely on.",
   ctaText: "Partner with our AI development company",
 };
 
 export const mission = {
   eyebrow: "Our mission",
-  titleLead: "Empowering Businesses Through",
+  titleLead: "Running More Of The Business On",
   titleAccent: "Automation",
   body:
     "We aim to lead in applied AI by delivering production-grade solutions in machine learning, computer vision and natural language processing. Our mission is to automate the repetitive work inside 1 million+ businesses, so teams spend their hours on judgement rather than data entry.",
@@ -86,7 +86,7 @@ export const beliefs = {
     {
       icon: "team",
       title: "High performance sports team",
-      body: "Productive. Synergy. Teamwork. Dedication.",
+      body: "Productive. Honest. Teamwork. Dedication.",
     },
     {
       icon: "people",
@@ -180,7 +180,7 @@ export const paths = {
       tone: "dark",
     },
     {
-      titleAccent: "Empowering Businesses",
+      titleAccent: "Scaling Businesses",
       titleLead: "Through Automation",
       body:
         "If you are building an AI product or SaaS platform, we become your dedicated AI and software development team. We handle everything from product architecture and UI design to AI model development and deployment, so founders focus on product vision and market growth while our engineers build and scale the technology behind it.",

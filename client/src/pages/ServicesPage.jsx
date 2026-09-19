@@ -88,9 +88,9 @@ export default function ServicesPage() {
       <FAQ id="services-faq" items={servicesFaq} />
 
       <GradientCTA
-        title="Start Your Journey To Success With Us"
-        subtitle="As a hands-on AI partner, we're trusted by clients worldwide to deliver tailored AI solutions that drive success. Let's discuss your project."
-        buttonText="Get Your Project Sized"
+        title="Turn Your AI Idea Into a Clear Project Plan"
+        subtitle="Tell us what you want to achieve. We will help define the scope, technical approach, and next steps for a solution that fits your business."
+        buttonText="Discuss Your Project"
       />
     </>
   );

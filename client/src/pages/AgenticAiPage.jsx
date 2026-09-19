@@ -45,15 +45,9 @@ export default function AgenticAiPage() {
       <AgenticReasonLoop />
 
       <GradientCTA
-        title={
-          <>
-            Not Sure Which Workflow
-            <br />
-            Should Go Autonomous First?
-          </>
-        }
-        subtitle="Bring us the process you want off your team's desk. We will tell you which agent class fits, what it costs to run at your volume, and whether an agent is even the right answer, before you spend anything."
-        buttonText="Book A Free Agentic AI Consultation"
+        title="Identify Your First AI Agent Use Case"
+        subtitle="Share a process your team wants to improve. We will assess its suitability for an AI agent, discuss the required controls, and estimate the effort and running costs."
+        buttonText="Book a Free Agentic AI Consultation"
       />
 
       <AgenticCaseStudies />
@@ -64,15 +58,9 @@ export default function AgenticAiPage() {
       <AgenticSecurity />
 
       <GradientCTA
-        title={
-          <>
-            Autonomy Your Security
-            <br />
-            Team Will Actually Approve.
-          </>
-        }
-        subtitle="Scoped permissions, approval gates on high-stakes actions, and a replayable audit trail behind every decision. Show us your review checklist and we will show you the agent architecture that clears it."
-        buttonText="Talk To An Agent Engineer"
+        title="AI Agents Designed for Oversight and Control"
+        subtitle="Define what your agents can access, which actions require approval, and how activity is recorded. We work with your security team to assess the architecture against your review requirements."
+        buttonText="Talk to an AI Agent Engineer"
       />
 
       <AgenticStack />
@@ -90,7 +78,7 @@ export default function AgenticAiPage() {
             Not Another Pilot.
           </>
         }
-        subtitle="Most agent projects stall between demo and production. Ours do not, because we scope for deployment from the first call and stay on for 60 days after go-live. Start with a free strategy session, no commitment, no generic pitch."
+        subtitle="Most agent projects stall between demo and production. We scope for deployment from the first call and stay on for 60 days after go-live. Start with a free strategy session, no commitment, no generic pitch."
         buttonText="Claim Your Free Strategy Session"
       />
 

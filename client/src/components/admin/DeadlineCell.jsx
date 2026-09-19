@@ -9,7 +9,7 @@ import { formatDate, toDateInputValue } from "./leadColumns";
  * keyboard- and locale-correct for free, and this is a field people set once
  * and rarely revisit.
  *
- * An overdue date is coloured, but only while the work is still open —
+ * An overdue date is coloured, but only while the work is still open, since
  * flagging a finished job as late is noise, not a warning.
  */
 export default function DeadlineCell({ value, done = false, onSave }) {

@@ -4,7 +4,7 @@
  * Every case study carries its own palette because the page is a run of
  * full-bleed bands: the brand colour IS the section background, and the
  * mockup was exported on that exact colour. `band` and the image therefore
- * have to stay in sync — change one and the seam becomes visible.
+ * have to stay in sync; change one and the seam becomes visible.
  *
  * Rows without a `band` are "neutral": they sit on the page surface and the
  * mockup gets a white stage of its own, so the row still works in dark mode.
@@ -95,7 +95,7 @@ export const caseStudies = [
     tag: "Education",
     title: "Automated School Attendance System",
     description:
-      "Navex is an AI-powered school transport and attendance management system that automates student tracking through real-time facial recognition. It eliminates manual attendance processes and communication gaps by seamlessly connecting schools, bus attendants, and parents in one centralized, secure platform.",
+      "Navex is an AI-powered school transport and attendance management system that automates student tracking through real-time facial recognition. It eliminates manual attendance processes and communication gaps by connecting schools, bus attendants, and parents in one centralized, secure platform.",
     stats: [
       { value: "75%", label: "Automation in student attendance and tracking" },
       { value: "50%", label: "Drop in manual attendance errors" },
@@ -147,7 +147,7 @@ export const caseStudies = [
     tag: "Market Research & Agentic AI",
     title: "Multi LLM-Powered Market Analysis Tool",
     description:
-      "Tambot is an AI-powered Excel plugin that automates the creation of Total Addressable Market reports by leveraging a multi-agent setup of Claude, Gemini, and GPT alongside intelligent web scrapers. It eliminates the hours of manual research and data gathering that businesses typically spend by instantly transforming raw inputs into comprehensive, actionable TAM reports.",
+      "Tambot is an AI-powered Excel plugin that automates the creation of Total Addressable Market reports using a multi-agent setup of Claude, Gemini, and GPT alongside intelligent web scrapers. It eliminates the hours of manual research and data gathering that businesses typically spend by instantly turning raw inputs into complete TAM reports.",
     stats: [
       { value: "70%", label: "Reduction in manual research effort" },
       { value: "15", label: "Minutes faster report turnaround time" },
@@ -217,7 +217,7 @@ export const caseStudies = [
     tag: "Fashion",
     title: "AI Automation For Branding Agencies",
     description:
-      "FN-AD is an AI-powered system built to streamline the core operations of a fashion branding agency by automating brand classification, competitor analysis, and lead management through a custom CRM. It eliminates the slow, manual processes that limit agency growth by delivering a continuous, intelligent pipeline of profiled and qualified leads.",
+      "FN-AD is an AI-powered system built to simplify the core operations of a fashion branding agency by automating brand classification, competitor analysis, and lead management through a custom CRM. It eliminates the slow, manual processes that limit agency growth by delivering a continuous, intelligent pipeline of profiled and qualified leads.",
     stats: [
       { value: "40%", label: "Reduction in manual work" },
       { value: "47%", label: "Increase in productivity" },
@@ -270,7 +270,7 @@ export const caseStudies = [
     tag: "Fashion",
     title: "AI Project Management Tool",
     description:
-      "FN-AD BP is an AI-powered project management tool designed to streamline post-sales operations in the fashion industry by automating brand-to-member assignments and tracking full project lifecycles. It solves the challenge of managing complex, multi-team workflows by delivering visual dashboards, smart alerts, and AI-driven insights that keep every project on track.",
+      "FN-AD BP is an AI-powered project management tool designed to tighten post-sales operations in the fashion industry by automating brand-to-member assignments and tracking full project lifecycles. It solves the challenge of managing complex, multi-team workflows by delivering visual dashboards, smart alerts, and AI-driven insights that keep every project on track.",
     stats: [
       { value: "40%", label: "Productivity boost with smart alerts and clear ownership" },
       { value: "5", label: "Structured stages" },

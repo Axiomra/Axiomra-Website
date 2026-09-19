@@ -5,7 +5,7 @@ import { intro } from "../../../data/insuranceData";
 
 /**
  * The positioning statement. Its top edge is the matching half of the hero's
- * canopy, so the two sections read as one arc rather than two blocks — which
+ * canopy, so the two sections read as one arc rather than two blocks, which
  * costs a little height at the shoulders, hence the extra top padding.
  */
 export default function InsuranceIntro() {

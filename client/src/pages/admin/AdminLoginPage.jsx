@@ -24,7 +24,7 @@ export default function AdminLoginPage() {
     document.title = "Sign in · Axiomra Lead Management";
   }, []);
 
-  // Already signed in — skip the form rather than making them sign in twice.
+  // Already signed in, so skip the form rather than making them sign in twice.
   if (user) return <Navigate to={location.state?.from || "/admin"} replace />;
 
   const submit = async (e) => {

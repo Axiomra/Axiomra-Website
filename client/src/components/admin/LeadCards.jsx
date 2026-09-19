@@ -140,7 +140,7 @@ export default function LeadCards({
                             />
                           ) : col.locked ? (
                             <span className="block px-2 py-1.5 text-sm text-content">
-                              {lead[col.key] || <span className="text-content-faint/60">—</span>}
+                              {lead[col.key] || <span className="text-content-faint/60">-</span>}
                             </span>
                           ) : (
                             <EditableCell

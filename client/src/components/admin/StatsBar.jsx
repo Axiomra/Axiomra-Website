@@ -5,7 +5,7 @@ import { STAGE_STYLES } from "./stageStyles";
  * Total count and a per-stage breakdown, above the table.
  *
  * Counts come from a server-side aggregate over the *filtered* set, not from
- * the rows currently on screen — a summary that only counts page one is worse
+ * the rows currently on screen; a summary that only counts page one is worse
  * than no summary.
  *
  * Spacing is left to the caller: this sits at the top of the working area, and

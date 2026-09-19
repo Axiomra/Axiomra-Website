@@ -28,6 +28,7 @@ export default function CvProcess() {
             <h2 className="mt-4 font-display text-3xl font-semibold leading-[1.12] tracking-tight text-content sm:text-4xl md:text-5xl">
               {process.titleLead}{" "}
               <span className="text-brand">{process.titleAccent}</span>
+              {process.titleTail ? <span className="mt-2 block">{process.titleTail}</span> : null}
             </h2>
           </div>
 

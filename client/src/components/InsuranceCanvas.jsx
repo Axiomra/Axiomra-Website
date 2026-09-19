@@ -6,12 +6,12 @@ import { makeDotTexture } from "../lib/dotTexture";
 /*
  * Backdrop for the Insurance hero. One idea, told four ways: cover holds.
  *
- *   Canopy  — a dome of points carrying a travelling ripple, the umbrella
+ *   Canopy:   a dome of points carrying a travelling ripple, the umbrella
  *             every policy is a version of.
- *   Risk    — instanced shards falling out of the dark, deflected at the
+ *   Risk:     instanced shards falling out of the dark, deflected at the
  *             canopy and recycled, so the dome is visibly doing work.
- *   Shield  — the crest outline, drawn once and turned slowly on its axis.
- *   Policies— thin instanced plates on a wide orbit, edge-on and rotating,
+ *   Shield:   the crest outline, drawn once and turned slowly on its axis.
+ *   Policies: thin instanced plates on a wide orbit, edge-on and rotating,
  *             the book of business circling the risk.
  *
  * Decorative and cheap: geometry allocated once and mutated in place, two
@@ -101,7 +101,7 @@ function Canopy() {
 
 /**
  * Incoming risk. Each shard falls on its own speed, and is recycled the
- * moment it reaches the canopy — the deflection is the whole point, so the
+ * moment it reaches the canopy, because the deflection is the whole point, so the
  * reset happens at the dome surface rather than at a floor plane.
  */
 function RiskField() {

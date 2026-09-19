@@ -4,7 +4,7 @@
  * Notes get written like notes: a bolded name, an underlined follow-up date, a
  * couple of bullets. Storing that as HTML would mean sanitising a rich-text
  * payload on every write and in the CSV export and the notification emails.
- * Storing markers instead keeps `remarks` a plain string end to end — the
+ * Storing markers instead keeps `remarks` a plain string end to end: the
  * server's tag stripper still applies, the CSV is still readable, and the
  * formatting is only interpreted here at render time.
  *

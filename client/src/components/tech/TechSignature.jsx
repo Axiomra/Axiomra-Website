@@ -4,7 +4,7 @@ import { signatureLogos } from "../../data/techStackData";
 /**
  * The logo wall.
  *
- * Two copies of the same list scroll as one track, so the loop is seamless at
+ * Two copies of the same list scroll as one track, so the loop has no visible join at
  * exactly -50%. Marks keep their brand colours on white plates rather than
  * being flattened to a single tint, which is what the row is for.
  */

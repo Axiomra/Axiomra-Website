@@ -42,7 +42,7 @@ const originPatterns = allowedOrigins.map(originMatcher);
 
 // The admin session is an httpOnly cookie sent cross-origin, so CORS has to
 // echo the exact origin and allow credentials. `*` is therefore not a usable
-// value here — the browser rejects a wildcard on a credentialed request — and
+// value here, because the browser rejects a wildcard on a credentialed request, and
 // a bare `*` in CLIENT_ORIGIN now only relaxes the non-credentialed paths.
 app.use(
   cors({
@@ -146,7 +146,7 @@ app.use("/api/lead-fields", withDb, leadFieldRoutes);
 app.use((req, res) => res.status(404).json({ error: "Not found." }));
 
 // Final safety net. Anything that reaches here is a bug, and its message may
-// name a collection, a driver internal or a file path — none of which belongs
+// name a collection, a driver internal or a file path, none of which belongs
 // in a client response. Log the real thing, return a flat one.
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {

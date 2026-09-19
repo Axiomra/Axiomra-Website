@@ -43,7 +43,7 @@ function cookieOptions() {
   return {
     httpOnly: true,
     // SameSite=None requires Secure, and Secure cookies are dropped over plain
-    // http — so local development uses Lax, which works because the dev client
+    // http, so local development uses Lax, which works because the dev client
     // and dev API are both on localhost.
     sameSite: deployed ? "none" : "lax",
     secure: deployed,
@@ -69,7 +69,7 @@ export function clearSession(res) {
 /**
  * Read the token from the cookie, falling back to a bearer header.
  *
- * The header path exists for scripts and curl, not for the browser app — the
+ * The header path exists for scripts and curl, not for the browser app; the
  * panel never receives the token in a readable form, so it cannot send one.
  */
 function readToken(req) {
@@ -81,7 +81,7 @@ function readToken(req) {
 
 /**
  * Gate for every admin route. Verifies signature and expiry, then reloads the
- * user — a token alone is not enough, because the account may have been
+ * user. A token alone is not enough, because the account may have been
  * deleted or had its password reset since the token was minted.
  */
 export async function requireAuth(req, res, next) {

@@ -30,13 +30,13 @@ export const agenticListingImage = heroAgent;
 
 export const hero = {
   eyebrow: "Agentic AI Development Company",
-  titleLead: "Agentic AI Development",
-  titleAccent: "Services",
-  titleTail: "Built For Business Results",
+  titleLead: "Agentic AI",
+  titleAccent: "Development",
+  titleTail: "for Connected Business Workflows",
   body:
-    "Axiomra designs, deploys, and runs autonomous AI agents that plan, reason, call your tools, and finish multi-step work without a human driving every click. Not a chatbot that answers: a system that acts, inside your stack, with an audit trail behind every decision.",
-  ctaText: "Request A Free Consultation",
-  secondaryCtaText: "See What We Build",
+    "Axiomra builds AI agents that plan tasks, use approved tools, and coordinate multi-step workflows. We define permissions, human approval points, and activity logging so your team can delegate routine work with appropriate oversight.",
+  ctaText: "Book a Free Consultation",
+  secondaryCtaText: "Explore Agent Solutions",
   proof: { rating: "4.8", reviews: "300+ companies", source: "Reviewed on Clutch" },
   stats: [
     { value: "60%", label: "Less manual workload" },
@@ -681,11 +681,11 @@ export const industries = {
 };
 
 export const security = {
-  eyebrow: "Built for enterprise from day one",
-  titleAccent: "Security, Compliance, And Control",
-  titleLead: "Built Into Every Agent We Deploy",
+  eyebrow: "Controls agreed before deployment",
+  titleAccent: "Security, Access, And Control",
+  titleLead: "Agreed Before Any Agent Goes Live",
   subtitle:
-    "Agents that connect to your systems, handle customer data, and make decisions need more than good architecture. They need controls. Here is how we make sure every agent we ship is safe, auditable, and ready for an enterprise environment.",
+    "Agents that connect to your systems, handle business data, and take actions need clear boundaries. The controls below are defined with your team during design and confirmed before the agent goes live.",
   items: [
     {
       title: "Access controls",
@@ -695,7 +695,7 @@ export const security = {
     {
       title: "Data handling",
       body:
-        "All data processed by your agents is encrypted in transit and at rest. We do not use your business data to train models. What goes into your agent stays inside your environment.",
+        "Data handling for each agent is agreed with your team before deployment: where data is stored, how it moves between systems, how long it is retained, and the terms covering model training. Encryption and access scope are confirmed in writing as part of the engagement.",
     },
     {
       title: "Human oversight",
@@ -713,9 +713,9 @@ export const security = {
         "Every agent is tested against edge cases, adversarial inputs, and failure scenarios before go-live. Prompt injection defence, tool-call validation, and output checking ship as standard, not as an upgrade.",
     },
     {
-      title: "Compliance-aware design",
+      title: "Requirements-aware design",
       body:
-        "For regulated industries (healthcare, finance, insurance) compliance requirements are designed into the agent architecture from the first sprint, not retrofitted after an audit finds them missing.",
+        "For regulated sectors such as healthcare, finance, and insurance, the applicable requirements are reviewed with your compliance team at the design stage, and the agent architecture is built around what they confirm.",
     },
   ],
 };
@@ -759,7 +759,7 @@ export const techStack = {
     },
     {
       name: "Security and governance",
-      tools: ["Vault", "OPA", "Keycloak", "Presidio", "Guardrails", "SOC 2 tooling"],
+      tools: ["Vault", "OPA", "Keycloak", "Presidio", "Guardrails", "Audit logging"],
     },
   ],
 };
@@ -863,11 +863,11 @@ export const outcomes = {
 
 export const whyUs = {
   eyebrow: "Why Axiomra",
-  titleAccent: "What Makes Axiomra The Right",
-  titleLead: "Agentic AI Development Partner",
+  titleAccent: "Why Choose Axiomra",
+  titleLead: "for Agentic AI Development",
   body:
-    "Plenty of companies say they build AI agents. Far fewer have the experience, the process, and the commitment to make them work in production, and to still be there sixty days after launch when the real edge cases arrive.",
-  ctaText: "Book A Free Agentic AI Consultation",
+    "We bring together workflow design, system integration, testing, and team enablement. Our approach helps you move from a promising use case to an operational agent system, supported through launch and the agreed support period.",
+  ctaText: "Book a Free Agentic AI Consultation",
   image: whyAxiomra,
   imageAlt: "Axiomra team working through an agent architecture against live dashboards with a client",
   humanImage: humanInTheLoop,
@@ -880,31 +880,31 @@ export const whyUs = {
   ],
   reasons: [
     {
-      title: "We build for production, not for demos",
+      title: "Built for Operational Use",
       body:
-        "Most agent projects die between prototype and production. Ours are tested, integrated, and deployed into real business environments from day one. No proof-of-concept handoffs, no half-finished builds.",
+        "We test agent behaviour, connect the required tools, and validate the workflow against agreed acceptance criteria before deployment.",
     },
     {
-      title: "Your team is trained, not left behind",
+      title: "Training for the People Who Use It",
       body:
-        "An agent system is only as good as the team running it. Every engagement includes training so your people can interpret outputs, manage exceptions, and get real value from day one. No extra cost, no separate contract.",
+        "Your team learns how to review outputs, manage exceptions, and supervise agent actions.",
     },
     {
-      title: "Sixty extra days of engineering support",
+      title: "60 Days of Engineering Support",
       body:
-        "Most vendors hand over the build and disappear. We stay for sixty days after launch, fixing issues, tuning agent behaviour, and making sure the system performs the way we said it would.",
+        "We help resolve early issues and tune behaviour based on actual usage, within the agreed post-launch support scope.",
     },
     {
-      title: "We will tell you when agents are the wrong answer",
+      title: "The Right Solution for Your Workflow",
       body:
-        "If a scheduled job, a better form, or a smaller model solves your problem, we will say so on the first call. We would rather lose the scope than sell you an agent that cannot pay for itself.",
+        "We assess the simplest effective approach to your problem. Depending on the task, that may be a workflow improvement, conventional automation, or an AI agent. Our recommendation considers cost, complexity, and expected value.",
     },
   ],
   humanLoopPoints: [
     "Agents act inside explicit permission boundaries, defined before deployment.",
     "High-stakes actions pause for human approval, with the reasoning attached.",
     "Every prompt, tool call, and outcome is logged and replayable.",
-    "Your data stays in your environment and is never used to train models.",
+    "Data location, retention, and model-training terms are agreed with your team and written into the engagement.",
   ],
 };
 
@@ -923,7 +923,7 @@ export const faqs = [
   },
   {
     q: "How long does it take to build and deploy an agentic AI system?",
-    a: "A working pilot on your real data typically takes four to six weeks. Production rollout is usually eight to twelve weeks from the first call, depending on how many systems the agent has to integrate with and how strict your security review is.",
+    a: "It depends on the scope of the workflow, the number of systems the agent has to integrate with, and how your security review is run. We share an indicative schedule after the discovery session and confirm dates once the scope is agreed.",
   },
   {
     q: "Do I need to replace my existing systems to use agentic AI?",
@@ -951,11 +951,11 @@ export const faqs = [
   },
   {
     q: "How do you handle data security and privacy when building agents?",
-    a: "Data is encrypted in transit and at rest, agents are scoped to the minimum data they need, and your business data is never used to train models. We deploy into your cloud, your on-premise environment, or ours. Your call, written into the contract.",
+    a: "Access scope, encryption, hosting location, and model-training terms are agreed with your team before development starts and written into the contract. Agents are scoped to the minimum data they need, and we can deploy into your cloud, your on-premise environment, or ours.",
   },
   {
     q: "What support do you provide after the agentic AI system goes live?",
-    a: "Sixty days of dedicated engineering support as standard: issue fixes, behaviour tuning, cost optimisation, and team training. After that you can run it yourself with the documentation and eval harness we hand over, or keep us on a support agreement.",
+    a: "Sixty days of engineering support within the agreed support scope: issue fixes, behaviour tuning, cost optimisation, and team training. After that you can run it yourself with the documentation and eval harness we hand over, or keep us on a support agreement.",
   },
   {
     q: "How do I get started with Axiomra's agentic AI development services?",

@@ -13,7 +13,7 @@ const NetworkBackground = lazy(() => import("../../NetworkBackground"));
  * never flat colour while the canvas chunk downloads.
  *
  * The panel is the page's first piece of glass, and it is deliberately the
- * only one that floats free of a section background — everything below sits on
+ * only one that floats free of a section background; everything below sits on
  * a surface, so the hero has to establish the material.
  */
 export default function RetailHero() {

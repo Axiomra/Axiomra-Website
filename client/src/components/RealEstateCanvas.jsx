@@ -6,11 +6,11 @@ import { makeDotTexture } from "../lib/dotTexture";
 /*
  * Backdrop for the Real Estate hero. Three ideas, one scene:
  *
- *   District — an instanced grid of towers whose heights breathe, so the field
+ *   District:  an instanced grid of towers whose heights breathe, so the field
  *              reads as a city being built rather than a static skyline.
- *   Plot     — a point field on the ground plane, the survey grid the towers
+ *   Plot:      a point field on the ground plane, the survey grid the towers
  *              stand on, lifted slightly by the same wave that drives them.
- *   Survey   — two rings sweeping outward from the centre, like a valuation
+ *   Survey:    two rings sweeping outward from the centre, like a valuation
  *              pass running across the district.
  *
  * Decorative and cheap: one instanced mesh, one shared geometry mutated in

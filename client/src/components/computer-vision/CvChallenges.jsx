@@ -98,13 +98,25 @@ export default function CvChallenges() {
             <dl className="mt-6 grid grid-cols-3 divide-x divide-line rounded-xl2 border border-line bg-surface-card">
               {challenges.metrics.map((m) => (
                 <div key={m.label} className="px-4 py-6 text-center">
-                  <dt className="sr-only">{m.label}</dt>
-                  <dd>
-                    <span className="block font-display text-2xl font-semibold text-brand md:text-3xl">
-                      {m.value}
-                    </span>
-                    <span className="mt-1 block text-xs text-content-dim md:text-sm">{m.label}</span>
-                  </dd>
+                  {/* Entries without a `value` are capability labels, not statistics. */}
+                  {m.value ? (
+                    <>
+                      <dt className="sr-only">{m.label}</dt>
+                      <dd>
+                        <span className="block font-display text-2xl font-semibold text-brand md:text-3xl">
+                          {m.value}
+                        </span>
+                        <span className="mt-1 block text-xs text-content-dim md:text-sm">{m.label}</span>
+                      </dd>
+                    </>
+                  ) : (
+                    <>
+                      <dt className="sr-only">Capability</dt>
+                      <dd className="font-display text-sm font-semibold text-brand md:text-base">
+                        {m.label}
+                      </dd>
+                    </>
+                  )}
                 </div>
               ))}
             </dl>

@@ -62,7 +62,7 @@ function isValidId(id) {
 
 /**
  * Turn the query string into a Mongo filter.
- * Every value goes through cleanString or an allow-list first — nothing from
+ * Every value goes through cleanString or an allow-list first; nothing from
  * the client reaches the query as an object, so no operator can be injected.
  */
 function buildFilter(query) {
@@ -132,7 +132,7 @@ function budgetNumber(value) {
   return n;
 }
 
-/* GET /api/leads — paginated, filtered, sorted list. */
+/* GET /api/leads: paginated, filtered, sorted list. */
 router.get("/", async (req, res) => {
   try {
     const filter = buildFilter(req.query);
@@ -182,7 +182,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-/* GET /api/leads/stats — counts per stage, for the footer summary. */
+/* GET /api/leads/stats: counts per stage, for the footer summary. */
 router.get("/stats", async (req, res) => {
   try {
     const filter = buildFilter(req.query);
@@ -245,7 +245,7 @@ function exportValue(lead, key) {
  * Resolve the requested column keys into an ordered header/accessor list.
  *
  * Unknown keys are dropped rather than exported blank, and an empty or absent
- * `columns` falls back to everything — so a direct call to the endpoint still
+ * `columns` falls back to everything, so a direct call to the endpoint still
  * gets a full export.
  */
 function resolveExportColumns(raw, customFields) {
@@ -289,7 +289,7 @@ function resolveExportColumns(raw, customFields) {
   return columns.length ? columns : resolveExportColumns("", customFields);
 }
 
-/* GET /api/leads/export — CSV of everything matching the current filter.
+/* GET /api/leads/export: CSV of everything matching the current filter.
    `columns` narrows and orders it to what the admin actually has on screen. */
 router.get("/export", async (req, res) => {
   try {
@@ -332,7 +332,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-/* GET /api/leads/:id/related — earlier leads from the same person or company. */
+/* GET /api/leads/:id/related: earlier leads from the same person or company. */
 router.get("/:id/related", async (req, res) => {
   if (!isValidId(req.params.id)) return res.status(400).json({ error: "Invalid lead id." });
   try {
@@ -422,7 +422,7 @@ function buildUpdate(body, { partial }) {
  *
  * `body.custom` is an object keyed by LeadField.key. Every key is checked
  * against the columns that actually exist, so a client cannot invent a field
- * and grow the document with arbitrary keys — and a column deleted in another
+ * and grow the document with arbitrary keys, and a column deleted in another
  * tab cannot be written to after the fact.
  */
 async function buildCustomUpdate(body) {
@@ -443,7 +443,7 @@ async function buildCustomUpdate(body) {
   return values;
 }
 
-/* POST /api/leads — manual entry from the panel. The public contact form still
+/* POST /api/leads: manual entry from the panel. The public contact form still
    posts to /api/contact, which writes into this same collection. */
 router.post("/", async (req, res) => {
   try {
@@ -469,7 +469,7 @@ async function applyUpdate(req, res, partial) {
 
   try {
     // Written as dotted paths so editing one custom column never rewrites the
-    // whole bag — two people editing two columns on the same row would
+    // whole bag; two people editing two columns on the same row would
     // otherwise overwrite each other.
     const custom = await buildCustomUpdate(req.body || {});
     for (const [key, value] of Object.entries(custom)) update[`custom.${key}`] = value;
@@ -497,10 +497,10 @@ async function applyUpdate(req, res, partial) {
   }
 }
 
-/* PUT /api/leads/:id — full update. */
+/* PUT /api/leads/:id: full update. */
 router.put("/:id", (req, res) => applyUpdate(req, res, false));
 
-/* PATCH /api/leads/:id — partial update, e.g. just progress or remarks. */
+/* PATCH /api/leads/:id: partial update, e.g. just progress or remarks. */
 router.patch("/:id", (req, res) => applyUpdate(req, res, true));
 
 /* DELETE /api/leads/:id */

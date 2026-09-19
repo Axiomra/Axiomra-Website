@@ -33,7 +33,7 @@ function arg(flag, fallback) {
 function askHidden(question) {
   return new Promise((resolve, reject) => {
     if (!process.stdin.isTTY) {
-      reject(new Error("Run this from an interactive terminal — it prompts for a password."));
+      reject(new Error("Run this from an interactive terminal; it prompts for a password."));
       return;
     }
 
@@ -85,7 +85,7 @@ async function main() {
   const existing = await User.findOne({ email });
   console.log(
     existing
-      ? `\n  Account ${email} already exists — this will RESET its password and sign out all sessions.`
+      ? `\n  Account ${email} already exists. This will RESET its password and sign out all sessions.`
       : `\n  Creating admin account for ${email}.`
   );
 

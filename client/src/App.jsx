@@ -38,7 +38,7 @@ const LegalPage = lazy(() => import("./pages/LegalPage"));
 const RetailPage = lazy(() => import("./pages/RetailPage"));
 const TransportationPage = lazy(() => import("./pages/TransportationPage"));
 
-// The admin panel shares nothing with the marketing site — its own chrome, its
+// The admin panel shares nothing with the marketing site: its own chrome, its
 // own auth provider, its own table libraries. Splitting it here keeps all of
 // that out of the bundle a normal visitor downloads.
 const AdminLeadsPage = lazy(() => import("./pages/admin/AdminLeadsPage"));
@@ -152,7 +152,7 @@ function SiteRoutes() {
 }
 
 /**
- * The admin panel. Deliberately outside the site chrome — the marketing navbar
+ * The admin panel. Deliberately outside the site chrome, since the marketing navbar
  * and the "Book a call" modal have no business on an internal tool.
  *
  * AdminGuard only decides what to render; the actual protection is the JWT

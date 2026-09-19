@@ -6,7 +6,7 @@ import { LEAD_COLUMNS, DEFAULT_VISIBLE } from "./leadColumns";
 /**
  * Show/hide menu for table columns, and the entry point for adding new ones.
  *
- * The last visible column cannot be hidden — an empty table with no way back
+ * The last visible column cannot be hidden: an empty table with no way back
  * except clearing localStorage is a trap, not a feature.
  *
  * Custom columns are listed under their own heading with a delete button:

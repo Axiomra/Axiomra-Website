@@ -74,8 +74,8 @@ export const intro = {
   titleLead: "AI Supply Chain Management",
   titleAccent: "Software Development Services That Deliver",
   paragraphs: [
-    "Axiomra is an AI supply chain software development company that designs and builds custom tools for planning, inventory, warehousing and transport. We fix the common pain points — poor visibility, weak forecasts, stockouts, high freight costs and manual work — by unifying your data, adding real-time alerts, applying predictive models and automating routine steps.",
-    "We create simple, reliable apps your teams use every day: demand forecasting, replenishment, slotting, routing, control-tower dashboards and document automation. Built for inventory management, manufacturing, transportation and logistics teams, and for leaders across logistics providers, distributors and wholesalers, suppliers, regulatory bodies and B2B customers. Our approach is model-agnostic and practical — time-series ML, optimisation, computer vision and LLMs, all selected for your use case.",
+    "Axiomra is an AI supply chain software development company that designs and builds custom tools for planning, inventory, warehousing and transport. We fix the common pain points (poor visibility, weak forecasts, stockouts, high freight costs and manual work) by unifying your data, adding real-time alerts, applying predictive models and automating routine steps.",
+    "We create simple, reliable apps your teams use every day: demand forecasting, replenishment, slotting, routing, control-tower dashboards and document automation. Built for inventory management, manufacturing, transportation and logistics teams, and for leaders across logistics providers, distributors and wholesalers, suppliers, regulatory bodies and B2B customers. Our approach is model-agnostic and practical: time-series ML, optimisation, computer vision and LLMs, all selected for your use case.",
   ],
   ctaText: "Book a Free Tech Consultation",
   image: introImg,
@@ -91,17 +91,17 @@ export const impact = {
     {
       value: "15%",
       label: "reduction in logistics costs among early adopters of AI-enabled supply chain management.",
-      source: "McKinsey — AI supply-chain revolution report",
+      source: "McKinsey, AI supply-chain revolution report",
     },
     {
       value: "35%",
       label: "improvement in inventory levels for organisations applying AI to planning and replenishment.",
-      source: "McKinsey — AI supply-chain revolution report",
+      source: "McKinsey, AI supply-chain revolution report",
     },
     {
-      value: "$58B",
+      value: "$58.5B",
       label: "projected AI in supply chain market size by 2031, growing at 40.4% CAGR from 2024.",
-      source: "Meticulous Research — AI in Supply Chain Market, 2024",
+      source: "Meticulous Research, AI in Supply Chain Market, 2024",
     },
   ],
 };
@@ -219,7 +219,7 @@ export const services = {
     {
       title: "Procurement Management",
       body:
-        "Axiomra engineers procurement management that streamlines source-to-pay to cut long cycle times, price variance and maverick spend. It works by guiding requests, ranking suppliers, checking prices and terms and automating approvals and three-way matches with clear evidence. We build it using Python, transformer-based NLP to normalise items and suppliers, machine learning for supplier scoring and price anomaly detection.",
+        "Axiomra engineers procurement management that shortens source-to-pay to cut long cycle times, price variance and maverick spend. It works by guiding requests, ranking suppliers, checking prices and terms and automating approvals and three-way matches with clear evidence. We build it using Python, transformer-based NLP to normalise items and suppliers, machine learning for supplier scoring and price anomaly detection.",
       image: svcProcurementImg,
       alt: "A buyer running a digital procurement workflow on a laptop",
     },
@@ -260,7 +260,7 @@ export const solutions = {
   titleLead: "Custom AI Supply Chain Management Software",
   titleAccent: "Development Services For Enterprises",
   body:
-    "We design and build custom AI and workflow solutions across the end-to-end supply chain. Our teams integrate with your ERP, WMS, TMS, PLM, YMS and carrier platforms to orchestrate planning, sourcing, manufacturing, logistics and service — on-premise, in a private cloud, or in a hybrid environment.",
+    "We design and build custom AI and workflow solutions across the end-to-end supply chain. Our teams integrate with your ERP, WMS, TMS, PLM, YMS and carrier platforms to orchestrate planning, sourcing, manufacturing, logistics and service, whether that runs on-premise, in a private cloud, or in a hybrid environment.",
   items: [
     {
       title: "Supply chain management AI software consulting",
@@ -279,7 +279,7 @@ export const solutions = {
     {
       title: "AI integration into existing SCM software",
       body:
-        "Axiomra builds seamless AI add-ons for your ERP, WMS, TMS, YMS, PLM and carrier platforms using APIs and EDI, backed by strong master data management and data quality. These integrations bring tender acceptance prediction, mode and carrier mix optimisation, predictive ETA and track and trace, and dynamic allocation into tools your teams already use. This replaces email and spreadsheet work and reduces freight cost volatility.",
+        "Axiomra builds AI add-ons that sit cleanly on your ERP, WMS, TMS, YMS, PLM and carrier platforms using APIs and EDI, backed by strong master data management and data quality. These integrations bring tender acceptance prediction, mode and carrier mix optimisation, predictive ETA and track and trace, and dynamic allocation into tools your teams already use. This replaces email and spreadsheet work and reduces freight cost volatility.",
       image: solIntegrationImg,
       alt: "An integration layer connecting enterprise supply systems",
     },
@@ -341,7 +341,7 @@ export const subIndustries = {
   titleLead: "Sub-Industries We Support",
   titleAccent: "Across Supply Chains",
   body:
-    "Every sector carries its own constraints — shelf life, dangerous goods, serialisation, seasonality. We build to those constraints rather than around them.",
+    "Every sector carries its own constraints: shelf life, dangerous goods, serialisation, seasonality. We build to those constraints rather than around them.",
   items: [
     {
       label: "Manufacturing",
@@ -555,7 +555,7 @@ export const businessTypes = {
   rows: [
     {
       label: "Startups",
-      body: "We help logistics and supply chain startups get a first platform live fast: a working order or inventory core, the integrations that unlock a pilot customer, and the metrics that prove the model before the next raise.",
+      body: "We help logistics and supply chain startups get a first platform live fast: a working order or inventory core, the integrations that win a pilot customer, and the metrics that prove the model before the next raise.",
     },
     {
       label: "Scale-ups",
@@ -574,8 +574,8 @@ export const businessTypes = {
 
 export const testimonials = {
   eyebrow: "Why is it worth working with us?",
-  titleLead: "Our Clients Trust Us For Top-Notch AI Solutions",
-  titleAccent: "And Exceptional Results",
+  titleLead: "What Operators Say",
+  titleAccent: "Once The System Is Running",
   items: [
     {
       name: "Faisal",
@@ -588,7 +588,7 @@ export const testimonials = {
       name: "Alan",
       role: "Chairman & CEO, Peersana",
       quote:
-        "I am most impressed with Axiomra's robust team, discipline, culture, project management skills and extensive pool of resources.",
+        "I am most impressed with Axiomra's deep team, discipline, culture, project management skills and extensive pool of resources.",
       rating: 5,
     },
     {
@@ -606,7 +606,7 @@ export const showcase = {
   titleLead: "Showcasing Our",
   titleAccent: "AI Development Projects",
   body:
-    "Discover our portfolio showcasing our expertise as an AI development company, delivering state-of-the-art solutions to address complex supply chain challenges.",
+    "Platforms we have built for planners, warehouses and carriers, and what they replaced.",
   ctaText: "Check Out Our Full Portfolio",
 };
 
@@ -623,7 +623,7 @@ export const partner = {
     },
     {
       icon: "Layers",
-      title: "Seamless Integration",
+      title: "Integration Without Rework",
       body:
         "ERP, WMS, TMS, PLM and MDM connect through APIs and EDI, which gives 3PL visibility and partner onboarding while removing manual work and shadow spreadsheets.",
     },
@@ -712,11 +712,11 @@ export const faqs = [
   },
   {
     q: "Are you a supply chain software development company or do you sell a product?",
-    a: "We are a development company. You own the code and the data, deployment runs where your policies require — on-premise, private cloud or hybrid — and there is no licence dependency holding the platform hostage.",
+    a: "We are a development company. You own the code and the data, deployment runs where your policies require (on-premise, private cloud or hybrid), and there is no licence dependency holding the platform hostage.",
   },
   {
     q: "Why partner with Axiomra for supply chain software development services?",
-    a: "Because we build for operators, not demos. Our teams work inside your constraints — master data quality, union rules, customs, cold chain, GxP — and stay engaged for 60 days after delivery to tune performance and train the people who run it every day.",
+    a: "Because we build for operators, not demos. Our teams work inside your constraints (master data quality, union rules, customs, cold chain, GxP) and stay engaged for 60 days after delivery to tune performance and train the people who run it every day.",
   },
 ];
 

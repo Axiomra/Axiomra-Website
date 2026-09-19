@@ -38,10 +38,12 @@ export default function Transformation() {
           />
           <div className="absolute inset-0 bg-inverse/75 backdrop-blur-[1px]" />
           <div className="relative flex h-full flex-col items-center justify-center gap-1 text-center">
-            <TrendingUp size={22} className="text-accent-vivid" strokeWidth={2} aria-hidden="true" />
-            <span className="font-display text-4xl font-semibold text-inverse-fg">3.2X</span>
+            <TrendingUp size={26} className="text-accent-vivid" strokeWidth={2} aria-hidden="true" />
+            <span className="px-3 font-display text-xl font-semibold leading-tight text-inverse-fg">
+              Measurable Outcomes
+            </span>
             <span className="px-3 text-[11px] uppercase tracking-widest text-inverse-fg/70">
-              Faster decisions
+              Defined with you
             </span>
           </div>
         </motion.div>
@@ -53,9 +55,9 @@ export default function Transformation() {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.1 }}
       >
-        <p className="mb-4 text-center font-mono text-sm uppercase tracking-[0.2em] text-accent md:text-base">Leading the Way</p>
+        <p className="mb-4 text-center font-mono text-sm uppercase tracking-[0.2em] text-accent md:text-base">AI for Everyday Business</p>
         <h2 className="text-center font-display text-4xl font-semibold leading-[1.1] tracking-tight text-content md:text-5xl">
-          <span className="text-brand">Leading The Way In</span> AI-Powered Transformation
+          <span className="text-brand">Turn Business Challenges</span> Into Working AI Solutions
         </h2>
         <p className="mt-6 text-justify text-lg leading-relaxed text-content-dim md:text-xl">
           We don&apos;t just follow trends; we set the standard for how businesses apply AI to create impact.
@@ -66,12 +68,12 @@ export default function Transformation() {
           in-house engine that specializes in converting complex business challenges into scalable AI products.
         </p>
         <p className="mt-5 text-justify text-base leading-relaxed text-content-dim md:text-lg">
-          We focus on one metric: your ROI. By automating manual workflows and deploying intelligent
-          predictive systems, we help businesses reduce operational overhead by up to 70% and accelerate
-          decision-making by 3.2X.
+          We connect process automation and predictive insights to clear goals, such as reducing manual
+          work, improving decision quality, and managing operating costs. Together, we define the measures
+          that matter and track progress against them.
         </p>
         <a href="#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-inverse px-7 py-3.5 text-base font-medium text-inverse-fg transition-all duration-300 hover:-translate-y-0.5 hover:bg-inverse-soft hover:shadow-glow focus-ring">
-          Hire our AI developers <ArrowUpRight size={17} />
+          Work With Our AI Team <ArrowUpRight size={17} />
         </a>
       </motion.div>
     </section>

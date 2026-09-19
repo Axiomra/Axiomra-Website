@@ -58,7 +58,7 @@ const services = [
     image: businessIntelligence,
     imageAlt: "Team reviewing printed dashboards and a market chart on a laptop with a magnifier",
     description:
-      "Axiomra turns scattered, complex data into clear, actionable insight. Using AI-driven analytics, we build predictive models, interactive dashboards, and forecasting tools that help leadership teams make confident, informed calls, so you can spot risk and opportunity before your competitors do.",
+      "Axiomra turns scattered, complex data into clear, usable insight. Using AI-driven analytics, we build predictive models, interactive dashboards, and forecasting tools that help leadership teams make confident, informed calls, so you can spot risk and opportunity before your competitors do.",
     links: ["BI Consulting", "Enterprise Business Intelligence", "BI Support & Maintenance"],
   },
   {
@@ -67,7 +67,7 @@ const services = [
     image: processAutomation,
     imageAlt: "Robotic hand and human hand meeting over a board of automated task icons above a night skyline",
     description:
-      "We use artificial intelligence and robotic process automation (RPA) to remove repetitive manual work and streamline entire workflows. Our automation platforms integrate cleanly with your existing systems (data entry, invoice processing, customer support, and supply chain), cutting errors while scaling output.",
+      "We use artificial intelligence and robotic process automation (RPA) to remove repetitive manual work and simplify entire workflows. Our automation platforms integrate cleanly with your existing systems (data entry, invoice processing, customer support, and supply chain), cutting errors while scaling output.",
     links: ["Process Automation Consulting", "Intelligent Automation Solutions", "RPA", "RPA Software Development", "Workflow Automation Consulting"],
   },
   {
@@ -130,7 +130,7 @@ const services = [
     image: dataScience,
     imageAlt: "Analyst working across a laptop and tablet while holographic charts and data streams fan out above the desk",
     description:
-      "Our data science and analytics services help organizations turn raw data into actionable insight. From data engineering and model development to interactive dashboards and visualization, we enable data-driven decisions that improve user experience, optimize operations, and boost measurable business outcomes.",
+      "Our data science and analytics services help organizations turn raw data into insight they can act on. From data engineering and model development to interactive dashboards and visualization, we enable data-driven decisions that improve user experience, optimize operations, and boost measurable business outcomes.",
     links: ["Data Ingestion and Cleaning", "Predictive Analytics", "Data Visualization", "Data Analytics Consulting"],
   },
   {
@@ -139,7 +139,7 @@ const services = [
     image: chatbotDevelopment,
     imageAlt: "Open hand holding a glowing chatbot panel with bot avatars and chat bubbles floating around it",
     description:
-      "We develop intelligent AI chatbots powered by conversational AI and natural language understanding. These personalized assistants provide 24/7 support, resolve inquiries instantly, and integrate seamlessly across web, mobile, and messaging platforms, enhancing customer engagement while freeing up your team for high-value tasks.",
+      "We develop intelligent AI chatbots powered by conversational AI and natural language understanding. These personalized assistants provide 24/7 support, resolve inquiries instantly, and integrate cleanly across web, mobile, and messaging platforms, enhancing customer engagement while freeing up your team for high-value tasks.",
     links: ["AI Chatbot Development Solutions", "Chatbot Design and Development", "Multi-language Chatbot Development", "Chatbot Integration", "NLP Chatbot Development"],
   },
   {
@@ -166,7 +166,7 @@ const services = [
     image: infoTechnology,
     imageAlt: "Glowing globe at the centre of a circular network linking laptops, monitors and documents",
     description:
-      "Axiomra provides IT consulting services that align technology with business goals. We design future-ready IT strategies powered by cloud, AI, and automation to digitize operations, optimize enterprise software, and enhance mobility, giving businesses a scalable, secure technology roadmap for long-term growth.",
+      "Axiomra provides IT consulting services that align technology with business goals. We design durable IT strategies powered by cloud, AI, and automation to digitize operations, optimize enterprise software, and enhance mobility, giving businesses a scalable, secure technology roadmap for long-term growth.",
     links: ["IT Consulting", "Cloud Transition and Architecture Strategy", "Digital Transformation Consulting", "Optimized Software Portfolio"],
   },
   {
@@ -184,7 +184,7 @@ const services = [
     image: webAppDevelopment,
     imageAlt: "Developer coding across dual monitors and a tablet with holographic app and analytics panels floating above the desk",
     description:
-      "Axiomra delivers dependable web app development services tailored to your business objectives. Using modern frameworks, APIs, and cloud-native architectures, we create secure, high-performance applications that scale with your growth and deliver an exceptional user experience from day one.",
+      "Axiomra delivers dependable web app development services tailored to your business objectives. Using modern frameworks, APIs, and cloud-native architectures, we create secure, high-performance applications that scale with your growth and deliver a user experience that holds up from day one.",
     links: ["Website Development", "Front-End Development", "Full-Stack Applications", "Back-End Development"],
   },
   {
@@ -193,7 +193,7 @@ const services = [
     image: mobileAppDevelopment,
     imageAlt: "Finger tapping a tablet as app icons and mobile source code float above the screen",
     description:
-      "Our mobile app development services cover both enterprise and consumer applications, built on clean architecture and scalable backends. We design and deploy cross-platform, iOS, and Android apps that expand customer reach, improve enterprise mobility, and deliver seamless user experiences.",
+      "Our mobile app development services cover both enterprise and consumer applications, built on clean architecture and scalable backends. We design and deploy cross-platform, iOS, and Android apps that expand customer reach, improve enterprise mobility, and deliver smooth user experiences.",
     links: ["Hybrid App Development", "Android Application Development", "Hybrid Architecture", "App/Soft Design", "iPhone App Development"],
   },
   {
@@ -211,7 +211,7 @@ const services = [
     image: webScraping,
     imageAlt: "Hands on a keyboard in the dark while code and extracted data readouts overlay the screen",
     description:
-      "Our web scraping services use advanced technologies to extract and analyze valuable data from across the web reliably and at scale. Our data engineers deploy robust scrapers to gather critical business and product insight, empowering informed decision-making, increasing revenue, and enhancing operational efficiency across industries.",
+      "Our web scraping services use advanced technologies to extract and analyze valuable data from across the web reliably and at scale. Our data engineers deploy resilient scrapers to gather critical business and product insight, supporting informed decision-making, increasing revenue, and enhancing operational efficiency across industries.",
     links: ["Retail and Web Scraping", "Social Media Web Scraping", "E-Commerce Price & Product Data Scraping"],
   },
   {

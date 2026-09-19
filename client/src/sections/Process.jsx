@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import SectionHeading from "../components/SectionHeading";
 
 const steps = [
-  { title: "Discovery & AI Strategy", desc: "We analyze your data to identify high-impact use cases that solve specific business inefficiencies." },
-  { title: "Data Engineering & Prototyping", desc: "We prepare your data for high-accuracy model training and build a functional prototype (MVP)." },
-  { title: "Custom AI Engineering", desc: "Our in-house team develops the full system, integrating advanced models into your existing infrastructure." },
-  { title: "Testing & Optimization", desc: "We conduct rigorous stress tests to ensure 99.9% reliability and performance across all environments." },
-  { title: "Deployment & Continuous Growth", desc: "We launch your AI solution into production and provide ongoing support as your business scales." },
+  { title: "Discovery and AI Strategy", desc: "We assess your goals, workflows, and data to prioritise practical AI use cases and define success measures." },
+  { title: "Data Preparation and Prototyping", desc: "We prepare the data and develop a prototype to test feasibility before full development." },
+  { title: "Custom AI Development", desc: "We build the solution and connect it to your existing systems and business tools." },
+  { title: "Testing and Optimisation", desc: "We evaluate accuracy, performance, reliability, and failure handling against agreed acceptance criteria." },
+  { title: "Deployment and Ongoing Improvement", desc: "We launch the solution, monitor its performance, and support improvements as your needs evolve." },
 ];
 
 export default function Process() {

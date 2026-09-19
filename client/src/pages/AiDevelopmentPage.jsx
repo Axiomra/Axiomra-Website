@@ -99,15 +99,9 @@ export default function AiDevelopmentPage() {
       <AiDevIndustries />
 
       <GradientCTA
-        title={
-          <>
-            We Know Your Industry.
-            <br />
-            Now Let&rsquo;s Solve Your Problem.
-          </>
-        }
-        subtitle="We have delivered AI systems across 12+ industries. From healthcare and finance to retail and supply chain, our teams understand your data, your compliance requirements, and your goals."
-        buttonText="Book A Free Industry AI Consultation"
+        title="Bring Us Your Industry Challenge"
+        subtitle="Whether you work in healthcare, finance, retail, or supply chain operations, we start by understanding your processes, data, and requirements. Together, we identify where AI can add practical value."
+        buttonText="Book a Free AI Consultation"
       />
 
       <AiDevProcess />
@@ -115,15 +109,9 @@ export default function AiDevelopmentPage() {
 
       <GradientCTA
         dark
-        title={
-          <>
-            The Right Tools. The Right Team.
-            <br />
-            Built For Your Stack.
-          </>
-        }
-        subtitle="We work with the most advanced AI frameworks, LLMs, and MLOps tools available. More importantly, we know how to combine them into systems that work in production. Tell us what you want to build and we will map out the right architecture."
-        buttonText="Book A Free Technical Discovery Call"
+        title="AI Architecture That Fits Your Existing Systems"
+        subtitle="Discuss your requirements with our engineers. We will help identify suitable models, integration options, and an architecture that balances performance, cost, and maintainability."
+        buttonText="Book a Technical Discovery Call"
       />
 
       <AiDevBenefits />
@@ -131,15 +119,9 @@ export default function AiDevelopmentPage() {
       <GradientCTA
         dark
         three
-        title={
-          <>
-            300+ AI Projects Delivered.
-            <br />
-            Yours Could Be Next.
-          </>
-        }
-        subtitle="We offer a free AI strategy session to every new client. No commitment. No generic pitch. Just a clear plan for what AI can do for your business, built by engineers who have done it across 20+ countries."
-        buttonText="Claim Your Free AI Strategy Session"
+        title="Your Next AI Project Starts With a Clear Plan"
+        subtitle="Discuss your goals with our team in a free AI strategy session. Explore relevant use cases, understand the main requirements, and decide on a practical next step."
+        buttonText="Book Your Free AI Strategy Session"
       />
 
       <FAQ id="ai-development-faq" eyebrow="AI development, answered" items={faqs} />

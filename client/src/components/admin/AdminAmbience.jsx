@@ -2,7 +2,7 @@
  * The colour wash the glass panels sit on.
  *
  * Frosted panels only read as glass if there is something behind them to
- * blur — over a flat page they just look faded. This paints three brand-hued
+ * blur; over a flat page they just look faded. This paints three brand-hued
  * pools across the viewport for the table and stat cards to pick up.
  *
  * Deliberately static, unlike the animated header backdrop: it covers the

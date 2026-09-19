@@ -6,12 +6,12 @@ import { makeDotTexture } from "../lib/dotTexture";
 /*
  * Backdrop for the Sports hero. Four ideas, one scene:
  *
- *   Pitch    — a ground plane of points carrying a slow travelling swell, so
+ *   Pitch:     a ground plane of points carrying a slow travelling swell, so
  *              the surface reads as a field seen in perspective.
- *   Tracks   — instanced markers sweeping along looping paths, the shape
+ *   Tracks:    instanced markers sweeping along looping paths, the shape
  *              player-tracking output takes on a coach's screen.
- *   Trails   — thin arcs through the volume: the flight of a struck ball.
- *   Ring     — one tilted torus, to give the composition an axis.
+ *   Trails:    thin arcs through the volume: the flight of a struck ball.
+ *   Ring:      one tilted torus, to give the composition an axis.
  *
  * Decorative and cheap: geometry allocated once and mutated in place, one
  * instanced mesh, no lights, and nothing allocated inside the frame loop.
@@ -139,7 +139,7 @@ function Trail({ from, to, peak, speed, phase, color }) {
   useEffect(() => () => geometry.dispose(), [geometry]);
 
   useFrame(({ clock }) => {
-    // The arc is drawn progressively, held, then cleared — one strike per cycle.
+    // The arc is drawn progressively, held, then cleared: one strike per cycle.
     const cycle = (clock.getElapsedTime() * speed + phase) % 1;
     const drawn = Math.min(1, cycle / 0.55);
     const fade = cycle > 0.8 ? 1 - (cycle - 0.8) / 0.2 : 1;

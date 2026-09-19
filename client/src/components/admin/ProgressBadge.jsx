@@ -5,7 +5,7 @@ import { FALLBACK_STAGE_STYLE, STAGE_STYLES } from "./stageStyles";
 /**
  * Pipeline stage as a chip you can open.
  *
- * Kept as a button rather than a native <select> so the colour survives — an
+ * Kept as a button rather than a native <select> so the colour survives; an
  * OS-rendered option list ignores the styling entirely. All the positioning
  * and clipping work lives in StatusSelect, shared with the completion chip.
  */

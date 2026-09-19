@@ -84,7 +84,7 @@ router.post("/logout", (req, res) => {
   res.json({ success: true });
 });
 
-/* GET /api/auth/me — the panel's session probe on load. */
+/* GET /api/auth/me: the panel's session probe on load. */
 router.get("/me", requireAuth, (req, res) => {
   res.json({ user: publicUser(req.user) });
 });
@@ -177,7 +177,7 @@ router.post("/reset-password", async (req, res) => {
     }
 
     if (user.hasRecoveryKey()) {
-      // The shape check is not a security control — it just turns an obvious
+      // The shape check is not a security control; it just turns an obvious
       // paste error into a clear message instead of a wasted attempt.
       const keyProblem = recoveryKeyProblem(recoveryKey);
       if (keyProblem) return res.status(400).json({ error: keyProblem });
@@ -190,7 +190,7 @@ router.post("/reset-password", async (req, res) => {
             ? `That recovery key is not correct. ${left} attempt${
                 left === 1 ? "" : "s"
               } left before this link is cancelled.`
-            : `That recovery key is not correct. This link has been cancelled — wait ${KEY_LOCK_MINUTES} minutes, then request a new one.`,
+            : `That recovery key is not correct. This link has been cancelled. Wait ${KEY_LOCK_MINUTES} minutes, then request a new one.`,
           attemptsLeft: left,
         });
       }
@@ -200,7 +200,7 @@ router.post("/reset-password", async (req, res) => {
       });
     } else {
       console.warn(
-        `Password reset for ${user.email} ran without a recovery key — none is set on the account.`
+        `Password reset for ${user.email} ran without a recovery key; none is set on the account.`
       );
     }
 
@@ -246,7 +246,7 @@ router.get("/reset-requirements", async (req, res) => {
   }
 });
 
-/* POST /api/auth/change-password — for a signed-in admin. */
+/* POST /api/auth/change-password: for a signed-in admin. */
 router.post("/change-password", requireAuth, async (req, res) => {
   try {
     const current = String(req.body?.currentPassword ?? "");

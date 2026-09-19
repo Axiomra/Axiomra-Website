@@ -35,7 +35,7 @@ export const REAL_ESTATE_SLUG = "real-estate";
 
 export const hero = {
   eyebrow: "AI for the real estate industry",
-  titleLead: "Revolutionise Your Business With",
+  titleLead: "Rebuild Your Business With",
   titleAccent: "Custom Real Estate App Development",
   titleTail: "Services",
   body:
@@ -50,8 +50,8 @@ export const intro = {
   titleLead: "Simple AI Real Estate Software Development",
   titleAccent: "Services For Faster, Fair Deals",
   paragraphs: [
-    "Axiomra is a real estate software development company that builds listing platforms, CRM, transaction and property management systems around the way your business already works. We remove the parts that slow a deal down — valuations argued from stale comps, leads sitting unanswered, contracts re-keyed between three systems — and replace them with tooling your agents and managers open every morning.",
-    "The result is a portfolio you can see in one place: live market movement, pipeline by agent, maintenance due, compliance dates, cash position. Our models are chosen for the job rather than the brochure — gradient boosting for valuation, time-series for market trend, computer vision for condition assessment and LLMs for document extraction — and every one of them is validated against your own historical deals before it reaches a user.",
+    "Axiomra is a real estate software development company that builds listing platforms, CRM, transaction and property management systems around the way your business already works. We remove the parts that slow a deal down (valuations argued from stale comps, leads sitting unanswered, contracts re-keyed between three systems) and replace them with tooling your agents and managers open every morning.",
+    "The result is a portfolio you can see in one place: live market movement, pipeline by agent, maintenance due, compliance dates, cash position. Our models are chosen for the job rather than the brochure: gradient boosting for valuation, time-series for market trend, computer vision for condition assessment, LLMs for document extraction. Every one of them is validated against your own historical deals before it reaches a user.",
   ],
   ctaText: "Get a Demo",
   image: introImg,
@@ -70,12 +70,12 @@ export const impact = {
       source: "NAR 2025 Technology Survey, via HousingWire",
     },
     {
-      value: "$301B",
+      value: "$301.6B",
       label: "global market size for AI in real estate in 2025, and still compounding.",
       source: "The Business Research Company, 2025",
     },
     {
-      value: "2M sqm",
+      value: "2.1M sqm",
       label: "of U.S. real estate footprint occupied by AI companies as of May 2025.",
       source: "JLL Research, 2025",
     },
@@ -84,7 +84,7 @@ export const impact = {
 
 /**
  * The core service rail. Each group pairs the operational problem a real
- * estate business actually reports with the system we build to remove it —
+ * estate business actually reports with the system we build to remove it:
  * the structure the reference page uses to make scope legible at a glance.
  */
 export const solutions = {
@@ -97,12 +97,12 @@ export const solutions = {
     {
       title: "Real Estate Operations and Analytics Solutions",
       body:
-        "Portfolio data stops living in exports. We unify listings, tenancies, maintenance and financials into one model, then put the analysis on top of it — occupancy, yield, arrears and market movement in a view leadership trusts enough to make decisions from.",
+        "Portfolio data stops living in exports. We unify listings, tenancies, maintenance and financials into one model, then put the analysis on top of it: occupancy, yield, arrears and market movement in a view leadership trusts enough to make decisions from.",
       image: solOperationsImg,
       alt: "A laptop showing property performance charts on a desk",
       pains: [
         { problem: "Manual data tracking", solution: "Property Management Systems" },
-        { problem: "Lack of actionable insights", solution: "Data Analytics & BI Tools" },
+        { problem: "No insight you can act on", solution: "Data Analytics & BI Tools" },
         { problem: "Unpredictable market performance", solution: "Predictive Analytics Solutions" },
         { problem: "Difficulty managing portfolios", solution: "Portfolio Management Tools" },
         { problem: "Market trend uncertainty", solution: "AI-Powered Market Trends Dashboard" },
@@ -190,7 +190,7 @@ export const solutions = {
 export const apps = {
   eyebrow: "What real estate apps do we specialise in?",
   titleLead: "We Develop Custom AI-Powered Real Estate",
-  titleAccent: "Software Using Cutting-Edge Technology",
+  titleAccent: "Software Built On Proven Technology",
   body:
     "Five product shapes cover most of what a property business asks us to build. Each is delivered as your own codebase, integrated with the portals, accounting and identity systems you already run.",
   background: appsBgImg,
@@ -206,10 +206,10 @@ export const apps = {
 
 export const technologies = {
   eyebrow: "Which technologies do we use for real estate solutions?",
-  titleLead: "Next-Gen Technologies For Building",
-  titleAccent: "Robust Real Estate Tools",
+  titleLead: "Modern Technologies For Building",
+  titleAccent: "Dependable Real Estate Tools",
   body:
-    "Four capabilities carry most of the value in a property platform. We pick between them on evidence — the cheapest model that clears your accuracy bar wins.",
+    "Four capabilities carry most of the value in a property platform. We pick between them on evidence. The cheapest model that clears your accuracy bar wins.",
   ctaText: "View all services",
   items: [
     {
@@ -238,7 +238,7 @@ export const technologies = {
 export const midCta = {
   title: "Craft Your Ideal Real Estate Software Solution",
   body:
-    "Bring us the part of the portfolio that costs you the most time — valuation, lead follow-up, transactions, maintenance — and we will map the fastest route to a working system, the integrations it needs and what it should return.",
+    "Bring us the part of the portfolio that costs you the most time (valuation, lead follow-up, transactions, maintenance) and we will map the fastest route to a working system, the integrations it needs and what it should return.",
   ctaText: "Get In Touch Now!",
   background: midCtaBgImg,
 };
@@ -246,7 +246,7 @@ export const midCta = {
 export const benefits = {
   eyebrow: "Benefits of custom real estate software solutions",
   titleLead: "Discover How AI Can",
-  titleAccent: "Streamline Your Real Estate Operations",
+  titleAccent: "Simplify Your Real Estate Operations",
   items: [
     {
       title: "Better Property Valuation",
@@ -282,8 +282,8 @@ export const benefits = {
 };
 
 export const stakeholders = {
-  eyebrow: "Who benefits from our expertise?",
-  titleLead: "Empowering Every Stakeholder",
+  eyebrow: "Who this serves",
+  titleLead: "Every Role",
   titleAccent: "In Real Estate",
   items: [
     {
@@ -296,7 +296,7 @@ export const stakeholders = {
     {
       title: "Real Estate Agents",
       body:
-        "Scored leads, instant valuations, generated listing copy and a mobile pipeline that is current at the viewing, not after it — the admin that eats a selling day handled before the day starts.",
+        "Scored leads, instant valuations, generated listing copy and a mobile pipeline that is current at the viewing, not after it. The admin that eats a selling day is handled before the day starts.",
       image: stkAgentsImg,
       alt: "A real estate agent in a blue suit outside a property",
     },
@@ -313,7 +313,7 @@ export const stakeholders = {
 export const build = {
   title: "Working With Us Is An Investment In Your Future",
   body:
-    "We hold a deep bench across AI, data and property systems, deliver in increments your teams use from the first sprint, and keep communication direct — one team, your timezone overlap, no account layer between you and the engineers.",
+    "We hold a deep bench across AI, data and property systems, deliver in increments your teams use from the first sprint, and keep communication direct: one team, your timezone overlap, no account layer between you and the engineers.",
   ctaText: "Request a free consultation",
   texture: textureBgImg,
   image: buildVisualImg,
@@ -327,7 +327,7 @@ export const build = {
     {
       title: "Efficiency",
       body:
-        "Every build targets a number you already track — days on market, cost per lead, arrears rate — and is measured against it after go-live on the same definition.",
+        "Every build targets a number you already track (days on market, cost per lead, arrears rate) and is measured against it after go-live on the same definition.",
     },
     {
       title: "Smooth Communication",
@@ -403,11 +403,11 @@ export const businessTypes = {
   titleLead: "Explore The Range Of",
   titleAccent: "Real Estate Businesses We Can Work With",
   body:
-    "We build custom AI-powered real estate software that drives measurable results — whether you are launching a first listing product or running a multi-country portfolio on legacy systems.",
+    "We build custom AI-powered real estate software that drives measurable results, whether you are launching a first listing product or running a multi-country portfolio on legacy systems.",
   rows: [
     {
       label: "Startups",
-      body: "We help proptech founders get a first product live fast: a working listing or CRM core, the MLS and payment integrations that unlock a pilot customer, and the metrics that prove the model before the next raise.",
+      body: "We help proptech founders get a first product live fast: a working listing or CRM core, the MLS and payment integrations that win a pilot customer, and the metrics that prove the model before the next raise.",
     },
     {
       label: "Scale-ups",
@@ -426,8 +426,8 @@ export const businessTypes = {
 
 export const testimonials = {
   eyebrow: "Why is it worth working with us?",
-  titleLead: "Why Our Clients Trust Us",
-  titleAccent: "For Top-Notch AI Solutions",
+  titleLead: "Why Property Teams",
+  titleAccent: "Keep Coming Back",
   items: [
     {
       name: "Abdullah",
@@ -458,7 +458,7 @@ export const showcase = {
   titleLead: "Showcasing Our",
   titleAccent: "AI Development Projects",
   body:
-    "Explore the portfolio behind our real estate work — platforms that value, list, transact and manage property at scale for agencies, developers and investors.",
+    "Explore the portfolio behind our real estate work: platforms that value, list, transact and manage property at scale for agencies, developers and investors.",
   ctaText: "Check Out Our Full Portfolio",
 };
 
@@ -475,7 +475,7 @@ export const partner = {
     },
     {
       icon: "Layers",
-      title: "Seamless Integration",
+      title: "Integration That Fits",
       body:
         "MLS and RESO feeds, Yardi and MRI, DocuSign, payments, identity and accounting connect through APIs against a hardened property data model, which removes the re-keying that creates most listing and ledger errors.",
     },
@@ -498,7 +498,7 @@ export const blogs = {
   eyebrow: "What can our expertise teach you?",
   title: "Our Blogs",
   body:
-    "Practical writing on where AI actually earns its place in a property business — agentic chatbots, automated CMA, investor reporting and the governance that keeps all three defensible.",
+    "Practical writing on where AI actually earns its place in a property business: agentic chatbots, automated CMA, investor reporting and the governance that keeps all three defensible.",
   posts: [
     {
       title: "A Complete Guide To Agentic AI Chatbot Development For Real Estate",
@@ -536,7 +536,7 @@ export const faqs = [
   },
   {
     q: "How accurate are AI property valuations?",
-    a: "On a portfolio with clean transaction history, we typically land within single-digit percentage error on median-priced stock, and wider on unusual or thinly traded properties. That is why every valuation ships with a confidence band and the comparables behind it — the model is a fast first opinion for an agent, not a replacement for one.",
+    a: "On a portfolio with clean transaction history, we typically land within single-digit percentage error on median-priced stock, and wider on unusual or thinly traded properties. That is why every valuation ships with a confidence band and the comparables behind it. The model is a fast first opinion for an agent, not a replacement for one.",
   },
   {
     q: "Can you integrate with our MLS, portals and accounting systems?",
@@ -544,7 +544,7 @@ export const faqs = [
   },
   {
     q: "How long does a real estate platform take to build?",
-    a: "A scoped MVP around one capability — a listing portal, a CRM core, a valuation service — typically runs eight to twelve weeks to a live pilot. A full platform covering listings, CRM, transactions and property management runs four to nine months, delivered in increments your team uses from the first sprint rather than at the end.",
+    a: "A scoped MVP around one capability (a listing portal, a CRM core, a valuation service) typically runs eight to twelve weeks to a live pilot. A full platform covering listings, CRM, transactions and property management runs four to nine months, delivered in increments your team uses from the first sprint rather than at the end.",
   },
   {
     q: "What does it cost, and how do you price it?",
@@ -552,11 +552,11 @@ export const faqs = [
   },
   {
     q: "Who owns the data and the models you train?",
-    a: "You do — the codebase, the data and any model trained on your transactions. Deployment runs where your policies require, including private cloud or on-premise, and we do not train shared models on your portfolio.",
+    a: "You do: the codebase, the data and any model trained on your transactions. Deployment runs where your policies require, including private cloud or on-premise, and we do not train shared models on your portfolio.",
   },
   {
     q: "Why choose Axiomra as your real estate software development partner?",
-    a: "Because we build for operators rather than demos. Our teams work inside your actual constraints — MLS rules, jurisdiction-specific compliance, legacy ledgers, the way your agents really work — validate every model against your own history before launch, and stay engaged for 60 days afterward to tune it and train the people who use it daily.",
+    a: "Because we build for operators rather than demos. Our teams work inside your actual constraints (MLS rules, jurisdiction-specific compliance, legacy ledgers, the way your agents really work), validate every model against your own history before launch, and stay engaged for 60 days afterward to tune it and train the people who use it daily.",
   },
 ];
 

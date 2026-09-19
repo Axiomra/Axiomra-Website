@@ -44,19 +44,23 @@ export const computerVisionListingImage = heroFaceMesh;
 /* Hero */
 
 export const hero = {
-  eyebrow: "Computer Vision Development Company",
-  titleLead: "Custom Computer Vision",
-  titleAccent: "Development Services",
-  titleTail: "That Deliver Real ROI",
+  eyebrow: "Computer Vision Development",
+  titleLead: "Computer Vision",
+  titleAccent: "Development",
+  titleTail: "for Your Business Operations",
   body:
-    "Most businesses sit on a goldmine of visual data and get nothing from it. Axiomra builds production-ready computer vision systems that turn your images, video, and camera feeds into decisions, savings, and growth, deployed across manufacturing, healthcare, retail, and logistics.",
-  ctaText: "Request A Free Consultation",
-  secondaryCtaText: "See What We Build",
+    "Axiomra builds computer vision systems that read images, video, and camera feeds and turn them into information your team can act on. We assess what your existing cameras and data can support, agree accuracy and latency targets before development, and deploy to the edge or the cloud to suit your environment.",
+  ctaText: "Book a Free Consultation",
+  secondaryCtaText: "Explore Our Capabilities",
   proof: { rating: "4.8", reviews: "300+ companies", source: "Reviewed on Clutch" },
+  /**
+   * Capability labels rather than statistics. Entries with no `value` render as a
+   * single label, so verified figures can be reinstated by adding `value:` here.
+   */
   stats: [
-    { value: "50+", label: "Vision systems shipped" },
-    { value: "99.2%", label: "Median model accuracy" },
-    { value: "30 ms", label: "Real-time inference" },
+    { label: "Detection and Tracking" },
+    { label: "Image and Video Analytics" },
+    { label: "Edge and Cloud Deployment" },
   ],
   /** The four textures the WebGL panel ring maps onto its planes. */
   panels: [
@@ -90,7 +94,7 @@ export const hero = {
 /* Framework / tooling bar */
 
 export const frameworkBar = {
-  label: "Built on the tooling your engineers already trust",
+  label: "Tools and frameworks we work with",
   items: [
     "OpenCV",
     "PyTorch",
@@ -106,55 +110,56 @@ export const frameworkBar = {
 /* Challenges */
 
 export const challenges = {
-  eyebrow: "Why visual data goes to waste",
-  titleAccent: "Turn Data Into Actionable Insights",
-  titleLead: "With Computer Vision",
+  eyebrow: "Working with visual data",
+  titleAccent: "Turn Visual Data",
+  titleLead: "Into Information You Can Use",
   intro:
-    "Businesses create a huge amount of visual data every day (camera feeds, scanned documents, inspection photos, product imagery) and most of it is reviewed by a person or never reviewed at all.",
-  listTitle: "The biggest problems we get called in to fix:",
+    "Most organisations record far more visual material than anyone can review: camera feeds, scanned documents, inspection photos, and product imagery. Much of it is checked by a person, and some of it is never checked at all.",
+  listTitle: "Common problems we are asked to solve:",
   problems: [
     {
-      title: "Manual visual review",
-      body: "People eyeballing frames, photos, or scans: slow, expensive, and inconsistent between shifts.",
+      title: "Manual Visual Review",
+      body: "Checking frames, photos, or scans by hand takes time and produces different results between people and shifts.",
     },
     {
-      title: "No real-time visibility",
-      body: "You find out about the defect, the intrusion, or the queue an hour after it mattered.",
+      title: "Limited Real-time Visibility",
+      body: "A defect, an obstruction, or a growing queue is often identified after the point where action would have helped.",
     },
     {
-      title: "Fraud and spoofing slip through",
-      body: "Identity checks and claims review that a printed photo or a replayed video can defeat.",
+      title: "Identity Checks That Can Be Defeated",
+      body: "Verification that relies on a static image can be passed with a printed photo or a replayed video.",
     },
     {
-      title: "Weak in-store and on-site experience",
-      body: "No usable data on footfall, dwell time, shelf gaps, or safety compliance.",
+      title: "Operational Data That Goes Unmeasured",
+      body: "Footfall, dwell time, shelf gaps, and safety compliance are not recorded because nobody has time to review the footage.",
     },
     {
-      title: "Legacy systems that cannot scale",
-      body: "A model that worked on ten cameras falls over at two hundred, or costs more than it saves.",
+      title: "Approaches That Do Not Scale",
+      body: "A setup that works on a handful of cameras can become unreliable or too costly to run across a larger estate.",
     },
   ],
   outro:
-    "Axiomra solves these with computer vision systems built around your workflow, from fraud detection in fintech and diagnostic support in healthcare, to real-time defect detection on the line and object recognition across logistics. The result is lower cost per review, faster decisions, and an audit trail you can defend.",
-  ctaText: "Request A Free Consultation",
+    "We design computer vision systems around your workflow and the equipment you already have, covering identity verification, document processing, inspection, and monitoring. Scope, accuracy targets, and the points where a person reviews an output are agreed with you before development begins.",
+  ctaText: "Book a Free Consultation",
   image: challengesMonitoring,
   imageAlt:
     "Dark monitoring room with terminals streaming live camera analysis output",
+  /** Capability labels, not measured results. See the note on `hero.stats`. */
   metrics: [
-    { value: "70%", label: "Less manual review time" },
-    { value: "24/7", label: "Continuous monitoring" },
-    { value: "12+", label: "Industries deployed in" },
+    { label: "Automated Review" },
+    { label: "Continuous Monitoring" },
+    { label: "Cross-industry Delivery" },
   ],
 };
 
 /* Service layers (numbered accordion) */
 
 export const services = {
-  eyebrow: "What computer vision services do we offer?",
-  titleAccent: "End To End",
-  titleLead: "Computer Vision Development Services",
+  eyebrow: "What we deliver",
+  titleAccent: "Computer Vision Services",
+  titleLead: "From Assessment to Deployment",
   subtitle:
-    "From consulting to deployment, we cover every stage of your computer vision project. Each service is built around your business problem, not a generic template.",
+    "We support every stage of a computer vision project, from the first feasibility question through to a system your team operates. Each service is scoped around your business problem and the data you hold.",
   items: [
     {
       id: "computer-vision-consulting",
@@ -163,58 +168,58 @@ export const services = {
         "Consultants reviewing charts and a roadmap on a whiteboard during a scoping workshop",
       title: "Computer Vision Consulting",
       body:
-        "Not sure where to start? Our consultants review your business goals, existing data, and technical setup. You get a clear plan that tells you what to build, how long it will take, and what it will cost, plus which use cases are worth doing first, whether your data is ready, and which technology fits your budget and timeline. No guesswork, no overselling.",
-      deliverables: ["Use-case scoring", "Data readiness audit", "Build vs. buy call", "Costed roadmap"],
+        "We review your business goals, the visual data you already hold, and your technical setup, then set out what can realistically be built. You receive a prioritised list of use cases, an assessment of whether your data supports them, and a roadmap with estimated effort, cost, and dependencies.",
+      deliverables: ["Prioritised use cases", "Data readiness assessment", "Build or buy assessment", "Roadmap with estimates"],
     },
     {
       id: "custom-vision-software",
       image: serviceCustomSoftware,
       imageAlt:
         "Developer writing production code across two monitors in a darkened studio",
-      title: "Custom Computer Vision Software Development",
+      title: "Custom Computer Vision Development",
       body:
-        "End-to-end builds: data pipeline, model, inference service, and the UI your team actually works in. We write production code: versioned, tested, containerised, and handed over with the repo, not a notebook.",
-      deliverables: ["Training pipelines", "Inference APIs", "Operator dashboards", "Edge + cloud builds"],
+        "We build the full solution: the data pipeline, the model, the inference service, and the interface your team works in. Code is versioned, tested, and containerised, and the repository is handed over with documentation for the people who will maintain it.",
+      deliverables: ["Training pipelines", "Inference APIs", "Operator dashboards", "Edge and cloud builds"],
     },
     {
       id: "model-design-optimization",
       image: serviceModelOptimization,
       imageAlt:
         "Processor seated in its socket on a motherboard, lit by the rig it trains on",
-      title: "Computer Vision Model Design And Optimization",
+      title: "Model Design and Optimisation",
       body:
-        "Architecture selection, transfer learning, and hard-negative mining to get accuracy up, then quantisation, pruning, and TensorRT/ONNX conversion to get latency and GPU cost down without losing the accuracy you just paid for.",
-      deliverables: ["Architecture selection", "Quantisation & pruning", "Latency budgeting", "Accuracy regression suites"],
+        "We select an architecture suited to your task and hardware, then apply transfer learning and targeted training to reach the agreed quality level. Quantisation, pruning, and conversion to ONNX or TensorRT reduce latency and running cost, with accuracy re-tested after each change.",
+      deliverables: ["Architecture selection", "Quantisation and pruning", "Latency budgeting", "Accuracy regression tests"],
     },
     {
       id: "system-integration",
       image: serviceIntegration,
       imageAlt:
         "Operator watching a wall of live camera feeds inside a monitoring room",
-      title: "Computer Vision System Integration",
+      title: "System Integration",
       body:
-        "The model is the easy part. We wire it into your cameras, PLCs, PACS, WMS, ERP, or CRM so detections become tickets, alerts, and records inside the systems your team already uses.",
-      deliverables: ["Camera & RTSP ingest", "ERP/CRM/PACS hooks", "Event streaming", "Alerting & escalation"],
+        "We connect the model to your cameras, PLCs, PACS, WMS, ERP, or CRM so that detections arrive as tickets, alerts, and records in the systems your team already uses. Integration work covers authentication, expected volumes, and behaviour when a component is unavailable.",
+      deliverables: ["Camera and RTSP ingest", "ERP, CRM and PACS integration", "Event streaming", "Alerting and escalation"],
     },
     {
       id: "proof-of-concept",
       image: servicePoc,
       imageAlt:
         "Engineer testing a projected interface prototype on her own hand in the lab",
-      title: "Computer Vision Proof Of Concept (PoC)",
+      title: "Proof of Concept",
       body:
-        "A time-boxed build on your own data that answers one question honestly: is this technically possible at the accuracy your business needs? You get the numbers, the failure cases, and a straight recommendation, including when the answer is no.",
-      deliverables: ["4-6 week timebox", "Your data, your metrics", "Documented failure modes", "Go / no-go report"],
+        "A time-boxed build on your own data to establish whether the use case is achievable at the accuracy your business needs. You receive the evaluation results, the cases where the model failed, and a recommendation on whether to proceed.",
+      deliverables: ["Agreed timebox", "Your data and success measures", "Documented failure modes", "Proceed or stop recommendation"],
     },
     {
       id: "vision-data-services",
       image: serviceData,
       imageAlt:
         "Annotator reviewing a contact sheet of candidate training images on screen",
-      title: "Computer Vision Data Services",
+      title: "Vision Data Services",
       body:
-        "Collection, cleaning, annotation, and augmentation, plus synthetic data generation when real-world samples are scarce, expensive, or legally restricted. Labelled to a written spec with QA sampling on every batch.",
-      deliverables: ["Annotation at scale", "Synthetic data generation", "Label QA sampling", "Dataset versioning"],
+        "Collection, cleaning, annotation, and augmentation of your visual data, with synthetic generation where real examples are limited, costly to capture, or restricted. Labelling follows a written specification, and each batch is sampled for quality before it enters training.",
+      deliverables: ["Annotation at scale", "Synthetic data generation", "Label quality sampling", "Dataset versioning"],
     },
   ],
 };
@@ -222,11 +227,11 @@ export const services = {
 /* Capability rows (motif-driven, no photography) */
 
 export const expertise = {
-  eyebrow: "Our computer vision expertise",
-  titleAccent: "Enhance Business Efficiency With Our",
-  titleLead: "Computer Vision Expertise",
+  eyebrow: "Our computer vision capabilities",
+  titleAccent: "Computer Vision Capabilities",
+  titleLead: "for Your Use Case",
   subtitle:
-    "Each capability below is a standalone system we have delivered in production. Every diagram is a live wireframe of what the model actually outputs: boxes, meshes, keypoints, masks, and text regions.",
+    "Each capability below can be delivered on its own or combined into a larger system. The diagrams show the form the model output takes: boxes, meshes, keypoints, masks, and text regions.",
   items: [
     {
       id: "object-detection",
@@ -235,7 +240,7 @@ export const expertise = {
       imageAlt: "Warehouse camera feed with detected items outlined by bounding boxes",
       title: "Object Detection",
       body:
-        "Identify, locate, and track objects in images and video streams in real time, with a confidence score attached to every prediction. We build detection systems for quality control, security monitoring, inventory management, and logistics automation, tuned to the cameras and lighting you already have on site. Models are trained on your own footage rather than generic public datasets, so they learn the exact parts, packaging, and edge cases your operation deals with. Everything runs on the edge or in the cloud depending on the latency and bandwidth your environment allows.",
+        "Identify, locate, and track objects in images and video streams, with a confidence score attached to every prediction. We build detection systems for quality control, security monitoring, inventory management, and logistics, tuned to the cameras and lighting already installed on your sites. Models are trained on your own footage rather than generic public datasets, so they learn the parts, packaging, and edge cases your operation deals with. Inference runs at the edge or in the cloud, chosen against the latency and bandwidth your environment allows.",
       bullets: [
         "Real-time object detection and classification",
         "Bounding box annotation and labeling",
@@ -251,7 +256,7 @@ export const expertise = {
       imageAlt: "Face captured by an access-control camera during identity verification",
       title: "Facial Recognition",
       body:
-        "Secure facial recognition for identity verification, access control, and customer analytics, built to hold accuracy across lighting conditions, camera angles, masks, and ageing. Our matching pipelines scale from a single door reader to millions of enrolled faces without a drop in response time. Liveness checks sit in front of every match, so printed photos, screen replays, and deepfake attempts are rejected before they reach the database. Templates are encrypted and stored as irreversible vectors, which keeps deployments aligned with GDPR and regional biometric rules.",
+        "Facial recognition for identity verification, access control, and customer analytics, tested across the lighting conditions, camera angles, and coverings your sites actually see. Matching pipelines are sized to your enrolled population, from a single door reader upwards. Liveness checks run ahead of every match so printed photos, screen replays, and synthetic video are rejected before a comparison is made. Templates are encrypted and stored as vectors rather than images, and the applicable biometric and privacy requirements are reviewed with your team before deployment.",
       bullets: [
         "Face matching and verification",
         "Biometric identification",
@@ -268,7 +273,7 @@ export const expertise = {
       imageAlt: "Person tracked by a camera while joint keypoints map their posture",
       title: "Pose Estimation",
       body:
-        "Detect body position, joint angles, and movement over time with keypoint-level accuracy, from a single camera or a multi-view rig. The same models power patient mobility monitoring, physiotherapy progress tracking, sports biomechanics, gesture-driven interfaces, and workplace safety compliance. We track posture across frames rather than scoring isolated images, so the system can flag a fall, a repetitive strain risk, or a missed safety step as it happens. Output streams as structured coordinates your own analytics tools can read directly.",
+        "Detect body position, joint angles, and movement over time at keypoint level, from a single camera or a multi-view setup. The same approach supports patient mobility monitoring, physiotherapy progress tracking, sports biomechanics, gesture-driven interfaces, and workplace safety checks. Posture is tracked across frames rather than scored on isolated images, so the system can flag a fall, a repetitive strain risk, or a missed safety step as it occurs. Output is delivered as structured coordinates your own analytics tools can read.",
       bullets: [
         "2D and 3D pose estimation",
         "Gesture recognition",
@@ -285,7 +290,7 @@ export const expertise = {
       imageAlt: "High-resolution scan being segmented region by region for inspection",
       title: "Image Analytics",
       body:
-        "We segment images at the pixel level so every region in a frame is classified, not just boxed. That precision is what medical imaging, autonomous systems, satellite analysis, and industrial inspection need when the difference between a pass and a defect is a few hundred pixels. Our models separate overlapping objects, backgrounds, and fine boundaries, and hold up on low-contrast, noisy, or high-resolution source images. Results are delivered as masks, measurements, and area statistics that plug straight into reporting.",
+        "We segment images at pixel level so each region in a frame is classified rather than only enclosed in a box. That level of detail is what medical imaging, autonomous systems, satellite analysis, and industrial inspection require when a pass and a defect differ by a small area. Models are evaluated on overlapping objects, fine boundaries, and low-contrast or noisy source images before deployment. Results are delivered as masks, measurements, and area statistics that feed directly into your reporting.",
       bullets: [
         "Semantic segmentation",
         "Panoptic segmentation",
@@ -301,7 +306,7 @@ export const expertise = {
       imageAlt: "Video wall reviewing movement and behaviour across multiple camera feeds",
       title: "Video Analytics",
       body:
-        "Turn raw footage into structured business intelligence instead of hours nobody has time to review. Our video analytics monitor behaviour across frames, detect anomalies, count and classify movement, and automate reporting across retail, logistics, transport, and security environments. Because the system understands sequence, it can tell the difference between someone waiting and someone loitering, or a stopped vehicle and a blocked exit. Alerts, dashboards, and forensic search over archives come as part of the delivery, not as a separate product.",
+        "Convert recorded footage into structured data instead of hours of material nobody has time to review. Video analytics monitor behaviour across frames, detect anomalies, count and classify movement, and produce reporting for retail, logistics, transport, and security environments. Because the model reads sequence rather than single frames, it can distinguish waiting from loitering, or a stopped vehicle from a blocked exit. Alerts, dashboards, and search across archived footage are part of the delivery.",
       bullets: [
         "Queue management and counting",
         "Automatic licence plate recognition",
@@ -317,7 +322,7 @@ export const expertise = {
       imageAlt: "Scanned document being read line by line into structured fields",
       title: "Optical Character Recognition",
       body:
-        "Extract text from photographs, scanned documents, handwritten forms, and video frames, then return it as structured, searchable data rather than a flat text dump. We fine-tune deep learning models on your own document types, fonts, and layouts, which is how we reach accuracy levels off-the-shelf OCR tools cannot get near on domain material. Tables, multi-column layouts, stamps, degraded scans, and multilingual pages are handled as first-class cases. The output maps to your fields, so downstream systems get values they can validate instead of paragraphs someone has to retype.",
+        "Extract text from photographs, scanned documents, handwritten forms, and video frames, and return it as structured, searchable data rather than a block of plain text. Models are fine-tuned on your own document types, fonts, and layouts, which generally performs better on specialist material than a general-purpose OCR tool. Tables, multi-column layouts, stamps, degraded scans, and multilingual pages are handled as part of the scope. The output maps to your fields, so downstream systems receive values they can validate rather than text someone has to re-key.",
       bullets: [
         "OCR clean-up services",
         "Document scanning and digitisation",
@@ -333,7 +338,7 @@ export const expertise = {
       imageAlt: "Synthetic imagery generated to fill gaps in a vision training set",
       title: "GAN-Based Image Generation",
       body:
-        "We use generative adversarial networks to create synthetic training data, enhance image quality, and generate visual content at scale. This matters most when real-world data is limited, expensive to capture, or legally restricted, such as rare manufacturing defects or patient imaging that cannot leave the hospital. Generated samples are balanced against your real distribution so the model learns the rare cases without drifting away from reality. The same techniques handle super-resolution, denoising, style transfer, and augmentation for pipelines that are starved of examples.",
+        "Generative models are used to create synthetic training data, improve image quality, and produce visual content at volume. This matters most when real examples are limited, costly to capture, or restricted, such as rare manufacturing defects or patient imaging that cannot leave the hospital. Generated samples are balanced against your real data distribution so the model learns uncommon cases without drifting from the conditions it will meet in production. The same techniques cover super-resolution, denoising, style transfer, and augmentation.",
       bullets: [
         "Synthetic data generation for training",
         "Style transfer and visual simulation",
@@ -347,11 +352,11 @@ export const expertise = {
 /* Case studies */
 
 export const caseStudies = {
-  eyebrow: "Real projects. Real results.",
-  titleLead: "Showcasing Our",
-  titleAccent: "Computer Vision Development Projects",
+  eyebrow: "Selected projects",
+  titleLead: "Computer Vision Projects",
+  titleAccent: "We Have Delivered",
   subtitle:
-    "Here are computer vision solutions we have built for real clients. Each project started with a specific business problem and ended with a measurable outcome.",
+    "Examples of computer vision systems we have built. Each began with a defined business problem, an agreed measure of success, and a scope set with the client before development started.",
   image: caseStudyAnalytics,
   imageAlt:
     "Analyst workstation showing a live vision analytics dashboard in a dark room",
@@ -392,7 +397,7 @@ export const caseStudies = {
       results: [
         { value: "43%", label: "Faster urgent turnaround" },
         { value: "0", label: "Autonomous diagnoses made" },
-        { value: "HIPAA", label: "Compliant deployment" },
+        { value: "On-prem", label: "Deployed inside the hospital network" },
       ],
     },
   ],
@@ -401,13 +406,13 @@ export const caseStudies = {
 /* Industries */
 
 export const industries = {
-  eyebrow: "What industries do we specialize in?",
-  titleAccent: "Where We Have Deployed",
-  titleLead: "Computer Vision Software",
+  eyebrow: "Industries we work with",
+  titleAccent: "Computer Vision",
+  titleLead: "Across Industries",
   subtitle:
-    "We have built and deployed computer vision systems across 12+ industries. Each solution is built around the specific workflows, data types, and compliance requirements of that industry.",
+    "We build computer vision systems for a range of sectors. Each solution is shaped around the workflows, data types, and regulatory requirements that apply to your industry, which we review with your team during scoping.",
   imageCaption:
-    "Same models, different rules, and the rules are where vision projects fail.",
+    "The models are similar across sectors; the rules around them are not.",
   items: [
     {
       name: "Healthcare",
@@ -424,7 +429,7 @@ export const industries = {
         "Hospital safety compliance (PPE detection, fall detection)",
         "Chronic disease progression tracking through imaging",
       ],
-      note: "HIPAA-compliant deployments available for every healthcare build.",
+      note: "Data handling, hosting, and retention for healthcare builds are agreed with your compliance team before deployment.",
     },
     {
       name: "Retail And E-Commerce",
@@ -507,38 +512,38 @@ export const industries = {
 /* Technology stack */
 
 export const stack = {
-  eyebrow: "Which technologies do we use?",
-  titleAccent: "Technologies We Use",
-  titleLead: "For Computer Vision Development",
+  eyebrow: "Technologies we work with",
+  titleAccent: "The Technology Behind",
+  titleLead: "Your Computer Vision System",
   subtitle:
-    "Proven, production-tested tools across every layer of our computer vision process. Here is what we use and why.",
+    "Established, well-supported tools across every layer of the build. The selection for your project is made against your data, your hardware, and the people who will maintain it.",
   image: modelPipeline,
   imageAlt:
     "Illustration of a layered neural network pipeline rendered as translucent panels",
   groups: [
     {
       name: "Core Frameworks And Libraries",
-      why: "The layer where accuracy is won or lost. We stay on mainstream, well-maintained frameworks so your system is still supportable in three years.",
+      why: "The foundation the models are built on. We keep to widely used, actively maintained frameworks so your system remains supportable over time.",
       items: ["OpenCV", "PyTorch", "TensorFlow", "Keras", "scikit-image", "MediaPipe", "Albumentations", "NumPy"],
     },
     {
       name: "Model Architectures",
-      why: "Chosen per problem and latency budget, not per fashion. Every choice is benchmarked on your data before it ships.",
+      why: "Selected for the task and the latency budget it has to meet. Candidate architectures are evaluated on your data before one is chosen.",
       items: ["YOLOv8", "Detectron2", "ResNet-50", "EfficientNet", "InceptionV3", "Segment Anything", "U-Net", "Vision Transformers"],
     },
     {
       name: "Serving And Optimization",
-      why: "Where GPU bills are decided. Quantisation and graph optimisation routinely cut inference cost by half.",
+      why: "This layer determines running cost. Quantisation and graph optimisation reduce inference cost, and we measure the effect on your workload rather than assume it.",
       items: ["ONNX Runtime", "NVIDIA TensorRT", "Triton Inference Server", "TorchServe", "OpenVINO", "CoreML", "DeepStream"],
     },
     {
       name: "Data And MLOps",
-      why: "Reproducibility is what separates a demo from a system you can retrain next quarter.",
+      why: "Versioned data, tracked experiments, and repeatable pipelines, so the system can be retrained and audited later by someone who was not on the original team.",
       items: ["MLflow", "DVC", "Label Studio", "CVAT", "Weights & Biases", "Airflow", "Docker", "Kubernetes"],
     },
     {
       name: "Edge And Cloud",
-      why: "Placement follows bandwidth and privacy, not preference. Frames that cannot leave the site get inferred on the site.",
+      why: "Where inference runs is decided by bandwidth, latency, and data handling requirements. Footage that should not leave a site is processed on that site.",
       items: ["NVIDIA Jetson", "AWS Panorama", "Azure IoT Edge", "Google Vertex AI", "AWS SageMaker", "Raspberry Pi + Coral"],
     },
   ],
@@ -547,12 +552,13 @@ export const stack = {
 /* Process */
 
 export const process = {
-  eyebrow: "What is our process for computer vision development?",
-  titleLead: "Our Process For Building",
-  titleAccent: "Computer Vision Software",
+  eyebrow: "How we work",
+  titleLead: "Our",
+  titleAccent: "Computer Vision Development",
+  titleTail: "Process",
   subtitle:
-    "A structured 8-step process that takes your project from the first conversation to a live, production-ready system that your team can actually operate. Every step has named deliverables, a clear owner, and an exit condition, so you always know what has been done, what is happening now, and what comes next. Nothing moves forward on assumption, and nothing is handed over without documentation.",
-  ctaText: "Contact Us Now",
+    "A structured process that takes a project from the first conversation to a system your team operates. Each stage has defined deliverables, a named owner, and an exit condition, so the current state of the work is always clear and nothing is handed over without documentation.",
+  ctaText: "Discuss Your Requirements",
   steps: [
     {
       title: "Discovery And Use-Case Definition",
@@ -590,9 +596,9 @@ export const process = {
         "We deploy to edge devices, cloud, or a hybrid of both, depending on the latency, bandwidth, and privacy constraints your environment imposes. The system is wired into the tools your team already uses, whether that is an ERP, a WMS, a VMS, or an internal dashboard, so nobody has to learn a second interface. Monitoring, logging, and alerting go live at the same time, which means accuracy drift shows up on a dashboard early instead of arriving as a customer complaint.",
     },
     {
-      title: "Monitoring, Retraining, And Support",
+      title: "Monitoring, Retraining, and Support",
       body:
-        "Vision models decay as cameras get replaced, lighting changes, packaging is redesigned, and new product lines appear. We monitor live accuracy against your baseline, flag drift as it develops, and retrain on an agreed schedule using the fresh data production generates. For 60 days after launch our team stays available at no extra cost to fix issues, answer questions, and coach your staff, and beyond that we offer a support arrangement sized to how critical the system is to your operation.",
+        "Vision models lose accuracy over time as cameras are replaced, lighting changes, packaging is redesigned, and new product lines appear. We monitor live performance against your baseline, flag drift as it develops, and retrain on an agreed schedule using the data production generates. A post-launch support period is included in the engagement, and longer-term support is arranged to suit how critical the system is to your operation.",
     },
   ],
 };
@@ -600,29 +606,29 @@ export const process = {
 /* Outcomes */
 
 export const outcomes = {
-  eyebrow: "What you can optimize with computer vision",
-  titleAccent: "What You Gain From Our",
-  titleLead: "Advanced Computer Vision Development Services",
+  eyebrow: "What a vision system changes",
+  titleAccent: "What You Gain",
+  titleLead: "From a Computer Vision System",
   items: [
     {
-      title: "Scalability",
+      title: "Capacity to Scale",
       body:
-        "Deploy computer vision across multiple sites and hundreds of devices without a proportional increase in labour cost.",
+        "Extend the same system across additional sites and cameras without adding review staff in proportion to the volume.",
     },
     {
-      title: "Cost Reduction",
+      title: "Lower Operating Cost",
       body:
-        "Automate repetitive visual tasks to cut manual effort and lower operational expenses over time.",
+        "Automating repetitive visual checks reduces the manual effort involved and the cost of running the process over time.",
     },
     {
-      title: "Automation Of Visual Tasks",
+      title: "Automated Visual Checks",
       body:
-        "Streamline processes like manufacturing quality control and inventory sorting, minimising errors and accelerating results.",
+        "Routine work such as quality control and inventory sorting runs continuously, with results recorded rather than re-keyed.",
     },
     {
-      title: "Enhanced Accuracy",
+      title: "Consistent Review",
       body:
-        "In applications like medical image analysis, computer vision identifies anomalies with greater consistency than human observers sustain across a full shift.",
+        "A model applies the same criteria to every image, which removes the variation that appears between people and across a long shift.",
     },
   ],
 };
@@ -630,12 +636,12 @@ export const outcomes = {
 /* Why us */
 
 export const whyUs = {
-  eyebrow: "Why choose us?",
-  titleAccent: "What Sets Us Apart From",
-  titleLead: "Other Computer Vision Companies",
+  eyebrow: "Why work with Axiomra",
+  titleAccent: "Why Choose Axiomra",
+  titleLead: "for Computer Vision Development",
   subtitle:
-    "There are a lot of computer vision companies out there. Here is why businesses choose Axiomra and stay with us after the first project.",
-  ctaText: "Request A Free Consultation",
+    "What clients tell us matters when they choose a computer vision partner, and what we commit to on every engagement.",
+  ctaText: "Book a Free Consultation",
   stats: [
     {
       value: "300+",
@@ -660,34 +666,34 @@ export const whyUs = {
   ],
   reasons: [
     {
-      title: "We Build For Production, Not Just Demos",
+      title: "Built for Operational Use",
       body:
-        "A lot of AI vendors deliver a proof of concept and disappear. We build systems that run in live environments, handle real data volumes, and stay accurate over time. Every solution we deliver is tested, integrated, and production-ready before handover.",
+        "We build systems intended to run in live environments, against real data volumes and the conditions your cameras actually see. Before handover, the solution is tested, integrated with your systems, and documented for the team that will run it.",
     },
     {
-      title: "End-To-End Computer Vision Development",
+      title: "One Team Across the Full Lifecycle",
       body:
-        "We handle the full lifecycle in-house: strategy, data preparation, model training, UI development, system integration, deployment, and ongoing maintenance. You work with one team from start to finish, no handoff gaps, no finger-pointing when something needs fixing.",
+        "Strategy, data preparation, model training, interface development, integration, deployment, and maintenance are handled by the same team. You have a single point of accountability from the first assessment through to support.",
     },
     {
-      title: "60 Days Of Free Tech Support After Launch",
+      title: "Post-launch Engineering Support",
       body:
-        "After your system goes live, our team stays available for 60 days at no extra cost. We fix issues, answer questions, and make sure your team is confident using the system. Most vendors walk away at deployment. We do not.",
+        "A support period is included after your system goes live, covering fixes, questions, and help for the people using the system day to day. The length and scope are set out in the engagement before work begins.",
     },
     {
-      title: "Team Coaching And Knowledge Transfer",
+      title: "Training for the People Who Use It",
       body:
-        "We do not hand over a black box. After deployment, we run coaching sessions on how the system works, how to interpret outputs, and how to flag issues early. Your team leaves the engagement self-sufficient.",
+        "After deployment we run sessions on how the system works, how to read its outputs, and how to raise an issue early. The aim is that your team can operate and question the system without depending on us.",
     },
     {
-      title: "Transparent Communication Throughout",
+      title: "Visibility at Every Stage",
       body:
-        "You get full visibility into every stage of your project. From the first data audit to the final deployment, you can see what our team is working on, what decisions are being made, and what results we are tracking. No black boxes, no surprises, no scope creep without your approval.",
+        "You can see what the team is working on, which decisions have been made, and what results are being tracked, from the first data assessment to deployment. Changes to scope are agreed with you rather than absorbed quietly.",
     },
     {
-      title: "Solutions Built Around Your Business Goals",
+      title: "Scoped Around Your Objectives",
       body:
-        "We start every project by understanding what success looks like for your business, not just what the model needs to achieve technically. Every decision ties back to your operational goals, reducing defect rates, cutting manual review time, or improving customer experience.",
+        "We start by establishing what success means for your operation, not only what the model needs to achieve technically. Decisions are tied back to that objective, whether it is fewer defects reaching customers, less manual review, or faster turnaround.",
     },
   ],
 };
@@ -697,34 +703,34 @@ export const whyUs = {
 export const faqs = [
   {
     q: "What are computer vision services?",
-    a: "Computer vision services cover everything needed to make software understand images and video: consulting on the right use case, collecting and labelling visual data, training and optimising models, integrating them with your existing systems, and running them in production. In practice it means turning camera feeds, scans, and photos into decisions your business can act on automatically.",
+    a: "Computer vision services cover the work needed to make software interpret images and video: identifying a suitable use case, collecting and labelling visual data, training and optimising models, integrating them with your existing systems, and running them in production. In practice it means turning camera feeds, scans, and photos into information your business can act on.",
   },
   {
     q: "How much does computer vision software development cost?",
-    a: "A scoped proof of concept on your own data typically runs 4-6 weeks. A full production system depends on camera count, accuracy target, edge versus cloud deployment, and how much labelled data already exists. We give a costed range after the data audit rather than a headline number before it. Anyone quoting you a fixed price without seeing your data is guessing.",
+    a: "Cost depends on the number of cameras, the accuracy target, whether the system runs at the edge or in the cloud, and how much labelled data already exists. We provide a costed range after the data assessment rather than a figure before it, so the estimate reflects your data rather than an average.",
   },
   {
     q: "How long does it take to build a computer vision solution?",
-    a: "A PoC is usually 4-6 weeks. Most production deployments land in 3-5 months, with data preparation being the step that varies most. If you already have clean labelled data and fixed camera positions, it moves considerably faster.",
+    a: "Timelines are set during scoping and depend mainly on the state of your data. Data preparation is the stage that varies most; where clean labelled data and fixed camera positions already exist, the build moves considerably faster. We give an estimated schedule with the proposal.",
   },
   {
     q: "How much data do I need to train a computer vision model?",
-    a: "It depends on how visually distinct your classes are. With transfer learning, a few hundred well-labelled examples per class is often enough to get a usable baseline; subtle defect detection can need thousands. Where real samples are scarce, we use synthetic generation and augmentation to fill the gap, and we tell you honestly in the data audit if what you have is not enough.",
+    a: "It depends on how visually distinct the categories are. With transfer learning, a modest number of well-labelled examples per class is often enough for a usable baseline, while subtle defect detection needs considerably more. Where real samples are limited we use synthetic generation and augmentation, and the data assessment states plainly whether what you hold is sufficient.",
   },
   {
     q: "Can you integrate computer vision with our existing systems?",
-    a: "Yes. That is usually the larger half of the work. We integrate with RTSP and IP camera fleets, PLCs on the factory floor, PACS in healthcare, WMS in logistics, and your ERP or CRM, so detections turn into tickets, alerts, and records inside the tools your team already uses.",
+    a: "Yes, and it is usually a substantial part of the work. We integrate with RTSP and IP camera fleets, PLCs on the factory floor, PACS in healthcare, WMS in logistics, and your ERP or CRM, so detections become tickets, alerts, and records inside the tools your team already uses.",
   },
   {
     q: "Does computer vision work in poor lighting or with low-quality cameras?",
-    a: "Often, but it has limits, and we tell you where they are up front. We test against hostile conditions (low light, glare, occlusion, motion blur), during the evaluation stage and document the failure modes. Sometimes the right answer is a camera or lighting change rather than a bigger model, and we will say so.",
+    a: "Often, but there are limits and we identify them during evaluation. We test against difficult conditions such as low light, glare, occlusion, and motion blur, and document the cases where the model is unreliable. Sometimes the better fix is a change to the camera or the lighting rather than a larger model, and we will say so.",
   },
   {
-    q: "How do you handle privacy and compliance for facial recognition?",
-    a: "We design for the regulation that applies to you: HIPAA for healthcare, GDPR for EU subjects, and sector rules for finance. That typically means on-premise or edge inference so frames never leave your network, template-only storage instead of raw imagery, configurable retention, and a full audit trail of every match.",
+    q: "How do you handle privacy for facial recognition and other biometric data?",
+    a: "Data handling is agreed with your team before development. Depending on your requirements that can include on-premise or edge inference so frames stay on your network, storing encrypted templates rather than raw imagery, configurable retention periods, and logging of matches for review. We assess the privacy and sector rules that apply to your deployment with your compliance team rather than assuming them.",
   },
   {
     q: "What happens to accuracy after the system goes live?",
-    a: "Vision models drift as cameras age, lighting changes, and products get redesigned. We monitor live accuracy against a sampled ground truth, alert on drift, and retrain on a schedule agreed with you. Every launch includes 60 days of free support while the system settles.",
+    a: "Vision models drift as cameras age, lighting changes, and products are redesigned. We monitor live accuracy against a sampled ground truth, alert on drift, and retrain on a schedule agreed with you. A post-launch support period is included while the system settles into normal operation.",
   },
 ];

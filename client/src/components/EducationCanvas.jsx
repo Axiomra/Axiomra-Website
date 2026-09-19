@@ -6,11 +6,11 @@ import { makeDotTexture } from "../lib/dotTexture";
 /*
  * Backdrop for the Education hero. Three ideas, one scene:
  *
- *   Page    — a point field folded by a wave that travels along one axis, so
+ *   Page:     a point field folded by a wave that travels along one axis, so
  *             the sheet reads as pages turning rather than water.
- *   Ascent  — instanced sparks drifting upward and recycling: knowledge
+ *   Ascent:   instanced sparks drifting upward and recycling: knowledge
  *             moving up through the field.
- *   Cap     — a wireframe mortarboard on a slow tilt, with one thin ring for
+ *   Cap:      a wireframe mortarboard on a slow tilt, with one thin ring for
  *             an axis.
  *
  * Decorative and cheap: one shared geometry mutated in place, one instanced

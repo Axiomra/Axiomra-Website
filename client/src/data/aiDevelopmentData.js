@@ -16,10 +16,10 @@ export const AI_DEVELOPMENT_SLUG = "ai-development-services";
 
 export const hero = {
   eyebrow: "AI Development Company",
-  titleLead: "AI Development Services",
-  titleAccent: "Built For Business Results",
+  titleLead: "Custom AI Development",
+  titleAccent: "Services for Your Business",
   body:
-    "Work with a custom AI development partner that builds, integrates, and scales AI systems for your business. We help enterprises automate operations, reduce costs, and open new revenue streams with AI built around their goals. Every engagement starts with your workflow and your data, not a model demo, and ends with a system your team owns, monitors, and keeps improving in production.",
+    "Axiomra designs, builds, and integrates AI systems around your goals, workflows, and data. We help you automate routine operations, uncover useful insights, and develop AI capabilities your team can use and manage. From discovery to deployment, we focus on practical adoption and measurable outcomes.",
   ctaText: "Request A Free Consultation",
   proof: { rating: "5.0", reviews: "11 reviews", source: "Reviewed on Clutch" },
   image: heroAiTeam,
@@ -147,7 +147,7 @@ export const subServices = [
     id: "aiops",
     title: "AIOps",
     description:
-      "Enhance application performance, reduce IT expenses, and optimize operations with our tailored AIOps solutions. By leveraging AI-driven monitoring, predictive analytics, and automated incident resolution, our AI development services for businesses ensure exceptional user experiences and streamlined IT workflows. We correlate logs, metrics, and traces into a single signal so your on-call engineer sees one root cause instead of two hundred alerts, then automate the runbook steps that never needed a human in the first place, cutting mean time to resolution and the alert fatigue that comes with it.",
+      "Enhance application performance, reduce IT expenses, and optimize operations with our tailored AIOps solutions. Using AI-driven monitoring, predictive analytics, and automated incident resolution, our AI development services for businesses keep the user experience solid and tighter IT workflows. We correlate logs, metrics, and traces into a single signal so your on-call engineer sees one root cause instead of two hundred alerts, then automate the runbook steps that never needed a human in the first place, cutting mean time to resolution and the alert fatigue that comes with it.",
     image: aiops,
     imageAlt: "Hands holding a glowing AI operations dashboard of live charts and system metrics",
   },
@@ -189,11 +189,11 @@ export const capabilities = {
 
 export const industries = {
   eyebrow: "Industries we serve",
-  titleAccent: "AI Development Services",
-  titleLead: "Built For Your Industry",
+  titleAccent: "AI Development",
+  titleLead: "Tailored to Your Industry",
   subtitle:
-    "We build custom AI systems for businesses across 12+ industries. Every solution is built around the specific workflows, data, and goals of your industry, not a generic template.",
-  ctaText: "View all industries",
+    "We design AI solutions around your industry's workflows, data, and business priorities. Each engagement considers the operational requirements and constraints that shape successful adoption.",
+  ctaText: "Explore Industries",
   items: [
     {
       name: "Healthcare",
@@ -321,49 +321,49 @@ export const industries = {
 export const process = {
   eyebrow: "How we work",
   titleLead: "Our",
-  titleAccent: "AI Software Development",
-  titleTail: "Process Includes",
+  titleAccent: "AI Development",
+  titleTail: "Process",
   body:
-    "We follow a structured, technical process to build AI systems that work in the real world, not just in demos. Every step is designed to reduce risk, cut development time, and deliver AI that performs in production from day one.",
-  ctaText: "Contact us now",
+    "A structured approach takes your project from discovery to deployment, with clear decision points, testing, and team handover.",
+  ctaText: "Discuss Your Requirements",
   steps: [
     {
       title: "Discovery and Use Case Definition",
-      body: "We start with your business problem, not the model. We map the workflow, quantify the cost of the status quo, and agree on the success metric the system will be judged against before a single line of code is written. Where AI is the wrong tool (a rules engine, a better report, or a fixed process would do the job), we say so at this stage, while it is still cheap to change direction.",
+      body: "We map your workflow, understand the business problem, and establish success measures. We assess whether AI is suitable and agree on a practical scope before development begins.",
     },
     {
       title: "Data Assessment and Preparation",
-      body: "We audit the data you already hold (volume, quality, labelling, and access) then build the cleaning, augmentation, and feature pipelines the model needs. Where data is thin, we plan collection or synthetic generation up front. This is also where governance gets settled: what is personally identifiable, what may leave your infrastructure, and who is allowed to see what. Getting that wrong later is what stalls most enterprise AI projects at the security review.",
+      body: "We assess data availability, quality, labelling, and access, then prepare the pipelines needed for development. Where gaps exist, we agree on a collection or preparation plan. Data handling, access permissions, and governance requirements are defined at this stage.",
     },
     {
-      title: "Model Design, Training, and Evaluation",
-      body: "We select the right model architecture for your specific use case, whether that is a fine-tuned LLM, a computer vision model, a recommendation engine, or a custom ML model. We train on your prepared data, then run rigorous benchmark testing using precision, recall, F1 score, and task-specific metrics. We use RLHF where needed to align model outputs with real business requirements.",
+      title: "Model Selection and Evaluation",
+      body: "We select an approach suited to your use case, data, and performance requirements. Where appropriate, we train or fine-tune models and evaluate them using task-specific benchmarks. Testing covers output quality, errors, and the conditions in which human review is needed.",
     },
     {
       title: "System Architecture and Integration",
-      body: "The model becomes a product here: APIs, auth, rate limits, queues, and the integrations into your ERP, CRM, or internal tools. We design for the load you actually expect, with a clear fallback path when a model call fails. Inference cost is treated as a first-class constraint: caching, batching, and model routing are decided at architecture time, not discovered on the first month's bill.",
+      body: "We connect the AI capability to your ERP, CRM, and internal tools through a suitable application architecture. We plan authentication, expected usage, running costs, and fallback behaviour so the system fits your operational environment.",
     },
     {
       title: "Deployment and MLOps",
-      body: "We containerize, automate CI/CD, and ship to your cloud of choice with versioned models and reproducible builds. Rollback is a one-command operation, not an incident. Model weights, training data snapshots, and configuration are all versioned together, so any prediction the system made six months ago can be reproduced exactly, which is what a regulator, an auditor, or a serious bug investigation will eventually ask for.",
+      body: "We deploy to the agreed environment using controlled release processes, version management, and rollback procedures. We document model and configuration changes to support maintenance, troubleshooting, and traceability.",
     },
     {
       title: "Monitoring and Continuous Improvement",
-      body: "Live dashboards track latency, cost, accuracy, and drift. When real-world data moves away from the training distribution, we retrain on a schedule you can see rather than waiting for a complaint. Human feedback captured in the product feeds the next training round, so the system gets measurably better each quarter instead of quietly degrading while everyone assumes it still works as well as it did on launch day.",
+      body: "We monitor agreed measures such as response time, cost, output quality, and data drift. Usage insights and team feedback guide improvements, with model updates or retraining introduced when evaluation shows they are needed.",
     },
     {
-      title: "Support, Handover, and Team Enablement",
-      body: "We document the system, train your team to operate it, and stay on for post-launch support, so the AI keeps earning after we step back. Handover covers architecture notes, runbooks for the failures we anticipate, and working sessions with the engineers who will own it. The goal is a team that no longer needs us, and an option to keep us on when it suits you rather than because you are locked in.",
+      title: "Handover and Team Enablement",
+      body: "We provide system documentation, operational guidance, and practical training for the people who will manage the solution. Post-launch support follows the agreed scope, helping your team resolve issues and operate the system with confidence.",
     },
   ],
 };
 
 export const techStack = {
   eyebrow: "Our technology stack",
-  titleAccent: "AI Technologies We Use To Build",
-  titleLead: "Production-Ready Systems",
+  titleAccent: "The Technology Behind",
+  titleLead: "Your AI Solution",
   subtitle:
-    "We work with organizations at different growth stages, helping them adopt AI in ways that match their goals, resources, and technical readiness.",
+    "We select models, frameworks, cloud services, and data tools to fit your use case, existing infrastructure, security requirements, and budget. Explore the technologies that support our development approach.",
   ctaText: "View all tech stack",
   groups: [
     {
@@ -406,23 +406,23 @@ export const techStack = {
 };
 
 export const benefits = {
-  eyebrow: "Why choose us for your next big project?",
-  title: "Partnering With Us Is A Strategic Move For Future",
+  eyebrow: "Why work with Axiomra",
+  title: "Practical Support From Strategy to Adoption",
   items: [
     {
-      titleAccent: "Team Coaching to",
-      titleRest: "Get the Most Out of AI",
-      body: "We don't just build AI: we help your team use it. Our experts work closely with your team to teach them how to understand, use, and grow AI tools that fit your business needs. Hands-on sessions cover prompt design, model limits, and when to trust an output, so adoption sticks after we step back instead of fading once the launch excitement passes.",
+      titleAccent: "Hands-on",
+      titleRest: "Team Training",
+      body: "Help your team understand model capabilities, evaluate outputs, and use the solution effectively in everyday work.",
     },
     {
-      titleAccent: "Free $1000 AI",
+      titleAccent: "Free AI",
       titleRest: "Strategy Session",
-      body: "Start your AI journey with a free strategy session worth $1000. We'll learn about your goals, find areas where AI can help, and build a plan that fits your business. You walk away with a shortlist of use cases ranked by effort and return, plus an honest note on anything we think you should not build yet, no obligation to continue with us.",
+      body: "Explore your goals and prioritise potential use cases with a practical discussion of feasibility, effort, and value.",
     },
     {
-      titleAccent: "Extra 60 Days of",
-      titleRest: "Tech Support",
-      body: "We're here for you after the launch too. Get 60 extra days of technical support to make sure everything runs smoothly and your team gets the help they need during the early stages of using AI. That covers monitoring, tuning against real usage patterns, and fixing the edge cases that only surface once actual customers start using the system.",
+      titleAccent: "60 Days of",
+      titleRest: "Post-launch Support",
+      body: "Receive help with early usage issues, performance tuning, and operational questions within the agreed support scope.",
     },
   ],
   stats: [

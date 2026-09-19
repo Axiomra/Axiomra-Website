@@ -31,7 +31,7 @@ export const hero = {
   titleLead: "Custom Fashion App",
   titleAccent: "Development Services",
   body:
-    "As a leading fashion app development company, we deliver AI-powered fashion software that cuts return rates, improves sizing accuracy and streamlines operations. Our custom fashion platforms help brands boost profitability, elevate customer experience and accelerate digital transformation.",
+    "As a leading fashion app development company, we deliver AI-powered fashion software that cuts return rates, improves sizing accuracy and simplifies operations. Our custom fashion platforms help brands boost profitability, elevate customer experience and accelerate digital transformation.",
   ctaText: "Request a free consultation",
   image: heroImg,
   alt: "A rail of brightly coloured jackets hanging in a boutique window",
@@ -43,7 +43,7 @@ export const intro = {
   titleAccent: "Sustainable, Transparent, Profitable Growth Worldwide",
   paragraphs: [
     "We provide AI fashion software development services for brands, retailers and manufacturers. We build end-to-end platforms for demand forecasting, design-to-shelf acceleration and transparent supply chains. They tackle waste, greenwashing risk and counterfeits with real-time traceability, so merchandisers, designers and sustainability teams gain trustworthy insight that lifts quality and consumer trust.",
-    "Built on a composable data fabric, computer vision and foundation models with no-code tools, the platform learns from sales, social and supplier signals. It predicts demand, flags quality issues and personalises journeys to lower CAC. Automation streamlines sourcing and compliance, supporting faster launches and measurable impact reductions. The result is resilient operations, higher margins and delighted customers across shifting trends.",
+    "Built on a composable data fabric, computer vision and foundation models with no-code tools, the platform learns from sales, social and supplier signals. It predicts demand, flags quality issues and personalises journeys to lower CAC. Automation speeds up sourcing and compliance, supporting faster launches and measurable impact reductions. The result is resilient operations, higher margins and delighted customers across shifting trends.",
   ],
   ctaText: "Request a Demo",
   image: introImg,
@@ -87,7 +87,7 @@ export const services = {
     {
       title: "Fashion Analytics and Insights Tools",
       body:
-        "Unlock the power of data with AI-driven fashion analytics. From consumer behaviour tracking to sales forecasting, our tools transform raw data into actionable insight so brands make smarter decisions, optimise strategy and stay ahead in a fast-moving market.",
+        "Put your data to work with AI-driven fashion analytics. From consumer behaviour tracking to sales forecasting, our tools turn raw data into insight you can act on so brands make smarter decisions, optimise strategy and stay ahead in a fast-moving market.",
       image: analyticsImg,
       alt: "A store manager reviewing stock on a tablet beside a rail of garments",
       points: [
@@ -106,7 +106,7 @@ export const services = {
       points: [
         { name: "Virtual Fitting Rooms", outcome: "Reduce costly returns caused by poor sizing" },
         { name: "AR Try-On Apps", outcome: "Eliminate uncertainty in online shopping" },
-        { name: "Mobile Integration", outcome: "Deliver seamless try-on experiences anywhere" },
+        { name: "Mobile Integration", outcome: "Deliver try-on experiences that work anywhere" },
         { name: "Customer Confidence Boost", outcome: "Enhance trust with accurate fit previews" },
       ],
     },
@@ -133,13 +133,13 @@ export const services = {
         { name: "Personalised Shopping", outcome: "End generic experiences with tailored journeys" },
         { name: "AI Recommendation Engines", outcome: "Boost sales with smarter product suggestions" },
         { name: "Omnichannel Integration", outcome: "Close the gap between online and in-store" },
-        { name: "Secure Payments", outcome: "Reduce cart abandonment with seamless checkout" },
+        { name: "Secure Payments", outcome: "Reduce cart abandonment with a shorter checkout" },
       ],
     },
     {
       title: "Fashion Design & Product Innovation Tools",
       body:
-        "Empower designers with next-gen tools that speed up creativity and reduce errors. We support everything from digital prototyping to sustainable product development, helping brands bring winning designs to market faster.",
+        "Give designers modern tools that speed up creativity and reduce errors. We support everything from digital prototyping to sustainable product development, helping brands bring winning designs to market faster.",
       image: designImg,
       alt: "A flat lay of leopard-print shoes, a leather wallet, sunglasses and accessories",
       points: [
@@ -158,7 +158,7 @@ export const services = {
       points: [
         { name: "Smart Mirrors", outcome: "Enhance shopping with interactive try-ons" },
         { name: "Customer Heatmaps", outcome: "Fix poor layouts with foot-traffic insights" },
-        { name: "Digital Kiosks", outcome: "Streamline purchases with self-service options" },
+        { name: "Digital Kiosks", outcome: "Speed up purchases with self-service options" },
         { name: "Unified Loyalty Programs", outcome: "Retain shoppers with personalised rewards" },
       ],
     },
@@ -167,7 +167,7 @@ export const services = {
 
 export const solutions = {
   eyebrow: "What types of fashion apps are we experts in?",
-  titleLead: "Building Innovative AI-Powered Fashion",
+  titleLead: "Building AI-Powered Fashion",
   titleTail: "Solutions Using The Latest Technology",
   image: solutionsBgImg,
   tabs: [
@@ -216,16 +216,16 @@ export const solutions = {
 
 export const technologies = {
   eyebrow: "Which technologies do we use for fashion solutions?",
-  titleLead: "Cutting-Edge Technologies",
-  titleTail: "For Innovative AI Fashion Tools",
+  titleLead: "The Technologies We Build On",
+  titleTail: "For AI Fashion Tools",
   body:
-    "We leverage advanced technologies to build scalable, future-ready applications for the fashion industry. Our approach blends AI, data analytics and intelligent automation to enhance creativity, improve efficiency and deliver superior customer experiences.",
+    "We use current technologies to build scalable, long-lived applications for the fashion industry. Our approach blends AI, data analytics and intelligent automation to enhance creativity, improve efficiency and deliver superior customer experiences.",
   ctaText: "View all services",
   items: [
     {
       title: "Artificial Intelligence",
       body:
-        "AI is reshaping fashion by boosting creativity, streamlining production and personalising shopping journeys. From intelligent recommendations to automated design tools, it empowers brands to innovate faster and smarter.",
+        "AI is reshaping fashion by boosting creativity, speeding up production and personalising shopping journeys. From intelligent recommendations to automated design tools, it lets brands move faster.",
       metric: "3.2x",
       metricLabel: "faster decisions",
     },
@@ -246,7 +246,7 @@ export const technologies = {
     {
       title: "Machine Learning",
       body:
-        "Machine learning transforms raw data into actionable insight. It improves design accuracy, predicts demand and enhances product recommendations, helping brands reduce returns and increase loyalty.",
+        "Machine learning turns raw data into usable insight. It improves design accuracy, predicts demand and enhances product recommendations, helping brands reduce returns and increase loyalty.",
       metric: "31%",
       metricLabel: "fewer returns",
     },
@@ -319,7 +319,7 @@ export const techStrip = {
 export const streamline = {
   eyebrow: "What AI can optimise for you?",
   titleLead: "Discover How AI Can",
-  titleAccent: "Streamline Your Fashion Business",
+  titleAccent: "Simplify Your Fashion Operations",
   items: [
     {
       title: "Boost Revenue",
@@ -339,7 +339,7 @@ export const streamline = {
     },
     {
       title: "AI and Social Media Integration",
-      body: "AI-powered tools integrate seamlessly with social platforms to improve engagement, personalise campaigns and boost visibility.",
+      body: "AI-powered tools plug straight into social platforms to improve engagement, personalise campaigns and boost visibility.",
     },
     {
       title: "Omnichannel Innovations",
@@ -351,7 +351,7 @@ export const streamline = {
 export const midCta = {
   title: "Create Your Perfect Fashion Software Solution",
   body:
-    "Elevate your fashion business with our expert fashion app development services, crafted to enhance efficiency, engage customers and drive growth.",
+    "Grow your fashion business with our fashion app development services, crafted to enhance efficiency, engage customers and grow revenue.",
   ctaText: "Contact Us Today",
   image: ctaImg,
   alt: "A model in a flowing red dress turning in a garden",
@@ -359,8 +359,8 @@ export const midCta = {
 };
 
 export const stakeholders = {
-  eyebrow: "Who benefits from our expertise?",
-  titleLead: "Empowering Every",
+  eyebrow: "Who benefits",
+  titleLead: "Built Around Every",
   titleAccent: "Stakeholder In Fashion",
   items: [
     {
@@ -389,15 +389,15 @@ export const businessTypes = {
   titleLead: "Explore The Range Of",
   titleAccent: "Fashion Businesses We Support",
   body:
-    "We excel in custom AI-powered fashion software development that drives innovation and efficiency. As a leading fashion app development company, we transform your ideas into market-leading solutions, whether you are developing a new prototype or expanding your market reach.",
+    "We excel in custom AI-powered fashion software development that drives innovation and efficiency. As a leading fashion app development company, we turn your ideas into products that ship, whether you are developing a new prototype or expanding your market reach.",
   rows: [
     {
       label: "Startups",
-      body: "We collaborate with startups to bring innovative fashion app ideas to life. Our expertise guides you from initial market analysis and concept validation to developing MVPs and refining your app post-launch.",
+      body: "We collaborate with startups to bring new fashion app ideas to life. Our expertise guides you from initial market analysis and concept validation to developing MVPs and refining your app post-launch.",
     },
     {
       label: "Scale-ups",
-      body: "As your fashion business grows, new opportunities and challenges arise. We help scale-ups leverage advanced technology to boost efficiency, streamline operations and enhance market positioning with state-of-the-art AI.",
+      body: "As your fashion business grows, new opportunities and challenges arise. We help scale-ups use current technology to boost efficiency, simplify operations and improve market positioning.",
     },
     {
       label: "Small and medium-sized businesses",
@@ -444,7 +444,7 @@ export const showcase = {
   titleLead: "Showcasing Our",
   titleAccent: "AI Development Projects",
   body:
-    "Discover our portfolio showcasing our expertise as an AI development company, delivering state-of-the-art solutions to address complex business challenges.",
+    "Work we have shipped for fashion brands, from design tooling through to the storefront.",
   ctaText: "Check Out Our Full Portfolio",
 };
 
@@ -457,7 +457,7 @@ export const partner = {
       icon: "Layers",
       title: "Integration Experts",
       body:
-        "From initial design to deployment, we excel at integrating with any third-party application, system, API or database. Our fashion app development provides comprehensive third-party and custom integration solutions to enhance user experience and boost conversions.",
+        "From initial design to deployment, we excel at integrating with any third-party application, system, API or database. Our fashion app development covers third-party and custom integration work to enhance user experience and boost conversions.",
     },
     {
       icon: "Target",
@@ -467,9 +467,9 @@ export const partner = {
     },
     {
       icon: "ShieldCheck",
-      title: "Seamless Communication",
+      title: "Direct Communication",
       body:
-        "We ensure smooth interactions with clear, efficient processes. As a top fashion app development company, we provide a dedicated project manager to keep you updated and ensure seamless collaboration throughout your build.",
+        "We ensure smooth interactions with clear, efficient processes. As a top fashion app development company, we provide a dedicated project manager to keep you updated and keep collaboration direct throughout your build.",
     },
   ],
   stats: [
@@ -484,7 +484,7 @@ export const blogs = {
   eyebrow: "What can our expertise teach you?",
   title: "Our Blogs",
   body:
-    "Harnessing the capabilities of AI models, we build efficient and robust business solutions that unlock new possibilities for innovation, automation and personalisation.",
+    "Using current AI models, we build efficient, reliable business systems that open new ground in innovation, automation and personalisation.",
   posts: [
     {
       title: "How To Grow Your Fashion Business In 2026",

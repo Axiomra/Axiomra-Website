@@ -76,7 +76,7 @@ function ServiceBlock({ item, index }) {
         to="/contact"
         className="group mt-9 inline-flex items-center gap-2.5 rounded-full border border-line px-6 py-3.5 text-base font-semibold transition-colors hover:border-brand/50 hover:text-brand focus-ring md:text-lg"
       >
-        Learn more
+        {item.ctaText ?? "Learn more"}
         <ArrowUpRight
           size={18}
           className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

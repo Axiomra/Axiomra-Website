@@ -61,7 +61,7 @@ export const hero = {
   titleAccent: "AI Marketing Software Development",
   titleTail: "Services",
   body:
-    "Transform your marketing operations with AI-powered, custom-built software that delivers precision, personalisation and performance. We help marketing leaders, creative agencies and digital enterprises build intelligent solutions that automate workflows, optimise campaigns and connect every touchpoint for measurable growth.",
+    "Rebuild your marketing operations with AI-powered, custom-built software that delivers precision, personalisation and performance. We help marketing leaders, creative agencies and digital enterprises build intelligent solutions that automate workflows, optimise campaigns and connect every touchpoint for measurable growth.",
   ctaText: "Request a free consultation",
   image: heroImg,
   alt: "A hand reaching into a glowing blue network of connected data points",
@@ -72,7 +72,7 @@ export const intro = {
   titleLead: "Transforming Brands Through Custom",
   titleAccent: "Marketing Software Development Services",
   paragraphs: [
-    "Axiomra is a forward-thinking marketing software development company that builds enterprise-grade, AI-powered solutions for digital marketing and creative teams. We combine deep marketing domain expertise with intelligent automation, data engineering and analytics to help organisations streamline campaigns, improve decision-making and enhance collaboration.",
+    "Axiomra is a forward-thinking marketing software development company that builds enterprise-grade, AI-powered solutions for digital marketing and creative teams. We combine deep marketing domain expertise with intelligent automation, data engineering and analytics to help organisations simplify campaigns, improve decision-making and enhance collaboration.",
     "We design and develop custom AI marketing software that goes beyond off-the-shelf tools, tailored to your exact needs. From workflow automation and personalisation engines to real-time analytics and omnichannel campaign orchestration, our platforms eliminate fragmented processes, reduce manual effort and connect data across every channel. For CMOs, marketing directors and creative strategists, our AI-driven solutions deliver measurable ROI, faster optimisation cycles and marketing intelligence that compounds.",
   ],
   ctaText: "Book a Free Tech Consultation",
@@ -84,23 +84,23 @@ export const impact = {
   titleLead: "The Role Of AI In",
   titleAccent: "Modern Marketing Operations",
   body:
-    "AI-driven marketing software is transforming how brands plan, execute and measure campaigns in real time. From automating insights and optimising ad performance to enabling hyper-personalised experiences, AI empowers marketing teams to act faster, smarter and more strategically.",
+    "AI-driven marketing software is transforming how brands plan, execute and measure campaigns in real time. From automating insights and optimising ad performance to enabling tightly personalised experiences, AI gives marketing teams to act faster, smarter and more strategically.",
   stats: [
     {
       value: "77%",
       label: "of marketers who have adopted generative AI report using it for creative development tasks.",
-      source: "Gartner — Use of GenAI Report 2025",
+      source: "Gartner, Use of GenAI Report 2025",
     },
     {
       value: "35%",
       label:
         "of marketing teams say AI is used for content creation, the top AI application, followed by 30% for data analysis and insights.",
-      source: "HubSpot — State of Marketing Report 2025",
+      source: "HubSpot, State of Marketing Report 2025",
     },
     {
       value: "65%",
       label: "of marketing leaders said their team plans to increase investment in AI and automation tools in 2025.",
-      source: "HubSpot — State of AI Report 2025",
+      source: "HubSpot, State of AI Report 2025",
     },
   ],
 };
@@ -166,14 +166,14 @@ export const services = {
     {
       title: "Marketing Automation Software",
       body:
-        "Our custom-built intelligent marketing automation software simplifies complex campaign workflows and eliminates repetitive manual tasks. Many teams waste hours managing multiple tools that do not connect seamlessly, but our custom-built platform unifies these systems into one streamlined process, ensuring faster execution, fewer errors and campaigns that run with precision.",
+        "Our custom-built intelligent marketing automation software simplifies complex campaign workflows and eliminates repetitive manual tasks. Many teams waste hours managing multiple tools that never quite connect, but our custom-built platform unifies these systems into one process, ensuring faster execution, fewer errors and campaigns that run with precision.",
       image: svcAutomationImg,
       alt: "A laptop showing an automated campaign workflow diagram",
     },
     {
       title: "Marketing Analytics Software",
       body:
-        "With advanced marketing analytics solutions, you can turn scattered campaign data into clear, actionable insights. Most teams struggle to connect data from multiple sources, leaving gaps in performance visibility. Our AI-powered dashboards bring every metric together, helping marketing leaders uncover trends and make faster, data-driven decisions.",
+        "With advanced marketing analytics solutions, you can turn scattered campaign data into clear, usable insights. Most teams struggle to connect data from multiple sources, leaving gaps in performance visibility. Our AI-powered dashboards bring every metric together, helping marketing leaders uncover trends and make faster, data-driven decisions.",
       image: svcAnalyticsImg,
       alt: "A dark analytics dashboard with live performance charts",
     },
@@ -201,14 +201,14 @@ export const services = {
     {
       title: "Sales Automation Software",
       body:
-        "We develop sales automation software that bridges marketing and sales teams for seamless lead management. Many businesses lose leads due to manual handoffs and poor follow-up tracking. Our intelligent system automates lead scoring, follow-ups and pipeline tracking to ensure every opportunity is nurtured efficiently and converted with precision.",
+        "We develop sales automation software that bridges marketing and sales teams for clean lead handover. Many businesses lose leads due to manual handoffs and poor follow-up tracking. Our intelligent system automates lead scoring, follow-ups and pipeline tracking to ensure every opportunity is nurtured efficiently and converted with precision.",
       image: svcSalesImg,
       alt: "A sales team reviewing pipeline figures in a meeting room",
     },
     {
       title: "Marketing CRM Software",
       body:
-        "We build marketing CRM software that unifies customer data, campaign interactions and engagement metrics in one place. Fragmented data across tools often causes missed personalisation and poor customer experiences. Our CRM integrates every touchpoint to deliver holistic customer views, driving stronger relationships and smarter, insight-led engagement strategies.",
+        "We build marketing CRM software that unifies customer data, campaign interactions and engagement metrics in one place. Fragmented data across tools often causes missed personalisation and poor customer experiences. Our CRM integrates every touchpoint to deliver a single customer view, driving stronger relationships and smarter, insight-led engagement strategies.",
       image: svcCrmImg,
       alt: "A support specialist working a CRM queue with a headset on",
     },
@@ -251,19 +251,19 @@ export const services = {
 };
 
 export const midCta = {
-  title: "Let's Build Your Next-Gen Marketing Software Together",
+  title: "Let's Build Your Marketing Software Together",
   body:
-    "Transform your campaigns, content and analytics with AI-powered automation tailored to your brand's goals.",
+    "Rebuild your campaigns, content and analytics with AI-powered automation tailored to your brand's goals.",
   ctaText: "Get in Touch",
   background: midCtaBgImg,
 };
 
 /**
- * The "comprehensive services" fold: six alternating photo/copy rows.
+ * The services fold: six alternating photo/copy rows.
  */
 export const solutions = {
   eyebrow: "What types of AI services do we offer?",
-  titleLead: "Comprehensive Custom Marketing",
+  titleLead: "Custom Marketing",
   titleAccent: "Software Development Services",
   body:
     "We deliver tailored marketing software development services that help enterprises and agencies achieve operational excellence through AI automation and intelligent system design.",
@@ -271,7 +271,7 @@ export const solutions = {
     {
       title: "Digital Transformation in Marketing",
       body:
-        "We work closely with stakeholders to identify automation opportunities, optimise workflows and design AI strategies aligned with business objectives. By leveraging AI insights, we help organisations improve decision-making and unlock operational efficiencies.",
+        "We work closely with stakeholders to identify automation opportunities, optimise workflows and design AI strategies aligned with business objectives. Using AI insights, we help organisations improve decision-making and cut operational waste.",
       extra:
         "The work starts with the campaign process that costs your team the most hours, not with a platform rollout. We map how briefs, approvals, launches and reporting actually move today, then automate the steps that never needed a person in the first place.",
       points: [
@@ -285,7 +285,7 @@ export const solutions = {
     {
       title: "AI Software Development Consulting",
       body:
-        "Our experts guide marketing teams through every stage of AI adoption, from strategy to implementation. We identify high-impact automation opportunities, design tailored AI models for predictive insights and ensure seamless integration with your existing tools. The result is smarter marketing operations that reduce costs, enhance personalisation and maximise ROI.",
+        "Our experts guide marketing teams through every stage of AI adoption, from strategy to implementation. We identify high-impact automation opportunities, design tailored AI models for predictive insights and keep integration clean with your existing tools. The result is smarter marketing operations that reduce costs, enhance personalisation and maximise ROI.",
       extra:
         "You leave with a roadmap that has prices on it, including an honest case against the ideas that will not pay for themselves. Most marketing teams already hold more first-party signal than they use, and far less than the model somebody tried to sell them needs.",
       points: [
@@ -313,7 +313,7 @@ export const solutions = {
     {
       title: "Marketing Mobile App Development",
       body:
-        "Our team designs and develops mobile-first marketing applications that enhance engagement, streamline campaign execution and deliver real-time insights on the go. From customer engagement tools to campaign performance trackers, our apps empower marketers to manage, monitor and optimise digital activities anytime and anywhere.",
+        "Our team designs and develops mobile-first marketing applications that enhance engagement, speed up campaign execution and deliver real-time insights on the go. From customer engagement tools to campaign performance trackers, our apps let marketers manage, monitor and optimise digital activities anytime and anywhere.",
       extra:
         "Approvals, budget shifts and creative sign-off are the moments that stall a campaign while someone is away from a desk, so those are the flows we build for the phone first. Everything else stays where it belongs, on the web.",
       points: [
@@ -486,10 +486,10 @@ export const benefits = {
     {
       title: "Personalised Customer Experiences",
       body:
-        "Our AI algorithms analyse customer behaviour to deliver hyper-personalised recommendations and campaigns. This helps marketers build stronger connections and increase engagement across digital touchpoints.",
+        "Our AI algorithms analyse customer behaviour to deliver tightly personalised recommendations and campaigns. This helps marketers build stronger connections and increase engagement across digital touchpoints.",
     },
     {
-      title: "Seamless System Integration",
+      title: "Integration That Holds",
       body:
         "Our custom development approach ensures your CRM, CMS and analytics tools work together effortlessly. The result is a unified marketing ecosystem that eliminates data silos and improves accuracy.",
     },
@@ -499,7 +499,7 @@ export const benefits = {
         "We follow strict GDPR, SOC 2 and ISO 27001 standards to protect sensitive marketing data. Every solution is built with privacy, transparency and reliability at its core.",
     },
     {
-      title: "Scalable and Future-Ready Architecture",
+      title: "Scalable Architecture That Lasts",
       body:
         "Our platforms are built to evolve with your growing business needs. Whether expanding to new markets or adding new channels, your marketing system scales without disruption.",
     },
@@ -509,7 +509,7 @@ export const benefits = {
 export const build = {
   title: "Build Your Custom AI Marketing Software with Axiomra",
   body:
-    "Transform your marketing operations with intelligent automation and data-driven personalisation designed to boost efficiency and ROI.",
+    "Rebuild your marketing operations with intelligent automation and data-driven personalisation designed to boost efficiency and ROI.",
   ctaText: "Request a Consultation",
   texture: textureBgImg,
   image: buildVisualImg,
@@ -600,8 +600,8 @@ export const businessTypes = {
 
 export const testimonials = {
   eyebrow: "Why is it worth working with us?",
-  titleLead: "Our Clients Trust Us For Top-Notch AI Solutions",
-  titleAccent: "And Exceptional Results",
+  titleLead: "What Marketing Teams Say",
+  titleAccent: "Once The Work Is Live",
   items: [
     {
       name: "Abdullah",
@@ -632,7 +632,7 @@ export const showcase = {
   titleLead: "Showcasing Our",
   titleAccent: "AI Development Projects",
   body:
-    "Discover our portfolio showcasing our expertise as an AI development company, delivering state-of-the-art solutions to address complex marketing challenges.",
+    "A look at the marketing systems we have built, and the number each one was measured against.",
   ctaText: "Check Out Our Full Portfolio",
 };
 
@@ -651,7 +651,7 @@ export const partner = {
       icon: "Layers",
       title: "Integrates With Your Stack",
       body:
-        "From CRM to CMS and analytics tools, our solutions integrate seamlessly into your existing marketing ecosystem. We build modular so the platform adapts as your channels, tools and business needs change.",
+        "From CRM to CMS and analytics tools, our solutions drop into your existing marketing ecosystem. We build modular so the platform adapts as your channels, tools and business needs change.",
     },
     {
       icon: "ShieldCheck",
@@ -681,7 +681,7 @@ export const blogs = {
       alt: "A notebook headed Social Media Marketing beside a keyboard",
     },
     {
-      title: "10 Best AI Sales Tools To Transform Your Pipeline In 2026",
+      title: "10 AI Sales Tools Worth Running In Your Pipeline In 2026",
       tag: "Tooling",
       image: blog2Img,
       alt: "A white humanoid robot against a deep purple background",
@@ -731,7 +731,7 @@ export const faqs = [
 ];
 
 export const finalCta = {
-  title: "Let's Build Your Custom AI Marketing Software Together",
+  title: "Show Us The Campaign Problem You Want Solved",
   subtitle:
     "Ready to automate workflows, personalise campaigns and maximise your marketing performance? Talk to our AI software experts.",
   buttonText: "Get your project done!",

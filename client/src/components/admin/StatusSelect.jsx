@@ -7,7 +7,7 @@ const MENU_WIDTH = 196;
 /**
  * A coloured chip that opens a list of the other values it could hold.
  *
- * Kept as a button rather than a native <select> so the colour survives — an
+ * Kept as a button rather than a native <select> so the colour survives; an
  * OS-rendered option list ignores the styling entirely. The menu goes through
  * AnchoredMenu because table cells and the table's scroller would otherwise
  * clip it to the height of one row.
@@ -19,7 +19,7 @@ export function StatusChip({ value, styles, fallback, className = "" }) {
       className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset ${s.chip} ${className}`}
     >
       <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${s.dot}`} />
-      {value || "—"}
+      {value || "-"}
     </span>
   );
 }

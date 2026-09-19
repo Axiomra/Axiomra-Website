@@ -18,13 +18,13 @@ import FAQ from "../sections/FAQ";
 import { faqs } from "../data/computerVisionData";
 
 const META_DESCRIPTION =
-  "Axiomra's computer vision development services: object detection, facial " +
-  "recognition, pose estimation, image and video analytics, OCR, and GAN-based " +
-  "image generation, all built, deployed, and supported in production.";
+  "Axiomra builds computer vision systems for business operations: object " +
+  "detection, facial recognition, pose estimation, image and video analytics, " +
+  "OCR, and image generation, built, integrated, and supported in production.";
 
 export default function ComputerVisionPage() {
   useEffect(() => {
-    document.title = "Custom Computer Vision Development Services | Axiomra";
+    document.title = "Computer Vision Development Services | Axiomra";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute("content", META_DESCRIPTION);
   }, []);
@@ -38,15 +38,9 @@ export default function ComputerVisionPage() {
       <CvExpertise />
 
       <GradientCTA
-        title={
-          <>
-            Not Sure Which Service
-            <br />
-            Fits Your Problem?
-          </>
-        }
-        subtitle="Most businesses know they have a visual data problem. They just do not know which computer vision service solves it. Book a free 30-minute call with our team. We will review your use case, tell you what is technically possible, and give you a clear path forward. No sales pitch, no commitment."
-        buttonText="Book A Free Strategy Call"
+        title="Not Sure Which Service Fits Your Problem?"
+        subtitle="If you know you have a visual data problem but not which approach solves it, book a free consultation. We will review your use case, set out what is technically possible with the data and cameras you have, and recommend a practical next step."
+        buttonText="Book a Free Consultation"
       />
 
       <CvCaseStudies />
@@ -55,15 +49,9 @@ export default function ComputerVisionPage() {
       <CvProcess />
 
       <GradientCTA
-        title={
-          <>
-            Your Industry Is
-            <br />
-            Not On The List?
-          </>
-        }
-        subtitle="We have built computer vision solutions for 15+ industries. If yours is not listed, that does not mean we cannot help. Bring us your use case and we will tell you honestly what is possible with the data and cameras you already have."
-        buttonText="Talk To A Computer Vision Expert"
+        title="Your Industry Is Not On the List?"
+        subtitle="The industries above are examples, not limits. Bring us your use case and we will assess what is achievable with the visual data and equipment you already have, and where the gaps are."
+        buttonText="Discuss Your Use Case"
       />
 
       <CvOutcomes />
@@ -72,18 +60,12 @@ export default function ComputerVisionPage() {
       <GradientCTA
         dark
         three
-        title={
-          <>
-            See The Difference
-            <br />
-            For Yourself.
-          </>
-        }
-        subtitle="We do not ask you to take our word for it. Book a free consultation and we will walk you through real projects, real timelines, and real outcomes from clients in your industry, then tell you whether computer vision is the right answer for yours."
-        buttonText="Get A Free Project Assessment"
+        title="Your Next Computer Vision Project Starts With a Clear Plan"
+        subtitle="Book a free consultation to talk through your use case, the data you hold, and the outcome you need. You will leave with a view on feasibility, an indicative scope, and an honest answer on whether computer vision is the right approach."
+        buttonText="Book a Free Consultation"
       />
 
-      <FAQ id="computer-vision-faq" eyebrow="Computer vision, answered" items={faqs} />
+      <FAQ id="computer-vision-faq" eyebrow="Computer vision questions" items={faqs} />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { cn } from "../lib/utils";
 // "inverse" is white-on-navy, for sitting on the always-dark navbar/hero
 // blocks that never change with the theme. "surface" tracks `--content`
 // instead, for chrome that sits on the normal themed page background (e.g.
-// the admin panel header) — the inverse colors read as invisible there in
+// the admin panel header), because the inverse colors read as invisible there in
 // light mode, since that background is light, not navy.
 const VARIANTS = {
   inverse: "border-inverse-fg/20 text-inverse-fg/80 hover:border-inverse-fg/40 hover:text-inverse-fg",

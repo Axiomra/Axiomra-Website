@@ -49,7 +49,7 @@ function row(label, value) {
 /**
  * Notify the team about a new contact submission.
  * Resolves to true when the mail was accepted by Gmail, false otherwise.
- * Never throws — a mail failure must not lose a saved lead.
+ * Never throws; a mail failure must not lose a saved lead.
  */
 export async function sendContactNotification(contact) {
   const transporter = getTransporter();
@@ -64,7 +64,7 @@ export async function sendContactNotification(contact) {
   // The visitor's own subject line is the most useful thing to see in the
   // inbox list, so it leads when present.
   const mailSubject = subject
-    ? `${subject} — ${name}${company ? ` (${company})` : ""}`
+    ? `${subject}: ${name}${company ? ` (${company})` : ""}`
     : `New enquiry from ${name}${company ? ` (${company})` : ""}`;
 
   try {
@@ -141,8 +141,8 @@ export async function sendPasswordResetEmail({ to, name, link, expiresInMinutes 
         link,
         "",
         `The link expires in ${expiresInMinutes} minutes and can only be used once.`,
-        "You will also need your 78-character admin recovery key to finish the reset — the link on its own will not change the password.",
-        "If you did not ask for this, you can ignore this email — your password stays as it is.",
+        "You will also need your 78-character admin recovery key to finish the reset. The link on its own will not change the password.",
+        "If you did not ask for this, you can ignore this email and your password stays as it is.",
       ].join("\n"),
       html: `
         <div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:15px;color:#111;line-height:1.6;">
@@ -159,11 +159,11 @@ export async function sendPasswordResetEmail({ to, name, link, expiresInMinutes 
             The link expires in ${expiresInMinutes} minutes and can only be used once.
           </p>
           <p style="margin:0 0 8px;color:#666;font-size:13px;">
-            You will also need your 78-character admin recovery key to finish the reset — the link
+            You will also need your 78-character admin recovery key to finish the reset. The link
             on its own will not change the password.
           </p>
           <p style="margin:0;color:#666;font-size:13px;">
-            If you did not ask for this, ignore this email — your password stays as it is.
+            If you did not ask for this, ignore this email and your password stays as it is.
           </p>
         </div>
       `,

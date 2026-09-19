@@ -6,11 +6,11 @@ import { makeDotTexture } from "../lib/dotTexture";
 /*
  * Backdrop for the Retail hero. Three ideas, one scene:
  *
- *   Shelf   — a grid of instanced units whose heights rise and fall under a
+ *   Shelf:    a grid of instanced units whose heights rise and fall under a
  *             travelling wave: stock moving through an estate, not water.
- *   Barcode — a row of thin bars along the floor, scrolling and re-striping,
+ *   Barcode:  a row of thin bars along the floor, scrolling and re-striping,
  *             so the base of the frame reads as a scan line.
- *   Tag     — a swing ticket built from a real polygon (five points and a
+ *   Tag:      a swing ticket built from a real polygon (five points and a
  *             punched eyelet) on a slow tilt.
  *
  * Decorative and cheap: two instanced meshes, one shared dot sprite, no lights,
