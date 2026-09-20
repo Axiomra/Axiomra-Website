@@ -137,7 +137,7 @@ export const challenges = {
     {
       title: "Compliance Complexity and Regulatory Pressure",
       body:
-        "Constantly evolving regulation makes it difficult for financial teams to maintain compliance across jurisdictions. Manual checks and reporting often lead to missed updates or audit delays. We build AI-driven monitoring and automated reporting frameworks that hold continuous compliance with GDPR, SOC 2, ISO 27001 and PCI DSS, reducing manual oversight and keeping the regulatory position current rather than reconstructed at quarter end.",
+        "Constantly evolving regulation makes it difficult for financial teams to maintain compliance across jurisdictions. Manual checks and reporting often lead to missed updates or audit delays. We build AI-driven monitoring and automated reporting frameworks aligned to the GDPR, SOC 2, ISO 27001 and PCI DSS requirements your team confirms, reducing manual oversight and keeping the regulatory position current rather than reconstructed at quarter end.",
     },
     {
       title: "Fraud and Transaction Risk",
@@ -254,7 +254,7 @@ export const midCta = {
   eyebrow: "Ready to level up?",
   title: "Rebuild Your Financial Operations With AI-Powered Precision",
   body:
-    "Partner with us to build secure, scalable and compliant systems that drive efficiency and growth. Schedule a consultation with our experts to explore custom financial software development solutions built around your ledger, not a template.",
+    "Partner with us to build secure, scalable and compliance-ready systems that drive efficiency and growth. Schedule a consultation with our experts to explore custom financial software development solutions built around your ledger, not a template.",
   ctaText: "Get in Touch",
   background: midCtaBgImg,
 };
@@ -279,7 +279,7 @@ export const solutions = {
     {
       title: "AI Custom Financial Software Development",
       body:
-        "Our team builds custom financial software solutions from scratch, addressing legacy system limitations, fragmented datasets and regulatory challenges. We ensure secure, scalable and compliant platforms for modern finance operations, delivered in increments you can put in front of a regulator.",
+        "Our team builds custom financial software solutions from scratch, addressing legacy system limitations, fragmented datasets and regulatory challenges. We build secure and scalable platforms around the regulatory requirements agreed with your team, delivered in increments you can put in front of a regulator.",
       image: solDevelopmentImg,
       alt: "An engineer working on platform code beside server racks",
     },
@@ -507,6 +507,8 @@ export const techStrip = {
     {
       id: "security",
       label: "Security & Compliance",
+      note:
+        "Standards and practices we design and build against, not certifications held by Axiomra. Which of them apply to your project, and what evidence your assessor will want, is confirmed with your compliance team before work starts.",
       items: ["PCI DSS", "SOC 2", "ISO 27001", "GDPR", "KYC / AML orchestration", "HSM & key management", "Zero-trust networking", "Penetration testing"],
     },
     {
@@ -526,7 +528,7 @@ export const businessTypes = {
   rows: [
     {
       label: "Start-ups",
-      body: "We help fintech founders get a licensed product live: a compliant ledger, an onboarding flow that converts, and the reporting a regulator will ask for on day one rather than after the first inspection.",
+      body: "We help fintech founders get a licensed product live: a ledger built to the rules your regulator applies, an onboarding flow that converts, and the reporting a regulator will ask for on day one rather than after the first inspection.",
     },
     {
       label: "Scale-ups",

@@ -603,7 +603,7 @@ export const partner = {
       icon: "ShieldCheck",
       title: "Athlete Data Handled Properly",
       body:
-        "Biometrics, medical records and minors' data carry real obligations. Consent, retention, residency and access control are designed in from the first architecture session, with complimentary post-launch support for up to 60 days.",
+        "Biometrics, medical records and minors' data carry real obligations. Consent, retention, residency and access control are designed in from the first architecture session, with post-launch support for up to 60 days within the agreed scope.",
     },
   ],
   stats: [

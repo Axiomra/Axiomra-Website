@@ -153,7 +153,7 @@ export const challenges = {
     {
       title: "HIPAA, GDPR And Audit Exposure",
       body:
-        "Most breaches are access-control failures, not exotic attacks. We design least-privilege by role, encrypt PHI end to end, keep immutable audit logs, and run de-identification pipelines so model training never touches identifiable data. The compliance evidence is produced by the system, not assembled before an audit.",
+        "Most breaches are access-control failures, not exotic attacks. We design least-privilege by role, encrypt PHI end to end, keep immutable audit logs, and run de-identification pipelines that keep identifiable data out of model training. The evidence your assessor asks for is produced by the system as it runs, rather than assembled before an audit.",
     },
     {
       title: "No-Shows, Rota Gaps And Bed Flow",
@@ -255,7 +255,7 @@ export const midCta = {
   eyebrow: "Ready to reduce the load?",
   title: "We Develop Custom AI-Powered Healthcare Software Solutions Using Clinical-Grade Engineering",
   body:
-    "Partner with us to build compliant, interoperable systems that shorten diagnosis, cut documentation time and hold up under a security review. Book a consultation and we will scope it against your own workflows, including the parts we would not automate yet.",
+    "Partner with us to build compliance-ready, interoperable systems that shorten diagnosis, cut documentation time and hold up under a security review. Book a consultation and we will scope it against your own workflows, including the parts we would not automate yet.",
   ctaText: "Get in Touch",
   background: midCtaBgImg,
 };
@@ -323,7 +323,7 @@ export const stakeholders = {
     {
       title: "Health-Tech Founders and Payers",
       body:
-        "A defensible clinical product on compliant rails: validated models, FHIR-native integrations, and the documentation a payer contract or an FDA pathway will require.",
+        "A defensible clinical product on compliance-ready rails: validated models, FHIR-native integrations, and the documentation a payer contract or an FDA pathway will require.",
       image: stkFoundersImg,
       alt: "A team of professionals in a working meeting",
     },
@@ -457,7 +457,7 @@ export const benefits = {
     {
       title: "Compliance That Produces Its Own Evidence",
       body:
-        "Least-privilege access, encrypted PHI and immutable audit logs mean the evidence for HIPAA, GDPR or SOC 2 is generated continuously rather than assembled before an audit.",
+        "Least-privilege access, encrypted PHI and immutable audit logs mean the evidence a HIPAA, GDPR or SOC 2 assessment asks for is generated continuously rather than assembled before an audit.",
     },
   ],
 };
@@ -524,6 +524,8 @@ export const techStrip = {
     {
       id: "security",
       label: "Security & Compliance",
+      note:
+        "Standards and practices we design and build against, not certifications held by Axiomra. Which of them apply to your project, and what evidence your assessor will want, is confirmed with your compliance team before work starts.",
       items: [
         "HIPAA", "GDPR", "HITRUST CSF", "SOC 2", "ISO 27001", "ISO 13485", "IEC 62304",
         "21 CFR Part 11", "De-identification pipelines", "Zero-trust networking", "Penetration testing",
@@ -614,7 +616,7 @@ export const partner = {
       icon: "ShieldCheck",
       title: "Compliance Is The Starting Point, Not The Retrofit",
       body:
-        "HIPAA, GDPR and SOC 2 controls are designed into the architecture on day one: least-privilege access, encrypted PHI, de-identified training data and immutable audit trails. Retrofitting compliance onto a finished product costs more and convinces nobody.",
+        "HIPAA, GDPR and SOC 2 controls are reviewed with your compliance team and designed into the architecture from the first sprint: least-privilege access, encrypted PHI, de-identified training data and immutable audit trails. Retrofitting them onto a finished product costs more and convinces nobody.",
     },
     {
       icon: "Layers",

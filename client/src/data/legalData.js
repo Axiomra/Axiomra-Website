@@ -528,6 +528,8 @@ export const techStrip = {
     {
       id: "security",
       label: "Security & Compliance",
+      note:
+        "Standards and practices we design and build against, not certifications held by Axiomra. Which of them apply to your project, and what evidence your assessor will want, is confirmed with your compliance team before work starts.",
       items: [
         "SOC 2", "ISO 27001", "GDPR", "Legal professional privilege controls", "Information barriers",
         "Client-managed encryption keys", "Retention and disposal policy", "Zero-trust networking",
@@ -615,7 +617,7 @@ export const partner = {
       icon: "ShieldCheck",
       title: "Privilege Is A Design Constraint, Not A Setting",
       body:
-        "Tenant isolation, matter-scoped retrieval, client-managed keys and a no-training-on-your-data guarantee are decided before the first line of code. We will show you the data-flow diagram your risk team is going to ask for.",
+        "Tenant isolation, matter-scoped retrieval, client-managed keys and a no-training-on-your-data term in the contract are decided before the first line of code. We will show you the data-flow diagram your risk team is going to ask for.",
     },
     {
       icon: "Target",
@@ -672,7 +674,7 @@ export const faqs = [
   },
   {
     q: "Is it safe to put privileged client documents through an AI system?",
-    a: "It is, provided the architecture is built for it. That means tenant isolation, retrieval scoped to the matter, encryption with keys you control, a contractual guarantee that your content is never used for model training, and deployment inside your own cloud boundary when the engagement demands it. We design that boundary first and hand your risk team the data-flow diagram.",
+    a: "It is, provided the architecture is built for it. That means tenant isolation, retrieval scoped to the matter, encryption with keys you control, a contractual term that your content is not used for model training, and deployment inside your own cloud boundary when the engagement demands it. We design that boundary first and hand your risk team the data-flow diagram.",
   },
   {
     q: "Will AI replace the lawyers in my firm?",

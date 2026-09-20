@@ -32,7 +32,7 @@ import {
 
 const TITLE = "Custom AI Insurance Software Development Services | Axiomra";
 const DESCRIPTION =
-  "AI insurance software development: claims automation, underwriting intelligence, fraud detection and policy administration built to stay explainable and compliant.";
+  "AI insurance software development: claims automation, underwriting intelligence, fraud detection and policy administration built to stay explainable and auditable.";
 
 export default function InsurancePage() {
   useEffect(() => {

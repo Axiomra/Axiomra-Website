@@ -113,6 +113,12 @@ export default function IndustriesTechStrip({ data = techStrip }) {
             ))}
           </ul>
         </div>
+
+        {active.note ? (
+          <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-content-dim">
+            {active.note}
+          </p>
+        ) : null}
       </div>
     </section>
   );

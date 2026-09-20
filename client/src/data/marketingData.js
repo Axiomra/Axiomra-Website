@@ -496,7 +496,7 @@ export const benefits = {
     {
       title: "Enterprise-Grade Security and Compliance",
       body:
-        "We follow strict GDPR, SOC 2 and ISO 27001 standards to protect sensitive marketing data. Every solution is built with privacy, transparency and reliability at its core.",
+        "We work to the GDPR, SOC 2 and ISO 27001 requirements that apply to your data, and confirm them with your team before development starts. Every solution is built with privacy, transparency and reliability at its core.",
     },
     {
       title: "Scalable Architecture That Lasts",
@@ -657,7 +657,7 @@ export const partner = {
       icon: "ShieldCheck",
       title: "Visible At Every Stage",
       body:
-        "Our agile process ensures full visibility at every stage, with continuous updates and proactive technical guidance. We also provide complimentary post-launch technical support for up to 60 days.",
+        "Our agile process ensures full visibility at every stage, with continuous updates and proactive technical guidance. We also provide post-launch technical support for up to 60 days, within the scope agreed in the engagement.",
     },
   ],
   stats: [
@@ -726,7 +726,7 @@ export const faqs = [
   },
   {
     q: "Do you handle data privacy and compliance?",
-    a: "Yes. GDPR, SOC 2 and ISO 27001 requirements are designed in from the first architecture session, covering consent capture, data residency, retention and the audit trail your security review will ask for.",
+    a: "Yes. GDPR, SOC 2 and ISO 27001 requirements are reviewed with your compliance team and designed in from the first architecture session, covering consent capture, data residency, retention and the audit trail your security review will ask for.",
   },
 ];
 

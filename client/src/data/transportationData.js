@@ -517,7 +517,7 @@ export const partner = {
       icon: "ShieldCheck",
       title: "Safety And Compliance Designed In",
       body:
-        "Driver hours, tachograph records, hazmat documentation and location data carry real obligations. Consent, retention, residency and access control are set in the first architecture session, with complimentary post-launch support for up to 60 days.",
+        "Driver hours, tachograph records, hazmat documentation and location data carry real obligations. Consent, retention, residency and access control are set in the first architecture session, with post-launch support for up to 60 days within the agreed scope.",
     },
   ],
   stats: [

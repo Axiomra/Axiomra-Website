@@ -324,7 +324,7 @@ export const stakeholders = {
     {
       title: "Insurtech Founders",
       body:
-        "A compliant ledger, a rating service and the reporting a regulator asks for on day one, built to survive the first capacity partner's due diligence.",
+        "A ledger built to the rules your regulator applies, a rating service and the reporting asked for on day one, built to survive the first capacity partner's due diligence.",
       image: stkFounderImg,
       alt: "An insurtech founder in a modern workspace",
     },
@@ -511,6 +511,8 @@ export const techStrip = {
     {
       id: "governance",
       label: "Security & Governance",
+      note:
+        "Standards and practices we design and build against, not certifications held by Axiomra. Which of them apply to your project, and what evidence your assessor will want, is confirmed with your compliance team before work starts.",
       items: ["SOC 2", "ISO 27001", "GDPR", "Model risk management", "Bias & fairness testing", "Decision audit trails", "Zero-trust networking", "Penetration testing"],
     },
   ],
@@ -525,7 +527,7 @@ export const businessTypes = {
   rows: [
     {
       label: "Insurtech start-ups",
-      body: "We help founders get a licensed product live: a rating service, a compliant ledger, a claims flow that scales past the first surge, and the reporting a capacity partner will ask for during due diligence.",
+      body: "We help founders get a licensed product live: a rating service, a ledger built to the rules your regulator applies, a claims flow that scales past the first surge, and the reporting a capacity partner will ask for during due diligence.",
     },
     {
       label: "MGAs and brokers",
