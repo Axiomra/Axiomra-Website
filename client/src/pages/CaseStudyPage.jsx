@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { ArrowLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight, Flag, UserCheck } from "lucide-react";
 import GradientCTA from "../components/GradientCTA";
 import { Reveal } from "../components/motion/Reveal";
 import usePageMeta from "../hooks/usePageMeta";
@@ -10,7 +10,7 @@ import BinaryGrid from "../components/case-study/BinaryGrid";
 import MoleculeGraph from "../components/case-study/MoleculeGraph";
 import CategoryBadge from "../components/case-study/CategoryBadge";
 import "../styles/case-study.css";
-import { caseStudies } from "../data/caseStudiesData";
+import { caseStudies, caseStudyPath } from "../data/caseStudiesData";
 import { PORTFOLIO_PATH } from "../data/portfolioData";
 
 /**
@@ -28,6 +28,29 @@ export default function CaseStudyPage() {
   return <CaseStudy study={study} />;
 }
 
+const DEFAULT_LABELS = {
+  summary: "Executive summary",
+  context: "Business context",
+  challenge: "The challenge",
+  solution: "The solution",
+  capabilities: "What the agent does",
+  flow: "How it works",
+  phases: "Implementation phases",
+  stack: "Technology stack",
+  outcome: "Outcome framework",
+  impact: "Business impact",
+  principles: "Implementation principles",
+  why: "Why this matters",
+  next: "Next enhancements",
+};
+
+const DEFAULT_CTA = {
+  title: "Want an agent like this on your own site?",
+  subtitle:
+    "Tell us how leads reach you today. We will show you which parts an agent can take over first, and what it would take to build.",
+  buttonText: "Talk to our team",
+};
+
 function CaseStudy({ study }) {
   usePageMeta({
     title: study.seoTitle,
@@ -35,165 +58,212 @@ function CaseStudy({ study }) {
     image: study.ogImage,
   });
 
+  const label = { ...DEFAULT_LABELS, ...study.labels };
+  const cta = study.cta ?? DEFAULT_CTA;
+  // Without a flow image the steps keep the article measure, which frees the
+  // margin for the molecule, unless the phases list below already has it.
+  const flowMolecule = !study.flowImage && !study.phases?.length;
+
   return (
     <article className="bg-surface">
       <Header study={study} />
       <KeyDetails details={study.keyDetails} />
 
       <div className="mx-auto max-w-5xl px-4 pb-24 pt-20 sm:px-6 md:pt-28 lg:px-8">
-        <Section id="context" title="Business context">
-          {study.context.map((p) => (
-            <p key={p.slice(0, 24)}>{p}</p>
-          ))}
-          {study.contextImage && <Figure image={study.contextImage} className="mt-10" />}
-        </Section>
-
-        <Section id="challenge" title="The challenge">
-          <p>{study.challenge.intro}</p>
-          <ul className="mt-6 space-y-4">
-            {study.challenge.items.map((item) => (
-              <li key={item.lead} className="flex gap-4">
-                <span
-                  aria-hidden="true"
-                  className="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full border-2 border-brand"
-                />
-                <span>
-                  <strong className="font-semibold text-content">{item.lead}</strong> {item.text}
-                </span>
-              </li>
+        {study.executiveSummary?.length > 0 && (
+          <Section id="executive-summary" title={label.summary}>
+            {study.executiveSummary.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
             ))}
-          </ul>
-        </Section>
+          </Section>
+        )}
 
-        <Insight text={study.insight} />
+        {study.context?.length > 0 && (
+          <Section id="context" title={label.context}>
+            {study.context.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+            {study.contextImage && <Figure image={study.contextImage} className="mt-10" />}
+          </Section>
+        )}
 
-        <Section
-          id="solution"
-          title="The solution"
-          aside={<BinaryGrid className="left-[calc(100%+4rem)] top-1 hidden xl:grid" />}
-        >
-          {study.solution.map((p) => (
-            <p key={p.slice(0, 24)}>{p}</p>
-          ))}
-        </Section>
+        {study.challenge && (
+          <Section id="challenge" title={label.challenge}>
+            {study.challenge.intro && <p>{study.challenge.intro}</p>}
+            <LeadList items={study.challenge.items} className={study.challenge.intro ? "mt-6" : ""} />
+          </Section>
+        )}
 
-        <Section id="capabilities" title="What the agent does" wide>
-          <ResponsiveTable
-            caption="Agent capabilities and the business value of each"
-            columns={[
-              { key: "capability", label: "Capability", strong: true },
-              { key: "value", label: "Business value" },
-            ]}
-            rows={study.capabilities}
-            rowKey="capability"
-          />
-        </Section>
+        {study.insight && <Insight text={study.insight} label={study.insightLabel} />}
 
-        <Section id="how-it-works" title="How it works" wide>
-          <div className="grid gap-12 lg:grid-cols-12">
-            <Flow steps={study.flow} className="lg:col-span-7" />
-            {study.flowImage && (
-              <div className="lg:col-span-5">
-                <Figure image={study.flowImage} className="lg:sticky lg:top-28" sizes="(min-width: 1024px) 26rem, 100vw" />
-              </div>
+        {study.solution?.length > 0 && (
+          <Section
+            id="solution"
+            title={label.solution}
+            aside={<BinaryGrid className="left-[calc(100%+4rem)] top-1 hidden xl:grid" />}
+          >
+            {study.solutionAsList ? (
+              <LeadList items={study.solution.map((text) => ({ text }))} />
+            ) : (
+              study.solution.map((p) => <p key={p.slice(0, 24)}>{p}</p>)
             )}
-          </div>
-        </Section>
+          </Section>
+        )}
 
-        <Section id="implementation" title="Implementation phases">
-          <div className="relative">
-            <MoleculeGraph className="right-[calc(100%+3.5rem)] top-2 hidden xl:block" />
-            <ol className="divide-y divide-line border-y border-line">
-              {study.phases.map((phase, i) => (
-                <li key={phase} className="grid grid-cols-[3rem_1fr] items-baseline gap-2 py-5 sm:grid-cols-[4rem_1fr]">
-                  <span data-num className="font-mono text-sm tracking-wider text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span>{phase}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </Section>
+        {study.capabilities?.length > 0 && (
+          <Section id="capabilities" title={label.capabilities} wide>
+            <ResponsiveTable
+              caption="Agent capabilities and the business value of each"
+              columns={[
+                { key: "capability", label: "Capability", strong: true },
+                { key: "value", label: "Business value" },
+              ]}
+              rows={study.capabilities}
+              rowKey="capability"
+            />
+          </Section>
+        )}
 
-        <Section id="tech-stack" title="Technology stack" wide>
-          <ResponsiveTable
-            caption="Technology stack by layer"
-            columns={[
-              { key: "layer", label: "Layer", strong: true },
-              { key: "tool", label: "Tool", mono: true },
-              { key: "purpose", label: "Purpose" },
-            ]}
-            rows={study.stack}
-            rowKey="layer"
-          />
-        </Section>
+        {study.flow?.length > 0 &&
+          (study.flowImage ? (
+            <Section id="how-it-works" title={label.flow} wide>
+              <div className="grid gap-12 lg:grid-cols-12">
+                <Flow steps={study.flow} className="lg:col-span-7" />
+                <div className="lg:col-span-5">
+                  <Figure image={study.flowImage} className="lg:sticky lg:top-28" sizes="(min-width: 1024px) 26rem, 100vw" />
+                </div>
+              </div>
+            </Section>
+          ) : (
+            <Section id="how-it-works" title={label.flow}>
+              <div className="relative">
+                {flowMolecule && <MoleculeGraph className="right-[calc(100%+3.5rem)] top-2 hidden xl:block" />}
+                <Flow steps={study.flow} />
+              </div>
+            </Section>
+          ))}
 
-        <Section id="outcome" title="Outcome framework" wide>
-          <p className="max-w-3xl">{study.outcome.intro}</p>
-          <OutcomeTable rows={study.outcome.rows} />
-        </Section>
+        {study.phases?.length > 0 && (
+          <Section id="implementation" title={label.phases}>
+            <div className="relative">
+              <MoleculeGraph className="right-[calc(100%+3.5rem)] top-2 hidden xl:block" />
+              <ol className="divide-y divide-line border-y border-line">
+                {study.phases.map((phase, i) => (
+                  <li key={phase} className="grid grid-cols-[3rem_1fr] items-baseline gap-2 py-5 sm:grid-cols-[4rem_1fr]">
+                    <span data-num className="font-mono text-sm tracking-wider text-accent">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span>{phase}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </Section>
+        )}
 
-        <Section id="impact" title="Business impact">
-          <ul className="space-y-4">
-            {study.impact.map((item) => (
-              <li key={item.lead} className="flex gap-4">
-                <span
-                  aria-hidden="true"
-                  className="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full border-2 border-brand"
-                />
-                <span>
-                  <strong className="font-semibold text-content">{item.lead}</strong> {item.text}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Section>
+        {study.stack?.length > 0 && (
+          <Section id="tech-stack" title={label.stack} wide>
+            <ResponsiveTable
+              caption="Technology stack by layer"
+              columns={
+                study.stack.some((row) => row.purpose)
+                  ? [
+                      { key: "layer", label: "Layer", strong: true },
+                      { key: "tool", label: "Tool", mono: true },
+                      { key: "purpose", label: "Purpose" },
+                    ]
+                  : [
+                      { key: "layer", label: "Layer", strong: true },
+                      { key: "tool", label: "Technology / Approach" },
+                    ]
+              }
+              rows={study.stack}
+              rowKey="layer"
+            />
+          </Section>
+        )}
 
-        <div className="mx-auto grid max-w-3xl gap-12 border-t border-line pt-16 md:grid-cols-2 md:gap-10">
-          <Reveal as="section" aria-labelledby="why-it-matters">
-            <h2 id="why-it-matters" className="font-display text-2xl font-semibold tracking-tight text-content">
-              Why this matters
-            </h2>
-            <p className="mt-4 leading-relaxed text-content-dim">{study.whyItMatters}</p>
-          </Reveal>
-          <Reveal as="section" aria-labelledby="next-enhancements" delay={0.08}>
-            <h2 id="next-enhancements" className="font-display text-2xl font-semibold tracking-tight text-content">
-              Next enhancements
-            </h2>
-            <ul className="mt-4 space-y-2.5 text-content-dim">
-              {study.nextSteps.map((step) => (
-                <li key={step} className="flex gap-3">
-                  <span aria-hidden="true" className="select-none text-accent">
-                    +
-                  </span>
-                  {step}
+        {study.outcome && (
+          <Section id="outcome" title={label.outcome} wide>
+            <p className="max-w-3xl">{study.outcome.intro}</p>
+            <OutcomeTable rows={study.outcome.rows} />
+          </Section>
+        )}
+
+        {study.impact?.length > 0 && (
+          <Section id="impact" title={label.impact}>
+            {study.impactIntro && <p>{study.impactIntro}</p>}
+            <LeadList items={study.impact} />
+          </Section>
+        )}
+
+        {study.targetOutcome && <TargetOutcome text={study.targetOutcome} />}
+
+        {study.principles?.length > 0 && (
+          <Section id="principles" title={label.principles} wide>
+            <ul className="grid gap-4 md:grid-cols-2">
+              {study.principles.map((item) => (
+                <li key={item.title} className="rounded-xl2 border border-line bg-surface-card p-6 md:p-7">
+                  <h3 className="font-semibold text-content">{item.title}</h3>
+                  <p className="mt-2 text-base leading-relaxed text-content-dim">{item.text}</p>
                 </li>
               ))}
             </ul>
-          </Reveal>
-        </div>
+          </Section>
+        )}
 
-        <div className="mx-auto mt-16 flex max-w-3xl flex-wrap items-center gap-2 border-t border-line pt-8">
-          <span className="mr-2 font-mono text-xs uppercase tracking-[0.18em] text-content-faint">Tags</span>
-          {study.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-line bg-surface-subtle px-3.5 py-1.5 text-sm text-content-dim"
-            >
-              {tag}
-            </span>
+        {study.whyItMatters &&
+          (study.nextSteps?.length > 0 ? (
+            <div className="mx-auto grid max-w-3xl gap-12 border-t border-line pt-16 md:grid-cols-2 md:gap-10">
+              <Reveal as="section" aria-labelledby="why-it-matters">
+                <h2 id="why-it-matters" className="font-display text-2xl font-semibold tracking-tight text-content">
+                  {label.why}
+                </h2>
+                <p className="mt-4 leading-relaxed text-content-dim">{study.whyItMatters}</p>
+              </Reveal>
+              <Reveal as="section" aria-labelledby="next-enhancements" delay={0.08}>
+                <h2 id="next-enhancements" className="font-display text-2xl font-semibold tracking-tight text-content">
+                  {label.next}
+                </h2>
+                <ul className="mt-4 space-y-2.5 text-content-dim">
+                  {study.nextSteps.map((step) => (
+                    <li key={step} className="flex gap-3">
+                      <span aria-hidden="true" className="select-none text-accent">
+                        +
+                      </span>
+                      {step}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            </div>
+          ) : (
+            <Reveal as="section" aria-labelledby="why-it-matters" className="mx-auto max-w-3xl border-t border-line pt-16">
+              <h2 id="why-it-matters" className="font-display text-2xl font-semibold tracking-tight text-content">
+                {label.why}
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-content-dim md:text-lg">{study.whyItMatters}</p>
+            </Reveal>
           ))}
-        </div>
+
+        {study.tags?.length > 0 && (
+          <div className="mx-auto mt-16 flex max-w-3xl flex-wrap items-center gap-2 border-t border-line pt-8">
+            <span className="mr-2 font-mono text-xs uppercase tracking-[0.18em] text-content-faint">Tags</span>
+            {study.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-line bg-surface-subtle px-3.5 py-1.5 text-sm text-content-dim"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
-      <GradientCTA
-        dark
-        three
-        title="Want an agent like this on your own site?"
-        subtitle="Tell us how leads reach you today. We will show you which parts an agent can take over first, and what it would take to build."
-        buttonText="Talk to our team"
-      />
+      <MoreCaseStudies current={study.slug} />
+
+      <GradientCTA dark three title={cta.title} subtitle={cta.subtitle} buttonText={cta.buttonText} />
     </article>
   );
 }
@@ -237,7 +307,17 @@ function Header({ study }) {
             Back to portfolio
           </Link>
 
-          <CategoryBadge label={study.eyebrow} className="cs-load-rise mt-8" />
+          <div className="cs-load-rise mt-8">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <CategoryBadge label={study.eyebrow} />
+              {study.type === "blueprint" && <BlueprintBadge />}
+            </div>
+            {study.type === "blueprint" && (
+              <p id="blueprint-note" className="mt-2 text-sm text-content-faint">
+                Representative solution design. Results depend on deployment.
+              </p>
+            )}
+          </div>
           <h1
             className="cs-load-rise mt-3 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-content sm:text-5xl xl:text-6xl"
             style={{ "--d": "60ms" }}
@@ -257,14 +337,30 @@ function Header({ study }) {
         </div>
       </div>
 
-      <dl className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-xl2 border border-line bg-line sm:grid-cols-3 lg:mt-20">
-        {study.stats.map((stat) => (
-          <div key={stat.label} className="flex flex-col-reverse bg-surface-card px-6 py-7 md:px-8 md:py-9">
-            <dt className="mt-2 text-sm leading-snug text-content-dim md:text-base">{stat.label}</dt>
-            <dd className="font-display text-3xl font-semibold tracking-tight text-brand md:text-4xl">{stat.value}</dd>
-          </div>
-        ))}
-      </dl>
+      {study.stats?.length > 0 && (
+        <dl className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-xl2 border border-line bg-line sm:grid-cols-3 lg:mt-20">
+          {study.stats.map((stat) => (
+            <div key={stat.label} className="flex flex-col-reverse bg-surface-card px-6 py-7 md:px-8 md:py-9">
+              <dt className="mt-2 text-sm leading-snug text-content-dim md:text-base">{stat.label}</dt>
+              <dd className="font-display text-3xl font-semibold tracking-tight text-brand md:text-4xl">{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+
+      {/* Same strip as the stats, but the headline is a phrase, so it is set
+          smaller and in the text colour rather than as a brand-blue figure. */}
+      {study.highlights?.length > 0 && (
+        <ul className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-xl2 border border-line bg-line sm:grid-cols-3 lg:mt-20">
+          {study.highlights.map((item) => (
+            <li key={item.title} className="bg-surface-card px-6 py-7 md:px-8 md:py-9">
+              <span aria-hidden="true" className="mb-4 block h-1 w-8 rounded-full bg-brand" />
+              <p className="font-display text-xl font-semibold tracking-tight text-content md:text-2xl">{item.title}</p>
+              <p className="mt-2 text-sm leading-snug text-content-dim md:text-base">{item.text}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </header>
   );
 }
@@ -289,9 +385,11 @@ function KeyDetails({ details }) {
         <h2 id="key-details" className="font-mono text-xs uppercase tracking-[0.22em] text-content-faint">
           Key details
         </h2>
-        <p className="mt-4 font-display text-2xl font-semibold tracking-tight text-content md:text-3xl">
-          {details.summary}
-        </p>
+        {details.summary && (
+          <p className="mt-4 font-display text-2xl font-semibold tracking-tight text-content md:text-3xl">
+            {details.summary}
+          </p>
+        )}
         <dl className="mt-10 divide-y divide-line border-t border-line">
           {rows.map(([term, text]) => (
             <div key={term} className="grid gap-1 py-5 md:grid-cols-[14rem_1fr] md:gap-8">
@@ -329,7 +427,7 @@ function Section({ id, title, wide = false, aside = null, children }) {
   );
 }
 
-function Insight({ text }) {
+function Insight({ text, label = "Primary objective" }) {
   const [ref, inView] = useInView({ rootMargin: "0px" });
   return (
     <Reveal as="aside" from="scale" className="relative mx-auto mb-20 max-w-3xl md:mb-24">
@@ -351,7 +449,7 @@ function Insight({ text }) {
         >
           &rdquo;
         </span>
-        <p className="relative font-mono text-xs uppercase tracking-[0.22em] text-accent-vivid">Primary objective</p>
+        <p className="relative font-mono text-xs uppercase tracking-[0.22em] text-accent-vivid">{label}</p>
         <blockquote className="relative mt-4 font-display text-2xl font-medium leading-snug md:text-3xl">
           {text}
         </blockquote>
@@ -368,11 +466,25 @@ function Flow({ steps, className = "" }) {
           {i < steps.length - 1 && (
             <span aria-hidden="true" className="absolute bottom-0 left-5 top-11 w-px bg-line-strong" />
           )}
-          <span data-num className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-brand/40 bg-surface font-mono text-sm font-medium text-brand">
-            {i + 1}
-          </span>
-          <div className="pt-1.5">
-            <h3 className="font-semibold text-content">{step.title}</h3>
+          {step.checkpoint ? (
+            <span data-num className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-white shadow-card">
+              <UserCheck size={18} strokeWidth={2} aria-hidden="true" />
+              <span className="sr-only">{i + 1}</span>
+            </span>
+          ) : (
+            <span data-num className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-brand/40 bg-surface font-mono text-sm font-medium text-brand">
+              {i + 1}
+            </span>
+          )}
+          <div
+            className={
+              step.checkpoint ? "-mt-1 rounded-xl2 border border-accent/35 bg-accent/[0.07] px-4 pb-4 pt-2.5" : "pt-1.5"
+            }
+          >
+            {step.checkpoint && (
+              <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-accent">Human checkpoint</p>
+            )}
+            <h3 className={`font-semibold text-content ${step.checkpoint ? "mt-1" : ""}`}>{step.title}</h3>
             <p className="mt-1.5 text-base leading-relaxed text-content-dim">{step.text}</p>
           </div>
         </li>
@@ -426,6 +538,105 @@ function ResponsiveTable({ caption, columns, rows, rowKey }) {
         ))}
       </tbody>
     </table>
+  );
+}
+
+/** Marks a representative design, so nothing on the page reads as a client result. */
+function BlueprintBadge() {
+  return (
+    <span
+      aria-describedby="blueprint-note"
+      className="inline-flex items-center rounded-full border border-gold/50 bg-gold/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-content"
+    >
+      Solution Blueprint
+    </span>
+  );
+}
+
+function LeadList({ items, className = "" }) {
+  return (
+    <ul className={`space-y-4 ${className}`}>
+      {items.map((item) => (
+        <li key={item.lead ?? item.text} className="flex gap-4">
+          <span aria-hidden="true" className="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full border-2 border-brand" />
+          <span>
+            {item.lead && (
+              <>
+                <strong className="font-semibold text-content">{item.lead}</strong>{" "}
+              </>
+            )}
+            {item.text}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/**
+ * A goal, not a result: dashed border, flag icon, and the word "Target" set
+ * before the sentence, so it cannot be mistaken for a measured outcome.
+ */
+function TargetOutcome({ text }) {
+  return (
+    <Reveal as="aside" aria-label="Target outcome" className="mx-auto mb-20 max-w-3xl md:mb-24">
+      <div className="flex gap-5 rounded-xl2 border border-dashed border-gold/60 bg-gold/[0.06] px-6 py-7 md:px-8">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold/50 text-content">
+          <Flag size={18} strokeWidth={1.8} aria-hidden="true" />
+        </span>
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-content-faint">Target</p>
+          <p className="mt-2 text-lg leading-relaxed text-content">{text}</p>
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
+/** Every other study in the data file, so the block grows with new entries. */
+function MoreCaseStudies({ current }) {
+  const others = Object.values(caseStudies).filter((s) => s.slug !== current);
+  if (!others.length) return null;
+
+  return (
+    <section aria-labelledby="more-case-studies" className="border-t border-line bg-surface-subtle">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+        <h2 id="more-case-studies" className="font-display text-2xl font-semibold tracking-tight text-content md:text-3xl">
+          More case studies
+        </h2>
+        <ul className="mt-8 grid gap-6 md:grid-cols-2">
+          {others.map((other) => (
+            <li key={other.slug}>
+              <Link
+                to={caseStudyPath(other.slug)}
+                className="group flex h-full flex-col overflow-hidden rounded-xl2 border border-line bg-surface-card transition-shadow hover:shadow-card focus-ring"
+              >
+                <Picture
+                  image={other.hero}
+                  sizes="(min-width: 768px) 30rem, 100vw"
+                  className="aspect-[16/9] w-full object-cover"
+                />
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-accent">
+                    {other.eyebrow}
+                    {other.type === "blueprint" && (
+                      <span className="rounded-full border border-gold/50 bg-gold/10 px-2 py-0.5 text-[0.65rem] tracking-[0.12em] text-content">
+                        Solution Blueprint
+                      </span>
+                    )}
+                  </p>
+                  <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-content">{other.title}</h3>
+                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold text-brand">
+                    Read case study
+                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                  </span>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }
 

@@ -8,35 +8,52 @@
  *
  * @typedef {{ src: string, width: number }} ImageSource
  * @typedef {{ sources: ImageSource[], width: number, height: number, alt: string }} CaseImage
- * @typedef {{ lead: string, text: string }} LeadItem
+ * Entries come in two kinds. "client" studies describe delivered work.
+ * "blueprint" studies are representative solution designs: they carry a
+ * visible badge, use `highlights` instead of numeric `stats`, and put any
+ * figure in `targetOutcome`, which the page styles as a goal, never a result.
+ * Every section below `hero` is optional unless marked otherwise; the page
+ * skips what an entry leaves out.
+ *
+ * @typedef {{ lead?: string, text: string }} LeadItem
  * @typedef {{ metric: string, traditional: string, agent: string, target?: boolean }} OutcomeRow
  *
  * @typedef {Object} CaseStudy
  * @property {string} slug
+ * @property {"client" | "blueprint"} type
  * @property {string} title
- * @property {string} eyebrow
+ * @property {string} eyebrow             Category, shown in the hero badge.
  * @property {string} subtitle
  * @property {string} seoTitle
  * @property {string} seoDescription
  * @property {string} ogImage              Path under /public.
  * @property {CaseImage} hero
- * @property {{ value: string, label: string }[]} stats
- * @property {{ summary: string, challenge: string, solution: string, technologies: string }} keyDetails
- * @property {string[]} context
+ * @property {{ value: string, label: string }[]} [stats]
+ * @property {{ title: string, text: string }[]} [highlights]   Non-numeric stat cards.
+ * @property {{ summary?: string, challenge: string, solution: string, technologies: string }} keyDetails
+ * @property {string[]} [executiveSummary]
+ * @property {string[]} [context]
  * @property {CaseImage} [contextImage]
- * @property {{ intro: string, items: LeadItem[] }} challenge
- * @property {string} insight
- * @property {string[]} solution
- * @property {{ capability: string, value: string }[]} capabilities
- * @property {{ title: string, text: string }[]} flow
+ * @property {{ intro?: string, items: LeadItem[] }} [challenge]
+ * @property {string} [insight]
+ * @property {string} [insightLabel]
+ * @property {string[]} [solution]
+ * @property {boolean} [solutionAsList]    Render `solution` as bullets instead of prose.
+ * @property {{ capability: string, value: string }[]} [capabilities]
+ * @property {{ title: string, text: string, checkpoint?: boolean }[]} [flow]   `checkpoint` marks a human step.
  * @property {CaseImage} [flowImage]
- * @property {string[]} phases
- * @property {{ layer: string, tool: string, purpose: string }[]} stack
- * @property {{ intro: string, rows: OutcomeRow[] }} outcome
- * @property {LeadItem[]} impact
- * @property {string} whyItMatters
- * @property {string[]} nextSteps
- * @property {string[]} tags
+ * @property {string[]} [phases]
+ * @property {{ layer: string, tool: string, purpose?: string }[]} [stack]
+ * @property {{ intro: string, rows: OutcomeRow[] }} [outcome]
+ * @property {string} [impactIntro]
+ * @property {LeadItem[]} [impact]
+ * @property {string} [targetOutcome]
+ * @property {{ title: string, text: string }[]} [principles]
+ * @property {string} [whyItMatters]
+ * @property {string[]} [nextSteps]
+ * @property {string[]} [tags]
+ * @property {Partial<Record<string, string>>} [labels]   Section title overrides.
+ * @property {{ title: string, subtitle: string, buttonText: string }} [cta]
  */
 
 import hero800 from "../assets/case-studies/axiomra-ai-sales-agent/hero-800.webp";
@@ -48,6 +65,12 @@ import team2200 from "../assets/case-studies/axiomra-ai-sales-agent/team-2200.we
 import handoff800 from "../assets/case-studies/axiomra-ai-sales-agent/handoff-800.webp";
 import handoff1400 from "../assets/case-studies/axiomra-ai-sales-agent/handoff-1400.webp";
 import handoff2200 from "../assets/case-studies/axiomra-ai-sales-agent/handoff-2200.webp";
+import intakeHero800 from "../assets/case-studies/healthcare-patient-intake-triage-ai-agent/hero-800.webp";
+import intakeHero1400 from "../assets/case-studies/healthcare-patient-intake-triage-ai-agent/hero-1400.webp";
+import intakeHero2200 from "../assets/case-studies/healthcare-patient-intake-triage-ai-agent/hero-2200.webp";
+import intakeScenario800 from "../assets/case-studies/healthcare-patient-intake-triage-ai-agent/scenario-800.webp";
+import intakeScenario1400 from "../assets/case-studies/healthcare-patient-intake-triage-ai-agent/scenario-1400.webp";
+import intakeScenario2200 from "../assets/case-studies/healthcare-patient-intake-triage-ai-agent/scenario-2200.webp";
 
 export const CASE_STUDIES_PATH = "/case-studies";
 
@@ -57,6 +80,7 @@ export const caseStudyPath = (slug) => `${CASE_STUDIES_PATH}/${slug}`;
 export const caseStudies = {
   "axiomra-ai-sales-agent": {
     slug: "axiomra-ai-sales-agent",
+    type: "client",
     eyebrow: "AI Agent",
     title: "Virtual Sales & Customer Support Assistant",
     subtitle:
@@ -247,5 +271,163 @@ export const caseStudies = {
     ],
 
     tags: ["Agentic AI", "Sales Automation", "GPT-4", "RAG", "CRM Integration", "AWS Serverless"],
+  },
+  "healthcare-patient-intake-triage-ai-agent": {
+    slug: "healthcare-patient-intake-triage-ai-agent",
+    type: "blueprint",
+    eyebrow: "Healthcare",
+    title: "Patient Intake & Triage AI Agent",
+    subtitle: "AI Agents / Clinical Workflow Automation",
+    seoTitle: "Patient Intake & Triage AI Agent: Healthcare Solution Blueprint | Axiomra",
+    seoDescription:
+      "Solution blueprint for an AI intake agent that structures patient information, routes cases with configurable rules and escalates red flags to staff.",
+    ogImage: "/og/healthcare-patient-intake-triage-ai-agent.jpg",
+
+    hero: {
+      sources: [
+        { src: intakeHero800, width: 800 },
+        { src: intakeHero1400, width: 1400 },
+        { src: intakeHero2200, width: 2200 },
+      ],
+      width: 1400,
+      height: 1050,
+      alt: "Hands typing on a laptop beside a stethoscope on a clinic desk",
+    },
+
+    highlights: [
+      { title: "24/7 intake", text: "Patients can start intake through web, mobile or portal at any hour." },
+      { title: "Human-in-the-loop", text: "High-risk and ambiguous cases are escalated to staff." },
+      { title: "EHR & scheduling integrated", text: "Staff receive a structured summary inside their existing workflow." },
+    ],
+
+    keyDetails: {
+      summary: "A guided intake agent that structures patient information and routes it for staff review.",
+      challenge: "Fragmented, slow patient intake across forms, calls, portals and free-text messages.",
+      solution: "A conversational AI intake agent with configurable triage routing and human escalation.",
+      technologies: "GPT-class LLM, Python, FastAPI, PostgreSQL, EHR/EMR and scheduling APIs.",
+    },
+
+    executiveSummary: [
+      "Axiomra designed an AI-assisted patient intake and triage workflow. It captures symptoms, structures patient information, applies configurable triage rules and routes each case to the appropriate care queue, where a clinician reviews it.",
+    ],
+
+    context: [
+      "A multi-location healthcare provider dealing with long intake queues, fragmented patient information and avoidable administrative work before appointments.",
+    ],
+    contextImage: {
+      sources: [
+        { src: intakeScenario800, width: 800 },
+        { src: intakeScenario1400, width: 1400 },
+        { src: intakeScenario2200, width: 2200 },
+      ],
+      width: 1400,
+      height: 788,
+      alt: "An empty clinic corridor with waiting benches outside consultation rooms",
+    },
+
+    challenge: {
+      items: [
+        {
+          lead: "Fragmented inputs.",
+          text: "Patient information arrives through forms, calls, portals and free-text messages, each with its own structure.",
+        },
+        {
+          lead: "Manual re-entry and sorting.",
+          text: "Clinical and administrative teams spend significant time re-entering data and working out the correct department or urgency level.",
+        },
+        {
+          lead: "Peak-hour bottlenecks.",
+          text: "Demand spikes create delays, repeated questions and an inconsistent intake experience across locations.",
+        },
+        {
+          lead: "Automation with clear limits.",
+          text: "The organization needs automation without letting an AI system make unsupported clinical decisions.",
+        },
+      ],
+    },
+
+    insight: "Automate the administrative steps, keep clinical judgment with licensed staff.",
+    insightLabel: "Design principle",
+
+    solution: [
+      "A conversational AI intake agent collects demographics, symptoms, medication details, visit reason and relevant history in a guided flow.",
+      "Natural-language answers are converted into structured fields and validated against required intake rules.",
+      "Configurable triage rules flag urgency and route each case to the correct queue for staff review. Defined red-flag conditions trigger immediate human escalation.",
+      "The agent connects to scheduling and EHR workflows, so staff receive a concise, structured intake summary instead of raw conversation history.",
+      "Human-in-the-loop controls keep clinical judgment with licensed staff while the repetitive administrative steps are automated.",
+    ],
+    solutionAsList: true,
+
+    flow: [
+      { title: "Patient starts intake", text: "Through the web, a mobile app or the patient portal." },
+      { title: "Guided conversation", text: "The AI agent collects and clarifies the required information." },
+      { title: "Structuring & completeness check", text: "NLP turns answers into structured data and checks nothing required is missing." },
+      { title: "Rule-based routing", text: "Configured rules and risk flags assign a provisional urgency and destination." },
+      {
+        title: "Escalation to staff",
+        text: "High-risk or ambiguous cases go straight to a staff member instead of continuing automatically.",
+        checkpoint: true,
+      },
+      { title: "Summary for clinical review", text: "A structured summary is written to the clinical workflow for staff to review." },
+    ],
+
+    stack: [
+      { layer: "LLM / NLP", tool: "GPT-class language model, structured prompting, medical terminology layer" },
+      { layer: "Backend", tool: "Python, FastAPI, REST APIs" },
+      { layer: "Data", tool: "PostgreSQL / secure patient-data store" },
+      { layer: "Integrations", tool: "EHR/EMR, scheduling and messaging APIs" },
+      { layer: "Security", tool: "Role-based access, audit logging, encryption, consent controls" },
+    ],
+
+    impactIntro: "What the workflow is designed to change:",
+    impact: [
+      { text: "Shorter intake queues and less repetitive data entry for clinical and front-desk teams." },
+      { text: "More consistent capture of patient information across digital channels." },
+      { text: "Faster routing of patients to the correct care team, and earlier escalation of red-flag cases." },
+      { text: "Intake available 24/7 without expanding administrative headcount." },
+    ],
+
+    targetOutcome:
+      "Reduce intake handling time from a manual, multi-step process to a near-real-time digital workflow, while preserving human clinical oversight.",
+
+    principles: [
+      {
+        title: "Human oversight",
+        text: "Human oversight is retained for high-impact, regulated, ambiguous or low-confidence decisions.",
+      },
+      {
+        title: "Security by design",
+        text: "Security, access control, auditability and privacy are designed into the workflow rather than added after deployment.",
+      },
+      {
+        title: "Process KPIs, not only accuracy",
+        text: "Model quality is measured together with operational KPIs, so automation improves the business process and not only model accuracy.",
+      },
+      {
+        title: "Monitored in production",
+        text: "Production monitoring, feedback capture and controlled retraining keep performance steady as data and behavior change.",
+      },
+    ],
+
+    whyItMatters:
+      "Axiomra combines AI engineering, data science, workflow integration and production governance to turn this use case into an operational solution that fits existing business systems and decision processes.",
+
+    tags: ["Healthcare", "AI Agents", "Clinical Workflow Automation", "Human-in-the-loop", "EHR Integration"],
+
+    labels: {
+      context: "Typical scenario",
+      challenge: "Business problem",
+      solution: "Solution",
+      stack: "Tools & technology",
+      impact: "Outcome & business impact",
+      why: "Axiomra value",
+    },
+
+    cta: {
+      title: "Planning an intake workflow like this?",
+      subtitle:
+        "Tell us how patients reach you today and which systems their details pass through. We will map which admin steps an agent can take over, and where staff stay in the loop.",
+      buttonText: "Talk to our team",
+    },
   },
 };
