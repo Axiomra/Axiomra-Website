@@ -34,6 +34,7 @@ import evoAiImg from "../assets/portfolio/evo-ai.webp";
 import frontOfficeImg from "../assets/portfolio/front-office.webp";
 import formoleImg from "../assets/portfolio/formole.webp";
 import salesAgentImg from "../assets/case-studies/axiomra-ai-sales-agent/card.webp";
+import intakeAgentImg from "../assets/case-studies/healthcare-patient-intake-triage-ai-agent/card.webp";
 import { caseStudyPath } from "./caseStudiesData";
 
 export const PORTFOLIO_PATH = "/portfolio";
@@ -461,6 +462,26 @@ export const caseStudies = [
     accent: "#3B4FBF",
     // Rows with a long-form write-up link to it instead of the contact page.
     caseStudy: caseStudyPath("axiomra-ai-sales-agent"),
+  },
+  {
+    slug: "healthcare-patient-intake-triage-ai-agent",
+    name: "Healthcare Intake Agent",
+    tag: "Healthcare & Agentic AI",
+    title: "Patient Intake & Triage AI Agent",
+    description:
+      "A solution blueprint for a conversational intake agent that collects patient details, structures them, routes each case with configurable rules and escalates red-flag cases to staff, so clinicians start from a structured summary.",
+    // A representative design, not a deployment: no figures, only what it does.
+    stats: [
+      { value: "24/7", label: "Patient intake through web, mobile or portal" },
+      { value: "Staff", label: "Review for high-risk and ambiguous cases" },
+      { value: "EHR", label: "Structured summaries into existing workflows" },
+    ],
+    statsLabel: "Solution blueprint",
+    image: intakeAgentImg,
+    width: 1574,
+    height: 976,
+    accent: "#0F766E",
+    caseStudy: caseStudyPath("healthcare-patient-intake-triage-ai-agent"),
   },
 ];
 
