@@ -3,6 +3,13 @@ import { ArrowLeft, ChevronRight } from "lucide-react";
 import GradientCTA from "../components/GradientCTA";
 import { Reveal } from "../components/motion/Reveal";
 import usePageMeta from "../hooks/usePageMeta";
+import useInView from "../hooks/useInView";
+import useStaggerReveal from "../hooks/useStaggerReveal";
+import NetworkMesh from "../components/case-study/NetworkMesh";
+import BinaryGrid from "../components/case-study/BinaryGrid";
+import MoleculeGraph from "../components/case-study/MoleculeGraph";
+import CategoryBadge from "../components/case-study/CategoryBadge";
+import "../styles/case-study.css";
 import { caseStudies } from "../data/caseStudiesData";
 import { PORTFOLIO_PATH } from "../data/portfolioData";
 
@@ -60,7 +67,11 @@ function CaseStudy({ study }) {
 
         <Insight text={study.insight} />
 
-        <Section id="solution" title="The solution">
+        <Section
+          id="solution"
+          title="The solution"
+          aside={<BinaryGrid className="left-[calc(100%+4rem)] top-1 hidden xl:grid" />}
+        >
           {study.solution.map((p) => (
             <p key={p.slice(0, 24)}>{p}</p>
           ))}
@@ -90,16 +101,19 @@ function CaseStudy({ study }) {
         </Section>
 
         <Section id="implementation" title="Implementation phases">
-          <ol className="divide-y divide-line border-y border-line">
-            {study.phases.map((phase, i) => (
-              <li key={phase} className="grid grid-cols-[3rem_1fr] items-baseline gap-2 py-5 sm:grid-cols-[4rem_1fr]">
-                <span className="font-mono text-sm tracking-wider text-accent">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span>{phase}</span>
-              </li>
-            ))}
-          </ol>
+          <div className="relative">
+            <MoleculeGraph className="right-[calc(100%+3.5rem)] top-2 hidden xl:block" />
+            <ol className="divide-y divide-line border-y border-line">
+              {study.phases.map((phase, i) => (
+                <li key={phase} className="grid grid-cols-[3rem_1fr] items-baseline gap-2 py-5 sm:grid-cols-[4rem_1fr]">
+                  <span data-num className="font-mono text-sm tracking-wider text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{phase}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
         </Section>
 
         <Section id="tech-stack" title="Technology stack" wide>
@@ -223,8 +237,11 @@ function Header({ study }) {
             Back to portfolio
           </Link>
 
-          <p className="mt-8 font-mono text-sm uppercase tracking-[0.2em] text-accent">{study.eyebrow}</p>
-          <h1 className="mt-3 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-content sm:text-5xl xl:text-6xl">
+          <CategoryBadge label={study.eyebrow} className="cs-load-rise mt-8" />
+          <h1
+            className="cs-load-rise mt-3 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-content sm:text-5xl xl:text-6xl"
+            style={{ "--d": "60ms" }}
+          >
             {study.title}
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-content-dim md:text-xl">{study.subtitle}</p>
@@ -260,8 +277,15 @@ function KeyDetails({ details }) {
   ];
 
   return (
-    <section aria-labelledby="key-details" className="mt-20 border-y border-line bg-surface-subtle md:mt-28">
-      <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 md:py-20 lg:px-8">
+    <section
+      aria-labelledby="key-details"
+      className="relative mt-20 overflow-hidden border-y border-line bg-surface-subtle md:mt-28"
+    >
+      {/* Both meshes stop 1rem short of the text column (72rem wide, 2rem
+          padding) and the panel clips whatever runs past its edges. */}
+      <NetworkMesh seed={3} origin="right" className="-top-6 hidden lg:block" style={{ right: "calc(50% + 35rem)" }} />
+      <NetworkMesh seed={11} origin="left" className="-bottom-10 hidden lg:block" style={{ left: "calc(50% + 35rem)" }} />
+      <div className="relative mx-auto max-w-5xl px-4 py-14 sm:px-6 md:py-20 lg:px-8">
         <h2 id="key-details" className="font-mono text-xs uppercase tracking-[0.22em] text-content-faint">
           Key details
         </h2>
@@ -281,14 +305,19 @@ function KeyDetails({ details }) {
   );
 }
 
-/** One article section. `wide` lets tables use the full column. */
-function Section({ id, title, wide = false, children }) {
+/**
+ * One article section. `wide` lets tables use the full column; `aside` is a
+ * decoration positioned against the section, for the page margin.
+ */
+function Section({ id, title, wide = false, aside = null, children }) {
+  const ref = useStaggerReveal();
   return (
-    <Reveal
-      as="section"
+    <section
+      ref={ref}
       aria-labelledby={id}
-      className={`mx-auto mb-20 md:mb-24 ${wide ? "" : "max-w-3xl"}`}
+      className={`cs-rise-group relative mx-auto mb-20 md:mb-24 ${wide ? "" : "max-w-3xl"}`}
     >
+      {aside}
       <h2
         id={id}
         className="font-display text-3xl font-semibold leading-tight tracking-tight text-content md:text-4xl"
@@ -296,21 +325,33 @@ function Section({ id, title, wide = false, children }) {
         {title}
       </h2>
       <div className="mt-6 space-y-5 text-base leading-relaxed text-content-dim md:text-lg">{children}</div>
-    </Reveal>
+    </section>
   );
 }
 
 function Insight({ text }) {
+  const [ref, inView] = useInView({ rootMargin: "0px" });
   return (
     <Reveal as="aside" from="scale" className="relative mx-auto mb-20 max-w-3xl md:mb-24">
-      <figure className="relative overflow-hidden rounded-xl2 bg-[linear-gradient(125deg,rgb(var(--inverse))_0%,rgb(var(--inverse-card))_45%,rgb(var(--brand-strong))_100%)] px-7 py-10 text-inverse-fg shadow-card md:px-12 md:py-12">
+      <figure
+        ref={ref}
+        data-active={inView || undefined}
+        className="cs-decor relative overflow-hidden rounded-xl2 bg-inverse px-7 py-10 text-inverse-fg shadow-card md:px-12 md:py-12"
+      >
+        {/* Twice the card's width and mirrored, so drifting it sideways shifts
+            the gradient without ever exposing an edge. At rest the visible
+            half matches the original inverse to brand sweep. */}
+        <span
+          aria-hidden="true"
+          className="cs-drift pointer-events-none absolute inset-y-0 left-0 w-[200%] bg-[linear-gradient(125deg,rgb(var(--inverse))_0%,rgb(var(--inverse-card))_22%,rgb(var(--brand-strong))_50%,rgb(var(--inverse-card))_78%,rgb(var(--inverse))_100%)]"
+        />
         <span
           aria-hidden="true"
           className="pointer-events-none absolute -right-2 -top-10 select-none font-display text-[11rem] leading-none text-white/[0.07]"
         >
           &rdquo;
         </span>
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent-vivid">Primary objective</p>
+        <p className="relative font-mono text-xs uppercase tracking-[0.22em] text-accent-vivid">Primary objective</p>
         <blockquote className="relative mt-4 font-display text-2xl font-medium leading-snug md:text-3xl">
           {text}
         </blockquote>
@@ -327,7 +368,7 @@ function Flow({ steps, className = "" }) {
           {i < steps.length - 1 && (
             <span aria-hidden="true" className="absolute bottom-0 left-5 top-11 w-px bg-line-strong" />
           )}
-          <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-brand/40 bg-surface font-mono text-sm font-medium text-brand">
+          <span data-num className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-brand/40 bg-surface font-mono text-sm font-medium text-brand">
             {i + 1}
           </span>
           <div className="pt-1.5">

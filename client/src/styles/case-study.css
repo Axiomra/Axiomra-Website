@@ -1,0 +1,181 @@
+/* ── Case study page: margin decorations and entry motion ─────────────────
+   Resting styles below are the finished, static picture. Everything that
+   moves lives under `no-preference`, so reduced motion gets that picture
+   with nothing hidden and nothing looping. Only opacity, transform and
+   stroke-dashoffset animate. */
+
+.cs-node {
+  opacity: 0.4;
+}
+
+.cs-mol-travel,
+.cs-mol-ripple {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Decorations wait until they are on screen, and freeze when scrolled away. */
+  .cs-decor:not([data-active]),
+  .cs-decor:not([data-active]) * {
+    animation-play-state: paused;
+  }
+
+  /* Line draw-in, shared by the mesh and the molecule. */
+  .cs-draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: cs-draw 0.6s ease-out var(--d, 0s) forwards;
+  }
+
+  .cs-node {
+    animation: cs-node-in 0.4s ease-out var(--d, 0s) both;
+  }
+
+  /* Pulse has no backwards fill, so node-in owns opacity until it starts. */
+  .cs-node-pulse {
+    animation:
+      cs-node-in 0.4s ease-out var(--d, 0s) both,
+      cs-pulse var(--dur, 5s) ease-in-out var(--pd, 1.2s) infinite;
+  }
+
+  .cs-mol-node {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: cs-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) var(--d, 0s) both;
+  }
+
+  .cs-mol-ripple {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: cs-ripple 3s ease-out 1.4s infinite;
+  }
+
+  .cs-mol-travel {
+    stroke-dasharray: 0.07 0.93;
+    animation:
+      cs-fade-in 0.4s ease-out 1.4s forwards,
+      cs-travel 7s linear 1.4s infinite;
+  }
+
+  .cs-flip {
+    animation: cs-flip 0.2s ease-out;
+  }
+
+  /* Insight card: the gradient layer is twice the card's width and drifts. */
+  .cs-drift {
+    animation: cs-drift 7.5s ease-in-out infinite alternate;
+  }
+
+  /* Hero badge and title, on page load. */
+  .cs-load-rise {
+    animation: cs-rise 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) var(--d, 0s) both;
+  }
+
+  /* Section content, tagged by useStaggerReveal. */
+  .cs-rise-group [data-rise],
+  .cs-rise-group [data-rise="num"] > * {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .cs-rise-group [data-rise="num"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cs-rise-group [data-rise="num"] > [data-num] {
+    transform: scale(0.6);
+  }
+
+  .cs-rise-group[data-revealed] [data-rise],
+  .cs-rise-group[data-revealed] [data-rise="num"] > * {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.4s ease-out,
+      transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  /* Text follows its number by a beat. */
+  .cs-rise-group[data-revealed] [data-rise="num"] > :not([data-num]) {
+    transition-delay: calc(var(--i, 0) * 60ms + 90ms);
+  }
+}
+
+@keyframes cs-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes cs-node-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+
+@keyframes cs-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes cs-pop {
+  from {
+    transform: scale(0);
+  }
+}
+
+@keyframes cs-ripple {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3.2);
+  }
+}
+
+@keyframes cs-travel {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes cs-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cs-flip {
+  from {
+    opacity: 0;
+    transform: translateY(-45%);
+  }
+}
+
+@keyframes cs-drift {
+  to {
+    transform: translate3d(-12%, 0, 0);
+  }
+}
+
+@keyframes cs-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
