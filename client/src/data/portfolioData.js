@@ -33,6 +33,8 @@ import voltoxImg from "../assets/portfolio/voltox.webp";
 import evoAiImg from "../assets/portfolio/evo-ai.webp";
 import frontOfficeImg from "../assets/portfolio/front-office.webp";
 import formoleImg from "../assets/portfolio/formole.webp";
+import salesAgentImg from "../assets/case-studies/axiomra-ai-sales-agent/card.webp";
+import { caseStudyPath } from "./caseStudiesData";
 
 export const PORTFOLIO_PATH = "/portfolio";
 
@@ -46,7 +48,7 @@ export const hero = {
     "backed by data and driven by results.",
   ctaText: "Read case study",
   stats: [
-    { value: "22", label: "Shipped case studies" },
+    { value: "23", label: "Shipped case studies" },
     { value: "12+", label: "Industries served" },
     { value: "300+", label: "AI projects delivered" },
     { value: "4.9/5", label: "Average client rating" },
@@ -438,6 +440,27 @@ export const caseStudies = [
     height: 868,
     band: "#074E16",
     accent: "#BEF2C7",
+  },
+  {
+    slug: "axiomra-ai-sales-agent",
+    name: "Axiomra Sales Agent",
+    tag: "Sales & Agentic AI",
+    title: "Virtual Sales & Customer Support Assistant",
+    description:
+      "Our own multi-agent assistant for the Axiomra website. It answers visitors around the clock, qualifies leads, creates Pipedrive opportunities and books calls with the right sales rep, so the team starts every conversation with context.",
+    stats: [
+      { value: "24/7", label: "Visitor engagement" },
+      { value: "< 2 min", label: "Target response time" },
+      { value: "CRM", label: "Leads qualified and logged automatically" },
+    ],
+    // These are capabilities and targets, not measured results.
+    statsLabel: "What it does",
+    image: salesAgentImg,
+    width: 1574,
+    height: 976,
+    accent: "#3B4FBF",
+    // Rows with a long-form write-up link to it instead of the contact page.
+    caseStudy: caseStudyPath("axiomra-ai-sales-agent"),
   },
 ];
 

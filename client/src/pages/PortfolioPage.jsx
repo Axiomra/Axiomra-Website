@@ -9,7 +9,7 @@ import GradientCTA from "../components/GradientCTA";
 import { caseStudies, faqs } from "../data/portfolioData";
 
 const META_DESCRIPTION =
-  "Explore Axiomra's AI case studies: 22 shipped projects across education, fashion, fintech, marketing and sports, with the results each one delivered.";
+  "Explore Axiomra's AI case studies: 23 shipped projects across education, fashion, fintech, marketing and sports, with the results each one delivered.";
 
 export default function PortfolioPage() {
   useEffect(() => {

@@ -170,7 +170,7 @@ export default function CaseStudyRow({ study, index }) {
               banded ? "text-white/40" : "text-content-faint"
             }`}
           >
-            The results?
+            {study.statsLabel ?? "The results?"}
           </p>
 
           <dl
@@ -203,7 +203,7 @@ export default function CaseStudyRow({ study, index }) {
 
           <div data-row-reveal className="mt-9">
             <Link
-              to="/contact"
+              to={study.caseStudy ?? "/contact"}
               className={`group inline-flex items-center gap-3 rounded-full border py-2 pl-6 pr-2 text-base font-semibold transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring ${
                 banded
                   ? "border-white/20 bg-white/10 text-white"

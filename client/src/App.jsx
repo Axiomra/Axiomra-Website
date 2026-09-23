@@ -23,6 +23,7 @@ const AboutPage = lazy(() => import("./pages/AboutPage"));
 const TechStackPage = lazy(() => import("./pages/TechStackPage"));
 const FaqsPage = lazy(() => import("./pages/FaqsPage"));
 const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
+const CaseStudyPage = lazy(() => import("./pages/CaseStudyPage"));
 const IndustriesPage = lazy(() => import("./pages/IndustriesPage"));
 const IndustryDetailPlaceholder = lazy(() => import("./pages/IndustryDetailPlaceholder"));
 const FashionPage = lazy(() => import("./pages/FashionPage"));
@@ -54,6 +55,7 @@ import { ABOUT_PATH } from "./data/aboutData";
 import { TECH_PATH } from "./data/techStackData";
 import { FAQS_PATH } from "./data/faqsData";
 import { PORTFOLIO_PATH } from "./data/portfolioData";
+import { CASE_STUDIES_PATH } from "./data/caseStudiesData";
 import { INDUSTRIES_PATH } from "./data/industriesData";
 import { AI_DEVELOPMENT_SLUG } from "./data/aiDevelopmentData";
 import { GENERATIVE_AI_SLUG } from "./data/generativeAiData";
@@ -104,6 +106,7 @@ function SiteRoutes() {
             <Route path={TECH_PATH} element={<TechStackPage />} />
             <Route path={FAQS_PATH} element={<FaqsPage />} />
             <Route path={PORTFOLIO_PATH} element={<PortfolioPage />} />
+            <Route path={`${CASE_STUDIES_PATH}/:slug`} element={<CaseStudyPage />} />
             <Route path={INDUSTRIES_PATH} element={<IndustriesPage />} />
             {/* Built industry pages go above the :slug fallback. */}
             <Route path={`${INDUSTRIES_PATH}/fashion`} element={<FashionPage />} />
