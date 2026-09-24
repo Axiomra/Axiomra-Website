@@ -7,14 +7,21 @@ import { caseStudies, PORTFOLIO_PATH } from "../../data/portfolioData";
 import { showcase } from "../../data/industriesData";
 
 /**
- * Case studies running as a continuous marquee. The list is rendered twice so
- * the -50% loop lands on an identical frame, and the animation pauses on hover
+ * Case studies running as a continuous marquee. The list is repeated until one
+ * pass is wider than a large screen, then rendered twice so the -50% loop
+ * lands on an identical frame. The animation pauses on hover
  * or keyboard focus so a card can actually be clicked. Under
  * prefers-reduced-motion it falls back to a plain scrollable rail.
  */
+// Cards in one loop pass: at ~26rem each, eight cover a 2560px viewport.
+const MIN_PASS = 8;
+// Seconds per card, so the scroll speed stays the same however many there are.
+const SECONDS_PER_CARD = 4;
+
 export default function IndustriesPortfolio({ data = showcase }) {
   const reduced = useReducedMotion();
-  const studies = reduced ? caseStudies : [...caseStudies, ...caseStudies];
+  const pass = Array.from({ length: Math.ceil(MIN_PASS / caseStudies.length) }, () => caseStudies).flat();
+  const studies = reduced ? caseStudies : [...pass, ...pass];
 
   return (
     <section className="overflow-hidden border-t border-line bg-surface py-24 md:py-32">
@@ -44,8 +51,8 @@ export default function IndustriesPortfolio({ data = showcase }) {
           <ul
             aria-label="Selected projects"
             // The default 30s marquee is tuned for short pills; this track is
-            // roughly ten times wider, so it needs its own slower duration.
-            style={reduced ? undefined : { animationDuration: "90s" }}
+            // much wider, so its duration follows the card count.
+            style={reduced ? undefined : { animationDuration: `${pass.length * SECONDS_PER_CARD}s` }}
             className={`flex w-max gap-5 px-4 pb-4 sm:px-6 lg:px-8 ${
               reduced
                 ? ""
@@ -59,7 +66,7 @@ export default function IndustriesPortfolio({ data = showcase }) {
                 className="w-[82vw] shrink-0 sm:w-[24rem] lg:w-[26rem]"
               >
                 <Link
-                  to={`${PORTFOLIO_PATH}/${study.slug}`}
+                  to={study.caseStudy ?? PORTFOLIO_PATH}
                   tabIndex={i >= caseStudies.length ? -1 : undefined}
                   className="group block h-full rounded-[2rem] border border-line bg-surface-subtle p-2 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-1 hover:shadow-card focus-ring"
                 >

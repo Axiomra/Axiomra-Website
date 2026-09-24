@@ -559,8 +559,8 @@ export default function ContactPage() {
               <span className="text-accent">With A Team That Ships.</span>
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-content-dim">
-              Tell us the scope, the problem or the rough idea. An engineer reads every submission
-. You get a real technical answer back, not a calendar link and a brochure.
+              Tell us the scope, the problem or the rough idea. An engineer reads every submission.
+              You get a real technical answer back, not a calendar link and a brochure.
             </p>
 
             <div className="mt-9 space-y-4">

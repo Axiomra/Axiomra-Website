@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ChevronRight, Flag, UserCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronDown, ChevronRight, Flag, UserCheck } from "lucide-react";
 import GradientCTA from "../components/GradientCTA";
 import { Reveal } from "../components/motion/Reveal";
 import usePageMeta from "../hooks/usePageMeta";
@@ -9,6 +9,7 @@ import NetworkMesh from "../components/case-study/NetworkMesh";
 import BinaryGrid from "../components/case-study/BinaryGrid";
 import MoleculeGraph from "../components/case-study/MoleculeGraph";
 import CategoryBadge from "../components/case-study/CategoryBadge";
+import BrandedImage from "../components/case-study/BrandedImage";
 import "../styles/case-study.css";
 import { caseStudies, caseStudyPath } from "../data/caseStudiesData";
 import { PORTFOLIO_PATH } from "../data/portfolioData";
@@ -42,6 +43,7 @@ const DEFAULT_LABELS = {
   principles: "Implementation principles",
   why: "Why this matters",
   next: "Next enhancements",
+  tech: "Under the hood (for technical teams)",
 };
 
 const DEFAULT_CTA = {
@@ -65,7 +67,7 @@ function CaseStudy({ study }) {
   const flowMolecule = !study.flowImage && !study.phases?.length;
 
   return (
-    <article className="bg-surface">
+    <article className="bg-surface" style={accentVars(study.accent)}>
       <Header study={study} />
       <KeyDetails details={study.keyDetails} />
 
@@ -143,46 +145,6 @@ function CaseStudy({ study }) {
             </Section>
           ))}
 
-        {study.phases?.length > 0 && (
-          <Section id="implementation" title={label.phases}>
-            <div className="relative">
-              <MoleculeGraph className="right-[calc(100%+3.5rem)] top-2 hidden xl:block" />
-              <ol className="divide-y divide-line border-y border-line">
-                {study.phases.map((phase, i) => (
-                  <li key={phase} className="grid grid-cols-[3rem_1fr] items-baseline gap-2 py-5 sm:grid-cols-[4rem_1fr]">
-                    <span data-num className="font-mono text-sm tracking-wider text-accent">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span>{phase}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </Section>
-        )}
-
-        {study.stack?.length > 0 && (
-          <Section id="tech-stack" title={label.stack} wide>
-            <ResponsiveTable
-              caption="Technology stack by layer"
-              columns={
-                study.stack.some((row) => row.purpose)
-                  ? [
-                      { key: "layer", label: "Layer", strong: true },
-                      { key: "tool", label: "Tool", mono: true },
-                      { key: "purpose", label: "Purpose" },
-                    ]
-                  : [
-                      { key: "layer", label: "Layer", strong: true },
-                      { key: "tool", label: "Technology / Approach" },
-                    ]
-              }
-              rows={study.stack}
-              rowKey="layer"
-            />
-          </Section>
-        )}
-
         {study.outcome && (
           <Section id="outcome" title={label.outcome} wide>
             <p className="max-w-3xl">{study.outcome.intro}</p>
@@ -259,6 +221,58 @@ function CaseStudy({ study }) {
             ))}
           </div>
         )}
+
+        {/* Implementation phases and the stack are for technical readers, so
+            they sit behind a closed disclosure and the article stays plain. */}
+        {(study.phases?.length > 0 || study.stack?.length > 0) && (
+          <details className="group mt-16">
+            <summary className="mx-auto flex max-w-3xl cursor-pointer list-none items-center justify-between gap-4 rounded-xl2 border border-line bg-surface-card px-6 py-5 font-display text-xl font-semibold tracking-tight text-content transition-colors hover:border-brand/40 focus-ring [&::-webkit-details-marker]:hidden">
+              {label.tech}
+              <ChevronDown size={20} className="shrink-0 text-content-dim transition-transform group-open:rotate-180" aria-hidden="true" />
+            </summary>
+            <div className="pt-16">
+              {study.phases?.length > 0 && (
+                <Section id="implementation" title={label.phases}>
+                  <div className="relative">
+                    <MoleculeGraph className="right-[calc(100%+3.5rem)] top-2 hidden xl:block" />
+                    <ol className="divide-y divide-line border-y border-line">
+                      {study.phases.map((phase, i) => (
+                        <li key={phase} className="grid grid-cols-[3rem_1fr] items-baseline gap-2 py-5 sm:grid-cols-[4rem_1fr]">
+                          <span data-num className="font-mono text-sm tracking-wider text-accent">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <span>{phase}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                </Section>
+              )}
+
+              {study.stack?.length > 0 && (
+                <Section id="tech-stack" title={label.stack} wide>
+                  <ResponsiveTable
+                    caption="Technology stack by layer"
+                    columns={
+                      study.stack.some((row) => row.purpose)
+                        ? [
+                            { key: "layer", label: "Layer", strong: true },
+                            { key: "tool", label: "Tool", mono: true },
+                            { key: "purpose", label: "Purpose" },
+                          ]
+                        : [
+                            { key: "layer", label: "Layer", strong: true },
+                            { key: "tool", label: "Technology / Approach" },
+                          ]
+                    }
+                    rows={study.stack}
+                    rowKey="layer"
+                  />
+                </Section>
+              )}
+            </div>
+          </details>
+        )}
       </div>
 
       <MoreCaseStudies current={study.slug} />
@@ -328,20 +342,29 @@ function Header({ study }) {
         </div>
 
         <div className="lg:col-span-6">
-          <Picture
+          <BrandedImage
             image={study.hero}
             priority
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="aspect-[4/3] w-full rounded-xl2 object-cover shadow-card ring-1 ring-line"
+            className="aspect-[4/3] w-full rounded-xl2 shadow-card ring-1 ring-[rgb(var(--cs-accent)/0.2)]"
           />
         </div>
       </div>
 
       {study.stats?.length > 0 && (
-        <dl className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-xl2 border border-line bg-line sm:grid-cols-3 lg:mt-20">
+        <dl
+          className={`mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-xl2 border border-line bg-line lg:mt-20 ${
+            study.stats.length === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-3"
+          }`}
+        >
           {study.stats.map((stat) => (
             <div key={stat.label} className="flex flex-col-reverse bg-surface-card px-6 py-7 md:px-8 md:py-9">
-              <dt className="mt-2 text-sm leading-snug text-content-dim md:text-base">{stat.label}</dt>
+              <dt className="mt-2 text-sm leading-snug text-content-dim md:text-base">
+                {stat.label}
+                {stat.target && (
+                  <span className="mt-2 block text-xs text-content-faint">{TARGET_NOTE}</span>
+                )}
+              </dt>
               <dd className="font-display text-3xl font-semibold tracking-tight text-brand md:text-4xl">{stat.value}</dd>
             </div>
           ))}
@@ -354,9 +377,16 @@ function Header({ study }) {
         <ul className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-xl2 border border-line bg-line sm:grid-cols-3 lg:mt-20">
           {study.highlights.map((item) => (
             <li key={item.title} className="bg-surface-card px-6 py-7 md:px-8 md:py-9">
-              <span aria-hidden="true" className="mb-4 block h-1 w-8 rounded-full bg-brand" />
+              {item.value ? (
+                <p className="mb-3 font-display text-3xl font-semibold tracking-tight text-brand md:text-4xl">{item.value}</p>
+              ) : (
+                <span aria-hidden="true" className="mb-4 block h-1 w-8 rounded-full bg-brand" />
+              )}
               <p className="font-display text-xl font-semibold tracking-tight text-content md:text-2xl">{item.title}</p>
               <p className="mt-2 text-sm leading-snug text-content-dim md:text-base">{item.text}</p>
+              {item.value && (
+                <span className="mt-2 block text-xs text-content-faint">By design, not a measured result</span>
+              )}
             </li>
           ))}
         </ul>
@@ -375,12 +405,13 @@ function KeyDetails({ details }) {
   return (
     <section
       aria-labelledby="key-details"
-      className="relative mt-20 overflow-hidden border-y border-line bg-surface-subtle md:mt-28"
+      className="relative mt-20 overflow-hidden border-y border-[rgb(var(--cs-accent)/0.2)] bg-surface-subtle md:mt-28"
     >
+      <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[rgb(var(--cs-accent)/0.08)]" />
       {/* Both meshes stop 1rem short of the text column (72rem wide, 2rem
           padding) and the panel clips whatever runs past its edges. */}
-      <NetworkMesh seed={3} origin="right" className="-top-6 hidden lg:block" style={{ right: "calc(50% + 35rem)" }} />
-      <NetworkMesh seed={11} origin="left" className="-bottom-10 hidden lg:block" style={{ left: "calc(50% + 35rem)" }} />
+      <NetworkMesh seed={3} origin="right" className="-top-6 hidden lg:block" style={{ right: "calc(50% + 35rem)", color: MESH_COLOR }} />
+      <NetworkMesh seed={11} origin="left" className="-bottom-10 hidden lg:block" style={{ left: "calc(50% + 35rem)", color: MESH_COLOR }} />
       <div className="relative mx-auto max-w-5xl px-4 py-14 sm:px-6 md:py-20 lg:px-8">
         <h2 id="key-details" className="font-mono text-xs uppercase tracking-[0.22em] text-content-faint">
           Key details
@@ -606,15 +637,16 @@ function MoreCaseStudies({ current }) {
         </h2>
         <ul className="mt-8 grid gap-6 md:grid-cols-2">
           {others.map((other) => (
-            <li key={other.slug}>
+            <li key={other.slug} style={accentVars(other.accent)}>
               <Link
                 to={caseStudyPath(other.slug)}
-                className="group flex h-full flex-col overflow-hidden rounded-xl2 border border-line bg-surface-card transition-shadow hover:shadow-card focus-ring"
+                className="group flex h-full flex-col overflow-hidden rounded-xl2 border border-[rgb(var(--cs-accent)/0.2)] bg-surface-card transition-shadow hover:shadow-card focus-ring"
               >
-                <Picture
+                <BrandedImage
                   image={other.hero}
+                  credit={false}
                   sizes="(min-width: 768px) 30rem, 100vw"
-                  className="aspect-[16/9] w-full object-cover"
+                  className="aspect-[16/9] w-full"
                 />
                 <div className="flex flex-1 flex-col p-6">
                   <p className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-accent">
@@ -640,11 +672,13 @@ function MoreCaseStudies({ current }) {
   );
 }
 
+const TARGET_NOTE = "Target, not yet measured";
+
 function TargetBadge() {
   return (
     <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-gold/40 bg-gold/10 px-2.5 py-0.5 text-xs font-medium text-content">
       <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-gold" />
-      Target (not yet validated)
+      {TARGET_NOTE}
     </span>
   );
 }
@@ -712,34 +746,26 @@ function OutcomeTable({ rows }) {
 
 /* ------------------------------------------------------------------ */
 
-function Picture({ image, sizes, priority = false, className = "" }) {
-  const largest = image.sources[image.sources.length - 1];
-  return (
-    <img
-      src={image.sources[1]?.src ?? largest.src}
-      srcSet={image.sources.map((s) => `${s.src} ${s.width}w`).join(", ")}
-      sizes={sizes}
-      width={image.width}
-      height={image.height}
-      alt={image.alt}
-      loading={priority ? "eager" : "lazy"}
-      // React 18 only forwards the lowercase attribute.
-      // eslint-disable-next-line react/no-unknown-property
-      fetchpriority={priority ? "high" : undefined}
-      decoding="async"
-      className={className}
-    />
-  );
+/**
+ * The study's `accent` hex as an RGB triple on --cs-accent, so Tailwind can
+ * apply it at an alpha, e.g. bg-[rgb(var(--cs-accent)/0.08)]. The accent is
+ * only ever a light tint: 6-12% on backgrounds, 15-25% on borders and
+ * decorations. Text keeps the site's own colours.
+ */
+function accentVars(hex = "#3B4FBF") {
+  const n = parseInt(hex.slice(1), 16);
+  return { "--cs-accent": `${(n >> 16) & 255} ${(n >> 8) & 255} ${n & 255}` };
 }
+
+// The mesh draws lines and resting nodes at 0.4 of this colour, so 0.5 here
+// lands them at 20%.
+const MESH_COLOR = "rgb(var(--cs-accent) / 0.5)";
 
 function Figure({ image, className = "", sizes = "(min-width: 1024px) 48rem, 100vw" }) {
   return (
+    // A <figure> so useStaggerReveal picks it up with the section's text.
     <figure className={className}>
-      <Picture
-        image={image}
-        sizes={sizes}
-        className="h-auto w-full rounded-xl2 object-cover shadow-card ring-1 ring-line"
-      />
+      <BrandedImage image={image} sizes={sizes} className="w-full rounded-xl2 shadow-card ring-1 ring-line" />
     </figure>
   );
 }

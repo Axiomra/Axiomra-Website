@@ -7,11 +7,15 @@
  * badges them as targets. Never flip that flag without real analytics behind it.
  *
  * @typedef {{ src: string, width: number }} ImageSource
- * @typedef {{ sources: ImageSource[], width: number, height: number, alt: string }} CaseImage
+ * @typedef {{ photographer: string, site: string, url: string }} ImageCredit
+ * @typedef {{ sources: ImageSource[], width: number, height: number, alt: string, imageCredit?: ImageCredit, logoBaked?: boolean }} CaseImage
+ * `logoBaked` marks legacy files with the Axiomra mark already in the pixels,
+ * so <BrandedImage> skips its overlay. Never set it on a new image.
  * Entries come in two kinds. "client" studies describe delivered work.
  * "blueprint" studies are representative solution designs: they carry a
- * visible badge, use `highlights` instead of numeric `stats`, and put any
+ * visible badge, use `highlights` instead of `stats`, and put any outcome
  * figure in `targetOutcome`, which the page styles as a goal, never a result.
+ * A highlight `value` may only state a fact of the design (hours, systems).
  * Every section below `hero` is optional unless marked otherwise; the page
  * skips what an entry leaves out.
  *
@@ -21,6 +25,7 @@
  * @typedef {Object} CaseStudy
  * @property {string} slug
  * @property {"client" | "blueprint"} type
+ * @property {string} accent              Hex hue, used only as light tints. Unique per study.
  * @property {string} title
  * @property {string} eyebrow             Category, shown in the hero badge.
  * @property {string} subtitle
@@ -28,8 +33,8 @@
  * @property {string} seoDescription
  * @property {string} ogImage              Path under /public.
  * @property {CaseImage} hero
- * @property {{ value: string, label: string }[]} [stats]
- * @property {{ title: string, text: string }[]} [highlights]   Non-numeric stat cards.
+ * @property {{ value: string, label: string, target?: boolean }[]} [stats]   `target` adds a not-yet-measured note.
+ * @property {{ value?: string, title: string, text: string }[]} [highlights]   Stat cards for blueprints. A `value` is a design figure, never a result, and is noted as such.
  * @property {{ summary?: string, challenge: string, solution: string, technologies: string }} keyDetails
  * @property {string[]} [executiveSummary]
  * @property {string[]} [context]
@@ -71,6 +76,15 @@ import intakeHero2200 from "../assets/case-studies/healthcare-patient-intake-tri
 import intakeScenario800 from "../assets/case-studies/healthcare-patient-intake-triage-ai-agent/scenario-800.webp";
 import intakeScenario1400 from "../assets/case-studies/healthcare-patient-intake-triage-ai-agent/scenario-1400.webp";
 import intakeScenario2200 from "../assets/case-studies/healthcare-patient-intake-triage-ai-agent/scenario-2200.webp";
+import chatHero800 from "../assets/case-studies/healthcare-chatbot-virtual-assistant/hero-800.webp";
+import chatHero1400 from "../assets/case-studies/healthcare-chatbot-virtual-assistant/hero-1400.webp";
+import chatHero2200 from "../assets/case-studies/healthcare-chatbot-virtual-assistant/hero-2200.webp";
+import chatStaff800 from "../assets/case-studies/healthcare-chatbot-virtual-assistant/staff-800.webp";
+import chatStaff1400 from "../assets/case-studies/healthcare-chatbot-virtual-assistant/staff-1400.webp";
+import chatStaff2200 from "../assets/case-studies/healthcare-chatbot-virtual-assistant/staff-2200.webp";
+import chatAnswers800 from "../assets/case-studies/healthcare-chatbot-virtual-assistant/answers-800.webp";
+import chatAnswers1400 from "../assets/case-studies/healthcare-chatbot-virtual-assistant/answers-1400.webp";
+import chatAnswers2200 from "../assets/case-studies/healthcare-chatbot-virtual-assistant/answers-2200.webp";
 
 export const CASE_STUDIES_PATH = "/case-studies";
 
@@ -81,10 +95,11 @@ export const caseStudies = {
   "axiomra-ai-sales-agent": {
     slug: "axiomra-ai-sales-agent",
     type: "client",
+    accent: "#3B4FBF",
     eyebrow: "AI Agent",
     title: "Virtual Sales & Customer Support Assistant",
     subtitle:
-      "A multi-agent assistant that answers website visitors, qualifies leads, fills the CRM and books sales calls, so the sales team starts with context instead of cold research.",
+      "A team of AI assistants that answers visitors, spots serious buyers, fills the CRM and books sales calls. Your sales team starts with context instead of cold research.",
     seoTitle: "AI Sales Agent Case Study: Virtual Sales & Support Assistant | Axiomra",
     seoDescription:
       "How Axiomra built a multi-agent GPT-4 assistant that engages website visitors 24/7, qualifies leads, creates Pipedrive opportunities and books sales calls.",
@@ -99,27 +114,30 @@ export const caseStudies = {
       width: 1400,
       height: 1050,
       alt: "A salesperson at a laptop in an open office, talking through a qualified inquiry",
+      logoBaked: true,
     },
 
     stats: [
-      { value: "24/7", label: "Visitor engagement" },
-      { value: "< 2 min", label: "Target response time" },
-      { value: "Automated", label: "Lead qualification & CRM" },
+      { value: "24/7", label: "Replies to website visitors" },
+      { value: "< 2 min", label: "Target time to first reply", target: true },
+      { value: "60–70%", label: "Lower cost per serious lead", target: true },
+      { value: "+27%", label: "More chats turned into booked calls", target: true },
     ],
 
     keyDetails: {
-      summary: "An AI assistant that carries the first stage of the sales conversation.",
+      summary: "An AI assistant that handles the first step of the sales conversation.",
       challenge:
-        "Deliver personalized 24/7 website support while reducing sales operating cost and improving conversion efficiency.",
+        "Give every website visitor personal help, day and night. At the same time, lower sales costs and turn more visitors into customers.",
       solution:
-        "A multi-agent GPT-powered virtual sales and customer support assistant integrated with company knowledge, CRM, and scheduling workflows.",
+        "A team of AI assistants that answers sales and support questions. It uses the company's own knowledge and connects to the CRM and call booking.",
       technologies:
-        "OpenAI embeddings and GPT-4; AWS Lambda, S3, RDS + pgvector; AWS SAM; CI/CD; Pipedrive API.",
+        "AI that understands and writes natural language, a search over the company's own documents, cloud hosting, and a direct link to the CRM. Full details are in the technical section below.",
     },
 
     context: [
-      "Axiomra needed a smarter way to engage inbound website visitors without depending entirely on human sales availability. High-intent prospects can arrive outside business hours, while sales teams spend a lot of time researching companies, answering repetitive service questions and typing details into the CRM.",
-      "The goal was an assistant that could carry the first stage of the buyer conversation: understand Axiomra's services, identify the visitor's business context, qualify the opportunity, and move a good-fit prospect toward a sales call, all within the same website session.",
+      "Axiomra wanted a better way to respond to website visitors, without relying only on when salespeople are free. Serious buyers can arrive outside business hours. Meanwhile, the sales team spent hours researching companies, answering the same questions and typing details into the CRM.",
+      "The goal was an assistant that could handle the first step of a buyer conversation, all in one website visit.",
+      "It would learn Axiomra's services and the visitor's business. It would check whether the visitor is a good fit. Then it would guide good-fit buyers toward a sales call.",
     ],
     contextImage: {
       sources: [
@@ -130,69 +148,72 @@ export const caseStudies = {
       width: 1400,
       height: 788,
       alt: "Support staff on headsets at their desks handling first responses by hand",
+      logoBaked: true,
     },
 
     challenge: {
-      intro: "The initiative focused on three recurring commercial problems:",
+      intro: "The project tackled three sales problems that kept coming up:",
       items: [
         {
-          lead: "Lost leads caused by response delays.",
-          text: "After-hours inquiries or slow first responses can mean visitors leave before anyone from sales engages.",
+          lead: "Leads lost to slow replies.",
+          text: "When questions arrive after hours, or the first reply is slow, visitors can leave before anyone from sales responds.",
         },
         {
-          lead: "Sales bandwidth consumed by unqualified traffic.",
-          text: "Manual research and qualification raise the cost of each viable opportunity and slow the pipeline.",
+          lead: "Sales time spent on poor-fit visitors.",
+          text: "Researching and screening each visitor by hand makes every good lead more expensive. It also slows the flow of new deals.",
         },
         {
-          lead: "Inconsistent first-contact messaging.",
-          text: "Early conversations vary between team members, which makes the customer experience uneven.",
+          lead: "Mixed first impressions.",
+          text: "Different team members handle early conversations differently, so customers get an uneven experience.",
         },
       ],
     },
 
     insight:
-      "Answer every visitor immediately, and shrink the time between a first inquiry and a qualified sales follow-up.",
+      "Reply to every visitor right away, and cut the time from a first question to a sales follow-up with a serious buyer.",
+    insightLabel: "Main goal",
 
     solution: [
-      "The assistant runs on GPT-4 with retrieval over Axiomra's own company knowledge. Specialized task agents sit behind the conversation, so the system can answer questions, enrich company information, score a lead, create an opportunity in Pipedrive, recommend relevant success stories and set up the next sales action.",
-      "Axiomra content is vectorized, and the most relevant pieces are retrieved before each reply. That keeps answers grounded, for simple questions and for more nuanced ones about services, capabilities and use cases.",
+      "We built an AI assistant that understands and writes natural language, and answers from Axiomra's own company knowledge. Behind the chat sits a team of AI assistants, each handling one job.",
+      "Together they answer questions, look up basic facts about the visitor's company and spot serious buyers. They also add the lead to the sales system automatically, suggest relevant success stories and set up the next sales step.",
+      "Before each reply, the assistant searches Axiomra's own documents for the most relevant information. This keeps answers based on real company content, for simple questions and detailed ones about services and use cases.",
     ],
 
     capabilities: [
       {
-        capability: "Answers service and capability questions 24/7",
-        value: "Reduces after-hours lead loss and gives visitors an immediate first response.",
+        capability: "Answers questions about services, day and night",
+        value: "Fewer leads lost after hours. Visitors get a reply right away.",
       },
       {
-        capability: "Retrieves firmographic context from company information",
-        value: "Enables faster personalization without repetitive manual prospect research.",
+        capability: "Looks up basic facts about the visitor's company",
+        value: "Makes replies more personal, without hours of manual research.",
       },
       {
-        capability: "Scores leads by industry, company profile and need fit",
-        value: "Lets sales representatives focus on better-qualified opportunities.",
+        capability: "Spots serious buyers by industry, company type and needs",
+        value: "Your sales reps can focus on the leads that fit best.",
       },
       {
-        capability: "Creates Pipedrive opportunities automatically",
-        value: "Reduces manual CRM entry and keeps captured data consistent.",
+        capability: "Adds each lead to the sales system automatically",
+        value: "Less typing into the CRM, and more consistent records.",
       },
       {
-        capability: "Recommends relevant case studies and service pages",
-        value: "Guides prospects toward evidence that matches their needs.",
+        capability: "Suggests relevant case studies and service pages",
+        value: "Shows visitors proof that matches their needs.",
       },
       {
-        capability: "Books calls using representative availability and geography",
-        value: "Shortens the path from first inquiry to a scheduled conversation.",
+        capability: "Books calls based on each sales rep's availability and location",
+        value: "Gets visitors from a first question to a booked call faster.",
       },
     ],
 
     flow: [
-      { title: "Visitor conversation", text: "The visitor asks a question, describes a business problem or shares company details." },
-      { title: "Intent & context analysis", text: "GPT-4 interprets the request while task agents work out which information or workflow is needed." },
-      { title: "Knowledge retrieval", text: "Relevant Axiomra content is pulled through embeddings and pgvector semantic search." },
-      { title: "Prospect enrichment", text: "Agents use the company name and context to prepare firmographic data for personalization and scoring." },
-      { title: "Lead qualification", text: "The opportunity is checked against business-fit criteria: industry, organization profile, use case and service need." },
-      { title: "CRM & content actions", text: "Qualified prospect data goes to Pipedrive, and matching Axiomra pages and success stories are recommended." },
-      { title: "Sales handoff", text: "When it fits, the visitor books a call with the right representative based on availability and geography." },
+      { title: "A visitor starts a chat", text: "They ask a question, describe a business problem or share company details." },
+      { title: "The assistant works out what they need", text: "The AI reads the request and decides which information or task is needed." },
+      { title: "It finds the right answer", text: "It searches Axiomra's own documents for the most relevant information." },
+      { title: "It learns about the visitor's company", text: "It uses the company name and details to look up basic facts. These help personalize replies and sort the lead." },
+      { title: "It checks for a good fit", text: "It compares the visitor against fit criteria: industry, company type, use case and service needs." },
+      { title: "It updates the CRM and shares useful content", text: "Serious buyers' details go into the CRM automatically. The visitor also sees matching pages and success stories." },
+      { title: "It hands off to sales", text: "When it's a good fit, the visitor books a call with the right sales rep, based on availability and location." },
     ],
     flowImage: {
       sources: [
@@ -203,6 +224,7 @@ export const caseStudies = {
       width: 1400,
       height: 788,
       alt: "Two people in a meeting room talking across a laptop, the kind of sales call the flow ends with",
+      logoBaked: true,
     },
 
     phases: [
@@ -229,55 +251,69 @@ export const caseStudies = {
 
     outcome: {
       intro:
-        "The agent turns the website from a passive information channel into an active sales layer. It handles the repetitive first stage and leaves discovery, consulting, negotiation and relationships to the human sales team.",
+        "The assistant turns your website from a page people read into one that actively sells. It handles the repetitive first step. Your sales team keeps discovery, advice, negotiation and relationships.",
       rows: [
-        { metric: "Lead response time", traditional: "Often limited to business hours", agent: "Under 2 minutes, 24/7", target: true },
-        { metric: "Lead qualification", traditional: "Manual sales-team review", agent: "Automated AI-assisted scoring" },
-        { metric: "CRM data entry", traditional: "Manual", agent: "Automated structured creation" },
+        { metric: "How fast leads get a reply", traditional: "Often only during business hours", agent: "Under 2 minutes, 24/7", target: true },
+        { metric: "Sorting leads", traditional: "Sales team reviews each one by hand", agent: "AI helps score each lead automatically" },
+        { metric: "Entering leads into the CRM", traditional: "Done by hand", agent: "Done automatically, in a consistent format" },
         {
-          metric: "Cost per qualified lead",
-          traditional: "Higher, due to research and screening time",
-          agent: "60–70% lower cost per qualified lead",
+          metric: "Cost per serious lead",
+          traditional: "Higher, because of research and screening time",
+          agent: "60–70% lower cost per serious lead",
           target: true,
         },
         {
-          metric: "Chat-to-call conversion",
-          traditional: "Existing baseline",
-          agent: "+27% chat-to-call conversion",
+          metric: "Chats that turn into booked calls",
+          traditional: "Current rate",
+          agent: "+27% more chats turned into booked calls",
           target: true,
         },
       ],
     },
 
     impact: [
-      { lead: "Higher pipeline quality:", text: "sales receives richer, pre-structured and pre-qualified lead information." },
-      { lead: "Lower qualification workload:", text: "routine screening, research and data capture move to agents." },
-      { lead: "Faster first sales conversation:", text: "qualified visitors can go from inquiry to a booked call in one session." },
-      { lead: "Coverage across time zones:", text: "inquiries are captured regardless of business hours." },
-      { lead: "Cleaner CRM records:", text: "agent-to-CRM transfer cuts repetitive manual entry and its errors." },
-      { lead: "Consistent positioning:", text: "approved Axiomra knowledge keeps first-contact messaging uniform." },
+      { lead: "Better leads:", text: "your sales team gets richer lead details, already organized and checked for fit." },
+      { lead: "Less screening work:", text: "the AI assistants take over routine screening, research and data entry." },
+      { lead: "Faster first sales call:", text: "a serious buyer can go from first question to a booked call in one visit." },
+      { lead: "Coverage in every time zone:", text: "questions are captured at any hour, not just during business hours." },
+      { lead: "Cleaner CRM records:", text: "leads flow straight into the CRM, so there is less retyping and fewer mistakes." },
+      { lead: "One consistent message:", text: "answers come from approved Axiomra content, so first conversations always sound the same." },
     ],
 
     whyItMatters:
-      "For an AI company, this assistant does two jobs: it improves how Axiomra sells, and it shows Axiomra deploying agentic AI in a real commercial setting. The same architecture extends to onboarding, account support, proposal preparation, multilingual engagement and quotation workflows.",
+      "For an AI company, this assistant does two jobs. It helps Axiomra sell better, and it shows Axiomra running AI agents in a real sales setting. The same setup can extend to onboarding, account support, proposals, chats in other languages and quotes.",
 
     nextSteps: [
-      "Multilingual sales conversations and market-specific routing.",
-      "Calendar integration with real-time representative availability.",
-      "Automated meeting summaries and CRM follow-up tasks.",
-      "Lead-nurture sequences triggered by intent and qualification score.",
-      "Analytics dashboard for conversations, intent trends and conversion.",
-      "Human-in-the-loop controls for high-value or sensitive opportunities.",
+      "Sales chats in more languages, sent to the right team for each market.",
+      "Calendar links that show each sales rep's availability in real time.",
+      "Automatic meeting summaries and CRM follow-up tasks.",
+      "Follow-up messages triggered by each lead's interest and fit score.",
+      "A dashboard showing chats, what visitors ask about most, and how many become calls.",
+      "Controls so your staff make the final call on high-value or sensitive deals.",
     ],
 
-    tags: ["Agentic AI", "Sales Automation", "GPT-4", "RAG", "CRM Integration", "AWS Serverless"],
+    tags: ["AI Agents", "Sales Automation", "AI Chatbot", "CRM Integration", "Lead Qualification", "24/7 Support"],
+
+    labels: {
+      context: "The situation",
+      challenge: "The problem",
+      solution: "What we built",
+      capabilities: "What the assistant does",
+      flow: "How it works, step by step",
+      outcome: "Before and after",
+      impact: "What changes for your team",
+      why: "Why this matters",
+      next: "What comes next",
+    },
   },
   "healthcare-patient-intake-triage-ai-agent": {
     slug: "healthcare-patient-intake-triage-ai-agent",
     type: "blueprint",
+    accent: "#0F766E",
     eyebrow: "Healthcare",
     title: "Patient Intake & Triage AI Agent",
-    subtitle: "AI Agents / Clinical Workflow Automation",
+    subtitle:
+      "An AI assistant that collects patient details and sends each case to the right team. Your staff review every case and make the decisions.",
     seoTitle: "Patient Intake & Triage AI Agent: Healthcare Solution Blueprint | Axiomra",
     seoDescription:
       "Solution blueprint for an AI intake agent that structures patient information, routes cases with configurable rules and escalates red flags to staff.",
@@ -295,24 +331,28 @@ export const caseStudies = {
     },
 
     highlights: [
-      { title: "24/7 intake", text: "Patients can start intake through web, mobile or portal at any hour." },
-      { title: "Human-in-the-loop", text: "High-risk and ambiguous cases are escalated to staff." },
-      { title: "EHR & scheduling integrated", text: "Staff receive a structured summary inside their existing workflow." },
+      { value: "24/7", title: "Intake at any hour", text: "Patients can start intake on the web, in an app or through the patient portal, day or night." },
+      {
+        value: "100%",
+        title: "Staff make the final call",
+        text: "Every clinical decision is made by staff. Serious and unclear cases go straight to a staff member.",
+      },
+      { value: "2 systems", title: "Works with your systems", text: "It connects with your existing patient records system and scheduling. Staff get an organized summary where they already work." },
     ],
 
     keyDetails: {
-      summary: "A guided intake agent that structures patient information and routes it for staff review.",
-      challenge: "Fragmented, slow patient intake across forms, calls, portals and free-text messages.",
-      solution: "A conversational AI intake agent with configurable triage routing and human escalation.",
-      technologies: "GPT-class LLM, Python, FastAPI, PostgreSQL, EHR/EMR and scheduling APIs.",
+      summary: "A guided intake assistant that organizes patient details and sends them to staff for review.",
+      challenge: "Patient intake is slow and scattered across forms, calls, portals and free-text messages.",
+      solution: "An AI chatbot for patient intake. It flags how urgent each case looks, using rules you set, and passes serious cases to staff.",
+      technologies: "AI that understands and writes natural language, a secure patient-data store, and links to your patient records and scheduling systems. Full details are in the technical section below.",
     },
 
     executiveSummary: [
-      "Axiomra designed an AI-assisted patient intake and triage workflow. It captures symptoms, structures patient information, applies configurable triage rules and routes each case to the appropriate care queue, where a clinician reviews it.",
+      "Axiomra designed an AI-assisted process for patient intake. It collects symptoms and organizes patient details. Using rules you set, it flags urgency and sends each case to the right care team, where a clinician reviews it.",
     ],
 
     context: [
-      "A multi-location healthcare provider dealing with long intake queues, fragmented patient information and avoidable administrative work before appointments.",
+      "A healthcare provider with several locations. It faces long intake queues, scattered patient information and admin work before appointments that could be avoided.",
     ],
     contextImage: {
       sources: [
@@ -328,47 +368,47 @@ export const caseStudies = {
     challenge: {
       items: [
         {
-          lead: "Fragmented inputs.",
-          text: "Patient information arrives through forms, calls, portals and free-text messages, each with its own structure.",
+          lead: "Information arrives in pieces.",
+          text: "Patient details come in through forms, calls, portals and free-text messages. Each one is organized differently.",
         },
         {
-          lead: "Manual re-entry and sorting.",
-          text: "Clinical and administrative teams spend significant time re-entering data and working out the correct department or urgency level.",
+          lead: "Retyping and sorting by hand.",
+          text: "Clinical and admin teams spend a lot of time retyping data. They also have to work out the right department and how urgent each case is.",
         },
         {
-          lead: "Peak-hour bottlenecks.",
-          text: "Demand spikes create delays, repeated questions and an inconsistent intake experience across locations.",
+          lead: "Busy-hour bottlenecks.",
+          text: "When demand spikes, patients face delays and repeated questions. The intake experience also differs from one location to the next.",
         },
         {
           lead: "Automation with clear limits.",
-          text: "The organization needs automation without letting an AI system make unsupported clinical decisions.",
+          text: "The provider wants automation, but it cannot let an AI system make clinical decisions on its own.",
         },
       ],
     },
 
-    insight: "Automate the administrative steps, keep clinical judgment with licensed staff.",
+    insight: "Automate the paperwork. Keep medical judgment with licensed staff.",
     insightLabel: "Design principle",
 
     solution: [
-      "A conversational AI intake agent collects demographics, symptoms, medication details, visit reason and relevant history in a guided flow.",
-      "Natural-language answers are converted into structured fields and validated against required intake rules.",
-      "Configurable triage rules flag urgency and route each case to the correct queue for staff review. Defined red-flag conditions trigger immediate human escalation.",
-      "The agent connects to scheduling and EHR workflows, so staff receive a concise, structured intake summary instead of raw conversation history.",
-      "Human-in-the-loop controls keep clinical judgment with licensed staff while the repetitive administrative steps are automated.",
+      "An AI chatbot guides each patient through intake, step by step. It collects personal details, symptoms, medications, the reason for the visit and relevant history.",
+      "It turns each patient's answers into organized information. Then it checks that nothing required is missing.",
+      "Rules your team sets flag how urgent each case looks and send it to the right queue for staff review. For serious warning signs you define, staff are alerted right away.",
+      "It connects with your existing patient records system and scheduling. Staff get a short, organized summary instead of the full chat history.",
+      "Medical judgment stays with licensed staff, who always make the final call. The AI takes over the repetitive admin steps.",
     ],
     solutionAsList: true,
 
     flow: [
-      { title: "Patient starts intake", text: "Through the web, a mobile app or the patient portal." },
-      { title: "Guided conversation", text: "The AI agent collects and clarifies the required information." },
-      { title: "Structuring & completeness check", text: "NLP turns answers into structured data and checks nothing required is missing." },
-      { title: "Rule-based routing", text: "Configured rules and risk flags assign a provisional urgency and destination." },
+      { title: "Patient starts intake", text: "On the website, in a mobile app or through the patient portal." },
+      { title: "Guided conversation", text: "The AI assistant asks for the required information and clears up unclear answers." },
+      { title: "Organizing and checking answers", text: "Answers are turned into organized information, and the AI checks that nothing required is missing." },
+      { title: "Sorting by urgency", text: "Rules your team sets, plus warning signs, give each case a first, provisional urgency level and destination." },
       {
-        title: "Escalation to staff",
-        text: "High-risk or ambiguous cases go straight to a staff member instead of continuing automatically.",
+        title: "Handoff to staff",
+        text: "Serious or unclear cases go straight to a staff member instead of continuing automatically.",
         checkpoint: true,
       },
-      { title: "Summary for clinical review", text: "A structured summary is written to the clinical workflow for staff to review." },
+      { title: "Summary for staff review", text: "An organized summary goes to your clinical team's system for staff to review." },
     ],
 
     stack: [
@@ -379,54 +419,245 @@ export const caseStudies = {
       { layer: "Security", tool: "Role-based access, audit logging, encryption, consent controls" },
     ],
 
-    impactIntro: "What the workflow is designed to change:",
+    impactIntro: "What this setup is designed to change:",
     impact: [
-      { text: "Shorter intake queues and less repetitive data entry for clinical and front-desk teams." },
-      { text: "More consistent capture of patient information across digital channels." },
-      { text: "Faster routing of patients to the correct care team, and earlier escalation of red-flag cases." },
-      { text: "Intake available 24/7 without expanding administrative headcount." },
+      { text: "Shorter intake queues, and less retyping for clinical and front-desk teams." },
+      { text: "Patient details captured more consistently across online channels." },
+      { text: "Patients reach the right care team faster, and serious cases reach staff sooner." },
+      { text: "Intake open 24/7 without hiring more admin staff." },
     ],
 
     targetOutcome:
-      "Reduce intake handling time from a manual, multi-step process to a near-real-time digital workflow, while preserving human clinical oversight.",
+      "Cut intake time from a slow, multi-step manual process to a near-real-time digital one. Staff keep oversight of all clinical decisions.",
 
     principles: [
       {
-        title: "Human oversight",
-        text: "Human oversight is retained for high-impact, regulated, ambiguous or low-confidence decisions.",
+        title: "People stay in charge",
+        text: "Staff make the final call on high-impact, regulated or unclear decisions, and whenever the AI is unsure.",
       },
       {
-        title: "Security by design",
-        text: "Security, access control, auditability and privacy are designed into the workflow rather than added after deployment.",
+        title: "Security built in from day one",
+        text: "Only the right people can see data, every action is recorded, and data is locked and protected. Privacy is planned in from the start, not added after launch.",
       },
       {
-        title: "Process KPIs, not only accuracy",
-        text: "Model quality is measured together with operational KPIs, so automation improves the business process and not only model accuracy.",
+        title: "Judged on real results",
+        text: "We track how accurate the AI is and how well the process runs. The goal is a better process, not just a smarter AI.",
       },
       {
-        title: "Monitored in production",
-        text: "Production monitoring, feedback capture and controlled retraining keep performance steady as data and behavior change.",
+        title: "Watched after launch",
+        text: "Once live, the system is monitored and feedback is collected. Careful, controlled updates keep it working well as data and patterns change.",
       },
     ],
 
     whyItMatters:
-      "Axiomra combines AI engineering, data science, workflow integration and production governance to turn this use case into an operational solution that fits existing business systems and decision processes.",
+      "Axiomra brings together AI, data, systems integration and ongoing oversight. That turns this idea into a working solution. It fits your existing systems and the way your team makes decisions.",
 
-    tags: ["Healthcare", "AI Agents", "Clinical Workflow Automation", "Human-in-the-loop", "EHR Integration"],
+    tags: ["Healthcare", "AI Agents", "Patient Intake", "Staff Review", "Patient Records Integration"],
 
     labels: {
-      context: "Typical scenario",
-      challenge: "Business problem",
-      solution: "Solution",
+      summary: "In short",
+      context: "A typical situation",
+      challenge: "The problem",
+      solution: "What we built",
+      flow: "How it works, step by step",
       stack: "Tools & technology",
-      impact: "Outcome & business impact",
-      why: "Axiomra value",
+      impact: "What changes for your team",
+      principles: "How we keep it safe and reliable",
+      why: "Why Axiomra",
     },
 
     cta: {
-      title: "Planning an intake workflow like this?",
+      title: "Planning a patient intake process like this?",
       subtitle:
-        "Tell us how patients reach you today and which systems their details pass through. We will map which admin steps an agent can take over, and where staff stay in the loop.",
+        "Tell us how patients reach you today and which systems their details pass through. We will show which admin steps an AI assistant can take over, and where staff stay in charge.",
+      buttonText: "Talk to our team",
+    },
+  },
+  "healthcare-chatbot-virtual-assistant": {
+    slug: "healthcare-chatbot-virtual-assistant",
+    type: "blueprint",
+    accent: "#D97706",
+    eyebrow: "Healthcare",
+    title: "Healthcare Chatbot & Virtual Assistant",
+    subtitle:
+      "A virtual assistant that answers patients' everyday questions at any hour, using only your approved content. Anything medical or sensitive goes to your staff.",
+    seoTitle: "Healthcare Chatbot & Virtual Assistant: Solution Blueprint | Axiomra",
+    seoDescription:
+      "Solution blueprint for a healthcare virtual assistant that answers patient questions from approved content, guides patients to services and hands sensitive questions to staff.",
+    ogImage: "/og/healthcare-chatbot-virtual-assistant.jpg",
+
+    hero: {
+      sources: [
+        { src: chatHero800, width: 800 },
+        { src: chatHero1400, width: 1400 },
+        { src: chatHero2200, width: 2200 },
+      ],
+      width: 1400,
+      height: 1050,
+      alt: "A smartphone on a table with a stethoscope resting on its screen",
+      imageCredit: {
+        photographer: "Bermix Studio",
+        site: "Unsplash",
+        url: "https://unsplash.com/photos/SJwYvNVW1qY",
+      },
+    },
+
+    highlights: [
+      { value: "24/7", title: "Answers at any hour", text: "Patients get trusted answers on the website, in the app or in the patient portal, day or night." },
+      { value: "100%", title: "Only your approved content", text: "Every answer comes from information your organization has checked and approved." },
+      { value: "0", title: "Diagnoses made by the assistant", text: "Medical or worrying questions are passed to a person instead of being answered by the assistant." },
+    ],
+
+    keyDetails: {
+      summary: "A virtual assistant that answers common patient questions and guides patients to the right service.",
+      challenge: "Staff answer the same questions all day, and patients struggle to find trusted answers after hours.",
+      solution: "An assistant that answers only from your approved content, helps with appointments and hands sensitive questions to staff.",
+      technologies: "AI that understands and writes natural language, a search over your approved documents, and links to your web chat, app and patient portal. Full details are in the technical section below.",
+    },
+
+    executiveSummary: [
+      "Axiomra designed a virtual assistant for healthcare. It answers patient questions, helps patients book appointments and find services, and explains approved care information. Every answer comes from a library of content your organization has approved.",
+    ],
+
+    context: [
+      "A healthcare network gets a large number of repeated questions every day. Patients ask about appointments, how to prepare for a visit, which services are offered, policies and what to do after a visit.",
+    ],
+    contextImage: {
+      sources: [
+        { src: chatStaff800, width: 800 },
+        { src: chatStaff1400, width: 1400 },
+        { src: chatStaff2200, width: 2200 },
+      ],
+      width: 1400,
+      height: 788,
+      alt: "A doctor at her desk on the phone while typing on a laptop",
+      imageCredit: {
+        photographer: "Vitaly Gariev",
+        site: "Unsplash",
+        url: "https://unsplash.com/photos/egCFrNJ6Djw",
+      },
+    },
+
+    challenge: {
+      items: [
+        {
+          lead: "The same questions, over and over.",
+          text: "Call-center and clinic staff spend much of their day answering the same practical questions again and again.",
+        },
+        {
+          lead: "No trusted answers after hours.",
+          text: "When the clinic is closed, patients have a hard time finding answers they can rely on.",
+        },
+        {
+          lead: "Ordinary chatbots can't be trusted.",
+          text: "A general-purpose chatbot can give different answers to the same question, and its answers are not based on the organization's own approved information.",
+        },
+        {
+          lead: "Knowing when to hand over.",
+          text: "The assistant has to tell the difference between a simple information question and a situation that needs a clinician.",
+        },
+      ],
+    },
+
+    insight: "Answer the everyday questions instantly. Send anything medical to a person.",
+    insightLabel: "Design principle",
+
+    solution: [
+      "Before it answers, the assistant looks up the most relevant pages in your approved content, and it only uses that content. It never makes up its own medical advice.",
+      "It answers common questions, explains how to prepare for a visit and what to do afterwards, and guides patients to the right service. When needed, it passes the patient to appointment booking or the contact team.",
+      "Built-in safety rules stop it from diagnosing. Sensitive or high-risk questions are passed straight to staff.",
+      "Reports show which questions went unanswered, so your team can see what content is missing and add it.",
+      "Patients and staff can each see their own set of content, when you need them kept separate.",
+    ],
+    solutionAsList: true,
+
+    flow: [
+      { title: "A patient asks a question", text: "About a health service, an appointment or a practical matter, on the web, in the app or in the portal." },
+      { title: "The assistant works out the question and how sensitive it is", text: "It understands what the patient needs and checks whether the question is risky." },
+      { title: "It finds your approved information", text: "It looks up the pages in your approved content that best match the question." },
+      { title: "It writes a clear answer", text: "The answer is based only on that content and follows the rules your team has set." },
+      {
+        title: "Sensitive questions go to staff",
+        text: "Medical, worrying or unclear questions are handed to a staff member instead of being answered automatically.",
+        checkpoint: true,
+      },
+      { title: "Gaps are recorded", text: "Questions the assistant could not answer are logged, so your team knows which content to add next." },
+    ],
+    flowImage: {
+      sources: [
+        { src: chatAnswers800, width: 800 },
+        { src: chatAnswers1400, width: 1400 },
+        { src: chatAnswers2200, width: 2200 },
+      ],
+      width: 1400,
+      height: 788,
+      alt: "An older couple on a sofa reading an answer on a smartphone together",
+      imageCredit: {
+        photographer: "Vitaly Gariev",
+        site: "Unsplash",
+        url: "https://unsplash.com/photos/F0Fk1ERlhtU",
+      },
+    },
+
+    stack: [
+      { layer: "AI that writes answers", tool: "GPT-class language model or a private company AI service" },
+      { layer: "Finding the right content", tool: "A searchable library of your approved documents" },
+      { layer: "Behind the scenes", tool: "Python, FastAPI or cloud functions" },
+      { layer: "Where patients use it", tool: "Web chat, mobile app, patient portal" },
+      { layer: "Safety and control", tool: "Answer rules, approved sources only, activity records, feedback from staff" },
+    ],
+
+    impactIntro: "What this setup is designed to change:",
+    impact: [
+      { text: "Support around the clock for common patient questions and finding the right service." },
+      { text: "Fewer repeated calls and questions for reception and clinical support staff." },
+      { text: "More consistent answers, based on approved healthcare content." },
+      { text: "Patients find information faster, before and after their visits." },
+    ],
+
+    targetOutcome:
+      "For this kind of solution, a well-connected assistant can save a care team or support team several hours of repeated question-handling every day.",
+
+    principles: [
+      {
+        title: "People stay in charge",
+        text: "Staff make the final call on high-impact, regulated or unclear questions, and whenever the assistant is unsure.",
+      },
+      {
+        title: "Security built in from day one",
+        text: "Only the right people can see data, every action is recorded, and privacy is planned in from the start, not added after launch.",
+      },
+      {
+        title: "Judged on real results",
+        text: "We measure how good the answers are and how much work they save. The goal is a better service, not just a smarter AI.",
+      },
+      {
+        title: "Watched after launch",
+        text: "Once live, the assistant is monitored and feedback is collected. Careful updates keep it accurate as questions and content change.",
+      },
+    ],
+
+    whyItMatters:
+      "Axiomra brings together AI, data, systems integration and ongoing oversight. That turns this idea into a working assistant that fits your existing systems and the way your team works.",
+
+    tags: ["Healthcare", "AI Chatbot", "Virtual Assistant", "Patient Support", "Staff Review"],
+
+    labels: {
+      summary: "In short",
+      context: "A typical situation",
+      challenge: "The problem",
+      solution: "What we built",
+      flow: "How it works, step by step",
+      stack: "Tools & technology",
+      impact: "What changes for your team",
+      principles: "How we keep it safe and reliable",
+      why: "Why Axiomra",
+    },
+
+    cta: {
+      title: "Getting the same patient questions every day?",
+      subtitle:
+        "Tell us which questions your team answers most and where your approved content lives. We will show what an assistant can answer on its own, and what should always go to your staff.",
       buttonText: "Talk to our team",
     },
   },
