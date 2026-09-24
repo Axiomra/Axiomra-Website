@@ -200,7 +200,7 @@ export default function Contact() {
         />
 
         <div className="mb-16 flex flex-wrap items-center justify-center gap-3">
-          {["Free 60-minute strategy session", "No obligation, no sales script", "NDA signed before you share anything"].map((chip) => (
+          {["NDA Available Before Sharing Sensitive Information", "We Aim to Reply Within One Business Day", "Free Initial Consultation"].map((chip) => (
             <span
               key={chip}
               className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface-card px-5 py-2.5 text-base text-content-dim shadow-card transition-colors duration-300 hover:border-brand hover:text-content"
@@ -222,7 +222,7 @@ export default function Contact() {
           <div className="mt-7 grid gap-4 sm:grid-cols-2">
             <div className="flex items-center gap-3 rounded-xl border border-line bg-surface-subtle p-4">
               <Clock size={20} className="shrink-0 text-brand" aria-hidden="true" />
-              <p className="text-base text-content-dim">Reply within 24 hours</p>
+              <p className="text-base text-content-dim">Reply within one business day</p>
             </div>
             <div className="flex items-center gap-3 rounded-xl border border-line bg-surface-subtle p-4">
               <ShieldCheck size={20} className="shrink-0 text-brand" aria-hidden="true" />
@@ -413,7 +413,7 @@ export default function Contact() {
               <div className="grid gap-3 border-t border-line-strong/50 pt-6 sm:grid-cols-3">
                 <div className="flex items-center gap-2.5">
                   <Clock size={17} className="shrink-0 text-gold" aria-hidden="true" />
-                  <p className="text-sm text-inverse-fg/75">Reply in 24 hours</p>
+                  <p className="text-sm text-inverse-fg/75">Reply in one business day</p>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <ShieldCheck size={17} className="shrink-0 text-gold" aria-hidden="true" />
