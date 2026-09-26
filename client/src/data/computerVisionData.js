@@ -6,6 +6,7 @@ import heroRoboticHand from "../assets/opencv/hero-robotic-hand.jpg";
 import challengesMonitoring from "../assets/opencv/cv-challenges-monitoring.jpg";
 import caseStudyAnalytics from "../assets/opencv/cv-case-study-analytics.jpg";
 import modelPipeline from "../assets/opencv/cv-model-pipeline.png";
+import { caseStudyPath } from "./caseStudiesData";
 
 /* Per-service photography: one frame per engagement type, so the detail
    panel never renders against an empty right-hand column. */
@@ -282,6 +283,11 @@ export const expertise = {
         "Single and multi-view estimation",
         "Skeleton keypoint mapping",
       ],
+      // Long-form write-up of this capability in use, linked under the bullets.
+      caseStudy: {
+        text: "Read the AI physical therapy blueprint",
+        to: caseStudyPath("ai-physical-therapy-pose-estimation"),
+      },
     },
     {
       id: "image-analytics",
@@ -360,6 +366,11 @@ export const caseStudies = {
   image: caseStudyAnalytics,
   imageAlt:
     "Analyst workstation showing a live vision analytics dashboard in a dark room",
+  // Long-form write-up of a related design, linked under the picker.
+  blueprint: {
+    text: "Read the medical imaging solution blueprint",
+    to: caseStudyPath("healthcare-medical-imaging-disease-identification"),
+  },
   items: [
     {
       name: "Voltox",

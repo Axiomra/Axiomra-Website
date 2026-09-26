@@ -7,6 +7,7 @@
  * because they are rendered on the card.
  */
 
+import { caseStudyPath } from "./caseStudiesData";
 import heroImg from "../assets/industries/retail/hero.webp";
 import introImg from "../assets/industries/retail/intro.webp";
 import svcOperationsImg from "../assets/industries/retail/svc-operations.webp";
@@ -163,6 +164,11 @@ export const services = {
         "Chatbots and virtual assistants",
         "Recommendation engines",
       ],
+      // Long-form write-up of this service in use, linked under the points.
+      caseStudy: {
+        text: "Read the in-store shopping assistant blueprint",
+        to: caseStudyPath("retail-in-store-ai-shopping-assistant"),
+      },
     },
     {
       title: "E-commerce and Digital Retail",
@@ -208,6 +214,11 @@ export const services = {
         "Accounting automation",
         "Pricing optimisation",
       ],
+      // Long-form write-up of this service in use, linked under the points.
+      caseStudy: {
+        text: "Read the smart pricing blueprint",
+        to: caseStudyPath("retail-dynamic-pricing-optimization"),
+      },
     },
     {
       title: "Demand Forecasting and Replenishment",
@@ -223,6 +234,11 @@ export const services = {
         "Markdown optimisation",
         "Returns and exchange automation",
       ],
+      // Long-form write-up of this service in use, linked under the points.
+      caseStudy: {
+        text: "Read the inventory forecasting blueprint",
+        to: caseStudyPath("retail-ai-inventory-demand-forecasting"),
+      },
     },
   ],
 };

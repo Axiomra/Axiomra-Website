@@ -234,9 +234,22 @@ Each study has an `accent` hex in its data entry. Current hues:
 | --- | --- |
 | `axiomra-ai-sales-agent` | `#3B4FBF` blue |
 | `healthcare-patient-intake-triage-ai-agent` | `#0F766E` teal |
+| `healthcare-chatbot-virtual-assistant` | `#D97706` amber |
+| `healthcare-medical-imaging-disease-identification` | `#7C3AED` violet |
+| `ai-physical-therapy-pose-estimation` | `#E11D48` rose |
+| `fintech-autonomous-financial-advisor-ai-agent` | `#16A34A` green |
+| `healthcare-readmission-risk-prediction` | `#0284C7` sky |
+| `fintech-regulatory-document-analysis-compliance-nlp` | `#0891B2` cyan |
+| `fintech-kyc-document-processing-onboarding-automation` | `#C026D3` fuchsia |
+| `retail-in-store-ai-shopping-assistant` | `#EA580C` orange |
+| `fintech-ai-fraud-detection-anomalous-transactions` | `#65A30D` lime |
+| `retail-ai-personalized-marketing` | `#DB2777` pink |
+| `fintech-machine-learning-credit-scoring` | `#4F46E5` indigo |
+| `retail-ai-inventory-demand-forecasting` | `#059669` emerald |
+| `retail-dynamic-pricing-optimization` | `#CA8A04` yellow |
 
-A new study **must use a hue not in this table** (next candidates: violet,
-amber, rose, green). Add it to this table and to the portfolio row.
+A new study **must use a hue not in this table** (next candidates: slate,
+red, purple). Add it to this table and to the portfolio row.
 
 How it is applied: the page sets `--cs-accent` (an RGB triple) on the
 `<article>` via `accentVars(hex)`, and uses it only as a tint:

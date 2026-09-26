@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
@@ -98,6 +99,16 @@ export default function CvExpertise() {
                       </li>
                     ))}
                   </ul>
+
+                  {item.caseStudy && (
+                    <Link
+                      to={item.caseStudy.to}
+                      className="mt-8 inline-flex items-center gap-2 rounded-full border border-line-strong px-7 py-3.5 text-base font-medium text-content transition-colors hover:border-brand hover:text-brand focus-ring md:text-lg"
+                    >
+                      {item.caseStudy.text}
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  )}
                 </div>
               </motion.article>
             );

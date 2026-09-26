@@ -111,6 +111,15 @@ export default function FinanceChallenges() {
                 <p className="mt-5 max-w-[62ch] text-base leading-relaxed text-inverse-fg/70 md:text-lg">
                   {active.body}
                 </p>
+                {active.caseStudy && (
+                  <Link
+                    to={active.caseStudy}
+                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-inverse-fg underline decoration-inverse-fg/30 underline-offset-4 transition-colors hover:decoration-accent-vivid focus-ring md:text-base"
+                  >
+                    Read the case study
+                    <ArrowUpRight size={16} aria-hidden="true" />
+                  </Link>
+                )}
               </motion.div>
             </AnimatePresence>
 

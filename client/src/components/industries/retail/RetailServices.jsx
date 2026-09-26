@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import SectionHeading from "../../SectionHeading";
 import { gsap, MOTION_OK } from "../../../lib/gsap";
@@ -120,6 +121,17 @@ export default function RetailServices() {
                       </li>
                     ))}
                   </ul>
+
+                  {item.caseStudy && (
+                    <Link
+                      data-row-item
+                      to={item.caseStudy.to}
+                      className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-brand underline-offset-4 hover:underline focus-ring"
+                    >
+                      {item.caseStudy.text}
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  )}
                 </div>
               </div>
             );

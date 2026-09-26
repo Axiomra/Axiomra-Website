@@ -9,7 +9,7 @@ import GradientCTA from "../components/GradientCTA";
 import { caseStudies, faqs } from "../data/portfolioData";
 
 const META_DESCRIPTION =
-  "Explore Axiomra's AI case studies: an AI sales assistant, a patient intake agent and a healthcare virtual assistant, with how each one works.";
+  "Explore Axiomra's AI case studies: AI assistants and agents for sales, healthcare, finance and retail, with how each one works.";
 
 export default function PortfolioPage() {
   useEffect(() => {

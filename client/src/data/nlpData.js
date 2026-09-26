@@ -12,6 +12,7 @@ import serviceSpeechToText from "../assets/nlp/nlp-speech-to-text.jpg";
 import serviceDataAcquisition from "../assets/nlp/nlp-data-acquisition.jpg";
 import serviceSemanticAnalytics from "../assets/nlp/nlp-semantic-analytics.jpg";
 import serviceIntegration from "../assets/nlp/nlp-integration.jpg";
+import { caseStudyPath } from "./caseStudiesData";
 
 /** The hero wallpaper. */
 export const heroVideo = {
@@ -381,6 +382,11 @@ export const industries = {
         "Complaint routing and regulatory reporting",
       ],
       note: "Can be deployed inside your own VPC where financial text must stay on your network.",
+      // Long-form write-up of this industry use, linked under the note.
+      caseStudy: {
+        text: "Read the regulatory document analysis blueprint",
+        to: caseStudyPath("fintech-regulatory-document-analysis-compliance-nlp"),
+      },
     },
     {
       name: "Legal",

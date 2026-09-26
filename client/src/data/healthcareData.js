@@ -48,6 +48,7 @@ import blog1Img from "../assets/industries/healthcare/blog-1.webp";
 import blog2Img from "../assets/industries/healthcare/blog-2.webp";
 import blog3Img from "../assets/industries/healthcare/blog-3.webp";
 import finalCtaBgImg from "../assets/industries/healthcare/final-cta.webp";
+import { caseStudyPath } from "./caseStudiesData";
 
 export const HEALTHCARE_SLUG = "healthcare";
 
@@ -205,6 +206,11 @@ export const services = {
         "Risk scores, deterioration alerts, sepsis and readmission prediction delivered inside the clinical workflow with the reasoning attached. Alert fatigue is a design failure, so we tune thresholds against your own outcome data and measure suppression as carefully as we measure sensitivity.",
       image: svcDecisionImg,
       alt: "A doctor showing a CT scan to a patient on a tablet",
+      // Long-form write-up of this service in use, linked under the body.
+      caseStudy: {
+        text: "Read the readmission risk blueprint",
+        to: caseStudyPath("healthcare-readmission-risk-prediction"),
+      },
     },
     {
       title: "Hospital Management & Workflow Automation",

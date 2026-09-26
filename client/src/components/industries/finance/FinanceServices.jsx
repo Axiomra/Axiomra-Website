@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import SectionHeading from "../../SectionHeading";
 import { Stagger, StaggerItem } from "../../motion/Reveal";
 import { services } from "../../../data/financeData";
@@ -54,6 +56,15 @@ export default function FinanceServices() {
                   {item.title}
                 </h3>
                 <p className="mt-3 text-base leading-relaxed text-content-dim">{item.body}</p>
+                {item.caseStudy && (
+                  <Link
+                    to={item.caseStudy}
+                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-colors hover:text-accent focus-ring"
+                  >
+                    Read the case study
+                    <ArrowRight size={16} aria-hidden="true" className="transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                )}
               </div>
             </StaggerItem>
           ))}

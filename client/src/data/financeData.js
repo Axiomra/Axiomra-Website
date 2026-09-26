@@ -5,6 +5,7 @@
  * a component. Section order in the page mirrors this file.
  */
 
+import { caseStudyPath } from "./caseStudiesData";
 import heroImg from "../assets/industries/finance/hero.webp";
 import introImg from "../assets/industries/finance/intro.webp";
 
@@ -148,6 +149,8 @@ export const challenges = {
       title: "Inefficient Customer Onboarding",
       body:
         "KYC and AML checks spread across disconnected vendors turn a five-minute sign-up into a five-day wait, and most of the drop-off happens before the first deposit. We build orchestrated onboarding that runs identity, sanctions and document verification in parallel, escalating only the cases that genuinely need a human.",
+      // Optional: links the panel to a long-form case study on the same topic.
+      caseStudy: caseStudyPath("fintech-kyc-document-processing-onboarding-automation"),
     },
     {
       title: "Legacy System Limitations",
@@ -190,6 +193,8 @@ export const services = {
         "Managing diverse portfolios requires continuous monitoring and smart analytics. Our AI-based financial software development solutions for wealth management help advisors deliver personalised recommendations, automate client reporting and strengthen long-term relationships through data intelligence.",
       image: svcWealthImg,
       alt: "Hands stacking gold coins into rising columns",
+      // Optional: links the card to a long-form case study on the same topic.
+      caseStudy: caseStudyPath("fintech-autonomous-financial-advisor-ai-agent"),
     },
     {
       title: "Risk Management Software Development",
@@ -197,6 +202,7 @@ export const services = {
         "Traditional risk frameworks struggle to keep pace with complex financial data. We build AI-based risk management systems that monitor exposures in real time, flag anomalies and predict potential threats. This proactive approach strengthens fraud prevention and helps financial institutions maintain operational integrity.",
       image: svcRiskImg,
       alt: "Wooden blocks spelling the word risk stacked on a desk",
+      caseStudy: caseStudyPath("fintech-ai-fraud-detection-anomalous-transactions"),
     },
     {
       title: "Tax Management Software Development",
@@ -204,6 +210,7 @@ export const services = {
         "Tax computation errors and delayed submissions lead to costly penalties. We develop AI-driven tax management platforms that automate calculations, detect inconsistencies and align with evolving tax regulation. This means accuracy, faster processing and reduced compliance risk.",
       image: svcTaxImg,
       alt: "A hand completing a tax return form beside a calculator",
+      caseStudy: caseStudyPath("fintech-regulatory-document-analysis-compliance-nlp"),
     },
     {
       title: "Process Automation for Financial Workflows",
@@ -246,6 +253,7 @@ export const services = {
         "Traditional lending systems are slow and prone to bias. We build AI-driven lending platforms that automate credit scoring, risk assessment and loan approvals using transparent algorithms. This improves decision accuracy and accelerates customer onboarding.",
       image: svcLendingImg,
       alt: "A lending adviser reviewing a loan application with a client",
+      caseStudy: caseStudyPath("fintech-machine-learning-credit-scoring"),
     },
   ],
 };

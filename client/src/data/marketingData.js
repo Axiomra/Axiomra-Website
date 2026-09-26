@@ -5,6 +5,7 @@
  * a component. Section order in the page mirrors this file.
  */
 
+import { caseStudyPath } from "./caseStudiesData";
 import heroImg from "../assets/industries/marketing/hero.webp";
 import introImg from "../assets/industries/marketing/intro.webp";
 
@@ -239,6 +240,8 @@ export const services = {
         "We develop customer loyalty software that helps brands retain and reward their most valuable customers. Many organisations rely on generic loyalty programmes that fail to build emotional engagement. Our system personalises rewards based on behaviour, preferences and purchase history, helping brands increase repeat sales and strengthen customer relationships.",
       image: svcLoyaltyImg,
       alt: "A customer redeeming a loyalty card at a shop counter",
+      // Optional: links the card to a long-form case study on the same topic.
+      caseStudy: caseStudyPath("retail-ai-personalized-marketing"),
     },
     {
       title: "Advertising Agency Software",

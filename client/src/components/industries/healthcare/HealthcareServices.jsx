@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SectionHeading from "../../SectionHeading";
 import { Stagger, StaggerItem } from "../../motion/Reveal";
 import { services } from "../../../data/healthcareData";
@@ -54,6 +55,15 @@ export default function HealthcareServices() {
                   {item.title}
                 </h3>
                 <p className="mt-3 text-base leading-relaxed text-content-dim">{item.body}</p>
+                {item.caseStudy && (
+                  <Link
+                    to={item.caseStudy.to}
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-brand underline-offset-4 hover:underline focus-ring"
+                  >
+                    {item.caseStudy.text}
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                )}
               </div>
             </StaggerItem>
           ))}

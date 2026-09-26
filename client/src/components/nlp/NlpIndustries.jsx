@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShieldCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 
 import SectionHeading from "../SectionHeading";
 import useGsapReveal from "../../hooks/useGsapReveal";
@@ -97,6 +98,18 @@ export default function NlpIndustries() {
                   <ShieldCheck size={16} className="shrink-0 text-brand" aria-hidden="true" />
                   {item.note}
                 </p>
+              )}
+
+              {item.caseStudy && (
+                <div>
+                  <Link
+                    to={item.caseStudy.to}
+                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-colors hover:text-accent focus-ring md:text-base"
+                  >
+                    {item.caseStudy.text}
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </Link>
+                </div>
               )}
             </motion.div>
           </AnimatePresence>

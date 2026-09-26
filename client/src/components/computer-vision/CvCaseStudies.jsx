@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "../SectionHeading";
 import { caseStudies } from "../../data/computerVisionData";
@@ -118,6 +119,16 @@ export default function CvCaseStudies() {
             </dl>
           </motion.article>
         </AnimatePresence>
+
+        {caseStudies.blueprint && (
+          <Link
+            to={caseStudies.blueprint.to}
+            className="mt-8 inline-flex items-center gap-2 rounded-full border border-line-strong px-7 py-3.5 text-base font-medium text-content transition-colors hover:border-brand hover:text-brand focus-ring md:text-lg"
+          >
+            {caseStudies.blueprint.text}
+            <span aria-hidden="true">→</span>
+          </Link>
+        )}
       </div>
     </section>
   );
