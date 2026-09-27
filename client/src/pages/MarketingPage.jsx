@@ -28,26 +28,13 @@ import {
   faqs,
   finalCta,
 } from "../data/marketingData";
+import Seo from "../seo/Seo";
 
 const TITLE = "Custom AI Marketing Software Development Services | Axiomra";
 const DESCRIPTION =
   "AI marketing software development: campaign automation, marketing analytics, RTB, CRM and personalisation platforms that cut manual work and prove marketing ROI.";
 
 export default function MarketingPage() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = TITLE;
-
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    meta?.setAttribute("content", DESCRIPTION);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   // Lazy photos land after the triggers were measured; once the page has
   // fully loaded, remeasure so nothing reveals early or late.
   useEffect(() => {
@@ -59,6 +46,7 @@ export default function MarketingPage() {
 
   return (
     <>
+      <Seo title={TITLE} description={DESCRIPTION} />
       <MarketingHero />
       <MarketingIntro />
       <MarketingImpact />

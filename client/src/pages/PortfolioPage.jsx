@@ -7,17 +7,12 @@ import PortfolioDesks from "../components/portfolio/PortfolioDesks";
 import FAQ from "../sections/FAQ";
 import GradientCTA from "../components/GradientCTA";
 import { caseStudies, faqs } from "../data/portfolioData";
+import Seo from "../seo/Seo";
 
 const META_DESCRIPTION =
   "Explore Axiomra's AI case studies: AI assistants and agents for sales, healthcare, finance and retail, with how each one works.";
 
 export default function PortfolioPage() {
-  useEffect(() => {
-    document.title = "Portfolio | AI Case Studies Built By Axiomra";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", META_DESCRIPTION);
-  }, []);
-
   useEffect(() => {
     // Fonts and the remaining images still shift this page after first paint,
     // so recompute trigger positions once things settle. Debounced, because
@@ -42,6 +37,7 @@ export default function PortfolioPage() {
 
   return (
     <div>
+      <Seo title="Portfolio | AI Case Studies Built By Axiomra" description={META_DESCRIPTION} />
       <PortfolioHero />
 
       <CaseStudyProgress targetId="case-studies" total={caseStudies.length} />

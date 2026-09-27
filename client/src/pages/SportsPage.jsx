@@ -28,26 +28,13 @@ import {
   faqs,
   finalCta,
 } from "../data/sportsData";
+import Seo from "../seo/Seo";
 
 const TITLE = "Custom AI Sports Software Development Services | Axiomra";
 const DESCRIPTION =
   "AI sports software development: athlete performance analytics, injury prevention, video and computer vision, league management, ticketing and fan engagement platforms.";
 
 export default function SportsPage() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = TITLE;
-
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    meta?.setAttribute("content", DESCRIPTION);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   // Lazy photos land after the triggers were measured; once the page has
   // fully loaded, remeasure so nothing reveals early or late.
   useEffect(() => {
@@ -59,6 +46,7 @@ export default function SportsPage() {
 
   return (
     <>
+      <Seo title={TITLE} description={DESCRIPTION} />
       <SportsHero />
       <SportsIntro />
       <SportsImpact />

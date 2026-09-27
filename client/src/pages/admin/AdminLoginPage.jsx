@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
 import AdminBackdrop from "../../components/admin/AdminBackdrop";
 import FieldError from "../../components/FieldError";
 import useAdminAuth from "../../admin/useAdminAuth";
+import Seo from "../../seo/Seo";
 
 const inputClass =
   "w-full rounded-xl border border-line bg-surface py-3 pl-11 pr-3 text-base text-content outline-none transition-colors placeholder:text-content-faint/70 focus:border-accent focus:ring-4 focus:ring-accent/12";
@@ -19,10 +20,6 @@ export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-
-  useEffect(() => {
-    document.title = "Sign in · Axiomra Lead Management";
-  }, []);
 
   // Already signed in, so skip the form rather than making them sign in twice.
   if (user) return <Navigate to={location.state?.from || "/admin"} replace />;
@@ -51,6 +48,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="relative grid min-h-[100svh] place-items-center overflow-hidden bg-surface px-4 py-12">
+      <Seo title="Sign in · Axiomra Lead Management" noindex />
       <AdminBackdrop />
 
       <motion.div

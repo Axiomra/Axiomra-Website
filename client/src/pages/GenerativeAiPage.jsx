@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 
 import GenAiHero from "../components/gen-ai/GenAiHero";
 import GenAiModelBar from "../components/gen-ai/GenAiModelBar";
@@ -17,20 +16,16 @@ import GradientCTA from "../components/GradientCTA";
 import FAQ from "../sections/FAQ";
 
 import { faqs } from "../data/generativeAiData";
+import Seo from "../seo/Seo";
 
 const META_DESCRIPTION =
   "Axiomra's generative AI development services: LLM strategy, custom model development, " +
   "RAG systems, AI copilots and agents, and workflow automation, all built, deployed, and supported.";
 
 export default function GenerativeAiPage() {
-  useEffect(() => {
-    document.title = "Generative AI Development Services For Enterprises | Axiomra";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", META_DESCRIPTION);
-  }, []);
-
   return (
     <div>
+      <Seo title="Generative AI Development Services For Enterprises | Axiomra" description={META_DESCRIPTION} />
       <GenAiHero />
       <GenAiModelBar />
       <GenAiChallenges />

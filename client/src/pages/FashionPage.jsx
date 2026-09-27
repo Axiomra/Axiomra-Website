@@ -26,26 +26,13 @@ import {
   faqs,
   finalCta,
 } from "../data/fashionData";
+import Seo from "../seo/Seo";
 
 const TITLE = "Custom Fashion App Development Services | Axiomra";
 const DESCRIPTION =
   "AI-powered fashion software development: virtual fitting rooms, demand forecasting, fashion analytics, e-commerce personalisation and design tools that cut returns and lift margins.";
 
 export default function FashionPage() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = TITLE;
-
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    meta?.setAttribute("content", DESCRIPTION);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   // Lazy photos land after the triggers were measured; once the page has
   // fully loaded, remeasure so nothing reveals early or late.
   useEffect(() => {
@@ -57,6 +44,7 @@ export default function FashionPage() {
 
   return (
     <>
+      <Seo title={TITLE} description={DESCRIPTION} />
       <FashionHero />
       <FashionIntro />
       <FashionImpact />

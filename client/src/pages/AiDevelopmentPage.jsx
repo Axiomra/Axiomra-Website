@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 
 import AiDevHero from "../components/ai-dev/AiDevHero";
 import ClientLogoStrip from "../components/ai-dev/ClientLogoStrip";
@@ -16,20 +15,16 @@ import Portfolio from "../sections/Portfolio";
 import FAQ from "../sections/FAQ";
 
 import { whatWeDo, subServices, faqs } from "../data/aiDevelopmentData";
+import Seo from "../seo/Seo";
 
 const META_DESCRIPTION =
   "Axiomra's AI development services: custom AI software, AI agents, LLM integration, " +
   "enterprise AI, PoC and MVP builds, AI integration, and AIOps, shipped to production.";
 
 export default function AiDevelopmentPage() {
-  useEffect(() => {
-    document.title = "AI Development Services Built For Business Results | Axiomra";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", META_DESCRIPTION);
-  }, []);
-
   return (
     <div className="ai-dev-page">
+      <Seo title="AI Development Services Built For Business Results | Axiomra" description={META_DESCRIPTION} />
       <div className="ai-dev-bg" aria-hidden="true" />
 
       <AiDevHero />

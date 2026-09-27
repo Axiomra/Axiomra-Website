@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import ServicesHero from "../components/ServicesHero";
 import ServiceRow from "../components/ServiceRow";
 import BusinessTypes from "../components/BusinessTypes";
@@ -8,6 +7,7 @@ import TechStack from "../sections/TechStack";
 import WhyUs from "../sections/WhyUs";
 import FAQ from "../sections/FAQ";
 import services, { SERVICES_BASE_PATH } from "../data/servicesData";
+import Seo from "../seo/Seo";
 
 const servicesFaq = [
   {
@@ -44,20 +44,13 @@ const servicesFaq = [
   },
 ];
 
-export default function ServicesPage() {
-  useEffect(() => {
-    document.title = "AI Services & Solutions | Axiomra";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) {
-      meta.setAttribute(
-        "content",
-        "Explore Axiomra's full range of AI services: from generative AI and computer vision to custom software, chatbots, and process automation.",
-      );
-    }
-  }, []);
+const META_DESCRIPTION =
+  "Explore Axiomra's full range of AI services: from generative AI and computer vision to custom software, chatbots, and process automation.";
 
+export default function ServicesPage() {
   return (
     <>
+      <Seo title="AI Services & Solutions | Axiomra" description={META_DESCRIPTION} />
       <ServicesHero />
 
       <div>

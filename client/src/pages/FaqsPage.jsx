@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 import FaqsHero from "../components/faqs/FaqsHero";
 import FaqsBrowser from "../components/faqs/FaqsBrowser";
 import FaqsHelpBanner from "../components/faqs/FaqsHelpBanner";
 import GradientCTA from "../components/GradientCTA";
+import Seo from "../seo/Seo";
 
 const META_DESCRIPTION =
   "Answers to the questions teams ask before starting an AI project with Axiomra: " +
@@ -14,12 +15,6 @@ export default function FaqsPage() {
   // query has to be owned by the page rather than by either component.
   const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    document.title = "FAQs | Axiomra AI Development";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", META_DESCRIPTION);
-  }, []);
-
   const jumpToResults = useCallback(() => {
     const el = document.getElementById("faq-browser");
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
@@ -28,6 +23,7 @@ export default function FaqsPage() {
 
   return (
     <div>
+      <Seo title="FAQs | Axiomra AI Development" description={META_DESCRIPTION} />
       <FaqsHero query={query} onQueryChange={setQuery} onSubmit={jumpToResults} />
       <FaqsBrowser query={query} onQueryChange={setQuery} />
       <FaqsHelpBanner />

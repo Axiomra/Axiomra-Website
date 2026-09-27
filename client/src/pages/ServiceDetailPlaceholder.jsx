@@ -1,18 +1,19 @@
-import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import services, { SERVICES_BASE_PATH } from "../data/servicesData";
+import Seo from "../seo/Seo";
 
 export default function ServiceDetailPlaceholder() {
   const { slug } = useParams();
   const service = services.find((s) => s.slug === slug);
 
-  useEffect(() => {
-    document.title = service ? `${service.title} | Axiomra` : "Service | Axiomra";
-  }, [service]);
-
   return (
     <section className="min-h-[70vh] flex items-center">
+      <Seo
+        title={service ? `${service.title} | Axiomra` : "Service | Axiomra"}
+        description={service?.description}
+        noindex
+      />
       <div className="max-w-2xl mx-auto px-6 py-32 text-center">
         {service && (
           <img

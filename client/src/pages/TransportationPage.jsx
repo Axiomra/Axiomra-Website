@@ -27,26 +27,13 @@ import {
   faqs,
   finalCta,
 } from "../data/transportationData";
+import Seo from "../seo/Seo";
 
 const TITLE = "Custom Transportation & Logistics Software Development | Axiomra";
 const DESCRIPTION =
   "Transportation software development: TMS platforms, fleet telematics, route optimisation, freight visibility, asset tracking, transit and mobility apps built for live operations.";
 
 export default function TransportationPage() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = TITLE;
-
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    meta?.setAttribute("content", DESCRIPTION);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   // Lazy photos land after the triggers were measured; once the page has
   // fully loaded, remeasure so nothing reveals early or late.
   useEffect(() => {
@@ -58,6 +45,7 @@ export default function TransportationPage() {
 
   return (
     <>
+      <Seo title={TITLE} description={DESCRIPTION} />
       <TransportationHero />
       <TransportationIntro />
       <TransportationImpact />

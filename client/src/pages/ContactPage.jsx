@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -37,6 +37,7 @@ import {
   validatePhone,
   validateSubject,
 } from "../lib/validation";
+import Seo from "../seo/Seo";
 
 const WHATSAPP_URL = "https://wa.me/16575203444";
 const PHONE = "+1 (657) 520-3444";
@@ -440,13 +441,16 @@ function ContactForm() {
   );
 }
 
-export default function ContactPage() {
-  useEffect(() => {
-    document.title = "Contact Axiomra: Let's Discuss Your Next AI Project";
-  }, []);
+const META_DESCRIPTION =
+  "Tell us about your goals, challenge, or initial idea. Our team will review your enquiry and help identify the next step.";
 
+export default function ContactPage() {
   return (
     <>
+      <Seo
+        title="Contact Axiomra: Let's Discuss Your Next AI Project"
+        description={META_DESCRIPTION}
+      />
       {/* Hero */}
       <section className="relative isolate overflow-hidden bg-inverse px-4 pb-24 pt-32 sm:px-6 md:pt-40">
         {/* The orbit field is the page's one WebGL surface. */}

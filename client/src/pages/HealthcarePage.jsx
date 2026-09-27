@@ -29,26 +29,13 @@ import {
   faqs,
   finalCta,
 } from "../data/healthcareData";
+import Seo from "../seo/Seo";
 
 const TITLE = "Custom AI Healthcare Software Development Services | Axiomra";
 const DESCRIPTION =
   "AI healthcare software development: EHR, telemedicine, medical imaging, clinical decision support, RCM and remote monitoring platforms built HIPAA-ready and FHIR-native.";
 
 export default function HealthcarePage() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = TITLE;
-
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    meta?.setAttribute("content", DESCRIPTION);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   // Lazy photos land after the triggers were measured; once the page has
   // fully loaded, remeasure so nothing reveals early or late.
   useEffect(() => {
@@ -60,6 +47,7 @@ export default function HealthcarePage() {
 
   return (
     <>
+      <Seo title={TITLE} description={DESCRIPTION} />
       <HealthcareHero />
       <HealthcareIntro />
       <HealthcareImpact />

@@ -29,26 +29,13 @@ import {
   faqs,
   finalCta,
 } from "../data/financeData";
+import Seo from "../seo/Seo";
 
 const TITLE = "Custom AI Financial Software Development Services | Axiomra";
 const DESCRIPTION =
   "AI financial software development: fraud detection, risk modelling, payments, lending, wealth and reconciliation platforms built for compliance and scale.";
 
 export default function FinancePage() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = TITLE;
-
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    meta?.setAttribute("content", DESCRIPTION);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   // Lazy photos land after the triggers were measured; once the page has
   // fully loaded, remeasure so nothing reveals early or late.
   useEffect(() => {
@@ -60,6 +47,7 @@ export default function FinancePage() {
 
   return (
     <>
+      <Seo title={TITLE} description={DESCRIPTION} />
       <FinanceHero />
       <FinanceIntro />
       <FinanceImpact />

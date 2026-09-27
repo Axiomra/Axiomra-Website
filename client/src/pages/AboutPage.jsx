@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 
 import AboutHero from "../components/about/AboutHero";
 import AboutJourney from "../components/about/AboutJourney";
@@ -12,20 +11,16 @@ import GradientCTA from "../components/GradientCTA";
 import FAQ from "../sections/FAQ";
 
 import { faqs } from "../data/aboutData";
+import Seo from "../seo/Seo";
 
 const META_DESCRIPTION =
   "About Axiomra: an AI development company founded in 2021, with 25+ in-house experts " +
   "and 300+ production AI projects delivered across 12+ industries.";
 
 export default function AboutPage() {
-  useEffect(() => {
-    document.title = "About Axiomra | AI Expertise Tailored To Your Business";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", META_DESCRIPTION);
-  }, []);
-
   return (
     <div>
+      <Seo title="About Axiomra | AI Expertise Tailored To Your Business" description={META_DESCRIPTION} />
       <AboutHero />
       <AboutJourney />
       <AboutVisionMission />

@@ -2,7 +2,6 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ChevronDown, ChevronRight, Flag, UserCheck } from "lucide-react";
 import GradientCTA from "../components/GradientCTA";
 import { Reveal } from "../components/motion/Reveal";
-import usePageMeta from "../hooks/usePageMeta";
 import useInView from "../hooks/useInView";
 import useStaggerReveal from "../hooks/useStaggerReveal";
 import NetworkMesh from "../components/case-study/NetworkMesh";
@@ -13,6 +12,7 @@ import BrandedImage from "../components/case-study/BrandedImage";
 import "../styles/case-study.css";
 import { caseStudies, caseStudyPath } from "../data/caseStudiesData";
 import { PORTFOLIO_PATH } from "../data/portfolioData";
+import Seo from "../seo/Seo";
 
 /**
  * Long-form case study, rendered entirely from data/caseStudiesData.js.
@@ -54,12 +54,6 @@ const DEFAULT_CTA = {
 };
 
 function CaseStudy({ study }) {
-  usePageMeta({
-    title: study.seoTitle,
-    description: study.seoDescription,
-    image: study.ogImage,
-  });
-
   const label = { ...DEFAULT_LABELS, ...study.labels };
   const cta = study.cta ?? DEFAULT_CTA;
   // Without a flow image the steps keep the article measure, which frees the
@@ -68,6 +62,12 @@ function CaseStudy({ study }) {
 
   return (
     <article className="bg-surface" style={accentVars(study.accent)}>
+      <Seo
+        title={study.seoTitle}
+        description={study.seoDescription}
+        image={study.ogImage}
+        type="article"
+      />
       <Header study={study} />
       <KeyDetails details={study.keyDetails} />
 

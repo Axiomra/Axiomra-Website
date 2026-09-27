@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 
 import NlpHero from "../components/nlp/NlpHero";
 import NlpIntro from "../components/nlp/NlpIntro";
@@ -18,6 +17,7 @@ import GradientCTA from "../components/GradientCTA";
 import FAQ from "../sections/FAQ";
 
 import { faqs } from "../data/nlpData";
+import Seo from "../seo/Seo";
 
 const META_DESCRIPTION =
   "Axiomra's natural language processing services: NLP consulting, custom model " +
@@ -25,14 +25,9 @@ const META_DESCRIPTION =
   "intelligent search, all built, integrated, and supported in production.";
 
 export default function NlpPage() {
-  useEffect(() => {
-    document.title = "Natural Language Processing Services | Axiomra";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", META_DESCRIPTION);
-  }, []);
-
   return (
     <div>
+      <Seo title="Natural Language Processing Services | Axiomra" description={META_DESCRIPTION} />
       <NlpHero />
       <NlpIntro />
       <NlpStats />

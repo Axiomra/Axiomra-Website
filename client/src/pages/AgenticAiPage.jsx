@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 
 import AgenticHero from "../components/agentic-ai/AgenticHero";
 import AgenticFrameworkBar from "../components/agentic-ai/AgenticFrameworkBar";
@@ -21,6 +20,7 @@ import GradientCTA from "../components/GradientCTA";
 import FAQ from "../sections/FAQ";
 
 import { faqs } from "../data/agenticAiData";
+import Seo from "../seo/Seo";
 
 const META_DESCRIPTION =
   "Axiomra's agentic AI development services: autonomous AI agents, multi-agent " +
@@ -28,14 +28,9 @@ const META_DESCRIPTION =
   "deployed, and supported in production.";
 
 export default function AgenticAiPage() {
-  useEffect(() => {
-    document.title = "Agentic AI Development Services For Enterprises | Axiomra";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", META_DESCRIPTION);
-  }, []);
-
   return (
     <div>
+      <Seo title="Agentic AI Development Services For Enterprises | Axiomra" description={META_DESCRIPTION} />
       <AgenticHero />
       <AgenticFrameworkBar />
       <AgenticChallenges />

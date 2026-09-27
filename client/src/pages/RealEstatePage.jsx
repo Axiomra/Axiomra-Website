@@ -27,26 +27,13 @@ import {
   faqs,
   finalCta,
 } from "../data/realEstateData";
+import Seo from "../seo/Seo";
 
 const TITLE = "Custom Real Estate App Development Services | Axiomra";
 const DESCRIPTION =
   "AI real estate software development: property valuation, listing platforms, CRM, transaction and property management systems that close deals faster and run a portfolio from one place.";
 
 export default function RealEstatePage() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = TITLE;
-
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    meta?.setAttribute("content", DESCRIPTION);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   // Lazy photos land after the triggers were measured; once the page has
   // fully loaded, remeasure so nothing reveals early or late.
   useEffect(() => {
@@ -58,6 +45,7 @@ export default function RealEstatePage() {
 
   return (
     <>
+      <Seo title={TITLE} description={DESCRIPTION} />
       <RealEstateHero />
       <RealEstateIntro />
       <RealEstateImpact />
