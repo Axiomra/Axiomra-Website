@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+stats.html
+package-lock.json
+client/public
+unused-images
+*.md

@@ -26,6 +26,8 @@ Thumbs.db
 *.swp
 
 # Vite / tooling caches
+coverage/
+test-results/
 .vite/
 node_modules/.vite/
 *.tsbuildinfo

@@ -46,6 +46,7 @@ export function mongoSanitize(req, _res, next) {
 const TAG_RE = /<\/?[a-z][^>]*>/gi;
 // Bare control characters break CSV and log output and never appear in a real
 // name, message or note. Newlines and tabs are kept: a message field needs them.
+// eslint-disable-next-line no-control-regex -- matching them is the point
 const CONTROL_RE = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g;
 
 /**

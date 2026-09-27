@@ -44,12 +44,16 @@ for (const [, body] of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
 }
 
 const { VITE_API_URL } = loadEnv("production", root, "VITE_");
-const api = new URL(VITE_API_URL);
-// A local API only makes sense for a local build, which vercel.json never
-// serves, so there is nothing to check.
-const localApi = ["localhost", "127.0.0.1", "[::1]"].includes(api.hostname);
-if (!localApi && !directive("connect-src").includes(api.origin)) {
-  problems.push(`VITE_API_URL origin ${api.origin} is not in connect-src`);
+const api = URL.parse(VITE_API_URL ?? "");
+if (!api) {
+  problems.push(`VITE_API_URL is ${VITE_API_URL ? `not a URL: ${VITE_API_URL}` : "not set"}`);
+} else {
+  // A local API only makes sense for a local build, which vercel.json never
+  // serves, so there is nothing to check.
+  const localApi = ["localhost", "127.0.0.1", "[::1]"].includes(api.hostname);
+  if (!localApi && !directive("connect-src").includes(api.origin)) {
+    problems.push(`VITE_API_URL origin ${api.origin} is not in connect-src`);
+  }
 }
 
 if (problems.length) {

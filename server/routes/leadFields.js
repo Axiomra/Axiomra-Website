@@ -37,7 +37,6 @@ function slugify(label) {
 async function uniqueKey(base) {
   for (let n = 1; n <= 50; n += 1) {
     const candidate = n === 1 ? base : `${base}_${n}`.slice(0, 40);
-    // eslint-disable-next-line no-await-in-loop
     const taken = await LeadField.exists({ key: candidate });
     if (!taken) return candidate;
   }
@@ -63,10 +62,7 @@ router.post("/", async (req, res) => {
 
     const type = FIELD_TYPES.includes(req.body?.type) ? req.body.type : "text";
 
-    const width = Math.min(
-      640,
-      Math.max(90, parseInt(req.body?.width, 10) || DEFAULT_FIELD_WIDTH)
-    );
+    const width = Math.min(640, Math.max(90, parseInt(req.body?.width, 10) || DEFAULT_FIELD_WIDTH));
 
     const count = await LeadField.countDocuments();
     if (count >= MAX_FIELDS) {
