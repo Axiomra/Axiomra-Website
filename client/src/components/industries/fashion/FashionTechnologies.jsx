@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { technologies } from "../../../data/fashionData";
-import { SERVICES_BASE_PATH } from "../../../data/servicesData";
+import { SERVICES_BASE_PATH } from "../../../routes.constants";
 
 /**
  * Sticky intro on the left, self-stacking numbered cards on the right. Same

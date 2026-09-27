@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import NotFoundPage from "./NotFoundPage";
-import services, { SERVICES_BASE_PATH } from "../data/servicesData";
+import services from "../data/servicesData";
+import { SERVICES_BASE_PATH } from "../routes.constants";
 import Seo from "../seo/Seo";
 
 export default function ServiceDetailPlaceholder() {

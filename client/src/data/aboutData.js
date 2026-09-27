@@ -3,8 +3,6 @@
  * can edit wording without touching layout or animation code.
  */
 
-export const ABOUT_PATH = "/about";
-
 export const hero = {
   eyebrow: "About Axiomra",
   titleLead: "AI Expertise Tailored To",

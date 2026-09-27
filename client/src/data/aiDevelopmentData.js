@@ -11,9 +11,6 @@ import aiProductDevelopment from "../assets/ai-dev/ai-product-development.jpg";
 import aiops from "../assets/ai-dev/aiops.jpg";
 import { INDUSTRY_IMAGES } from "../lib/media";
 
-/** Route this page owns, imported by App.jsx and the navbar so they can't drift. */
-export const AI_DEVELOPMENT_SLUG = "ai-development-services";
-
 export const hero = {
   eyebrow: "AI Development Company",
   titleLead: "Custom AI Development",

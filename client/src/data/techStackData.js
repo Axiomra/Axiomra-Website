@@ -3,8 +3,6 @@
  * so the technology list can be edited without touching layout or motion code.
  */
 
-export const TECH_PATH = "/tech";
-
 export const hero = {
   eyebrow: "What we build with",
   titleLead: "The AI Tech Stack Behind",

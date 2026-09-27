@@ -8,17 +8,19 @@ import {
 } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { SERVICES_BASE_PATH } from "@/data/servicesData";
-import { GENERATIVE_AI_SLUG } from "@/data/generativeAiData";
-import { AI_DEVELOPMENT_SLUG } from "@/data/aiDevelopmentData";
-import { AGENTIC_AI_SLUG } from "@/data/agenticAiData";
-import { COMPUTER_VISION_SLUG } from "@/data/computerVisionData";
-import { NLP_SLUG } from "@/data/nlpData";
-import { ABOUT_PATH } from "@/data/aboutData";
-import { TECH_PATH } from "@/data/techStackData";
-import { FAQS_PATH } from "@/data/faqsData";
-import { PORTFOLIO_PATH } from "@/data/portfolioData";
-import { INDUSTRIES_PATH } from "@/data/industriesData";
+import {
+  SERVICES_BASE_PATH,
+  GENERATIVE_AI_SLUG,
+  AI_DEVELOPMENT_SLUG,
+  AGENTIC_AI_SLUG,
+  COMPUTER_VISION_SLUG,
+  NLP_SLUG,
+  ABOUT_PATH,
+  TECH_PATH,
+  FAQS_PATH,
+  PORTFOLIO_PATH,
+  INDUSTRIES_PATH,
+} from "@/routes.constants";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import logoLight from "@/assets/logo-light.webp";
 import logoDark from "@/assets/logo-dark.webp";

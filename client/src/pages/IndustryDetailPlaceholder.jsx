@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import NotFoundPage from "./NotFoundPage";
-import { industries, INDUSTRIES_PATH } from "../data/industriesData";
+import { industries } from "../data/industriesData";
+import { INDUSTRIES_PATH } from "../routes.constants";
 import Seo from "../seo/Seo";
 
 /** Stand-in for the per-industry pages until each one is built. */

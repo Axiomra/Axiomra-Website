@@ -3,15 +3,18 @@ import logoLight from "../assets/logo-light.webp";
 import iconTeal from "../assets/icon-teal.png";
 import NetworkBackground from "./NetworkBackground";
 import { Link, useLocation } from "react-router-dom";
-import { ABOUT_PATH } from "../data/aboutData";
-import { TECH_PATH } from "../data/techStackData";
-import { FAQS_PATH } from "../data/faqsData";
-import { INDUSTRIES_PATH, industryPath } from "../data/industriesData";
-import { SERVICES_BASE_PATH } from "../data/servicesData";
-import { AI_DEVELOPMENT_SLUG } from "../data/aiDevelopmentData";
-import { COMPUTER_VISION_SLUG } from "../data/computerVisionData";
-import { GENERATIVE_AI_SLUG } from "../data/generativeAiData";
-import { AGENTIC_AI_SLUG } from "../data/agenticAiData";
+import {
+  ABOUT_PATH,
+  TECH_PATH,
+  FAQS_PATH,
+  INDUSTRIES_PATH,
+  industryPath,
+  SERVICES_BASE_PATH,
+  AI_DEVELOPMENT_SLUG,
+  COMPUTER_VISION_SLUG,
+  GENERATIVE_AI_SLUG,
+  AGENTIC_AI_SLUG,
+} from "../routes.constants";
 
 /**
  * Footer labels that already have a route. Anything missing from here has no

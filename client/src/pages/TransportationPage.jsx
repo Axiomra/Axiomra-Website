@@ -28,7 +28,7 @@ import {
   finalCta,
 } from "../data/transportationData";
 import Seo from "../seo/Seo";
-import { INDUSTRIES_PATH } from "../data/industriesData";
+import { INDUSTRIES_PATH } from "../routes.constants";
 
 const TITLE = "Custom Transportation & Logistics Software Development | Axiomra";
 const DESCRIPTION =

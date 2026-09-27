@@ -28,7 +28,7 @@ import {
   finalCta,
 } from "../data/realEstateData";
 import Seo from "../seo/Seo";
-import { INDUSTRIES_PATH } from "../data/industriesData";
+import { INDUSTRIES_PATH } from "../routes.constants";
 
 const TITLE = "Custom Real Estate App Development Services | Axiomra";
 const DESCRIPTION =

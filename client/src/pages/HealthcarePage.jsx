@@ -30,7 +30,7 @@ import {
   finalCta,
 } from "../data/healthcareData";
 import Seo from "../seo/Seo";
-import { INDUSTRIES_PATH } from "../data/industriesData";
+import { INDUSTRIES_PATH } from "../routes.constants";
 
 const TITLE = "Custom AI Healthcare Software Development Services | Axiomra";
 const DESCRIPTION =

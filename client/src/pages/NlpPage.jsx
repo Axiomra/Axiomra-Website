@@ -19,7 +19,7 @@ import FAQ from "../sections/FAQ";
 import { faqs } from "../data/nlpData";
 import Seo from "../seo/Seo";
 import { serviceSchema } from "../seo/schema";
-import { SERVICES_BASE_PATH } from "../data/servicesData";
+import { SERVICES_BASE_PATH } from "../routes.constants";
 
 const META_DESCRIPTION =
   "Axiomra's natural language processing services: NLP consulting, custom model " +

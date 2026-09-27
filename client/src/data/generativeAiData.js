@@ -20,9 +20,6 @@ import enterpriseIndustries from "../assets/gen-ai/enterprise-industries.jpg";
 import governance from "../assets/gen-ai/ai-governance-security.jpg";
 import horizon from "../assets/gen-ai/generative-ai-horizon.jpg";
 
-/** Route this page owns, imported by App.jsx and the navbar so they can't drift. */
-export const GENERATIVE_AI_SLUG = "generative-ai-services";
-
 export const hero = {
   eyebrow: "Generative AI Development Company",
   titleLead: "Custom Generative AI",

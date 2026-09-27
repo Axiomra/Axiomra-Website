@@ -28,7 +28,7 @@ import {
   finalCta,
 } from "../data/educationData";
 import Seo from "../seo/Seo";
-import { INDUSTRIES_PATH } from "../data/industriesData";
+import { INDUSTRIES_PATH } from "../routes.constants";
 
 const TITLE = "Education Software Development Services | AI EdTech | Axiomra";
 const DESCRIPTION =

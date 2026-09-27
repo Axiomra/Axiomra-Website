@@ -7,18 +7,22 @@
  * (they render with noindex). A service joins the sitemap once it has its own
  * page, which means adding its slug to BUILT_SERVICE_PAGES below.
  */
-import { SERVICES_BASE_PATH } from "../data/servicesData";
-import { ABOUT_PATH } from "../data/aboutData";
-import { TECH_PATH } from "../data/techStackData";
-import { FAQS_PATH } from "../data/faqsData";
-import { PORTFOLIO_PATH } from "../data/portfolioData";
-import { CASE_STUDIES_PATH, caseStudies } from "../data/caseStudiesData";
-import { INDUSTRIES_PATH, industries } from "../data/industriesData";
-import { AI_DEVELOPMENT_SLUG } from "../data/aiDevelopmentData";
-import { GENERATIVE_AI_SLUG } from "../data/generativeAiData";
-import { AGENTIC_AI_SLUG } from "../data/agenticAiData";
-import { COMPUTER_VISION_SLUG } from "../data/computerVisionData";
-import { NLP_SLUG } from "../data/nlpData";
+import {
+  SERVICES_BASE_PATH,
+  ABOUT_PATH,
+  TECH_PATH,
+  FAQS_PATH,
+  PORTFOLIO_PATH,
+  CASE_STUDIES_PATH,
+  INDUSTRIES_PATH,
+  AI_DEVELOPMENT_SLUG,
+  GENERATIVE_AI_SLUG,
+  AGENTIC_AI_SLUG,
+  COMPUTER_VISION_SLUG,
+  NLP_SLUG,
+} from "../routes.constants";
+import { caseStudies } from "../data/caseStudiesData";
+import { industries } from "../data/industriesData";
 
 const BUILT_SERVICE_PAGES = {
   [AI_DEVELOPMENT_SLUG]: "src/pages/AiDevelopmentPage.jsx",

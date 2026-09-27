@@ -51,18 +51,20 @@ const AdminResetPasswordPage = lazy(() => import("./pages/admin/AdminResetPasswo
 import AdminAuthProvider from "./admin/AdminAuthProvider";
 import AdminGuard from "./admin/AdminGuard";
 
-import { SERVICES_BASE_PATH } from "./data/servicesData";
-import { ABOUT_PATH } from "./data/aboutData";
-import { TECH_PATH } from "./data/techStackData";
-import { FAQS_PATH } from "./data/faqsData";
-import { PORTFOLIO_PATH } from "./data/portfolioData";
-import { CASE_STUDIES_PATH } from "./data/caseStudiesData";
-import { INDUSTRIES_PATH } from "./data/industriesData";
-import { AI_DEVELOPMENT_SLUG } from "./data/aiDevelopmentData";
-import { GENERATIVE_AI_SLUG } from "./data/generativeAiData";
-import { AGENTIC_AI_SLUG } from "./data/agenticAiData";
-import { COMPUTER_VISION_SLUG } from "./data/computerVisionData";
-import { NLP_SLUG } from "./data/nlpData";
+import {
+  SERVICES_BASE_PATH,
+  ABOUT_PATH,
+  TECH_PATH,
+  FAQS_PATH,
+  PORTFOLIO_PATH,
+  CASE_STUDIES_PATH,
+  INDUSTRIES_PATH,
+  AI_DEVELOPMENT_SLUG,
+  GENERATIVE_AI_SLUG,
+  AGENTIC_AI_SLUG,
+  COMPUTER_VISION_SLUG,
+  NLP_SLUG,
+} from "./routes.constants";
 
 /** Scrolls to a hash target on route change, or to the top of a fresh page. */
 function ScrollManager() {

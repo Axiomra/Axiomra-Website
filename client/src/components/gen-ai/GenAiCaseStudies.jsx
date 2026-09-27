@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { caseStudies } from "../../data/generativeAiData";
-import { PORTFOLIO_PATH } from "../../data/portfolioData";
+import { PORTFOLIO_PATH } from "../../routes.constants";
 
 /** Three shipped projects as full cards, problem, solution, then the numbers. */
 export default function GenAiCaseStudies() {

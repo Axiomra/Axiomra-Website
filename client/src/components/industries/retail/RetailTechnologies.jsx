@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../../SectionHeading";
 import { Stagger, StaggerItem } from "../../motion/Reveal";
 import { technologies } from "../../../data/retailData";
-import { SERVICES_BASE_PATH } from "../../../data/servicesData";
+import { SERVICES_BASE_PATH } from "../../../routes.constants";
 
 /**
  * The five technology families, numbered 01-05 over a photographic base coat.

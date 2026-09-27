@@ -1,2 +1,5 @@
 .vercel
 .env*
+
+# Bundle report from `ANALYZE=1 npm run build`
+stats.html

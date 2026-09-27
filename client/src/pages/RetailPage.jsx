@@ -28,7 +28,7 @@ import {
   finalCta,
 } from "../data/retailData";
 import Seo from "../seo/Seo";
-import { INDUSTRIES_PATH } from "../data/industriesData";
+import { INDUSTRIES_PATH } from "../routes.constants";
 
 const TITLE = "Retail Software Development Services | AI for Retail | Axiomra";
 const DESCRIPTION =

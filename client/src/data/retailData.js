@@ -7,7 +7,7 @@
  * because they are rendered on the card.
  */
 
-import { caseStudyPath } from "./caseStudiesData";
+import { caseStudyPath } from "../routes.constants";
 import heroImg from "../assets/industries/retail/hero.webp";
 import introImg from "../assets/industries/retail/intro.webp";
 import svcOperationsImg from "../assets/industries/retail/svc-operations.webp";

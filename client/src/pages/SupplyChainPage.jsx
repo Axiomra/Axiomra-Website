@@ -29,7 +29,7 @@ import {
   finalCta,
 } from "../data/supplyChainData";
 import Seo from "../seo/Seo";
-import { INDUSTRIES_PATH } from "../data/industriesData";
+import { INDUSTRIES_PATH } from "../routes.constants";
 
 const TITLE = "Custom AI Supply Chain Software Development Services | Axiomra";
 const DESCRIPTION =

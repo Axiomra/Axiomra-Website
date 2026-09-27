@@ -2,7 +2,8 @@ import { useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { gsap, MOTION_OK } from "../../lib/gsap";
-import { industries, industryPath } from "../../data/industriesData";
+import { industries } from "../../data/industriesData";
+import { industryPath } from "../../routes.constants";
 
 /** One industry chapter: photo on one side, the pitch on the other. */
 function IndustrySection({ industry, index }) {

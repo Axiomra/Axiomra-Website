@@ -27,7 +27,7 @@ import {
   finalCta,
 } from "../data/fashionData";
 import Seo from "../seo/Seo";
-import { INDUSTRIES_PATH } from "../data/industriesData";
+import { INDUSTRIES_PATH } from "../routes.constants";
 
 const TITLE = "Custom Fashion App Development Services | Axiomra";
 const DESCRIPTION =

@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../../SectionHeading";
 import { Stagger, StaggerItem } from "../../motion/Reveal";
 import { technologies } from "../../../data/educationData";
-import { SERVICES_BASE_PATH } from "../../../data/servicesData";
+import { SERVICES_BASE_PATH } from "../../../routes.constants";
 
 /** Four numbered technology cards on a photographic ground, as in the reference. */
 export default function EducationTechnologies() {

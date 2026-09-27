@@ -6,7 +6,8 @@ import Portfolio from "../sections/Portfolio";
 import TechStack from "../sections/TechStack";
 import WhyUs from "../sections/WhyUs";
 import FAQ from "../sections/FAQ";
-import services, { SERVICES_BASE_PATH } from "../data/servicesData";
+import services from "../data/servicesData";
+import { SERVICES_BASE_PATH } from "../routes.constants";
 import Seo from "../seo/Seo";
 
 const servicesFaq = [

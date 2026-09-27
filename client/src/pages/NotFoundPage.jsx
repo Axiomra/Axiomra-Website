@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Seo from "../seo/Seo";
-import { SERVICES_BASE_PATH } from "../data/servicesData";
+import { SERVICES_BASE_PATH } from "../routes.constants";
 
 // Same classes as the secondary pills in ServiceRow.
 const SECONDARY_LINK =
