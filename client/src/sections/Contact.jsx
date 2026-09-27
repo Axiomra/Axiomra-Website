@@ -10,6 +10,8 @@ import services from "../data/servicesData";
 import { DEFAULT_COUNTRY } from "../data/countryCodes";
 import { INTRO_VIDEO } from "../lib/media";
 import { submitContact } from "../lib/contactApi";
+import { useSpamGuard } from "../lib/useSpamGuard";
+import HoneypotField from "../components/HoneypotField";
 import {
   formatPhone,
   validateContactForm,
@@ -99,6 +101,7 @@ export default function Contact() {
   const [error, setError] = useState("");
   const [sent, setSent] = useState(null);
   const formRef = useRef(null);
+  const { honeypotRef, signals, restart } = useSpamGuard();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -158,7 +161,7 @@ export default function Contact() {
     // before submit; the team needs one dialable string, not two halves.
     const payload = { ...form, phone: formatPhone(form.phone, country) };
     try {
-      await submitContact(payload);
+      await submitContact({ ...payload, ...signals() });
       setStatus("success");
       // Snapshot first: the confirmation replays the payload, and the reset
       // below would otherwise empty it out.
@@ -166,6 +169,7 @@ export default function Contact() {
       setForm(EMPTY_FORM);
       setCountry(DEFAULT_COUNTRY);
       setErrors({});
+      restart();
     } catch (err) {
       setError(err.message);
       setStatus("error");
@@ -261,6 +265,7 @@ export default function Contact() {
               className="absolute -bottom-8 -right-8 rotate-[-12deg] text-inverse-fg/5"
             />
           </span>
+          <HoneypotField inputRef={honeypotRef} />
 
           <div className="relative">
             <div className="mb-8 flex flex-wrap items-start justify-between gap-3">

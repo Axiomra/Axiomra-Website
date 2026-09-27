@@ -27,6 +27,8 @@ import SubmissionModal from "../components/SubmissionModal";
 import services from "../data/servicesData";
 import { DEFAULT_COUNTRY } from "../data/countryCodes";
 import { submitContact } from "../lib/contactApi";
+import { useSpamGuard } from "../lib/useSpamGuard";
+import HoneypotField from "../components/HoneypotField";
 import {
   formatPhone,
   validateCompany,
@@ -171,6 +173,7 @@ function ContactForm() {
   const [error, setError] = useState("");
   const [sent, setSent] = useState(null);
   const formRef = useRef(null);
+  const { honeypotRef, signals, restart } = useSpamGuard();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -230,7 +233,7 @@ function ContactForm() {
     // dialable string.
     const payload = { ...form, phone: formatPhone(form.phone, country) };
     try {
-      await submitContact(payload);
+      await submitContact({ ...payload, ...signals() });
       setStatus("success");
       // Snapshot first: the confirmation replays the payload, and the reset
       // below would otherwise empty it out.
@@ -238,6 +241,7 @@ function ContactForm() {
       setForm(EMPTY_FORM);
       setCountry(DEFAULT_COUNTRY);
       setErrors({});
+      restart();
     } catch (err) {
       setError(err.message);
       setStatus("error");
@@ -263,6 +267,7 @@ function ContactForm() {
       <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[1.75rem]">
         <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid" />
       </span>
+      <HoneypotField inputRef={honeypotRef} />
 
       <div className="grid gap-5 sm:grid-cols-2">
         <motion.div {...reveal(0)}>

@@ -1,7 +1,6 @@
-// Base URL of the backend. Vite inlines this at build time, so a missing
-// VITE_API_URL in a production build silently points the form at localhost,
-// hence the explicit dev-only fallback.
-const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/+$/, "");
+// Base URL of the backend, inlined at build time. vite.config.js fails the
+// build when it is unset and defaults it to the local API under `vite dev`.
+const API_URL = import.meta.env.VITE_API_URL.replace(/\/+$/, "");
 
 /**
  * POST a contact submission.

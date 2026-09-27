@@ -1,4 +1,5 @@
 import { Router } from "express";
+import mongoose from "mongoose";
 import Lead from "../models/Lead.js";
 import { sendContactNotification } from "../mailer.js";
 import { cleanString } from "../lib/sanitize.js";
@@ -37,6 +38,23 @@ function validate({ name, email, phone, company, subject, message }) {
   return "";
 }
 
+// Spam traps. `website` is a field real visitors never see (it is positioned off
+// screen and hidden from assistive tech), so any value in it came from a bot
+// filling every input. `elapsedMs` is how long the form was open; a person
+// cannot fill it in under three seconds.
+const HONEYPOT_FIELD = "website";
+const MIN_FILL_MS = 3000;
+
+function looksAutomated(body) {
+  if (String(body[HONEYPOT_FIELD] ?? "").trim()) return "honeypot";
+  // Missing timing is let through: a visitor on a page cached from before this
+  // field existed must not silently lose their message.
+  if (body.elapsedMs === undefined) return "";
+  const elapsed = Number(body.elapsedMs);
+  if (!Number.isFinite(elapsed) || elapsed < MIN_FILL_MS) return "too-fast";
+  return "";
+}
+
 /**
  * Public intake. Writes into the same collection the admin lead panel reads,
  * so a submission shows up there with progress "New" and no extra wiring.
@@ -45,7 +63,19 @@ function validate({ name, email, phone, company, subject, message }) {
  */
 router.post("/", async (req, res) => {
   try {
-    const invalid = validate(req.body || {});
+    const body = req.body || {};
+
+    // Answer a trapped submission exactly like a real one, so the bot has no
+    // signal to adapt to, but store nothing and send no email.
+    const trapped = looksAutomated(body);
+    if (trapped) {
+      console.warn(`Contact submission dropped (${trapped}).`);
+      return res
+        .status(201)
+        .json({ success: true, id: new mongoose.Types.ObjectId(), notified: true });
+    }
+
+    const invalid = validate(body);
     if (invalid) {
       return res.status(400).json({ error: invalid });
     }

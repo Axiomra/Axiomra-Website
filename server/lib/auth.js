@@ -10,9 +10,11 @@ import User from "../models/User.js";
  * field cannot walk away with an admin session.
  *
  * The cost of that choice is cross-site cookies: the panel and the API sit on
- * different origins in production, so the cookie needs SameSite=None; Secure,
- * and CORS has to echo the exact origin with credentials enabled. Both are
- * handled in app.js.
+ * different sites in production (vercel.app is a public suffix, so SameSite=Lax
+ * would drop the cookie on every panel request). The cookie therefore needs
+ * SameSite=None; Secure, CORS has to echo the exact origin with credentials
+ * enabled, and unsafe requests from unlisted origins are refused as CSRF.
+ * All three are handled in app.js.
  */
 
 const COOKIE_NAME = "axiomra_admin";
