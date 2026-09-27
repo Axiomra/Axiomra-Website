@@ -3,7 +3,22 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/contact", "destination": "/index.html" },
+    { "source": "/about", "destination": "/index.html" },
+    { "source": "/tech", "destination": "/index.html" },
+    { "source": "/faqs", "destination": "/index.html" },
+    { "source": "/portfolio", "destination": "/index.html" },
+    { "source": "/industries", "destination": "/index.html" },
+    { "source": "/industries/:slug", "destination": "/index.html" },
+    { "source": "/ai-services-and-solutions", "destination": "/index.html" },
+    { "source": "/ai-services-and-solutions/:slug", "destination": "/index.html" },
+    { "source": "/case-studies/:slug", "destination": "/index.html" },
+    { "source": "/service/nlp", "destination": "/index.html" },
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/admin/:path*", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

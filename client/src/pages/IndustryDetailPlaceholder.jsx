@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import NotFoundPage from "./NotFoundPage";
 import { industries, INDUSTRIES_PATH } from "../data/industriesData";
 import Seo from "../seo/Seo";
 
@@ -7,6 +8,9 @@ import Seo from "../seo/Seo";
 export default function IndustryDetailPlaceholder() {
   const { slug } = useParams();
   const industry = industries.find((i) => i.slug === slug);
+
+  // A slug we have no entry for is a dead link, not a page that is on its way.
+  if (!industry) return <NotFoundPage />;
 
   return (
     <section className="flex min-h-[70vh] items-center">

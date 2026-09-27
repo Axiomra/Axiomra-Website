@@ -1,11 +1,15 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import NotFoundPage from "./NotFoundPage";
 import services, { SERVICES_BASE_PATH } from "../data/servicesData";
 import Seo from "../seo/Seo";
 
 export default function ServiceDetailPlaceholder() {
   const { slug } = useParams();
   const service = services.find((s) => s.slug === slug);
+
+  // A slug we have no entry for is a dead link, not a page that is on its way.
+  if (!service) return <NotFoundPage />;
 
   return (
     <section className="min-h-[70vh] flex items-center">

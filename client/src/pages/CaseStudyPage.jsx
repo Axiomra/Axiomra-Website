@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ChevronDown, ChevronRight, Flag, UserCheck } from "lucide-react";
 import GradientCTA from "../components/GradientCTA";
 import { Reveal } from "../components/motion/Reveal";
@@ -13,6 +13,7 @@ import "../styles/case-study.css";
 import { caseStudies, caseStudyPath } from "../data/caseStudiesData";
 import { PORTFOLIO_PATH } from "../data/portfolioData";
 import Seo from "../seo/Seo";
+import NotFoundPage from "./NotFoundPage";
 
 /**
  * Long-form case study, rendered entirely from data/caseStudiesData.js.
@@ -25,7 +26,7 @@ export default function CaseStudyPage() {
   const { slug } = useParams();
   const study = caseStudies[slug];
 
-  if (!study) return <Navigate to={PORTFOLIO_PATH} replace />;
+  if (!study) return <NotFoundPage />;
   return <CaseStudy study={study} />;
 }
 

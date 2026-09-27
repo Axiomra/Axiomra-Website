@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../../SectionHeading";
 import { Stagger, StaggerItem } from "../../motion/Reveal";
 import { technologies } from "../../../data/retailData";
+import { SERVICES_BASE_PATH } from "../../../data/servicesData";
 
 /**
  * The five technology families, numbered 01-05 over a photographic base coat.
@@ -45,7 +46,7 @@ export default function RetailTechnologies() {
             />
 
             <Link
-              to="/services"
+              to={SERVICES_BASE_PATH}
               className="group mt-8 inline-flex items-center gap-3 rounded-full border border-white/20 px-6 py-3 text-base font-medium text-inverse-fg transition-colors duration-300 hover:bg-white/10 focus-ring"
             >
               {technologies.ctaText}

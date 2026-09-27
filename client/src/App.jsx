@@ -38,6 +38,7 @@ const EducationPage = lazy(() => import("./pages/EducationPage"));
 const LegalPage = lazy(() => import("./pages/LegalPage"));
 const RetailPage = lazy(() => import("./pages/RetailPage"));
 const TransportationPage = lazy(() => import("./pages/TransportationPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 // The admin panel shares nothing with the marketing site: its own chrome, its
 // own auth provider, its own table libraries. Splitting it here keeps all of
@@ -145,6 +146,9 @@ function SiteRoutes() {
               element={<Navigate to={`${SERVICES_BASE_PATH}/${NLP_SLUG}`} replace />}
             />
             <Route path={`${SERVICES_BASE_PATH}/:slug`} element={<ServiceDetailPlaceholder />} />
+            {/* Unknown URLs. Vercel serves these with a real 404 status via
+                dist/404.html; see scripts/generate-sitemap.mjs. */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </main>
