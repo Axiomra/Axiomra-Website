@@ -7,7 +7,7 @@
  * there is no token to attach by hand; the browser does it.
  */
 
-const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/+$/, "");
+const API_URL = import.meta.env.VITE_API_URL.replace(/\/+$/, "");
 
 /** Thrown for any non-2xx response. `status` lets callers treat 401 specially. */
 export class ApiError extends Error {

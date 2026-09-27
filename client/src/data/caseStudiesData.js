@@ -195,10 +195,6 @@ import pricingReview800 from "../assets/case-studies/retail-dynamic-pricing-opti
 import pricingReview1400 from "../assets/case-studies/retail-dynamic-pricing-optimization/review-1400.webp";
 import pricingReview2200 from "../assets/case-studies/retail-dynamic-pricing-optimization/review-2200.webp";
 
-export const CASE_STUDIES_PATH = "/case-studies";
-
-export const caseStudyPath = (slug) => `${CASE_STUDIES_PATH}/${slug}`;
-
 /** @type {Record<string, CaseStudy>} */
 export const caseStudies = {
   "axiomra-ai-sales-agent": {

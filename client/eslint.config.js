@@ -69,7 +69,7 @@ export default [
     rules: { 'react/no-unknown-property': 'off' },
   },
   {
-    files: ['*.config.js', 'postcss.config.js', 'tailwind.config.js'],
+    files: ['*.config.js', 'postcss.config.js', 'tailwind.config.js', 'scripts/**'],
     languageOptions: { globals: globals.node },
   },
 ]

@@ -3,8 +3,6 @@
  * must carry a `category` that exists in `faqCategories`.
  */
 
-export const FAQS_PATH = "/faqs";
-
 export const hero = {
   eyebrow: "Answers, not brochures",
   titleLead: "Everything People Ask Us",

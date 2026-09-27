@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
 import App from "./App.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import ThemeProvider from "./theme/ThemeProvider.jsx";
@@ -23,9 +24,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       }
       onError={(error) => console.error("Unhandled UI error:", error)}
     >
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <HelmetProvider>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </HelmetProvider>
     </ErrorBoundary>
   </React.StrictMode>
 );

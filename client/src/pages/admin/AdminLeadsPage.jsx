@@ -34,6 +34,7 @@ import ThemeToggle from "../../components/ThemeToggle";
 import useAdminAuth from "../../admin/useAdminAuth";
 import { leadFieldsApi, leadsApi } from "../../lib/adminApi";
 import services from "../../data/servicesData";
+import Seo from "../../seo/Seo";
 
 const SERVICE_OPTIONS = services.map((s) => s.title);
 const PAGE_SIZE = 25;
@@ -94,10 +95,6 @@ export default function AdminLeadsPage() {
   // Bumped to force a refetch without changing any filter.
   const [reloadKey, setReloadKey] = useState(0);
   const [debouncedSearch, setDebouncedSearch] = useState("");
-
-  useEffect(() => {
-    document.title = "Axiomra Lead Management System";
-  }, []);
 
   useEffect(() => {
     try {
@@ -333,6 +330,7 @@ export default function AdminLeadsPage() {
 
   return (
     <div className="min-h-[100svh] bg-surface">
+      <Seo title="Axiomra Lead Management System" noindex />
       <AdminAmbience />
 
       {/* --- Heading --- */}

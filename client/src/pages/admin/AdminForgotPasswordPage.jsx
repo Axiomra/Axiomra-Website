@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Loader2, Mail, MailCheck } from "lucide-react";
@@ -6,6 +6,7 @@ import AdminBackdrop from "../../components/admin/AdminBackdrop";
 import FieldError from "../../components/FieldError";
 import { adminAuth } from "../../lib/adminApi";
 import { validateEmail } from "../../lib/validation";
+import Seo from "../../seo/Seo";
 
 /**
  * Step one of the reset flow.
@@ -19,10 +20,6 @@ export default function AdminForgotPasswordPage() {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
-
-  useEffect(() => {
-    document.title = "Reset password · Axiomra Lead Management";
-  }, []);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -46,6 +43,7 @@ export default function AdminForgotPasswordPage() {
 
   return (
     <div className="relative grid min-h-[100svh] place-items-center overflow-hidden bg-surface px-4 py-12">
+      <Seo title="Reset password · Axiomra Lead Management" noindex />
       <AdminBackdrop />
 
       <motion.div

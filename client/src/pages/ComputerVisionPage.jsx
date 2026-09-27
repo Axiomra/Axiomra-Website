@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 
 import CvHero from "../components/computer-vision/CvHero";
 import CvTechBar from "../components/computer-vision/CvTechBar";
@@ -16,6 +15,9 @@ import GradientCTA from "../components/GradientCTA";
 import FAQ from "../sections/FAQ";
 
 import { faqs } from "../data/computerVisionData";
+import Seo from "../seo/Seo";
+import { serviceSchema } from "../seo/schema";
+import { SERVICES_BASE_PATH } from "../routes.constants";
 
 const META_DESCRIPTION =
   "Axiomra builds computer vision systems for business operations: object " +
@@ -23,14 +25,14 @@ const META_DESCRIPTION =
   "OCR, and image generation, built, integrated, and supported in production.";
 
 export default function ComputerVisionPage() {
-  useEffect(() => {
-    document.title = "Computer Vision Development Services | Axiomra";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", META_DESCRIPTION);
-  }, []);
-
   return (
     <div>
+      <Seo
+        title="Computer Vision Development Services | Axiomra"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Services", path: SERVICES_BASE_PATH }, { name: "Computer Vision" }]}
+        jsonLd={serviceSchema({ name: "Computer Vision", description: META_DESCRIPTION, path: `${SERVICES_BASE_PATH}/computer-vision-services` })}
+      />
       <CvHero />
       <CvTechBar />
       <CvChallenges />

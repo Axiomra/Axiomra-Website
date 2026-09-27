@@ -1,9 +1,10 @@
+// First import on purpose: loads .env and validates it before any other
+// module reads process.env.
+import { env } from "./lib/env.js";
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
-import rateLimit from "express-rate-limit";
 import contactRoutes from "./routes/contact.js";
 import authRoutes from "./routes/auth.js";
 import leadRoutes from "./routes/leads.js";
@@ -11,21 +12,24 @@ import leadFieldRoutes from "./routes/leadFields.js";
 import { connectDB } from "./db.js";
 import { mailerConfigured } from "./mailer.js";
 import { mongoSanitize } from "./lib/sanitize.js";
+import {
+  apiLimiter,
+  contactLimiter,
+  forgotPasswordEmailLimiter,
+  forgotPasswordIpLimiter,
+  loginLimiter,
+  resetPasswordLimiter,
+} from "./lib/rateLimit.js";
 import { renderStatusPage, statusPayload } from "./status.js";
-
-dotenv.config();
 
 const app = express();
 
-// CLIENT_ORIGIN accepts a comma-separated list so the Vercel production
-// domain and any preview/custom domain can share one deployment. An entry may
-// contain `*` as a wildcard, which matters for Vercel previews: every preview
-// build gets a fresh generated hostname that no fixed list can name ahead of
-// time, and a missed one shows up as a CORS failure on the contact form.
-const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:5173")
-  .split(",")
-  .map((o) => o.trim())
-  .filter(Boolean);
+// ALLOWED_ORIGINS (or the older CLIENT_ORIGIN) is a comma-separated list, so
+// the production domain and preview/custom domains can share one deployment.
+// An entry may contain `*` inside one hostname label, which matters for Vercel
+// previews: every preview build gets a fresh generated hostname that no fixed
+// list can name ahead of time. A bare `*` is rejected by lib/env.js.
+const { allowedOrigins } = env;
 
 // `*` matches within one hostname label only, so `https://*.vercel.app` cannot
 // be satisfied by an attacker-controlled `https://evil.com/.vercel.app` style
@@ -39,19 +43,17 @@ function originMatcher(pattern) {
 }
 
 const originPatterns = allowedOrigins.map(originMatcher);
+const isAllowedOrigin = (origin) => originPatterns.some((re) => re.test(origin));
 
 // The admin session is an httpOnly cookie sent cross-origin, so CORS has to
-// echo the exact origin and allow credentials. `*` is therefore not a usable
-// value here, because the browser rejects a wildcard on a credentialed request, and
-// a bare `*` in CLIENT_ORIGIN now only relaxes the non-credentialed paths.
+// echo the exact origin and allow credentials, and only for listed origins.
 app.use(
   cors({
     credentials: true,
     origin(origin, callback) {
       // Same-origin and server-to-server calls send no Origin header.
       if (!origin) return callback(null, true);
-      const ok =
-        allowedOrigins.includes("*") || originPatterns.some((re) => re.test(origin));
+      const ok = isAllowedOrigin(origin);
       // Returning false rather than an Error omits the CORS headers, which is
       // what the browser needs to see. Throwing would surface as a 500 and
       // make a simple misconfiguration look like a server fault.
@@ -94,23 +96,28 @@ app.use(mongoSanitize);
 // under the same proxy address.
 app.set("trust proxy", 1);
 
-const apiLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
-
-// Credential endpoints get their own far tighter bucket. The general /api
-// limit of 100 per 15 minutes is generous enough to be a usable password
-// guessing budget; 8 is not. Successful sign-ins are not counted, so a working
-// admin never locks themselves out by reloading the panel.
-const credentialLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 8,
-  skipSuccessfulRequests: true,
-  message: { error: "Too many attempts. Please wait 15 minutes and try again." },
+// CSRF. The client and API live on different registrable domains (vercel.app
+// is on the Public Suffix List), so the admin cookie has to be SameSite=None
+// and the browser attaches it to cross-site requests too. CORS only stops the
+// attacker reading the response; a form POST from another site would still
+// run. Browsers always send Origin on cross-site unsafe requests, so refusing
+// unlisted origins here closes that. Requests without Origin (curl, server to
+// server) carry no ambient cookie and are left alone.
+const UNSAFE_METHODS = new Set(["POST", "PUT", "PATCH", "DELETE"]);
+app.use("/api", (req, res, next) => {
+  const origin = req.get("origin");
+  if (UNSAFE_METHODS.has(req.method) && origin && !isAllowedOrigin(origin)) {
+    return res.status(403).json({ error: "Origin not allowed." });
+  }
+  next();
 });
 
+// Limits live in lib/rateLimit.js, backed by Redis when REDIS_URL is set.
 app.use("/api", apiLimiter);
-app.use("/api/auth/login", credentialLimiter);
-app.use("/api/auth/forgot-password", credentialLimiter);
-app.use("/api/auth/reset-password", credentialLimiter);
+app.use("/api/auth/login", loginLimiter);
+app.use("/api/auth/forgot-password", forgotPasswordIpLimiter, forgotPasswordEmailLimiter);
+app.use("/api/auth/reset-password", resetPasswordLimiter);
+app.post("/api/contact", contactLimiter);
 
 // Landing page for anyone who opens the API host in a browser: a live status
 // dashboard instead of a bare 404. `/status.json` deliberately sits outside

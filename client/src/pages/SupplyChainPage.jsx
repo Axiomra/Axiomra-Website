@@ -28,26 +28,14 @@ import {
   faqs,
   finalCta,
 } from "../data/supplyChainData";
+import Seo from "../seo/Seo";
+import { INDUSTRIES_PATH } from "../routes.constants";
 
 const TITLE = "Custom AI Supply Chain Software Development Services | Axiomra";
 const DESCRIPTION =
   "AI supply chain software development: ERP, MRP, WMS, TMS and OMS platforms, demand forecasting, control-tower visibility and logistics optimisation built around your data.";
 
 export default function SupplyChainPage() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = TITLE;
-
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    meta?.setAttribute("content", DESCRIPTION);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   // Lazy photos land after the triggers were measured; once the page has
   // fully loaded, remeasure so nothing reveals early or late.
   useEffect(() => {
@@ -59,6 +47,11 @@ export default function SupplyChainPage() {
 
   return (
     <>
+      <Seo
+        title={TITLE}
+        description={DESCRIPTION}
+        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Supply Chain" }]}
+      />
       <SupplyChainHero />
       <SupplyChainIntro />
       <SupplyChainImpact />

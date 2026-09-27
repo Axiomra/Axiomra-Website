@@ -10,6 +10,7 @@ import User, {
 import { issueSession, clearSession, requireAuth } from "../lib/auth.js";
 import { sendPasswordResetEmail } from "../mailer.js";
 import { cleanString } from "../lib/sanitize.js";
+import { env } from "../lib/env.js";
 
 const router = Router();
 
@@ -109,9 +110,9 @@ router.post("/forgot-password", async (req, res) => {
     const rawToken = user.issueResetToken();
     await user.save();
 
-    const base = (process.env.ADMIN_PANEL_URL || process.env.CLIENT_ORIGIN || "")
-      .split(",")[0]
-      .trim()
+    // A wildcard entry is a pattern, not a link target, so fall back to the
+    // first literal allowed origin.
+    const base = (env.ADMIN_PANEL_URL || env.allowedOrigins.find((o) => !o.includes("*")) || "")
       .replace(/\/+$/, "");
     const link = `${base}/admin/reset-password?token=${rawToken}&email=${encodeURIComponent(email)}`;
 

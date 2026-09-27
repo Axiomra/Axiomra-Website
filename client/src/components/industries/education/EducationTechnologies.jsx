@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../../SectionHeading";
 import { Stagger, StaggerItem } from "../../motion/Reveal";
 import { technologies } from "../../../data/educationData";
+import { SERVICES_BASE_PATH } from "../../../routes.constants";
 
 /** Four numbered technology cards on a photographic ground, as in the reference. */
 export default function EducationTechnologies() {
@@ -57,7 +58,7 @@ export default function EducationTechnologies() {
 
         <div className="mt-12">
           <Link
-            to="/services"
+            to={SERVICES_BASE_PATH}
             className="group inline-flex items-center gap-3 rounded-full border border-inverse-fg/20 py-2 pl-7 pr-2 text-base font-medium text-inverse-fg transition-colors duration-300 hover:border-accent-vivid focus-ring md:text-lg"
           >
             {technologies.ctaText}

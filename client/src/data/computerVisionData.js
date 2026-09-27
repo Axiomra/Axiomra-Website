@@ -6,7 +6,7 @@ import heroRoboticHand from "../assets/opencv/hero-robotic-hand.jpg";
 import challengesMonitoring from "../assets/opencv/cv-challenges-monitoring.jpg";
 import caseStudyAnalytics from "../assets/opencv/cv-case-study-analytics.jpg";
 import modelPipeline from "../assets/opencv/cv-model-pipeline.png";
-import { caseStudyPath } from "./caseStudiesData";
+import { caseStudyPath } from "../routes.constants";
 
 /* Per-service photography: one frame per engagement type, so the detail
    panel never renders against an empty right-hand column. */
@@ -35,12 +35,6 @@ import capImageAnalytics from "../assets/cv/cv-cap-image-analytics.webp";
 import capVideoAnalytics from "../assets/cv/cv-cap-video-analytics.webp";
 import capOcr from "../assets/cv/cv-cap-ocr.webp";
 import capGan from "../assets/cv/cv-cap-gan.webp";
-
-/** Route this page owns, imported by App.jsx and the navbar so they can't drift. */
-export const COMPUTER_VISION_SLUG = "computer-vision-services";
-
-/** Listing-card image, re-exported so `servicesData` never reaches into assets twice. */
-export const computerVisionListingImage = heroFaceMesh;
 
 /* Hero */
 

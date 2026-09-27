@@ -5,7 +5,7 @@
  * a component. Section order in the page mirrors this file.
  */
 
-import { caseStudyPath } from "./caseStudiesData";
+import { caseStudyPath } from "../routes.constants";
 import heroImg from "../assets/industries/finance/hero.webp";
 import introImg from "../assets/industries/finance/intro.webp";
 

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 
 import GenAiHero from "../components/gen-ai/GenAiHero";
 import GenAiModelBar from "../components/gen-ai/GenAiModelBar";
@@ -17,20 +16,23 @@ import GradientCTA from "../components/GradientCTA";
 import FAQ from "../sections/FAQ";
 
 import { faqs } from "../data/generativeAiData";
+import Seo from "../seo/Seo";
+import { serviceSchema } from "../seo/schema";
+import { SERVICES_BASE_PATH } from "../routes.constants";
 
 const META_DESCRIPTION =
   "Axiomra's generative AI development services: LLM strategy, custom model development, " +
   "RAG systems, AI copilots and agents, and workflow automation, all built, deployed, and supported.";
 
 export default function GenerativeAiPage() {
-  useEffect(() => {
-    document.title = "Generative AI Development Services For Enterprises | Axiomra";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", META_DESCRIPTION);
-  }, []);
-
   return (
     <div>
+      <Seo
+        title="Generative AI Development Services For Enterprises | Axiomra"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Services", path: SERVICES_BASE_PATH }, { name: "Generative AI" }]}
+        jsonLd={serviceSchema({ name: "Generative AI", description: META_DESCRIPTION, path: `${SERVICES_BASE_PATH}/generative-ai-services` })}
+      />
       <GenAiHero />
       <GenAiModelBar />
       <GenAiChallenges />

@@ -1,8 +1,7 @@
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ChevronDown, ChevronRight, Flag, UserCheck } from "lucide-react";
 import GradientCTA from "../components/GradientCTA";
 import { Reveal } from "../components/motion/Reveal";
-import usePageMeta from "../hooks/usePageMeta";
 import useInView from "../hooks/useInView";
 import useStaggerReveal from "../hooks/useStaggerReveal";
 import NetworkMesh from "../components/case-study/NetworkMesh";
@@ -11,8 +10,11 @@ import MoleculeGraph from "../components/case-study/MoleculeGraph";
 import CategoryBadge from "../components/case-study/CategoryBadge";
 import BrandedImage from "../components/case-study/BrandedImage";
 import "../styles/case-study.css";
-import { caseStudies, caseStudyPath } from "../data/caseStudiesData";
-import { PORTFOLIO_PATH } from "../data/portfolioData";
+import { caseStudies } from "../data/caseStudiesData";
+import { caseStudyPath, PORTFOLIO_PATH } from "../routes.constants";
+import Seo from "../seo/Seo";
+import { articleSchema } from "../seo/schema";
+import NotFoundPage from "./NotFoundPage";
 
 /**
  * Long-form case study, rendered entirely from data/caseStudiesData.js.
@@ -25,7 +27,7 @@ export default function CaseStudyPage() {
   const { slug } = useParams();
   const study = caseStudies[slug];
 
-  if (!study) return <Navigate to={PORTFOLIO_PATH} replace />;
+  if (!study) return <NotFoundPage />;
   return <CaseStudy study={study} />;
 }
 
@@ -54,12 +56,6 @@ const DEFAULT_CTA = {
 };
 
 function CaseStudy({ study }) {
-  usePageMeta({
-    title: study.seoTitle,
-    description: study.seoDescription,
-    image: study.ogImage,
-  });
-
   const label = { ...DEFAULT_LABELS, ...study.labels };
   const cta = study.cta ?? DEFAULT_CTA;
   // Without a flow image the steps keep the article measure, which frees the
@@ -68,6 +64,19 @@ function CaseStudy({ study }) {
 
   return (
     <article className="bg-surface" style={accentVars(study.accent)}>
+      <Seo
+        title={study.seoTitle}
+        description={study.seoDescription}
+        image={study.ogImage}
+        type="article"
+        breadcrumbs={[{ name: "Portfolio", path: PORTFOLIO_PATH }, { name: study.title }]}
+        jsonLd={articleSchema({
+          headline: study.title,
+          description: study.seoDescription,
+          image: study.ogImage,
+          path: caseStudyPath(study.slug),
+        })}
+      />
       <Header study={study} />
       <KeyDetails details={study.keyDetails} />
 

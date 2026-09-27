@@ -1,19 +1,21 @@
-import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { industries, INDUSTRIES_PATH } from "../data/industriesData";
+import NotFoundPage from "./NotFoundPage";
+import { industries } from "../data/industriesData";
+import { INDUSTRIES_PATH } from "../routes.constants";
+import Seo from "../seo/Seo";
 
 /** Stand-in for the per-industry pages until each one is built. */
 export default function IndustryDetailPlaceholder() {
   const { slug } = useParams();
   const industry = industries.find((i) => i.slug === slug);
 
-  useEffect(() => {
-    document.title = industry ? `AI for ${industry.name} | Axiomra` : "Industry | Axiomra";
-  }, [industry]);
+  // A slug we have no entry for is a dead link, not a page that is on its way.
+  if (!industry) return <NotFoundPage />;
 
   return (
     <section className="flex min-h-[70vh] items-center">
+      <Seo title={industry ? `AI for ${industry.name} | Axiomra` : "Industry | Axiomra"} noindex />
       <div className="mx-auto max-w-2xl px-6 py-32 text-center">
         {industry && (
           <img

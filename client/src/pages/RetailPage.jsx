@@ -27,26 +27,14 @@ import {
   faqs,
   finalCta,
 } from "../data/retailData";
+import Seo from "../seo/Seo";
+import { INDUSTRIES_PATH } from "../routes.constants";
 
 const TITLE = "Retail Software Development Services | AI for Retail | Axiomra";
 const DESCRIPTION =
   "AI-powered retail software development: order management, POS, retail CRM, demand forecasting and computer vision for retailers, brands and marketplaces.";
 
 export default function RetailPage() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = TITLE;
-
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    meta?.setAttribute("content", DESCRIPTION);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   // Lazy photos land after the triggers were measured; once the page has
   // fully loaded, remeasure so nothing reveals early or late.
   useEffect(() => {
@@ -60,6 +48,11 @@ export default function RetailPage() {
   // `.liquid-glass` below reads them, so the wrapper is not optional.
   return (
     <div className="retail-page">
+      <Seo
+        title={TITLE}
+        description={DESCRIPTION}
+        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Retail" }]}
+      />
       <RetailHero />
       <RetailIntro />
       <RetailImpact />

@@ -22,12 +22,6 @@ import whyAxiomra from "../assets/agentic-ai/why-axiomra-agents.jpg";
 import agentRoi from "../assets/agentic-ai/agent-roi.jpg";
 import industriesImage from "../assets/agentic-ai/agentic-industries.jpg";
 
-/** Route this page owns, imported by App.jsx and the navbar so they can't drift. */
-export const AGENTIC_AI_SLUG = "agentic-ai-services";
-
-/** Listing-card image, re-exported so `servicesData` never reaches into assets twice. */
-export const agenticListingImage = heroAgent;
-
 export const hero = {
   eyebrow: "Agentic AI Development Company",
   titleLead: "Agentic AI",

@@ -20,11 +20,6 @@ import financeImg from "../assets/industries/finance.webp";
 import legalImg from "../assets/industries/legal.webp";
 import transportationImg from "../assets/industries/transportation.webp";
 
-export const INDUSTRIES_PATH = "/industries";
-
-/** Route for one industry's detail page. */
-export const industryPath = (slug) => `${INDUSTRIES_PATH}/${slug}`;
-
 export const hero = {
   eyebrow: "Where we work",
   titleLead: "Advanced",

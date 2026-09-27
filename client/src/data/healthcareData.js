@@ -48,7 +48,7 @@ import blog1Img from "../assets/industries/healthcare/blog-1.webp";
 import blog2Img from "../assets/industries/healthcare/blog-2.webp";
 import blog3Img from "../assets/industries/healthcare/blog-3.webp";
 import finalCtaBgImg from "../assets/industries/healthcare/final-cta.webp";
-import { caseStudyPath } from "./caseStudiesData";
+import { caseStudyPath } from "../routes.constants";
 
 export const HEALTHCARE_SLUG = "healthcare";
 

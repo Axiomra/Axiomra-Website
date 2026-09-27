@@ -17,21 +17,25 @@ const MAX_LINKS_PER_PARTICLE = 12;
 const LINK_INTERVAL = 3;
 const MAX_DIST = 2.6;
 
+// A fresh random layout per mount is intended; useMemo keeps it stable across
+// re-renders, so the impurity never reaches the rendered output.
+function scatter(count) {
+  const arr = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    arr[i * 3] = (Math.random() - 0.5) * 18;
+    arr[i * 3 + 1] = (Math.random() - 0.5) * 10;
+    arr[i * 3 + 2] = (Math.random() - 0.5) * 6;
+  }
+  return arr;
+}
+
 function ParticleField({ count }) {
   const pointsRef = useRef();
   const linesRef = useRef();
   const frame = useRef(0);
   const COUNT = count;
 
-  const positions = useMemo(() => {
-    const arr = new Float32Array(COUNT * 3);
-    for (let i = 0; i < COUNT; i++) {
-      arr[i * 3] = (Math.random() - 0.5) * 18;
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 10;
-      arr[i * 3 + 2] = (Math.random() - 0.5) * 6;
-    }
-    return arr;
-  }, [COUNT]);
+  const positions = useMemo(() => scatter(COUNT), [COUNT]);
 
   const basePositions = useMemo(() => positions.slice(), [positions]);
   const dotTexture = useMemo(() => makeDotTexture(), []);
@@ -100,7 +104,12 @@ function ParticleField({ count }) {
     <group rotation={[0, 0, 0.15]}>
       <points ref={pointsRef}>
         <bufferGeometry>
-          <bufferAttribute attach="attributes-position" count={COUNT} array={positions} itemSize={3} />
+          <bufferAttribute
+            attach="attributes-position"
+            count={COUNT}
+            array={positions}
+            itemSize={3}
+          />
         </bufferGeometry>
         <pointsMaterial
           size={0.34}

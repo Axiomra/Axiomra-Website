@@ -5,6 +5,7 @@ import { ArrowLeft, Check, Eye, EyeOff, KeyRound, Loader2, Lock, ShieldCheck } f
 import AdminBackdrop from "../../components/admin/AdminBackdrop";
 import FieldError from "../../components/FieldError";
 import { adminAuth } from "../../lib/adminApi";
+import Seo from "../../seo/Seo";
 
 const MIN_LENGTH = 10;
 const KEY_LENGTH = 78;
@@ -49,10 +50,6 @@ export default function AdminResetPasswordPage() {
   // Assume the key is needed until the server says otherwise: rendering the
   // field and removing it is a worse flicker than the reverse.
   const [keyRequired, setKeyRequired] = useState(true);
-
-  useEffect(() => {
-    document.title = "Set a new password · Axiomra Lead Management";
-  }, []);
 
   useEffect(() => {
     if (!token) return undefined;
@@ -105,6 +102,7 @@ export default function AdminResetPasswordPage() {
 
   return (
     <div className="relative grid min-h-[100svh] place-items-center overflow-hidden bg-surface px-4 py-12">
+      <Seo title="Set a new password · Axiomra Lead Management" noindex />
       <AdminBackdrop />
 
       <motion.div

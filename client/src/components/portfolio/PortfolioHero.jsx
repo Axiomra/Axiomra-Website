@@ -83,6 +83,9 @@ export default function PortfolioHero() {
         src={heroImage}
         alt=""
         aria-hidden="true"
+        // React 18 does not know the camelCase fetchPriority prop and warns on
+        // it; the lowercase attribute is passed through to the DOM as-is.
+        // eslint-disable-next-line react/no-unknown-property
         fetchpriority="high"
         decoding="async"
         className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-55"

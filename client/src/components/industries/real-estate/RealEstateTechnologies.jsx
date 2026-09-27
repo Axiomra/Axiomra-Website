@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../../SectionHeading";
 import { Stagger, StaggerItem } from "../../motion/Reveal";
-import { SERVICES_BASE_PATH } from "../../../data/servicesData";
+import { SERVICES_BASE_PATH } from "../../../routes.constants";
 import { technologies } from "../../../data/realEstateData";
 
 /** The four capabilities that carry a property platform, as numbered cards. */

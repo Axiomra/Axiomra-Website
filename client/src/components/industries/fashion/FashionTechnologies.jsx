@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { technologies } from "../../../data/fashionData";
+import { SERVICES_BASE_PATH } from "../../../routes.constants";
 
 /**
  * Sticky intro on the left, self-stacking numbered cards on the right. Same
@@ -75,7 +76,7 @@ export default function FashionTechnologies() {
           <p className="copy-justify mt-6 text-lg leading-relaxed text-content-dim md:text-xl">{technologies.body}</p>
 
           <Link
-            to="/services"
+            to={SERVICES_BASE_PATH}
             className="group mt-9 inline-flex items-center gap-2.5 rounded-full border border-line px-7 py-4 text-base font-semibold text-content transition-colors hover:border-brand/50 hover:text-brand focus-ring md:text-lg"
           >
             {technologies.ctaText}

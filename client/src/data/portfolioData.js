@@ -26,9 +26,8 @@ import personalizedMarketingImg from "../assets/case-studies/retail-ai-personali
 import creditScoringImg from "../assets/case-studies/fintech-machine-learning-credit-scoring/card.webp";
 import inventoryForecastImg from "../assets/case-studies/retail-ai-inventory-demand-forecasting/card.webp";
 import dynamicPricingImg from "../assets/case-studies/retail-dynamic-pricing-optimization/card.webp";
-import { caseStudies as caseStudyPages, caseStudyPath } from "./caseStudiesData";
-
-export const PORTFOLIO_PATH = "/portfolio";
+import { caseStudies as caseStudyPages } from "./caseStudiesData";
+import { caseStudyPath } from "../routes.constants";
 
 export const hero = {
   eyebrow: "Selected work",

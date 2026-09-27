@@ -10,26 +10,13 @@ import IndustriesTestimonials from "../components/industries/IndustriesTestimoni
 import FAQ from "../sections/FAQ";
 import GradientCTA from "../components/GradientCTA";
 import { faqs, finalCta } from "../data/industriesData";
+import Seo from "../seo/Seo";
 
 const TITLE = "AI Solutions for Industries | Axiomra";
 const DESCRIPTION =
   "Advanced AI solutions for fashion, sports, education, healthcare, real estate, retail, marketing, supply chain, insurance, finance, legal and transportation.";
 
 export default function IndustriesPage() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = TITLE;
-
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    meta?.setAttribute("content", DESCRIPTION);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   // Twelve lazily loaded photos land after the triggers were measured; once
   // the page has fully loaded, remeasure so nothing reveals early or late.
   useEffect(() => {
@@ -41,6 +28,7 @@ export default function IndustriesPage() {
 
   return (
     <>
+      <Seo title={TITLE} description={DESCRIPTION} breadcrumbs={[{ name: "Industries" }]} />
       <IndustriesHero />
       <IndustryList />
       <IndustriesTechStrip />

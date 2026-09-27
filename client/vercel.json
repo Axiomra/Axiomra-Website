@@ -3,8 +3,34 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/contact", "destination": "/index.html" },
+    { "source": "/about", "destination": "/index.html" },
+    { "source": "/tech", "destination": "/index.html" },
+    { "source": "/faqs", "destination": "/index.html" },
+    { "source": "/portfolio", "destination": "/index.html" },
+    { "source": "/industries", "destination": "/index.html" },
+    { "source": "/industries/:slug", "destination": "/index.html" },
+    { "source": "/ai-services-and-solutions", "destination": "/index.html" },
+    { "source": "/ai-services-and-solutions/:slug", "destination": "/index.html" },
+    { "source": "/case-studies/:slug", "destination": "/index.html" },
+    { "source": "/service/nlp", "destination": "/index.html" },
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/admin/:path*", "destination": "/index.html" }
+  ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'sha256-JEMCe5AOakNCvZmUWYxFcJ1pVe6b25CFz+mrPSZZaOk='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com https://i.ytimg.com; font-src 'self'; media-src 'self'; connect-src 'self' https://axiomra-server.vercel.app; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()" }
+      ]
+    },
     {
       "source": "/assets/(.*)",
       "headers": [

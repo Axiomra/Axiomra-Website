@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import GradientCTA from "../components/GradientCTA";
 
 import Hero from "../sections/Hero";
@@ -19,14 +18,16 @@ import Awards from "../sections/Awards";
 import Resources from "../sections/Resources";
 import FAQ from "../sections/FAQ";
 import Contact from "../sections/Contact";
+import Seo from "../seo/Seo";
+import { organizationSchema, websiteSchema } from "../seo/schema";
 
 export default function HomePage() {
-  useEffect(() => {
-    document.title = "Axiomra: Result-Driven AI Development Company";
-  }, []);
-
   return (
     <>
+      <Seo
+        title="Axiomra: Result-Driven AI Development Company"
+        jsonLd={[organizationSchema(), websiteSchema()]}
+      />
       <Hero />
       <FoundersSay />
       <Transformation />

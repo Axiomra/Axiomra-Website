@@ -12,16 +12,13 @@ import serviceSpeechToText from "../assets/nlp/nlp-speech-to-text.jpg";
 import serviceDataAcquisition from "../assets/nlp/nlp-data-acquisition.jpg";
 import serviceSemanticAnalytics from "../assets/nlp/nlp-semantic-analytics.jpg";
 import serviceIntegration from "../assets/nlp/nlp-integration.jpg";
-import { caseStudyPath } from "./caseStudiesData";
+import { caseStudyPath } from "../routes.constants";
 
 /** The hero wallpaper. */
 export const heroVideo = {
   src: "/media/nlp-hero.mp4",
   poster: "/media/nlp-hero-poster.webp",
 };
-
-/** Route this page owns, imported by App.jsx and the navbar so they can't drift. */
-export const NLP_SLUG = "natural-language-processing-services";
 
 /* Hero */
 

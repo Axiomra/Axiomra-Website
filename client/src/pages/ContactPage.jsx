@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -27,6 +27,8 @@ import SubmissionModal from "../components/SubmissionModal";
 import services from "../data/servicesData";
 import { DEFAULT_COUNTRY } from "../data/countryCodes";
 import { submitContact } from "../lib/contactApi";
+import { useSpamGuard } from "../lib/useSpamGuard";
+import HoneypotField from "../components/HoneypotField";
 import {
   formatPhone,
   validateCompany,
@@ -37,6 +39,8 @@ import {
   validatePhone,
   validateSubject,
 } from "../lib/validation";
+import Seo from "../seo/Seo";
+import { contactPageSchema } from "../seo/schema";
 
 const WHATSAPP_URL = "https://wa.me/16575203444";
 const PHONE = "+1 (657) 520-3444";
@@ -169,6 +173,7 @@ function ContactForm() {
   const [error, setError] = useState("");
   const [sent, setSent] = useState(null);
   const formRef = useRef(null);
+  const { honeypotRef, signals, restart } = useSpamGuard();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -228,7 +233,7 @@ function ContactForm() {
     // dialable string.
     const payload = { ...form, phone: formatPhone(form.phone, country) };
     try {
-      await submitContact(payload);
+      await submitContact({ ...payload, ...signals() });
       setStatus("success");
       // Snapshot first: the confirmation replays the payload, and the reset
       // below would otherwise empty it out.
@@ -236,6 +241,7 @@ function ContactForm() {
       setForm(EMPTY_FORM);
       setCountry(DEFAULT_COUNTRY);
       setErrors({});
+      restart();
     } catch (err) {
       setError(err.message);
       setStatus("error");
@@ -261,6 +267,7 @@ function ContactForm() {
       <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[1.75rem]">
         <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid" />
       </span>
+      <HoneypotField inputRef={honeypotRef} />
 
       <div className="grid gap-5 sm:grid-cols-2">
         <motion.div {...reveal(0)}>
@@ -440,13 +447,18 @@ function ContactForm() {
   );
 }
 
-export default function ContactPage() {
-  useEffect(() => {
-    document.title = "Contact Axiomra: Let's Discuss Your Next AI Project";
-  }, []);
+const META_DESCRIPTION =
+  "Tell us about your goals, challenge, or initial idea. Our team will review your enquiry and help identify the next step.";
 
+export default function ContactPage() {
   return (
     <>
+      <Seo
+        title="Contact Axiomra: Let's Discuss Your Next AI Project"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Contact" }]}
+        jsonLd={contactPageSchema({ name: "Contact Axiomra", description: META_DESCRIPTION, path: "/contact" })}
+      />
       {/* Hero */}
       <section className="relative isolate overflow-hidden bg-inverse px-4 pb-24 pt-32 sm:px-6 md:pt-40">
         {/* The orbit field is the page's one WebGL surface. */}

@@ -27,26 +27,14 @@ import {
   faqs,
   finalCta,
 } from "../data/educationData";
+import Seo from "../seo/Seo";
+import { INDUSTRIES_PATH } from "../routes.constants";
 
 const TITLE = "Education Software Development Services | AI EdTech | Axiomra";
 const DESCRIPTION =
   "AI-powered education software development: LMS and SIS platforms, adaptive learning, automated assessment and analytics for schools, universities and EdTech founders.";
 
 export default function EducationPage() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = TITLE;
-
-    const meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    meta?.setAttribute("content", DESCRIPTION);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   // Lazy photos land after the triggers were measured; once the page has
   // fully loaded, remeasure so nothing reveals early or late.
   useEffect(() => {
@@ -58,6 +46,11 @@ export default function EducationPage() {
 
   return (
     <>
+      <Seo
+        title={TITLE}
+        description={DESCRIPTION}
+        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Education" }]}
+      />
       <EducationHero />
       <EducationIntro />
       <EducationImpact />

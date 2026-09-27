@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 
 import AgenticHero from "../components/agentic-ai/AgenticHero";
 import AgenticFrameworkBar from "../components/agentic-ai/AgenticFrameworkBar";
@@ -21,6 +20,9 @@ import GradientCTA from "../components/GradientCTA";
 import FAQ from "../sections/FAQ";
 
 import { faqs } from "../data/agenticAiData";
+import Seo from "../seo/Seo";
+import { serviceSchema } from "../seo/schema";
+import { SERVICES_BASE_PATH } from "../routes.constants";
 
 const META_DESCRIPTION =
   "Axiomra's agentic AI development services: autonomous AI agents, multi-agent " +
@@ -28,14 +30,14 @@ const META_DESCRIPTION =
   "deployed, and supported in production.";
 
 export default function AgenticAiPage() {
-  useEffect(() => {
-    document.title = "Agentic AI Development Services For Enterprises | Axiomra";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", META_DESCRIPTION);
-  }, []);
-
   return (
     <div>
+      <Seo
+        title="Agentic AI Development Services For Enterprises | Axiomra"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Services", path: SERVICES_BASE_PATH }, { name: "Agentic AI" }]}
+        jsonLd={serviceSchema({ name: "Agentic AI", description: META_DESCRIPTION, path: `${SERVICES_BASE_PATH}/agentic-ai-services` })}
+      />
       <AgenticHero />
       <AgenticFrameworkBar />
       <AgenticChallenges />

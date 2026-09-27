@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { Reveal } from "../motion/Reveal";
-import { caseStudies, PORTFOLIO_PATH } from "../../data/portfolioData";
+import { caseStudies } from "../../data/portfolioData";
+import { PORTFOLIO_PATH } from "../../routes.constants";
 import { showcase } from "../../data/industriesData";
 
 /**

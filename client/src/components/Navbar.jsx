@@ -170,8 +170,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logoLight from "../assets/logo-light.png";
 import ThemeToggle from "./ThemeToggle";
-import { SERVICES_BASE_PATH } from "../data/servicesData";
-import { INDUSTRIES_PATH, industryPath } from "../data/industriesData";
+import { SERVICES_BASE_PATH, INDUSTRIES_PATH, industryPath } from "../routes.constants";
 
 const links = [
   { label: "Home", href: "/" },

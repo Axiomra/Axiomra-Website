@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 
 import AiDevHero from "../components/ai-dev/AiDevHero";
 import ClientLogoStrip from "../components/ai-dev/ClientLogoStrip";
@@ -16,20 +15,23 @@ import Portfolio from "../sections/Portfolio";
 import FAQ from "../sections/FAQ";
 
 import { whatWeDo, subServices, faqs } from "../data/aiDevelopmentData";
+import Seo from "../seo/Seo";
+import { serviceSchema } from "../seo/schema";
+import { SERVICES_BASE_PATH } from "../routes.constants";
 
 const META_DESCRIPTION =
   "Axiomra's AI development services: custom AI software, AI agents, LLM integration, " +
   "enterprise AI, PoC and MVP builds, AI integration, and AIOps, shipped to production.";
 
 export default function AiDevelopmentPage() {
-  useEffect(() => {
-    document.title = "AI Development Services Built For Business Results | Axiomra";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", META_DESCRIPTION);
-  }, []);
-
   return (
     <div className="ai-dev-page">
+      <Seo
+        title="AI Development Services Built For Business Results | Axiomra"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Services", path: SERVICES_BASE_PATH }, { name: "Artificial Intelligence" }]}
+        jsonLd={serviceSchema({ name: "Artificial Intelligence", description: META_DESCRIPTION, path: `${SERVICES_BASE_PATH}/ai-development-services` })}
+      />
       <div className="ai-dev-bg" aria-hidden="true" />
 
       <AiDevHero />

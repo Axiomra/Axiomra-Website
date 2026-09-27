@@ -8,6 +8,10 @@ import gptIntegration from "../assets/services/gpt-integration-services.jpg";
 import predictiveAnalytics from "../assets/services/predictive-analytics-services.jpg";
 import deepLearning from "../assets/services/deep-learning-services.jpg";
 import dataScience from "../assets/services/data-science-analytics-services.jpg";
+// Same files the Agentic AI and Computer Vision heroes use. Imported directly
+// so this module does not pull those pages' full data into the entry chunk.
+import agenticListingImage from "../assets/agentic-ai/hero-autonomous-agent.jpg";
+import computerVisionListingImage from "../assets/opencv/hero-face-mesh.webp";
 import chatbotDevelopment from "../assets/services/chatbot-development-services.webp";
 import dataExtraction from "../assets/services/data-extraction-services.jpg";
 import voiceAssistant from "../assets/services/voice-assistant-services.jpg";
@@ -18,11 +22,7 @@ import mobileAppDevelopment from "../assets/services/mobile-app-development-serv
 import recommendationSystems from "../assets/services/recommendation-systems-services.jpg";
 import webScraping from "../assets/services/web-scraping-services.jpg";
 import botAutomation from "../assets/services/bot-automation-services.jpg";
-import { AGENTIC_AI_SLUG, agenticListingImage } from "./agenticAiData";
-import { COMPUTER_VISION_SLUG, computerVisionListingImage } from "./computerVisionData";
-
-// Base path every individual service detail page will eventually live under, e.g.
-export const SERVICES_BASE_PATH = "/ai-services-and-solutions";
+import { AGENTIC_AI_SLUG, COMPUTER_VISION_SLUG } from "../routes.constants";
 
 const services = [
   {
