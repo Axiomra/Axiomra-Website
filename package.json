@@ -16,10 +16,6 @@
     "format:check": "prettier --check .",
     "prepare": "husky"
   },
-  "dependencies": {
-    "gsap": "^3.15.0",
-    "react-router-dom": "^7.18.2"
-  },
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
