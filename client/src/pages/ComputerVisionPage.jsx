@@ -16,6 +16,8 @@ import FAQ from "../sections/FAQ";
 
 import { faqs } from "../data/computerVisionData";
 import Seo from "../seo/Seo";
+import { serviceSchema } from "../seo/schema";
+import { SERVICES_BASE_PATH } from "../data/servicesData";
 
 const META_DESCRIPTION =
   "Axiomra builds computer vision systems for business operations: object " +
@@ -25,7 +27,12 @@ const META_DESCRIPTION =
 export default function ComputerVisionPage() {
   return (
     <div>
-      <Seo title="Computer Vision Development Services | Axiomra" description={META_DESCRIPTION} />
+      <Seo
+        title="Computer Vision Development Services | Axiomra"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Services", path: SERVICES_BASE_PATH }, { name: "Computer Vision" }]}
+        jsonLd={serviceSchema({ name: "Computer Vision", description: META_DESCRIPTION, path: `${SERVICES_BASE_PATH}/computer-vision-services` })}
+      />
       <CvHero />
       <CvTechBar />
       <CvChallenges />

@@ -17,6 +17,8 @@ import FAQ from "../sections/FAQ";
 
 import { faqs } from "../data/generativeAiData";
 import Seo from "../seo/Seo";
+import { serviceSchema } from "../seo/schema";
+import { SERVICES_BASE_PATH } from "../data/servicesData";
 
 const META_DESCRIPTION =
   "Axiomra's generative AI development services: LLM strategy, custom model development, " +
@@ -25,7 +27,12 @@ const META_DESCRIPTION =
 export default function GenerativeAiPage() {
   return (
     <div>
-      <Seo title="Generative AI Development Services For Enterprises | Axiomra" description={META_DESCRIPTION} />
+      <Seo
+        title="Generative AI Development Services For Enterprises | Axiomra"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Services", path: SERVICES_BASE_PATH }, { name: "Generative AI" }]}
+        jsonLd={serviceSchema({ name: "Generative AI", description: META_DESCRIPTION, path: `${SERVICES_BASE_PATH}/generative-ai-services` })}
+      />
       <GenAiHero />
       <GenAiModelBar />
       <GenAiChallenges />

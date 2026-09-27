@@ -13,6 +13,7 @@ import "../styles/case-study.css";
 import { caseStudies, caseStudyPath } from "../data/caseStudiesData";
 import { PORTFOLIO_PATH } from "../data/portfolioData";
 import Seo from "../seo/Seo";
+import { articleSchema } from "../seo/schema";
 import NotFoundPage from "./NotFoundPage";
 
 /**
@@ -68,6 +69,13 @@ function CaseStudy({ study }) {
         description={study.seoDescription}
         image={study.ogImage}
         type="article"
+        breadcrumbs={[{ name: "Portfolio", path: PORTFOLIO_PATH }, { name: study.title }]}
+        jsonLd={articleSchema({
+          headline: study.title,
+          description: study.seoDescription,
+          image: study.ogImage,
+          path: caseStudyPath(study.slug),
+        })}
       />
       <Header study={study} />
       <KeyDetails details={study.keyDetails} />

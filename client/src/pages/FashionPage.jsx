@@ -27,6 +27,7 @@ import {
   finalCta,
 } from "../data/fashionData";
 import Seo from "../seo/Seo";
+import { INDUSTRIES_PATH } from "../data/industriesData";
 
 const TITLE = "Custom Fashion App Development Services | Axiomra";
 const DESCRIPTION =
@@ -44,7 +45,11 @@ export default function FashionPage() {
 
   return (
     <>
-      <Seo title={TITLE} description={DESCRIPTION} />
+      <Seo
+        title={TITLE}
+        description={DESCRIPTION}
+        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Fashion" }]}
+      />
       <FashionHero />
       <FashionIntro />
       <FashionImpact />

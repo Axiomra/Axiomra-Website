@@ -38,6 +38,7 @@ import {
   validateSubject,
 } from "../lib/validation";
 import Seo from "../seo/Seo";
+import { contactPageSchema } from "../seo/schema";
 
 const WHATSAPP_URL = "https://wa.me/16575203444";
 const PHONE = "+1 (657) 520-3444";
@@ -450,6 +451,8 @@ export default function ContactPage() {
       <Seo
         title="Contact Axiomra: Let's Discuss Your Next AI Project"
         description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Contact" }]}
+        jsonLd={contactPageSchema({ name: "Contact Axiomra", description: META_DESCRIPTION, path: "/contact" })}
       />
       {/* Hero */}
       <section className="relative isolate overflow-hidden bg-inverse px-4 pb-24 pt-32 sm:px-6 md:pt-40">

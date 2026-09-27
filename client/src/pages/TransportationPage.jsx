@@ -28,6 +28,7 @@ import {
   finalCta,
 } from "../data/transportationData";
 import Seo from "../seo/Seo";
+import { INDUSTRIES_PATH } from "../data/industriesData";
 
 const TITLE = "Custom Transportation & Logistics Software Development | Axiomra";
 const DESCRIPTION =
@@ -45,7 +46,11 @@ export default function TransportationPage() {
 
   return (
     <>
-      <Seo title={TITLE} description={DESCRIPTION} />
+      <Seo
+        title={TITLE}
+        description={DESCRIPTION}
+        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Transportation" }]}
+      />
       <TransportationHero />
       <TransportationIntro />
       <TransportationImpact />

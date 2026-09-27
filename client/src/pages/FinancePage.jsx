@@ -30,6 +30,7 @@ import {
   finalCta,
 } from "../data/financeData";
 import Seo from "../seo/Seo";
+import { INDUSTRIES_PATH } from "../data/industriesData";
 
 const TITLE = "Custom AI Financial Software Development Services | Axiomra";
 const DESCRIPTION =
@@ -47,7 +48,11 @@ export default function FinancePage() {
 
   return (
     <>
-      <Seo title={TITLE} description={DESCRIPTION} />
+      <Seo
+        title={TITLE}
+        description={DESCRIPTION}
+        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Finance" }]}
+      />
       <FinanceHero />
       <FinanceIntro />
       <FinanceImpact />

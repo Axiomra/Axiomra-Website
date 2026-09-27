@@ -18,6 +18,8 @@ import FAQ from "../sections/FAQ";
 
 import { faqs } from "../data/nlpData";
 import Seo from "../seo/Seo";
+import { serviceSchema } from "../seo/schema";
+import { SERVICES_BASE_PATH } from "../data/servicesData";
 
 const META_DESCRIPTION =
   "Axiomra's natural language processing services: NLP consulting, custom model " +
@@ -27,7 +29,12 @@ const META_DESCRIPTION =
 export default function NlpPage() {
   return (
     <div>
-      <Seo title="Natural Language Processing Services | Axiomra" description={META_DESCRIPTION} />
+      <Seo
+        title="Natural Language Processing Services | Axiomra"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Services", path: SERVICES_BASE_PATH }, { name: "Natural Language Processing" }]}
+        jsonLd={serviceSchema({ name: "Natural Language Processing", description: META_DESCRIPTION, path: `${SERVICES_BASE_PATH}/natural-language-processing-services` })}
+      />
       <NlpHero />
       <NlpIntro />
       <NlpStats />

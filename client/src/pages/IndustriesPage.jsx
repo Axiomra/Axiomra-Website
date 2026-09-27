@@ -28,7 +28,7 @@ export default function IndustriesPage() {
 
   return (
     <>
-      <Seo title={TITLE} description={DESCRIPTION} />
+      <Seo title={TITLE} description={DESCRIPTION} breadcrumbs={[{ name: "Industries" }]} />
       <IndustriesHero />
       <IndustryList />
       <IndustriesTechStrip />

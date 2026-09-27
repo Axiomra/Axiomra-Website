@@ -28,6 +28,7 @@ import {
   finalCta,
 } from "../data/retailData";
 import Seo from "../seo/Seo";
+import { INDUSTRIES_PATH } from "../data/industriesData";
 
 const TITLE = "Retail Software Development Services | AI for Retail | Axiomra";
 const DESCRIPTION =
@@ -47,7 +48,11 @@ export default function RetailPage() {
   // `.liquid-glass` below reads them, so the wrapper is not optional.
   return (
     <div className="retail-page">
-      <Seo title={TITLE} description={DESCRIPTION} />
+      <Seo
+        title={TITLE}
+        description={DESCRIPTION}
+        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Retail" }]}
+      />
       <RetailHero />
       <RetailIntro />
       <RetailImpact />

@@ -20,7 +20,11 @@ const META_DESCRIPTION =
 export default function AboutPage() {
   return (
     <div>
-      <Seo title="About Axiomra | AI Expertise Tailored To Your Business" description={META_DESCRIPTION} />
+      <Seo
+        title="About Axiomra | AI Expertise Tailored To Your Business"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "About" }]}
+      />
       <AboutHero />
       <AboutJourney />
       <AboutVisionMission />

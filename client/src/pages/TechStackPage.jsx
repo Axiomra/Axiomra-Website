@@ -17,7 +17,11 @@ const META_DESCRIPTION =
 export default function TechStackPage() {
   return (
     <div>
-      <Seo title="Tech Stack | The Tools Behind Every Axiomra Build" description={META_DESCRIPTION} />
+      <Seo
+        title="Tech Stack | The Tools Behind Every Axiomra Build"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Tech Stack" }]}
+      />
       <TechHero />
       <TechSignature />
       <TechExplorer />

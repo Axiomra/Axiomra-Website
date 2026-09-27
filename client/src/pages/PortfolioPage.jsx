@@ -37,7 +37,11 @@ export default function PortfolioPage() {
 
   return (
     <div>
-      <Seo title="Portfolio | AI Case Studies Built By Axiomra" description={META_DESCRIPTION} />
+      <Seo
+        title="Portfolio | AI Case Studies Built By Axiomra"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Portfolio" }]}
+      />
       <PortfolioHero />
 
       <CaseStudyProgress targetId="case-studies" total={caseStudies.length} />

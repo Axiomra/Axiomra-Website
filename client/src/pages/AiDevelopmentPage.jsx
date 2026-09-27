@@ -16,6 +16,8 @@ import FAQ from "../sections/FAQ";
 
 import { whatWeDo, subServices, faqs } from "../data/aiDevelopmentData";
 import Seo from "../seo/Seo";
+import { serviceSchema } from "../seo/schema";
+import { SERVICES_BASE_PATH } from "../data/servicesData";
 
 const META_DESCRIPTION =
   "Axiomra's AI development services: custom AI software, AI agents, LLM integration, " +
@@ -24,7 +26,12 @@ const META_DESCRIPTION =
 export default function AiDevelopmentPage() {
   return (
     <div className="ai-dev-page">
-      <Seo title="AI Development Services Built For Business Results | Axiomra" description={META_DESCRIPTION} />
+      <Seo
+        title="AI Development Services Built For Business Results | Axiomra"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Services", path: SERVICES_BASE_PATH }, { name: "Artificial Intelligence" }]}
+        jsonLd={serviceSchema({ name: "Artificial Intelligence", description: META_DESCRIPTION, path: `${SERVICES_BASE_PATH}/ai-development-services` })}
+      />
       <div className="ai-dev-bg" aria-hidden="true" />
 
       <AiDevHero />

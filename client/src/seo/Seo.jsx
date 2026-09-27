@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 import {
@@ -9,6 +10,7 @@ import {
   TWITTER_HANDLE,
   absoluteUrl,
 } from "./seo.config";
+import { breadcrumbSchema, toJsonLd } from "./schema";
 
 /**
  * Head tags for one page: title, description, canonical, Open Graph and
@@ -16,6 +18,8 @@ import {
  *
  * `path` defaults to the current pathname, so most pages only pass copy.
  * `noindex` is for admin screens and "coming soon" placeholders.
+ * `breadcrumbs` ([{ name, path }], Home is added) and `jsonLd` (schema.org
+ * nodes from ./schema) are emitted together as one JSON-LD @graph.
  */
 export default function Seo({
   title = DEFAULT_TITLE,
@@ -24,13 +28,26 @@ export default function Seo({
   image = DEFAULT_OG_IMAGE,
   type = "website",
   noindex = false,
+  breadcrumbs,
+  jsonLd = [],
   children,
 }) {
   const { pathname } = useLocation();
+  // react-helmet-async registers an instance during render, so a render React
+  // discards (Suspense, concurrent rendering) leaves an instance that is never
+  // removed, and its JSON-LD outlives the page. Mounting Helmet only after
+  // commit avoids that.
+  const [mounted, setMounted] = useState(false);
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- the point is one render after commit
+  useEffect(() => setMounted(true), []);
   // Trailing slashes are dropped so /about and /about/ share one canonical;
   // the root keeps its slash.
-  const url = SITE_URL + ((path ?? pathname).replace(/\/+$/, "") || "/");
+  const canonicalPath = (path ?? pathname).replace(/\/+$/, "") || "/";
+  const url = SITE_URL + canonicalPath;
   const imageUrl = absoluteUrl(image);
+  const graph = [...[].concat(jsonLd), ...(breadcrumbs ? [breadcrumbSchema(breadcrumbs, canonicalPath)] : [])];
+
+  if (!mounted) return null;
 
   return (
     <Helmet prioritizeSeoTags>
@@ -51,6 +68,7 @@ export default function Seo({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+      {graph.length > 0 && <script type="application/ld+json">{toJsonLd(graph)}</script>}
       {children}
     </Helmet>
   );

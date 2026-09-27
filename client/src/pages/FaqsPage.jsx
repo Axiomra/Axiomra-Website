@@ -23,7 +23,11 @@ export default function FaqsPage() {
 
   return (
     <div>
-      <Seo title="FAQs | Axiomra AI Development" description={META_DESCRIPTION} />
+      <Seo
+        title="FAQs | Axiomra AI Development"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "FAQs" }]}
+      />
       <FaqsHero query={query} onQueryChange={setQuery} onSubmit={jumpToResults} />
       <FaqsBrowser query={query} onQueryChange={setQuery} />
       <FaqsHelpBanner />

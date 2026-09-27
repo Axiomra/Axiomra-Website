@@ -28,6 +28,7 @@ import {
   finalCta,
 } from "../data/educationData";
 import Seo from "../seo/Seo";
+import { INDUSTRIES_PATH } from "../data/industriesData";
 
 const TITLE = "Education Software Development Services | AI EdTech | Axiomra";
 const DESCRIPTION =
@@ -45,7 +46,11 @@ export default function EducationPage() {
 
   return (
     <>
-      <Seo title={TITLE} description={DESCRIPTION} />
+      <Seo
+        title={TITLE}
+        description={DESCRIPTION}
+        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Education" }]}
+      />
       <EducationHero />
       <EducationIntro />
       <EducationImpact />

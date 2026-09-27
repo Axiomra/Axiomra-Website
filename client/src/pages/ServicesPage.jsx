@@ -50,7 +50,11 @@ const META_DESCRIPTION =
 export default function ServicesPage() {
   return (
     <>
-      <Seo title="AI Services & Solutions | Axiomra" description={META_DESCRIPTION} />
+      <Seo
+        title="AI Services & Solutions | Axiomra"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Services" }]}
+      />
       <ServicesHero />
 
       <div>

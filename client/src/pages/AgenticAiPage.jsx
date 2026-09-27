@@ -21,6 +21,8 @@ import FAQ from "../sections/FAQ";
 
 import { faqs } from "../data/agenticAiData";
 import Seo from "../seo/Seo";
+import { serviceSchema } from "../seo/schema";
+import { SERVICES_BASE_PATH } from "../data/servicesData";
 
 const META_DESCRIPTION =
   "Axiomra's agentic AI development services: autonomous AI agents, multi-agent " +
@@ -30,7 +32,12 @@ const META_DESCRIPTION =
 export default function AgenticAiPage() {
   return (
     <div>
-      <Seo title="Agentic AI Development Services For Enterprises | Axiomra" description={META_DESCRIPTION} />
+      <Seo
+        title="Agentic AI Development Services For Enterprises | Axiomra"
+        description={META_DESCRIPTION}
+        breadcrumbs={[{ name: "Services", path: SERVICES_BASE_PATH }, { name: "Agentic AI" }]}
+        jsonLd={serviceSchema({ name: "Agentic AI", description: META_DESCRIPTION, path: `${SERVICES_BASE_PATH}/agentic-ai-services` })}
+      />
       <AgenticHero />
       <AgenticFrameworkBar />
       <AgenticChallenges />

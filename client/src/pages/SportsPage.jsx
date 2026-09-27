@@ -29,6 +29,7 @@ import {
   finalCta,
 } from "../data/sportsData";
 import Seo from "../seo/Seo";
+import { INDUSTRIES_PATH } from "../data/industriesData";
 
 const TITLE = "Custom AI Sports Software Development Services | Axiomra";
 const DESCRIPTION =
@@ -46,7 +47,11 @@ export default function SportsPage() {
 
   return (
     <>
-      <Seo title={TITLE} description={DESCRIPTION} />
+      <Seo
+        title={TITLE}
+        description={DESCRIPTION}
+        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Sports" }]}
+      />
       <SportsHero />
       <SportsIntro />
       <SportsImpact />

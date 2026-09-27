@@ -30,6 +30,7 @@ import {
   finalCta,
 } from "../data/insuranceData";
 import Seo from "../seo/Seo";
+import { INDUSTRIES_PATH } from "../data/industriesData";
 
 const TITLE = "Custom AI Insurance Software Development Services | Axiomra";
 const DESCRIPTION =
@@ -47,7 +48,11 @@ export default function InsurancePage() {
 
   return (
     <>
-      <Seo title={TITLE} description={DESCRIPTION} />
+      <Seo
+        title={TITLE}
+        description={DESCRIPTION}
+        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Insurance" }]}
+      />
       <InsuranceHero />
       <InsuranceIntro />
       <InsuranceImpact />
