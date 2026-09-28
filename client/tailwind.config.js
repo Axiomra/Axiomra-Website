@@ -41,9 +41,9 @@ export default {
         success: token("success"),
       },
       fontFamily: {
-        display: ["'Clash Grotesk'", "'Space Grotesk'", "sans-serif"],
-        body: ["'Satoshi'", "'Inter'", "sans-serif"],
-        mono: ["'JetBrains Mono'", "monospace"],
+        display: ["'Clash Grotesk'", "'Clash Grotesk Fallback'", "'Space Grotesk'", "sans-serif"],
+        body: ["'Satoshi'", "'Satoshi Fallback'", "'Inter'", "sans-serif"],
+        mono: ["'JetBrains Mono'", "'JetBrains Mono Fallback'", "monospace"],
       },
       borderRadius: { xl2: "1.25rem" },
       maxWidth: {
@@ -67,9 +67,18 @@ export default {
         float: "float 7s ease-in-out infinite",
       },
       keyframes: {
-        marquee: { "0%": { transform: "translateX(0)" }, "100%": { transform: "translateX(-50%)" } },
-        "marquee-rev": { "0%": { transform: "translateX(-50%)" }, "100%": { transform: "translateX(0)" } },
-        float: { "0%,100%": { transform: "translateY(0px)" }, "50%": { transform: "translateY(-16px)" } },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "marquee-rev": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        float: {
+          "0%,100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-16px)" },
+        },
       },
     },
   },
