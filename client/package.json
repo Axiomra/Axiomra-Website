@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "vitest run"
+    "test": "vitest run",
+    "perf": "npm run build && lhci autorun",
+    "perf:all": "node perf/lighthouse.mjs perf/latest && node perf/table.mjs perf/baseline/summary.json perf/latest/summary.json"
   },
   "dependencies": {
     "@react-three/fiber": "^8.16.8",
