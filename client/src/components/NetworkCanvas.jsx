@@ -2,20 +2,20 @@ import { useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { makeDotTexture } from "../lib/dotTexture";
+import { buildLinks, makeGrid } from "../lib/linkGrid";
 
 /*
  * Animated particle-network field.
  *
- * The connection pass is O(n²) in the particle count, so two things keep it off
- * the frame budget: it runs every LINK_INTERVAL frames rather than every frame,
- * and it compares squared distances so the inner loop never calls Math.sqrt.
+ * The connection pass (lib/linkGrid.js) only compares neighbouring grid cells,
+ * runs every LINK_INTERVAL frames rather than every frame, and compares
+ * squared distances so it never calls Math.sqrt.
  */
 
 // Only a small fraction of the n² pairs are ever close enough to draw, so the
 // segment buffer is sized to a realistic ceiling instead of COUNT * COUNT.
 const MAX_LINKS_PER_PARTICLE = 12;
 const LINK_INTERVAL = 3;
-const MAX_DIST = 2.6;
 
 // A fresh random layout per mount is intended; useMemo keeps it stable across
 // re-renders, so the impurity never reaches the rendered output.
@@ -52,6 +52,9 @@ function ParticleField({ count }) {
   // not know to release it on unmount. Route changes would otherwise leak it.
   useEffect(() => () => lineGeometry.dispose(), [lineGeometry]);
 
+  // Counting-sort scratch for the grid, allocated once so frames make no garbage.
+  const grid = useRef(null);
+
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
     const posAttr = pointsRef.current.geometry.attributes.position;
@@ -67,32 +70,13 @@ function ParticleField({ count }) {
     // every third frame is indistinguishable from rebuilding every frame.
     if (frame.current++ % LINK_INTERVAL !== 0) return;
 
-    const linePos = linesRef.current.geometry.attributes.position.array;
-    const limit = linePos.length - 6;
-    const maxDistSq = MAX_DIST * MAX_DIST;
-    let idx = 0;
-
-    outer: for (let i = 0; i < COUNT; i++) {
-      const xi = pos[i * 3];
-      const yi = pos[i * 3 + 1];
-      const zi = pos[i * 3 + 2];
-
-      for (let j = i + 1; j < COUNT; j++) {
-        const dx = xi - pos[j * 3];
-        const dy = yi - pos[j * 3 + 1];
-        const dz = zi - pos[j * 3 + 2];
-        if (dx * dx + dy * dy + dz * dz >= maxDistSq) continue;
-
-        linePos[idx++] = xi;
-        linePos[idx++] = yi;
-        linePos[idx++] = zi;
-        linePos[idx++] = pos[j * 3];
-        linePos[idx++] = pos[j * 3 + 1];
-        linePos[idx++] = pos[j * 3 + 2];
-
-        if (idx > limit) break outer;
-      }
-    }
+    if (grid.current?.order.length !== COUNT) grid.current = makeGrid(COUNT);
+    const idx = buildLinks(
+      pos,
+      COUNT,
+      grid.current,
+      linesRef.current.geometry.attributes.position.array
+    );
 
     // Anything past the draw range is simply not rendered, so the stale tail
     // beyond `idx` does not need to be cleared.
