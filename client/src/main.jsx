@@ -5,8 +5,12 @@ import App from "./App.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import ThemeProvider from "./theme/ThemeProvider.jsx";
 import "./index.css";
+// Loaded up front rather than with the lazy CaseStudyPage chunk: prerendered
+// case studies paint before that chunk arrives, and need their styles then.
+// After index.css, so the cascade order matches what the chunk used to give.
+import "./styles/case-study.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const app = (
   <React.StrictMode>
     <ErrorBoundary
       fallback={
@@ -16,8 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               Something went wrong
             </h1>
             <p className="mt-2 text-sm text-content-dim">
-              Please refresh the page. If it keeps happening, email us at
-              hello@axiomra.com.
+              Please refresh the page. If it keeps happening, email us at hello@axiomra.com.
             </p>
           </div>
         </div>
@@ -32,3 +35,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </ErrorBoundary>
   </React.StrictMode>
 );
+
+// Prerendered pages (scripts/prerender.mjs) arrive with the markup already in
+// #root; the empty SPA shell (spa.html, 404.html, dev) does not.
+const root = document.getElementById("root");
+if (root.hasChildNodes()) ReactDOM.hydrateRoot(root, app);
+else ReactDOM.createRoot(root).render(app);

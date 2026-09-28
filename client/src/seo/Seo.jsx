@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 import {
@@ -11,6 +11,7 @@ import {
   absoluteUrl,
 } from "./seo.config";
 import { breadcrumbSchema, toJsonLd } from "./schema";
+import { PrerenderContext } from "./prerender-context";
 
 /**
  * Head tags for one page: title, description, canonical, Open Graph and
@@ -37,6 +38,10 @@ export default function Seo({
   // discards (Suspense, concurrent rendering) leaves an instance that is never
   // removed, and its JSON-LD outlives the page. Mounting Helmet only after
   // commit avoids that.
+  // The build-time prerender has no effects and no discarded renders, and its
+  // whole point is getting these tags into the static HTML, so it renders
+  // them straight away.
+  const prerendering = useContext(PrerenderContext);
   const [mounted, setMounted] = useState(false);
   // eslint-disable-next-line react-hooks/set-state-in-effect -- the point is one render after commit
   useEffect(() => setMounted(true), []);
@@ -45,9 +50,12 @@ export default function Seo({
   const canonicalPath = (path ?? pathname).replace(/\/+$/, "") || "/";
   const url = SITE_URL + canonicalPath;
   const imageUrl = absoluteUrl(image);
-  const graph = [...[].concat(jsonLd), ...(breadcrumbs ? [breadcrumbSchema(breadcrumbs, canonicalPath)] : [])];
+  const graph = [
+    ...[].concat(jsonLd),
+    ...(breadcrumbs ? [breadcrumbSchema(breadcrumbs, canonicalPath)] : []),
+  ];
 
-  if (!mounted) return null;
+  if (!mounted && !prerendering) return null;
 
   return (
     <Helmet prioritizeSeoTags>

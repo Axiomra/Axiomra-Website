@@ -5,6 +5,7 @@ const DARK_QUERY = "(prefers-color-scheme: dark)";
 
 /** Reads the stored preference. Falls back to "system" when unset or invalid. */
 function readStoredTheme() {
+  if (typeof window === "undefined") return "system";
   try {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
     return THEME_OPTIONS.includes(stored) ? stored : "system";
@@ -15,6 +16,7 @@ function readStoredTheme() {
 }
 
 function systemTheme() {
+  if (typeof window === "undefined") return "light";
   return window.matchMedia(DARK_QUERY).matches ? "dark" : "light";
 }
 
