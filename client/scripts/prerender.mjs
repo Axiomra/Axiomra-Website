@@ -90,9 +90,14 @@ for (const url of paths) {
     .concat(preloads)
     .filter(Boolean)
     .join("\n  ");
+  // Low priority, including Vite's own entry preloads: at the default (high)
+  // they share the connection with the render-blocking CSS and fonts, and on
+  // a slow link the first paint waits for all of them. The HTML is already
+  // there to paint; the JS only has to arrive before hydration.
   const page = baseHead
     .replace("</head>", `  ${head}\n  ${gate.style}\n  ${gate.noscript}\n</head>`)
-    .replace('<div id="root"></div>', `<div id="root">${html}</div>`);
+    .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
+    .replaceAll('<link rel="modulepreload" crossorigin', '<link rel="modulepreload" fetchpriority="low" crossorigin');
 
   const h1s = (html.match(/<h1[\s>]/g) || []).length;
   if (h1s !== 1) problems.push(`${url}: ${h1s} <h1> elements`);
