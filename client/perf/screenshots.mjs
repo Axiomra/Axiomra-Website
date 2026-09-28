@@ -32,7 +32,13 @@ const VIEWPORTS = {
   mobile: { width: 390, height: 844, deviceScaleFactor: 1, isMobile: true, hasTouch: true },
 };
 
-const browser = await chromium.launch({ channel: "chrome" }); // system Chrome, same as Lighthouse
+// Real GPU GL: under the default SwiftShader the canvas gate shows static
+// fallbacks, while a pre-gate build mounts (hidden) canvases, so the two
+// builds would differ in exactly the areas the screenshots are meant to skip.
+const browser = await chromium.launch({
+  channel: "chrome",
+  args: ["--enable-gpu", "--use-angle=gl"],
+});
 try {
   for (const [name, viewport] of Object.entries(VIEWPORTS)) {
     const ctx = await browser.newContext({ viewport, colorScheme: "light" });
@@ -43,6 +49,13 @@ try {
       await page.clock.install({ time: new Date("2026-01-01T00:00:00Z") });
       await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: "networkidle" });
       await page.clock.runFor(1000);
+      // A prerendered page is on screen before React has hydrated it; reveals
+      // fired before then would be lost, so walk the page only afterwards.
+      await page.waitForFunction(
+        () =>
+          !document.getElementById("prerender-gate") ||
+          document.documentElement.classList.contains("hydrated")
+      );
       // Walk the page so every whileInView / ScrollTrigger reveal fires.
       const height = await page.evaluate(() => document.body.scrollHeight);
       const step = Math.round(viewport.height / 2);
