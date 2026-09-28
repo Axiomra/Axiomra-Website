@@ -1,18 +1,10 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense } from "react";
 import ErrorBoundary from "../ErrorBoundary";
 import useInView from "../../hooks/useInView";
+import useCanvasGate from "../../lib/useCanvasGate";
 
 // three.js + drei sit behind a dynamic import so they never block first paint.
 const VisionPanelsCanvas = lazy(() => import("./VisionPanelsCanvas"));
-
-function supportsWebGL() {
-  try {
-    const canvas = document.createElement("canvas");
-    return !!(canvas.getContext("webgl2") || canvas.getContext("webgl"));
-  } catch {
-    return false;
-  }
-}
 
 /** Painted whenever WebGL is unavailable, the user asked for less motion, or the canvas throws. */
 function StaticPanels({ panels }) {
@@ -46,19 +38,15 @@ function StaticPanels({ panels }) {
 
 /** Decorative WebGL carousel for the Computer Vision hero. */
 export default function VisionCanvas({ panels, className = "", onActiveChange }) {
-  const [webgl] = useState(supportsWebGL);
-  // A CSS media query cannot reach a WebGL render loop, so the opt-out is here.
-  const [reducedMotion] = useState(
-    () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
-  );
-
   const fallback = <StaticPanels panels={panels} />;
   const [hostRef, inView] = useInView();
   const frameloop = inView ? "always" : "never";
+  // Static first (server included), WebGL after load and once near the viewport.
+  const ready = useCanvasGate(inView);
 
   return (
     <div ref={hostRef} className={`absolute inset-0 ${className}`} aria-hidden="true">
-      {webgl && !reducedMotion ? (
+      {ready ? (
         <ErrorBoundary fallback={fallback}>
           <Suspense fallback={fallback}>
             <VisionPanelsCanvas

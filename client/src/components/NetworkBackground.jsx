@@ -1,6 +1,7 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense } from "react";
 import ErrorBoundary from "./ErrorBoundary";
 import useInView from "../hooks/useInView";
+import useCanvasGate from "../lib/useCanvasGate";
 
 // three.js lives behind a dynamic import so it never blocks first paint.
 const NetworkCanvas = lazy(() => import("./NetworkCanvas"));
@@ -23,15 +24,6 @@ const LegalCanvas = lazy(() => import("./LegalCanvas"));
 const HealthcareCanvas = lazy(() => import("./HealthcareCanvas"));
 const TransportationCanvas = lazy(() => import("./TransportationCanvas"));
 
-function supportsWebGL() {
-  try {
-    const canvas = document.createElement("canvas");
-    return !!(canvas.getContext("webgl2") || canvas.getContext("webgl"));
-  } catch {
-    return false;
-  }
-}
-
 function StaticNetworkBackground({ className = "" }) {
   return (
     <div
@@ -48,21 +40,17 @@ function StaticNetworkBackground({ className = "" }) {
 }
 
 export default function NetworkBackground({ className = "", count = 140, variant = "network" }) {
-  const [webgl] = useState(() => supportsWebGL());
-  // The CSS reduced-motion rule can't reach a WebGL render loop, so opt out of the animated field here instead.
-  const [reducedMotion] = useState(
-    () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
-  );
-
   const fallback = <StaticNetworkBackground className={className} />;
   // Parks the render loop while the canvas is off screen. The footer canvas is
   // mounted on every route, so without this it burns a frame budget forever.
   const [hostRef, inView] = useInView();
   const frameloop = inView ? "always" : "never";
 
+  const ready = useCanvasGate(inView);
+
   return (
     <div ref={hostRef} className={`absolute inset-0 ${className}`} aria-hidden="true">
-      {webgl && !reducedMotion ? (
+      {ready ? (
         <ErrorBoundary fallback={fallback}>
           <Suspense fallback={fallback}>
             {variant === "wave" ? (

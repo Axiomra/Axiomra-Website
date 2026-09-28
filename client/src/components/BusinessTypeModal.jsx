@@ -4,18 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import ErrorBoundary from "./ErrorBoundary";
+import useMounted from "../lib/useMounted";
+import { supportsWebGL } from "../lib/useCanvasGate";
 
 // three.js only ships once a card is actually opened.
 const BusinessTypeCanvas = lazy(() => import("./BusinessTypeCanvas"));
-
-function supportsWebGL() {
-  try {
-    const canvas = document.createElement("canvas");
-    return !!(canvas.getContext("webgl2") || canvas.getContext("webgl"));
-  } catch {
-    return false;
-  }
-}
 
 /** Static stand-in for the animated header (no WebGL, reduced motion, or a crash). */
 function CanvasFallback() {
@@ -50,7 +43,7 @@ export default function BusinessTypeModal({ item, onClose }) {
       }
       if (e.key !== "Tab") return;
       const focusables = panelRef.current?.querySelectorAll(
-        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
       );
       if (!focusables?.length) return;
       const first = focusables[0];
@@ -88,13 +81,17 @@ export default function BusinessTypeModal({ item, onClose }) {
     if (open) panelRef.current?.focus();
   }, [open]);
 
+  const mounted = useMounted();
   const [canAnimate] = useState(
     () =>
+      typeof window !== "undefined" &&
       supportsWebGL() &&
-      !(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false),
+      !(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false)
   );
   const useCanvas = open && canAnimate;
 
+  // There is no <body> to portal into on the server; it starts closed anyway.
+  if (!mounted) return null;
   return createPortal(
     <AnimatePresence>
       {open && (
@@ -205,7 +202,11 @@ export default function BusinessTypeModal({ item, onClose }) {
                   <ul className="space-y-3">
                     {item.deliverables.map((d) => (
                       <li key={d} className="flex gap-3 text-sm leading-relaxed text-content-dim">
-                        <Check size={16} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
+                        <Check
+                          size={16}
+                          className="mt-0.5 shrink-0 text-brand"
+                          aria-hidden="true"
+                        />
                         {d}
                       </li>
                     ))}
@@ -248,6 +249,6 @@ export default function BusinessTypeModal({ item, onClose }) {
         </motion.div>
       )}
     </AnimatePresence>,
-    document.body,
+    document.body
   );
 }
