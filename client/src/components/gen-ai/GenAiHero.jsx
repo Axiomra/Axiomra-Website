@@ -57,8 +57,7 @@ export default function GenAiHero() {
             custom={1}
             className="font-display text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4rem]"
           >
-            {hero.titleLead}{" "}
-            <span className="text-gradient">{hero.titleAccent}</span>
+            {hero.titleLead} <span className="text-gradient">{hero.titleAccent}</span>
             <span className="mt-2 block">{hero.titleTail}</span>
           </motion.h1>
 
@@ -109,7 +108,7 @@ export default function GenAiHero() {
                 {hero.proof.source}
               </span>
               <span className="flex items-center gap-2">
-                <span className="flex" aria-label={`${hero.proof.rating} out of 5`}>
+                <span className="flex" role="img" aria-label={`${hero.proof.rating} out of 5`}>
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} size={15} className="fill-gold text-gold" aria-hidden="true" />
                   ))}
@@ -171,7 +170,12 @@ export default function GenAiHero() {
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
             className="absolute -bottom-10 -left-6 hidden w-52 overflow-hidden rounded-xl2 border border-white/15 bg-inverse-card shadow-card sm:block"
           >
-            <img src={chat.src} alt={chat.alt} loading="lazy" className="h-32 w-full object-cover" />
+            <img
+              src={chat.src}
+              alt={chat.alt}
+              loading="lazy"
+              className="h-32 w-full object-cover"
+            />
             <p className="px-4 py-3 font-mono text-xs uppercase tracking-[0.16em] text-accent-vivid">
               Copilots &amp; agents
             </p>
@@ -182,7 +186,12 @@ export default function GenAiHero() {
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
             className="absolute -right-6 -top-10 hidden w-48 overflow-hidden rounded-xl2 border border-white/15 bg-inverse-card shadow-card sm:block"
           >
-            <img src={chip.src} alt={chip.alt} loading="lazy" className="h-28 w-full object-cover" />
+            <img
+              src={chip.src}
+              alt={chip.alt}
+              loading="lazy"
+              className="h-28 w-full object-cover"
+            />
             <p className="px-4 py-3 font-mono text-xs uppercase tracking-[0.16em] text-accent-vivid">
               Fine-tuned models
             </p>

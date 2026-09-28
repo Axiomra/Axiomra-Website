@@ -42,9 +42,31 @@ const LINK_ROUTES = {
 };
 
 const cols = [
-  { title: "Services", links: ["Artificial Intelligence", "Computer Vision", "Software Development", "Generative AI", "Agentic AI Development"] },
-  { title: "Industries", links: ["AI for Fashion", "AI for Sports", "AI for Transportation", "AI for Retail", "AI for Healthcare", "AI for Finance"] },
-  { title: "Quick Links", links: ["Blogs", "Contact Us", "About Us", "Tech Stack", "Awards and Recognition", "FAQs"] },
+  {
+    title: "Services",
+    links: [
+      "Artificial Intelligence",
+      "Computer Vision",
+      "Software Development",
+      "Generative AI",
+      "Agentic AI Development",
+    ],
+  },
+  {
+    title: "Industries",
+    links: [
+      "AI for Fashion",
+      "AI for Sports",
+      "AI for Transportation",
+      "AI for Retail",
+      "AI for Healthcare",
+      "AI for Finance",
+    ],
+  },
+  {
+    title: "Quick Links",
+    links: ["Blogs", "Contact Us", "About Us", "Tech Stack", "Awards and Recognition", "FAQs"],
+  },
 ];
 
 /* lucide ships no X (formerly Twitter) mark, so the brand glyph is inlined. */
@@ -90,10 +112,16 @@ export default function Footer() {
 
         <div className="relative z-10 mx-auto grid max-w-6xl gap-x-8 gap-y-12 px-4 sm:px-6 md:grid-cols-4">
           <div>
-            <img src={logoLight} alt="Axiomra" className="mb-4 h-9 w-auto" width={500} height={91} />
+            <img
+              src={logoLight}
+              alt="Axiomra"
+              className="mb-4 h-9 w-auto"
+              width={500}
+              height={91}
+            />
             <p className="max-w-xs text-lg leading-relaxed text-inverse-fg/70">
-              We build custom AI solutions that simplify workflows, support better decisions,
-              and help businesses measure the value of automation.
+              We build custom AI solutions that simplify workflows, support better decisions, and
+              help businesses measure the value of automation.
             </p>
             <Link
               to="/contact"
@@ -104,7 +132,9 @@ export default function Footer() {
           </div>
           {cols.map((c) => (
             <div key={c.title}>
-              <h4 className="mb-5 font-display text-2xl font-semibold text-inverse-fg">{c.title}</h4>
+              <h2 className="mb-5 font-display text-2xl font-semibold text-inverse-fg">
+                {c.title}
+              </h2>
               <ul className="space-y-3">
                 {c.links.map((l) => (
                   <li key={l}>

@@ -53,8 +53,7 @@ export default function AgenticHero() {
             custom={1}
             className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.15rem]"
           >
-            {hero.titleLead}{" "}
-            <span className="text-gradient">{hero.titleAccent}</span>
+            {hero.titleLead} <span className="text-gradient">{hero.titleAccent}</span>
             <span className="mt-2 block">{hero.titleTail}</span>
           </motion.h1>
 
@@ -101,7 +100,7 @@ export default function AgenticHero() {
             className="mt-9 flex flex-col items-center gap-2"
           >
             <span className="flex items-center gap-2">
-              <span className="flex" aria-label={`${hero.proof.rating} out of 5`}>
+              <span className="flex" role="img" aria-label={`${hero.proof.rating} out of 5`}>
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} size={15} className="fill-gold text-gold" aria-hidden="true" />
                 ))}

@@ -85,7 +85,7 @@ export default function AiDevHero() {
                 {hero.proof.source}
               </span>
               <span className="flex items-center gap-2">
-                <span className="flex" aria-label={`${hero.proof.rating} out of 5`}>
+                <span className="flex" role="img" aria-label={`${hero.proof.rating} out of 5`}>
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} size={15} className="fill-gold text-gold" aria-hidden="true" />
                   ))}
