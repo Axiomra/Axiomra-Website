@@ -3,3 +3,11 @@
 
 # Bundle report from `ANALYZE=1 npm run build`
 stats.html
+
+# Raw Lighthouse reports (~1 MB each) and screenshots; perf/*/summary.json and
+# the markdown reports are what gets committed.
+perf/**/*.mobile.json
+perf/**/*.desktop.json
+perf/screenshots/
+.lighthouseci/
+perf/latest/
