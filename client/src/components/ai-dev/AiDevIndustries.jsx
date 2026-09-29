@@ -25,19 +25,23 @@ export default function AiDevIndustries() {
         />
 
         <div className="mb-12 flex justify-center">
-        <Link
-          to="/#industries"
-          className="group inline-flex items-center gap-2.5 rounded-full border border-line px-6 py-3 text-lg font-semibold transition-colors hover:border-brand/50 hover:text-brand focus-ring"
-        >
-          {industries.ctaText}
-          <ArrowUpRight
-            size={18}
-            className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-          />
-        </Link>
+          <Link
+            to="/#industries"
+            className="group inline-flex items-center gap-2.5 rounded-full border border-line px-6 py-3 text-lg font-semibold transition-colors hover:border-brand/50 hover:text-brand focus-ring"
+          >
+            {industries.ctaText}
+            <ArrowUpRight
+              size={18}
+              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </Link>
         </div>
 
-        <div role="tablist" aria-label="Industries" className="mb-12 flex flex-wrap justify-center gap-3">
+        <div
+          role="tablist"
+          aria-label="Industries"
+          className="mb-12 flex flex-wrap justify-center gap-3"
+        >
           {industries.items.map((item, i) => {
             const selected = i === active;
             return (
@@ -51,7 +55,7 @@ export default function AiDevIndustries() {
                 onClick={() => setActive(i)}
                 className={`rounded-xl2 px-5 py-3 text-base font-semibold transition-colors focus-ring md:text-lg ${
                   selected
-                    ? "bg-cta-gradient text-inverse"
+                    ? "bg-assistant text-assistant-ink-soft"
                     : "bg-inverse text-inverse-fg hover:opacity-90"
                 }`}
               >

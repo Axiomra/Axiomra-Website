@@ -42,7 +42,7 @@ export default function AiDevTechStack() {
                 onClick={() => setActive(i)}
                 className={`rounded-xl2 px-5 py-3 text-base font-semibold transition-colors focus-ring md:text-lg ${
                   selected
-                    ? "bg-cta-gradient text-inverse"
+                    ? "bg-assistant text-assistant-ink-soft"
                     : "bg-inverse text-inverse-fg hover:opacity-90"
                 }`}
               >
@@ -80,16 +80,16 @@ export default function AiDevTechStack() {
         </div>
 
         <div className="mt-10 flex justify-center">
-        <Link
-          to="/#tech-stack"
-          className="group inline-flex items-center gap-2.5 rounded-full border border-line px-7 py-4 text-lg font-semibold transition-colors hover:border-brand/50 hover:text-brand focus-ring"
-        >
-          {techStack.ctaText}
-          <ArrowUpRight
-            size={19}
-            className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-          />
-        </Link>
+          <Link
+            to="/#tech-stack"
+            className="group inline-flex items-center gap-2.5 rounded-full border border-line px-7 py-4 text-lg font-semibold transition-colors hover:border-brand/50 hover:text-brand focus-ring"
+          >
+            {techStack.ctaText}
+            <ArrowUpRight
+              size={19}
+              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </Link>
         </div>
       </div>
     </section>

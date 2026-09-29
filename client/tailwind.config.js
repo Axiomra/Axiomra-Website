@@ -7,6 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
+        // The chat widget's accent, with a dark ink that stays readable on it
+        // (white text on #00D1D1 is under 2:1 contrast).
+        assistant: {
+          DEFAULT: "#00D1D1",
+          ink: "#053B3F",
+          // Lighter ink for the AI dev page; still 5:1 on the teal.
+          "ink-soft": "#084D51",
+        },
         surface: {
           DEFAULT: token("surface"),
           subtle: token("surface-subtle"),

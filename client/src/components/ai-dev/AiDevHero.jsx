@@ -71,7 +71,7 @@ export default function AiDevHero() {
           >
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-cta-gradient px-8 py-4 text-lg font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring"
+              className="group inline-flex items-center gap-2 rounded-full bg-assistant px-8 py-4 text-lg font-semibold text-assistant-ink-soft transition-transform hover:scale-[1.02] focus-ring"
             >
               {hero.ctaText}
               <ArrowUpRight
