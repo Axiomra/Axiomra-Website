@@ -333,7 +333,7 @@ export default function RoiCalculator() {
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className="focus-ring inline-flex items-center gap-2 rounded-full bg-[#14D8C4] px-7 py-3.5 text-base font-semibold text-[#0A1428] transition-all hover:bg-[#2EE6D3] hover:shadow-glow"
+                    className="focus-ring inline-flex items-center gap-2 rounded-full bg-accent-vivid px-7 py-3.5 text-base font-semibold text-on-accent transition-all hover:bg-accent-vivid-hover hover:shadow-glow"
                   >
                     Next step <ArrowRight size={18} />
                   </button>
@@ -371,7 +371,7 @@ export default function RoiCalculator() {
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="focus-ring inline-flex items-center gap-2 rounded-full bg-[#14D8C4] px-7 py-3.5 text-base font-semibold text-[#0A1428] transition-all hover:bg-[#2EE6D3] hover:shadow-glow"
+                    className="focus-ring inline-flex items-center gap-2 rounded-full bg-accent-vivid px-7 py-3.5 text-base font-semibold text-on-accent transition-all hover:bg-accent-vivid-hover hover:shadow-glow"
                   >
                     Schedule a free 30-min scoping call <ArrowRight size={18} />
                   </button>
@@ -449,7 +449,7 @@ export default function RoiCalculator() {
                       <button
                         type="submit"
                         disabled={status === "loading"}
-                        className="focus-ring inline-flex items-center gap-2 rounded-full bg-[#14D8C4] px-7 py-3.5 text-base font-semibold text-[#0A1428] transition-all hover:bg-[#2EE6D3] hover:shadow-glow disabled:opacity-60"
+                        className="focus-ring inline-flex items-center gap-2 rounded-full bg-accent-vivid px-7 py-3.5 text-base font-semibold text-on-accent transition-all hover:bg-accent-vivid-hover hover:shadow-glow disabled:opacity-60"
                       >
                         {status === "loading" ? "Booking..." : "Book my call"}
                         {status !== "loading" && <ArrowRight size={18} />}
