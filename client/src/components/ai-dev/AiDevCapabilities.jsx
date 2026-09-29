@@ -9,7 +9,7 @@ export default function AiDevCapabilities() {
   const current = capabilities.items[active];
 
   return (
-    <section id="ai-capabilities" className="bg-surface py-20 md:py-28">
+    <section id="ai-capabilities" className="bg-surface py-12 md:py-16">
       <div className="mx-auto max-w-8xl px-6">
         <SectionHeading
           className="mb-14"

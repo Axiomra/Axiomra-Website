@@ -33,15 +33,15 @@ export default function ServiceRow({
       )}
 
       {!compact && (
-      <div className="mb-6 flex items-center gap-4">
-        <span
-          className="font-mono text-base font-semibold text-brand/70 tabular-nums"
-          aria-hidden="true"
-        >
-          {number}
-        </span>
-        <span className="h-px flex-1 bg-line" aria-hidden="true" />
-      </div>
+        <div className="mb-6 flex items-center gap-4">
+          <span
+            className="font-mono text-base font-semibold text-brand/70 tabular-nums"
+            aria-hidden="true"
+          >
+            {number}
+          </span>
+          <span className="h-px flex-1 bg-line" aria-hidden="true" />
+        </div>
       )}
 
       <h2
@@ -133,7 +133,7 @@ export default function ServiceRow({
   );
 
   return (
-    <section id={id} className={`${bg} py-20 md:py-28`}>
+    <section id={id} className={`${bg} ${compact ? "py-12 md:py-16" : "py-20 md:py-28"}`}>
       <div
         className={`mx-auto grid max-w-8xl grid-cols-1 gap-14 px-6 md:grid-cols-2 md:gap-20 lg:gap-24 ${
           compact ? "items-center md:items-stretch" : "items-center"

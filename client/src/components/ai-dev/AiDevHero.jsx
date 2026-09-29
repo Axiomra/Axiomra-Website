@@ -17,7 +17,7 @@ export default function AiDevHero() {
   return (
     <section
       data-nav-tone="light"
-      className="relative overflow-hidden bg-surface pb-20 pt-36 md:pb-28 md:pt-44"
+      className="relative overflow-hidden bg-surface pb-12 pt-36 md:pb-16 md:pt-44"
     >
       {/* Two soft washes stand in for the reference's engraved line-art field. */}
       <div

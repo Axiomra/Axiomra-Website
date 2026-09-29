@@ -7,7 +7,7 @@ const icons = [Users, Sparkles, LifeBuoy];
 /** Three engagement perks plus the delivery numbers that back them. */
 export default function AiDevBenefits() {
   return (
-    <section className="bg-surface py-20 md:py-28">
+    <section className="bg-surface py-12 md:py-16">
       <div className="mx-auto max-w-8xl px-6">
         <p className="mb-4 text-center font-mono text-sm uppercase tracking-[0.2em] text-accent md:text-base">
           {benefits.eyebrow}
