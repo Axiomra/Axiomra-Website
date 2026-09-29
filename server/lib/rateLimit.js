@@ -128,3 +128,12 @@ export const contactLimiter = limiter("contact", {
   message: "Too many messages from this network. Please try again later or email us directly.",
   failOpen: true,
 });
+
+// Every chat turn is a paid model call, so it gets its own, tighter bucket on
+// top of the general API limit.
+export const chatLimiter = limiter("chat", {
+  windowMs: 15 * MINUTE,
+  limit: 30,
+  message: "You're sending messages quickly. Please wait a few minutes and try again.",
+  failOpen: true,
+});

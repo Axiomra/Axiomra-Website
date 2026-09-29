@@ -187,10 +187,12 @@ export default function Footer() {
         </span>
       </a>
 
+      {/* Stacked above the chat launcher (components/chat/ChatWidget.jsx),
+          centred on it. */}
       <button
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-surface-card text-content shadow-card backdrop-blur transition-colors hover:bg-surface-subtle focus-ring"
+        className="fixed bottom-[6.5rem] right-[1.625rem] z-40 flex h-11 w-11 sm:right-[2.125rem] items-center justify-center rounded-full border border-line bg-surface-card text-content shadow-card backdrop-blur transition-colors hover:bg-surface-subtle focus-ring"
         aria-label="Back to top"
       >
         <ArrowUp size={18} />

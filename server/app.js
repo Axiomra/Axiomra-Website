@@ -9,11 +9,13 @@ import contactRoutes from "./routes/contact.js";
 import authRoutes from "./routes/auth.js";
 import leadRoutes from "./routes/leads.js";
 import leadFieldRoutes from "./routes/leadFields.js";
+import chatRoutes from "./routes/chat.js";
 import { connectDB } from "./db.js";
 import { mailerConfigured } from "./mailer.js";
 import { mongoSanitize } from "./lib/sanitize.js";
 import {
   apiLimiter,
+  chatLimiter,
   contactLimiter,
   forgotPasswordEmailLimiter,
   forgotPasswordIpLimiter,
@@ -118,6 +120,7 @@ app.use("/api/auth/login", loginLimiter);
 app.use("/api/auth/forgot-password", forgotPasswordIpLimiter, forgotPasswordEmailLimiter);
 app.use("/api/auth/reset-password", resetPasswordLimiter);
 app.post("/api/contact", contactLimiter);
+app.post("/api/chat", chatLimiter);
 
 // Landing page for anyone who opens the API host in a browser: a live status
 // dashboard instead of a bare 404. `/status.json` deliberately sits outside
@@ -146,6 +149,8 @@ async function withDb(req, res, next) {
 }
 
 app.use("/api/contact", withDb, contactRoutes);
+// No database: the chat is stateless and nothing is stored.
+app.use("/api/chat", chatRoutes);
 app.use("/api/auth", withDb, authRoutes);
 app.use("/api/leads", withDb, leadRoutes);
 app.use("/api/lead-fields", withDb, leadFieldRoutes);

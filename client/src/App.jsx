@@ -1,10 +1,11 @@
-import { Suspense, lazy, useContext, useEffect } from "react";
+import { Suspense, lazy, useContext, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import { Navbar } from "./components/ui/navbar";
 import Footer from "./components/Footer";
 import BookCallModal from "./components/BookCallModal";
 import { RenderedPagesContext } from "./seo/prerender-context";
+import { afterLoadIdle } from "./lib/idle";
 
 const pageModules = import.meta.glob(["./pages/*.jsx", "!./pages/*.test.jsx"]);
 
@@ -123,7 +124,25 @@ function HydratedMark() {
   return null;
 }
 
-/** The public marketing site: navbar, footer and the call modal. */
+const ChatWidget = lazy(() => import("./components/chat/ChatWidget"));
+
+/**
+ * Axiomra Assistant. Loaded once the page is idle so the widget and
+ * framer-motion never compete with first paint, and never prerendered (it
+ * starts as null on the server and during hydration).
+ */
+function DeferredChat() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => afterLoadIdle(() => setReady(true)), []);
+  if (!ready) return null;
+  return (
+    <Suspense fallback={null}>
+      <ChatWidget />
+    </Suspense>
+  );
+}
+
+/** The public marketing site: navbar, footer, the call modal and the chat. */
 function SiteRoutes() {
   return (
     <div className="overflow-x-clip">
@@ -183,6 +202,7 @@ function SiteRoutes() {
       </main>
       <Footer />
       <BookCallModal />
+      <DeferredChat />
     </div>
   );
 }

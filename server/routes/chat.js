@@ -1,0 +1,112 @@
+import { Router } from "express";
+import { Agent, run, user, assistant, setTracingDisabled } from "@openai/agents";
+import { z } from "zod";
+import { CHAT_SYSTEM_PROMPT } from "../lib/chatKnowledge.js";
+
+const router = Router();
+
+const MODEL = process.env.CHAT_MODEL?.trim() || "gpt-5-mini";
+
+// Traces would be uploaded after every reply; a stateless FAQ chat does not need them.
+setTracingDisabled(true);
+
+// A visitor chat, not a document pipeline: the caps keep one conversation's
+// cost bounded no matter what the browser sends.
+const MAX_MESSAGES = 20;
+const MAX_CHARS = 2000;
+
+const bodySchema = z.object({
+  messages: z
+    .array(
+      z.object({
+        role: z.enum(["user", "assistant"]),
+        content: z.string().trim().min(1).max(MAX_CHARS),
+      })
+    )
+    .min(1)
+    .max(MAX_MESSAGES)
+    .refine(
+      (list) => list.every((m, i) => m.role === (i % 2 === 0 ? "user" : "assistant")),
+      "Messages must alternate, starting with the visitor."
+    )
+    .refine((list) => list.at(-1)?.role === "user", "The last message must be the visitor's."),
+});
+
+// Reasoning models reject sampling settings and vice versa, so the settings
+// follow the configured model family.
+const isReasoningModel = /^(gpt-5|o\d)/.test(MODEL);
+
+const agent = new Agent({
+  name: "Axiomra Assistant",
+  instructions: CHAT_SYSTEM_PROMPT,
+  model: MODEL,
+  modelSettings: {
+    // Replies are short by instruction; the cap bounds cost per turn.
+    maxTokens: isReasoningModel ? 2048 : 700,
+    // Visitor conversations are not kept on OpenAI's side.
+    store: false,
+    // A FAQ-style chat does not need deep reasoning, and minimal effort answers faster.
+    ...(isReasoningModel ? { reasoning: { effort: "minimal" } } : { temperature: 0.3 }),
+  },
+});
+
+/**
+ * Streams the assistant's reply as server-sent events:
+ *   data: {"type":"text","text":"..."}   one per chunk
+ *   data: {"type":"done"}
+ *   data: {"type":"error","error":"..."}  after headers were already sent
+ */
+router.post("/", async (req, res) => {
+  const parsed = bodySchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: "Invalid chat request." });
+  }
+
+  if (!process.env.OPENAI_API_KEY) {
+    return res.status(503).json({ error: "The assistant is not available right now." });
+  }
+
+  res.status(200).set({
+    "Content-Type": "text/event-stream; charset=utf-8",
+    "Cache-Control": "no-cache, no-transform",
+    Connection: "keep-alive",
+    // Stops proxies (nginx and friends) from buffering the whole reply.
+    "X-Accel-Buffering": "no",
+  });
+  res.flushHeaders();
+  const send = (event) => res.write(`data: ${JSON.stringify(event)}\n\n`);
+
+  // The visitor closed the widget or navigated away: stop paying for tokens.
+  const controller = new AbortController();
+  let finished = false;
+  res.on("close", () => {
+    if (!finished) controller.abort();
+  });
+
+  const input = parsed.data.messages.map((m) =>
+    m.role === "user" ? user(m.content) : assistant(m.content)
+  );
+
+  try {
+    const result = await run(agent, input, {
+      stream: true,
+      maxTurns: 1,
+      signal: controller.signal,
+    });
+    for await (const text of result.toTextStream()) {
+      if (text) send({ type: "text", text });
+    }
+    await result.completed;
+    if (result.error) throw result.error;
+    send({ type: "done" });
+  } catch (err) {
+    if (controller.signal.aborted) return;
+    console.error(`Chat: OpenAI run failed${err.status ? ` (${err.status})` : ""}:`, err.message);
+    send({ type: "error", error: "The assistant ran into a problem. Please try again." });
+  } finally {
+    finished = true;
+    res.end();
+  }
+});
+
+export default router;
