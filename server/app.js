@@ -26,26 +26,27 @@ import { renderStatusPage, statusPayload } from "./status.js";
 
 const app = express();
 
-// ALLOWED_ORIGINS (or the older CLIENT_ORIGIN) is a comma-separated list, so
-// the production domain and preview/custom domains can share one deployment.
-// An entry may contain `*` inside one hostname label, which matters for Vercel
-// previews: every preview build gets a fresh generated hostname that no fixed
-// list can name ahead of time. A bare `*` is rejected by lib/env.js.
-const { allowedOrigins } = env;
+// ALLOWED_ORIGINS (or the older CLIENT_ORIGIN) is a comma-separated list of
+// exact origins: the production domain plus any preview/branch URL that should
+// reach this API. Matching is exact on purpose. Any `*.vercel.app` pattern,
+// even one scoped to the team suffix, is satisfiable by another Vercel account
+// that names a project to fit it, and with credentialed CORS that would let it
+// act as the signed-in admin. lib/env.js refuses wildcards at startup.
+//
+// This deployment's own URLs (VERCEL_URL, VERCEL_BRANCH_URL,
+// VERCEL_PROJECT_PRODUCTION_URL) are added automatically: Vercel sets them per
+// deployment, so they only ever name hosts this project owns.
+const ownVercelOrigins = [
+  process.env.VERCEL_URL,
+  process.env.VERCEL_BRANCH_URL,
+  process.env.VERCEL_PROJECT_PRODUCTION_URL,
+]
+  .map((host) => host?.trim())
+  .filter(Boolean)
+  .map((host) => `https://${host}`);
 
-// `*` matches within one hostname label only, so `https://*.vercel.app` cannot
-// be satisfied by an attacker-controlled `https://evil.com/.vercel.app` style
-// host. Everything else is escaped literally.
-function originMatcher(pattern) {
-  const source = pattern
-    .split("*")
-    .map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
-    .join("[^./]*");
-  return new RegExp(`^${source}$`);
-}
-
-const originPatterns = allowedOrigins.map(originMatcher);
-const isAllowedOrigin = (origin) => originPatterns.some((re) => re.test(origin));
+const allowedOrigins = new Set([...env.allowedOrigins, ...ownVercelOrigins]);
+const isAllowedOrigin = (origin) => allowedOrigins.has(origin);
 
 // The admin session is an httpOnly cookie sent cross-origin, so CORS has to
 // echo the exact origin and allow credentials, and only for listed origins.

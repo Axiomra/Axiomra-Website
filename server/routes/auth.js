@@ -110,10 +110,8 @@ router.post("/forgot-password", async (req, res) => {
     const rawToken = user.issueResetToken();
     await user.save();
 
-    // A wildcard entry is a pattern, not a link target, so fall back to the
-    // first literal allowed origin.
-    const base = (env.ADMIN_PANEL_URL || env.allowedOrigins.find((o) => !o.includes("*")) || "")
-      .replace(/\/+$/, "");
+    // Fall back to the first allowed origin (the production domain by convention).
+    const base = (env.ADMIN_PANEL_URL || env.allowedOrigins[0] || "").replace(/\/+$/, "");
     const link = `${base}/admin/reset-password?token=${rawToken}&email=${encodeURIComponent(email)}`;
 
     const sent = await sendPasswordResetEmail({
@@ -229,7 +227,11 @@ router.post("/reset-password", async (req, res) => {
 router.get("/reset-requirements", async (req, res) => {
   try {
     const token = cleanString(req.query?.token, 128);
-    const fallback = { recoveryKeyRequired: true, recoveryKeyLength: RECOVERY_KEY_LENGTH, maxAttempts: MAX_KEY_ATTEMPTS };
+    const fallback = {
+      recoveryKeyRequired: true,
+      recoveryKeyLength: RECOVERY_KEY_LENGTH,
+      maxAttempts: MAX_KEY_ATTEMPTS,
+    };
     if (!token) return res.json(fallback);
 
     const user = await User.findOne({
@@ -243,7 +245,11 @@ router.get("/reset-requirements", async (req, res) => {
     });
   } catch (err) {
     console.error("Reset requirements lookup failed:", err.message);
-    return res.json({ recoveryKeyRequired: true, recoveryKeyLength: RECOVERY_KEY_LENGTH, maxAttempts: MAX_KEY_ATTEMPTS });
+    return res.json({
+      recoveryKeyRequired: true,
+      recoveryKeyLength: RECOVERY_KEY_LENGTH,
+      maxAttempts: MAX_KEY_ATTEMPTS,
+    });
   }
 });
 

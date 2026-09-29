@@ -26,6 +26,11 @@ describe("environment validation", () => {
 
   it.each([
     ["a bare *", { ALLOWED_ORIGINS: "*" }],
+    ["a vercel.app wildcard", { ALLOWED_ORIGINS: "https://axiomra-*.vercel.app" }],
+    [
+      "a team-scoped wildcard",
+      { ALLOWED_ORIGINS: "https://axiomra-*-hamzajiis-projects.vercel.app" },
+    ],
     ["an origin with a path", { ALLOWED_ORIGINS: "https://a.example/admin" }],
     ["a short JWT_SECRET", { ALLOWED_ORIGINS: "https://a.example", JWT_SECRET: "short" }],
     ["a non-redis REDIS_URL", { ALLOWED_ORIGINS: "https://a.example", REDIS_URL: "http://x" }],

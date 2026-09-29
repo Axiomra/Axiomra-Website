@@ -22,10 +22,10 @@ const optional = z
 const url = (name) =>
   optional.refine((v) => v === undefined || URL.canParse(v), `${name} must be an absolute URL`);
 
-// An origin is scheme://host[:port] with no path. `*` may stand in for part of
-// one hostname label (see originMatcher in app.js); a bare `*` is refused, because
-// with credentialed CORS it would let any site act as the signed-in admin.
-const ORIGIN_RE = /^https?:\/\/[a-z0-9*]([a-z0-9*.-]*[a-z0-9*])?(:\d{1,5})?$/i;
+// An origin is scheme://host[:port] with no path, and no wildcards at all:
+// app.js matches exactly, and any `*.vercel.app` pattern could be satisfied by
+// a project in someone else's Vercel account (see the note in app.js).
+const ORIGIN_RE = /^https?:\/\/[a-z0-9]([a-z0-9.-]*[a-z0-9])?(:\d{1,5})?$/i;
 
 const originList = z
   .string()
@@ -36,12 +36,13 @@ const originList = z
       .filter(Boolean)
   )
   .superRefine((list, ctx) => {
-    if (list.length === 0) ctx.addIssue({ code: "custom", message: "must list at least one origin" });
+    if (list.length === 0)
+      ctx.addIssue({ code: "custom", message: "must list at least one origin" });
     for (const origin of list) {
       if (!ORIGIN_RE.test(origin)) {
         ctx.addIssue({
           code: "custom",
-          message: `"${origin}" is not an origin (expected e.g. https://axiomra.co; a bare * is not allowed)`,
+          message: `"${origin}" is not an exact origin (expected e.g. https://axiomra.co; wildcards are not allowed)`,
         });
       }
     }
@@ -74,7 +75,9 @@ function load() {
     : parsed.error.issues.map((i) => `${i.path.join(".") || "env"}: ${i.message}`);
 
   const rawOrigins =
-    process.env.ALLOWED_ORIGINS?.trim() || process.env.CLIENT_ORIGIN?.trim() || "http://localhost:5173";
+    process.env.ALLOWED_ORIGINS?.trim() ||
+    process.env.CLIENT_ORIGIN?.trim() ||
+    "http://localhost:5173";
   const origins = originList.safeParse(rawOrigins);
   if (!origins.success) {
     for (const i of origins.error.issues) issues.push(`ALLOWED_ORIGINS: ${i.message}`);
