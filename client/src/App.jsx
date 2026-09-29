@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { Navbar } from "./components/ui/navbar";
 import Footer from "./components/Footer";
 import BookCallModal from "./components/BookCallModal";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { RenderedPagesContext } from "./seo/prerender-context";
 import { afterLoadIdle } from "./lib/idle";
 
@@ -135,10 +136,13 @@ function DeferredChat() {
   const [ready, setReady] = useState(false);
   useEffect(() => afterLoadIdle(() => setReady(true)), []);
   if (!ready) return null;
+  // A failed chunk here just means no chat, not a blank site.
   return (
-    <Suspense fallback={null}>
-      <ChatWidget />
-    </Suspense>
+    <ErrorBoundary fallback={null}>
+      <Suspense fallback={null}>
+        <ChatWidget />
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 
