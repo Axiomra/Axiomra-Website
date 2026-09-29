@@ -12,24 +12,12 @@
  */
 import { env } from "./env.js";
 import { redis } from "./rateLimit.js";
+import { priceFor } from "./chatConfig.js";
 
 const DAY_SECONDS = 24 * 60 * 60;
 
-// USD per 1M tokens (input, output). An unlisted model is priced at the most
-// expensive entry, so a CHAT_MODEL override can only make the cap stricter.
-const PRICES = {
-  "gpt-5": { input: 1.25, output: 10 },
-  "gpt-5-mini": { input: 0.25, output: 2 },
-  "gpt-5-nano": { input: 0.05, output: 0.4 },
-  "gpt-4.1-mini": { input: 0.4, output: 1.6 },
-  "gpt-4o-mini": { input: 0.15, output: 0.6 },
-};
-const FALLBACK_PRICE = PRICES["gpt-5"];
-
 // Tokenisers average ~4 characters per token for English; 3 errs high.
 const CHARS_PER_TOKEN_ESTIMATE = 3;
-
-export const priceFor = (model) => PRICES[model] ?? FALLBACK_PRICE;
 
 /** Cost in micro-dollars (1e-6 USD) of a number of tokens, rounded up. */
 export function costMicros(model, inputTokens, outputTokens) {

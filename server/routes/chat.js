@@ -3,10 +3,9 @@ import { Agent, run, user, setTracingDisabled } from "@openai/agents";
 import { z } from "zod";
 import { CHAT_SYSTEM_PROMPT } from "../lib/chatKnowledge.js";
 import { reserve, settle } from "../lib/chatBudget.js";
+import { CHAT_MODEL } from "../lib/chatConfig.js";
 
 const router = Router();
-
-const MODEL = process.env.CHAT_MODEL?.trim() || "gpt-5-mini";
 
 // Traces would be uploaded after every reply; a stateless FAQ chat does not need them.
 setTracingDisabled(true);
@@ -39,7 +38,7 @@ const HISTORY_NOTE =
 
 // Reasoning models reject sampling settings and vice versa, so the settings
 // follow the configured model family.
-const isReasoningModel = /^(gpt-5|o\d)/.test(MODEL);
+const isReasoningModel = /^(gpt-5|o\d)/.test(CHAT_MODEL);
 
 const MAX_OUTPUT_TOKENS = isReasoningModel ? 2048 : 700;
 const INSTRUCTIONS = CHAT_SYSTEM_PROMPT + HISTORY_NOTE;
@@ -51,7 +50,7 @@ const DAILY_CAP_REACHED =
 const agent = new Agent({
   name: "Axiomra Assistant",
   instructions: INSTRUCTIONS,
-  model: MODEL,
+  model: CHAT_MODEL,
   modelSettings: {
     // Replies are short by instruction; the cap bounds cost per turn.
     maxTokens: MAX_OUTPUT_TOKENS,
@@ -82,7 +81,7 @@ router.post("/", async (req, res) => {
   let reservation;
   try {
     reservation = await reserve({
-      model: MODEL,
+      model: CHAT_MODEL,
       inputChars:
         INSTRUCTIONS.length + parsed.data.messages.reduce((n, m) => n + m.content.length, 0),
       maxOutputTokens: MAX_OUTPUT_TOKENS,
