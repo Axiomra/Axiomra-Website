@@ -74,7 +74,17 @@ const TONE = {
 export default function Hero() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  // Slides whose <img> is mounted. All six sit in the viewport (only opacity
+  // hides them), so loading="lazy" would not hold any back: mount the active
+  // slide, and the next one halfway through its predecessor's turn.
+  const [mounted, setMounted] = useState(() => new Set([0]));
   const reduced = useReducedMotion();
+
+  useEffect(() => {
+    const next = (index + 1) % SLIDES.length;
+    const t = setTimeout(() => setMounted((m) => new Set([...m, index, next])), INTERVAL_MS / 2);
+    return () => clearTimeout(t);
+  }, [index]);
 
   useEffect(() => {
     if (paused || reduced) return;
@@ -107,21 +117,22 @@ export default function Hero() {
               i === index ? "opacity-100" : "opacity-0"
             }`}
           >
-            <img
-              // 960w only, no srcset, until real 1920px sources exist (see SLIDES).
-              src={src(s.id)}
-              alt={s.alt}
-              width={960}
-              height={540}
-              loading={i === 0 ? "eager" : "lazy"}
-              // React 18 only forwards the lowercase attribute.
-              // eslint-disable-next-line react/no-unknown-property
-              fetchpriority={i === 0 ? "high" : "low"}
-              decoding="async"
-              className={`h-full w-full object-cover ${
-                i === index && !reduced ? "hero-kenburns" : ""
-              }`}
-            />
+            {(i === index || mounted.has(i)) && (
+              <img
+                // 960w only, no srcset, until real 1920px sources exist (see SLIDES).
+                src={src(s.id)}
+                alt={s.alt}
+                width={960}
+                height={540}
+                // React 18 only forwards the lowercase attribute.
+                // eslint-disable-next-line react/no-unknown-property
+                fetchpriority={i === 0 ? "high" : "low"}
+                decoding="async"
+                className={`h-full w-full object-cover ${
+                  i === index && !reduced ? "hero-kenburns" : ""
+                }`}
+              />
+            )}
           </div>
         ))}
 
@@ -156,9 +167,9 @@ export default function Hero() {
             data-fade="2"
             className={`mx-auto mt-7 max-w-4xl text-lg leading-relaxed md:text-xl ${c.body} ${fade}`}
           >
-            Axiomra builds AI solutions around your business goals, data, and workflows. From process
-            automation to predictive insights, we help your team work more efficiently, make informed
-            decisions, and measure the value of AI in everyday operations.
+            Axiomra builds AI solutions around your business goals, data, and workflows. From
+            process automation to predictive insights, we help your team work more efficiently, make
+            informed decisions, and measure the value of AI in everyday operations.
           </p>
 
           <div data-fade="3" className="mt-9">
