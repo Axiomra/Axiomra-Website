@@ -6,7 +6,7 @@ import ChatWidget from "./ChatWidget";
 import RichText from "./richText";
 
 /** A fetch Response whose body streams the given server-sent events. */
-function sseResponse(events) {
+function sseResponse(events, headers = {}) {
   const body = new ReadableStream({
     start(controller) {
       const enc = new TextEncoder();
@@ -14,7 +14,10 @@ function sseResponse(events) {
       controller.close();
     },
   });
-  return new Response(body, { status: 200, headers: { "Content-Type": "text/event-stream" } });
+  return new Response(body, {
+    status: 200,
+    headers: { "Content-Type": "text/event-stream", ...headers },
+  });
 }
 
 afterEach(() => {
@@ -26,12 +29,18 @@ describe("ChatWidget", () => {
   it("opens from the launcher and streams a reply", async () => {
     const fetchMock = vi
       .spyOn(globalThis, "fetch")
-      .mockResolvedValue(
-        sseResponse([
-          { type: "text", text: "We build " },
-          { type: "text", text: "**AI systems**." },
-          { type: "done" },
-        ])
+      .mockResolvedValueOnce(
+        sseResponse(
+          [
+            { type: "text", text: "We build " },
+            { type: "text", text: "**AI systems**." },
+            { type: "done" },
+          ],
+          { "X-Conversation-Id": "conv-123" }
+        )
+      )
+      .mockResolvedValueOnce(
+        sseResponse([{ type: "text", text: "Usually 4 to 8 weeks." }, { type: "done" }])
       );
     const user = userEvent.setup();
     renderPage(<ChatWidget />);
@@ -45,8 +54,15 @@ describe("ChatWidget", () => {
     );
 
     expect(await screen.findByText("AI systems")).toBeInTheDocument();
-    const body = JSON.parse(fetchMock.mock.calls[0][1].body);
-    expect(body.messages).toEqual([{ role: "user", content: "What services do you offer?" }]);
+    // Only the new message travels; a new chat has no conversation id yet.
+    const first = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(first).toEqual({ message: "What services do you offer?" });
+
+    // The next turn carries the id the server minted on the first reply.
+    await user.type(screen.getByLabelText("Message Axiomra Assistant"), "How long?{Enter}");
+    expect(await screen.findByText("Usually 4 to 8 weeks.")).toBeInTheDocument();
+    const second = JSON.parse(fetchMock.mock.calls[1][1].body);
+    expect(second).toEqual({ message: "How long?", conversationId: "conv-123" });
   });
 
   it("shows the server's error and restores the draft", async () => {
