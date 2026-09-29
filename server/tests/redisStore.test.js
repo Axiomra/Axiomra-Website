@@ -41,7 +41,6 @@ describe("login limiter in production", () => {
   it("refuses sign-in rather than going unlimited when Redis is down", async () => {
     fake.failing = true;
     const res = await login(nextIp());
-    expect(res.status).toBeGreaterThanOrEqual(500);
-    expect(res.status).not.toBe(401);
+    expect(res.status).toBe(503);
   });
 });

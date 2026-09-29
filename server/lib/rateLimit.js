@@ -47,8 +47,10 @@ function store(name) {
 
 const byIp = (req) => ipKeyGenerator(req.ip);
 
+const STORE_DOWN = { error: "Service temporarily unavailable. Please try again shortly." };
+
 function limiter(name, { windowMs, limit, message, failOpen, ...rest }) {
-  return rateLimit({
+  const middleware = rateLimit({
     windowMs,
     limit,
     standardHeaders: "draft-7",
@@ -57,10 +59,20 @@ function limiter(name, { windowMs, limit, message, failOpen, ...rest }) {
     store: store(name),
     message: { error: message },
     // Store outage: the general API and contact form stay up, while
-    // credential endpoints refuse rather than go unlimited.
+    // credential endpoints and the paid chat refuse rather than go unlimited.
     passOnStoreError: failOpen,
     ...rest,
   });
+  if (failOpen) return middleware;
+
+  // Fail closed with an explicit 503. express-rate-limit hands a store error
+  // to next(err), which would otherwise surface as a generic 500.
+  return (req, res, next) =>
+    middleware(req, res, (err) => {
+      if (!err) return next();
+      console.error(`Rate limit store unavailable (${name}):`, err.message);
+      return res.status(503).json(STORE_DOWN);
+    });
 }
 
 export const apiLimiter = limiter("api", {
@@ -124,10 +136,11 @@ export const contactLimiter = limiter("contact", {
 });
 
 // Every chat turn is a paid model call, so it gets its own, tighter bucket on
-// top of the general API limit.
+// top of the general API limit, and fails closed: an unmetered chat during a
+// store outage is an open tap on the OpenAI bill.
 export const chatLimiter = limiter("chat", {
   windowMs: 15 * MINUTE,
   limit: 30,
   message: "You're sending messages quickly. Please wait a few minutes and try again.",
-  failOpen: true,
+  failOpen: false,
 });
