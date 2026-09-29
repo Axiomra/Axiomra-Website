@@ -431,17 +431,44 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
   const [open, setOpen] = useState(false);
   const [openSection, setOpenSection] = useState<MegaSection | null>(null);
 
+  const rootRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
   const close = () => {
     setOpen(false);
     setOpenSection(null);
   };
 
+  // Tap outside or Escape closes the panel; the toggle button handles taps on itself.
+  useEffect(() => {
+    if (!open) return;
+    const close = () => {
+      setOpen(false);
+      setOpenSection(null);
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) close();
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      close();
+      buttonRef.current?.focus();
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
   const panelFg = TONE.dark;
 
   return (
-    <div className="flex items-center gap-2 lg:hidden">
+    <div ref={rootRef} className="flex items-center gap-2 lg:hidden">
       <ThemeToggle className={open ? undefined : cn(fg.border, fg.link)} />
       <button
+        ref={buttonRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
@@ -550,7 +577,8 @@ export function Navbar({ className }: { className?: string }) {
 
   // On the contact page the whole bar is hidden until the cursor reaches the
   // top edge, so the glass form stays the clear focus. Everywhere else it
-  // behaves as before (fixed, always visible).
+  // behaves as before (fixed, always visible). Touch screens have no hover to
+  // reveal it with, so there the bar stays visible.
   const hoverReveal = pathname === "/contact";
 
   useEffect(() => {
@@ -577,7 +605,7 @@ export function Navbar({ className }: { className?: string }) {
         className={cn(
           "relative w-full border-b transition-all duration-300",
           hoverReveal &&
-            "-translate-y-full opacity-0 group-hover/rev:translate-y-0 group-hover/rev:opacity-100 group-focus-within/rev:translate-y-0 group-focus-within/rev:opacity-100",
+            "[@media(hover:hover)]:-translate-y-full [@media(hover:hover)]:opacity-0 group-hover/rev:translate-y-0 group-hover/rev:opacity-100 group-focus-within/rev:translate-y-0 group-focus-within/rev:opacity-100",
           transparent
             ? "border-transparent bg-transparent"
             : "border-inverse-fg/10 bg-inverse/95 shadow-card backdrop-blur",
