@@ -29,27 +29,41 @@ export default function AgenticServices() {
   const reduced = useReducedMotion();
   const items = services.items;
 
-  const [active, setActive] = useState(indexFromHash);
+  // Starts on the first layer, as the prerendered HTML does; a deep-linked
+  // layer is opened after hydration (below), since React would not patch the
+  // mismatched attributes.
+  const [active, setActive] = useState(0);
   // Only fetch the artwork for layers the visitor has actually opened, so the
   // section costs one image on load instead of eight.
-  const [loaded, setLoaded] = useState(() => new Set([indexFromHash()]));
+  const [loaded, setLoaded] = useState(() => new Set([0]));
   const panelRef = useRef(null);
 
-  const select = useCallback((index, { scrollIntoView = false } = {}) => {
+  useEffect(() => {
+    const index = indexFromHash();
+    if (!index) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one render after hydration
     setActive(index);
-    setLoaded((seen) => (seen.has(index) ? seen : new Set(seen).add(index)));
-    // On small screens the panel sits below the rail, so a tap near the bottom
-    // of a long list would otherwise update something off screen.
-    if (scrollIntoView && window.matchMedia("(max-width: 1023px)").matches) {
-      panelRef.current?.scrollIntoView({
-        behavior: reduced ? "auto" : "smooth",
-        block: "nearest",
-      });
-    }
-  }, [reduced]);
+    setLoaded((seen) => new Set(seen).add(index));
+  }, []);
+
+  const select = useCallback(
+    (index, { scrollIntoView = false } = {}) => {
+      setActive(index);
+      setLoaded((seen) => (seen.has(index) ? seen : new Set(seen).add(index)));
+      // On small screens the panel sits below the rail, so a tap near the bottom
+      // of a long list would otherwise update something off screen.
+      if (scrollIntoView && window.matchMedia("(max-width: 1023px)").matches) {
+        panelRef.current?.scrollIntoView({
+          behavior: reduced ? "auto" : "smooth",
+          block: "nearest",
+        });
+      }
+    },
+    [reduced]
+  );
 
   // Deep links: /…/agentic-ai-services#rag-as-a-service opens that layer. The
-  // first one is handled by the initial state above; this catches the rest.
+  // first one is handled by the mount effect above; this catches the rest.
   useEffect(() => {
     const onHashChange = () => select(indexFromHash());
     window.addEventListener("hashchange", onHashChange);
@@ -241,7 +255,11 @@ export default function AgenticServices() {
                           transition={{ duration: 0.35, delay: 0.1 + bulletIndex * 0.06 }}
                           className="flex items-start gap-2.5 text-sm text-content-dim md:text-base"
                         >
-                          <Check size={16} className="mt-1 shrink-0 text-brand" aria-hidden="true" />
+                          <Check
+                            size={16}
+                            className="mt-1 shrink-0 text-brand"
+                            aria-hidden="true"
+                          />
                           {bullet}
                         </motion.li>
                       ))}

@@ -1,18 +1,10 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense } from "react";
 import ErrorBoundary from "../ErrorBoundary";
 import useInView from "../../hooks/useInView";
+import useCanvasGate from "../../lib/useCanvasGate";
 
 const LatentCanvas = lazy(() => import("./LatentCanvas"));
 const TokenFlowCanvas = lazy(() => import("./TokenFlowCanvas"));
-
-function supportsWebGL() {
-  try {
-    const canvas = document.createElement("canvas");
-    return !!(canvas.getContext("webgl2") || canvas.getContext("webgl"));
-  } catch {
-    return false;
-  }
-}
 
 function StaticField({ className = "" }) {
   return (
@@ -30,35 +22,27 @@ function StaticField({ className = "" }) {
 
 /** Decorative WebGL backdrop for the Generative AI page. */
 export default function GenAiCanvas({ variant = "latent", className = "" }) {
-  const [webgl] = useState(supportsWebGL);
-  // A CSS media query cannot reach a WebGL render loop, so the opt-out is here.
-  const [reducedMotion] = useState(
-    () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
-  );
-
   const fallback = <StaticField className={className} />;
   const [hostRef, inView] = useInView();
   const frameloop = inView ? "always" : "never";
-
-  if (!webgl || reducedMotion) {
-    return (
-      <div className={`absolute inset-0 ${className}`} aria-hidden="true">
-        {fallback}
-      </div>
-    );
-  }
+  // Static first (server included), WebGL after load and once near the viewport.
+  const ready = useCanvasGate(inView);
 
   return (
     <div ref={hostRef} className={`absolute inset-0 ${className}`} aria-hidden="true">
-      <ErrorBoundary fallback={fallback}>
-        <Suspense fallback={fallback}>
-          {variant === "tokens" ? (
-            <TokenFlowCanvas frameloop={frameloop} />
-          ) : (
-            <LatentCanvas frameloop={frameloop} />
-          )}
-        </Suspense>
-      </ErrorBoundary>
+      {ready ? (
+        <ErrorBoundary fallback={fallback}>
+          <Suspense fallback={fallback}>
+            {variant === "tokens" ? (
+              <TokenFlowCanvas frameloop={frameloop} />
+            ) : (
+              <LatentCanvas frameloop={frameloop} />
+            )}
+          </Suspense>
+        </ErrorBoundary>
+      ) : (
+        fallback
+      )}
     </div>
   );
 }

@@ -9,7 +9,6 @@ import BinaryGrid from "../components/case-study/BinaryGrid";
 import MoleculeGraph from "../components/case-study/MoleculeGraph";
 import CategoryBadge from "../components/case-study/CategoryBadge";
 import BrandedImage from "../components/case-study/BrandedImage";
-import "../styles/case-study.css";
 import { caseStudies } from "../data/caseStudiesData";
 import { caseStudyPath, PORTFOLIO_PATH } from "../routes.constants";
 import Seo from "../seo/Seo";
@@ -101,7 +100,10 @@ function CaseStudy({ study }) {
         {study.challenge && (
           <Section id="challenge" title={label.challenge}>
             {study.challenge.intro && <p>{study.challenge.intro}</p>}
-            <LeadList items={study.challenge.items} className={study.challenge.intro ? "mt-6" : ""} />
+            <LeadList
+              items={study.challenge.items}
+              className={study.challenge.intro ? "mt-6" : ""}
+            />
           </Section>
         )}
 
@@ -141,14 +143,20 @@ function CaseStudy({ study }) {
               <div className="grid gap-12 lg:grid-cols-12">
                 <Flow steps={study.flow} className="lg:col-span-7" />
                 <div className="lg:col-span-5">
-                  <Figure image={study.flowImage} className="lg:sticky lg:top-28" sizes="(min-width: 1024px) 26rem, 100vw" />
+                  <Figure
+                    image={study.flowImage}
+                    className="lg:sticky lg:top-28"
+                    sizes="(min-width: 1024px) 26rem, 100vw"
+                  />
                 </div>
               </div>
             </Section>
           ) : (
             <Section id="how-it-works" title={label.flow}>
               <div className="relative">
-                {flowMolecule && <MoleculeGraph className="right-[calc(100%+3.5rem)] top-2 hidden xl:block" />}
+                {flowMolecule && (
+                  <MoleculeGraph className="right-[calc(100%+3.5rem)] top-2 hidden xl:block" />
+                )}
                 <Flow steps={study.flow} />
               </div>
             </Section>
@@ -174,7 +182,10 @@ function CaseStudy({ study }) {
           <Section id="principles" title={label.principles} wide>
             <ul className="grid gap-4 md:grid-cols-2">
               {study.principles.map((item) => (
-                <li key={item.title} className="rounded-xl2 border border-line bg-surface-card p-6 md:p-7">
+                <li
+                  key={item.title}
+                  className="rounded-xl2 border border-line bg-surface-card p-6 md:p-7"
+                >
                   <h3 className="font-semibold text-content">{item.title}</h3>
                   <p className="mt-2 text-base leading-relaxed text-content-dim">{item.text}</p>
                 </li>
@@ -187,13 +198,19 @@ function CaseStudy({ study }) {
           (study.nextSteps?.length > 0 ? (
             <div className="mx-auto grid max-w-3xl gap-12 border-t border-line pt-16 md:grid-cols-2 md:gap-10">
               <Reveal as="section" aria-labelledby="why-it-matters">
-                <h2 id="why-it-matters" className="font-display text-2xl font-semibold tracking-tight text-content">
+                <h2
+                  id="why-it-matters"
+                  className="font-display text-2xl font-semibold tracking-tight text-content"
+                >
                   {label.why}
                 </h2>
                 <p className="mt-4 leading-relaxed text-content-dim">{study.whyItMatters}</p>
               </Reveal>
               <Reveal as="section" aria-labelledby="next-enhancements" delay={0.08}>
-                <h2 id="next-enhancements" className="font-display text-2xl font-semibold tracking-tight text-content">
+                <h2
+                  id="next-enhancements"
+                  className="font-display text-2xl font-semibold tracking-tight text-content"
+                >
                   {label.next}
                 </h2>
                 <ul className="mt-4 space-y-2.5 text-content-dim">
@@ -209,17 +226,28 @@ function CaseStudy({ study }) {
               </Reveal>
             </div>
           ) : (
-            <Reveal as="section" aria-labelledby="why-it-matters" className="mx-auto max-w-3xl border-t border-line pt-16">
-              <h2 id="why-it-matters" className="font-display text-2xl font-semibold tracking-tight text-content">
+            <Reveal
+              as="section"
+              aria-labelledby="why-it-matters"
+              className="mx-auto max-w-3xl border-t border-line pt-16"
+            >
+              <h2
+                id="why-it-matters"
+                className="font-display text-2xl font-semibold tracking-tight text-content"
+              >
                 {label.why}
               </h2>
-              <p className="mt-4 text-base leading-relaxed text-content-dim md:text-lg">{study.whyItMatters}</p>
+              <p className="mt-4 text-base leading-relaxed text-content-dim md:text-lg">
+                {study.whyItMatters}
+              </p>
             </Reveal>
           ))}
 
         {study.tags?.length > 0 && (
           <div className="mx-auto mt-16 flex max-w-3xl flex-wrap items-center gap-2 border-t border-line pt-8">
-            <span className="mr-2 font-mono text-xs uppercase tracking-[0.18em] text-content-faint">Tags</span>
+            <span className="mr-2 font-mono text-xs uppercase tracking-[0.18em] text-content-faint">
+              Tags
+            </span>
             {study.tags.map((tag) => (
               <span
                 key={tag}
@@ -237,7 +265,11 @@ function CaseStudy({ study }) {
           <details className="group mt-16">
             <summary className="mx-auto flex max-w-3xl cursor-pointer list-none items-center justify-between gap-4 rounded-xl2 border border-line bg-surface-card px-6 py-5 font-display text-xl font-semibold tracking-tight text-content transition-colors hover:border-brand/40 focus-ring [&::-webkit-details-marker]:hidden">
               {label.tech}
-              <ChevronDown size={20} className="shrink-0 text-content-dim transition-transform group-open:rotate-180" aria-hidden="true" />
+              <ChevronDown
+                size={20}
+                className="shrink-0 text-content-dim transition-transform group-open:rotate-180"
+                aria-hidden="true"
+              />
             </summary>
             <div className="pt-16">
               {study.phases?.length > 0 && (
@@ -246,7 +278,10 @@ function CaseStudy({ study }) {
                     <MoleculeGraph className="right-[calc(100%+3.5rem)] top-2 hidden xl:block" />
                     <ol className="divide-y divide-line border-y border-line">
                       {study.phases.map((phase, i) => (
-                        <li key={phase} className="grid grid-cols-[3rem_1fr] items-baseline gap-2 py-5 sm:grid-cols-[4rem_1fr]">
+                        <li
+                          key={phase}
+                          className="grid grid-cols-[3rem_1fr] items-baseline gap-2 py-5 sm:grid-cols-[4rem_1fr]"
+                        >
                           <span data-num className="font-mono text-sm tracking-wider text-accent">
                             {String(i + 1).padStart(2, "0")}
                           </span>
@@ -286,7 +321,13 @@ function CaseStudy({ study }) {
 
       <MoreCaseStudies current={study.slug} />
 
-      <GradientCTA dark three title={cta.title} subtitle={cta.subtitle} buttonText={cta.buttonText} />
+      <GradientCTA
+        dark
+        three
+        title={cta.title}
+        subtitle={cta.subtitle}
+        buttonText={cta.buttonText}
+      />
     </article>
   );
 }
@@ -326,7 +367,11 @@ function Header({ study }) {
             to={PORTFOLIO_PATH}
             className="group inline-flex items-center gap-2 text-sm font-medium text-content-dim transition-colors hover:text-brand focus-ring"
           >
-            <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-0.5" aria-hidden="true" />
+            <ArrowLeft
+              size={16}
+              className="transition-transform group-hover:-translate-x-0.5"
+              aria-hidden="true"
+            />
             Back to portfolio
           </Link>
 
@@ -347,7 +392,9 @@ function Header({ study }) {
           >
             {study.title}
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-content-dim md:text-xl">{study.subtitle}</p>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-content-dim md:text-xl">
+            {study.subtitle}
+          </p>
         </div>
 
         <div className="lg:col-span-6">
@@ -367,14 +414,19 @@ function Header({ study }) {
           }`}
         >
           {study.stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col-reverse bg-surface-card px-6 py-7 md:px-8 md:py-9">
+            <div
+              key={stat.label}
+              className="flex flex-col-reverse bg-surface-card px-6 py-7 md:px-8 md:py-9"
+            >
               <dt className="mt-2 text-sm leading-snug text-content-dim md:text-base">
                 {stat.label}
                 {stat.target && (
                   <span className="mt-2 block text-xs text-content-faint">{TARGET_NOTE}</span>
                 )}
               </dt>
-              <dd className="font-display text-3xl font-semibold tracking-tight text-brand md:text-4xl">{stat.value}</dd>
+              <dd className="font-display text-3xl font-semibold tracking-tight text-brand md:text-4xl">
+                {stat.value}
+              </dd>
             </div>
           ))}
         </dl>
@@ -387,14 +439,20 @@ function Header({ study }) {
           {study.highlights.map((item) => (
             <li key={item.title} className="bg-surface-card px-6 py-7 md:px-8 md:py-9">
               {item.value ? (
-                <p className="mb-3 font-display text-3xl font-semibold tracking-tight text-brand md:text-4xl">{item.value}</p>
+                <p className="mb-3 font-display text-3xl font-semibold tracking-tight text-brand md:text-4xl">
+                  {item.value}
+                </p>
               ) : (
                 <span aria-hidden="true" className="mb-4 block h-1 w-8 rounded-full bg-brand" />
               )}
-              <p className="font-display text-xl font-semibold tracking-tight text-content md:text-2xl">{item.title}</p>
+              <p className="font-display text-xl font-semibold tracking-tight text-content md:text-2xl">
+                {item.title}
+              </p>
               <p className="mt-2 text-sm leading-snug text-content-dim md:text-base">{item.text}</p>
               {item.value && (
-                <span className="mt-2 block text-xs text-content-faint">By design, not a measured result</span>
+                <span className="mt-2 block text-xs text-content-faint">
+                  By design, not a measured result
+                </span>
               )}
             </li>
           ))}
@@ -416,13 +474,29 @@ function KeyDetails({ details }) {
       aria-labelledby="key-details"
       className="relative mt-20 overflow-hidden border-y border-[rgb(var(--cs-accent)/0.2)] bg-surface-subtle md:mt-28"
     >
-      <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[rgb(var(--cs-accent)/0.08)]" />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[rgb(var(--cs-accent)/0.08)]"
+      />
       {/* Both meshes stop 1rem short of the text column (72rem wide, 2rem
           padding) and the panel clips whatever runs past its edges. */}
-      <NetworkMesh seed={3} origin="right" className="-top-6 hidden lg:block" style={{ right: "calc(50% + 35rem)", color: MESH_COLOR }} />
-      <NetworkMesh seed={11} origin="left" className="-bottom-10 hidden lg:block" style={{ left: "calc(50% + 35rem)", color: MESH_COLOR }} />
+      <NetworkMesh
+        seed={3}
+        origin="right"
+        className="-top-6 hidden lg:block"
+        style={{ right: "calc(50% + 35rem)", color: MESH_COLOR }}
+      />
+      <NetworkMesh
+        seed={11}
+        origin="left"
+        className="-bottom-10 hidden lg:block"
+        style={{ left: "calc(50% + 35rem)", color: MESH_COLOR }}
+      />
       <div className="relative mx-auto max-w-5xl px-4 py-14 sm:px-6 md:py-20 lg:px-8">
-        <h2 id="key-details" className="font-mono text-xs uppercase tracking-[0.22em] text-content-faint">
+        <h2
+          id="key-details"
+          className="font-mono text-xs uppercase tracking-[0.22em] text-content-faint"
+        >
           Key details
         </h2>
         {details.summary && (
@@ -462,7 +536,9 @@ function Section({ id, title, wide = false, aside = null, children }) {
       >
         {title}
       </h2>
-      <div className="mt-6 space-y-5 text-base leading-relaxed text-content-dim md:text-lg">{children}</div>
+      <div className="mt-6 space-y-5 text-base leading-relaxed text-content-dim md:text-lg">
+        {children}
+      </div>
     </section>
   );
 }
@@ -489,7 +565,9 @@ function Insight({ text, label = "Primary objective" }) {
         >
           &rdquo;
         </span>
-        <p className="relative font-mono text-xs uppercase tracking-[0.22em] text-accent-vivid">{label}</p>
+        <p className="relative font-mono text-xs uppercase tracking-[0.22em] text-accent-vivid">
+          {label}
+        </p>
         <blockquote className="relative mt-4 font-display text-2xl font-medium leading-snug md:text-3xl">
           {text}
         </blockquote>
@@ -504,27 +582,42 @@ function Flow({ steps, className = "" }) {
       {steps.map((step, i) => (
         <li key={step.title} className="relative grid grid-cols-[2.5rem_1fr] gap-5 pb-9 last:pb-0">
           {i < steps.length - 1 && (
-            <span aria-hidden="true" className="absolute bottom-0 left-5 top-11 w-px bg-line-strong" />
+            <span
+              aria-hidden="true"
+              className="absolute bottom-0 left-5 top-11 w-px bg-line-strong"
+            />
           )}
           {step.checkpoint ? (
-            <span data-num className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-white shadow-card">
+            <span
+              data-num
+              className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-white shadow-card"
+            >
               <UserCheck size={18} strokeWidth={2} aria-hidden="true" />
               <span className="sr-only">{i + 1}</span>
             </span>
           ) : (
-            <span data-num className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-brand/40 bg-surface font-mono text-sm font-medium text-brand">
+            <span
+              data-num
+              className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-brand/40 bg-surface font-mono text-sm font-medium text-brand"
+            >
               {i + 1}
             </span>
           )}
           <div
             className={
-              step.checkpoint ? "-mt-1 rounded-xl2 border border-accent/35 bg-accent/[0.07] px-4 pb-4 pt-2.5" : "pt-1.5"
+              step.checkpoint
+                ? "-mt-1 rounded-xl2 border border-accent/35 bg-accent/[0.07] px-4 pb-4 pt-2.5"
+                : "pt-1.5"
             }
           >
             {step.checkpoint && (
-              <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-accent">Human checkpoint</p>
+              <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-accent">
+                Human checkpoint
+              </p>
             )}
-            <h3 className={`font-semibold text-content ${step.checkpoint ? "mt-1" : ""}`}>{step.title}</h3>
+            <h3 className={`font-semibold text-content ${step.checkpoint ? "mt-1" : ""}`}>
+              {step.title}
+            </h3>
             <p className="mt-1.5 text-base leading-relaxed text-content-dim">{step.text}</p>
           </div>
         </li>
@@ -598,7 +691,10 @@ function LeadList({ items, className = "" }) {
     <ul className={`space-y-4 ${className}`}>
       {items.map((item) => (
         <li key={item.lead ?? item.text} className="flex gap-4">
-          <span aria-hidden="true" className="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full border-2 border-brand" />
+          <span
+            aria-hidden="true"
+            className="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full border-2 border-brand"
+          />
           <span>
             {item.lead && (
               <>
@@ -641,7 +737,10 @@ function MoreCaseStudies({ current }) {
   return (
     <section aria-labelledby="more-case-studies" className="border-t border-line bg-surface-subtle">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
-        <h2 id="more-case-studies" className="font-display text-2xl font-semibold tracking-tight text-content md:text-3xl">
+        <h2
+          id="more-case-studies"
+          className="font-display text-2xl font-semibold tracking-tight text-content md:text-3xl"
+        >
           More case studies
         </h2>
         <ul className="mt-8 grid gap-6 md:grid-cols-2">
@@ -666,10 +765,16 @@ function MoreCaseStudies({ current }) {
                       </span>
                     )}
                   </p>
-                  <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-content">{other.title}</h3>
+                  <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-content">
+                    {other.title}
+                  </h3>
                   <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold text-brand">
                     Read case study
-                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-0.5"
+                      aria-hidden="true"
+                    />
                   </span>
                 </div>
               </Link>
@@ -700,7 +805,9 @@ function OutcomeTable({ rows }) {
   return (
     <div className="mt-8">
       <table className="w-full border-separate border-spacing-0 text-left text-base md:overflow-hidden md:rounded-xl2 md:border md:border-line">
-        <caption className="sr-only">Outcome framework: traditional process compared with the AI-agent model</caption>
+        <caption className="sr-only">
+          Outcome framework: traditional process compared with the AI-agent model
+        </caption>
         <thead className="sr-only md:not-sr-only md:table-header-group">
           <tr>
             {["Metric", "Traditional", "AI-Agent"].map((h) => (
@@ -774,7 +881,11 @@ function Figure({ image, className = "", sizes = "(min-width: 1024px) 48rem, 100
   return (
     // A <figure> so useStaggerReveal picks it up with the section's text.
     <figure className={className}>
-      <BrandedImage image={image} sizes={sizes} className="w-full rounded-xl2 shadow-card ring-1 ring-line" />
+      <BrandedImage
+        image={image}
+        sizes={sizes}
+        className="w-full rounded-xl2 shadow-card ring-1 ring-line"
+      />
     </figure>
   );
 }

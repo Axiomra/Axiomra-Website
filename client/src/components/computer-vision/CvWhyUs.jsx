@@ -50,7 +50,7 @@ export default function CvWhyUs() {
           {/* Stat tiles flip top-to-bottom on hover: the number is the hook, the
               sentence behind it is the proof. Both faces sit in the same 3D
               box, so the tile never changes size mid-flip. */}
-          <dl className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             {whyUs.stats.map((s, i) => (
               <motion.div
                 key={s.label}
@@ -64,15 +64,16 @@ export default function CvWhyUs() {
                 <div className="relative h-full w-full transition-transform duration-[650ms] ease-[cubic-bezier(0.16,1,0.3,1)] [transform-style:preserve-3d] group-hover:[transform:rotateX(-180deg)] group-focus-visible:[transform:rotateX(-180deg)]">
                   {/* Front */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl2 border border-line bg-surface-card px-6 text-center [backface-visibility:hidden]">
-                    <dt className="sr-only">{s.label}</dt>
-                    <dd>
+                    {/* A plain div, not dt/dd: the flip wrappers would sit
+                        between <dl> and its items, which is invalid markup. */}
+                    <div>
                       <span className="block font-display text-3xl font-semibold text-brand md:text-4xl">
                         {s.value}
                       </span>
                       <span className="mt-2 block text-sm text-content-dim md:text-base">
                         {s.label}
                       </span>
-                    </dd>
+                    </div>
                   </div>
 
                   {/* Back, pre-rotated so it reads upright once the tile lands. */}
@@ -90,7 +91,7 @@ export default function CvWhyUs() {
                 </div>
               </motion.div>
             ))}
-          </dl>
+          </div>
         </div>
 
         <motion.h3

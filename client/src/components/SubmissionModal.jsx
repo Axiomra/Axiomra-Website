@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import useMounted from "../lib/useMounted";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, Clock, Mail, X } from "lucide-react";
 
@@ -26,6 +27,7 @@ const ROW_ORDER = [
 
 export default function SubmissionModal({ open, submission, onClose }) {
   const closeRef = useRef(null);
+  const mounted = useMounted();
 
   // Escape must close it, and focus has to land inside or a keyboard user is
   // left tabbing through the page behind the overlay.
@@ -52,6 +54,8 @@ export default function SubmissionModal({ open, submission, onClose }) {
   // Portalled to <body>: both callers sit inside an animated form, and a
   // transformed ancestor turns position:fixed into position:absolute, which
   // would anchor the overlay to the form instead of the viewport.
+  // There is no <body> to portal into on the server; it starts closed anyway.
+  if (!mounted) return null;
   return createPortal(
     <AnimatePresence>
       {open && (

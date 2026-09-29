@@ -27,7 +27,7 @@ export default function AiDevBenefits() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
               >
-                <span className="inline-flex h-16 w-16 items-center justify-center rounded-xl2 bg-cta-gradient text-inverse">
+                <span className="inline-flex h-16 w-16 items-center justify-center rounded-xl2 bg-assistant text-assistant-ink-soft">
                   <Icon size={28} aria-hidden="true" />
                 </span>
                 <h3 className="mt-7 font-display text-2xl font-semibold md:text-3xl">

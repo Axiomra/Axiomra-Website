@@ -1,0 +1,1042 @@
+{
+  "/": {
+    "mobile": {
+      "perf": 38,
+      "a11y": 99,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3906,
+      "lcp": 6236,
+      "tbt": 7516,
+      "cls": 0,
+      "si": 4058,
+      "bytes": 874
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 99,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 803,
+      "lcp": 1223,
+      "tbt": 90,
+      "cls": 0,
+      "si": 1090,
+      "bytes": 899
+    }
+  },
+  "/about": {
+    "mobile": {
+      "perf": 39,
+      "a11y": 99,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 2676,
+      "lcp": 8095,
+      "tbt": 2216,
+      "cls": 0,
+      "si": 5292,
+      "bytes": 1982
+    },
+    "desktop": {
+      "perf": 92,
+      "a11y": 99,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 689,
+      "lcp": 1595,
+      "tbt": 34,
+      "cls": 0,
+      "si": 1571,
+      "bytes": 1982
+    }
+  },
+  "/tech": {
+    "mobile": {
+      "perf": 41,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3498,
+      "lcp": 5898,
+      "tbt": 2701,
+      "cls": 0,
+      "si": 3688,
+      "bytes": 843
+    },
+    "desktop": {
+      "perf": 97,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 676,
+      "lcp": 1140,
+      "tbt": 40,
+      "cls": 0,
+      "si": 1123,
+      "bytes": 843
+    }
+  },
+  "/faqs": {
+    "mobile": {
+      "perf": 50,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 2546,
+      "lcp": 5782,
+      "tbt": 1315,
+      "cls": 0,
+      "si": 3212,
+      "bytes": 792
+    },
+    "desktop": {
+      "perf": 97,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 664,
+      "lcp": 1077,
+      "tbt": 108,
+      "cls": 0,
+      "si": 981,
+      "bytes": 792
+    }
+  },
+  "/contact": {
+    "mobile": {
+      "perf": 46,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3598,
+      "lcp": 4749,
+      "tbt": 2391,
+      "cls": 0,
+      "si": 3598,
+      "bytes": 582
+    },
+    "desktop": {
+      "perf": 94,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 716,
+      "lcp": 1063,
+      "tbt": 150,
+      "cls": 0,
+      "si": 1145,
+      "bytes": 582
+    }
+  },
+  "/portfolio": {
+    "mobile": {
+      "perf": 33,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3465,
+      "lcp": 8612,
+      "tbt": 3929,
+      "cls": 0,
+      "si": 6210,
+      "bytes": 2140
+    },
+    "desktop": {
+      "perf": 92,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 681,
+      "lcp": 1530,
+      "tbt": 64,
+      "cls": 0,
+      "si": 1740,
+      "bytes": 2140
+    }
+  },
+  "/ai-services-and-solutions": {
+    "mobile": {
+      "perf": 36,
+      "a11y": 99,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3296,
+      "lcp": 8540,
+      "tbt": 2664,
+      "cls": 0,
+      "si": 5426,
+      "bytes": 2531
+    },
+    "desktop": {
+      "perf": 95,
+      "a11y": 99,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 686,
+      "lcp": 1367,
+      "tbt": 39,
+      "cls": 0,
+      "si": 1255,
+      "bytes": 1485
+    }
+  },
+  "/ai-services-and-solutions/ai-development-services": {
+    "mobile": {
+      "perf": 61,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 92,
+      "fcp": 2764,
+      "lcp": 7301,
+      "tbt": 406,
+      "cls": 0,
+      "si": 3743,
+      "bytes": 1520
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 92,
+      "fcp": 676,
+      "lcp": 1306,
+      "tbt": 22,
+      "cls": 0,
+      "si": 913,
+      "bytes": 1520
+    }
+  },
+  "/ai-services-and-solutions/generative-ai-services": {
+    "mobile": {
+      "perf": 37,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 2762,
+      "lcp": 8147,
+      "tbt": 4316,
+      "cls": 0,
+      "si": 5627,
+      "bytes": 2022
+    },
+    "desktop": {
+      "perf": 93,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 667,
+      "lcp": 1511,
+      "tbt": 52,
+      "cls": 0,
+      "si": 1537,
+      "bytes": 2022
+    }
+  },
+  "/ai-services-and-solutions/agentic-ai-services": {
+    "mobile": {
+      "perf": 46,
+      "a11y": 92,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3040,
+      "lcp": 10002,
+      "tbt": 883,
+      "cls": 0,
+      "si": 5132,
+      "bytes": 2943
+    },
+    "desktop": {
+      "perf": 91,
+      "a11y": 92,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 712,
+      "lcp": 1720,
+      "tbt": 51,
+      "cls": 0,
+      "si": 1670,
+      "bytes": 2947
+    }
+  },
+  "/ai-services-and-solutions/computer-vision-services": {
+    "mobile": {
+      "perf": 39,
+      "a11y": 85,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3346,
+      "lcp": 6861,
+      "tbt": 3079,
+      "cls": 0,
+      "si": 4441,
+      "bytes": 2150
+    },
+    "desktop": {
+      "perf": 78,
+      "a11y": 85,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 695,
+      "lcp": 1286,
+      "tbt": 409,
+      "cls": 0,
+      "si": 1311,
+      "bytes": 2150
+    }
+  },
+  "/ai-services-and-solutions/natural-language-processing-services": {
+    "mobile": {
+      "perf": 64,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3430,
+      "lcp": 8592,
+      "tbt": 227,
+      "cls": 0,
+      "si": 3430,
+      "bytes": 3869
+    },
+    "desktop": {
+      "perf": 95,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 679,
+      "lcp": 1508,
+      "tbt": 9,
+      "cls": 0,
+      "si": 956,
+      "bytes": 3869
+    }
+  },
+  "/industries": {
+    "mobile": {
+      "perf": 39,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3490,
+      "lcp": 10133,
+      "tbt": 1471,
+      "cls": 0,
+      "si": 5242,
+      "bytes": 4477
+    },
+    "desktop": {
+      "perf": 92,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 687,
+      "lcp": 1700,
+      "tbt": 25,
+      "cls": 0,
+      "si": 1328,
+      "bytes": 4477
+    }
+  },
+  "/industries/fashion": {
+    "mobile": {
+      "perf": 38,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3036,
+      "lcp": 8796,
+      "tbt": 3348,
+      "cls": 0,
+      "si": 4433,
+      "bytes": 4004
+    },
+    "desktop": {
+      "perf": 53,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 713,
+      "lcp": 1752,
+      "tbt": 1484,
+      "cls": 0,
+      "si": 12483,
+      "bytes": 3592
+    }
+  },
+  "/industries/sports": {
+    "mobile": {
+      "perf": 37,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3096,
+      "lcp": 9862,
+      "tbt": 3080,
+      "cls": 0,
+      "si": 4899,
+      "bytes": 7664
+    },
+    "desktop": {
+      "perf": 56,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 711,
+      "lcp": 1757,
+      "tbt": 775,
+      "cls": 0,
+      "si": 6021,
+      "bytes": 8675
+    }
+  },
+  "/industries/education": {
+    "mobile": {
+      "perf": 37,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3073,
+      "lcp": 9994,
+      "tbt": 5456,
+      "cls": 0,
+      "si": 4427,
+      "bytes": 4288
+    },
+    "desktop": {
+      "perf": 53,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 717,
+      "lcp": 1747,
+      "tbt": 5474,
+      "cls": 0,
+      "si": 11276,
+      "bytes": 4525
+    }
+  },
+  "/industries/healthcare": {
+    "mobile": {
+      "perf": 36,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3116,
+      "lcp": 9346,
+      "tbt": 3549,
+      "cls": 0,
+      "si": 5392,
+      "bytes": 3878
+    },
+    "desktop": {
+      "perf": 55,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 698,
+      "lcp": 1590,
+      "tbt": 1201,
+      "cls": 0,
+      "si": 11826,
+      "bytes": 3490
+    }
+  },
+  "/industries/real-estate": {
+    "mobile": {
+      "perf": 35,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3042,
+      "lcp": 9570,
+      "tbt": 3530,
+      "cls": 0,
+      "si": 5597,
+      "bytes": 3946
+    },
+    "desktop": {
+      "perf": 66,
+      "a11y": 99,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 697,
+      "lcp": 1690,
+      "tbt": 405,
+      "cls": 0,
+      "si": 6806,
+      "bytes": 3838
+    }
+  },
+  "/industries/retail": {
+    "mobile": {
+      "perf": 34,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3665,
+      "lcp": 10122,
+      "tbt": 2811,
+      "cls": 0,
+      "si": 5934,
+      "bytes": 2833
+    },
+    "desktop": {
+      "perf": 90,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 746,
+      "lcp": 1802,
+      "tbt": 23,
+      "cls": 0,
+      "si": 1574,
+      "bytes": 3824
+    }
+  },
+  "/industries/marketing": {
+    "mobile": {
+      "perf": 37,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3005,
+      "lcp": 8942,
+      "tbt": 3845,
+      "cls": 0,
+      "si": 4941,
+      "bytes": 3884
+    },
+    "desktop": {
+      "perf": 54,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 694,
+      "lcp": 1621,
+      "tbt": 7906,
+      "cls": 0,
+      "si": 12443,
+      "bytes": 3156
+    }
+  },
+  "/industries/supply-chain": {
+    "mobile": {
+      "perf": 36,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3073,
+      "lcp": 10091,
+      "tbt": 2415,
+      "cls": 0,
+      "si": 5737,
+      "bytes": 4910
+    },
+    "desktop": {
+      "perf": 92,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 691,
+      "lcp": 1703,
+      "tbt": 22,
+      "cls": 0,
+      "si": 1454,
+      "bytes": 5353
+    }
+  },
+  "/industries/insurance": {
+    "mobile": {
+      "perf": 35,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3048,
+      "lcp": 9351,
+      "tbt": 12258,
+      "cls": 0,
+      "si": 5719,
+      "bytes": 3912
+    },
+    "desktop": {
+      "perf": 54,
+      "a11y": 98,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 695,
+      "lcp": 1653,
+      "tbt": 3187,
+      "cls": 0,
+      "si": 11357,
+      "bytes": 3764
+    }
+  },
+  "/industries/finance": {
+    "mobile": {
+      "perf": 37,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3058,
+      "lcp": 9593,
+      "tbt": 3191,
+      "cls": 0,
+      "si": 4706,
+      "bytes": 4076
+    },
+    "desktop": {
+      "perf": 92,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 715,
+      "lcp": 1680,
+      "tbt": 29,
+      "cls": 0,
+      "si": 1319,
+      "bytes": 4336
+    }
+  },
+  "/industries/legal": {
+    "mobile": {
+      "perf": 37,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3048,
+      "lcp": 9536,
+      "tbt": 2984,
+      "cls": 0,
+      "si": 4964,
+      "bytes": 4787
+    },
+    "desktop": {
+      "perf": 88,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 692,
+      "lcp": 1719,
+      "tbt": 162,
+      "cls": 0,
+      "si": 1242,
+      "bytes": 4787
+    }
+  },
+  "/industries/transportation": {
+    "mobile": {
+      "perf": 39,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3573,
+      "lcp": 11936,
+      "tbt": 1327,
+      "cls": 0,
+      "si": 5654,
+      "bytes": 4883
+    },
+    "desktop": {
+      "perf": 90,
+      "a11y": 95,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 612,
+      "lcp": 1790,
+      "tbt": 98,
+      "cls": 0,
+      "si": 1465,
+      "bytes": 1935
+    }
+  },
+  "/case-studies/axiomra-ai-sales-agent": {
+    "mobile": {
+      "perf": 70,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 2882,
+      "lcp": 7100,
+      "tbt": 110,
+      "cls": 0,
+      "si": 3559,
+      "bytes": 1342
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 664,
+      "lcp": 1336,
+      "tbt": 0,
+      "cls": 0,
+      "si": 853,
+      "bytes": 1342
+    }
+  },
+  "/case-studies/healthcare-patient-intake-triage-ai-agent": {
+    "mobile": {
+      "perf": 71,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 2923,
+      "lcp": 6865,
+      "tbt": 82,
+      "cls": 0,
+      "si": 3142,
+      "bytes": 1300
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 706,
+      "lcp": 1353,
+      "tbt": 13,
+      "cls": 0,
+      "si": 832,
+      "bytes": 1300
+    }
+  },
+  "/case-studies/healthcare-chatbot-virtual-assistant": {
+    "mobile": {
+      "perf": 63,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3426,
+      "lcp": 7155,
+      "tbt": 291,
+      "cls": 0,
+      "si": 3426,
+      "bytes": 1334
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 665,
+      "lcp": 1335,
+      "tbt": 0,
+      "cls": 0,
+      "si": 761,
+      "bytes": 1334
+    }
+  },
+  "/case-studies/healthcare-medical-imaging-disease-identification": {
+    "mobile": {
+      "perf": 65,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 2937,
+      "lcp": 7130,
+      "tbt": 291,
+      "cls": 0,
+      "si": 3181,
+      "bytes": 1333
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 685,
+      "lcp": 1328,
+      "tbt": 0,
+      "cls": 0,
+      "si": 888,
+      "bytes": 1333
+    }
+  },
+  "/case-studies/ai-physical-therapy-pose-estimation": {
+    "mobile": {
+      "perf": 69,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3385,
+      "lcp": 7077,
+      "tbt": 90,
+      "cls": 0,
+      "si": 3385,
+      "bytes": 1337
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 678,
+      "lcp": 1352,
+      "tbt": 0,
+      "cls": 0,
+      "si": 932,
+      "bytes": 1337
+    }
+  },
+  "/case-studies/healthcare-readmission-risk-prediction": {
+    "mobile": {
+      "perf": 69,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3315,
+      "lcp": 7167,
+      "tbt": 106,
+      "cls": 0,
+      "si": 3315,
+      "bytes": 1329
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 671,
+      "lcp": 1359,
+      "tbt": 0,
+      "cls": 0,
+      "si": 1043,
+      "bytes": 1329
+    }
+  },
+  "/case-studies/fintech-autonomous-financial-advisor-ai-agent": {
+    "mobile": {
+      "perf": 65,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 2969,
+      "lcp": 7147,
+      "tbt": 273,
+      "cls": 0,
+      "si": 3447,
+      "bytes": 1328
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 664,
+      "lcp": 1336,
+      "tbt": 0,
+      "cls": 0,
+      "si": 901,
+      "bytes": 1328
+    }
+  },
+  "/case-studies/fintech-ai-fraud-detection-anomalous-transactions": {
+    "mobile": {
+      "perf": 66,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3413,
+      "lcp": 7064,
+      "tbt": 202,
+      "cls": 0,
+      "si": 3413,
+      "bytes": 1318
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 694,
+      "lcp": 1343,
+      "tbt": 20,
+      "cls": 0,
+      "si": 929,
+      "bytes": 1318
+    }
+  },
+  "/case-studies/fintech-kyc-document-processing-onboarding-automation": {
+    "mobile": {
+      "perf": 68,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3376,
+      "lcp": 7219,
+      "tbt": 145,
+      "cls": 0,
+      "si": 3376,
+      "bytes": 1316
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 664,
+      "lcp": 1339,
+      "tbt": 0,
+      "cls": 0,
+      "si": 910,
+      "bytes": 1316
+    }
+  },
+  "/case-studies/retail-in-store-ai-shopping-assistant": {
+    "mobile": {
+      "perf": 62,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 2997,
+      "lcp": 7348,
+      "tbt": 356,
+      "cls": 0,
+      "si": 2997,
+      "bytes": 1386
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 674,
+      "lcp": 1368,
+      "tbt": 17,
+      "cls": 0,
+      "si": 890,
+      "bytes": 1386
+    }
+  },
+  "/case-studies/fintech-regulatory-document-analysis-compliance-nlp": {
+    "mobile": {
+      "perf": 68,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 2922,
+      "lcp": 7035,
+      "tbt": 206,
+      "cls": 0,
+      "si": 2922,
+      "bytes": 1316
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 676,
+      "lcp": 1337,
+      "tbt": 0,
+      "cls": 0,
+      "si": 931,
+      "bytes": 1316
+    }
+  },
+  "/case-studies/retail-ai-personalized-marketing": {
+    "mobile": {
+      "perf": 68,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3309,
+      "lcp": 7249,
+      "tbt": 123,
+      "cls": 0,
+      "si": 3309,
+      "bytes": 1341
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 679,
+      "lcp": 1313,
+      "tbt": 0,
+      "cls": 0,
+      "si": 773,
+      "bytes": 1341
+    }
+  },
+  "/case-studies/fintech-machine-learning-credit-scoring": {
+    "mobile": {
+      "perf": 70,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 2891,
+      "lcp": 7015,
+      "tbt": 136,
+      "cls": 0,
+      "si": 2891,
+      "bytes": 1330
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 673,
+      "lcp": 1327,
+      "tbt": 0,
+      "cls": 0,
+      "si": 875,
+      "bytes": 1330
+    }
+  },
+  "/case-studies/retail-ai-inventory-demand-forecasting": {
+    "mobile": {
+      "perf": 60,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3458,
+      "lcp": 7471,
+      "tbt": 373,
+      "cls": 0,
+      "si": 3458,
+      "bytes": 1354
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 694,
+      "lcp": 1379,
+      "tbt": 6,
+      "cls": 0,
+      "si": 848,
+      "bytes": 1354
+    }
+  },
+  "/case-studies/retail-dynamic-pricing-optimization": {
+    "mobile": {
+      "perf": 67,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 3356,
+      "lcp": 7419,
+      "tbt": 146,
+      "cls": 0,
+      "si": 3356,
+      "bytes": 1387
+    },
+    "desktop": {
+      "perf": 96,
+      "a11y": 94,
+      "bp": 100,
+      "seo": 100,
+      "fcp": 675,
+      "lcp": 1379,
+      "tbt": 0,
+      "cls": 0,
+      "si": 906,
+      "bytes": 1387
+    }
+  }
+}

@@ -1,0 +1,8 @@
+# Lighthouse budgets (client/lighthouserc.cjs), only when client/ changed since
+# the last push. Takes a few minutes; `git push --no-verify` skips it.
+if git rev-parse -q --verify '@{push}' >/dev/null && git diff --quiet '@{push}' HEAD -- client; then
+  exit 0
+fi
+# The build refuses to run without an API origin; the value only matters for
+# what gets inlined, not for the measurements.
+VITE_API_URL="${VITE_API_URL:-https://axiomra-server.vercel.app}" npm --prefix client run perf

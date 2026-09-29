@@ -1,4 +1,5 @@
 import {
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -25,7 +26,7 @@ import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import logoLight from "@/assets/logo-light.webp";
 import logoDark from "@/assets/logo-dark.webp";
 import ThemeToggle from "@/components/ThemeToggle";
-
+import { HeroToneContext } from "@/seo/prerender-context";
 
 /** Bar height in px, `h-16`. Used to decide when the hero is fully behind it. */
 const NAV_HEIGHT = 64;
@@ -33,18 +34,21 @@ const NAV_HEIGHT = 64;
 type Tone = "dark" | "light";
 
 /** Foreground class sets for the two backdrops the bar can sit on. */
-const TONE: Record<Tone, {
-  logo: string;
-  link: string;
-  linkActive: string;
-  strong: string;
-  softer: string;
-  border: string;
-  borderStrong: string;
-  hoverBg: string;
-  hover: string;
-  panel: string;
-}> = {
+const TONE: Record<
+  Tone,
+  {
+    logo: string;
+    link: string;
+    linkActive: string;
+    strong: string;
+    softer: string;
+    border: string;
+    borderStrong: string;
+    hoverBg: string;
+    hover: string;
+    panel: string;
+  }
+> = {
   dark: {
     logo: logoLight,
     link: "text-inverse-fg/80 hover:text-accent-vivid",
@@ -74,9 +78,20 @@ const TONE: Record<Tone, {
 /** Tracks whether the bar is still floating over a tagged hero, and which tone that hero wants. */
 function useNavTone() {
   const { pathname } = useLocation();
-  const [state, setState] = useState<{ overHero: boolean; tone: Tone }>({
-    overHero: false,
-    tone: "dark",
+  const prerenderTone = useContext(HeroToneContext) as Tone | null;
+  // A prerendered page loads at the top of its hero, so the prerender draws the
+  // bar transparent over it. Hydration has to start from that same state, and
+  // reads it back from the hero already in the DOM. A client-only mount finds
+  // no hero yet and starts solid, as before; the effect below corrects both.
+  const [state, setState] = useState<{ overHero: boolean; tone: Tone }>(() => {
+    const hero =
+      typeof document === "undefined"
+        ? null
+        : document.querySelector<HTMLElement>("[data-nav-tone]")?.dataset.navTone;
+    const tone = hero ?? prerenderTone;
+    return tone
+      ? { overHero: true, tone: tone === "light" ? "light" : "dark" }
+      : { overHero: false, tone: "dark" };
   });
 
   useEffect(() => {
@@ -110,28 +125,96 @@ function useNavTone() {
 }
 
 const serviceItems = [
-  { label: "AI Development", description: "Custom AI software, agents & LLM integration", href: `${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}` },
-  { label: "Generative AI", description: "Text, image & video generation at scale", href: `${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}` },
-  { label: "Agentic AI", description: "Autonomous agents for real workflows", href: `${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}` },
-  { label: "Computer Vision", description: "Detection, recognition & visual inspection", href: `${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}` },
-  { label: "NLP", description: "Search, chatbots & document understanding", href: `${SERVICES_BASE_PATH}/${NLP_SLUG}` },
+  {
+    label: "AI Development",
+    description: "Custom AI software, agents & LLM integration",
+    href: `${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`,
+  },
+  {
+    label: "Generative AI",
+    description: "Text, image & video generation at scale",
+    href: `${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}`,
+  },
+  {
+    label: "Agentic AI",
+    description: "Autonomous agents for real workflows",
+    href: `${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`,
+  },
+  {
+    label: "Computer Vision",
+    description: "Detection, recognition & visual inspection",
+    href: `${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}`,
+  },
+  {
+    label: "NLP",
+    description: "Search, chatbots & document understanding",
+    href: `${SERVICES_BASE_PATH}/${NLP_SLUG}`,
+  },
 ];
 
 // Verticals with a built page link straight to it; the rest deep-link into the
 // industries index, so nobody lands on a placeholder from the top nav.
 const industryItems = [
-  { label: "Fashion", description: "Design-to-catalog AI pipelines", href: `${INDUSTRIES_PATH}/fashion` },
-  { label: "Marketing", description: "Campaign automation, RTB & attribution", href: `${INDUSTRIES_PATH}/marketing` },
-  { label: "Real Estate", description: "Valuation, listings, CRM & transactions", href: `${INDUSTRIES_PATH}/real-estate` },
-  { label: "Sports", description: "Athlete analytics, fan & league platforms", href: `${INDUSTRIES_PATH}/sports` },
-  { label: "Education", description: "Adaptive learning & auto-grading", href: `${INDUSTRIES_PATH}/education` },
-  { label: "Supply Chain", description: "Forecasting, routing & warehouse AI", href: `${INDUSTRIES_PATH}/supply-chain` },
-  { label: "Finance", description: "Fraud detection, forecasting & compliance", href: `${INDUSTRIES_PATH}/finance` },
-  { label: "Insurance", description: "Claims automation & risk scoring", href: `${INDUSTRIES_PATH}/insurance` },
-  { label: "Healthcare", description: "HIPAA-safe data & diagnosis AI", href: `${INDUSTRIES_PATH}/healthcare` },
-  { label: "Transportation", description: "Fleet, route & telematics intelligence", href: `${INDUSTRIES_PATH}/transportation` },
-  { label: "Legal", description: "Contract review & case document AI", href: `${INDUSTRIES_PATH}/legal` },
-  { label: "Retail", description: "Personalization & demand planning", href: `${INDUSTRIES_PATH}/retail` },
+  {
+    label: "Fashion",
+    description: "Design-to-catalog AI pipelines",
+    href: `${INDUSTRIES_PATH}/fashion`,
+  },
+  {
+    label: "Marketing",
+    description: "Campaign automation, RTB & attribution",
+    href: `${INDUSTRIES_PATH}/marketing`,
+  },
+  {
+    label: "Real Estate",
+    description: "Valuation, listings, CRM & transactions",
+    href: `${INDUSTRIES_PATH}/real-estate`,
+  },
+  {
+    label: "Sports",
+    description: "Athlete analytics, fan & league platforms",
+    href: `${INDUSTRIES_PATH}/sports`,
+  },
+  {
+    label: "Education",
+    description: "Adaptive learning & auto-grading",
+    href: `${INDUSTRIES_PATH}/education`,
+  },
+  {
+    label: "Supply Chain",
+    description: "Forecasting, routing & warehouse AI",
+    href: `${INDUSTRIES_PATH}/supply-chain`,
+  },
+  {
+    label: "Finance",
+    description: "Fraud detection, forecasting & compliance",
+    href: `${INDUSTRIES_PATH}/finance`,
+  },
+  {
+    label: "Insurance",
+    description: "Claims automation & risk scoring",
+    href: `${INDUSTRIES_PATH}/insurance`,
+  },
+  {
+    label: "Healthcare",
+    description: "HIPAA-safe data & diagnosis AI",
+    href: `${INDUSTRIES_PATH}/healthcare`,
+  },
+  {
+    label: "Transportation",
+    description: "Fleet, route & telematics intelligence",
+    href: `${INDUSTRIES_PATH}/transportation`,
+  },
+  {
+    label: "Legal",
+    description: "Contract review & case document AI",
+    href: `${INDUSTRIES_PATH}/legal`,
+  },
+  {
+    label: "Retail",
+    description: "Personalization & demand planning",
+    href: `${INDUSTRIES_PATH}/retail`,
+  },
 ];
 
 const companyItems = [
@@ -285,7 +368,7 @@ function FullWidthDropdown({
 
 const NAV_ITEM =
   "relative flex items-center gap-1 rounded-full px-4 py-2 text-base font-medium transition-all duration-300 hover:-translate-y-0.5 focus-ring " +
-  "after:absolute after:bottom-0.5 after:left-4 after:right-4 after:h-[2px] after:origin-left after:scale-x-0 " +
+  "after:absolute after:bottom-0.5 after:left-4 after:right-4 after:h-[2px] after:origin-left " +
   "after:bg-gradient-to-r after:from-accent-vivid after:to-brand after:transition-transform after:duration-300 " +
   "hover:after:scale-x-100 focus-visible:after:scale-x-100";
 
@@ -316,7 +399,9 @@ function DesktopNav({
             onClick={onNavigate}
             className={cn(
               NAV_ITEM,
-              active === l.mega ? `${fg.linkActive} after:scale-x-100` : fg.link
+              active === l.mega
+                ? `${fg.linkActive} after:scale-x-100`
+                : `${fg.link} after:scale-x-0`
             )}
           >
             {l.label}
@@ -332,7 +417,7 @@ function DesktopNav({
             key={l.label}
             href={l.href}
             onClick={onNavigate}
-            className={cn(NAV_ITEM, fg.link)}
+            className={cn(NAV_ITEM, fg.link, "after:scale-x-0")}
           >
             {l.label}
           </NavLink>
@@ -398,7 +483,10 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
                   >
                     {section === "services" ? "Services" : "Industries"}
                     <ChevronDown
-                      className={cn("h-4 w-4 transition-transform duration-200", isOpen && "rotate-180")}
+                      className={cn(
+                        "h-4 w-4 transition-transform duration-200",
+                        isOpen && "rotate-180"
+                      )}
                     />
                   </button>
                   {isOpen && (
@@ -481,12 +569,7 @@ export function Navbar({ className }: { className?: string }) {
   const closeMenu = () => setActive(null);
 
   return (
-    <div
-      className={cn(
-        "fixed inset-x-0 top-0 z-50",
-        hoverReveal && "group/rev"
-      )}
-    >
+    <div className={cn("fixed inset-x-0 top-0 z-50", hoverReveal && "group/rev")}>
       <header
         ref={rootRef}
         onMouseLeave={closeMenu}
@@ -502,37 +585,37 @@ export function Navbar({ className }: { className?: string }) {
         )}
       >
         <div className="mx-auto flex h-16 max-w-8xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="focus-ring rounded-md">
-          {/* h-8 keeps the wordmark inside the 4rem bar; the old h-32 overflowed it. */}
-          <img src={fg.logo} alt="Axiomra" className="h-8 w-auto" width={500} height={91} />
-        </Link>
+          <Link to="/" className="focus-ring rounded-md">
+            {/* h-8 keeps the wordmark inside the 4rem bar; the old h-32 overflowed it. */}
+            <img src={fg.logo} alt="Axiomra" className="h-8 w-auto" width={500} height={91} />
+          </Link>
 
-        <DesktopNav active={active} setActive={setActive} onNavigate={closeMenu} fg={fg} />
+          <DesktopNav active={active} setActive={setActive} onNavigate={closeMenu} fg={fg} />
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <ThemeToggle className={cn(fg.border, fg.link)} />
-          <NavLink
-            href="/contact"
-            className={cn(
-              "rounded-full border px-5 py-2.5 text-base font-medium transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-vivid hover:bg-accent-vivid/15 hover:text-accent-vivid focus-ring",
-              fg.borderStrong,
-              fg.strong
-            )}
-          >
-            Contact us
-          </NavLink>
-          <NavLink
-            href="/contact"
-            className="rounded-full bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid bg-[length:200%_100%] bg-left px-6 py-2.5 text-base font-medium text-inverse-fg transition-all duration-500 hover:-translate-y-0.5 hover:bg-right hover:shadow-glow focus-ring"
-          >
-            Book a call
-          </NavLink>
+          <div className="hidden items-center gap-3 lg:flex">
+            <ThemeToggle className={cn(fg.border, fg.link)} />
+            <NavLink
+              href="/contact"
+              className={cn(
+                "rounded-full border px-5 py-2.5 text-base font-medium transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-vivid hover:bg-accent-vivid/15 hover:text-accent-vivid focus-ring",
+                fg.borderStrong,
+                fg.strong
+              )}
+            >
+              Contact us
+            </NavLink>
+            <NavLink
+              href="/contact"
+              className="rounded-full bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid bg-[length:200%_100%] bg-left px-6 py-2.5 text-base font-medium text-inverse-fg transition-all duration-500 hover:-translate-y-0.5 hover:bg-right hover:shadow-glow focus-ring"
+            >
+              Book a call
+            </NavLink>
+          </div>
+
+          <MobileNav fg={fg} />
         </div>
 
-        <MobileNav fg={fg} />
-      </div>
-
-      {active && <FullWidthDropdown section={active} onNavigate={closeMenu} />}
+        {active && <FullWidthDropdown section={active} onNavigate={closeMenu} />}
       </header>
     </div>
   );

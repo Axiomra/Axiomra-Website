@@ -1,44 +1,60 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy, useContext, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import { Navbar } from "./components/ui/navbar";
 import Footer from "./components/Footer";
 import BookCallModal from "./components/BookCallModal";
+import { RenderedPagesContext } from "./seo/prerender-context";
 
-// The landing page is the common entry point, so it stays in the main bundle:
-// splitting it would only add a round trip before first paint.
-import HomePage from "./pages/HomePage";
+const pageModules = import.meta.glob(["./pages/*.jsx", "!./pages/*.test.jsx"]);
 
-// Every other route is split out. Without this, a visitor who only reads the
-// home page still downloads every service page's components and copy.
-const ServicesPage = lazy(() => import("./pages/ServicesPage"));
-const ServiceDetailPlaceholder = lazy(() => import("./pages/ServiceDetailPlaceholder"));
-const AiDevelopmentPage = lazy(() => import("./pages/AiDevelopmentPage"));
-const GenerativeAiPage = lazy(() => import("./pages/GenerativeAiPage"));
-const AgenticAiPage = lazy(() => import("./pages/AgenticAiPage"));
-const ComputerVisionPage = lazy(() => import("./pages/ComputerVisionPage"));
-const NlpPage = lazy(() => import("./pages/NlpPage"));
-const ContactPage = lazy(() => import("./pages/ContactPage"));
-const AboutPage = lazy(() => import("./pages/AboutPage"));
-const TechStackPage = lazy(() => import("./pages/TechStackPage"));
-const FaqsPage = lazy(() => import("./pages/FaqsPage"));
-const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
-const CaseStudyPage = lazy(() => import("./pages/CaseStudyPage"));
-const IndustriesPage = lazy(() => import("./pages/IndustriesPage"));
-const IndustryDetailPlaceholder = lazy(() => import("./pages/IndustryDetailPlaceholder"));
-const FashionPage = lazy(() => import("./pages/FashionPage"));
-const MarketingPage = lazy(() => import("./pages/MarketingPage"));
-const SupplyChainPage = lazy(() => import("./pages/SupplyChainPage"));
-const RealEstatePage = lazy(() => import("./pages/RealEstatePage"));
-const SportsPage = lazy(() => import("./pages/SportsPage"));
-const FinancePage = lazy(() => import("./pages/FinancePage"));
-const InsurancePage = lazy(() => import("./pages/InsurancePage"));
-const HealthcarePage = lazy(() => import("./pages/HealthcarePage"));
-const EducationPage = lazy(() => import("./pages/EducationPage"));
-const LegalPage = lazy(() => import("./pages/LegalPage"));
-const RetailPage = lazy(() => import("./pages/RetailPage"));
-const TransportationPage = lazy(() => import("./pages/TransportationPage"));
-const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+/**
+ * A lazily loaded page that, during the prerender, reports its source file so
+ * scripts/prerender.mjs can modulepreload its chunks. Without that the browser
+ * only discovers the chunk after the entry bundle has run.
+ */
+function page(name) {
+  const Lazy = lazy(pageModules[`./pages/${name}.jsx`]);
+  function Page(props) {
+    useContext(RenderedPagesContext)?.add(`src/pages/${name}.jsx`);
+    return <Lazy {...props} />;
+  }
+  Page.displayName = name;
+  return Page;
+}
+
+// Every route is split out, the landing page included: first paint comes from
+// the prerendered HTML, so its chunk only gates hydration, and keeping it out
+// of the entry spares every other route its twenty sections.
+const HomePage = page("HomePage");
+const ServicesPage = page("ServicesPage");
+const ServiceDetailPlaceholder = page("ServiceDetailPlaceholder");
+const AiDevelopmentPage = page("AiDevelopmentPage");
+const GenerativeAiPage = page("GenerativeAiPage");
+const AgenticAiPage = page("AgenticAiPage");
+const ComputerVisionPage = page("ComputerVisionPage");
+const NlpPage = page("NlpPage");
+const ContactPage = page("ContactPage");
+const AboutPage = page("AboutPage");
+const TechStackPage = page("TechStackPage");
+const FaqsPage = page("FaqsPage");
+const PortfolioPage = page("PortfolioPage");
+const CaseStudyPage = page("CaseStudyPage");
+const IndustriesPage = page("IndustriesPage");
+const IndustryDetailPlaceholder = page("IndustryDetailPlaceholder");
+const FashionPage = page("FashionPage");
+const MarketingPage = page("MarketingPage");
+const SupplyChainPage = page("SupplyChainPage");
+const RealEstatePage = page("RealEstatePage");
+const SportsPage = page("SportsPage");
+const FinancePage = page("FinancePage");
+const InsurancePage = page("InsurancePage");
+const HealthcarePage = page("HealthcarePage");
+const EducationPage = page("EducationPage");
+const LegalPage = page("LegalPage");
+const RetailPage = page("RetailPage");
+const TransportationPage = page("TransportationPage");
+const NotFoundPage = page("NotFoundPage");
 
 // The admin panel shares nothing with the marketing site: its own chrome, its
 // own auth provider, its own table libraries. Splitting it here keeps all of
@@ -94,6 +110,19 @@ function RouteFallback() {
   return <div className="min-h-[100svh] bg-surface" aria-busy="true" />;
 }
 
+/**
+ * Lifts the prerender gate (src/seo/prerenderGate.js). It sits after <Routes>
+ * inside the same Suspense boundary, so it commits together with the lazy page
+ * and its effect runs after the page's GSAP layout effects have put their
+ * targets in their start state.
+ */
+function HydratedMark() {
+  useEffect(() => {
+    document.documentElement.classList.add("hydrated");
+  }, []);
+  return null;
+}
+
 /** The public marketing site: navbar, footer and the call modal. */
 function SiteRoutes() {
   return (
@@ -134,10 +163,7 @@ function SiteRoutes() {
               path={`${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}`}
               element={<GenerativeAiPage />}
             />
-            <Route
-              path={`${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`}
-              element={<AgenticAiPage />}
-            />
+            <Route path={`${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`} element={<AgenticAiPage />} />
             <Route
               path={`${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}`}
               element={<ComputerVisionPage />}
@@ -152,6 +178,7 @@ function SiteRoutes() {
                 dist/404.html; see scripts/generate-sitemap.mjs. */}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
+          <HydratedMark />
         </Suspense>
       </main>
       <Footer />
@@ -194,13 +221,20 @@ function AdminRoutes() {
   );
 }
 
+/** Every route, without a router. The prerender wraps it in a StaticRouter. */
+export function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/admin/*" element={<AdminRoutes />} />
+      <Route path="*" element={<SiteRoutes />} />
+    </Routes>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/admin/*" element={<AdminRoutes />} />
-        <Route path="*" element={<SiteRoutes />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

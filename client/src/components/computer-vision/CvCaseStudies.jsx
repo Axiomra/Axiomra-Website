@@ -18,8 +18,7 @@ export default function CvCaseStudies() {
           eyebrow={caseStudies.eyebrow}
           title={
             <>
-              {caseStudies.titleLead}{" "}
-              <span className="text-brand">{caseStudies.titleAccent}</span>
+              {caseStudies.titleLead} <span className="text-brand">{caseStudies.titleAccent}</span>
             </>
           }
           subtitle={caseStudies.subtitle}
@@ -72,7 +71,7 @@ export default function CvCaseStudies() {
         </div>
 
         <AnimatePresence mode="wait">
-          <motion.article
+          <motion.div
             key={study.name}
             role="tabpanel"
             id={`cv-case-panel-${active}`}
@@ -117,7 +116,7 @@ export default function CvCaseStudies() {
                 </div>
               ))}
             </dl>
-          </motion.article>
+          </motion.div>
         </AnimatePresence>
 
         {caseStudies.blueprint && (

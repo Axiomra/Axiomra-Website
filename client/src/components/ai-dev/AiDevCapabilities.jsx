@@ -43,7 +43,7 @@ export default function AiDevCapabilities() {
                   onClick={() => setActive(i)}
                   className={`rounded-xl2 px-5 py-4 text-left text-lg font-semibold transition-colors focus-ring ${
                     selected
-                      ? "bg-cta-gradient text-inverse"
+                      ? "bg-assistant text-assistant-ink-soft"
                       : "text-content-dim hover:bg-surface-inset hover:text-content"
                   }`}
                 >

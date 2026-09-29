@@ -79,7 +79,7 @@ export default function NlpCaseStudies() {
         </div>
 
         <AnimatePresence mode="wait">
-          <motion.article
+          <motion.div
             key={study.name}
             role="tabpanel"
             id={`nlp-case-panel-${active}`}
@@ -124,7 +124,7 @@ export default function NlpCaseStudies() {
                 </div>
               ))}
             </dl>
-          </motion.article>
+          </motion.div>
         </AnimatePresence>
       </div>
     </section>

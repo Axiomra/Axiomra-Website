@@ -12,9 +12,9 @@ export const DEFAULT_TITLE = "Axiomra: Result-Driven AI Development Company";
 export const DEFAULT_DESCRIPTION =
   "Axiomra builds production-grade AI systems that automate operations and deliver measurable ROI for SMBs and enterprises.";
 
-// No site-wide share image exists yet. Pages with their own image (case
-// studies) pass it in; everything else ships without og:image.
-export const DEFAULT_OG_IMAGE = null;
+// 1200x630 site-wide share image. Pages with their own image (case studies)
+// pass it in instead.
+export const DEFAULT_OG_IMAGE = "/og/default.jpg";
 
 export const TWITTER_HANDLE = "@Axiomra_co";
 

@@ -1,4 +1,3 @@
-
 import AiDevHero from "../components/ai-dev/AiDevHero";
 import ClientLogoStrip from "../components/ai-dev/ClientLogoStrip";
 import AiDevIntro from "../components/ai-dev/AiDevIntro";
@@ -29,8 +28,15 @@ export default function AiDevelopmentPage() {
       <Seo
         title="AI Development Services Built For Business Results | Axiomra"
         description={META_DESCRIPTION}
-        breadcrumbs={[{ name: "Services", path: SERVICES_BASE_PATH }, { name: "Artificial Intelligence" }]}
-        jsonLd={serviceSchema({ name: "Artificial Intelligence", description: META_DESCRIPTION, path: `${SERVICES_BASE_PATH}/ai-development-services` })}
+        breadcrumbs={[
+          { name: "Services", path: SERVICES_BASE_PATH },
+          { name: "Artificial Intelligence" },
+        ]}
+        jsonLd={serviceSchema({
+          name: "Artificial Intelligence",
+          description: META_DESCRIPTION,
+          path: `${SERVICES_BASE_PATH}/ai-development-services`,
+        })}
       />
       <div className="ai-dev-bg" aria-hidden="true" />
 
@@ -63,8 +69,6 @@ export default function AiDevelopmentPage() {
             description={s.description}
             image={s.image}
             imageAlt={s.imageAlt}
-            ctaHref={s.ctaText ? "/contact" : undefined}
-            ctaText={s.ctaText}
           />
         ))}
       </div>
@@ -72,6 +76,7 @@ export default function AiDevelopmentPage() {
       <AiDevCapabilities />
 
       <GradientCTA
+        solid
         title={
           <>
             Have A Use Case In Mind?
@@ -101,6 +106,7 @@ export default function AiDevelopmentPage() {
       <AiDevIndustries />
 
       <GradientCTA
+        solid
         title="Bring Us Your Industry Challenge"
         subtitle="Whether you work in healthcare, finance, retail, or supply chain operations, we start by understanding your processes, data, and requirements. Together, we identify where AI can add practical value."
         buttonText="Book a Free AI Consultation"
