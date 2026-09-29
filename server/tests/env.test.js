@@ -39,3 +39,28 @@ describe("environment validation", () => {
     await expect(loadEnv(vars)).rejects.toThrow(/Invalid environment configuration/);
   });
 });
+
+describe("REDIS_URL in production", () => {
+  it.each([
+    ["NODE_ENV=production", { NODE_ENV: "production" }],
+    ["on Vercel", { VERCEL: "1" }],
+  ])("refuses to start without REDIS_URL (%s)", async (_label, vars) => {
+    await expect(loadEnv({ ALLOWED_ORIGINS: "https://a.example", ...vars })).rejects.toThrow(
+      /REDIS_URL is required in production/
+    );
+  });
+
+  it("starts in production when REDIS_URL is set", async () => {
+    const env = await loadEnv({
+      ALLOWED_ORIGINS: "https://a.example",
+      NODE_ENV: "production",
+      REDIS_URL: "rediss://default:x@example.upstash.io:6379",
+    });
+    expect(env.REDIS_URL).toMatch(/^rediss:/);
+  });
+
+  it("allows the in-memory store in local development", async () => {
+    const env = await loadEnv({ ALLOWED_ORIGINS: "https://a.example", NODE_ENV: "development" });
+    expect(env.REDIS_URL).toBeUndefined();
+  });
+});

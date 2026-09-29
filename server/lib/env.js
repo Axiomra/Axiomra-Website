@@ -48,7 +48,10 @@ const originList = z
     }
   });
 
-const schema = z.object({
+// Vercel sets NODE_ENV=production for preview and production deployments alike.
+const isDeployed = (e) => e.NODE_ENV === "production" || Boolean(e.VERCEL);
+
+const baseSchema = z.object({
   MONGO_URI: z.string().trim().min(1, "MONGO_URI is required"),
   // ALLOWED_ORIGINS is the new name; CLIENT_ORIGIN is still read so existing
   // deployments keep working without an env change.
@@ -66,6 +69,21 @@ const schema = z.object({
     (v) => v === undefined || /^rediss?:\/\//.test(v),
     "REDIS_URL must start with redis:// or rediss://"
   ),
+  NODE_ENV: optional,
+  VERCEL: optional,
+});
+
+// Deployed, the rate limiters (login brute-force above all) must count in one
+// shared store. Per-instance memory on serverless resets on every cold start
+// and splits across concurrent instances, so there is no silent fallback.
+const schema = baseSchema.superRefine((e, ctx) => {
+  if (isDeployed(e) && !e.REDIS_URL) {
+    ctx.addIssue({
+      code: "custom",
+      path: ["REDIS_URL"],
+      message: "REDIS_URL is required in production (rate limits need a shared store)",
+    });
+  }
 });
 
 function load() {

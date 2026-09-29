@@ -4,8 +4,9 @@
  * On Vercel every function instance has its own memory, so an in-memory
  * counter resets on each cold start and is split across concurrent instances;
  * a login limit of 5 becomes 5 per instance. With REDIS_URL set (Upstash or any
- * Redis) all instances count against the same keys. Without it we fall back to
- * memory, which is correct for local development and warned about when deployed.
+ * Redis) all instances count against the same keys. lib/env.js refuses to start
+ * a deployed instance without REDIS_URL, so the in-memory store below is only
+ * ever used in local development and tests.
  */
 import { rateLimit, ipKeyGenerator } from "express-rate-limit";
 import { RedisStore } from "rate-limit-redis";
@@ -14,8 +15,6 @@ import { env } from "./env.js";
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
-
-const deployed = process.env.NODE_ENV === "production" || Boolean(process.env.VERCEL);
 
 // One connection per function instance, reused across warm invocations (same
 // pattern as the Mongo connection in db.js).
@@ -35,12 +34,7 @@ function redisClient() {
   return globalThis.__axiomraRedis;
 }
 
-const redis = redisClient();
-if (!redis && deployed) {
-  console.warn(
-    "REDIS_URL is not set: rate limits are per function instance and reset on cold start."
-  );
-}
+export const redis = redisClient();
 
 // Each limiter needs its own store instance and key prefix.
 function store(name) {
