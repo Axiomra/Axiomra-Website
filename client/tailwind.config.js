@@ -41,6 +41,12 @@ export default {
         },
         // Text on accent-vivid: the same dark ink in both themes (--inverse is not).
         "on-accent": token("on-accent"),
+        // Contact form surfaces, dark teal in both themes.
+        field: {
+          dark: token("field-dark"),
+          "dark-deep": token("field-dark-deep"),
+          label: token("field-label"),
+        },
         inverse: {
           DEFAULT: token("inverse"),
           soft: token("inverse-soft"),

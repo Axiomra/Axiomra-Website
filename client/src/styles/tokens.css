@@ -21,6 +21,10 @@
   /* Hover shade of accent-vivid, and the dark ink that stays readable on both. */
   --accent-vivid-hover: 46 230 211;
   --on-accent: 10 20 40;
+  /* Contact form surfaces: the same dark teal in both themes. */
+  --field-dark: 15 44 58;
+  --field-dark-deep: 10 31 43;
+  --field-label: 143 239 229;
   --gold: 224 150 16;
 
   /* Always-dark blocks */
@@ -59,6 +63,10 @@
   /* Hover shade of accent-vivid, and the dark ink that stays readable on both. */
   --accent-vivid-hover: 46 230 211;
   --on-accent: 10 20 40;
+  /* Contact form surfaces: the same dark teal in both themes. */
+  --field-dark: 15 44 58;
+  --field-dark-deep: 10 31 43;
+  --field-label: 143 239 229;
   --gold: 255 190 71;
 
   --inverse: 19 15 42;

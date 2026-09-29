@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, CheckCircle2, Play, Mail, User, MessageSquare, ShieldCheck, Clock, Crown, UserCheck, Tag, Layers } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Play, Mail, User, MessageSquare, ShieldCheck, Clock, UserCheck, Tag, Layers } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import PhoneField from "../components/PhoneField";
 import SelectField from "../components/SelectField";
@@ -23,9 +23,9 @@ import {
 } from "../lib/validation";
 
 const FIELD_CLASS =
-  "w-full rounded-xl border border-line-strong bg-inverse-soft py-3.5 pl-11 pr-4 text-base text-inverse-fg outline-none transition-all placeholder:text-inverse-fg/35 focus:border-gold/70 focus:ring-4 focus:ring-gold/15";
+  "w-full rounded-xl border border-white/10 bg-field-dark py-3.5 pl-11 pr-4 text-base text-white outline-none transition-all placeholder:text-white/55 hover:border-white/20 focus:border-accent-vivid focus:ring-4 focus:ring-accent-vivid/15";
 
-const LABEL_CLASS = "mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-inverse-fg/70";
+const LABEL_CLASS = "mb-2 block text-sm font-semibold tracking-wide text-field-label";
 
 const FIELDS = ["name", "email", "phone", "subject", "message"];
 
@@ -181,15 +181,6 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative overflow-hidden px-4 py-24 sm:px-6">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] opacity-70"
-        style={{
-          backgroundImage:
-            "radial-gradient(600px 320px at 25% 0%, rgba(20,216,196,0.16), transparent 70%), radial-gradient(600px 320px at 75% 10%, rgba(120,139,227,0.18), transparent 70%)",
-        }}
-      />
-
       <div className="relative mx-auto max-w-8xl">
         <SectionHeading
           className="mb-10"
@@ -243,39 +234,41 @@ export default function Contact() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative rounded-xl2 border border-inverse-card bg-inverse-card p-9 shadow-card"
+          className="relative rounded-[1.75rem] border border-accent-vivid/30 bg-field-dark-deep p-7 shadow-[0_40px_90px_-35px_rgba(20,216,196,0.45)] md:p-10"
         >
           {/* Decoration lives in its own clipped layer: the form itself must not
               clip, or the country / category dropdowns get cut off at the edge. */}
-          <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl2">
-            {/* Gold-to-brand hairline seals the card as the section's centerpiece. */}
-            <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-gold via-[#f7cf7e] to-brand" />
-            {/* Warm gold + cool brand glows keep the dark card from going flat. */}
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[1.75rem]">
+            {/* Solid teal cap and a faint dotted field keep the card from reading flat. */}
+            <span className="absolute inset-x-0 top-0 h-1 bg-accent-vivid" />
             <span
-              className="absolute inset-0"
+              className="absolute inset-0 opacity-[0.07]"
               style={{
-                backgroundImage:
-                  "radial-gradient(520px 260px at 12% 0%, rgba(224,150,16,0.10), transparent 60%), radial-gradient(420px 300px at 100% 100%, rgba(20,216,196,0.10), transparent 60%)",
+                backgroundImage: "radial-gradient(rgb(var(--accent-vivid)) 1px, transparent 1px)",
+                backgroundSize: "22px 22px",
               }}
-            />
-            {/* Faint crown watermark, bottom-right, premium without shouting. */}
-            <Crown
-              size={150}
-              strokeWidth={0.5}
-              className="absolute -bottom-8 -right-8 rotate-[-12deg] text-inverse-fg/5"
             />
           </span>
           <HoneypotField inputRef={honeypotRef} />
 
           <div className="relative">
-            <div className="mb-8 flex flex-wrap items-start justify-between gap-3">
+            <div className="mb-8 flex flex-wrap items-start justify-between gap-4 border-b border-white/10 pb-7">
               <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-xs uppercase tracking-[0.18em] text-gold">
-                  <Crown size={13} aria-hidden="true" /> VIP Priority Intake
+                <span className="inline-flex items-center gap-2 rounded-full bg-accent-vivid px-3.5 py-1 text-xs font-bold uppercase tracking-[0.2em] text-on-accent">
+                  <span className="relative flex h-2 w-2" aria-hidden="true">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-on-accent/60" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-on-accent" />
+                  </span>
+                  VIP Priority Intake
                 </span>
-                <h3 className="mt-4 font-display text-2xl font-semibold text-inverse-fg">Tell us about your project</h3>
+                <h3 className="mt-4 font-display text-3xl font-semibold text-white md:text-4xl">
+                  Tell us about your <span className="text-accent-vivid">project</span>
+                </h3>
+                <p className="mt-2 text-base text-white/60">A senior engineer reads every brief personally.</p>
               </div>
-              <span className="pt-2 font-mono text-xs uppercase tracking-[0.2em] text-inverse-fg/45">Concierge Desk</span>
+              <span className="rounded-full border border-accent-vivid/40 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-vivid">
+                Concierge Desk
+              </span>
             </div>
 
             <div className="space-y-5">
@@ -283,7 +276,7 @@ export default function Contact() {
                 <div>
                   <label htmlFor="contact-name" className={LABEL_CLASS}>First Name</label>
                   <div className="relative">
-                    <User size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gold/70" aria-hidden="true" />
+                    <User size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-accent-vivid/80" aria-hidden="true" />
                     <input
                       required
                       id="contact-name"
@@ -303,7 +296,7 @@ export default function Contact() {
                 <div>
                   <label htmlFor="contact-email" className={LABEL_CLASS}>Business Email</label>
                   <div className="relative">
-                    <Mail size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gold/70" aria-hidden="true" />
+                    <Mail size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-accent-vivid/80" aria-hidden="true" />
                     <input
                       required
                       type="email"
@@ -342,7 +335,7 @@ export default function Contact() {
                 <div>
                   <label htmlFor="contact-subject" className={LABEL_CLASS}>Subject</label>
                   <div className="relative">
-                    <Tag size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gold/70" aria-hidden="true" />
+                    <Tag size={17} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-accent-vivid/80" aria-hidden="true" />
                     <input
                       id="contact-subject"
                       name="subject"
@@ -377,7 +370,7 @@ export default function Contact() {
               <motion.div {...reveal(3)}>
                 <label htmlFor="contact-message" className={LABEL_CLASS}>Message</label>
                 <div className="relative">
-                  <MessageSquare size={17} className="pointer-events-none absolute left-4 top-4 text-gold/70" aria-hidden="true" />
+                  <MessageSquare size={17} className="pointer-events-none absolute left-4 top-4 text-accent-vivid/80" aria-hidden="true" />
                   <textarea
                     id="contact-message"
                     name="message"
@@ -400,7 +393,7 @@ export default function Contact() {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={status === "loading"}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#e0a52e] via-gold to-[#f7cf7e] px-7 py-4 text-base font-semibold text-[#10182b] transition-all hover:shadow-[0_0_55px_-12px_rgba(224,150,16,0.65)] focus-ring disabled:opacity-60"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-vivid px-7 py-4 text-lg font-semibold text-on-accent transition-all hover:bg-accent-vivid-hover hover:shadow-[0_0_55px_-12px_rgba(20,216,196,0.8)] focus-ring disabled:opacity-60"
               >
                 {status === "loading" ? "Sending..." : "Request VIP Consultation"} {status !== "loading" && <ArrowUpRight size={18} />}
               </motion.button>
@@ -415,18 +408,18 @@ export default function Contact() {
                 )}
               </p>
 
-              <div className="grid gap-3 border-t border-line-strong/50 pt-6 sm:grid-cols-3">
+              <div className="grid gap-3 border-t border-white/10 pt-6 sm:grid-cols-3">
                 <div className="flex items-center gap-2.5">
-                  <Clock size={17} className="shrink-0 text-gold" aria-hidden="true" />
-                  <p className="text-sm text-inverse-fg/75">Reply in one business day</p>
+                  <Clock size={17} className="shrink-0 text-accent-vivid" aria-hidden="true" />
+                  <p className="text-sm text-white/75">Reply in one business day</p>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <ShieldCheck size={17} className="shrink-0 text-gold" aria-hidden="true" />
-                  <p className="text-sm text-inverse-fg/75">NDA on request</p>
+                  <ShieldCheck size={17} className="shrink-0 text-accent-vivid" aria-hidden="true" />
+                  <p className="text-sm text-white/75">NDA on request</p>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <UserCheck size={17} className="shrink-0 text-gold" aria-hidden="true" />
-                  <p className="text-sm text-inverse-fg/75">Engineer-led review</p>
+                  <UserCheck size={17} className="shrink-0 text-accent-vivid" aria-hidden="true" />
+                  <p className="text-sm text-white/75">Engineer-led review</p>
                 </div>
               </div>
             </div>
