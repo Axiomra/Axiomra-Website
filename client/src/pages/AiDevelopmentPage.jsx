@@ -44,7 +44,7 @@ export default function AiDevelopmentPage() {
       <ClientLogoStrip />
       <AiDevIntro />
 
-      <section id="what-we-do" className="bg-surface pt-20 md:pt-28">
+      <section id="what-we-do" className="bg-surface pt-12 md:pt-16">
         <div className="mx-auto max-w-8xl px-6">
           <SectionHeading
             eyebrow={whatWeDo.eyebrow}
@@ -76,6 +76,7 @@ export default function AiDevelopmentPage() {
       <AiDevCapabilities />
 
       <GradientCTA
+        compact
         solid
         title={
           <>
@@ -88,7 +89,7 @@ export default function AiDevelopmentPage() {
         buttonText="Book A Free Strategy Session"
       />
 
-      <section className="bg-surface pt-20 md:pt-28">
+      <section className="bg-surface pt-12 md:pt-16">
         <div className="mx-auto max-w-8xl px-6">
           <SectionHeading
             eyebrow="Real AI systems we have built"
@@ -101,11 +102,12 @@ export default function AiDevelopmentPage() {
           />
         </div>
       </section>
-      <Portfolio showHeading={false} />
+      <Portfolio showHeading={false} compact />
 
       <AiDevIndustries />
 
       <GradientCTA
+        compact
         solid
         title="Bring Us Your Industry Challenge"
         subtitle="Whether you work in healthcare, finance, retail, or supply chain operations, we start by understanding your processes, data, and requirements. Together, we identify where AI can add practical value."
@@ -116,6 +118,7 @@ export default function AiDevelopmentPage() {
       <AiDevTechStack />
 
       <GradientCTA
+        compact
         dark
         title="AI Architecture That Fits Your Existing Systems"
         subtitle="Discuss your requirements with our engineers. We will help identify suitable models, integration options, and an architecture that balances performance, cost, and maintainability."
@@ -125,6 +128,7 @@ export default function AiDevelopmentPage() {
       <AiDevBenefits />
 
       <GradientCTA
+        compact
         dark
         three
         title="Your Next AI Project Starts With a Clear Plan"
@@ -132,7 +136,7 @@ export default function AiDevelopmentPage() {
         buttonText="Book Your Free AI Strategy Session"
       />
 
-      <FAQ id="ai-development-faq" eyebrow="AI development, answered" items={faqs} />
+      <FAQ compact id="ai-development-faq" eyebrow="AI development, answered" items={faqs} />
     </div>
   );
 }

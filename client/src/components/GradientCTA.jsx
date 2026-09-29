@@ -10,6 +10,7 @@ export default function GradientCTA({
   dark = false,
   three = false,
   solid = false,
+  compact = false,
   image,
 }) {
   // `solid` swaps the gradient for the flat logo teal. White text is under 2:1
@@ -20,7 +21,9 @@ export default function GradientCTA({
   const button = solid ? "bg-assistant-ink-soft text-white" : "bg-inverse-fg text-inverse";
 
   return (
-    <section className={`relative overflow-hidden px-6 py-24 ${bg}`}>
+    <section
+      className={`relative overflow-hidden px-6 ${compact ? "py-14 md:py-16" : "py-24"} ${bg}`}
+    >
       {/* Optional photographic base coat. The scrim over it is what keeps the
           headline readable, so the two always ship together. */}
       {image && (

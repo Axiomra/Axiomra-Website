@@ -11,7 +11,7 @@ export default function AiDevTechStack() {
   const current = techStack.groups[active];
 
   return (
-    <section id="ai-tech-stack" className="bg-surface py-20 md:py-28">
+    <section id="ai-tech-stack" className="bg-surface py-12 md:py-16">
       <div className="mx-auto max-w-8xl px-6">
         <SectionHeading
           className="mb-12"

@@ -13,7 +13,7 @@ export default function AiDevProcess() {
   const go = (delta) => setStep((s) => (s + delta + total) % total);
 
   return (
-    <section id="ai-process" className="bg-surface py-20 md:py-28">
+    <section id="ai-process" className="bg-surface py-12 md:py-16">
       <div className="mx-auto grid max-w-8xl grid-cols-1 gap-14 px-6 lg:grid-cols-2 lg:gap-20">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

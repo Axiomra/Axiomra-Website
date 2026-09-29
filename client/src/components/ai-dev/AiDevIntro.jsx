@@ -6,7 +6,7 @@ import { intro } from "../../data/aiDevelopmentData";
 /** "Stay Ahead In Tech" block, company positioning plus the capability list. */
 export default function AiDevIntro() {
   return (
-    <section className="bg-surface py-20 md:py-28">
+    <section className="bg-surface py-12 md:py-16">
       <div className="mx-auto grid max-w-8xl grid-cols-1 items-start gap-14 px-6 lg:grid-cols-2 lg:gap-20">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -20,7 +20,10 @@ export default function AiDevIntro() {
           </h2>
 
           {intro.paragraphs.map((p) => (
-            <p key={p.slice(0, 40)} className="copy-justify mt-6 text-xl leading-relaxed text-content-dim">
+            <p
+              key={p.slice(0, 40)}
+              className="copy-justify mt-6 text-xl leading-relaxed text-content-dim"
+            >
               {p}
             </p>
           ))}

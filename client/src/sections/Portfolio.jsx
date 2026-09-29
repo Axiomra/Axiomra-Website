@@ -5,19 +5,62 @@ import SectionHeading from "../components/SectionHeading";
 import { Link } from "react-router-dom";
 
 const cases = [
-  { name: "Konnect", tag: "AI-Based Recommendation Engine", stats: [["50X", "Match accuracy"], ["30%", "Filters automated"], ["1M+", "Users connected"]] },
-  { name: "Doozoo", tag: "AI Graphic Design Automation", stats: [["90%", "Recipe accuracy"], ["40X", "Faster customization"], ["30s", "Delivery time"]] },
-  { name: "FluentTalk AI", tag: "AI Language Tutor", stats: [["87%", "Learning automated"], ["80%", "Time saved"], ["21+", "Languages"]] },
-  { name: "FN-AD", tag: "AI Fashion Brand Matching", stats: [["47%", "Productivity lift"], ["50%", "Lead conversion"], ["5.0", "Quality rating"]] },
-  { name: "Pitchmark", tag: "AI Marketing Pitch Automation", stats: [["10X", "Report generation"], ["70%", "Fewer review edits"], ["10-15", "Pitches / day"]] },
+  {
+    name: "Konnect",
+    tag: "AI-Based Recommendation Engine",
+    stats: [
+      ["50X", "Match accuracy"],
+      ["30%", "Filters automated"],
+      ["1M+", "Users connected"],
+    ],
+  },
+  {
+    name: "Doozoo",
+    tag: "AI Graphic Design Automation",
+    stats: [
+      ["90%", "Recipe accuracy"],
+      ["40X", "Faster customization"],
+      ["30s", "Delivery time"],
+    ],
+  },
+  {
+    name: "FluentTalk AI",
+    tag: "AI Language Tutor",
+    stats: [
+      ["87%", "Learning automated"],
+      ["80%", "Time saved"],
+      ["21+", "Languages"],
+    ],
+  },
+  {
+    name: "FN-AD",
+    tag: "AI Fashion Brand Matching",
+    stats: [
+      ["47%", "Productivity lift"],
+      ["50%", "Lead conversion"],
+      ["5.0", "Quality rating"],
+    ],
+  },
+  {
+    name: "Pitchmark",
+    tag: "AI Marketing Pitch Automation",
+    stats: [
+      ["10X", "Report generation"],
+      ["70%", "Fewer review edits"],
+      ["10-15", "Pitches / day"],
+    ],
+  },
 ];
 
-export default function Portfolio({ showHeading = true }) {
+export default function Portfolio({ showHeading = true, compact = false }) {
   const ref = useRef(null);
   const scroll = (dir) => ref.current?.scrollBy({ left: dir * 380, behavior: "smooth" });
 
   return (
-    <section id="portfolio" className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
+    <section
+      id="portfolio"
+      className={`mx-auto max-w-8xl px-4 sm:px-6 ${compact ? "pb-12 pt-8 md:pb-16" : "py-24"}`}
+    >
       {/* The arrows live inside the heading when there is one, and stand on their own when the host page suppresses it. */}
       {showHeading ? (
         <SectionHeading
@@ -31,20 +74,40 @@ export default function Portfolio({ showHeading = true }) {
           subtitle="Explore selected projects to see the challenge, the solution we developed, and the outcomes measured after deployment."
         >
           <div className="mt-8 flex gap-3">
-            <button type="button" onClick={() => scroll(-1)} className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring" aria-label="Previous case studies">
+            <button
+              type="button"
+              onClick={() => scroll(-1)}
+              className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring"
+              aria-label="Previous case studies"
+            >
               <ChevronLeft size={20} />
             </button>
-            <button type="button" onClick={() => scroll(1)} className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring" aria-label="Next case studies">
+            <button
+              type="button"
+              onClick={() => scroll(1)}
+              className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring"
+              aria-label="Next case studies"
+            >
               <ChevronRight size={20} />
             </button>
           </div>
         </SectionHeading>
       ) : (
         <div className="mb-12 flex justify-center gap-3">
-          <button type="button" onClick={() => scroll(-1)} className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring" aria-label="Previous case studies">
+          <button
+            type="button"
+            onClick={() => scroll(-1)}
+            className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring"
+            aria-label="Previous case studies"
+          >
             <ChevronLeft size={20} />
           </button>
-          <button type="button" onClick={() => scroll(1)} className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring" aria-label="Next case studies">
+          <button
+            type="button"
+            onClick={() => scroll(1)}
+            className="rounded-full border border-line-strong p-3 text-content transition-colors hover:bg-surface-subtle focus-ring"
+            aria-label="Next case studies"
+          >
             <ChevronRight size={20} />
           </button>
         </div>
@@ -67,7 +130,9 @@ export default function Portfolio({ showHeading = true }) {
               className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-brand/10 to-transparent transition-transform duration-[900ms] ease-out group-hover:translate-x-full"
             />
             <div className="relative">
-              <h3 className="font-display text-2xl font-semibold text-content transition-colors duration-300 group-hover:text-brand">{c.name}</h3>
+              <h3 className="font-display text-2xl font-semibold text-content transition-colors duration-300 group-hover:text-brand">
+                {c.name}
+              </h3>
               <p className="mb-7 mt-1 text-base text-content-dim">{c.tag}</p>
               <div className="mb-7 grid grid-cols-3 gap-3">
                 {c.stats.map(([num, label]) => (
@@ -81,9 +146,15 @@ export default function Portfolio({ showHeading = true }) {
                 ))}
               </div>
             </div>
-            <Link to="/contact" className="relative inline-flex items-center gap-1.5 text-base font-medium text-content transition-colors hover:text-brand focus-ring">
+            <Link
+              to="/contact"
+              className="relative inline-flex items-center gap-1.5 text-base font-medium text-content transition-colors hover:text-brand focus-ring"
+            >
               Read Full Case Study
-              <ArrowUpRight size={17} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <ArrowUpRight
+                size={17}
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
             </Link>
           </motion.article>
         ))}

@@ -4,13 +4,34 @@ import { Plus } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 
 const defaultFaqs = [
-  { q: "Who does Axiomra serve as an AI development partner?", a: "SMBs, growth-stage companies, and global enterprises (especially in healthcare, finance, and retail), moving from manual workflows to automated, data-driven operations." },
-  { q: "What makes Axiomra different from other AI development companies?", a: "We focus on production-grade engineering, not prototypes. A 100% in-house team of 25+ experts ensures every solution is scalable, secure, and delivers measurable ROI within two quarters." },
-  { q: "Why should I choose an AI development company for my global project?", a: "You get access to elite engineering talent at a competitive price point, with 300+ successful projects delivered globally." },
-  { q: "What industries does your AI development company have experience in?", a: "Extensive experience across healthcare, fashion, sports, education, real estate, and more, 300+ projects delivered or in progress." },
-  { q: "Does Axiomra offer post-development support?", a: "Yes: complete post-launch care across AI, software, data, and design, to keep your solution performing as you scale." },
-  { q: "How much does it cost to build custom software?", a: "Cost depends on project complexity, chosen tech stack, and ongoing maintenance needs. Book a free session and we'll scope it honestly." },
-  { q: "How do I get started with Axiomra?", a: "Book a free strategy session. We'll analyze your business challenges and provide a clear roadmap for automating your processes." },
+  {
+    q: "Who does Axiomra serve as an AI development partner?",
+    a: "SMBs, growth-stage companies, and global enterprises (especially in healthcare, finance, and retail), moving from manual workflows to automated, data-driven operations.",
+  },
+  {
+    q: "What makes Axiomra different from other AI development companies?",
+    a: "We focus on production-grade engineering, not prototypes. A 100% in-house team of 25+ experts ensures every solution is scalable, secure, and delivers measurable ROI within two quarters.",
+  },
+  {
+    q: "Why should I choose an AI development company for my global project?",
+    a: "You get access to elite engineering talent at a competitive price point, with 300+ successful projects delivered globally.",
+  },
+  {
+    q: "What industries does your AI development company have experience in?",
+    a: "Extensive experience across healthcare, fashion, sports, education, real estate, and more, 300+ projects delivered or in progress.",
+  },
+  {
+    q: "Does Axiomra offer post-development support?",
+    a: "Yes: complete post-launch care across AI, software, data, and design, to keep your solution performing as you scale.",
+  },
+  {
+    q: "How much does it cost to build custom software?",
+    a: "Cost depends on project complexity, chosen tech stack, and ongoing maintenance needs. Book a free session and we'll scope it honestly.",
+  },
+  {
+    q: "How do I get started with Axiomra?",
+    a: "Book a free strategy session. We'll analyze your business challenges and provide a clear roadmap for automating your processes.",
+  },
 ];
 
 export default function FAQ({
@@ -18,11 +39,15 @@ export default function FAQ({
   eyebrow = "Your questions answered here",
   title = "Frequently Asked Questions",
   items = defaultFaqs,
+  compact = false,
 }) {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id={id} className="mx-auto max-w-8xl px-4 py-24 sm:px-6">
+    <section
+      id={id}
+      className={`mx-auto max-w-8xl px-4 sm:px-6 ${compact ? "py-12 md:py-16" : "py-24"}`}
+    >
       <SectionHeading className="mb-14" eyebrow={eyebrow} title={title} />
 
       <div className="space-y-3">
@@ -31,7 +56,10 @@ export default function FAQ({
           const panelId = `${id}-panel-${i}`;
           const buttonId = `${id}-button-${i}`;
           return (
-            <div key={f.q} className="overflow-hidden rounded-xl2 border border-line bg-surface-subtle">
+            <div
+              key={f.q}
+              className="overflow-hidden rounded-xl2 border border-line bg-surface-subtle"
+            >
               <button
                 type="button"
                 id={buttonId}
@@ -61,7 +89,9 @@ export default function FAQ({
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <p className="px-6 pb-6 text-base leading-relaxed text-content-dim md:text-lg">{f.a}</p>
+                    <p className="px-6 pb-6 text-base leading-relaxed text-content-dim md:text-lg">
+                      {f.a}
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>

@@ -11,7 +11,7 @@ export default function AiDevIndustries() {
   const current = industries.items[active];
 
   return (
-    <section id="ai-industries" className="bg-surface-subtle py-20 md:py-28">
+    <section id="ai-industries" className="bg-surface-subtle py-12 md:py-16">
       <div className="mx-auto max-w-8xl px-6">
         <SectionHeading
           className="mb-10"
