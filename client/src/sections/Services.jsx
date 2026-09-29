@@ -129,7 +129,10 @@ export default function Services() {
                   className="inline-flex items-center gap-1.5 rounded-full border border-line-strong px-5 py-2.5 text-sm font-medium text-content transition-colors hover:border-accent-vivid focus-ring"
                 >
                   View service details
-                  <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight
+                    size={15}
+                    className="transition-transform group-hover:translate-x-0.5"
+                  />
                 </a>
               </div>
             </div>

@@ -1,6 +1,19 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HeartPulse, GraduationCap, Shirt, Building2, Trophy, ShoppingBag, Truck, Boxes, Landmark, ShieldCheck, Scale, Megaphone } from "lucide-react";
+import {
+  HeartPulse,
+  GraduationCap,
+  Shirt,
+  Building2,
+  Trophy,
+  ShoppingBag,
+  Truck,
+  Boxes,
+  Landmark,
+  ShieldCheck,
+  Scale,
+  Megaphone,
+} from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import ConnectingDots from "../components/ConnectingDots";
 import { INDUSTRY_IMAGES } from "../lib/media";
@@ -190,7 +203,9 @@ export default function Industries({ showHeading = true, showStats = true }) {
               { value: "24", label: "Countries with live systems" },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="font-display text-5xl font-semibold text-brand md:text-6xl">{stat.value}</p>
+                <p className="font-display text-5xl font-semibold text-brand md:text-6xl">
+                  {stat.value}
+                </p>
                 <p className="mt-2 text-base text-ink-dim md:text-lg">{stat.label}</p>
               </div>
             ))}

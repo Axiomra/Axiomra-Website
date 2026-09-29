@@ -4,10 +4,26 @@ import { Cpu, TrendingUp, Users, ShieldCheck } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 
 const points = [
-  { icon: Cpu, title: "Production-Grade Engineering", desc: "We build AI systems that hold up against real-world data at scale: reliable, secure, enterprise-ready." },
-  { icon: TrendingUp, title: "Result-Driven Methodology", desc: "Every solution is designed to deliver a proven ROI within the first two quarters." },
-  { icon: Users, title: "100% In-House Expertise", desc: "Our dedicated team of 25+ AI specialists works directly with you from strategy to launch." },
-  { icon: ShieldCheck, title: "Ethical & Secure AI", desc: "Advanced security protocols protect your proprietary data and ensure compliance." },
+  {
+    icon: Cpu,
+    title: "Production-Grade Engineering",
+    desc: "We build AI systems that hold up against real-world data at scale: reliable, secure, enterprise-ready.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Result-Driven Methodology",
+    desc: "Every solution is designed to deliver a proven ROI within the first two quarters.",
+  },
+  {
+    icon: Users,
+    title: "100% In-House Expertise",
+    desc: "Our dedicated team of 25+ AI specialists works directly with you from strategy to launch.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Ethical & Secure AI",
+    desc: "Advanced security protocols protect your proprietary data and ensure compliance.",
+  },
 ];
 
 const stats = [
@@ -35,8 +51,14 @@ function Counter({ value, suffix }) {
   return (
     // The final value is what matters to assistive tech; the count-up is decoration.
     <span ref={ref} className="font-display text-4xl font-semibold text-content md:text-5xl">
-      <span aria-hidden="true">{display}{suffix}</span>
-      <span className="sr-only">{value}{suffix}</span>
+      <span aria-hidden="true">
+        {display}
+        {suffix}
+      </span>
+      <span className="sr-only">
+        {value}
+        {suffix}
+      </span>
     </span>
   );
 }
@@ -72,8 +94,12 @@ export default function WhyUs() {
             >
               <p.icon size={28} className="text-[#0A1428]" strokeWidth={1.8} />
             </div>
-            <h3 className="mb-2 font-display text-xl text-content transition-colors duration-300 group-hover:text-brand">{p.title}</h3>
-            <p className="text-base leading-relaxed text-content-dim transition-colors duration-300 group-hover:text-content">{p.desc}</p>
+            <h3 className="mb-2 font-display text-xl text-content transition-colors duration-300 group-hover:text-brand">
+              {p.title}
+            </h3>
+            <p className="text-base leading-relaxed text-content-dim transition-colors duration-300 group-hover:text-content">
+              {p.desc}
+            </p>
           </motion.div>
         ))}
       </div>

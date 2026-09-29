@@ -22,14 +22,7 @@ import SubmissionModal from "../components/SubmissionModal";
 import { DEFAULT_COUNTRY } from "../data/countryCodes";
 import { submitContact } from "../lib/contactApi";
 import { useSpamGuard } from "../lib/useSpamGuard";
-import {
-  COMPLEXITY,
-  PROJECT_TYPES,
-  SIZE,
-  TIMELINE,
-  estimate,
-  money,
-} from "../lib/costEstimate";
+import { COMPLEXITY, PROJECT_TYPES, SIZE, TIMELINE, estimate, money } from "../lib/costEstimate";
 import {
   formatPhone,
   validateCompany,
@@ -163,7 +156,8 @@ function Estimate({ result }) {
 
 const VALIDATORS = {
   name: (f) => validateName(f.name),
-  company: (f) => (f.company.trim() ? validateCompany(f.company) : "Please enter your company name."),
+  company: (f) =>
+    f.company.trim() ? validateCompany(f.company) : "Please enter your company name.",
   email: (f) => validateEmail(f.email),
   phone: (f, country) => validatePhone(f.phone, country, { required: true }),
 };
@@ -206,7 +200,7 @@ export default function RoiCalculator() {
     const found = Object.fromEntries(
       Object.entries(VALIDATORS)
         .map(([k, fn]) => [k, fn(lead, country)])
-        .filter(([, m]) => m),
+        .filter(([, m]) => m)
     );
     setErrors(found);
     if (Object.keys(found).length) {
@@ -260,7 +254,10 @@ export default function RoiCalculator() {
   };
 
   return (
-    <section id="roi-calculator" className="relative overflow-hidden bg-[#0A1428] px-4 py-24 sm:px-6">
+    <section
+      id="roi-calculator"
+      className="relative overflow-hidden bg-[#0A1428] px-4 py-24 sm:px-6"
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
@@ -348,9 +345,24 @@ export default function RoiCalculator() {
                 </h3>
                 <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
                   <div className="space-y-7">
-                    <Group title="AI complexity" options={COMPLEXITY} value={sel.complexity} onChange={pick("complexity")} />
-                    <Group title="Project size" options={SIZE} value={sel.size} onChange={pick("size")} />
-                    <Group title="Timeline" options={TIMELINE} value={sel.timeline} onChange={pick("timeline")} />
+                    <Group
+                      title="AI complexity"
+                      options={COMPLEXITY}
+                      value={sel.complexity}
+                      onChange={pick("complexity")}
+                    />
+                    <Group
+                      title="Project size"
+                      options={SIZE}
+                      value={sel.size}
+                      onChange={pick("size")}
+                    />
+                    <Group
+                      title="Timeline"
+                      options={TIMELINE}
+                      value={sel.timeline}
+                      onChange={pick("timeline")}
+                    />
                   </div>
                   <div className="lg:sticky lg:top-28 lg:self-start">
                     <Estimate result={result} />
@@ -388,13 +400,25 @@ export default function RoiCalculator() {
                   <form ref={formRef} noValidate onSubmit={onSubmit} className="relative">
                     <HoneypotField inputRef={honeypotRef} />
                     <h3 className="mb-6 font-display text-2xl font-semibold text-white md:text-3xl">
-                      Great! There&rsquo;s only <span className="text-[#14D8C4]">one step left</span>.
+                      Great! There&rsquo;s only{" "}
+                      <span className="text-[#14D8C4]">one step left</span>.
                     </h3>
                     <div className="space-y-4">
                       {[
                         { name: "name", icon: User, placeholder: "Full name*", auto: "name" },
-                        { name: "company", icon: Building2, placeholder: "Company name*", auto: "organization" },
-                        { name: "email", icon: Mail, placeholder: "Business email*", auto: "email", type: "email" },
+                        {
+                          name: "company",
+                          icon: Building2,
+                          placeholder: "Company name*",
+                          auto: "organization",
+                        },
+                        {
+                          name: "email",
+                          icon: Mail,
+                          placeholder: "Business email*",
+                          auto: "email",
+                          type: "email",
+                        },
                       ].map(({ name, icon: Icon, placeholder, auto, type = "text" }) => (
                         <div key={name}>
                           <div className="relative">

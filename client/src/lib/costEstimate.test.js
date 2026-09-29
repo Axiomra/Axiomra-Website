@@ -5,9 +5,9 @@ const all = () =>
   PROJECT_TYPES.flatMap((t) =>
     COMPLEXITY.flatMap((c) =>
       SIZE.flatMap((s) =>
-        TIMELINE.map((l) => ({ type: t.id, complexity: c.id, size: s.id, timeline: l.id })),
-      ),
-    ),
+        TIMELINE.map((l) => ({ type: t.id, complexity: c.id, size: s.id, timeline: l.id }))
+      )
+    )
   );
 
 describe("estimate", () => {

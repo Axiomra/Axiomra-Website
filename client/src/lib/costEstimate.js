@@ -43,9 +43,27 @@ export const PROJECT_TYPES = [
 ];
 
 export const COMPLEXITY = [
-  { id: "simple", label: "Simple", hint: "Rule-based logic, basic ML, chatbot", cost: 0.68, time: 0.8 },
-  { id: "moderate", label: "Moderate", hint: "Custom models, NLP, computer vision", cost: 1, time: 1 },
-  { id: "advanced", label: "Advanced", hint: "LLMs, multi-agent systems, real-time AI", cost: 1.46, time: 1.35 },
+  {
+    id: "simple",
+    label: "Simple",
+    hint: "Rule-based logic, basic ML, chatbot",
+    cost: 0.68,
+    time: 0.8,
+  },
+  {
+    id: "moderate",
+    label: "Moderate",
+    hint: "Custom models, NLP, computer vision",
+    cost: 1,
+    time: 1,
+  },
+  {
+    id: "advanced",
+    label: "Advanced",
+    hint: "LLMs, multi-agent systems, real-time AI",
+    cost: 1.46,
+    time: 1.35,
+  },
 ];
 
 export const SIZE = [
@@ -57,9 +75,30 @@ export const SIZE = [
 /* Rushing costs more (a larger parallel team) and a relaxed schedule costs a
    little less; duration moves the other way. */
 export const TIMELINE = [
-  { id: "relaxed", label: "Relaxed", hint: "Flexible deadline, lowest cost", cost: 0.88, time: 1.4, team: 0.8 },
-  { id: "standard", label: "Standard", hint: "Balanced pace and budget", cost: 1, time: 1, team: 1 },
-  { id: "rush", label: "Rush", hint: "Fastest delivery, larger team", cost: 1.37, time: 0.65, team: 1.6 },
+  {
+    id: "relaxed",
+    label: "Relaxed",
+    hint: "Flexible deadline, lowest cost",
+    cost: 0.88,
+    time: 1.4,
+    team: 0.8,
+  },
+  {
+    id: "standard",
+    label: "Standard",
+    hint: "Balanced pace and budget",
+    cost: 1,
+    time: 1,
+    team: 1,
+  },
+  {
+    id: "rush",
+    label: "Rush",
+    hint: "Fastest delivery, larger team",
+    cost: 1.37,
+    time: 0.65,
+    team: 1.6,
+  },
 ];
 
 const find = (list, id) => list.find((o) => o.id === id) ?? list[0];

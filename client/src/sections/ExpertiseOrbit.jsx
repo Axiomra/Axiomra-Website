@@ -85,7 +85,9 @@ function Ring({ items, inset, duration, reverse = false, offset = 0, variant }) 
             </span>
             <span
               className={`max-w-[5.5rem] text-center font-medium leading-tight text-content md:max-w-[8rem] ${
-                variant === "service" ? "text-[10px] md:text-sm" : "text-[9px] text-content-dim md:text-xs"
+                variant === "service"
+                  ? "text-[10px] md:text-sm"
+                  : "text-[9px] text-content-dim md:text-xs"
               }`}
             >
               {label}
@@ -122,7 +124,7 @@ export default function ExpertiseOrbit() {
           className="orbit relative mx-auto mt-14 aspect-square w-full max-w-[760px]"
           role="img"
           aria-label={`Axiomra at the centre, surrounded by its services (${SERVICES.map(
-            (s) => s.label,
+            (s) => s.label
           ).join(", ")}) and industries (${INDUSTRIES.map((s) => s.label).join(", ")}).`}
         >
           {/* Soft teal halo behind the core. */}
@@ -137,7 +139,14 @@ export default function ExpertiseOrbit() {
             <span className="absolute bottom-0 left-1/2 h-2.5 w-2.5 -translate-x-1/2 translate-y-1/2 rounded-full bg-brand" />
           </div>
 
-          <Ring items={INDUSTRIES} inset="16%" duration={70} reverse offset={20} variant="industry" />
+          <Ring
+            items={INDUSTRIES}
+            inset="16%"
+            duration={70}
+            reverse
+            offset={20}
+            variant="industry"
+          />
           <Ring items={SERVICES} inset="3%" duration={90} variant="service" />
 
           {/* The core. */}
@@ -156,7 +165,8 @@ export default function ExpertiseOrbit() {
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-content-dim">
           <span className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full border border-accent-vivid bg-accent-vivid/20" /> AI services
+            <span className="h-3 w-3 rounded-full border border-accent-vivid bg-accent-vivid/20" />{" "}
+            AI services
           </span>
           <span className="flex items-center gap-2">
             <span className="h-3 w-3 rounded-full border border-brand bg-brand/20" /> Industries

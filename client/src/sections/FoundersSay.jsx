@@ -7,9 +7,30 @@ import img2 from "../assets/founder-2.webp";
 import img3 from "../assets/founder-3.webp";
 
 const items = [
-  { name: "Randel Griff", role: "CEO & Founder, Doozoo", stars: 4.5, img: img1, quote: "Their advanced understanding and experience in AI and Machine Learning technology and understanding current trends and capabilities. All deliveries were on time and accurate." },
-  { name: "Suleman Niazi", role: "CEO & Founder, Konnect", stars: 5, img: img2, quote: "We've been impressed with the team. Working with them does not feel like we're dealing with a business; it feels like we're dealing with a group of people who want us to be successful." },
-  { name: "David Milward", role: "Chairman of Metadataworks", stars: 5, img: img3, quote: "Very knowledgeable, and the team did what they promised, no bullshit, just good solid working through the requirements and suggesting good solutions." },
+  {
+    name: "Randel Griff",
+    role: "CEO & Founder, Doozoo",
+    stars: 4.5,
+    img: img1,
+    quote:
+      "Their advanced understanding and experience in AI and Machine Learning technology and understanding current trends and capabilities. All deliveries were on time and accurate.",
+  },
+  {
+    name: "Suleman Niazi",
+    role: "CEO & Founder, Konnect",
+    stars: 5,
+    img: img2,
+    quote:
+      "We've been impressed with the team. Working with them does not feel like we're dealing with a business; it feels like we're dealing with a group of people who want us to be successful.",
+  },
+  {
+    name: "David Milward",
+    role: "Chairman of Metadataworks",
+    stars: 5,
+    img: img3,
+    quote:
+      "Very knowledgeable, and the team did what they promised, no bullshit, just good solid working through the requirements and suggesting good solutions.",
+  },
 ];
 
 export default function FoundersSay() {
@@ -47,7 +68,10 @@ export default function FoundersSay() {
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-              style={{ backgroundImage: "radial-gradient(circle at 15% 0%, rgba(20,216,196,0.14), transparent 60%)" }}
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle at 15% 0%, rgba(20,216,196,0.14), transparent 60%)",
+              }}
             />
             <Quote
               aria-hidden="true"
@@ -67,7 +91,13 @@ export default function FoundersSay() {
               />
               <div className="flex text-gold" role="img" aria-label={`${t.stars} out of 5 stars`}>
                 {[...Array(5)].map((_, idx) => (
-                  <Star key={idx} size={18} strokeWidth={0} fill="currentColor" opacity={idx < Math.floor(t.stars) ? 1 : 0.25} />
+                  <Star
+                    key={idx}
+                    size={18}
+                    strokeWidth={0}
+                    fill="currentColor"
+                    opacity={idx < Math.floor(t.stars) ? 1 : 0.25}
+                  />
                 ))}
               </div>
             </div>
