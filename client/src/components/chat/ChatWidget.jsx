@@ -11,6 +11,9 @@ const WELCOME =
   "Hi there! I'm Axiomra Assistant. Ask me about our AI services, pricing, timelines or how we work, and I'll point you in the right direction.";
 
 const STORAGE_KEY = "axiomra-chat";
+// The server-side conversation the transcript above belongs to. Kept for the
+// same browser session as the transcript, so the two never drift apart.
+const CONVERSATION_KEY = "axiomra-chat-conversation";
 
 // Browser storage can be missing or throw (private mode, blocked site data);
 // the chat must work without it.
@@ -25,6 +28,13 @@ const storage = {
   set(key, value) {
     try {
       sessionStorage.setItem(key, value);
+    } catch {
+      /* ignore */
+    }
+  },
+  remove(key) {
+    try {
+      sessionStorage.removeItem(key);
     } catch {
       /* ignore */
     }
@@ -244,17 +254,17 @@ export default function ChatWidget() {
       });
 
     try {
-      // The API accepts only the visitor's own turns (it refuses assistant
-      // turns so a reply cannot be forged) and caps them at 20.
-      const recent = history
-        .filter((m) => m.role === "user")
-        .slice(-20)
-        .map(({ role, content }) => ({ role, content }));
-      await streamChat(recent, {
-        signal: controller.signal,
-        onText: (chunk) => setReply((prev) => prev + chunk),
-        onReplace: (full) => setReply(() => full),
-      });
+      // The server rebuilds the history from its own store; only the new
+      // message and the conversation id travel.
+      await streamChat(
+        { message: content, conversationId: storage.get(CONVERSATION_KEY) },
+        {
+          onConversation: (id) => storage.set(CONVERSATION_KEY, id),
+          signal: controller.signal,
+          onText: (chunk) => setReply((prev) => prev + chunk),
+          onReplace: (full) => setReply(() => full),
+        }
+      );
     } catch (err) {
       if (err.name === "AbortError") return;
       setError(err.message);
@@ -269,6 +279,7 @@ export default function ChatWidget() {
 
   const reset = () => {
     abortRef.current?.abort();
+    storage.remove(CONVERSATION_KEY);
     setMessages([]);
     setError("");
     setBusy(false);

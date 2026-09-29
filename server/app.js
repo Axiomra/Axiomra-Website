@@ -53,6 +53,8 @@ const isAllowedOrigin = (origin) => allowedOrigins.has(origin);
 app.use(
   cors({
     credentials: true,
+    // The chat widget reads its conversation id from this response header.
+    exposedHeaders: ["X-Conversation-Id"],
     origin(origin, callback) {
       // Same-origin and server-to-server calls send no Origin header.
       if (!origin) return callback(null, true);

@@ -9,10 +9,12 @@ export const fake = {
   failPrefix: null,
   data: new Map(),
   prefixes: new Set(),
+  ttl: new Map(),
   reset() {
     this.failing = false;
     this.failPrefix = null;
     this.data.clear();
+    this.ttl.clear();
   },
 };
 
@@ -36,9 +38,25 @@ export class FakeRedis {
     fake.data.set(key, next);
     return next;
   }
-  async expire(key) {
+  async expire(key, seconds) {
     guard(key);
+    fake.ttl.set(key, seconds);
     return 1;
+  }
+  async lrange(key) {
+    guard(key);
+    return [...(fake.data.get(key) ?? [])];
+  }
+  async rpush(key, ...values) {
+    guard(key);
+    const list = [...(fake.data.get(key) ?? []), ...values];
+    fake.data.set(key, list);
+    return list.length;
+  }
+  async ltrim(key, start) {
+    guard(key);
+    // Only the negative-start form lib/chatConversations.js uses.
+    fake.data.set(key, (fake.data.get(key) ?? []).slice(start));
   }
   async call() {
     guard();

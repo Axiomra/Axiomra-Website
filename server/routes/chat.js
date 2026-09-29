@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { Agent, run, user, setTracingDisabled } from "@openai/agents";
+import { Agent, run, user, assistant, setTracingDisabled } from "@openai/agents";
 import { z } from "zod";
 import { CHAT_SYSTEM_PROMPT } from "../lib/chatKnowledge.js";
 import { reserve, settle } from "../lib/chatBudget.js";
 import { CHAT_MODEL } from "../lib/chatConfig.js";
+import { appendTurns, loadConversation } from "../lib/chatConversations.js";
 
 const router = Router();
 
@@ -12,36 +13,36 @@ setTracingDisabled(true);
 
 // A visitor chat, not a document pipeline: the caps keep one conversation's
 // cost bounded no matter what the browser sends.
-const MAX_MESSAGES = 20;
 const MAX_CHARS = 2000;
 
-// Only visitor turns are accepted. Assistant and system turns would let the
-// browser put words in the model's mouth (a forged "assistant" reply or a
-// replacement system prompt), so any role other than "user" is a 400.
-const bodySchema = z.strictObject({
-  messages: z
-    .array(
-      z.strictObject({
-        role: z.literal("user"),
-        content: z.string().trim().min(1).max(MAX_CHARS),
-      })
-    )
-    .min(1)
-    .max(MAX_MESSAGES),
-});
+const content = z.string().trim().min(1).max(MAX_CHARS);
 
-// The model only ever sees the visitor's side of the conversation, so say so;
-// otherwise it reads the gaps as the visitor repeating themselves.
-const HISTORY_NOTE =
-  "\n\nThe conversation you receive contains only the visitor's messages, oldest first; " +
-  "your own earlier replies are omitted. Answer the latest message, using the earlier ones as context.";
+// The browser sends its new message and the conversationId it was given; the
+// history comes from lib/chatConversations.js, never from the request. The
+// older `messages` array (widget bundles cached before conversationId existed)
+// is still accepted, but only its last turn is used, and any role other than
+// "user" anywhere in it is a 400: a forged assistant or system turn is never
+// something to quietly pass along.
+const bodySchema = z
+  .strictObject({
+    conversationId: z.string().max(100).optional(),
+    message: content.optional(),
+    messages: z
+      .array(z.strictObject({ role: z.literal("user"), content }))
+      .min(1)
+      .optional(),
+  })
+  .refine(
+    (b) => (b.message === undefined) !== (b.messages === undefined),
+    "Send exactly one of message or messages."
+  );
 
 // Reasoning models reject sampling settings and vice versa, so the settings
 // follow the configured model family.
 const isReasoningModel = /^(gpt-5|o\d)/.test(CHAT_MODEL);
 
 const MAX_OUTPUT_TOKENS = isReasoningModel ? 2048 : 700;
-const INSTRUCTIONS = CHAT_SYSTEM_PROMPT + HISTORY_NOTE;
+const INSTRUCTIONS = CHAT_SYSTEM_PROMPT;
 
 const DAILY_CAP_REACHED =
   "Our assistant has reached its limit for today. Please try again tomorrow, " +
@@ -62,6 +63,9 @@ const agent = new Agent({
 });
 
 /**
+ * Body: { message, conversationId? }. The conversation's id comes back in the
+ * X-Conversation-Id header; send it with the next turn to keep the context.
+ *
  * Streams the assistant's reply as server-sent events:
  *   data: {"type":"text","text":"..."}   one per chunk
  *   data: {"type":"done"}
@@ -77,18 +81,25 @@ router.post("/", async (req, res) => {
     return res.status(503).json({ error: "The assistant is not available right now." });
   }
 
-  // Checked before any header goes out, so a refusal is a plain JSON error.
+  const { data } = parsed;
+  const text = data.message ?? data.messages.at(-1).content;
+
+  // Both checked before any header goes out, so a refusal is a plain JSON
+  // error, and both fail closed: no store means no context and no spend cap.
+  let conversation;
   let reservation;
   try {
+    conversation = await loadConversation(data.conversationId);
     reservation = await reserve({
       model: CHAT_MODEL,
       inputChars:
-        INSTRUCTIONS.length + parsed.data.messages.reduce((n, m) => n + m.content.length, 0),
+        INSTRUCTIONS.length +
+        text.length +
+        conversation.history.reduce((n, t) => n + t.content.length, 0),
       maxOutputTokens: MAX_OUTPUT_TOKENS,
     });
   } catch (err) {
-    // Fail closed: without the spend counter there is no cap.
-    console.error("Chat: spend store unavailable:", err.message);
+    console.error("Chat: store unavailable:", err.message);
     return res.status(503).json({ error: "The assistant is not available right now." });
   }
   if (!reservation) {
@@ -101,6 +112,7 @@ router.post("/", async (req, res) => {
     Connection: "keep-alive",
     // Stops proxies (nginx and friends) from buffering the whole reply.
     "X-Accel-Buffering": "no",
+    "X-Conversation-Id": conversation.id,
   });
   res.flushHeaders();
   const send = (event) => res.write(`data: ${JSON.stringify(event)}\n\n`);
@@ -112,21 +124,37 @@ router.post("/", async (req, res) => {
     if (!finished) controller.abort();
   });
 
-  const input = parsed.data.messages.map((m) => user(m.content));
+  const input = [
+    ...conversation.history.map((t) =>
+      t.role === "user" ? user(t.content) : assistant(t.content)
+    ),
+    user(text),
+  ];
 
   let usage;
+  let reply = "";
   try {
     const result = await run(agent, input, {
       stream: true,
       maxTurns: 1,
       signal: controller.signal,
     });
-    for await (const text of result.toTextStream()) {
-      if (text) send({ type: "text", text });
+    for await (const chunk of result.toTextStream()) {
+      if (chunk) {
+        reply += chunk;
+        send({ type: "text", text: chunk });
+      }
     }
     await result.completed;
     usage = result.state?.usage;
     if (result.error) throw result.error;
+    // Only a completed exchange is remembered; a failed turn is retried by
+    // the visitor and would otherwise appear twice. A store hiccup here costs
+    // the next turn its context, not this reply.
+    await appendTurns(conversation.id, [
+      { role: "user", content: text },
+      { role: "assistant", content: reply },
+    ]).catch((err) => console.error("Chat: could not save conversation:", err.message));
     send({ type: "done" });
   } catch (err) {
     if (controller.signal.aborted) return;

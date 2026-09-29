@@ -71,7 +71,7 @@ describe("POST /api/chat", () => {
     expect(events(res.text).map((e) => e.type)).toEqual(["text", "error"]);
   });
 
-  it("passes earlier visitor turns to the model as user input", async () => {
+  it("uses only the last turn of a legacy messages array, never client history", async () => {
     sdk.script = ["Sure"];
     const res = await chat({
       messages: [
@@ -80,10 +80,7 @@ describe("POST /api/chat", () => {
       ],
     });
     expect(res.status).toBe(200);
-    expect(sdk.lastInput).toEqual([
-      { role: "user", content: "What do you build?" },
-      { role: "user", content: "How much does it cost?" },
-    ]);
+    expect(sdk.lastInput).toEqual([{ role: "user", content: "How much does it cost?" }]);
   });
 
   it.each(["assistant", "system", "developer"])(
