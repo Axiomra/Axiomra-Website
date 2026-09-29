@@ -18,15 +18,16 @@ const MAX_CHARS = 2000;
 const content = z.string().trim().min(1).max(MAX_CHARS);
 
 // The browser sends its new message and the conversationId it was given; the
-// history comes from lib/chatConversations.js, never from the request. The
-// older `messages` array (widget bundles cached before conversationId existed)
-// is still accepted, but only its last turn is used, and any role other than
-// "user" anywhere in it is a 400: a forged assistant or system turn is never
-// something to quietly pass along.
+// history comes from lib/chatConversations.js, never from the request.
 const bodySchema = z
   .strictObject({
     conversationId: z.string().max(100).optional(),
     message: content.optional(),
+    // TEMPORARY SHIM, remove by 2026-10-06: see SECURITY-DEFERRED.md,
+    // "Legacy `messages` array on POST /api/chat". Not a supported path; it
+    // exists only for widget bundles still open in tabs from before
+    // conversationId. Only the last turn is used, and any role other than
+    // "user" anywhere in it is a 400.
     messages: z
       .array(z.strictObject({ role: z.literal("user"), content }))
       .min(1)

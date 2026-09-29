@@ -56,3 +56,42 @@ v7 notes for when it happens: needs React 18+ and Node 20+;
 `react-router-dom/server` (used by `entry-server.jsx`) must be re-checked; turn
 on the v6 `future` flags (`v7_startTransition`, `v7_relativeSplatPath`, …)
 first and verify prerender and hydration before bumping the major.
+
+## Legacy `messages` array on POST /api/chat (server)
+
+- **What:** `/api/chat` still accepts the old body shape
+  `{ messages: [{ role: "user", content }] }` alongside the supported
+  `{ message, conversationId? }`.
+- **Where:** the `messages` field of `bodySchema` in `server/routes/chat.js`
+  (marked `TEMPORARY SHIM`).
+- **Added:** 2026-09-29
+- **Remove by:** 2026-10-06
+- **Status:** temporary shim, not a supported path.
+
+### Why it exists
+
+Widget bundles loaded before the server kept conversation history send the
+whole transcript as `messages`. Tabs left open across the deploy keep doing so
+until they reload. The shim stops those visitors getting a 400 in the meantime.
+
+### Why it is safe while it lasts
+
+- Only the last element is used, as the new message. Every earlier element is
+  ignored; context comes only from the server's store (`chat:conv:<id>`).
+- Every element must be `{ role: "user", content }` with no extra keys, and
+  content capped at 2000 characters. An `assistant`, `system` or any other
+  role anywhere in the array is refused with a 400, so a forged turn is never
+  forwarded or silently dropped.
+- A body carrying both `message` and `messages` is refused.
+- The spend cap and rate limits apply exactly as on the supported path.
+
+### How to remove it
+
+1. Delete the `messages` field and the `message`/`messages` refine from
+   `bodySchema`, make `message` required, and set
+   `const text = data.message`.
+2. Move the tests in `server/tests/chat.test.js` and
+   `server/tests/chatHistory.test.js` that post `messages` to `message`.
+   Keep a test that a body with a `messages` array is now a 400 (it hits
+   `strictObject`).
+3. Delete this section.
