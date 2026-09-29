@@ -2520,3 +2520,46 @@
 .chat-typing-dot {
   animation: chat-typing 1s ease-in-out infinite;
 }
+
+/* Home expertise orbit: rings spin, their chips counter-spin to stay upright. */
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes orbit-spin-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes orbit-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+.orbit-spin {
+  animation: orbit-spin linear infinite;
+}
+.orbit-spin-rev {
+  animation: orbit-spin-rev linear infinite;
+}
+.orbit-pulse {
+  animation: orbit-pulse 2.4s ease-out infinite;
+}
+.orbit:hover .orbit-ring,
+.orbit:hover .orbit-item {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit-spin,
+  .orbit-spin-rev,
+  .orbit-pulse,
+  .hero-kenburns {
+    animation: none;
+  }
+}
