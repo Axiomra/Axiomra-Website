@@ -122,7 +122,7 @@ export default function Industries({ showHeading = true, showStats = true }) {
           {/* Scrim kept light: the tile labels sit on their own gradient, so the
               photo stays sharp and reads as the subject of the panel. */}
           <div className="absolute inset-0 bg-inverse/35" />
-          <div className="absolute inset-0 bg-gradient-to-br from-inverse/55 via-transparent to-brand-strong/35" />
+          <div className="absolute inset-0 bg-inverse/15" />
 
           {/* The network field: drifting dots wired to their neighbours. */}
           <ConnectingDots className="pointer-events-none" />

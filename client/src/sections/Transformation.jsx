@@ -13,7 +13,7 @@ export default function Transformation() {
         transition={{ duration: 0.6 }}
         className="relative"
       >
-        <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl2 bg-gradient-to-br from-inverse to-brand-strong">
+        <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl2 bg-inverse">
           <img
             src={teamImg}
             alt="Abstract rendering of a networked AI system"

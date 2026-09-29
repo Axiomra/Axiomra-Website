@@ -37,7 +37,10 @@ export default {
         accent: {
           DEFAULT: token("accent"),
           vivid: token("accent-vivid"),
+          "vivid-hover": token("accent-vivid-hover"),
         },
+        // Text on accent-vivid: the same dark ink in both themes (--inverse is not).
+        "on-accent": token("on-accent"),
         inverse: {
           DEFAULT: token("inverse"),
           soft: token("inverse-soft"),

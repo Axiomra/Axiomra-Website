@@ -84,7 +84,7 @@ export default function FoundersSay() {
             {/* Brand rule that wipes in from the left on hover. */}
             <span
               aria-hidden="true"
-              className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-accent-vivid to-brand transition-transform duration-500 group-hover:scale-x-100"
+              className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-accent-vivid transition-transform duration-500 group-hover:scale-x-100"
             />
           </motion.figure>
         ))}

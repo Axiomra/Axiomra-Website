@@ -18,6 +18,9 @@
   --brand-strong: 74 78 176;
   --accent: 15 118 110;
   --accent-vivid: 20 216 196;
+  /* Hover shade of accent-vivid, and the dark ink that stays readable on both. */
+  --accent-vivid-hover: 46 230 211;
+  --on-accent: 10 20 40;
   --gold: 224 150 16;
 
   /* Always-dark blocks */
@@ -53,6 +56,9 @@
   --brand-strong: 140 156 233;
   --accent: 45 232 213;
   --accent-vivid: 20 216 196;
+  /* Hover shade of accent-vivid, and the dark ink that stays readable on both. */
+  --accent-vivid-hover: 46 230 211;
+  --on-accent: 10 20 40;
   --gold: 255 190 71;
 
   --inverse: 19 15 42;
