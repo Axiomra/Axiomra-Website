@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Agent, run, user, assistant, setTracingDisabled } from "@openai/agents";
+import { Agent, run, user, setTracingDisabled } from "@openai/agents";
 import { z } from "zod";
 import { CHAT_SYSTEM_PROMPT } from "../lib/chatKnowledge.js";
 
@@ -15,22 +15,26 @@ setTracingDisabled(true);
 const MAX_MESSAGES = 20;
 const MAX_CHARS = 2000;
 
-const bodySchema = z.object({
+// Only visitor turns are accepted. Assistant and system turns would let the
+// browser put words in the model's mouth (a forged "assistant" reply or a
+// replacement system prompt), so any role other than "user" is a 400.
+const bodySchema = z.strictObject({
   messages: z
     .array(
-      z.object({
-        role: z.enum(["user", "assistant"]),
+      z.strictObject({
+        role: z.literal("user"),
         content: z.string().trim().min(1).max(MAX_CHARS),
       })
     )
     .min(1)
-    .max(MAX_MESSAGES)
-    .refine(
-      (list) => list.every((m, i) => m.role === (i % 2 === 0 ? "user" : "assistant")),
-      "Messages must alternate, starting with the visitor."
-    )
-    .refine((list) => list.at(-1)?.role === "user", "The last message must be the visitor's."),
+    .max(MAX_MESSAGES),
 });
+
+// The model only ever sees the visitor's side of the conversation, so say so;
+// otherwise it reads the gaps as the visitor repeating themselves.
+const HISTORY_NOTE =
+  "\n\nThe conversation you receive contains only the visitor's messages, oldest first; " +
+  "your own earlier replies are omitted. Answer the latest message, using the earlier ones as context.";
 
 // Reasoning models reject sampling settings and vice versa, so the settings
 // follow the configured model family.
@@ -38,7 +42,7 @@ const isReasoningModel = /^(gpt-5|o\d)/.test(MODEL);
 
 const agent = new Agent({
   name: "Axiomra Assistant",
-  instructions: CHAT_SYSTEM_PROMPT,
+  instructions: CHAT_SYSTEM_PROMPT + HISTORY_NOTE,
   model: MODEL,
   modelSettings: {
     // Replies are short by instruction; the cap bounds cost per turn.
@@ -83,9 +87,7 @@ router.post("/", async (req, res) => {
     if (!finished) controller.abort();
   });
 
-  const input = parsed.data.messages.map((m) =>
-    m.role === "user" ? user(m.content) : assistant(m.content)
-  );
+  const input = parsed.data.messages.map((m) => user(m.content));
 
   try {
     const result = await run(agent, input, {

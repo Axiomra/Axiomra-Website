@@ -244,10 +244,12 @@ export default function ChatWidget() {
       });
 
     try {
-      // The API caps a conversation at 20 messages; send the most recent
-      // ones, starting on a visitor turn.
-      let recent = history.slice(-19);
-      if (recent[0]?.role !== "user") recent = recent.slice(1);
+      // The API accepts only the visitor's own turns (it refuses assistant
+      // turns so a reply cannot be forged) and caps them at 20.
+      const recent = history
+        .filter((m) => m.role === "user")
+        .slice(-20)
+        .map(({ role, content }) => ({ role, content }));
       await streamChat(recent, {
         signal: controller.signal,
         onText: (chunk) => setReply((prev) => prev + chunk),
