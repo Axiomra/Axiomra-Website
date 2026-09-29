@@ -2521,6 +2521,30 @@
   animation: chat-typing 1s ease-in-out infinite;
 }
 
+/* Home hero carousel: slow push-in on the active slide, and the indicator fill. */
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+.hero-kenburns {
+  animation: hero-kenburns 7s ease-out both;
+}
+@keyframes hero-progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.hero-progress {
+  animation: hero-progress linear both;
+}
+
 /* Home expertise orbit: rings spin, their chips counter-spin to stay upright. */
 @keyframes orbit-spin {
   to {

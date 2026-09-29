@@ -114,8 +114,16 @@ function useNavTone() {
     const raf = requestAnimationFrame(measure);
     window.addEventListener("scroll", measure, { passive: true });
     window.addEventListener("resize", measure);
+    // A hero carousel flips its tone per slide without any scroll.
+    const toneObserver = new MutationObserver(measure);
+    toneObserver.observe(document.body, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["data-nav-tone"],
+    });
     return () => {
       cancelAnimationFrame(raf);
+      toneObserver.disconnect();
       window.removeEventListener("scroll", measure);
       window.removeEventListener("resize", measure);
     };
