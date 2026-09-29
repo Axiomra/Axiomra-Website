@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
+import { RELOAD_PARAM } from "./components/RouteErrorBoundary.jsx";
 import ThemeProvider from "./theme/ThemeProvider.jsx";
 import "./index.css";
 // Loaded up front rather than with the lazy CaseStudyPage chunk: prerendered
@@ -35,6 +36,14 @@ const app = (
     </ErrorBoundary>
   </React.StrictMode>
 );
+
+// Drop the cache-busting param a chunk-failure reload added, before the router
+// reads the URL, so it never shows up in links, analytics or canonicals.
+const url = new URL(window.location.href);
+if (url.searchParams.has(RELOAD_PARAM)) {
+  url.searchParams.delete(RELOAD_PARAM);
+  window.history.replaceState(window.history.state, "", url);
+}
 
 // Prerendered pages (scripts/prerender.mjs) arrive with the markup already in
 // #root; the empty SPA shell (spa.html, 404.html, dev) does not.

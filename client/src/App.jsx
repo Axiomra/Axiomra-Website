@@ -5,6 +5,7 @@ import { Navbar } from "./components/ui/navbar";
 import Footer from "./components/Footer";
 import BookCallModal from "./components/BookCallModal";
 import ErrorBoundary from "./components/ErrorBoundary";
+import RouteErrorBoundary from "./components/RouteErrorBoundary";
 import { RenderedPagesContext } from "./seo/prerender-context";
 import { afterLoadIdle } from "./lib/idle";
 
@@ -148,61 +149,67 @@ function DeferredChat() {
 
 /** The public marketing site: navbar, footer, the call modal and the chat. */
 function SiteRoutes() {
+  const { pathname } = useLocation();
   return (
     <div className="overflow-x-clip">
       <Navbar />
       <ScrollManager />
       <main>
-        <Suspense fallback={<RouteFallback />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path={ABOUT_PATH} element={<AboutPage />} />
-            <Route path={TECH_PATH} element={<TechStackPage />} />
-            <Route path={FAQS_PATH} element={<FaqsPage />} />
-            <Route path={PORTFOLIO_PATH} element={<PortfolioPage />} />
-            <Route path={`${CASE_STUDIES_PATH}/:slug`} element={<CaseStudyPage />} />
-            <Route path={INDUSTRIES_PATH} element={<IndustriesPage />} />
-            {/* Built industry pages go above the :slug fallback. */}
-            <Route path={`${INDUSTRIES_PATH}/fashion`} element={<FashionPage />} />
-            <Route path={`${INDUSTRIES_PATH}/marketing`} element={<MarketingPage />} />
-            <Route path={`${INDUSTRIES_PATH}/supply-chain`} element={<SupplyChainPage />} />
-            <Route path={`${INDUSTRIES_PATH}/real-estate`} element={<RealEstatePage />} />
-            <Route path={`${INDUSTRIES_PATH}/sports`} element={<SportsPage />} />
-            <Route path={`${INDUSTRIES_PATH}/finance`} element={<FinancePage />} />
-            <Route path={`${INDUSTRIES_PATH}/insurance`} element={<InsurancePage />} />
-            <Route path={`${INDUSTRIES_PATH}/education`} element={<EducationPage />} />
-            <Route path={`${INDUSTRIES_PATH}/retail`} element={<RetailPage />} />
-            <Route path={`${INDUSTRIES_PATH}/healthcare`} element={<HealthcarePage />} />
-            <Route path={`${INDUSTRIES_PATH}/legal`} element={<LegalPage />} />
-            <Route path={`${INDUSTRIES_PATH}/transportation`} element={<TransportationPage />} />
-            <Route path={`${INDUSTRIES_PATH}/:slug`} element={<IndustryDetailPlaceholder />} />
-            <Route path={SERVICES_BASE_PATH} element={<ServicesPage />} />
-            <Route
-              path={`${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`}
-              element={<AiDevelopmentPage />}
-            />
-            <Route
-              path={`${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}`}
-              element={<GenerativeAiPage />}
-            />
-            <Route path={`${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`} element={<AgenticAiPage />} />
-            <Route
-              path={`${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}`}
-              element={<ComputerVisionPage />}
-            />
-            <Route path={`${SERVICES_BASE_PATH}/${NLP_SLUG}`} element={<NlpPage />} />
-            <Route
-              path="/service/nlp"
-              element={<Navigate to={`${SERVICES_BASE_PATH}/${NLP_SLUG}`} replace />}
-            />
-            <Route path={`${SERVICES_BASE_PATH}/:slug`} element={<ServiceDetailPlaceholder />} />
-            {/* Unknown URLs. Vercel serves these with a real 404 status via
+        <RouteErrorBoundary resetKey={pathname} pending={<RouteFallback />}>
+          <Suspense fallback={<RouteFallback />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path={ABOUT_PATH} element={<AboutPage />} />
+              <Route path={TECH_PATH} element={<TechStackPage />} />
+              <Route path={FAQS_PATH} element={<FaqsPage />} />
+              <Route path={PORTFOLIO_PATH} element={<PortfolioPage />} />
+              <Route path={`${CASE_STUDIES_PATH}/:slug`} element={<CaseStudyPage />} />
+              <Route path={INDUSTRIES_PATH} element={<IndustriesPage />} />
+              {/* Built industry pages go above the :slug fallback. */}
+              <Route path={`${INDUSTRIES_PATH}/fashion`} element={<FashionPage />} />
+              <Route path={`${INDUSTRIES_PATH}/marketing`} element={<MarketingPage />} />
+              <Route path={`${INDUSTRIES_PATH}/supply-chain`} element={<SupplyChainPage />} />
+              <Route path={`${INDUSTRIES_PATH}/real-estate`} element={<RealEstatePage />} />
+              <Route path={`${INDUSTRIES_PATH}/sports`} element={<SportsPage />} />
+              <Route path={`${INDUSTRIES_PATH}/finance`} element={<FinancePage />} />
+              <Route path={`${INDUSTRIES_PATH}/insurance`} element={<InsurancePage />} />
+              <Route path={`${INDUSTRIES_PATH}/education`} element={<EducationPage />} />
+              <Route path={`${INDUSTRIES_PATH}/retail`} element={<RetailPage />} />
+              <Route path={`${INDUSTRIES_PATH}/healthcare`} element={<HealthcarePage />} />
+              <Route path={`${INDUSTRIES_PATH}/legal`} element={<LegalPage />} />
+              <Route path={`${INDUSTRIES_PATH}/transportation`} element={<TransportationPage />} />
+              <Route path={`${INDUSTRIES_PATH}/:slug`} element={<IndustryDetailPlaceholder />} />
+              <Route path={SERVICES_BASE_PATH} element={<ServicesPage />} />
+              <Route
+                path={`${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`}
+                element={<AiDevelopmentPage />}
+              />
+              <Route
+                path={`${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}`}
+                element={<GenerativeAiPage />}
+              />
+              <Route
+                path={`${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`}
+                element={<AgenticAiPage />}
+              />
+              <Route
+                path={`${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}`}
+                element={<ComputerVisionPage />}
+              />
+              <Route path={`${SERVICES_BASE_PATH}/${NLP_SLUG}`} element={<NlpPage />} />
+              <Route
+                path="/service/nlp"
+                element={<Navigate to={`${SERVICES_BASE_PATH}/${NLP_SLUG}`} replace />}
+              />
+              <Route path={`${SERVICES_BASE_PATH}/:slug`} element={<ServiceDetailPlaceholder />} />
+              {/* Unknown URLs. Vercel serves these with a real 404 status via
                 dist/404.html; see scripts/generate-sitemap.mjs. */}
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-          <HydratedMark />
-        </Suspense>
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+            <HydratedMark />
+          </Suspense>
+        </RouteErrorBoundary>
       </main>
       <Footer />
       <BookCallModal />
@@ -220,27 +227,30 @@ function SiteRoutes() {
  * empty table, not the data.
  */
 function AdminRoutes() {
+  const { pathname } = useLocation();
   return (
     <AdminAuthProvider>
-      <Suspense fallback={<RouteFallback />}>
-        {/* Paths here are relative to the parent's /admin/* match. An absolute
+      <RouteErrorBoundary resetKey={pathname} pending={<RouteFallback />}>
+        <Suspense fallback={<RouteFallback />}>
+          {/* Paths here are relative to the parent's /admin/* match. An absolute
             "/admin/login" would be matched against the leftover "login" and
             never hit, leaving a blank page. */}
-        <Routes>
-          <Route path="login" element={<AdminLoginPage />} />
-          <Route path="forgot-password" element={<AdminForgotPasswordPage />} />
-          <Route path="reset-password" element={<AdminResetPasswordPage />} />
-          <Route
-            index
-            element={
-              <AdminGuard>
-                <AdminLeadsPage />
-              </AdminGuard>
-            }
-          />
-          <Route path="*" element={<Navigate to="/admin" replace />} />
-        </Routes>
-      </Suspense>
+          <Routes>
+            <Route path="login" element={<AdminLoginPage />} />
+            <Route path="forgot-password" element={<AdminForgotPasswordPage />} />
+            <Route path="reset-password" element={<AdminResetPasswordPage />} />
+            <Route
+              index
+              element={
+                <AdminGuard>
+                  <AdminLeadsPage />
+                </AdminGuard>
+              }
+            />
+            <Route path="*" element={<Navigate to="/admin" replace />} />
+          </Routes>
+        </Suspense>
+      </RouteErrorBoundary>
     </AdminAuthProvider>
   );
 }
