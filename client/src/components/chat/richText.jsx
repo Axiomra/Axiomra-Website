@@ -2,6 +2,9 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 // **bold**, an email address, or a site path such as /contact.
+// The path whitelist keeps backslashes out of <Link to>, which is what makes
+// the deferred react-router open-redirect advisory safe here. Keep it strict;
+// see SECURITY-DEFERRED.md.
 const TOKEN_RE = /(\*\*[^*]+\*\*|[\w.+-]+@[\w-]+\.[\w.]+|(?<![\w/])\/[a-z0-9][a-z0-9\-/]*)/gi;
 
 function inline(text, onNavigate) {
