@@ -5,16 +5,21 @@
  */
 export const fake = {
   failing: false,
+  // Fail only keys starting with this, e.g. the spend counter but not limits.
+  failPrefix: null,
   data: new Map(),
   prefixes: new Set(),
   reset() {
     this.failing = false;
+    this.failPrefix = null;
     this.data.clear();
   },
 };
 
-function guard() {
-  if (fake.failing) throw new Error("ECONNREFUSED (fake redis)");
+function guard(key = "") {
+  if (fake.failing || (fake.failPrefix && key.startsWith(fake.failPrefix))) {
+    throw new Error("ECONNREFUSED (fake redis)");
+  }
 }
 
 export class FakeRedis {
@@ -22,17 +27,17 @@ export class FakeRedis {
     return this;
   }
   async get(key) {
-    guard();
+    guard(key);
     return fake.data.has(key) ? String(fake.data.get(key)) : null;
   }
   async incrby(key, by) {
-    guard();
+    guard(key);
     const next = Number(fake.data.get(key) ?? 0) + Number(by);
     fake.data.set(key, next);
     return next;
   }
-  async expire() {
-    guard();
+  async expire(key) {
+    guard(key);
     return 1;
   }
   async call() {

@@ -31,7 +31,7 @@ let app;
 let stop;
 
 beforeAll(async () => {
-  ({ app, stop } = await startApp({ OPENAI_API_KEY: "test-key" }));
+  ({ app, stop } = await startApp({ OPENAI_API_KEY: "test-key", CHAT_DAILY_USD_CAP: "5" }));
 });
 afterAll(() => stop());
 beforeEach(() => {

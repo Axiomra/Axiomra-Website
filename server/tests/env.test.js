@@ -1,6 +1,12 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-const BASE = { MONGO_URI: "mongodb://127.0.0.1:1/unused", CLIENT_ORIGIN: "", REDIS_URL: "" };
+const BASE = {
+  MONGO_URI: "mongodb://127.0.0.1:1/unused",
+  CLIENT_ORIGIN: "",
+  REDIS_URL: "",
+  OPENAI_API_KEY: "",
+  CHAT_DAILY_USD_CAP: "",
+};
 const saved = { ...process.env };
 
 async function loadEnv(vars) {
@@ -62,5 +68,36 @@ describe("REDIS_URL in production", () => {
   it("allows the in-memory store in local development", async () => {
     const env = await loadEnv({ ALLOWED_ORIGINS: "https://a.example", NODE_ENV: "development" });
     expect(env.REDIS_URL).toBeUndefined();
+  });
+});
+
+describe("chat configuration", () => {
+  it("requires CHAT_DAILY_USD_CAP when OPENAI_API_KEY is set", async () => {
+    await expect(
+      loadEnv({
+        ALLOWED_ORIGINS: "https://a.example",
+        OPENAI_API_KEY: "sk-x",
+        CHAT_DAILY_USD_CAP: "",
+      })
+    ).rejects.toThrow(/CHAT_DAILY_USD_CAP is required/);
+  });
+
+  it.each(["0", "-5", "ten"])("refuses CHAT_DAILY_USD_CAP=%s", async (cap) => {
+    await expect(
+      loadEnv({
+        ALLOWED_ORIGINS: "https://a.example",
+        OPENAI_API_KEY: "sk-x",
+        CHAT_DAILY_USD_CAP: cap,
+      })
+    ).rejects.toThrow(/positive number/);
+  });
+
+  it("parses the cap as a number", async () => {
+    const env = await loadEnv({
+      ALLOWED_ORIGINS: "https://a.example",
+      OPENAI_API_KEY: "sk-x",
+      CHAT_DAILY_USD_CAP: "2.5",
+    });
+    expect(env.CHAT_DAILY_USD_CAP).toBe(2.5);
   });
 });

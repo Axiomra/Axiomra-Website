@@ -37,6 +37,7 @@ beforeAll(async () => {
     NODE_ENV: "production",
     REDIS_URL: "redis://fake:6379",
     OPENAI_API_KEY: "test-key",
+    CHAT_DAILY_USD_CAP: "1",
   }));
 });
 afterAll(() => stop());
@@ -64,6 +65,43 @@ describe("chat rate limiter", () => {
     const res = await chat();
     expect(res.status).toBe(503);
     expect(res.body.error).toMatch(/temporarily unavailable/i);
+    expect(sdk.runs).toBe(0);
+  });
+});
+
+describe("chat daily spend cap", () => {
+  const today = new Date().toISOString().slice(0, 10);
+  const spend = `chat:spend:${today}`;
+  const tokens = `chat:tokens:${today}`;
+
+  it("records the day's actual cost and tokens after a reply", async () => {
+    const res = await chat();
+    expect(res.status).toBe(200);
+    // gpt-5-mini: 1000 in x $0.25/M + 500 out x $2/M = $0.00125 = 1250 micro-USD.
+    expect(fake.data.get(spend)).toBe(1250);
+    expect(fake.data.get(tokens)).toBe(1500);
+  });
+
+  it("answers 429 with a friendly message once the cap is reached", async () => {
+    fake.data.set(spend, 1_000_000); // $1.00, the configured cap.
+    const res = await chat();
+    expect(res.status).toBe(429);
+    expect(res.body.error).toMatch(/limit for today/i);
+    expect(sdk.runs).toBe(0);
+    expect(fake.data.get(spend)).toBe(1_000_000);
+  });
+
+  it("refuses a turn whose worst case would cross the cap", async () => {
+    fake.data.set(spend, 999_000); // $0.001 left: less than one turn's reservation.
+    const res = await chat();
+    expect(res.status).toBe(429);
+    expect(sdk.runs).toBe(0);
+  });
+
+  it("fails closed with 503 when the spend counter is unavailable", async () => {
+    fake.failPrefix = "chat:spend:";
+    const res = await chat();
+    expect(res.status).toBe(503);
     expect(sdk.runs).toBe(0);
   });
 });

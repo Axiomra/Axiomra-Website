@@ -2,6 +2,7 @@ import { Router } from "express";
 import { Agent, run, user, setTracingDisabled } from "@openai/agents";
 import { z } from "zod";
 import { CHAT_SYSTEM_PROMPT } from "../lib/chatKnowledge.js";
+import { reserve, settle } from "../lib/chatBudget.js";
 
 const router = Router();
 
@@ -40,13 +41,20 @@ const HISTORY_NOTE =
 // follow the configured model family.
 const isReasoningModel = /^(gpt-5|o\d)/.test(MODEL);
 
+const MAX_OUTPUT_TOKENS = isReasoningModel ? 2048 : 700;
+const INSTRUCTIONS = CHAT_SYSTEM_PROMPT + HISTORY_NOTE;
+
+const DAILY_CAP_REACHED =
+  "Our assistant has reached its limit for today. Please try again tomorrow, " +
+  "or reach us through the contact form and we'll get back to you.";
+
 const agent = new Agent({
   name: "Axiomra Assistant",
-  instructions: CHAT_SYSTEM_PROMPT + HISTORY_NOTE,
+  instructions: INSTRUCTIONS,
   model: MODEL,
   modelSettings: {
     // Replies are short by instruction; the cap bounds cost per turn.
-    maxTokens: isReasoningModel ? 2048 : 700,
+    maxTokens: MAX_OUTPUT_TOKENS,
     // Visitor conversations are not kept on OpenAI's side.
     store: false,
     // A FAQ-style chat does not need deep reasoning, and minimal effort answers faster.
@@ -70,6 +78,24 @@ router.post("/", async (req, res) => {
     return res.status(503).json({ error: "The assistant is not available right now." });
   }
 
+  // Checked before any header goes out, so a refusal is a plain JSON error.
+  let reservation;
+  try {
+    reservation = await reserve({
+      model: MODEL,
+      inputChars:
+        INSTRUCTIONS.length + parsed.data.messages.reduce((n, m) => n + m.content.length, 0),
+      maxOutputTokens: MAX_OUTPUT_TOKENS,
+    });
+  } catch (err) {
+    // Fail closed: without the spend counter there is no cap.
+    console.error("Chat: spend store unavailable:", err.message);
+    return res.status(503).json({ error: "The assistant is not available right now." });
+  }
+  if (!reservation) {
+    return res.status(429).json({ error: DAILY_CAP_REACHED });
+  }
+
   res.status(200).set({
     "Content-Type": "text/event-stream; charset=utf-8",
     "Cache-Control": "no-cache, no-transform",
@@ -89,6 +115,7 @@ router.post("/", async (req, res) => {
 
   const input = parsed.data.messages.map((m) => user(m.content));
 
+  let usage;
   try {
     const result = await run(agent, input, {
       stream: true,
@@ -99,6 +126,7 @@ router.post("/", async (req, res) => {
       if (text) send({ type: "text", text });
     }
     await result.completed;
+    usage = result.state?.usage;
     if (result.error) throw result.error;
     send({ type: "done" });
   } catch (err) {
@@ -107,6 +135,11 @@ router.post("/", async (req, res) => {
     send({ type: "error", error: "The assistant ran into a problem. Please try again." });
   } finally {
     finished = true;
+    // Before res.end(): a serverless instance may be frozen once the
+    // response is finished, and the write would never land.
+    await settle(reservation, usage).catch((err) =>
+      console.error("Chat: could not record spend:", err.message)
+    );
     res.end();
   }
 });

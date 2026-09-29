@@ -21,6 +21,8 @@ export async function startApp(overrides = {}) {
     APP_PASSWORD: "",
     REDIS_URL: "",
     ADMIN_PANEL_URL: "",
+    OPENAI_API_KEY: "",
+    CHAT_DAILY_USD_CAP: "",
     ...overrides,
   });
 

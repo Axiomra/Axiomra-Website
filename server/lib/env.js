@@ -69,6 +69,14 @@ const baseSchema = z.object({
     (v) => v === undefined || /^rediss?:\/\//.test(v),
     "REDIS_URL must start with redis:// or rediss://"
   ),
+  OPENAI_API_KEY: optional,
+  // Hard ceiling on the chat assistant's model spend per UTC day, in USD.
+  CHAT_DAILY_USD_CAP: optional
+    .transform((v) => (v === undefined ? undefined : Number(v)))
+    .refine(
+      (v) => v === undefined || (Number.isFinite(v) && v > 0),
+      "CHAT_DAILY_USD_CAP must be a positive number of US dollars"
+    ),
   NODE_ENV: optional,
   VERCEL: optional,
 });
@@ -82,6 +90,14 @@ const schema = baseSchema.superRefine((e, ctx) => {
       code: "custom",
       path: ["REDIS_URL"],
       message: "REDIS_URL is required in production (rate limits need a shared store)",
+    });
+  }
+  // A paid model with no spend ceiling is not a configuration to start with.
+  if (e.OPENAI_API_KEY && e.CHAT_DAILY_USD_CAP === undefined) {
+    ctx.addIssue({
+      code: "custom",
+      path: ["CHAT_DAILY_USD_CAP"],
+      message: "CHAT_DAILY_USD_CAP is required when OPENAI_API_KEY is set",
     });
   }
 });
