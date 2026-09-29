@@ -120,7 +120,7 @@ export default function Services() {
               <div className="flex flex-wrap items-center gap-3">
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-accent-vivid px-5 py-2.5 text-sm font-semibold text-[#0A1428] transition-all hover:bg-[#2EE6D3] hover:shadow-glow focus-ring"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-accent-vivid px-5 py-2.5 text-sm font-semibold text-on-accent transition-all hover:bg-accent-vivid-hover hover:shadow-glow focus-ring"
                 >
                   Buy our service <ArrowUpRight size={15} />
                 </a>
