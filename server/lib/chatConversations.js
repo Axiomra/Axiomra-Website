@@ -13,7 +13,8 @@
 import { randomUUID } from "node:crypto";
 import { redis } from "./rateLimit.js";
 
-export const MAX_TURNS = 20;
+// Stored messages, not exchanges: 40 is the last 20 question/answer pairs.
+export const MAX_TURNS = 40;
 export const CONVERSATION_TTL_SECONDS = 24 * 60 * 60;
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;

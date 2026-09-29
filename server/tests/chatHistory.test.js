@@ -144,16 +144,16 @@ describe("chat conversation history", () => {
     expect(stored(id)).toHaveLength(2);
   });
 
-  it("keeps only the last 20 turns", async () => {
+  it("keeps only the last 40 messages (20 exchanges)", async () => {
     let id;
-    for (let i = 0; i < 12; i += 1) {
+    for (let i = 0; i < 22; i += 1) {
       const res = await post({ conversationId: id, message: `q${i}` });
       id = res.headers["x-conversation-id"];
     }
     const turns = stored(id);
-    expect(turns).toHaveLength(20);
+    expect(turns).toHaveLength(40);
     expect(turns[0]).toEqual({ role: "user", content: "q2" });
-    expect(turns.at(-1)).toEqual({ role: "assistant", content: "reply-12" });
+    expect(turns.at(-1)).toEqual({ role: "assistant", content: "reply-22" });
   });
 
   it("does not remember a turn whose run failed", async () => {
