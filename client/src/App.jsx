@@ -57,12 +57,15 @@ const EducationPage = page("EducationPage");
 const LegalPage = page("LegalPage");
 const RetailPage = page("RetailPage");
 const TransportationPage = page("TransportationPage");
+const BlogListPage = page("BlogListPage");
+const BlogPostPage = page("BlogPostPage");
 const NotFoundPage = page("NotFoundPage");
 
 // The admin panel shares nothing with the marketing site: its own chrome, its
 // own auth provider, its own table libraries. Splitting it here keeps all of
 // that out of the bundle a normal visitor downloads.
 const AdminLeadsPage = lazy(() => import("./pages/admin/AdminLeadsPage"));
+const AdminBlogsPage = lazy(() => import("./pages/admin/AdminBlogsPage"));
 const AdminLoginPage = lazy(() => import("./pages/admin/AdminLoginPage"));
 const AdminForgotPasswordPage = lazy(() => import("./pages/admin/AdminForgotPasswordPage"));
 const AdminResetPasswordPage = lazy(() => import("./pages/admin/AdminResetPasswordPage"));
@@ -78,6 +81,7 @@ import {
   PORTFOLIO_PATH,
   CASE_STUDIES_PATH,
   INDUSTRIES_PATH,
+  BLOG_PATH,
   AI_DEVELOPMENT_SLUG,
   GENERATIVE_AI_SLUG,
   AGENTIC_AI_SLUG,
@@ -166,6 +170,8 @@ function SiteRoutes() {
               <Route path={PORTFOLIO_PATH} element={<PortfolioPage />} />
               <Route path={`${CASE_STUDIES_PATH}/:slug`} element={<CaseStudyPage />} />
               <Route path={INDUSTRIES_PATH} element={<IndustriesPage />} />
+              <Route path={BLOG_PATH} element={<BlogListPage />} />
+              <Route path={`${BLOG_PATH}/:slug`} element={<BlogPostPage />} />
               {/* Built industry pages go above the :slug fallback. */}
               <Route path={`${INDUSTRIES_PATH}/fashion`} element={<FashionPage />} />
               <Route path={`${INDUSTRIES_PATH}/marketing`} element={<MarketingPage />} />
@@ -244,6 +250,14 @@ function AdminRoutes() {
               element={
                 <AdminGuard>
                   <AdminLeadsPage />
+                </AdminGuard>
+              }
+            />
+            <Route
+              path="blogs"
+              element={
+                <AdminGuard>
+                  <AdminBlogsPage />
                 </AdminGuard>
               }
             />

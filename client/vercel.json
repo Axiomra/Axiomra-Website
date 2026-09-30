@@ -16,6 +16,8 @@
     { "source": "/ai-services-and-solutions", "destination": "/spa.html" },
     { "source": "/ai-services-and-solutions/:slug", "destination": "/spa.html" },
     { "source": "/case-studies/:slug", "destination": "/spa.html" },
+    { "source": "/blogs", "destination": "/spa.html" },
+    { "source": "/blogs/:slug", "destination": "/spa.html" },
     { "source": "/service/nlp", "destination": "/spa.html" },
     { "source": "/admin", "destination": "/spa.html" },
     { "source": "/admin/:path*", "destination": "/spa.html" }

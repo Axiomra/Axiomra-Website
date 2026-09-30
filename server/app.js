@@ -10,6 +10,7 @@ import authRoutes from "./routes/auth.js";
 import leadRoutes from "./routes/leads.js";
 import leadFieldRoutes from "./routes/leadFields.js";
 import chatRoutes from "./routes/chat.js";
+import blogRoutes from "./routes/blogs.js";
 import { connectDB } from "./db.js";
 import { mailerConfigured } from "./mailer.js";
 import { mongoSanitize } from "./lib/sanitize.js";
@@ -157,6 +158,8 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/auth", withDb, authRoutes);
 app.use("/api/leads", withDb, leadRoutes);
 app.use("/api/lead-fields", withDb, leadFieldRoutes);
+// Public reads for the site; writes require the admin session.
+app.use("/api/blogs", withDb, blogRoutes);
 
 app.use((req, res) => res.status(404).json({ error: "Not found." }));
 
