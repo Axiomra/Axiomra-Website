@@ -170,7 +170,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logoLight from "../assets/logo-light.png";
 import ThemeToggle from "./ThemeToggle";
-import { SERVICES_BASE_PATH, INDUSTRIES_PATH, industryPath } from "../routes.constants";
+import { BOOKING_URL } from "../lib/booking";
+import {
+  SERVICES_BASE_PATH,
+  INDUSTRIES_PATH,
+  PORTFOLIO_PATH,
+  ABOUT_PATH,
+  AI_DEVELOPMENT_SLUG,
+  GENERATIVE_AI_SLUG,
+  COMPUTER_VISION_SLUG,
+  industryPath,
+} from "../routes.constants";
 
 const links = [
   { label: "Home", href: "/" },
@@ -180,19 +190,15 @@ const links = [
     dropdown: [
       {
         label: "Artificial Intelligence",
-        href: `${SERVICES_BASE_PATH}#ai-development-services`,
+        href: `${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`,
       },
       {
         label: "Generative AI",
-        href: `${SERVICES_BASE_PATH}#generative-ai-services`,
+        href: `${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}`,
       },
       {
         label: "Computer Vision",
-        href: `${SERVICES_BASE_PATH}#computer-vision-services`,
-      },
-      {
-        label: "Machine Learning",
-        href: `${SERVICES_BASE_PATH}#machine-learning-services`,
+        href: `${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}`,
       },
       { label: "View all services", href: SERVICES_BASE_PATH },
     ],
@@ -209,12 +215,12 @@ const links = [
       { label: "View all industries", href: INDUSTRIES_PATH },
     ],
   },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Company", href: "/#process" },
+  { label: "Portfolio", href: PORTFOLIO_PATH },
+  { label: "Company", href: ABOUT_PATH },
 ];
 
 function NavItem({ href, className, onClick, children }) {
-  if (href.startsWith("/") && !href.includes("#")) {
+  if (href.startsWith("/")) {
     return (
       <Link to={href} className={className} onClick={onClick}>
         {children}
@@ -295,14 +301,16 @@ export default function Navbar() {
 
         <div className="hidden lg:flex items-center gap-3">
           <ThemeToggle />
-          <a
-            href="/contact"
+          <Link
+            to="/contact"
             className="text-sm font-medium px-4 py-2.5 rounded-full border border-white/25 text-white hover:bg-white/10 transition-colors focus-ring"
           >
             Contact us
-          </a>
+          </Link>
           <a
-            href="/contact"
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm font-medium bg-grad-sky text-[#0A1428] px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity focus-ring"
           >
             Book a call
@@ -340,7 +348,9 @@ export default function Navbar() {
               </NavItem>
             ))}
             <a
-              href="/contact"
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="bg-grad-sky text-[#0A1428] text-center py-2.5 rounded-full font-medium"
             >

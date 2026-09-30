@@ -20,6 +20,7 @@ import infrastructure from "../assets/gen-ai/deployment-infrastructure.jpg";
 import enterpriseIndustries from "../assets/gen-ai/enterprise-industries.jpg";
 import governance from "../assets/gen-ai/ai-governance-security.jpg";
 import horizon from "../assets/gen-ai/generative-ai-horizon.jpg";
+import { SERVICES_BASE_PATH, AI_DEVELOPMENT_SLUG, AGENTIC_AI_SLUG } from "../routes.constants";
 
 export const hero = {
   eyebrow: "Generative AI Development Company",
@@ -163,6 +164,7 @@ export const services = {
         "APIs designed for growth and maintenance",
       ],
       ctaText: "Explore AI App Development",
+      to: `${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`,
       image: appDevelopment,
       imageAlt:
         "Hands using a laptop showing a prompt console beside a generated application layout",
@@ -178,6 +180,7 @@ export const services = {
         "Integration with collaboration and business tools",
       ],
       ctaText: "Explore AI Agents",
+      to: `${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`,
       image: copilotAgents,
       imageAlt: "Developer working with an AI chat assistant docked beside their code editor",
     },

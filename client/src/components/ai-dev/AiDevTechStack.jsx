@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { TECH_PATH } from "../../routes.constants";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { techStack } from "../../data/aiDevelopmentData";
@@ -81,7 +82,7 @@ export default function AiDevTechStack() {
 
         <div className="mt-10 flex justify-center">
           <Link
-            to="/#tech-stack"
+            to={TECH_PATH}
             className="group inline-flex items-center gap-2.5 rounded-full bg-[#2563EB] px-7 py-4 text-lg font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-ring"
           >
             {techStack.ctaText}

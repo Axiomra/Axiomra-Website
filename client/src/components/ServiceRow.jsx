@@ -67,13 +67,20 @@ export default function ServiceRow({
       <ul className={`flex flex-wrap gap-3 ${ctaHref && ctaText ? "mb-10" : ""}`}>
         {links.map((l) => (
           <li key={l}>
-            <Link
-              to={ctaHref}
-              className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-card px-4 py-2.5 text-sm font-medium text-content-dim transition-colors hover:border-brand/50 hover:text-brand md:text-base focus-ring"
-            >
-              <ChevronRight size={15} className="shrink-0 text-accent" aria-hidden="true" />
-              <span>{l}</span>
-            </Link>
+            {ctaHref ? (
+              <Link
+                to={ctaHref}
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-card px-4 py-2.5 text-sm font-medium text-content-dim transition-colors hover:border-brand/50 hover:text-brand md:text-base focus-ring"
+              >
+                <ChevronRight size={15} className="shrink-0 text-accent" aria-hidden="true" />
+                <span>{l}</span>
+              </Link>
+            ) : (
+              <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-card px-4 py-2.5 text-sm font-medium text-content-dim md:text-base">
+                <ChevronRight size={15} className="shrink-0 text-accent" aria-hidden="true" />
+                <span>{l}</span>
+              </span>
+            )}
           </li>
         ))}
       </ul>

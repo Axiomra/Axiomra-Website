@@ -1,8 +1,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
-import { Link } from "react-router-dom";
 
 const cases = [
   {
@@ -146,16 +145,6 @@ export default function Portfolio({ showHeading = true, compact = false }) {
                 ))}
               </div>
             </div>
-            <Link
-              to="/contact"
-              className="relative inline-flex items-center gap-1.5 text-base font-medium text-content transition-colors hover:text-brand focus-ring"
-            >
-              Read Full Case Study
-              <ArrowUpRight
-                size={17}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </Link>
           </motion.article>
         ))}
       </div>

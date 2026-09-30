@@ -213,11 +213,15 @@
   --accent: 79 168 224;
 }
 
+/* Accent words use the solid brand blue (same as text-brand, e.g. the
+   fashion "For AI Fashion Tools" heading). Always-dark blocks (bg-inverse)
+   and dark mode switch to white so it stays readable. */
 .text-gradient {
-  background: linear-gradient(90deg, rgb(var(--grad-sky)) 0%, #2563eb 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: rgb(var(--brand));
+}
+.dark .text-gradient,
+.bg-inverse .text-gradient {
+  color: #fff;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
@@ -2570,6 +2574,15 @@
   background-clip: text;
   color: transparent;
   text-shadow: none;
+}
+
+/* Home hero "Trusted across" strip; see sections/Hero.jsx. Keeps scrolling
+   under reduced motion too (by request), same as the certificates marquee. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-client-marquee {
+    animation-duration: 30s !important;
+    animation-iteration-count: infinite !important;
+  }
 }
 
 /* Certificates marquee; see sections/Awards.jsx. It never pauses: not on

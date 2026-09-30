@@ -1,5 +1,14 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import {
+  SERVICES_BASE_PATH,
+  AI_DEVELOPMENT_SLUG,
+  AGENTIC_AI_SLUG,
+  NLP_SLUG,
+  COMPUTER_VISION_SLUG,
+  GENERATIVE_AI_SLUG,
+} from "../routes.constants";
 import logoLight from "../assets/logo-light.webp";
 import aiDevImg from "../assets/services/ai-development-services.jpg";
 import botImg from "../assets/services/bot-automation-services.jpg";
@@ -13,6 +22,7 @@ import biBoxImg from "../assets/box/finances.jpeg";
 const services = [
   {
     title: "AI Development",
+    to: `${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`,
     desc: "We design and build custom AI products from concept to deployment. Expect a clear roadmap, staged delivery, and measurable ROI.",
     image: aiDevImg,
   },
@@ -23,6 +33,7 @@ const services = [
   },
   {
     title: "AI Agents & Agentic AI",
+    to: `${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`,
     desc: "Autonomous agents that plan, act, and coordinate multi-step tasks with minimal human oversight.",
     image: botImg,
   },
@@ -33,11 +44,13 @@ const services = [
   },
   {
     title: "Natural Language Processing",
+    to: `${SERVICES_BASE_PATH}/${NLP_SLUG}`,
     desc: "Systems that read, understand, and generate human language for search, classification, and summarization.",
     image: nlpImg,
   },
   {
     title: "Computer Vision",
+    to: `${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}`,
     desc: "Systems that analyze images and video to automate inspections, detect anomalies, and extract visual signals.",
     image: cvImg,
   },
@@ -48,6 +61,7 @@ const services = [
   },
   {
     title: "Generative AI",
+    to: `${SERVICES_BASE_PATH}/${GENERATIVE_AI_SLUG}`,
     desc: "We apply LLMs like GPT-4o, DALL·E, and MidJourney to automate content and personalize customer messages.",
     image: genaiBoxImg,
   },
@@ -67,12 +81,12 @@ export default function Services() {
           We deliver a full range of AI services built to automate manual work, predict future
           trends, and scale your business.
         </p>
-        <a
-          href="#contact"
+        <Link
+          to={SERVICES_BASE_PATH}
           className="mt-8 inline-flex items-center gap-2 rounded-full border border-line-strong px-6 py-3 text-sm font-medium text-content transition-colors hover:border-accent-vivid hover:bg-accent-vivid/10 focus-ring"
         >
           View all services <ArrowUpRight size={15} />
-        </a>
+        </Link>
       </div>
 
       <div className="grid gap-8 sm:grid-cols-2">
@@ -124,16 +138,18 @@ export default function Services() {
                 >
                   Buy our service <ArrowUpRight size={15} />
                 </a>
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-line-strong px-5 py-2.5 text-sm font-medium text-content transition-colors hover:border-brand focus-ring"
-                >
-                  View service details
-                  <ArrowRight
-                    size={15}
-                    className="transition-transform group-hover:translate-x-0.5"
-                  />
-                </a>
+                {s.to && (
+                  <Link
+                    to={s.to}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-line-strong px-5 py-2.5 text-sm font-medium text-content transition-colors hover:border-brand focus-ring"
+                  >
+                    View service details
+                    <ArrowRight
+                      size={15}
+                      className="transition-transform group-hover:translate-x-0.5"
+                    />
+                  </Link>
+                )}
               </div>
             </div>
 

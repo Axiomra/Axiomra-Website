@@ -7,7 +7,14 @@ import TechStack from "../sections/TechStack";
 import WhyUs from "../sections/WhyUs";
 import FAQ from "../sections/FAQ";
 import services from "../data/servicesData";
-import { SERVICES_BASE_PATH } from "../routes.constants";
+import {
+  SERVICES_BASE_PATH,
+  AI_DEVELOPMENT_SLUG,
+  GENERATIVE_AI_SLUG,
+  AGENTIC_AI_SLUG,
+  COMPUTER_VISION_SLUG,
+  NLP_SLUG,
+} from "../routes.constants";
 import Seo from "../seo/Seo";
 
 const servicesFaq = [
@@ -48,6 +55,16 @@ const servicesFaq = [
 const META_DESCRIPTION =
   "Explore Axiomra's full range of AI services: from generative AI and computer vision to custom software, chatbots, and process automation.";
 
+// Services with a built detail page. The rest would land on "Coming soon", so
+// their pills stay unlinked until the page ships.
+const DETAIL_SLUGS = new Set([
+  AI_DEVELOPMENT_SLUG,
+  GENERATIVE_AI_SLUG,
+  AGENTIC_AI_SLUG,
+  COMPUTER_VISION_SLUG,
+  NLP_SLUG,
+]);
+
 export default function ServicesPage() {
   return (
     <>
@@ -70,7 +87,7 @@ export default function ServicesPage() {
             image={s.image}
             imageAlt={s.imageAlt}
             links={s.links}
-            ctaHref={`${SERVICES_BASE_PATH}/${s.slug}`}
+            ctaHref={DETAIL_SLUGS.has(s.slug) ? `${SERVICES_BASE_PATH}/${s.slug}` : undefined}
           />
         ))}
       </div>

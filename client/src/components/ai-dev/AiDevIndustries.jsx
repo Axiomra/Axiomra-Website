@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { INDUSTRIES_PATH } from "../../routes.constants";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { industries } from "../../data/aiDevelopmentData";
@@ -26,7 +27,7 @@ export default function AiDevIndustries() {
 
         <div className="mb-12 flex justify-center">
           <Link
-            to="/#industries"
+            to={INDUSTRIES_PATH}
             className="group inline-flex items-center gap-2.5 rounded-full bg-[#2563EB] px-6 py-3 text-lg font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-ring"
           >
             {industries.ctaText}
