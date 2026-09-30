@@ -15,7 +15,7 @@ export default function TransportationIntro() {
   return (
     <section
       ref={scope}
-      className="clip-lane-top relative -mt-10 bg-gradient-to-br from-brand/20 via-brand/10 to-accent-vivid/12 pb-24 pt-28 md:pb-32 md:pt-36"
+      className="clip-lane-top relative -mt-10 bg-surface-wash pb-24 pt-28 md:pb-32 md:pt-36"
     >
       <div
         aria-hidden="true"
@@ -40,7 +40,12 @@ export default function TransportationIntro() {
           </p>
 
           {rest.map((p) => (
-            <div key={p.slice(0, 40)} data-reveal data-reveal-group="intro-copy" className="lg-rim clip-waybill mt-6 max-w-[70ch]">
+            <div
+              key={p.slice(0, 40)}
+              data-reveal
+              data-reveal-group="intro-copy"
+              className="lg-rim clip-waybill mt-6 max-w-[70ch]"
+            >
               <div className="lg lg-strong clip-waybill p-6 md:p-7">
                 <p className="text-base leading-relaxed text-content md:text-lg">{p}</p>
               </div>
@@ -50,7 +55,7 @@ export default function TransportationIntro() {
           <div data-reveal className="mt-9">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
+              className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {intro.ctaText}
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">
@@ -63,10 +68,7 @@ export default function TransportationIntro() {
         {/* Leaned rather than rounded, so the photo belongs to the same family
             as the mode rail further down. */}
         <figure data-reveal className="relative lg:col-span-5">
-          <div
-            aria-hidden="true"
-            className="clip-trailer absolute -inset-3 bg-gradient-to-br from-brand/35 to-accent-vivid/35"
-          />
+          <div aria-hidden="true" className="clip-trailer absolute -inset-3 bg-[#BFDBFE]" />
           <img
             src={intro.image}
             alt={intro.alt}

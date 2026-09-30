@@ -16,9 +16,7 @@ export default function RetailIntro() {
   const scope = useGsapReveal({ y: 28 });
 
   return (
-    <section ref={scope} className="relative overflow-hidden bg-surface py-24 md:py-32">
-      <div aria-hidden="true" className="retail-bloom opacity-40" />
-
+    <section ref={scope} className="relative overflow-hidden bg-surface-wash py-24 md:py-32">
       <div className="relative mx-auto grid max-w-8xl grid-cols-1 items-center gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
         <div className="lg:col-span-6">
           <h2
@@ -37,7 +35,9 @@ export default function RetailIntro() {
             >
               <ShoppingBag size={64} strokeWidth={1} />
             </span>
-            <p className="text-base leading-relaxed text-content-dim md:text-lg">{intro.paragraphs[0]}</p>
+            <p className="text-base leading-relaxed text-content-dim md:text-lg">
+              {intro.paragraphs[0]}
+            </p>
           </div>
 
           <p data-reveal className="mt-6 text-base leading-relaxed text-content-dim md:text-lg">

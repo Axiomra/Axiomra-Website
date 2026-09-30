@@ -83,7 +83,7 @@ export default class RouteErrorBoundary extends Component {
           <button
             type="button"
             onClick={reloadFresh}
-            className="mt-6 rounded-full bg-gradient-to-r from-accent-vivid to-brand px-6 py-2.5 text-base font-medium text-inverse-fg transition-opacity hover:opacity-90 focus-ring"
+            className="mt-6 rounded-full bg-grad-sky px-6 py-2.5 text-base font-medium text-[#0A1428] transition-opacity hover:opacity-90 focus-ring"
           >
             Reload
           </button>

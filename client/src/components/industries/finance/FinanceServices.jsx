@@ -44,7 +44,7 @@ export default function FinanceServices() {
                 {/* Tinted wash so ten different stock photos still read as one set. */}
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand/40 via-brand/10 to-transparent mix-blend-multiply"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-grad-blue/40 via-grad-blue/10 to-transparent mix-blend-multiply"
                 />
               </div>
 
@@ -62,7 +62,11 @@ export default function FinanceServices() {
                     className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-colors hover:text-accent focus-ring"
                   >
                     Read the case study
-                    <ArrowRight size={16} aria-hidden="true" className="transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight
+                      size={16}
+                      aria-hidden="true"
+                      className="transition-transform group-hover:translate-x-0.5"
+                    />
                   </Link>
                 )}
               </div>

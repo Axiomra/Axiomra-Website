@@ -1,9 +1,15 @@
 :root {
+  /* Gradient stops, the same in both themes: deep blue into sky blue. */
+  --grad-blue: 37 99 235;
+  --grad-sky: 96 165 250;
+
   /* Elevation */
   --surface: 255 255 255;
   --surface-subtle: 245 248 252;
   --surface-card: 255 255 255;
   --surface-inset: 245 248 252;
+  /* Flat light-blue band used wherever a section once had a gradient. */
+  --wash: 239 246 255;
 
   --content: 15 23 41;
   --content-dim: 74 84 104;
@@ -51,6 +57,7 @@
   --surface-subtle: 20 17 44;
   --surface-card: 27 22 56;
   --surface-inset: 20 17 44;
+  --wash: 20 17 44;
 
   --content: 234 232 248;
   --content-dim: 169 165 198;

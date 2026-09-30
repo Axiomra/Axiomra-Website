@@ -19,16 +19,6 @@ export default function AiDevHero() {
       data-nav-tone="light"
       className="relative overflow-hidden bg-surface pb-12 pt-36 md:pb-16 md:pt-44"
     >
-      {/* Two soft washes stand in for the reference's engraved line-art field. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-40 -top-32 h-[42rem] w-[42rem] rounded-full bg-accent/10 blur-[150px]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-52 top-40 h-[34rem] w-[34rem] rounded-full bg-brand/10 blur-[150px]"
-      />
-
       <div className="relative z-10 mx-auto grid max-w-8xl grid-cols-1 items-center gap-14 px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
         <div>
           <motion.p
@@ -71,7 +61,7 @@ export default function AiDevHero() {
           >
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-assistant px-8 py-4 text-lg font-semibold text-assistant-ink-soft transition-transform hover:scale-[1.02] focus-ring"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#2563EB] px-8 py-4 text-lg font-semibold text-white transition-transform hover:bg-[#1D4ED8] hover:scale-[1.02] focus-ring"
             >
               {hero.ctaText}
               <ArrowUpRight

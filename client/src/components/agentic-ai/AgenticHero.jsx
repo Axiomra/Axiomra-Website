@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Bot, Star } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import AgenticCanvas from "./AgenticCanvas";
 import { hero } from "../../data/agenticAiData";
 
@@ -42,7 +42,6 @@ export default function AgenticHero() {
             custom={0}
             className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-5 py-2 font-mono text-sm uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm md:text-base"
           >
-            <Bot size={15} className="text-accent-vivid" aria-hidden="true" />
             {hero.eyebrow}
           </motion.p>
 
@@ -76,7 +75,7 @@ export default function AgenticHero() {
           >
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-cta-gradient px-8 py-4 text-base font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring md:text-lg"
+              className="group inline-flex items-center gap-2 rounded-full bg-grad-sky px-8 py-4 text-base font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring md:text-lg"
             >
               {hero.ctaText}
               <ArrowUpRight

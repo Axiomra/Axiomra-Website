@@ -58,7 +58,9 @@ export default function AdminForgotPasswordPage() {
               <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-accent/12 text-accent">
                 <MailCheck size={22} aria-hidden="true" />
               </span>
-              <h1 className="mt-4 font-display text-xl font-semibold text-content">Check your inbox</h1>
+              <h1 className="mt-4 font-display text-xl font-semibold text-content">
+                Check your inbox
+              </h1>
               <p className="mt-2 text-sm leading-relaxed text-content-dim">
                 If that address has an account, a reset link is on its way. It expires in 30 minutes
                 and can only be used once.
@@ -73,7 +75,9 @@ export default function AdminForgotPasswordPage() {
             </div>
           ) : (
             <form onSubmit={submit} noValidate>
-              <h1 className="font-display text-xl font-semibold text-content">Reset your password</h1>
+              <h1 className="font-display text-xl font-semibold text-content">
+                Reset your password
+              </h1>
               <p className="mt-2 text-sm leading-relaxed text-content-dim">
                 Enter the email on your admin account and we will send you a link to set a new
                 password.
@@ -109,7 +113,7 @@ export default function AdminForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={busy}
-                className="focus-ring mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cta-gradient py-3 text-sm font-semibold text-[#0A1428] transition-opacity hover:opacity-90 disabled:opacity-60"
+                className="focus-ring mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-grad-sky py-3 text-sm font-semibold text-[#0A1428] transition-opacity hover:opacity-90 disabled:opacity-60"
               >
                 {busy && <Loader2 size={16} className="animate-spin" aria-hidden="true" />}
                 {busy ? "Sending…" : "Send reset link"}

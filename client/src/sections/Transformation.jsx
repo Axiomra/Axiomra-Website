@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, TrendingUp } from "lucide-react";
-import teamImg from "../assets/team.webp";
+import teamImg from "../assets/ai-team-collab.webp";
 import { METRIC_IMAGE } from "../lib/media";
 
 export default function Transformation() {
@@ -16,9 +16,10 @@ export default function Transformation() {
         <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl2 bg-inverse">
           <img
             src={teamImg}
-            alt="Abstract rendering of a networked AI system"
+            alt="Engineers working together on laptops to build an AI solution"
             width={1600}
-            height={1216}
+            height={1200}
+            loading="lazy"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-inverse/70 via-transparent to-transparent" />

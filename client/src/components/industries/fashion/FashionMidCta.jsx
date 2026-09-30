@@ -35,11 +35,13 @@ export default function FashionMidCta() {
             <h2 className="font-display text-3xl font-semibold leading-[1.1] tracking-tight text-inverse-fg md:text-4xl lg:text-5xl">
               {midCta.title}
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-inverse-fg/75 md:text-lg">{midCta.body}</p>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-inverse-fg/75 md:text-lg">
+              {midCta.body}
+            </p>
             <div className="mt-8">
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
+                className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
               >
                 {midCta.ctaText}
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">

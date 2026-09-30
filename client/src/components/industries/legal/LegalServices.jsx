@@ -42,7 +42,7 @@ export default function LegalServices() {
                 {/* Tinted wash so ten different stock photos still read as one set. */}
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-accent-vivid/40 via-brand/10 to-transparent mix-blend-multiply"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-grad-sky/40 via-grad-blue/10 to-transparent mix-blend-multiply"
                 />
               </div>
 

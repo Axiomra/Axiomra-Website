@@ -45,6 +45,18 @@ describe("POST /api/contact", () => {
     expect(res.body.error).toBeTruthy();
   });
 
+  it("accepts a phone number that fits its dial code", async () => {
+    const res = await submit({ ...lead, phone: "+92 300 1234567" });
+    expect(res.status).toBe(201);
+  });
+
+  it("rejects a phone number that does not fit its dial code", async () => {
+    // Ten digits, but a Pakistani mobile is not a US number.
+    const res = await submit({ ...lead, phone: "+1 3001234567" });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toMatch(/phone/i);
+  });
+
   it.each([
     ["a filled honeypot", { website: "http://spam.example" }],
     ["a form sent too fast", { elapsedMs: 800 }],

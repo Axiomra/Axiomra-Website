@@ -32,13 +32,6 @@ export const INDUSTRY_IMAGES = {
   Marketing: marketingImg,
 };
 
-/** Blog / resource cards. */
-export const RESOURCE_IMAGES = {
-  "MVP vs. Full-Scale Custom AI Development": unsplash("1531403009284-440f080d1e12"),
-  "Custom AI Development Timeline: 2026 Benchmarks": unsplash("1518186285589-2f7649de83e0"),
-  "Why AI Projects Fail: 10 Root Causes": unsplash("1454165804606-c3d57bc86b40"),
-};
-
 /** Misc one-offs. */
 export const METRIC_IMAGE = unsplash("1516321318423-f06f85e504b3", 600);
 

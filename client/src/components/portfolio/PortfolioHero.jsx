@@ -1,6 +1,6 @@
 import { Suspense, lazy, useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { gsap, MOTION_OK } from "../../lib/gsap";
 import { hero } from "../../data/portfolioData";
 import heroImage from "../../assets/portfolio/hero.webp";
@@ -109,7 +109,6 @@ export default function PortfolioHero() {
           data-hero-eyebrow
           className="mx-auto mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2 font-mono text-sm uppercase tracking-[0.18em] text-white/75 backdrop-blur-sm"
         >
-          <Sparkles size={15} strokeWidth={1.5} className="text-accent-vivid" aria-hidden="true" />
           {hero.eyebrow}
         </p>
 
@@ -133,7 +132,7 @@ export default function PortfolioHero() {
         <div data-hero-cta className="mt-10 flex justify-center">
           <a
             href="#case-studies"
-            className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-lg font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring"
+            className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-lg font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring"
           >
             {hero.ctaText}
             {/* Button-in-button: the arrow gets its own well so the pill reads

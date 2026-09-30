@@ -31,7 +31,10 @@ function BigNumber({ value }) {
   }, [value]);
 
   return (
-    <p ref={ref} className="font-display text-6xl font-semibold tracking-tight text-inverse-fg md:text-7xl">
+    <p
+      ref={ref}
+      className="font-display text-6xl font-semibold tracking-tight text-[#1E3A8A] md:text-7xl"
+    >
       {value}
     </p>
   );
@@ -57,19 +60,15 @@ export default function InsuranceImpact() {
             <StaggerItem
               as="article"
               key={stat.value + stat.source}
-              className="clip-policy lg-sheen relative flex flex-col overflow-hidden bg-gradient-to-br from-accent-vivid via-brand to-brand-strong p-8 shadow-card md:p-10"
+              className="clip-policy lg-sheen relative flex flex-col overflow-hidden bg-[#DBEAFE] p-8 shadow-card md:p-10"
             >
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-accent-vivid/25 blur-3xl"
-              />
               <span className="relative">
                 <BigNumber value={stat.value} />
               </span>
-              <p className="relative mt-5 text-base leading-relaxed text-inverse-fg/85 md:text-lg">
+              <p className="relative mt-5 text-base leading-relaxed text-[#1E3A8A]/85 md:text-lg">
                 {stat.label}
               </p>
-              <p className="relative mt-auto pt-6 font-mono text-xs uppercase tracking-[0.16em] text-inverse-fg/60">
+              <p className="relative mt-auto pt-6 font-mono text-xs uppercase tracking-[0.16em] text-[#1E3A8A]/60">
                 {stat.source}
               </p>
             </StaggerItem>

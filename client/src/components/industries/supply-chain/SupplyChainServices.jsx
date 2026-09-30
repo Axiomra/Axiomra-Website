@@ -45,7 +45,7 @@ export default function SupplyChainServices() {
                 {/* Tinted wash so twelve different stock photos still read as one set. */}
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand/40 via-brand/10 to-transparent mix-blend-multiply"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-grad-blue/40 via-grad-blue/10 to-transparent mix-blend-multiply"
                 />
                 <span className="absolute left-6 top-6 rounded-full bg-inverse/70 px-3 py-1 font-mono text-xs uppercase tracking-[0.18em] text-inverse-fg backdrop-blur-sm">
                   {String(i + 1).padStart(2, "0")}

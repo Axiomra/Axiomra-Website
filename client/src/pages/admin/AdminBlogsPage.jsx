@@ -25,7 +25,7 @@ const EMPTY_POST = {
 const actionButton =
   "focus-ring inline-flex items-center gap-2 rounded-xl border border-line bg-surface-card px-3 py-2 text-sm font-medium text-content-dim transition-colors hover:bg-surface-inset disabled:opacity-50";
 const primaryButton =
-  "focus-ring inline-flex items-center gap-2 rounded-xl bg-cta-gradient px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50";
+  "focus-ring inline-flex items-center gap-2 rounded-xl bg-grad-sky px-4 py-2 text-sm font-medium text-[#0A1428] transition-opacity hover:opacity-90 disabled:opacity-50";
 const inputClass =
   "focus-ring w-full rounded-xl border border-line bg-surface-card px-3 py-2 text-sm text-content placeholder:text-content-dim/60";
 

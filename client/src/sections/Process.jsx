@@ -2,11 +2,26 @@ import { motion } from "framer-motion";
 import SectionHeading from "../components/SectionHeading";
 
 const steps = [
-  { title: "Discovery and AI Strategy", desc: "We assess your goals, workflows, and data to prioritise practical AI use cases and define success measures." },
-  { title: "Data Preparation and Prototyping", desc: "We prepare the data and develop a prototype to test feasibility before full development." },
-  { title: "Custom AI Development", desc: "We build the solution and connect it to your existing systems and business tools." },
-  { title: "Testing and Optimisation", desc: "We evaluate accuracy, performance, reliability, and failure handling against agreed acceptance criteria." },
-  { title: "Deployment and Ongoing Improvement", desc: "We launch the solution, monitor its performance, and support improvements as your needs evolve." },
+  {
+    title: "Discovery and AI Strategy",
+    desc: "We assess your goals, workflows, and data to prioritise practical AI use cases and define success measures.",
+  },
+  {
+    title: "Data Preparation and Prototyping",
+    desc: "We prepare the data and develop a prototype to test feasibility before full development.",
+  },
+  {
+    title: "Custom AI Development",
+    desc: "We build the solution and connect it to your existing systems and business tools.",
+  },
+  {
+    title: "Testing and Optimisation",
+    desc: "We evaluate accuracy, performance, reliability, and failure handling against agreed acceptance criteria.",
+  },
+  {
+    title: "Deployment and Ongoing Improvement",
+    desc: "We launch the solution, monitor its performance, and support improvements as your needs evolve.",
+  },
 ];
 
 export default function Process() {
@@ -35,8 +50,12 @@ export default function Process() {
             className="group flex items-start gap-6 rounded-xl2 border border-line bg-surface-subtle p-8 transition-colors duration-300 hover:border-brand hover:bg-brand/5 hover:shadow-glow"
           >
             <div className="flex-1">
-              <h3 className="mb-2 font-display text-xl text-content transition-colors duration-300 group-hover:text-brand">{s.title}</h3>
-              <p className="max-w-3xl text-base leading-relaxed text-content-dim transition-colors duration-300 group-hover:text-content md:text-lg">{s.desc}</p>
+              <h3 className="mb-2 font-display text-xl text-content transition-colors duration-300 group-hover:text-brand">
+                {s.title}
+              </h3>
+              <p className="max-w-3xl text-base leading-relaxed text-content-dim transition-colors duration-300 group-hover:text-content md:text-lg">
+                {s.desc}
+              </p>
             </div>
             <span
               className="shrink-0 font-display text-4xl font-semibold text-brand/40 transition-all duration-300 group-hover:scale-110 group-hover:text-accent"

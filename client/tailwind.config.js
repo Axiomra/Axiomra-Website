@@ -20,6 +20,7 @@ export default {
           subtle: token("surface-subtle"),
           card: token("surface-card"),
           inset: token("surface-inset"),
+          wash: token("wash"),
         },
         content: {
           DEFAULT: token("content"),
@@ -53,6 +54,10 @@ export default {
           card: token("inverse-card"),
           fg: token("on-inverse"),
         },
+        grad: {
+          blue: token("grad-blue"),
+          sky: token("grad-sky"),
+        },
         gold: token("gold"),
         danger: token("danger"),
         success: token("success"),
@@ -77,7 +82,7 @@ export default {
       backgroundImage: {
         // Brand gradients are fixed by identity, they do not flip per theme.
         "cta-gradient":
-          "linear-gradient(120deg, rgb(var(--accent-vivid)) 0%, #788BE3 55%, #777ACF 100%)",
+          "linear-gradient(120deg, rgb(var(--grad-sky)) 0%, #3B82F6 55%, rgb(var(--grad-blue)) 100%)",
       },
       animation: {
         marquee: "marquee 30s linear infinite",

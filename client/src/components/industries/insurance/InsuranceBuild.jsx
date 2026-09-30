@@ -36,7 +36,10 @@ export default function InsuranceBuild() {
         decoding="async"
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-40 mix-blend-multiply dark:opacity-[0.18] dark:mix-blend-screen"
       />
-      <div aria-hidden="true" className="ins-grid-lines pointer-events-none absolute inset-0 -z-10" />
+      <div
+        aria-hidden="true"
+        className="ins-grid-lines pointer-events-none absolute inset-0 -z-10"
+      />
 
       {/* Loose crests, echoing the motif in the reference artwork. */}
       <span
@@ -49,10 +52,7 @@ export default function InsuranceBuild() {
       />
 
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <p
-          data-reveal
-          className="mb-5 font-mono text-sm uppercase tracking-[0.18em] text-accent"
-        >
+        <p data-reveal className="mb-5 font-mono text-sm uppercase tracking-[0.18em] text-accent">
           {build.eyebrow}
         </p>
 
@@ -70,7 +70,7 @@ export default function InsuranceBuild() {
           />
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-brand/15 to-brand/45"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-grad-blue/15 to-grad-blue/45"
           />
         </figure>
 
@@ -93,7 +93,7 @@ export default function InsuranceBuild() {
         <div data-reveal className="mt-9">
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
+            className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
           >
             {build.ctaText}
             <span className="flex h-11 w-11 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">

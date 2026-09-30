@@ -15,7 +15,7 @@ export default function HealthcareIntro() {
   return (
     <section
       ref={scope}
-      className="clip-pulse-bottom relative -mt-px bg-gradient-to-b from-accent-vivid/16 via-brand/10 to-brand/16 pb-36 pt-20 md:pb-48 md:pt-28"
+      className="clip-pulse-bottom relative -mt-px bg-surface-wash pb-36 pt-20 md:pb-48 md:pt-28"
     >
       <div
         aria-hidden="true"
@@ -45,7 +45,7 @@ export default function HealthcareIntro() {
           <div data-reveal className="mt-9">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
+              className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {intro.ctaText}
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">
@@ -58,10 +58,7 @@ export default function HealthcareIntro() {
         {/* The photo takes the scanner aperture used across the page rather
             than sitting in another rounded rectangle. */}
         <figure data-reveal className="relative lg:col-span-5">
-          <div
-            aria-hidden="true"
-            className="clip-lens absolute -inset-3 bg-gradient-to-br from-accent-vivid/35 to-brand/35"
-          />
+          <div aria-hidden="true" className="clip-lens absolute -inset-3 bg-[#BFDBFE]" />
           <img
             src={intro.image}
             alt={intro.alt}

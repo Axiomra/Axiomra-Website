@@ -10,10 +10,19 @@ import img2025 from "../../assets/about/milestone-2025.webp";
 
 /* One photo per year, so the frame tracks whatever the year rail is showing. */
 const YEAR_MEDIA = {
-  2021: { src: img2021, alt: "Two founders shipping the first production model from a single shared room" },
+  2021: {
+    src: img2021,
+    alt: "Two founders shipping the first production model from a single shared room",
+  },
   2022: { src: img2022, alt: "The first full-time hires working through an early client build" },
-  2023: { src: img2023, alt: "A larger studio, with the NLP and vision practices running side by side" },
-  2024: { src: img2024, alt: "Clinicians using the first healthcare retrieval system we delivered" },
+  2023: {
+    src: img2023,
+    alt: "A larger studio, with the NLP and vision practices running side by side",
+  },
+  2024: {
+    src: img2024,
+    alt: "Clinicians using the first healthcare retrieval system we delivered",
+  },
   2025: { src: img2025, alt: "Production infrastructure running multi-agent systems at scale" },
 };
 
@@ -77,7 +86,7 @@ export default function AboutMilestones() {
                   onClick={() => selectYear(i)}
                   className={`shrink-0 rounded-xl px-7 py-3.5 text-lg font-semibold transition-all focus-ring lg:w-full ${
                     active
-                      ? "bg-cta-gradient text-inverse"
+                      ? "bg-grad-sky text-inverse"
                       : "bg-white/5 text-inverse-fg/60 hover:bg-white/10 hover:text-inverse-fg"
                   }`}
                 >

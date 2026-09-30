@@ -130,7 +130,7 @@ const socials = [
 const UNDERLINE_LINK =
   "relative inline-block text-lg text-inverse-fg/70 transition-colors duration-300 hover:text-inverse-fg focus-ring " +
   "after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 " +
-  "after:bg-gradient-to-r after:from-accent-vivid after:to-brand after:transition-transform after:duration-300 " +
+  "after:bg-gradient-to-r after:from-grad-sky after:to-grad-blue after:transition-transform after:duration-300 " +
   "hover:after:scale-x-100 focus-visible:after:scale-x-100";
 
 /**

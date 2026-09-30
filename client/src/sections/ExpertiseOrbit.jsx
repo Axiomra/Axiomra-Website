@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import iconTeal from "../assets/icon-teal.png";
+import bgImg from "../assets/expertise-bg.webp";
 import { INDUSTRIES_PATH } from "../routes.constants";
 
 const SERVICES = [
@@ -57,7 +58,7 @@ function Ring({ items, inset, duration, reverse = false, offset = 0, variant }) 
   const style = { animationDuration: `${duration}s` };
   return (
     <div
-      className={`orbit-ring absolute rounded-full border border-dashed border-line-strong ${
+      className={`orbit-ring absolute rounded-full border border-dashed border-white/25 ${
         reverse ? "orbit-spin-rev" : "orbit-spin"
       }`}
       style={{ inset, ...style }}
@@ -77,17 +78,17 @@ function Ring({ items, inset, duration, reverse = false, offset = 0, variant }) 
             <span
               className={`flex items-center justify-center rounded-full border shadow-card transition-transform duration-300 hover:scale-110 ${
                 variant === "service"
-                  ? "h-11 w-11 border-accent-vivid/40 bg-surface-card text-accent md:h-16 md:w-16"
-                  : "h-9 w-9 border-brand/30 bg-surface-card text-brand md:h-12 md:w-12"
+                  ? "h-10 w-10 border-accent-vivid/50 bg-[#0A1428]/80 text-accent-vivid backdrop-blur-sm md:h-14 md:w-14"
+                  : "h-8 w-8 border-white/25 bg-white/90 text-brand md:h-11 md:w-11"
               }`}
             >
               <Icon className="h-1/2 w-1/2" strokeWidth={1.6} aria-hidden="true" />
             </span>
             <span
-              className={`max-w-[5.5rem] text-center font-medium leading-tight text-content md:max-w-[8rem] ${
+              className={`max-w-[5.5rem] text-center font-medium leading-tight text-white md:max-w-[8rem] ${
                 variant === "service"
                   ? "text-[10px] md:text-sm"
-                  : "text-[9px] text-content-dim md:text-xs"
+                  : "text-[9px] text-white/75 md:text-xs"
               }`}
             >
               {label}
@@ -101,16 +102,36 @@ function Ring({ items, inset, duration, reverse = false, offset = 0, variant }) 
 
 export default function ExpertiseOrbit() {
   return (
-    <section className="relative overflow-hidden bg-surface px-4 py-24 sm:px-6">
+    <section className="relative isolate overflow-hidden bg-inverse px-4 py-10 sm:px-6">
+      {/* Earth-at-night photo fills the gutters either side of the orbit. */}
+      <img
+        src={bgImg}
+        alt=""
+        aria-hidden="true"
+        width={1920}
+        height={1278}
+        loading="lazy"
+        decoding="async"
+        className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-70"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(ellipse 45% 60% at 50% 55%, rgba(10,20,40,0.85), rgba(10,20,40,0.35) 70%, rgba(10,20,40,0.55))",
+        }}
+      />
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-vivid/40 bg-accent-vivid/10 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-accent">
+          <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-accent-vivid/40 bg-accent-vivid/10 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-accent-vivid">
             One team, every layer of AI
           </p>
-          <h2 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-content md:text-5xl lg:text-6xl">
-            Our AI Expertise Across <span className="text-brand">Services &amp; Industries</span>
+          <h2 className="font-display text-3xl font-semibold leading-[1.1] tracking-tight text-white md:text-4xl lg:text-5xl">
+            Our AI Expertise Across{" "}
+            <span className="text-accent-vivid">Services &amp; Industries</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-content-dim md:text-xl">
+          <p className="mx-auto mt-3 hidden max-w-3xl text-base leading-relaxed text-white/75 sm:block md:text-lg">
             Eight core AI capabilities, applied inside the industries we know best. Everything
             revolves around one delivery team.
           </p>
@@ -121,7 +142,7 @@ export default function ExpertiseOrbit() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="orbit relative mx-auto mt-14 aspect-square w-full max-w-[760px]"
+          className="orbit relative mx-auto mt-6 aspect-square w-[min(100%,680px,calc(100svh-26rem))] min-w-[18rem] max-w-full"
           role="img"
           aria-label={`Axiomra at the centre, surrounded by its services (${SERVICES.map(
             (s) => s.label
@@ -132,7 +153,7 @@ export default function ExpertiseOrbit() {
 
           {/* Inner ring: just travelling dots. */}
           <div
-            className="orbit-ring orbit-spin absolute inset-[29%] rounded-full border border-line"
+            className="orbit-ring orbit-spin absolute inset-[29%] rounded-full border border-white/20"
             style={{ animationDuration: "18s" }}
           >
             <span className="absolute left-1/2 top-0 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-vivid shadow-[0_0_12px_rgba(20,216,196,0.9)]" />
@@ -163,17 +184,17 @@ export default function ExpertiseOrbit() {
           </div>
         </motion.div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-content-dim">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-white/75">
           <span className="flex items-center gap-2">
             <span className="h-3 w-3 rounded-full border border-accent-vivid bg-accent-vivid/20" />{" "}
             AI services
           </span>
           <span className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full border border-brand bg-brand/20" /> Industries
+            <span className="h-3 w-3 rounded-full border border-white/60 bg-white/80" /> Industries
           </span>
           <Link
             to={INDUSTRIES_PATH}
-            className="inline-flex items-center gap-1.5 rounded-full bg-accent-vivid px-5 py-2.5 font-semibold text-[#0A1428] transition-all hover:shadow-glow focus-ring"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#2563EB] px-5 py-2.5 font-semibold text-white transition-all hover:bg-[#1D4ED8] hover:shadow-[0_12px_28px_-12px_rgba(37,99,235,0.8)] focus-ring"
           >
             Explore industries <ArrowUpRight size={16} />
           </Link>

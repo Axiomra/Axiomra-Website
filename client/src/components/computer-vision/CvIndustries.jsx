@@ -38,7 +38,7 @@ export default function CvIndustries() {
                 onClick={() => setActive(i)}
                 className={`rounded-full px-6 py-3 text-sm font-medium transition-colors focus-ring md:text-base ${
                   selected
-                    ? "bg-cta-gradient text-inverse"
+                    ? "bg-grad-sky text-inverse"
                     : "border border-line bg-surface-card text-content-dim hover:border-brand/50 hover:text-content"
                 }`}
               >

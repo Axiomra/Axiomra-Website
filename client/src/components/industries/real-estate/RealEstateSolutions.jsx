@@ -118,7 +118,7 @@ export default function RealEstateSolutions() {
                   <span
                     data-rule
                     aria-hidden="true"
-                    className="mt-5 block h-px w-full max-w-md bg-gradient-to-r from-brand via-accent-vivid to-transparent"
+                    className="mt-5 block h-px w-full max-w-md bg-gradient-to-r from-grad-blue via-grad-sky to-transparent"
                   />
                   <p
                     data-row-item

@@ -4,26 +4,26 @@ import SectionHeading from "../components/SectionHeading";
 
 const wall = [
   {
-    name: "Adam Gawron",
-    role: "Founder of Upstar",
+    name: "Richard Dixon",
+    role: "Founder, Lucky Egg",
     quote:
       "They communicated with me and we developed trust over the years. Project management is great: willingness to take any problem and get through it is impressive.",
   },
   {
-    name: "Abdullah",
-    role: "CEO & Founder, Navex",
+    name: "Marisa Poster",
+    role: "Founder, PerfectTed",
     quote:
       "Commendable work! Collaborated and communicated in a highly professional manner and delivered exactly what was asked in the desired time frame.",
   },
   {
-    name: "Susana Raj",
-    role: "CEO & Founder, Minmini",
+    name: "Abigail Reid",
+    role: "Founder, Merwave",
     quote:
       "Impressed with their dedication, exceeding expectations on scope. Prioritized quality, delivered on time, and communicated professionally throughout.",
   },
   {
-    name: "Andreas Remy",
-    role: "CEO & Founder, NEONMONKI",
+    name: "Adam Golder",
+    role: "Founder, K9 Jets",
     quote:
       "Extremely impressed with the AI and automation expertise in automating our tagging system. Efficient communication made the experience exceptional.",
   },
@@ -58,9 +58,9 @@ export default function TestimonialWall({ showHeading = true }) {
                 <Star key={i} size={20} strokeWidth={0} fill="currentColor" />
               ))}
             </span>
-            <span className="font-display text-xl font-semibold text-content">4.8/5</span>
+            <span className="font-display text-xl font-semibold text-content">4.9/5</span>
             <span className="h-5 w-px bg-line-strong" aria-hidden="true" />
-            <span className="text-base text-content-dim">from 300+ companies</span>
+            <span className="text-base text-content-dim">from 500+ companies</span>
           </div>
         </SectionHeading>
       ) : (
@@ -71,9 +71,9 @@ export default function TestimonialWall({ showHeading = true }) {
                 <Star key={i} size={20} strokeWidth={0} fill="currentColor" />
               ))}
             </span>
-            <span className="font-display text-xl font-semibold text-content">4.8/5</span>
+            <span className="font-display text-xl font-semibold text-content">4.9/5</span>
             <span className="h-5 w-px bg-line-strong" aria-hidden="true" />
-            <span className="text-base text-content-dim">from 300+ companies</span>
+            <span className="text-base text-content-dim">from 500+ companies</span>
           </div>
         </div>
       )}
@@ -90,10 +90,10 @@ export default function TestimonialWall({ showHeading = true }) {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.55, delay: i * 0.1, ease: "easeOut" }}
               whileHover={{ y: -8 }}
-              className={`group relative overflow-hidden rounded-xl2 border p-9 shadow-card transition-[border-color,box-shadow] duration-300 hover:shadow-glow ${
+              className={`group relative overflow-hidden rounded-xl2 border p-9 shadow-card transition-[border-color,box-shadow] duration-300 hover:shadow-[0_24px_50px_-20px_rgba(37,99,235,0.45)] ${
                 inverted
-                  ? "border-inverse bg-inverse hover:border-accent-vivid/60"
-                  : "border-line bg-surface-subtle hover:border-brand/50"
+                  ? "border-inverse bg-inverse hover:border-[#3B82F6]/70"
+                  : "border-line bg-surface-subtle hover:border-[#3B82F6]/50"
               }`}
             >
               <Quote
@@ -101,7 +101,7 @@ export default function TestimonialWall({ showHeading = true }) {
                 size={80}
                 strokeWidth={1}
                 className={`pointer-events-none absolute -right-3 -top-3 transition-transform duration-500 group-hover:scale-110 ${
-                  inverted ? "text-accent-vivid/15" : "text-brand/10"
+                  inverted ? "text-[#60A5FA]/20" : "text-[#2563EB]/15"
                 }`}
               />
 
@@ -124,7 +124,7 @@ export default function TestimonialWall({ showHeading = true }) {
               <figcaption className="relative flex items-center gap-4">
                 <span
                   aria-hidden="true"
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent-vivid font-display text-base font-semibold text-inverse"
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#2563EB] font-display text-base font-semibold text-white"
                 >
                   {initials(t.name)}
                 </span>
@@ -144,7 +144,7 @@ export default function TestimonialWall({ showHeading = true }) {
 
               <span
                 aria-hidden="true"
-                className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-accent-vivid transition-transform duration-500 group-hover:scale-x-100"
+                className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[#2563EB] transition-transform duration-500 group-hover:scale-x-100"
               />
             </motion.figure>
           );

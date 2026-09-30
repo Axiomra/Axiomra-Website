@@ -1,18 +1,6 @@
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
-import {
-  ArrowUpRight,
-  Star,
-  Link,
-  Rabbit,
-  ClipboardList,
-  Zap,
-  Megaphone,
-  MessageCircle,
-  Music,
-  Compass,
-  Users,
-} from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 /*
  * The entrance fade is a CSS animation ([data-fade] in index.css), not
@@ -20,16 +8,135 @@ import {
  * before any JS runs, or the h1 (the LCP element) waits on the whole bundle.
  */
 
+/*
+ * Client marks for the "Trusted by" strip: one small geometric SVG per brand,
+ * drawn on a 32px grid in currentColor so the whole strip greys out together
+ * and each mark picks up its brand tint on hover.
+ */
 const clients = [
-  { name: "Konnect", Icon: Link },
-  { name: "Doozoo", Icon: Rabbit },
-  { name: "FormOle", Icon: ClipboardList },
-  { name: "Voltox", Icon: Zap },
-  { name: "FN-AD", Icon: Megaphone },
-  { name: "FluentTalk", Icon: MessageCircle },
-  { name: "TuneGPT", Icon: Music },
-  { name: "Navex", Icon: Compass },
-  { name: "Peersuma", Icon: Users },
+  {
+    name: "Konnect",
+    tint: "#2563EB",
+    mark: (
+      <>
+        <circle cx="12" cy="16" r="7" fill="none" stroke="currentColor" strokeWidth="3" />
+        <circle cx="20" cy="16" r="7" fill="none" stroke="currentColor" strokeWidth="3" />
+      </>
+    ),
+  },
+  {
+    name: "Doozoo",
+    tint: "#F97316",
+    mark: (
+      <path
+        fillRule="evenodd"
+        d="M8 4h16a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Zm8 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"
+        fill="currentColor"
+      />
+    ),
+  },
+  {
+    name: "FormOle",
+    tint: "#0EA5E9",
+    mark: (
+      <>
+        <rect x="5" y="6" width="22" height="5" rx="2.5" fill="currentColor" />
+        <rect x="5" y="14" width="16" height="5" rx="2.5" fill="currentColor" opacity=".7" />
+        <rect x="5" y="22" width="10" height="5" rx="2.5" fill="currentColor" opacity=".45" />
+      </>
+    ),
+  },
+  {
+    name: "Voltox",
+    tint: "#EAB308",
+    mark: (
+      <>
+        <path
+          d="M16 3 27.3 9.5v13L16 29 4.7 22.5v-13Z"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+        />
+        <path d="M17.5 8 11 17.5h4.5L14 24l7-9.5h-4.5Z" fill="currentColor" />
+      </>
+    ),
+  },
+  {
+    name: "FN-AD",
+    tint: "#E11D48",
+    mark: (
+      <>
+        <path d="M4 28V4h8a16 16 0 0 1 16 16v8Z" fill="currentColor" opacity=".35" />
+        <path d="M4 28V14h4a10 10 0 0 1 10 10v4Z" fill="currentColor" />
+      </>
+    ),
+  },
+  {
+    name: "FluentTalk",
+    tint: "#8B5CF6",
+    mark: (
+      <>
+        <path
+          d="M6 5h20a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3Z"
+          fill="currentColor"
+        />
+        <path
+          d="M9 14c2-3 4-3 6 0s4 3 6 0"
+          fill="none"
+          stroke="#fff"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
+      </>
+    ),
+  },
+  {
+    name: "TuneGPT",
+    tint: "#10B981",
+    mark: (
+      <>
+        {[
+          [4, 8],
+          [10, 18],
+          [16, 26],
+          [22, 14],
+          [28, 8],
+        ].map(([x, h]) => (
+          <rect
+            key={x}
+            x={x - 1.75}
+            y={16 - h / 2}
+            width="3.5"
+            height={h}
+            rx="1.75"
+            fill="currentColor"
+          />
+        ))}
+      </>
+    ),
+  },
+  {
+    name: "Navex",
+    tint: "#0F766E",
+    mark: (
+      <>
+        <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" strokeWidth="2.5" />
+        <path d="M16 6 19.5 16 16 26 12.5 16Z" fill="currentColor" />
+        <circle cx="16" cy="16" r="2" fill="#fff" />
+      </>
+    ),
+  },
+  {
+    name: "Peersuma",
+    tint: "#DB2777",
+    mark: (
+      <>
+        <circle cx="11" cy="12" r="7" fill="currentColor" opacity=".45" />
+        <circle cx="21" cy="12" r="7" fill="currentColor" opacity=".7" />
+        <circle cx="16" cy="21" r="7" fill="currentColor" />
+      </>
+    ),
+  },
 ];
 
 /*
@@ -105,7 +212,7 @@ export default function Hero() {
       className="relative overflow-hidden bg-inverse pb-0"
     >
       <div
-        className="relative flex min-h-[640px] items-center pt-36 md:min-h-[760px]"
+        className="relative flex min-h-[760px] items-center pt-36 md:min-h-[920px]"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -175,7 +282,7 @@ export default function Hero() {
           <div data-fade="3" className="mt-9">
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-[#14D8C4] px-9 py-4 text-lg font-semibold text-[#0A1428] shadow-[0_18px_40px_-18px_rgba(20,216,196,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#2EE6D3] focus-ring md:text-xl"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#2563EB] px-9 py-4 text-lg font-semibold text-white shadow-[0_18px_40px_-18px_rgba(37,99,235,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1D4ED8] focus-ring md:text-xl"
             >
               Book Your Free AI Strategy Session
               <ArrowUpRight
@@ -200,33 +307,29 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Slide indicators: the active one fills over the slide's lifetime. */}
-        <div className="absolute inset-x-0 bottom-10 z-10 flex justify-center gap-2.5">
-          {SLIDES.map((s, i) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => setIndex(i)}
-              aria-label={`Show slide ${i + 1} of ${SLIDES.length}`}
-              aria-current={i === index}
-              className="group relative h-1.5 w-10 overflow-hidden rounded-full bg-white/30 focus-ring"
-            >
-              <span
-                key={i === index ? `on-${index}` : "off"}
-                className={`absolute inset-y-0 left-0 rounded-full bg-[#14D8C4] ${
-                  i === index ? (paused || reduced ? "w-full" : "hero-progress") : "w-0"
-                }`}
-                style={{ animationDuration: `${INTERVAL_MS}ms` }}
-              />
-            </button>
-          ))}
-        </div>
+        {/* Prev / next: pinned to the sides from md up, paired under the copy on
+            phones so they never sit on top of the headline. */}
+        {[
+          { dir: -1, label: "Previous slide", Icon: ChevronLeft, side: "md:left-6" },
+          { dir: 1, label: "Next slide", Icon: ChevronRight, side: "md:right-6" },
+        ].map(({ dir, label, Icon, side }) => (
+          <button
+            key={dir}
+            type="button"
+            onClick={() => setIndex((i) => (i + dir + SLIDES.length) % SLIDES.length)}
+            aria-label={label}
+            className={`absolute bottom-8 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/35 bg-white/10 text-white backdrop-blur-md transition-colors duration-300 hover:border-white/70 hover:bg-white/25 focus-ring md:bottom-auto md:top-1/2 md:h-12 md:w-12 md:-translate-y-1/2 ${
+              dir < 0 ? "left-[calc(50%-3.25rem)]" : "right-[calc(50%-3.25rem)]"
+            } ${side}`}
+          >
+            <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
+          </button>
+        ))}
       </div>
 
-      <div className="relative z-10 border-t border-inverse-fg/10 bg-inverse py-8">
-        <div className="absolute inset-x-0 top-0 h-px bg-accent-vivid/60" />
-        <p className="mb-6 text-center font-mono text-sm uppercase tracking-[0.35em] text-inverse-fg/70 md:text-base">
-          Trusted by 300+ teams
+      <div className="relative z-10 border-y border-line bg-surface py-10">
+        <p className="mb-8 text-center font-mono text-sm uppercase tracking-[0.35em] text-content-faint md:text-base">
+          Trusted by 500+ teams
         </p>
         <div
           className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
@@ -235,14 +338,26 @@ export default function Hero() {
               "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
           }}
         >
-          <div className="flex w-max animate-marquee items-center gap-20">
-            {[...clients, ...clients].map(({ name, Icon }, i) => (
+          <div className="flex w-max animate-marquee items-center gap-16 md:gap-20">
+            {[...clients, ...clients].map(({ name, tint, mark }, i) => (
               <span
                 key={i}
-                className="flex items-center gap-4 whitespace-nowrap font-mono text-2xl uppercase tracking-[0.2em]"
+                aria-hidden={i >= clients.length || undefined}
+                style={{ "--tint": tint }}
+                className="group flex items-center gap-3 whitespace-nowrap text-content-dim opacity-80 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
               >
-                <Icon size={30} strokeWidth={1.8} className="text-accent-vivid" />
-                <span className="text-inverse-fg/85">{name}</span>
+                <svg
+                  viewBox="0 0 32 32"
+                  width="34"
+                  height="34"
+                  aria-hidden="true"
+                  className="shrink-0 text-[var(--tint)]"
+                >
+                  {mark}
+                </svg>
+                <span className="font-display text-2xl font-semibold tracking-tight text-content">
+                  {name}
+                </span>
               </span>
             ))}
           </div>

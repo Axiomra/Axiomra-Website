@@ -1,6 +1,6 @@
 import { Suspense, lazy, useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ShieldCheck, Star } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import { gsap, MOTION_OK } from "../../../lib/gsap";
 import { hero } from "../../../data/insuranceData";
 
@@ -26,7 +26,11 @@ export default function InsuranceHero() {
         gsap
           .timeline({ defaults: { ease: "power3.out" } })
           .from("[data-hero]", { autoAlpha: 0, y: 28, duration: 0.9, stagger: 0.12 }, 0.1)
-          .from("[data-hero-img]", { autoAlpha: 0, scale: 1.06, duration: 1.6, ease: "power2.out" }, 0)
+          .from(
+            "[data-hero-img]",
+            { autoAlpha: 0, scale: 1.06, duration: 1.6, ease: "power2.out" },
+            0
+          )
           .from(
             "[data-hero-badge]",
             { autoAlpha: 0, y: 18, scale: 0.9, duration: 0.7, stagger: 0.1 },
@@ -60,7 +64,6 @@ export default function InsuranceHero() {
 
       {/* The ground the frosted panels refract: slow blooms rather than flat
           colour, so the backdrop-filter above has something to work on. */}
-      <div aria-hidden="true" className="ins-liquid pointer-events-none absolute inset-0 opacity-70" />
 
       <Suspense fallback={null}>
         <NetworkBackground variant="insurance" className="opacity-90" />
@@ -78,7 +81,6 @@ export default function InsuranceHero() {
             // tint, so the pill picks up whatever is moving behind it.
             className="lg lg-dark lg-soft lg-sheen mb-7 inline-flex items-center gap-2 rounded-full px-5 py-2 font-mono text-sm uppercase tracking-[0.18em] text-white/80"
           >
-            <ShieldCheck size={15} strokeWidth={1.5} className="text-accent-vivid" aria-hidden="true" />
             {hero.eyebrow}
           </p>
 
@@ -86,17 +88,21 @@ export default function InsuranceHero() {
             data-hero
             className="font-display text-4xl font-semibold leading-[1.06] tracking-tight text-inverse-fg sm:text-5xl lg:text-[3.4rem] xl:text-[4rem]"
           >
-            {hero.titleLead} <span className="text-gradient">{hero.titleAccent}</span> {hero.titleTail}
+            {hero.titleLead} <span className="text-gradient">{hero.titleAccent}</span>{" "}
+            {hero.titleTail}
           </h1>
 
-          <p data-hero className="mt-8 max-w-2xl text-lg leading-relaxed text-inverse-fg/70 md:text-xl">
+          <p
+            data-hero
+            className="mt-8 max-w-2xl text-lg leading-relaxed text-inverse-fg/70 md:text-xl"
+          >
             {hero.body}
           </p>
 
           <div data-hero className="mt-10 flex flex-wrap items-center gap-6">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-lg font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring"
+              className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-lg font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring"
             >
               {hero.ctaText}
               <span className="flex h-11 w-11 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-[1px] group-hover:scale-105">
@@ -124,7 +130,10 @@ export default function InsuranceHero() {
 
         {/* Two floating shields over the photo half. Decorative, and hidden on
             narrow screens where they would sit on top of the copy. */}
-        <div aria-hidden="true" className="pointer-events-none relative hidden lg:col-span-5 lg:block">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none relative hidden lg:col-span-5 lg:block"
+        >
           <span
             data-hero-badge
             className="lg lg-dark lg-sheen clip-shield absolute right-10 top-4 h-40 w-32 xl:h-48 xl:w-40"

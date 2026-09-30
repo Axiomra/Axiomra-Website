@@ -117,7 +117,7 @@
 //           </a>
 //           <a
 //             href="#contact"
-//             className="text-sm font-medium bg-gradient-to-r from-teal to-periwinkle text-white px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity focus-ring"
+//             className="text-sm font-medium bg-grad-sky text-[#0A1428] px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity focus-ring"
 //           >
 //             Book a call
 //           </a>
@@ -153,7 +153,7 @@
 //             <a
 //               href="#contact"
 //               onClick={() => setOpen(false)}
-//               className="bg-gradient-to-r from-teal to-periwinkle text-white text-center py-2.5 rounded-full font-medium"
+//               className="bg-grad-sky text-[#0A1428] text-center py-2.5 rounded-full font-medium"
 //             >
 //               Book a call
 //             </a>
@@ -245,9 +245,7 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 inset-x-0 z-50 bg-navy transition-shadow duration-300 ${
-        scrolled
-          ? "shadow-[0_8px_30px_-10px_rgba(0,0,0,0.5)] bg-navy/95 backdrop-blur-xl"
-          : ""
+        scrolled ? "shadow-[0_8px_30px_-10px_rgba(0,0,0,0.5)] bg-navy/95 backdrop-blur-xl" : ""
       }`}
     >
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
@@ -305,7 +303,7 @@ export default function Navbar() {
           </a>
           <a
             href="/contact"
-            className="text-sm font-medium bg-gradient-to-r from-teal to-periwinkle text-white px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity focus-ring"
+            className="text-sm font-medium bg-grad-sky text-[#0A1428] px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity focus-ring"
           >
             Book a call
           </a>
@@ -344,7 +342,7 @@ export default function Navbar() {
             <a
               href="/contact"
               onClick={() => setOpen(false)}
-              className="bg-gradient-to-r from-teal to-periwinkle text-white text-center py-2.5 rounded-full font-medium"
+              className="bg-grad-sky text-[#0A1428] text-center py-2.5 rounded-full font-medium"
             >
               Book a call
             </a>

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
-import CvMotif from "./CvMotif";
 import { expertise } from "../../data/computerVisionData";
 
 /** The seven capabilities, alternating left/right. */
@@ -40,35 +39,15 @@ export default function CvExpertise() {
                     flipped ? "lg:order-2" : ""
                   }`}
                 >
-                  {/* Hybrid frame: the photo grounds the capability in a real
-                      scene, the wireframe on top shows what the model actually
-                      returns. Rows without a photo fall back to the wireframe
-                      on its own blueprint grid. */}
                   <div className="relative aspect-[400/280]">
-                    {item.image && (
-                      <>
-                        <img
-                          src={item.image}
-                          alt={item.imageAlt ?? ""}
-                          loading="lazy"
-                          decoding="async"
-                          className="absolute inset-0 h-full w-full object-cover"
-                        />
-                        {/* Scrim: without it the thin brand strokes disappear
-                            over bright or busy areas of the photo. */}
-                        <span
-                          aria-hidden="true"
-                          className="absolute inset-0 bg-gradient-to-br from-inverse/70 via-inverse/45 to-inverse/70"
-                        />
-                      </>
-                    )}
-                    <div className="absolute inset-0">
-                      <CvMotif variant={item.motif} showGrid={!item.image} />
-                    </div>
+                    <img
+                      src={item.image}
+                      alt={item.imageAlt ?? ""}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
                   </div>
-                  <span className="absolute left-5 top-4 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-content-faint">
-                    output · {item.motif}
-                  </span>
                 </div>
 
                 <div className={flipped ? "lg:order-1" : ""}>

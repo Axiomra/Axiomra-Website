@@ -52,7 +52,7 @@ export default function NlpIntro() {
                 duration: 0.22,
                 ease: "none",
               },
-              i * 0.16,
+              i * 0.16
             )
             .to(
               token,
@@ -63,7 +63,7 @@ export default function NlpIntro() {
                 duration: 0.5,
                 ease: "none",
               },
-              i * 0.16 + 0.45,
+              i * 0.16 + 0.45
             );
         });
 
@@ -75,7 +75,7 @@ export default function NlpIntro() {
             row,
             { autoAlpha: 0.25, x: -10 },
             { autoAlpha: 1, x: 0, duration: 0.4, ease: "power2.out" },
-            readEnd + i * 0.28,
+            readEnd + i * 0.28
           );
           loop.fromTo(
             bars[i],
@@ -86,7 +86,7 @@ export default function NlpIntro() {
               ease: "power2.out",
               transformOrigin: "left center",
             },
-            readEnd + i * 0.28,
+            readEnd + i * 0.28
           );
         });
 
@@ -102,7 +102,6 @@ export default function NlpIntro() {
           repeat: -1,
           repeatRefresh: true,
         });
-
       }, root);
 
       return () => ctx.revert();
@@ -123,7 +122,7 @@ export default function NlpIntro() {
         aria-hidden="true"
         style={{
           backgroundImage:
-            "radial-gradient(55% 60% at 100% 8%, rgba(20,216,196,0.14), transparent 68%), radial-gradient(50% 60% at 0% 100%, rgba(59,79,191,0.10), transparent 70%)",
+            "radial-gradient(55% 60% at 100% 8%, rgba(96,165,250,0.14), transparent 68%), radial-gradient(50% 60% at 0% 100%, rgba(37,99,235,0.10), transparent 70%)",
         }}
       />
 
@@ -162,7 +161,7 @@ export default function NlpIntro() {
               <Link
                 data-intro-cta
                 to="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-cta-gradient px-8 py-4 text-base font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring md:text-lg"
+                className="group inline-flex items-center gap-2 rounded-full bg-grad-sky px-8 py-4 text-base font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring md:text-lg"
               >
                 {hero.ctaText}
                 <ArrowUpRight
@@ -205,7 +204,7 @@ export default function NlpIntro() {
             <span
               data-hero-scan
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-vivid/70 to-transparent"
+              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-grad-sky/70 to-transparent"
             />
 
             <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
@@ -274,7 +273,6 @@ export default function NlpIntro() {
             </dl>
           </div>
         </div>
-
       </div>
     </section>
   );

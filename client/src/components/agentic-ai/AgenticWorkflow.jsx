@@ -36,10 +36,7 @@ export default function AgenticWorkflow() {
   useEffect(() => {
     if (!playing || paused || reduced) return;
 
-    const id = window.setInterval(
-      () => setActive((i) => (i + 1) % stages.length),
-      ADVANCE_MS
-    );
+    const id = window.setInterval(() => setActive((i) => (i + 1) % stages.length), ADVANCE_MS);
     return () => window.clearInterval(id);
   }, [playing, paused, reduced, stages.length]);
 
@@ -62,8 +59,10 @@ export default function AgenticWorkflow() {
     >
       {/* CSS-only backdrop: this band sits between two WebGL sections already,
           and a third render loop is not worth the frame budget. */}
-      <div className="pointer-events-none absolute inset-0 tech-grid opacity-[0.35]" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-0 tech-aurora opacity-40" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute inset-0 tech-grid opacity-[0.35]"
+        aria-hidden="true"
+      />
 
       <div className="relative z-10 mx-auto max-w-8xl px-6">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
@@ -72,8 +71,7 @@ export default function AgenticWorkflow() {
               {workflow.eyebrow}
             </p>
             <h2 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl lg:text-[3.4rem]">
-              <span className="text-gradient">{workflow.titleAccent}</span>{" "}
-              {workflow.titleLead}
+              <span className="text-gradient">{workflow.titleAccent}</span> {workflow.titleLead}
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 md:text-xl">
               {workflow.body}
@@ -162,7 +160,11 @@ export default function AgenticWorkflow() {
                         key={point}
                         className="flex items-start gap-3 text-sm text-white/70 md:text-base"
                       >
-                        <Check size={16} className="mt-1 shrink-0 text-accent-vivid" aria-hidden="true" />
+                        <Check
+                          size={16}
+                          className="mt-1 shrink-0 text-accent-vivid"
+                          aria-hidden="true"
+                        />
                         {point}
                       </StaggerItem>
                     ))}
@@ -174,7 +176,10 @@ export default function AgenticWorkflow() {
                   <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3">
                     <span className="h-2.5 w-2.5 rounded-full bg-white/20" aria-hidden="true" />
                     <span className="h-2.5 w-2.5 rounded-full bg-white/20" aria-hidden="true" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-accent-vivid/60" aria-hidden="true" />
+                    <span
+                      className="h-2.5 w-2.5 rounded-full bg-accent-vivid/60"
+                      aria-hidden="true"
+                    />
                     <span className="ml-2 font-mono text-xs uppercase tracking-[0.16em] text-white/45">
                       agent trace
                     </span>
@@ -201,7 +206,11 @@ export default function AgenticWorkflow() {
                 onClick={() => setPlaying((p) => !p)}
                 className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2 font-mono text-xs uppercase tracking-[0.16em] text-white/60 transition-colors hover:bg-white/10 hover:text-white focus-ring"
               >
-                {playing ? <Pause size={13} aria-hidden="true" /> : <Play size={13} aria-hidden="true" />}
+                {playing ? (
+                  <Pause size={13} aria-hidden="true" />
+                ) : (
+                  <Play size={13} aria-hidden="true" />
+                )}
                 {playing ? "Pause walkthrough" : "Play walkthrough"}
               </button>
             </div>

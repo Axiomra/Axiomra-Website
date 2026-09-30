@@ -5,16 +5,12 @@ import {
   Briefcase,
   CalendarClock,
   Clock,
-  FileSignature,
-  Handshake,
   Mail,
   MessageSquare,
   Phone,
-  Rocket,
   ShieldCheck,
   Tag,
   Layers,
-  Users,
 } from "lucide-react";
 
 import NetworkBackground from "../components/NetworkBackground";
@@ -77,31 +73,31 @@ const CHANNELS = [
   },
 ];
 
-/* How the engagement actually runs after the form is sent. */
-const OPERATIONS = [
+/* Representative engagements, shown under "From Strategy to Implementation". */
+const PROJECT_EXAMPLES = [
   {
-    icon: FileSignature,
-    step: "01",
-    title: "Discovery and Confidentiality",
-    body: "We clarify your goals and arrange an NDA before sensitive information is shared. A discovery discussion establishes scope, available data, and success measures.",
+    title: "AI Assistant for E-Commerce",
+    price: "$28K",
+    duration: "8-week production implementation",
+    body: "RAG-powered shopping assistant, product catalog integration, semantic search and deployment.",
   },
   {
-    icon: Users,
-    step: "02",
-    title: "Project Team and Plan",
-    body: "We identify the skills your project needs and agree on responsibilities, milestones, and communication.",
+    title: "Predictive Analytics Platform",
+    price: "$55K",
+    duration: "12-week implementation",
+    body: "Data pipelines, custom ML forecasting, BI dashboards and automated reporting.",
   },
   {
-    icon: Rocket,
-    step: "03",
-    title: "Development and Progress Reviews",
-    body: "We work in agreed delivery cycles and share demonstrations so your team can review progress and provide feedback.",
+    title: "Computer Vision Quality Inspection",
+    price: "$90K",
+    duration: "16-week implementation",
+    body: "Real-time defect detection, model training, edge deployment and production-line integration.",
   },
   {
-    icon: Handshake,
-    step: "04",
-    title: "Handover and Support",
-    body: "We provide the agreed deliverables, documentation, and training. Post-launch support and any continuing maintenance are defined in your project agreement.",
+    title: "Intelligent Document Processing",
+    price: "$140K",
+    duration: "20-week enterprise implementation",
+    body: "OCR, LLM extraction, validation workflows, compliance rules and enterprise integrations.",
   },
 ];
 
@@ -132,8 +128,7 @@ const TRUST_CHIPS = [
 const FIELD_CLASS =
   "w-full rounded-xl border border-line bg-surface px-4 py-3.5 text-base text-content outline-none transition-all placeholder:text-content-faint/70 focus:border-accent focus:ring-4 focus:ring-accent/15";
 
-const LABEL_CLASS =
-  "mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-content-faint";
+const LABEL_CLASS = "mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-content-faint";
 
 const EMPTY_FORM = {
   name: "",
@@ -264,8 +259,11 @@ function ContactForm() {
     >
       {/* Clipped decoration layer; the form itself must not clip or the country
           and category dropdowns get cut off at the card edge. */}
-      <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[1.75rem]">
-        <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid" />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 overflow-hidden rounded-[1.75rem]"
+      >
+        <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-grad-sky via-grad-blue to-grad-sky" />
       </span>
       <HoneypotField inputRef={honeypotRef} />
 
@@ -457,7 +455,11 @@ export default function ContactPage() {
         title="Contact Axiomra: Let's Discuss Your Next AI Project"
         description={META_DESCRIPTION}
         breadcrumbs={[{ name: "Contact" }]}
-        jsonLd={contactPageSchema({ name: "Contact Axiomra", description: META_DESCRIPTION, path: "/contact" })}
+        jsonLd={contactPageSchema({
+          name: "Contact Axiomra",
+          description: META_DESCRIPTION,
+          path: "/contact",
+        })}
       />
       {/* Hero */}
       <section className="relative isolate overflow-hidden bg-inverse px-4 pb-24 pt-32 sm:px-6 md:pt-40">
@@ -480,13 +482,12 @@ export default function ContactPage() {
           </p>
 
           <h1 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-inverse-fg md:text-6xl lg:text-7xl">
-            Let&rsquo;s Discuss Your{" "}
-            <span className="text-accent-vivid">Next AI Project</span>
+            Let&rsquo;s Discuss Your <span className="text-accent-vivid">Next AI Project</span>
           </h1>
 
           <p className="mx-auto mt-7 max-w-3xl text-lg leading-relaxed text-inverse-fg/75 md:text-xl">
-            Tell us about your goals, challenge, or initial idea. Our team will review your
-            enquiry and help identify the next step.
+            Tell us about your goals, challenge, or initial idea. Our team will review your enquiry
+            and help identify the next step.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -549,7 +550,10 @@ export default function ContactPage() {
       </section>
 
       {/* Form */}
-      <section id="contact-form" className="relative overflow-hidden bg-surface-subtle px-4 py-24 sm:px-6">
+      <section
+        id="contact-form"
+        className="relative overflow-hidden bg-surface-subtle px-4 py-24 sm:px-6"
+      >
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -left-32 top-10 h-96 w-96 animate-float rounded-full bg-accent-vivid/10 blur-3xl"
@@ -567,8 +571,7 @@ export default function ContactPage() {
               Let&rsquo;s talk
             </p>
             <h2 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-content md:text-5xl">
-              Launch Your AI Project{" "}
-              <span className="text-accent">With A Team That Ships.</span>
+              Launch Your AI Project <span className="text-accent">With A Team That Ships.</span>
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-content-dim">
               Tell us the scope, the problem or the rough idea. An engineer reads every submission.
@@ -614,35 +617,35 @@ export default function ContactPage() {
             eyebrow="How we operate"
             title={
               <>
-                What Happens <span className="text-accent">After You Contact Us</span>
+                From Strategy to <span className="text-accent">Implementation</span>
               </>
             }
-            subtitle="Here is how we move from your initial enquiry to an agreed project and delivery plan."
+            subtitle="We turn complex business requirements into scalable, production-ready solutions with a clear path from discovery to deployment."
           />
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {OPERATIONS.map(({ icon: Icon, step, title, body }, i) => (
+          <div className="mx-auto grid max-w-6xl gap-5 md:grid-cols-2">
+            {PROJECT_EXAMPLES.map(({ title, price, duration, body }, i) => (
               <motion.div
-                key={step}
+                key={title}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
-                className="group relative h-full overflow-hidden rounded-xl2 border border-line bg-surface-card p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-card"
+                className="glossy-card h-full rounded-xl2 border border-line/60 p-6 sm:p-7"
               >
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -right-2 -top-4 font-display text-7xl font-semibold text-content/[0.04]"
-                >
-                  {step}
-                </span>
-
-                <span className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-vivid/12 text-accent transition-transform duration-300 group-hover:scale-110">
-                  <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
-                </span>
-
-                <h3 className="font-display text-xl font-semibold text-content">{title}</h3>
-                <p className="mt-3 text-base leading-relaxed text-content-dim">{body}</p>
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-display text-lg font-semibold text-content sm:text-xl">
+                    {title}
+                  </h3>
+                  <span className="shrink-0 font-display text-lg font-semibold text-accent sm:text-xl">
+                    {price}
+                  </span>
+                </div>
+                <p className="mt-2 flex items-center gap-2 text-sm text-content-dim">
+                  <Clock size={16} aria-hidden="true" />
+                  {duration}
+                </p>
+                <p className="mt-4 text-base leading-relaxed text-content-dim">{body}</p>
               </motion.div>
             ))}
           </div>

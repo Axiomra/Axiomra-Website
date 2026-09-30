@@ -70,7 +70,7 @@ export default function FoundersSay() {
               className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
               style={{
                 backgroundImage:
-                  "radial-gradient(circle at 15% 0%, rgba(20,216,196,0.14), transparent 60%)",
+                  "radial-gradient(circle at 15% 0%, rgba(96,165,250,0.14), transparent 60%)",
               }}
             />
             <Quote

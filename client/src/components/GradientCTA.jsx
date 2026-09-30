@@ -9,16 +9,15 @@ export default function GradientCTA({
   buttonText = "Book My Strategy Call",
   dark = false,
   three = false,
-  solid = false,
   compact = false,
   image,
 }) {
-  // `solid` swaps the gradient for the flat logo teal. White text is under 2:1
-  // on that teal, so the copy and button flip to the dark teal ink.
-  const bg = dark ? "bg-inverse" : solid ? "bg-assistant" : "bg-cta-gradient";
-  const heading = solid ? "text-assistant-ink-soft" : "text-inverse-fg";
-  const body = solid ? "text-assistant-ink-soft/85" : "text-inverse-fg/85";
-  const button = solid ? "bg-assistant-ink-soft text-white" : "bg-inverse-fg text-inverse";
+  // Every non-dark variant is one flat light blue with navy copy and a blue
+  // button.
+  const bg = dark ? "bg-inverse" : "bg-[#DBEAFE]";
+  const heading = dark ? "text-inverse-fg" : "text-[#1E3A8A]";
+  const body = dark ? "text-inverse-fg/85" : "text-[#1E3A8A]/80";
+  const button = dark ? "bg-inverse-fg text-inverse" : "bg-[#2563EB] text-white hover:bg-[#1D4ED8]";
 
   return (
     <section
@@ -47,11 +46,15 @@ export default function GradientCTA({
         <div className="absolute inset-0 bg-gradient-to-b from-inverse/70 via-inverse/40 to-inverse/80" />
       )}
 
-      <div className="absolute -left-16 -top-16 h-72 w-72 animate-float rounded-full bg-white/10 blur-3xl" />
-      <div
-        className="absolute -bottom-16 -right-16 h-72 w-72 animate-float rounded-full bg-white/10 blur-3xl"
-        style={{ animationDelay: "2s" }}
-      />
+      {dark && (
+        <>
+          <div className="absolute -left-16 -top-16 h-72 w-72 animate-float rounded-full bg-white/10 blur-3xl" />
+          <div
+            className="absolute -bottom-16 -right-16 h-72 w-72 animate-float rounded-full bg-white/10 blur-3xl"
+            style={{ animationDelay: "2s" }}
+          />
+        </>
+      )}
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}

@@ -36,25 +36,25 @@ export default function AdminBackdrop() {
       <motion.div
         {...drift(60, 30, 1.14)}
         className="absolute -left-24 -top-32 h-[26rem] w-[26rem] rounded-full opacity-[0.30] blur-[90px]"
-        style={{ background: "radial-gradient(circle, #14D8C4 0%, transparent 68%)" }}
+        style={{ background: "radial-gradient(circle, #60A5FA 0%, transparent 68%)" }}
       />
       {/* Periwinkle, top-right. */}
       <motion.div
         {...drift(-70, 44, 1.1)}
         className="absolute -right-32 -top-24 h-[30rem] w-[30rem] rounded-full opacity-[0.28] blur-[100px]"
-        style={{ background: "radial-gradient(circle, #788BE3 0%, transparent 68%)" }}
+        style={{ background: "radial-gradient(circle, #2563EB 0%, transparent 68%)" }}
       />
       {/* Violet, centre: the colour the dark theme is built around. */}
       <motion.div
         {...drift(50, -20, 1.12, 32)}
         className="absolute -bottom-40 left-1/4 h-[28rem] w-[28rem] rounded-full opacity-[0.22] blur-[110px]"
-        style={{ background: "radial-gradient(circle, #8B5CF6 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #2563EB 0%, transparent 70%)" }}
       />
       {/* Gold, low and small: an accent, not a third light source. */}
       <motion.div
         {...drift(40, -26, 1.16)}
         className="absolute -bottom-28 left-2/3 h-64 w-64 rounded-full opacity-[0.16] blur-[80px]"
-        style={{ background: "radial-gradient(circle, #FFB020 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #60A5FA 0%, transparent 70%)" }}
       />
 
       {/* --- Smoke --- */}
@@ -63,7 +63,7 @@ export default function AdminBackdrop() {
         className="absolute -left-1/4 top-[-30%] h-[22rem] w-[75%] rounded-[50%] opacity-50 blur-[70px] dark:opacity-70"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgb(var(--brand) / 0.45) 0%, transparent 70%)",
+            "radial-gradient(ellipse at center, rgb(var(--grad-blue) / 0.45) 0%, transparent 70%)",
         }}
       />
       <motion.div
@@ -71,7 +71,7 @@ export default function AdminBackdrop() {
         className="absolute right-[-20%] top-[10%] h-[18rem] w-[70%] rounded-[50%] opacity-40 blur-[80px] dark:opacity-65"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgb(var(--accent-vivid) / 0.30) 0%, transparent 72%)",
+            "radial-gradient(ellipse at center, rgb(var(--grad-sky) / 0.30) 0%, transparent 72%)",
         }}
       />
       <motion.div
@@ -86,7 +86,12 @@ export default function AdminBackdrop() {
       {/* Static grain, so the smoke has texture instead of reading as a gradient. */}
       <svg className="absolute inset-0 h-full w-full opacity-[0.16] mix-blend-overlay">
         <filter id="admin-smoke-grain">
-          <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.75"
+            numOctaves="3"
+            stitchTiles="stitch"
+          />
           <feColorMatrix type="saturate" values="0" />
         </filter>
         <rect width="100%" height="100%" filter="url(#admin-smoke-grain)" />

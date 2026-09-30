@@ -31,9 +31,18 @@ const types = [
       "A technical narrative your investors and future CTO can both read",
     ],
     engagement: [
-      { title: "Frame", body: "One week to pin down the assumption worth testing and the number that proves it." },
-      { title: "Build", body: "Four to six weeks of focused delivery, with a working build in your hands every week." },
-      { title: "Decide", body: "A measured result and a straight recommendation: double down, pivot, or stop." },
+      {
+        title: "Frame",
+        body: "One week to pin down the assumption worth testing and the number that proves it.",
+      },
+      {
+        title: "Build",
+        body: "Four to six weeks of focused delivery, with a working build in your hands every week.",
+      },
+      {
+        title: "Decide",
+        body: "A measured result and a straight recommendation: double down, pivot, or stop.",
+      },
     ],
     cta: "Validate My Idea",
   },
@@ -63,9 +72,18 @@ const types = [
       "Knowledge transfer to your team, so you are not dependent on us to operate it",
     ],
     engagement: [
-      { title: "Audit", body: "Two weeks inside the stack to find the real constraint, not the loudest symptom." },
-      { title: "Rebuild", body: "Embedded delivery sprints alongside your engineers, shipping behind flags." },
-      { title: "Hand over", body: "Runbooks, dashboards and a trained team that owns the system after we leave." },
+      {
+        title: "Audit",
+        body: "Two weeks inside the stack to find the real constraint, not the loudest symptom.",
+      },
+      {
+        title: "Rebuild",
+        body: "Embedded delivery sprints alongside your engineers, shipping behind flags.",
+      },
+      {
+        title: "Hand over",
+        body: "Runbooks, dashboards and a trained team that owns the system after we leave.",
+      },
     ],
     cta: "Fix My Growth Bottleneck",
   },
@@ -95,9 +113,18 @@ const types = [
       "Reporting that builds itself, with the numbers your team already trusts",
     ],
     engagement: [
-      { title: "Map", body: "We sit with your team for a week and time the work that actually eats the day." },
-      { title: "Automate", body: "The highest-volume flow goes live first, so the saving arrives before the invoice." },
-      { title: "Extend", body: "Each following flow reuses the same foundation, so it costs less than the last." },
+      {
+        title: "Map",
+        body: "We sit with your team for a week and time the work that actually eats the day.",
+      },
+      {
+        title: "Automate",
+        body: "The highest-volume flow goes live first, so the saving arrives before the invoice.",
+      },
+      {
+        title: "Extend",
+        body: "Each following flow reuses the same foundation, so it costs less than the last.",
+      },
     ],
     cta: "Show Me What To Automate",
   },
@@ -127,9 +154,18 @@ const types = [
       "A department-by-department rollout with the business case measured at each step",
     ],
     engagement: [
-      { title: "Assess", body: "Data, architecture and compliance readiness reviewed before a line of model code." },
-      { title: "Prove", body: "One department, one measurable outcome, delivered inside your governance model." },
-      { title: "Scale", body: "The proven pattern repeated across departments on shared, governed foundations." },
+      {
+        title: "Assess",
+        body: "Data, architecture and compliance readiness reviewed before a line of model code.",
+      },
+      {
+        title: "Prove",
+        body: "One department, one measurable outcome, delivered inside your governance model.",
+      },
+      {
+        title: "Scale",
+        body: "The proven pattern repeated across departments on shared, governed foundations.",
+      },
     ],
     cta: "Plan My AI Programme",
   },
@@ -148,8 +184,9 @@ export default function BusinessTypes() {
           Explore The <span className="text-brand">Range Of Businesses</span> We Can Work With
         </h2>
         <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-content-dim md:text-xl md:leading-relaxed">
-          We specialize in custom, advanced technology solutions that drive innovation and efficiency, 
-          whether you&rsquo;re developing a new prototype or broadening your market presence.
+          We specialize in custom, advanced technology solutions that drive innovation and
+          efficiency, whether you&rsquo;re developing a new prototype or broadening your market
+          presence.
         </p>
       </div>
 
@@ -177,7 +214,7 @@ export default function BusinessTypes() {
                   aria-hidden="true"
                 />
                 <div
-                  className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-grad-blue/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   aria-hidden="true"
                 />
 

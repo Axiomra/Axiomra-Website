@@ -84,7 +84,7 @@ export default function Services() {
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.55, delay: (i % 2) * 0.1, ease: "easeOut" }}
             whileHover={{ y: -8, transition: { duration: 0.3 } }}
-            className="group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-line bg-surface-card shadow-card transition-[border-color,box-shadow] duration-500 hover:border-accent-vivid/70 hover:shadow-[0_35px_70px_-30px_rgba(20,216,196,0.55)]"
+            className="group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-line bg-surface-card shadow-card transition-[border-color,background-color,box-shadow] duration-500 hover:border-brand hover:bg-brand/5 hover:shadow-glow"
           >
             <div className="relative aspect-[16/9] overflow-hidden">
               <img
@@ -115,18 +115,18 @@ export default function Services() {
             </div>
 
             <div className="relative flex flex-1 flex-col p-7">
-              <span className="mb-5 block h-0.5 w-12 rounded-full bg-accent-vivid transition-all duration-500 group-hover:w-24" />
+              <span className="mb-5 block h-0.5 w-12 rounded-full bg-accent-vivid transition-all group-hover:bg-brand duration-500 group-hover:w-24" />
               <p className="mb-7 flex-1 text-base leading-relaxed text-content-dim">{s.desc}</p>
               <div className="flex flex-wrap items-center gap-3">
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-accent-vivid px-5 py-2.5 text-sm font-semibold text-on-accent transition-all hover:bg-accent-vivid-hover hover:shadow-glow focus-ring"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-[#2563EB] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#1D4ED8] hover:shadow-[0_12px_28px_-12px_rgba(37,99,235,0.8)] focus-ring"
                 >
                   Buy our service <ArrowUpRight size={15} />
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-line-strong px-5 py-2.5 text-sm font-medium text-content transition-colors hover:border-accent-vivid focus-ring"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-line-strong px-5 py-2.5 text-sm font-medium text-content transition-colors hover:border-brand focus-ring"
                 >
                   View service details
                   <ArrowRight
@@ -137,10 +137,10 @@ export default function Services() {
               </div>
             </div>
 
-            {/* Teal rule that wipes in along the bottom edge on hover. */}
+            {/* Accent rule that wipes in along the bottom edge on hover. */}
             <span
               aria-hidden="true"
-              className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-accent-vivid transition-transform duration-500 group-hover:scale-x-100"
+              className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-brand transition-transform duration-500 group-hover:scale-x-100"
             />
           </motion.article>
         ))}

@@ -29,7 +29,6 @@ export default function RetailMidCta() {
         className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-40"
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-inverse via-inverse/75 to-inverse" />
-      <div aria-hidden="true" className="retail-bloom opacity-70" />
 
       <Reveal>
         <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
@@ -39,19 +38,13 @@ export default function RetailMidCta() {
 
           {/* Floats first: a float only pushes the text that follows it. */}
           <div className="mt-8">
-            <span
-              aria-hidden="true"
-              className="shape-aisle-left liquid-glass"
-            />
-            <span
-              aria-hidden="true"
-              className="shape-aisle-right liquid-glass"
-            />
+            <span aria-hidden="true" className="shape-aisle-left liquid-glass" />
+            <span aria-hidden="true" className="shape-aisle-right liquid-glass" />
             <p className="text-lg leading-relaxed text-inverse-fg/75 md:text-xl">{midCta.body}</p>
 
             <Link
               to="/contact"
-              className="group mt-10 inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-lg font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring"
+              className="group mt-10 inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-lg font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring"
             >
               {midCta.buttonText}
               <span className="flex h-11 w-11 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-[1px] group-hover:scale-105">

@@ -59,7 +59,7 @@ function IntroVideo() {
 
   if (playing) {
     return (
-      <div className="relative aspect-video overflow-hidden rounded-xl2 border border-line bg-inverse shadow-card">
+      <div className="relative aspect-video overflow-hidden rounded-xl2 border border-line bg-inverse shadow-card md:aspect-auto md:flex-1">
         <iframe
           src={INTRO_VIDEO.embed}
           title={INTRO_VIDEO.title}
@@ -76,7 +76,7 @@ function IntroVideo() {
       type="button"
       onClick={() => setPlaying(true)}
       aria-label={`Play video: ${INTRO_VIDEO.title}`}
-      className="group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl2 border border-line bg-inverse shadow-card focus-ring"
+      className="group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl2 border border-line bg-inverse shadow-card focus-ring md:aspect-auto md:flex-1"
     >
       <img
         src={INTRO_VIDEO.poster}
@@ -223,12 +223,15 @@ export default function Contact() {
           ))}
         </div>
 
-        <div className="grid items-center gap-12 md:grid-cols-2">
+        {/* Both columns stretch to the form's height; the video grows to fill
+            the left one so the two sides read as a matched pair. */}
+        <div className="grid items-stretch gap-12 md:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="flex flex-col"
           >
             <IntroVideo />
             <div className="mt-7 grid gap-4 sm:grid-cols-2">
@@ -251,7 +254,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="relative rounded-[1.75rem] border border-accent-vivid/30 bg-field-dark-deep p-7 shadow-[0_40px_90px_-35px_rgba(20,216,196,0.45)] md:p-10"
+            className="form-blue relative rounded-[1.75rem] border border-accent-vivid/30 bg-gradient-to-br from-[#0C1E4E] to-[#1E3A8A] p-7 shadow-[0_40px_90px_-35px_rgba(77,148,255,0.55)] md:p-10"
           >
             {/* Decoration lives in its own clipped layer: the form itself must not
               clip, or the country / category dropdowns get cut off at the edge. */}
@@ -443,7 +446,7 @@ export default function Contact() {
                   whileTap={{ scale: 0.98 }}
                   type="submit"
                   disabled={status === "loading"}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-vivid px-7 py-4 text-lg font-semibold text-on-accent transition-all hover:bg-accent-vivid-hover hover:shadow-[0_0_55px_-12px_rgba(20,216,196,0.8)] focus-ring disabled:opacity-60"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-vivid px-7 py-4 text-lg font-semibold text-on-accent transition-all hover:bg-accent-vivid-hover hover:shadow-[0_0_55px_-12px_rgba(77,148,255,0.8)] focus-ring disabled:opacity-60"
                 >
                   {status === "loading" ? "Sending..." : "Request VIP Consultation"}{" "}
                   {status !== "loading" && <ArrowUpRight size={18} />}

@@ -21,7 +21,10 @@ const SECONDS_PER_CARD = 4;
 
 export default function IndustriesPortfolio({ data = showcase }) {
   const reduced = useReducedMotion();
-  const pass = Array.from({ length: Math.ceil(MIN_PASS / caseStudies.length) }, () => caseStudies).flat();
+  const pass = Array.from(
+    { length: Math.ceil(MIN_PASS / caseStudies.length) },
+    () => caseStudies
+  ).flat();
   const studies = reduced ? caseStudies : [...pass, ...pass];
 
   return (
@@ -41,7 +44,9 @@ export default function IndustriesPortfolio({ data = showcase }) {
       {/* Full-bleed on purpose: the track has to be wider than the viewport for
           the loop to read as continuous. */}
       <Reveal>
-        <div className={`relative mt-12 ${reduced ? "scrollbar-hide overflow-x-auto" : "overflow-hidden"}`}>
+        <div
+          className={`relative mt-12 ${reduced ? "scrollbar-hide overflow-x-auto" : "overflow-hidden"}`}
+        >
           {!reduced && (
             <>
               <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-surface to-transparent sm:w-32" />
@@ -53,7 +58,9 @@ export default function IndustriesPortfolio({ data = showcase }) {
             aria-label="Selected projects"
             // The default 30s marquee is tuned for short pills; this track is
             // much wider, so its duration follows the card count.
-            style={reduced ? undefined : { animationDuration: `${pass.length * SECONDS_PER_CARD}s` }}
+            style={
+              reduced ? undefined : { animationDuration: `${pass.length * SECONDS_PER_CARD}s` }
+            }
             className={`flex w-max gap-5 px-4 pb-4 sm:px-6 lg:px-8 ${
               reduced
                 ? ""
@@ -68,6 +75,8 @@ export default function IndustriesPortfolio({ data = showcase }) {
               >
                 <Link
                   to={study.caseStudy ?? PORTFOLIO_PATH}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   tabIndex={i >= caseStudies.length ? -1 : undefined}
                   className="group block h-full rounded-[2rem] border border-line bg-surface-subtle p-2 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-1 hover:shadow-card focus-ring"
                 >

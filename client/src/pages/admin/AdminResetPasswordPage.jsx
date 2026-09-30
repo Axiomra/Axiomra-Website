@@ -142,7 +142,9 @@ export default function AdminResetPasswordPage() {
             </div>
           ) : (
             <form onSubmit={submit} noValidate>
-              <h1 className="font-display text-xl font-semibold text-content">Set a new password</h1>
+              <h1 className="font-display text-xl font-semibold text-content">
+                Set a new password
+              </h1>
               <p className="mt-2 text-sm leading-relaxed text-content-dim">
                 Choose something you do not use anywhere else.
               </p>
@@ -174,7 +176,11 @@ export default function AdminResetPasswordPage() {
                     aria-label={show ? "Hide password" : "Show password"}
                     className="focus-ring absolute right-2.5 top-1/2 -translate-y-1/2 rounded-lg p-1.5 text-content-faint transition-colors hover:bg-surface-inset hover:text-content"
                   >
-                    {show ? <EyeOff size={16} aria-hidden="true" /> : <Eye size={16} aria-hidden="true" />}
+                    {show ? (
+                      <EyeOff size={16} aria-hidden="true" />
+                    ) : (
+                      <Eye size={16} aria-hidden="true" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -279,7 +285,7 @@ export default function AdminResetPasswordPage() {
               <button
                 type="submit"
                 disabled={busy}
-                className="focus-ring mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cta-gradient py-3 text-sm font-semibold text-[#0A1428] transition-opacity hover:opacity-90 disabled:opacity-60"
+                className="focus-ring mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-grad-sky py-3 text-sm font-semibold text-[#0A1428] transition-opacity hover:opacity-90 disabled:opacity-60"
               >
                 {busy && <Loader2 size={16} className="animate-spin" aria-hidden="true" />}
                 {busy ? "Updating…" : "Update password"}

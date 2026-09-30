@@ -60,7 +60,7 @@ export default function GenAiWhyUs() {
             </p>
             <Link
               to="/contact"
-              className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-cta-gradient px-7 py-4 text-base font-semibold text-inverse-fg shadow-glow transition-transform hover:-translate-y-0.5 focus-ring md:text-lg"
+              className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-grad-sky px-7 py-4 text-base font-semibold text-[#0A1428] shadow-glow transition-transform hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {whyUs.ctaText}
               <ArrowRight size={19} className="transition-transform group-hover:translate-x-1" />
@@ -107,9 +107,8 @@ export default function GenAiWhyUs() {
                 Security and Governance Built Into the Project
               </h3>
               <p className="mt-4 text-base leading-relaxed text-content-dim md:text-lg">
-                We agree on data handling, hosting, and access requirements before
-                implementation. Controls are selected for the data and risks involved in your
-                use case.
+                We agree on data handling, hosting, and access requirements before implementation.
+                Controls are selected for the data and risks involved in your use case.
               </p>
               <ul className="mt-7 space-y-3.5">
                 {GOVERNANCE_POINTS.map((point) => (

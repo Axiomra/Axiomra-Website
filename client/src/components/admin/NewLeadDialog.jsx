@@ -156,7 +156,12 @@ function LeadForm({ onClose, onCreate, services }) {
               <label htmlFor="nl-phone" className={labelClass}>
                 Phone
               </label>
-              <input id="nl-phone" value={form.phone} onChange={set("phone")} className={inputClass} />
+              <input
+                id="nl-phone"
+                value={form.phone}
+                onChange={set("phone")}
+                className={inputClass}
+              />
             </div>
 
             <div>
@@ -285,7 +290,7 @@ function LeadForm({ onClose, onCreate, services }) {
             <button
               type="submit"
               disabled={busy}
-              className="focus-ring rounded-xl bg-cta-gradient px-5 py-2.5 text-sm font-semibold text-[#0A1428] transition-opacity hover:opacity-90 disabled:opacity-60"
+              className="focus-ring rounded-xl bg-grad-sky px-5 py-2.5 text-sm font-semibold text-[#0A1428] transition-opacity hover:opacity-90 disabled:opacity-60"
             >
               {busy ? "Saving…" : "Add lead"}
             </button>

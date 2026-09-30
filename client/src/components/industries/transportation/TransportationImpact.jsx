@@ -32,7 +32,10 @@ function BigNumber({ value }) {
   }, [value]);
 
   return (
-    <p ref={ref} className="font-display text-6xl font-semibold tracking-tight text-inverse-fg md:text-7xl">
+    <p
+      ref={ref}
+      className="font-display text-6xl font-semibold tracking-tight text-[#1E3A8A] md:text-7xl"
+    >
       {value}
     </p>
   );
@@ -58,20 +61,14 @@ export default function TransportationImpact() {
             <StaggerItem
               as="article"
               key={stat.value + stat.source}
-              // The gradient is the ground the pane refracts; without it the
-              // glass would have nothing behind it to bend.
-              className="clip-waybill relative overflow-hidden bg-gradient-to-br from-accent-vivid via-brand to-brand-strong p-1 shadow-card"
+              className="clip-waybill relative overflow-hidden bg-[#DBEAFE] p-1 shadow-card"
             >
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-accent-vivid/30 blur-3xl"
-              />
-              <div className="lg lg-dark lg-soft lg-sheen clip-waybill relative flex h-full flex-col p-7 md:p-9">
+              <div className="clip-waybill relative flex h-full flex-col p-7 md:p-9">
                 <BigNumber value={stat.value} />
-                <p className="mt-5 text-base leading-relaxed text-inverse-fg/90 md:text-lg">
+                <p className="mt-5 text-base leading-relaxed text-[#1E3A8A]/90 md:text-lg">
                   {stat.label}
                 </p>
-                <p className="mt-auto pt-6 font-mono text-xs uppercase tracking-[0.16em] text-inverse-fg/65">
+                <p className="mt-auto pt-6 font-mono text-xs uppercase tracking-[0.16em] text-[#1E3A8A]/65">
                   {stat.source}
                 </p>
               </div>

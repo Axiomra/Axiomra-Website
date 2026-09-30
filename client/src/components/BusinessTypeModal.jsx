@@ -18,8 +18,8 @@ function CanvasFallback() {
       aria-hidden="true"
       style={{
         backgroundImage:
-          "radial-gradient(circle at 30% 40%, rgba(20,216,196,0.35), transparent 55%)," +
-          "radial-gradient(circle at 72% 60%, rgba(120,139,227,0.35), transparent 55%)",
+          "radial-gradient(circle at 30% 40%, rgba(96,165,250,0.35), transparent 55%)," +
+          "radial-gradient(circle at 72% 60%, rgba(37,99,235,0.35), transparent 55%)",
       }}
     />
   );
@@ -236,7 +236,7 @@ export default function BusinessTypeModal({ item, onClose }) {
               <Link
                 to="/#contact"
                 onClick={close}
-                className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-accent-vivid to-brand px-7 py-4 text-base font-semibold text-inverse-fg transition-opacity hover:opacity-90 focus-ring"
+                className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-grad-sky px-7 py-4 text-base font-semibold text-[#0A1428] transition-opacity hover:opacity-90 focus-ring"
               >
                 {item.cta}
                 <ArrowUpRight

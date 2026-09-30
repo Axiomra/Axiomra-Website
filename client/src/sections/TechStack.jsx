@@ -3,8 +3,30 @@ import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "../components/SectionHeading";
 
 const tabs = {
-  "Artificial Intelligence": ["GPT-4o", "Claude", "Gemini", "Llama 3", "MistralAI", "Whisper", "Stable Diffusion", "VertexAI", "Groq", "Guardrails"],
-  "Backend & Database": ["Node.js", "Express.js", "FastAPI", "Django", "MongoDB", "PostgreSQL", "Redis", "ChromaDB", "Celery", "NestJS"],
+  "Artificial Intelligence": [
+    "GPT-4o",
+    "Claude",
+    "Gemini",
+    "Llama 3",
+    "MistralAI",
+    "Whisper",
+    "Stable Diffusion",
+    "VertexAI",
+    "Groq",
+    "Guardrails",
+  ],
+  "Backend & Database": [
+    "Node.js",
+    "Express.js",
+    "FastAPI",
+    "Django",
+    "MongoDB",
+    "PostgreSQL",
+    "Redis",
+    "ChromaDB",
+    "Celery",
+    "NestJS",
+  ],
   Frontend: ["React", "Next.js", "Vue.js", "TypeScript", "React Native", "HTML5", "CSS3"],
   Cloud: ["AWS", "GCP", "Azure", "Docker", "Digital Ocean", "Nginx", "EC2"],
   DevOps: ["GitHub", "GitLab", "CI/CD", "Docker", "Gunicorn"],
@@ -15,9 +37,8 @@ export default function TechStack() {
   const [active, setActive] = useState("Artificial Intelligence");
 
   return (
-    <section className="relative overflow-hidden border-y border-line bg-surface-subtle py-24">
+    <section className="relative overflow-hidden border-y border-line bg-surface-wash py-24">
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[720px]">
-        <div className="tech-aurora absolute inset-0 opacity-70" />
         <div className="tech-grid absolute inset-0 opacity-[0.18]" />
         <div className="tech-sweep absolute inset-x-0 top-0 h-px" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-surface-subtle" />
@@ -38,7 +59,11 @@ export default function TechStack() {
       </div>
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mb-8 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Technology categories">
+        <div
+          className="mb-8 flex flex-wrap justify-center gap-2"
+          role="tablist"
+          aria-label="Technology categories"
+        >
           {Object.keys(tabs).map((tab) => (
             <button
               key={tab}
@@ -70,7 +95,10 @@ export default function TechStack() {
             className="flex flex-wrap justify-center gap-3 rounded-xl2 border border-line bg-surface-card p-8"
           >
             {tabs[active].map((t) => (
-              <span key={t} className="rounded-full border border-line bg-surface-inset px-4 py-2 text-sm text-content-dim">
+              <span
+                key={t}
+                className="rounded-full border border-line bg-surface-inset px-4 py-2 text-sm text-content-dim"
+              >
                 {t}
               </span>
             ))}

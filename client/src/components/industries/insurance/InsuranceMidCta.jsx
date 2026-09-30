@@ -35,7 +35,7 @@ export default function InsuranceMidCta() {
         decoding="async"
         className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover opacity-55"
       />
-      <div className="pointer-events-none absolute inset-0 -z-20 bg-gradient-to-br from-brand/45 via-inverse/70 to-accent-vivid/35" />
+      <div className="pointer-events-none absolute inset-0 -z-20 bg-gradient-to-br from-grad-blue/45 via-inverse/70 to-grad-sky/35" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-24 top-0 -z-20 h-80 w-80 rounded-full bg-brand/35 blur-[120px]"
@@ -60,14 +60,17 @@ export default function InsuranceMidCta() {
               >
                 {midCta.title}
               </h2>
-              <p data-reveal className="mt-5 text-base leading-relaxed text-inverse-fg/75 md:text-lg">
+              <p
+                data-reveal
+                className="mt-5 text-base leading-relaxed text-inverse-fg/75 md:text-lg"
+              >
                 {midCta.body}
               </p>
 
               <Link
                 data-reveal
                 to="/contact"
-                className="group mt-9 inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
+                className="group mt-9 inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
               >
                 {midCta.ctaText}
                 <span className="flex h-11 w-11 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">
@@ -100,7 +103,7 @@ export default function InsuranceMidCta() {
             {/* Ties the picture to the band. Kept as a plain alpha wash: a
                 blend mode here composites against the pane in front of it, not
                 the photo behind, and turns the window black in dark theme. */}
-            <span className="clip-shield absolute inset-0 bg-gradient-to-b from-accent-vivid/20 via-transparent to-brand/45" />
+            <span className="clip-shield absolute inset-0 bg-gradient-to-b from-grad-sky/20 via-transparent to-grad-blue/45" />
           </span>
         </div>
       </div>

@@ -12,7 +12,10 @@ export default function SportsMidCta() {
   const scope = useGsapReveal({ y: 26 });
 
   return (
-    <section ref={scope} className="clip-slant relative isolate overflow-hidden bg-inverse py-24 md:py-32">
+    <section
+      ref={scope}
+      className="clip-slant relative isolate overflow-hidden bg-inverse py-24 md:py-32"
+    >
       <img
         src={midCta.background}
         alt=""
@@ -37,7 +40,10 @@ export default function SportsMidCta() {
           >
             {midCta.title}
           </h2>
-          <p data-reveal className="mt-5 max-w-xl text-base leading-relaxed text-inverse-fg/75 md:text-lg">
+          <p
+            data-reveal
+            className="mt-5 max-w-xl text-base leading-relaxed text-inverse-fg/75 md:text-lg"
+          >
             {midCta.body}
           </p>
         </div>
@@ -45,7 +51,7 @@ export default function SportsMidCta() {
         <Link
           data-reveal
           to="/contact"
-          className="group inline-flex shrink-0 items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
+          className="group inline-flex shrink-0 items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
         >
           {midCta.ctaText}
           <span className="flex h-11 w-11 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">

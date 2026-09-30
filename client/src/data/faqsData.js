@@ -7,10 +7,9 @@ export const hero = {
   eyebrow: "Answers, not brochures",
   titleLead: "Everything People Ask Us",
   titleAccent: "Before Starting An AI Project",
-  body:
-    "Scope, cost, data handling, timelines and what happens after launch. The same answers we give on a first call.",
+  body: "Scope, cost, data handling, timelines and what happens after launch. The same answers we give on a first call.",
   searchLabel: "Search the questions",
-  searchPlaceholder: "Try \"cost\", \"data\" or \"timeline\"",
+  searchPlaceholder: 'Try "cost", "data" or "timeline"',
   popular: [
     "How much does an AI project cost?",
     "How long does a typical build take?",
@@ -53,7 +52,7 @@ export const faqItems = [
   {
     category: "Services & Industries",
     q: "Which industries have you shipped into?",
-    a: "Healthcare, finance, retail, fashion, education, real estate and logistics, across 300+ projects delivered or in progress. Where we lack sector depth we say so, and we price the discovery work honestly rather than learning on your budget.",
+    a: "Healthcare, finance, retail, fashion, education, real estate and logistics, across 500+ projects delivered or in progress. Where we lack sector depth we say so, and we price the discovery work honestly rather than learning on your budget.",
   },
   {
     category: "Services & Industries",

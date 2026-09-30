@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ChevronDown, ChevronRight, Flag, UserCheck } from "lucide-react";
 import GradientCTA from "../components/GradientCTA";
 import { Reveal } from "../components/motion/Reveal";
@@ -557,7 +558,7 @@ function Insight({ text, label = "Primary objective" }) {
             half matches the original inverse to brand sweep. */}
         <span
           aria-hidden="true"
-          className="cs-drift pointer-events-none absolute inset-y-0 left-0 w-[200%] bg-[linear-gradient(125deg,rgb(var(--inverse))_0%,rgb(var(--inverse-card))_22%,rgb(var(--brand-strong))_50%,rgb(var(--inverse-card))_78%,rgb(var(--inverse))_100%)]"
+          className="cs-drift pointer-events-none absolute inset-y-0 left-0 w-[200%] bg-[linear-gradient(125deg,rgb(var(--inverse))_0%,rgb(var(--inverse-card))_22%,rgb(var(--grad-blue))_50%,rgb(var(--inverse-card))_78%,rgb(var(--inverse))_100%)]"
         />
         <span
           aria-hidden="true"
@@ -729,57 +730,109 @@ function TargetOutcome({ text }) {
   );
 }
 
-/** Every other study in the data file, so the block grows with new entries. */
+/**
+ * Every other study in the data file, running as a continuous marquee so the
+ * block grows with new entries. The list repeats until one pass is wider than
+ * a large screen, then renders twice so the -50% loop lands on an identical
+ * frame. Pauses on hover or focus; under reduced motion it becomes a plain
+ * scrollable rail.
+ */
+// Cards in one loop pass: at ~24rem each, eight cover a 2560px viewport.
+const MORE_MIN_PASS = 8;
+// Seconds per card, so the scroll speed stays the same however many there are.
+const MORE_SECONDS_PER_CARD = 5;
+
 function MoreCaseStudies({ current }) {
+  const reduced = useReducedMotion();
   const others = Object.values(caseStudies).filter((s) => s.slug !== current);
   if (!others.length) return null;
 
+  const pass = Array.from(
+    { length: Math.ceil(MORE_MIN_PASS / others.length) },
+    () => others
+  ).flat();
+  const items = reduced ? others : [...pass, ...pass];
+
   return (
-    <section aria-labelledby="more-case-studies" className="border-t border-line bg-surface-subtle">
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+    <section
+      aria-labelledby="more-case-studies"
+      className="overflow-hidden border-t border-line bg-surface-subtle py-16 md:py-20"
+    >
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <h2
           id="more-case-studies"
           className="font-display text-2xl font-semibold tracking-tight text-content md:text-3xl"
         >
           More case studies
         </h2>
-        <ul className="mt-8 grid gap-6 md:grid-cols-2">
-          {others.map((other) => (
-            <li key={other.slug} style={accentVars(other.accent)}>
-              <Link
-                to={caseStudyPath(other.slug)}
-                className="group flex h-full flex-col overflow-hidden rounded-xl2 border border-[rgb(var(--cs-accent)/0.2)] bg-surface-card transition-shadow hover:shadow-card focus-ring"
+      </div>
+
+      <div
+        className={`relative mt-8 ${reduced ? "scrollbar-hide overflow-x-auto" : "overflow-hidden"}`}
+      >
+        {!reduced && (
+          <>
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-surface-subtle to-transparent sm:w-28" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-surface-subtle to-transparent sm:w-28" />
+          </>
+        )}
+        <ul
+          style={
+            reduced ? undefined : { animationDuration: `${pass.length * MORE_SECONDS_PER_CARD}s` }
+          }
+          className={`flex w-max gap-6 px-4 pb-4 sm:px-6 lg:px-8 ${
+            reduced
+              ? ""
+              : "animate-marquee hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]"
+          }`}
+        >
+          {items.map((other, i) => {
+            const clone = i >= others.length;
+            return (
+              <li
+                key={`${other.slug}-${i}`}
+                aria-hidden={clone ? "true" : undefined}
+                className="w-[80vw] shrink-0 sm:w-[22rem] lg:w-[24rem]"
+                style={accentVars(other.accent)}
               >
-                <BrandedImage
-                  image={other.hero}
-                  credit={false}
-                  sizes="(min-width: 768px) 30rem, 100vw"
-                  className="aspect-[16/9] w-full"
-                />
-                <div className="flex flex-1 flex-col p-6">
-                  <p className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-accent">
-                    {other.eyebrow}
-                    {other.type === "blueprint" && (
-                      <span className="rounded-full border border-gold/50 bg-gold/10 px-2 py-0.5 text-[0.65rem] tracking-[0.12em] text-content">
-                        Solution Blueprint
-                      </span>
-                    )}
-                  </p>
-                  <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-content">
-                    {other.title}
-                  </h3>
-                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold text-brand">
-                    Read case study
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform group-hover:translate-x-0.5"
-                      aria-hidden="true"
-                    />
-                  </span>
-                </div>
-              </Link>
-            </li>
-          ))}
+                <Link
+                  to={caseStudyPath(other.slug)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  tabIndex={clone ? -1 : undefined}
+                  className="group flex h-full flex-col overflow-hidden rounded-xl2 border border-[rgb(var(--cs-accent)/0.2)] bg-surface-card transition-shadow hover:shadow-card focus-ring"
+                >
+                  <BrandedImage
+                    image={other.hero}
+                    credit={false}
+                    sizes="(min-width: 1024px) 24rem, (min-width: 640px) 22rem, 80vw"
+                    className="aspect-[16/9] w-full"
+                  />
+                  <div className="flex flex-1 flex-col p-6">
+                    <p className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-accent">
+                      {other.eyebrow}
+                      {other.type === "blueprint" && (
+                        <span className="rounded-full border border-gold/50 bg-gold/10 px-2 py-0.5 text-[0.65rem] tracking-[0.12em] text-content">
+                          Solution Blueprint
+                        </span>
+                      )}
+                    </p>
+                    <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-content">
+                      {other.title}
+                    </h3>
+                    <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold text-brand">
+                      Read case study
+                      <ArrowRight
+                        size={16}
+                        className="transition-transform group-hover:translate-x-0.5"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

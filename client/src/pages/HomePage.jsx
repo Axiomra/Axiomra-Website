@@ -36,9 +36,8 @@ export default function HomePage() {
       {/* <VideoTestimonials /> */}
       <FoundersSay />
       <GradientCTA
-        solid
         title="Want These Results For Your Business?"
-        subtitle="We've done it for 300+ clients. Book a discovery call today, and our AI development partner team will map out a custom AI roadmap to eliminate manual overhead and boost your bottom line."
+        subtitle="We've done it for 500+ clients. Book a discovery call today, and our AI development partner team will map out a custom AI roadmap to eliminate manual overhead and boost your bottom line."
       />
       <Services />
       <GradientCTA
@@ -69,7 +68,6 @@ export default function HomePage() {
       <FAQ />
       <Contact />
       <GradientCTA
-        solid
         title="Find the Right AI Opportunity for Your Business"
         subtitle="Book a free AI strategy session to discuss your goals, assess relevant use cases, and identify a practical next step."
         buttonText="Book Your Free AI Strategy Session"

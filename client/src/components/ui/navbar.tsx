@@ -27,6 +27,7 @@ import logoLight from "@/assets/logo-light.webp";
 import logoDark from "@/assets/logo-dark.webp";
 import ThemeToggle from "@/components/ThemeToggle";
 import { HeroToneContext } from "@/seo/prerender-context";
+import { BOOKING_URL } from "@/lib/booking";
 
 /** Bar height in px, `h-16`. Used to decide when the hero is fully behind it. */
 const NAV_HEIGHT = 64;
@@ -361,9 +362,11 @@ function FullWidthDropdown({
           <h4 className="font-display text-lg font-semibold text-inverse-fg">{cfg.ctaTitle}</h4>
           <p className="text-base leading-relaxed text-inverse-fg/60">{cfg.ctaSubtitle}</p>
           <NavLink
-            href="/contact"
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noreferrer"
             onClick={onNavigate}
-            className="mt-auto inline-flex w-fit items-center gap-1.5 rounded-full bg-accent-vivid px-5 py-2.5 text-base font-semibold text-on-accent transition-opacity hover:opacity-90 focus-ring"
+            className="mt-auto inline-flex w-fit items-center gap-1.5 rounded-full bg-[#2563EB] px-5 py-2.5 text-base font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-ring"
           >
             Book a call
             <ArrowRight className="h-4 w-4" />
@@ -560,9 +563,11 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
                 Contact us
               </NavLink>
               <NavLink
-                href="/contact"
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noreferrer"
                 onClick={close}
-                className="w-full rounded-full bg-accent-vivid px-5 py-2.5 text-center text-base font-semibold text-on-accent hover:opacity-90 focus-ring"
+                className="w-full rounded-full bg-[#2563EB] px-5 py-2.5 text-center text-base font-semibold text-white hover:bg-[#1D4ED8] focus-ring"
               >
                 Book a call
               </NavLink>
@@ -641,8 +646,10 @@ export function Navbar({ className }: { className?: string }) {
               Contact us
             </NavLink>
             <NavLink
-              href="/contact"
-              className="rounded-full bg-accent-vivid px-6 py-2.5 text-base font-semibold text-on-accent transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-vivid-hover hover:shadow-glow focus-ring"
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-[#2563EB] px-6 py-2.5 text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1D4ED8] hover:shadow-[0_12px_28px_-12px_rgba(37,99,235,0.8)] focus-ring"
             >
               Book a call
             </NavLink>

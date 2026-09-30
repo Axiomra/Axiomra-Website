@@ -45,7 +45,7 @@ export default function CvServices() {
                     onClick={() => setActive(i)}
                     className={`rounded-lg px-5 py-4 text-left text-base font-medium transition-colors focus-ring md:text-lg ${
                       selected
-                        ? "bg-cta-gradient text-inverse"
+                        ? "bg-grad-sky text-inverse"
                         : "text-content-dim hover:bg-surface-inset hover:text-content"
                     }`}
                   >
@@ -95,7 +95,11 @@ export default function CvServices() {
                           key={d}
                           className="flex items-start gap-2.5 text-sm text-content-dim md:text-base"
                         >
-                          <Check size={16} className="mt-1 shrink-0 text-brand" aria-hidden="true" />
+                          <Check
+                            size={16}
+                            className="mt-1 shrink-0 text-brand"
+                            aria-hidden="true"
+                          />
                           {d}
                         </li>
                       ))}

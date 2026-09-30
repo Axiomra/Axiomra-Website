@@ -12,9 +12,7 @@ const ICONS = { PackageX, Users, Tags, ShieldAlert, Clock, Network };
  */
 export default function RetailChallenges() {
   return (
-    <section className="relative overflow-hidden border-b border-line bg-surface-subtle py-24 md:py-32">
-      <div aria-hidden="true" className="retail-bloom opacity-30" />
-
+    <section className="relative overflow-hidden border-b border-line bg-surface-wash py-24 md:py-32">
       <div className="relative mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow={challenges.eyebrow}
@@ -26,7 +24,11 @@ export default function RetailChallenges() {
           subtitle={challenges.body}
         />
 
-        <Stagger as="ul" step={0.08} className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <Stagger
+          as="ul"
+          step={0.08}
+          className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
+        >
           {challenges.items.map((item) => {
             const Icon = ICONS[item.icon] ?? PackageX;
             return (

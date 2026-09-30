@@ -27,10 +27,10 @@ const points = [
 ];
 
 const stats = [
-  { label: "Projects Delivered", value: 300, suffix: "+" },
-  { label: "Partnerships", value: 120, suffix: "+" },
-  { label: "Countries Served", value: 24, suffix: "+" },
-  { label: "Tech Experts", value: 25, suffix: "+" },
+  { label: "Projects Delivered", value: 500, suffix: "+" },
+  { label: "Partnerships", value: 170, suffix: "+" },
+  { label: "Countries Served", value: 30, suffix: "+" },
+  { label: "Tech Experts", value: 85, suffix: "+" },
 ];
 
 function Counter({ value, suffix }) {
@@ -88,11 +88,8 @@ export default function WhyUs() {
             whileHover={{ y: -8 }}
             className="group flex flex-col items-center rounded-xl2 border border-line bg-surface-card p-8 text-center shadow-card transition-[border-color,background-color,box-shadow] duration-300 [perspective:900px] hover:border-brand hover:bg-brand/5 hover:shadow-glow"
           >
-            <div
-              className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-vivid transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(20deg)_rotateY(-20deg)_translateZ(16px)]"
-              style={{ boxShadow: "0 12px 30px -10px rgba(20,216,196,0.75)" }}
-            >
-              <p.icon size={28} className="text-[#0A1428]" strokeWidth={1.8} />
+            <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#DBEAFE] shadow-card transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateX(20deg)_rotateY(-20deg)_translateZ(16px)]">
+              <p.icon size={28} className="text-[#2563EB]" strokeWidth={1.8} />
             </div>
             <h3 className="mb-2 font-display text-xl text-content transition-colors duration-300 group-hover:text-brand">
               {p.title}

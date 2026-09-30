@@ -32,7 +32,10 @@ function BigNumber({ value }) {
   }, [value]);
 
   return (
-    <p ref={ref} className="font-display text-6xl font-semibold tracking-tight text-inverse-fg md:text-7xl">
+    <p
+      ref={ref}
+      className="font-display text-6xl font-semibold tracking-tight text-inverse-fg md:text-7xl"
+    >
       {value}
     </p>
   );
@@ -49,7 +52,6 @@ export default function RetailImpact() {
       data-nav-tone="dark"
       className="on-dark clip-receipt-bottom relative overflow-hidden bg-inverse py-24 md:py-32"
     >
-      <div aria-hidden="true" className="retail-bloom opacity-60" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-40 left-1/4 h-[34rem] w-[34rem] rounded-full bg-brand/20 blur-[150px]"
@@ -75,7 +77,9 @@ export default function RetailImpact() {
               className="liquid-glass clip-docket relative flex flex-col p-8 md:p-10"
             >
               <BigNumber value={stat.value} />
-              <p className="mt-5 text-base leading-relaxed text-inverse-fg/85 md:text-lg">{stat.label}</p>
+              <p className="mt-5 text-base leading-relaxed text-inverse-fg/85 md:text-lg">
+                {stat.label}
+              </p>
               <p className="mt-auto pt-6 font-mono text-xs uppercase tracking-[0.16em] text-inverse-fg/55">
                 {stat.source}
               </p>

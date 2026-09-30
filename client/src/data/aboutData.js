@@ -7,11 +7,10 @@ export const hero = {
   eyebrow: "About Axiomra",
   titleLead: "AI Expertise Tailored To",
   titleAccent: "Your Unique Business Needs",
-  body:
-    "Every business is different, and so are our AI solutions. Our team of AI engineers, data scientists and product specialists builds end-to-end systems around your specific constraints, so the result fits the way you already work instead of forcing a rewrite of it.",
+  body: "Every business is different, and so are our AI solutions. Our team of AI engineers, data scientists and product specialists builds end-to-end systems around your specific constraints, so the result fits the way you already work instead of forcing a rewrite of it.",
   ctaText: "Get in touch",
   stats: [
-    { value: "300+", label: "Projects delivered" },
+    { value: "500+", label: "Projects delivered" },
     { value: "25+", label: "In-house experts" },
     { value: "12+", label: "Industries served" },
     { value: "20+", label: "Countries shipped to" },
@@ -34,8 +33,7 @@ export const vision = {
   eyebrow: "Our vision",
   titleLead: "Building An",
   titleAccent: "Unbiased World",
-  body:
-    "We envision a world where AI decisions can be explained, audited and trusted. We aim to stay current with where the field is moving while building a workplace where that expertise drives positive change, solving hard problems and leaving behind systems people are willing to rely on.",
+  body: "We envision a world where AI decisions can be explained, audited and trusted. We aim to stay current with where the field is moving while building a workplace where that expertise drives positive change, solving hard problems and leaving behind systems people are willing to rely on.",
   ctaText: "Partner with our AI development company",
 };
 
@@ -43,8 +41,7 @@ export const mission = {
   eyebrow: "Our mission",
   titleLead: "Running More Of The Business On",
   titleAccent: "Automation",
-  body:
-    "We aim to lead in applied AI by delivering production-grade solutions in machine learning, computer vision and natural language processing. Our mission is to automate the repetitive work inside 1 million+ businesses, so teams spend their hours on judgement rather than data entry.",
+  body: "We aim to lead in applied AI by delivering production-grade solutions in machine learning, computer vision and natural language processing. Our mission is to automate the repetitive work inside 1 million+ businesses, so teams spend their hours on judgement rather than data entry.",
   ctaText: "Get in touch with us",
 };
 
@@ -117,46 +114,126 @@ export const milestones = {
     {
       year: "2025",
       quarters: [
-        ["Crossed 300 delivered AI projects", "Opened a dedicated agentic AI practice", "Grew the engineering team past 25 specialists"],
-        ["Shipped our first multi-agent production system", "Added MLOps and model monitoring as a standing service", "Joined by 4 new engineers"],
-        ["Expanded computer vision work into manufacturing QA", "Published our internal AI delivery playbook", "Ran the first Axiomra AI enablement workshop"],
-        ["Launched the Axiomra AI strategy session programme", "Client retention held above 90%", "Started work across 20+ countries"],
+        [
+          "Crossed 300 delivered AI projects",
+          "Opened a dedicated agentic AI practice",
+          "Grew the engineering team past 25 specialists",
+        ],
+        [
+          "Shipped our first multi-agent production system",
+          "Added MLOps and model monitoring as a standing service",
+          "Joined by 4 new engineers",
+        ],
+        [
+          "Expanded computer vision work into manufacturing QA",
+          "Published our internal AI delivery playbook",
+          "Ran the first Axiomra AI enablement workshop",
+        ],
+        [
+          "Launched the Axiomra AI strategy session programme",
+          "Client retention held above 90%",
+          "Started work across 20+ countries",
+        ],
       ],
     },
     {
       year: "2024",
       quarters: [
-        ["Built our first RAG platform for a healthcare client", "Standardised the two-week sprint delivery model", "Joined by 3 new members"],
-        ["Signed our first enterprise retainer", "Rolled out an in-house evaluation harness for LLM work", "Opened the generative AI service line"],
-        ["Delivered 17 projects in a single quarter", "Formalised the NDA-first engagement process", "Added a dedicated delivery lead role"],
-        ["Reached a 4.9/5 average client rating", "Completed our first fashion-industry vision deployment", "Extended support into rolling monthly agreements"],
+        [
+          "Built our first RAG platform for a healthcare client",
+          "Standardised the two-week sprint delivery model",
+          "Joined by 3 new members",
+        ],
+        [
+          "Signed our first enterprise retainer",
+          "Rolled out an in-house evaluation harness for LLM work",
+          "Opened the generative AI service line",
+        ],
+        [
+          "Delivered 17 projects in a single quarter",
+          "Formalised the NDA-first engagement process",
+          "Added a dedicated delivery lead role",
+        ],
+        [
+          "Reached a 4.9/5 average client rating",
+          "Completed our first fashion-industry vision deployment",
+          "Extended support into rolling monthly agreements",
+        ],
       ],
     },
     {
       year: "2023",
       quarters: [
-        ["Moved into a larger engineering office", "Started the NLP practice", "Joined by 5 new members"],
-        ["First seven-figure-impact automation delivered", "Introduced structured code review across all projects", "Hired our first data engineering specialist"],
-        ["Launched the internal AI research reading group", "Delivered our first education-sector project", "Standardised handover documentation"],
-        ["Crossed 100 delivered projects", "Opened the computer vision practice", "Began working with international clients"],
+        [
+          "Moved into a larger engineering office",
+          "Started the NLP practice",
+          "Joined by 5 new members",
+        ],
+        [
+          "First seven-figure-impact automation delivered",
+          "Introduced structured code review across all projects",
+          "Hired our first data engineering specialist",
+        ],
+        [
+          "Launched the internal AI research reading group",
+          "Delivered our first education-sector project",
+          "Standardised handover documentation",
+        ],
+        [
+          "Crossed 100 delivered projects",
+          "Opened the computer vision practice",
+          "Began working with international clients",
+        ],
       ],
     },
     {
       year: "2022",
       quarters: [
-        ["First full-time engineering hires", "Shifted from freelance work to studio delivery", "Set up the first internal ML pipeline"],
-        ["Delivered our first predictive analytics system", "Started the design and front-end team", "Won our first retail client"],
-        ["Built the first chatbot deployment for a client", "Introduced staging environments for every project", "Joined by 2 new members"],
-        ["Closed the year with 25 delivered projects", "Defined the core values the team still runs on", "Committed to a 100% in-house team"],
+        [
+          "First full-time engineering hires",
+          "Shifted from freelance work to studio delivery",
+          "Set up the first internal ML pipeline",
+        ],
+        [
+          "Delivered our first predictive analytics system",
+          "Started the design and front-end team",
+          "Won our first retail client",
+        ],
+        [
+          "Built the first chatbot deployment for a client",
+          "Introduced staging environments for every project",
+          "Joined by 2 new members",
+        ],
+        [
+          "Closed the year with 25 delivered projects",
+          "Defined the core values the team still runs on",
+          "Committed to a 100% in-house team",
+        ],
       ],
     },
     {
       year: "2021",
       quarters: [
-        ["Axiomra founded by a small group of engineers", "First production machine learning model shipped", "Worked out of a single shared room"],
-        ["Signed our first paying client", "Set the bootstrap-first, no-outside-funding direction", "Built the first internal tooling"],
-        ["Delivered the first end-to-end automation project", "Established the two-founder engineering review habit", "Started documenting everything we ship"],
-        ["Registered the company formally", "Defined the initial AI service lines", "Planned the first year of hiring"],
+        [
+          "Axiomra founded by a small group of engineers",
+          "First production machine learning model shipped",
+          "Worked out of a single shared room",
+        ],
+        [
+          "Signed our first paying client",
+          "Set the bootstrap-first, no-outside-funding direction",
+          "Built the first internal tooling",
+        ],
+        [
+          "Delivered the first end-to-end automation project",
+          "Established the two-founder engineering review habit",
+          "Started documenting everything we ship",
+        ],
+        [
+          "Registered the company formally",
+          "Defined the initial AI service lines",
+          "Planned the first year of hiring",
+        ],
       ],
     },
   ],
@@ -172,16 +249,14 @@ export const paths = {
     {
       titleAccent: "AI Automation For",
       titleLead: "Modern Businesses",
-      body:
-        "If you already run a business, AI can improve how the work gets done. We design and implement automation that connects to your current systems and removes the repetitive tasks. From intelligent data processing and workflow automation to AI assistants and predictive analytics, we help teams work faster, cut manual effort, and make better decisions.",
+      body: "If you already run a business, AI can improve how the work gets done. We design and implement automation that connects to your current systems and removes the repetitive tasks. From intelligent data processing and workflow automation to AI assistants and predictive analytics, we help teams work faster, cut manual effort, and make better decisions.",
       ctaText: "Get started",
       tone: "dark",
     },
     {
       titleAccent: "Scaling Businesses",
       titleLead: "Through Automation",
-      body:
-        "If you are building an AI product or SaaS platform, we become your dedicated AI and software development team. We handle everything from product architecture and UI design to AI model development and deployment, so founders focus on product vision and market growth while our engineers build and scale the technology behind it.",
+      body: "If you are building an AI product or SaaS platform, we become your dedicated AI and software development team. We handle everything from product architecture and UI design to AI model development and deployment, so founders focus on product vision and market growth while our engineers build and scale the technology behind it.",
       ctaText: "Get started",
       tone: "brand",
     },
@@ -207,6 +282,6 @@ export const faqs = [
   },
   {
     q: "What is the founding journey of Axiomra?",
-    a: "Axiomra started in 2021 as a bootstrap team of engineers who wanted AI to be usable outside research notebooks. It has since grown into a full AI development company with 300+ delivered projects across 12+ industries and 20+ countries, still without outside funding.",
+    a: "Axiomra started in 2021 as a bootstrap team of engineers who wanted AI to be usable outside research notebooks. It has since grown into a full AI development company with 500+ delivered projects across 12+ industries and 20+ countries, still without outside funding.",
   },
 ];
