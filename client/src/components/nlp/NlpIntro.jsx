@@ -4,6 +4,7 @@ import { ArrowUpRight, Star } from "lucide-react";
 
 import { gsap, MOTION_OK } from "../../lib/gsap";
 import { hero } from "../../data/nlpData";
+import { BOOKING_URL } from "../../lib/booking";
 
 /**
  * The band under the video hero: the actual pitch.
@@ -158,9 +159,11 @@ export default function NlpIntro() {
             </p>
 
             <div className="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-              <Link
+              <a
                 data-intro-cta
-                to="/contact"
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 rounded-full bg-grad-sky px-8 py-4 text-base font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring md:text-lg"
               >
                 {hero.ctaText}
@@ -168,14 +171,14 @@ export default function NlpIntro() {
                   size={19}
                   className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 />
-              </Link>
-              <a
+              </a>
+              <Link
                 data-intro-cta
-                href="#nlp-services"
+                to="/contact"
                 className="inline-flex items-center gap-2 rounded-full border border-line-strong px-8 py-4 text-base font-medium text-content transition-colors hover:border-brand hover:text-brand focus-ring md:text-lg"
               >
                 {hero.secondaryCtaText}
-              </a>
+              </Link>
             </div>
 
             <div data-intro-proof className="mt-9 flex flex-col gap-2">

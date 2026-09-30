@@ -2,6 +2,7 @@ import { companyStats } from "../data/companyStats.js";
 import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { BOOKING_URL } from "../lib/booking";
 
 const NetworkBackground = lazy(() => import("./NetworkBackground"));
 
@@ -17,8 +18,8 @@ const fadeUp = {
 const stats = [
   { value: `${companyStats.projects}+`, label: "Projects delivered" },
   { value: `${companyStats.experts}+`, label: "In-house experts" },
-  { value: "30+", label: "AI service lines" },
-  { value: "85+", label: "Clients served" },
+  { value: `${companyStats.industries}+`, label: "Industries served" },
+  { value: `${companyStats.countries}+`, label: "Countries" },
 ];
 
 export default function ServicesHero() {
@@ -85,7 +86,9 @@ export default function ServicesHero() {
             className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <a
-              href="/contact"
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 rounded-full bg-grad-sky px-9 py-4 text-base font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring"
             >
               Book a Free Consultation

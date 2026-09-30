@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { BOOKING_URL } from "../lib/booking";
 
 const SHOWN_KEY = "axiomra:book-call-shown";
 const DWELL_MS = 45000;
@@ -144,13 +144,15 @@ export default function BookCallModal() {
               Your desired idea is just a phone call away. Just pitch us your idea, thought, design,
               or project, and we will deliver the best possible solution right to your inbox.
             </p>
-            <Link
-              to="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={close}
               className="inline-flex items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-semibold text-[#0A1428] transition-opacity hover:opacity-90 focus-ring"
             >
               Book My Free Consultation <ArrowUpRight size={16} />
-            </Link>
+            </a>
           </motion.div>
         </motion.div>
       )}

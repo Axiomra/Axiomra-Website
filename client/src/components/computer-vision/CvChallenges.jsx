@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { ArrowUpRight, X } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { challenges } from "../../data/computerVisionData";
+import { BOOKING_URL } from "../../lib/booking";
 
 /** The problem statement, as copy on the left and the one monitoring photograph on the right. */
 export default function CvChallenges() {
@@ -57,8 +57,10 @@ export default function CvChallenges() {
               {challenges.outro}
             </p>
 
-            <Link
-              to="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group mt-9 inline-flex items-center gap-2 rounded-full border border-line-strong px-7 py-3.5 text-base font-medium text-content transition-colors hover:border-brand hover:text-brand focus-ring md:text-lg"
             >
               {challenges.ctaText}
@@ -66,7 +68,7 @@ export default function CvChallenges() {
                 size={18}
                 className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />
-            </Link>
+            </a>
           </div>
 
           {/* Sticky so the photo stays with the reader through a long list. */}
@@ -106,7 +108,9 @@ export default function CvChallenges() {
                         <span className="block font-display text-2xl font-semibold text-brand md:text-3xl">
                           {m.value}
                         </span>
-                        <span className="mt-1 block text-xs text-content-dim md:text-sm">{m.label}</span>
+                        <span className="mt-1 block text-xs text-content-dim md:text-sm">
+                          {m.label}
+                        </span>
                       </dd>
                     </>
                   ) : (

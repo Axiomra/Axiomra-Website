@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { whyUs } from "../../data/agenticAiData";
+import { BOOKING_URL } from "../../lib/booking";
 
 /** Closing argument: four reasons, the numbers, and the human-in-the-loop panel. */
 export default function AgenticWhyUs() {
@@ -51,13 +51,15 @@ export default function AgenticWhyUs() {
               ))}
             </dl>
 
-            <Link
-              to="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-grad-sky px-7 py-4 text-base font-semibold text-[#0A1428] shadow-glow transition-transform hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {whyUs.ctaText}
               <ArrowRight size={19} className="transition-transform group-hover:translate-x-1" />
-            </Link>
+            </a>
           </div>
 
           <div>

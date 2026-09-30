@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, Star } from "lucide-react";
 import GenAiCanvas from "./GenAiCanvas";
 import { hero } from "../../data/generativeAiData";
+import { BOOKING_URL } from "../../lib/booking";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 26 },
@@ -77,8 +78,10 @@ export default function GenAiHero() {
             custom={3}
             className="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center"
           >
-            <Link
-              to="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 rounded-full bg-grad-sky px-8 py-4 text-base font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring md:text-lg"
             >
               {hero.ctaText}
@@ -86,13 +89,13 @@ export default function GenAiHero() {
                 size={19}
                 className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />
-            </Link>
-            <a
-              href="#generative-ai-capabilities"
+            </a>
+            <Link
+              to="/contact"
               className="inline-flex items-center gap-2 rounded-full border border-white/25 px-8 py-4 text-base font-medium text-white transition-colors hover:bg-white/10 focus-ring md:text-lg"
             >
               {hero.secondaryCtaText}
-            </a>
+            </Link>
           </motion.div>
 
           <motion.div

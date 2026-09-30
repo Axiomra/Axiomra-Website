@@ -5,3 +5,6 @@ export const BOOKING_URL =
   "https://calendar.google.com/calendar/appointments/schedules/AcZssZ025W3qESqeOfXDNLvDm5cSJN0jIJMBMa-fVqkCDbSSulxioKU7lGFMzPZ8ERyV6UAQf1BRaxvO";
 
 export const BOOKING_EMBED_URL = `${BOOKING_URL}?gv=true`;
+
+// "Book ..." CTAs open the calendar; every other CTA goes to the contact page.
+export const ctaTarget = (label = "") => (/^book\b/i.test(label.trim()) ? BOOKING_URL : "/contact");

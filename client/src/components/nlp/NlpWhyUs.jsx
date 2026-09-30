@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
 import SectionHeading from "../SectionHeading";
 import useGsapReveal from "../../hooks/useGsapReveal";
 import { whyUs } from "../../data/nlpData";
+import { BOOKING_URL } from "../../lib/booking";
 
 /** Differentiation: the stat block, then six numbered reasons. */
 export default function NlpWhyUs() {
@@ -25,8 +25,10 @@ export default function NlpWhyUs() {
               subtitle={whyUs.subtitle}
             />
 
-            <Link
-              to="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group mt-9 inline-flex items-center gap-2 rounded-full border border-line-strong px-7 py-3.5 text-base font-medium text-content transition-colors hover:border-brand hover:text-brand focus-ring md:text-lg"
             >
               {whyUs.ctaText}
@@ -34,7 +36,7 @@ export default function NlpWhyUs() {
                 size={18}
                 className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />
-            </Link>
+            </a>
           </div>
 
           <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-xl2 border border-line bg-line">

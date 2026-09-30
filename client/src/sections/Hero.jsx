@@ -2,6 +2,7 @@ import { companyStats } from "../data/companyStats.js";
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { BOOKING_URL } from "../lib/booking";
 
 /*
  * The entrance fade is a CSS animation ([data-fade] in index.css), not
@@ -181,7 +182,6 @@ const TONE = {
 /** The hero is a full-bleed photo carousel; copy colour follows each photo. */
 export default function Hero() {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   // Slides whose <img> is mounted. All six sit in the viewport (only opacity
   // hides them), so loading="lazy" would not hold any back: mount the active
   // slide, and the next one halfway through its predecessor's turn.
@@ -194,11 +194,12 @@ export default function Hero() {
     return () => clearTimeout(t);
   }, [index]);
 
+  // Autoplay never stops: not on hover, and not under reduced motion either
+  // (by request). Only the Ken Burns push-in still respects reduced motion.
   useEffect(() => {
-    if (paused || reduced) return;
     const t = setTimeout(() => setIndex((i) => (i + 1) % SLIDES.length), INTERVAL_MS);
     return () => clearTimeout(t);
-  }, [index, paused, reduced]);
+  }, [index]);
 
   const tone = SLIDES[index].tone;
   const c = TONE[tone];
@@ -212,11 +213,7 @@ export default function Hero() {
       aria-label="Axiomra highlights"
       className="relative overflow-hidden bg-inverse pb-0"
     >
-      <div
-        className="relative flex min-h-[760px] items-center pt-36 md:min-h-[920px]"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
+      <div className="relative flex min-h-[760px] items-center pt-36 md:min-h-[920px]">
         {SLIDES.map((s, i) => (
           <div
             key={s.id}
@@ -282,7 +279,9 @@ export default function Hero() {
 
           <div data-fade="3" className="mt-9">
             <a
-              href="#contact"
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 rounded-full bg-[#2563EB] px-9 py-4 text-lg font-semibold text-white shadow-[0_18px_40px_-18px_rgba(37,99,235,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1D4ED8] focus-ring md:text-xl"
             >
               Book Your Free AI Strategy Session
@@ -339,7 +338,7 @@ export default function Hero() {
               "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
           }}
         >
-          <div className="flex w-max animate-marquee items-center gap-16 md:gap-20">
+          <div className="hero-client-marquee flex w-max animate-marquee items-center gap-16 md:gap-20">
             {[...clients, ...clients].map(({ name, tint, mark }, i) => (
               <span
                 key={i}

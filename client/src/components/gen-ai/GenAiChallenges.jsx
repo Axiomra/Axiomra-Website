@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { challenges } from "../../data/generativeAiData";
+import { BOOKING_URL } from "../../lib/booking";
 
 /** Problem framing: photo left, four numbered pain points right. */
 export default function GenAiChallenges() {
@@ -85,8 +85,10 @@ export default function GenAiChallenges() {
             ))}
           </ol>
 
-          <Link
-            to="/contact"
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group mt-10 inline-flex items-center gap-2.5 rounded-full border border-line px-7 py-4 text-base font-semibold transition-colors hover:border-brand/50 hover:text-brand focus-ring md:text-lg"
           >
             Book a Free Consultation
@@ -94,7 +96,7 @@ export default function GenAiChallenges() {
               size={19}
               className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
-          </Link>
+          </a>
         </motion.div>
       </div>
     </section>

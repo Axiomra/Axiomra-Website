@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import useGsapReveal from "../../../hooks/useGsapReveal";
 import { intro } from "../../../data/supplyChainData";
+import { BOOKING_URL } from "../../../lib/booking";
 
 /**
  * The positioning statement, on a tinted band whose bottom edge is clipped to
@@ -42,15 +42,17 @@ export default function SupplyChainIntro() {
           ))}
 
           <div data-reveal className="mt-9">
-            <Link
-              to="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {intro.ctaText}
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">
                 <ArrowUpRight size={18} aria-hidden="true" />
               </span>
-            </Link>
+            </a>
           </div>
         </div>
 

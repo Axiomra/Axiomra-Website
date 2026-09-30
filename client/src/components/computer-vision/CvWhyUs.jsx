@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { whyUs } from "../../data/computerVisionData";
+import { BOOKING_URL } from "../../lib/booking";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -35,8 +35,10 @@ export default function CvWhyUs() {
               subtitle={whyUs.subtitle}
             />
 
-            <Link
-              to="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group mt-9 inline-flex items-center gap-2 rounded-full border border-line-strong px-7 py-3.5 text-base font-medium text-content transition-colors hover:border-brand hover:text-brand focus-ring md:text-lg"
             >
               {whyUs.ctaText}
@@ -44,7 +46,7 @@ export default function CvWhyUs() {
                 size={18}
                 className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />
-            </Link>
+            </a>
           </div>
 
           {/* Stat tiles flip top-to-bottom on hover: the number is the hook, the

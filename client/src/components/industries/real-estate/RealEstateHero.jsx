@@ -1,8 +1,8 @@
 import { Suspense, lazy, useLayoutEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import { ArrowUpRight, Star } from "lucide-react";
 import { gsap, MOTION_OK } from "../../../lib/gsap";
 import { hero } from "../../../data/realEstateData";
+import { BOOKING_URL } from "../../../lib/booking";
 
 // three.js stays behind a dynamic import so it never blocks first paint.
 const NetworkBackground = lazy(() => import("../../NetworkBackground"));
@@ -107,15 +107,17 @@ export default function RealEstateHero() {
           </ul>
 
           <div data-hero className="mt-10 flex flex-wrap items-center gap-6">
-            <Link
-              to="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-lg font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring"
             >
               {hero.ctaText}
               <span className="flex h-11 w-11 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-[1px] group-hover:scale-105">
                 <ArrowUpRight size={20} strokeWidth={1.75} aria-hidden="true" />
               </span>
-            </Link>
+            </a>
 
             <div className="flex items-center gap-3 text-inverse-fg/80">
               <span

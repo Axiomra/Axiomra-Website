@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { whyUs } from "../../data/generativeAiData";
+import { BOOKING_URL } from "../../lib/booking";
 
 const GOVERNANCE_POINTS = [
   "Agreed hosting and data access arrangements",
@@ -58,13 +58,15 @@ export default function GenAiWhyUs() {
             <p className="mt-6 text-base leading-relaxed text-content-dim md:text-lg">
               {whyUs.body}
             </p>
-            <Link
-              to="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-grad-sky px-7 py-4 text-base font-semibold text-[#0A1428] shadow-glow transition-transform hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {whyUs.ctaText}
               <ArrowRight size={19} className="transition-transform group-hover:translate-x-1" />
-            </Link>
+            </a>
           </div>
         </div>
 

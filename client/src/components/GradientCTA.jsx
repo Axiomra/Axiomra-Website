@@ -2,11 +2,13 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import NetworkBackground from "./NetworkBackground";
 import { Link } from "react-router-dom";
+import { ctaTarget } from "../lib/booking";
 
 export default function GradientCTA({
   title,
   subtitle,
   buttonText = "Book My Strategy Call",
+  href,
   dark = false,
   three = false,
   compact = false,
@@ -17,6 +19,12 @@ export default function GradientCTA({
   const bg = dark ? "bg-inverse" : "bg-[#DBEAFE]";
   const heading = dark ? "text-inverse-fg" : "text-[#1E3A8A]";
   const body = dark ? "text-inverse-fg/85" : "text-[#1E3A8A]/80";
+  const target = href ?? ctaTarget(buttonText);
+  const external = /^https?:/.test(target);
+  const CtaTag = external ? "a" : Link;
+  const ctaProps = external
+    ? { href: target, target: "_blank", rel: "noopener noreferrer" }
+    : { to: target };
   const button = dark ? "bg-inverse-fg text-inverse" : "bg-[#2563EB] text-white hover:bg-[#1D4ED8]";
 
   return (
@@ -73,8 +81,8 @@ export default function GradientCTA({
             {subtitle}
           </p>
         )}
-        <Link
-          to="/contact"
+        <CtaTag
+          {...ctaProps}
           className={`group mt-10 inline-flex items-center gap-2 rounded-full ${button} px-8 py-4 text-base font-medium transition-all hover:shadow-glow focus-ring md:text-lg`}
         >
           {buttonText}
@@ -82,7 +90,7 @@ export default function GradientCTA({
             size={20}
             className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
           />
-        </Link>
+        </CtaTag>
       </motion.div>
     </section>
   );
