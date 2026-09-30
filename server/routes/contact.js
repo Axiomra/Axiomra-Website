@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { isValidPhoneNumber } from "libphonenumber-js/min";
 import mongoose from "mongoose";
 import Lead from "../models/Lead.js";
 import { sendContactNotification } from "../mailer.js";
@@ -25,12 +26,10 @@ function validate({ name, email, phone, company, subject, message }) {
     return "Please provide a valid email.";
   }
 
-  // Arrives as one dialable string ("+92 3001234567"); the exact per-country
-  // digit count is enforced in the browser, so only the outer bounds matter.
-  const digits = String(phone ?? "").replace(/\D/g, "");
-  if (digits && (digits.length < 7 || digits.length > 17)) {
-    return "Please provide a valid phone number.";
-  }
+  // Arrives as one international string ("+92 300 1234567"), so the dial code
+  // it carries decides which numbering plan the rest must fit.
+  const tel = String(phone ?? "").trim();
+  if (tel && !isValidPhoneNumber(tel)) return "Please provide a valid phone number.";
 
   if (String(company ?? "").trim().length > 100) return "Company name is too long.";
   if (String(subject ?? "").trim().length > 120) return "Subject is too long.";

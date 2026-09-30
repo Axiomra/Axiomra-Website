@@ -27,8 +27,7 @@ export const hero = {
   titleLead: "Natural Language Processing",
   titleAccent: "Solutions",
   titleTail: "That Turn Language Into Insight",
-  body:
-    "Axiomra develops NLP solutions that analyse documents, support tickets, and transcribed conversations. Extract key information, identify intent and sentiment, and route requests more efficiently so your team can act on relevant insights.",
+  body: "Axiomra develops NLP solutions that analyse documents, support tickets, and transcribed conversations. Extract key information, identify intent and sentiment, and route requests more efficiently so your team can act on relevant insights.",
   ctaText: "Book a Free NLP Consultation",
   secondaryCtaText: "Explore NLP Solutions",
   proof: { rating: "4.9", reviews: "300+ companies", source: "Reviewed on Clutch" },
@@ -38,18 +37,7 @@ export const hero = {
     { value: "94%", label: "Median intent accuracy" },
   ],
   /** The raw text the hero's WebGL stream feeds into the model. */
-  inputTokens: [
-    "the",
-    "invoice",
-    "was",
-    "late",
-    "again",
-    "so",
-    "we",
-    "escalated",
-    "the",
-    "ticket",
-  ],
+  inputTokens: ["the", "invoice", "was", "late", "again", "so", "we", "escalated", "the", "ticket"],
   /** What comes out the other side. */
   outputTokens: [
     { label: "Sentiment", value: "NEGATIVE", confidence: "0.962" },
@@ -134,8 +122,7 @@ export const services = {
       imageAlt:
         "Two consultants reviewing printed reports beside a laptop during a planning session",
       title: "Natural Language Processing Consulting",
-      body:
-        "Not sure where to start with NLP? Our consultants cut through the noise. We sit with your team, map where language work actually costs you time and money, and audit the text you already hold: tickets, contracts, emails, call transcripts, product reviews. Each candidate use case is scored on business value, data readiness, and effort, so the weak ones are killed early instead of six months in. You get a build vs. buy recommendation for every one that survives, a realistic accuracy expectation based on your own samples rather than a vendor benchmark, and a costed roadmap with phases, team shape, and integration points. Built for CTOs, COOs, and product teams who want a practical plan and an honest answer, including a straight no when NLP is the wrong tool, before committing budget to development.",
+      body: "Not sure where to start with NLP? Our consultants cut through the noise. We sit with your team, map where language work actually costs you time and money, and audit the text you already hold: tickets, contracts, emails, call transcripts, product reviews. Each candidate use case is scored on business value, data readiness, and effort, so the weak ones are killed early instead of six months in. You get a build vs. buy recommendation for every one that survives, a realistic accuracy expectation based on your own samples rather than a vendor benchmark, and a costed roadmap with phases, team shape, and integration points. Built for CTOs, COOs, and product teams who want a practical plan and an honest answer, including a straight no when NLP is the wrong tool, before committing budget to development.",
       deliverables: [
         "Use-case scoring",
         "Text data readiness audit",
@@ -147,11 +134,9 @@ export const services = {
       id: "custom-nlp-development",
       motif: "transformer",
       image: serviceCustomDev,
-      imageAlt:
-        "Developer writing model training code in an editor on a laptop",
+      imageAlt: "Developer writing model training code in an editor on a laptop",
       title: "Custom NLP Solutions Development",
-      body:
-        "Off-the-shelf language tools are built for everyone, which means they are built for no one in particular. We design and develop custom NLP solutions from the ground up, trained on your data, tuned to your industry, and fitted to your existing stack. We work with GPT-class models, BERT, Hugging Face, PyTorch, and TensorFlow to build document classifiers, language models, and full NLP pipelines.",
+      body: "Off-the-shelf language tools are built for everyone, which means they are built for no one in particular. We design and develop custom NLP solutions from the ground up, trained on your data, tuned to your industry, and fitted to your existing stack. We work with GPT-class models, BERT, Hugging Face, PyTorch, and TensorFlow to build document classifiers, language models, and full NLP pipelines.",
       deliverables: [
         "Fine-tuned domain models",
         "Document classifiers",
@@ -163,11 +148,9 @@ export const services = {
       id: "speech-to-text",
       motif: "waveform",
       image: serviceSpeechToText,
-      imageAlt:
-        "Audio waveform open in an editor on a laptop with studio headphones beside it",
+      imageAlt: "Audio waveform open in an editor on a laptop with studio headphones beside it",
       title: "Speech-To-Text Integration",
-      body:
-        "We use Google Speech-to-Text, Whisper, and Deepgram to convert spoken language into structured, searchable text. From real-time transcription and voice-driven search to multilingual speech processing and automated call analysis, we wire voice capabilities directly into your existing systems and remove manual transcription effort at scale.",
+      body: "We use Google Speech-to-Text, Whisper, and Deepgram to convert spoken language into structured, searchable text. From real-time transcription and voice-driven search to multilingual speech processing and automated call analysis, we wire voice capabilities directly into your existing systems and remove manual transcription effort at scale.",
       deliverables: [
         "Real-time transcription",
         "Speaker diarisation",
@@ -179,11 +162,9 @@ export const services = {
       id: "data-acquisition",
       motif: "corpus",
       image: serviceDataAcquisition,
-      imageAlt:
-        "Analyst inspecting a printed data report through a magnifying glass",
+      imageAlt: "Analyst inspecting a printed data report through a magnifying glass",
       title: "Data Acquisition Solutions",
-      body:
-        "Bad data leads to bad AI. Before any NLP model can work, it needs clean, relevant, well-structured language data. We collect, label, and prepare the right datasets from your internal systems, third-party sources, or public repositories using Python, spaCy, Hugging Face, and custom data pipelines, with QA sampling on every batch.",
+      body: "Bad data leads to bad AI. Before any NLP model can work, it needs clean, relevant, well-structured language data. We collect, label, and prepare the right datasets from your internal systems, third-party sources, or public repositories using Python, spaCy, Hugging Face, and custom data pipelines, with QA sampling on every batch.",
       deliverables: [
         "Corpus collection",
         "Annotation to a written spec",
@@ -195,11 +176,9 @@ export const services = {
       id: "semantic-analytics",
       motif: "attention",
       image: serviceSemanticAnalytics,
-      imageAlt:
-        "Analytics dashboard showing a clustered bubble chart and a price chart",
+      imageAlt: "Analytics dashboard showing a clustered bubble chart and a price chart",
       title: "Semantic Analytics Systems",
-      body:
-        "Your business generates text every day: emails, reports, tickets, reviews, contracts. Semantic analytics goes beyond keyword matching to understand the actual meaning behind that text. Using BERT, transformer models, TensorFlow, and PyTorch, we build systems that read context, detect intent, and surface insights your team can act on immediately.",
+      body: "Your business generates text every day: emails, reports, tickets, reviews, contracts. Semantic analytics goes beyond keyword matching to understand the actual meaning behind that text. Using BERT, transformer models, TensorFlow, and PyTorch, we build systems that read context, detect intent, and surface insights your team can act on immediately.",
       deliverables: [
         "Embedding + vector search",
         "Intent and topic detection",
@@ -211,11 +190,9 @@ export const services = {
       id: "nlp-integration",
       motif: "pipeline",
       image: serviceIntegration,
-      imageAlt:
-        "Rendered rows of server panels linked by data pathways",
+      imageAlt: "Rendered rows of server panels linked by data pathways",
       title: "NLP Integration And Maintenance",
-      body:
-        "Building an NLP model is only half the job. We integrate your solution into your existing platforms, CRMs, ERPs, or internal tools using REST APIs, Docker, Kubernetes, AWS, Azure, and GCP. Our team handles system integration, performance monitoring, and ongoing model updates so your solution stays accurate as your language data evolves.",
+      body: "Building an NLP model is only half the job. We integrate your solution into your existing platforms, CRMs, ERPs, or internal tools using REST APIs, Docker, Kubernetes, AWS, Azure, and GCP. Our team handles system integration, performance monitoring, and ongoing model updates so your solution stays accurate as your language data evolves.",
       deliverables: [
         "REST + streaming APIs",
         "CRM / ERP integration",
@@ -352,8 +329,7 @@ export const industries = {
   image: industriesWorldMap,
   imageAlt:
     "The letters NLP lit above a dotted world map, ringed by icons for speech, chat, and neural networks",
-  imageCaption:
-    "Same models, different vocabulary, and the vocabulary is where NLP projects fail.",
+  imageCaption: "Same models, different vocabulary, and the vocabulary is where NLP projects fail.",
   items: [
     {
       name: "Healthcare",
@@ -494,16 +470,7 @@ export const stack = {
     {
       name: "Cloud And Infrastructure",
       why: "Where privacy and unit economics are settled. Text that cannot leave your network gets inferred inside it.",
-      items: [
-        "Docker",
-        "Kubernetes",
-        "AWS",
-        "Azure",
-        "Google Cloud",
-        "vLLM",
-        "MLflow",
-        "Airflow",
-      ],
+      items: ["Docker", "Kubernetes", "AWS", "Azure", "Google Cloud", "vLLM", "MLflow", "Airflow"],
     },
   ],
 };
@@ -561,57 +528,56 @@ export const process = {
 export const outcomes = {
   eyebrow: "What can you optimise with NLP?",
   image: outcomesCircuit,
-  imageAlt:
-    "A robotic finger touching a glowing NLP dial rendered over a circuit board",
+  imageAlt: "A robotic finger touching a glowing NLP dial rendered over a circuit board",
   titleAccent: "What Changes Once",
   titleLead: "Your NLP System Goes Live",
   subtitle:
-    "NLP is not a science project. Once a model is in production, the change shows up in "
-    + "numbers your team already tracks: handling time, error rates, backlog, cost per document. "
-    + "These are the four shifts our clients report most consistently after go-live.",
+    "NLP is not a science project. Once a model is in production, the change shows up in " +
+    "numbers your team already tracks: handling time, error rates, backlog, cost per document. " +
+    "These are the four shifts our clients report most consistently after go-live.",
   items: [
     {
       title: "Accuracy",
       body:
-        "Our NLP development services apply advanced algorithms and machine learning models to analyse "
-        + "text with high precision, reducing human error, improving decision-making, and uncovering "
-        + "patterns traditional methods miss. Every model ships with a measured baseline on your own data, "
-        + "not a public benchmark, and a confidence threshold that routes uncertain cases to a human instead "
-        + "of guessing. Accuracy is monitored after launch too, so drift is caught in a dashboard rather than "
-        + "in a customer complaint.",
+        "Our NLP development services apply advanced algorithms and machine learning models to analyse " +
+        "text with high precision, reducing human error, improving decision-making, and uncovering " +
+        "patterns traditional methods miss. Every model ships with a measured baseline on your own data, " +
+        "not a public benchmark, and a confidence threshold that routes uncertain cases to a human instead " +
+        "of guessing. Accuracy is monitored after launch too, so drift is caught in a dashboard rather than " +
+        "in a customer complaint.",
       metric: "94%+",
       metricLabel: "typical production accuracy",
     },
     {
       title: "Customisation",
       body:
-        "Every solution is designed to match your business. From selecting the right model and techniques "
-        + "to supporting multiple languages, we make sure your NLP fits your workflow and your industry's "
-        + "vocabulary. Domain terms, product codes, abbreviations, and the way your customers actually write, "
-        + "including code-switched and misspelled text, are trained in rather than filtered out. The result "
-        + "reads like it was built inside your company, because it was.",
+        "Every solution is designed to match your business. From selecting the right model and techniques " +
+        "to supporting multiple languages, we make sure your NLP fits your workflow and your industry's " +
+        "vocabulary. Domain terms, product codes, abbreviations, and the way your customers actually write, " +
+        "including code-switched and misspelled text, are trained in rather than filtered out. The result " +
+        "reads like it was built inside your company, because it was.",
       metric: "40+",
       metricLabel: "languages supported",
     },
     {
       title: "Efficiency",
       body:
-        "Processing large volumes of text manually is slow and expensive. Our NLP solutions automate the "
-        + "analysis, shorten repetitive tasks, and deliver insight faster, so teams focus on strategy "
-        + "instead of data handling. Work that took an analyst a full day, reading, tagging, routing, and "
-        + "summarising, runs in seconds and scales with volume instead of headcount. Your people stay on the "
-        + "judgement calls that actually need them.",
+        "Processing large volumes of text manually is slow and expensive. Our NLP solutions automate the " +
+        "analysis, shorten repetitive tasks, and deliver insight faster, so teams focus on strategy " +
+        "instead of data handling. Work that took an analyst a full day, reading, tagging, routing, and " +
+        "summarising, runs in seconds and scales with volume instead of headcount. Your people stay on the " +
+        "judgement calls that actually need them.",
       metric: "70%",
       metricLabel: "less manual text handling",
     },
     {
       title: "Integration",
       body:
-        "Our NLP solutions integrate smoothly with the tools you already run (chatbots, CRMs, and virtual "
-        + "assistants), improving customer experience and internal operations through workflow automation "
-        + "and system-wide connectivity. We deliver documented APIs, event hooks, and rollback paths, and we "
-        + "test against your staging environment before anything touches production. Nothing gets ripped out "
-        + "and replaced; the model slots into the workflow your team already knows.",
+        "Our NLP solutions integrate smoothly with the tools you already run (chatbots, CRMs, and virtual " +
+        "assistants), improving customer experience and internal operations through workflow automation " +
+        "and system-wide connectivity. We deliver documented APIs, event hooks, and rollback paths, and we " +
+        "test against your staging environment before anything touches production. Nothing gets ripped out " +
+        "and replaced; the model slots into the workflow your team already knows.",
       metric: "0",
       metricLabel: "systems you have to replace",
     },
@@ -628,9 +594,9 @@ export const whyUs = {
     "What clients tell us matters when they choose an NLP partner, and what we commit to on every engagement.",
   ctaText: "Book a Free Consultation",
   stats: [
-    { value: "300+", label: "AI and machine learning projects" },
-    { value: "25+", label: "Engineers and data scientists" },
-    { value: "25+", label: "Global markets" },
+    { value: "450+", label: "AI and machine learning projects" },
+    { value: "40+", label: "Engineers and data scientists" },
+    { value: "30+", label: "Global markets" },
     { value: "4+", label: "Years building production AI" },
   ],
   reasons: [

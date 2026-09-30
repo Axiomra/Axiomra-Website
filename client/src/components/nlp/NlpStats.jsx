@@ -37,7 +37,7 @@ export default function NlpStats() {
             stagger: 0.12,
             ease: "power2.out",
             scrollTrigger: { trigger: root.current, start: "top 85%", once: true },
-          },
+          }
         );
 
         gsap.utils.toArray("[data-count]").forEach((el) => {
@@ -76,7 +76,7 @@ export default function NlpStats() {
         aria-hidden="true"
         style={{
           backgroundImage:
-            "radial-gradient(85% 110% at 6% 0%, rgba(20,216,196,0.32), transparent 66%), radial-gradient(75% 95% at 100% 100%, rgba(120,139,227,0.28), transparent 70%)",
+            "radial-gradient(85% 110% at 6% 0%, rgba(96,165,250,0.32), transparent 66%), radial-gradient(75% 95% at 100% 100%, rgba(37,99,235,0.28), transparent 70%)",
         }}
       />
 

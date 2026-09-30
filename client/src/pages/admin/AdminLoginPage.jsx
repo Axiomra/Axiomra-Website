@@ -22,6 +22,9 @@ export default function AdminLoginPage() {
   const [busy, setBusy] = useState(false);
 
   // Already signed in, so skip the form rather than making them sign in twice.
+  // The return path comes from history state, never the URL: react-router 6
+  // has an open-redirect advisory we have deferred on that basis. Read
+  // SECURITY-DEFERRED.md before making it URL-driven (?next= etc.).
   if (user) return <Navigate to={location.state?.from || "/admin"} replace />;
 
   const submit = async (e) => {
@@ -73,7 +76,10 @@ export default function AdminLoginPage() {
           className="rounded-2xl border border-line bg-surface-card/90 p-6 shadow-[0_30px_80px_-40px_rgba(10,20,40,0.5)] backdrop-blur-xl sm:p-7"
         >
           <div>
-            <label htmlFor="admin-email" className="mb-1.5 block text-sm font-medium text-content-dim">
+            <label
+              htmlFor="admin-email"
+              className="mb-1.5 block text-sm font-medium text-content-dim"
+            >
               Email
             </label>
             <div className="relative">
@@ -122,7 +128,11 @@ export default function AdminLoginPage() {
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 className="focus-ring absolute right-2.5 top-1/2 -translate-y-1/2 rounded-lg p-1.5 text-content-faint transition-colors hover:bg-surface-inset hover:text-content"
               >
-                {showPassword ? <EyeOff size={16} aria-hidden="true" /> : <Eye size={16} aria-hidden="true" />}
+                {showPassword ? (
+                  <EyeOff size={16} aria-hidden="true" />
+                ) : (
+                  <Eye size={16} aria-hidden="true" />
+                )}
               </button>
             </div>
           </div>
@@ -132,7 +142,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={busy}
-            className="focus-ring mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-cta-gradient py-3 text-sm font-semibold text-[#0A1428] transition-opacity hover:opacity-90 disabled:opacity-60"
+            className="focus-ring mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-grad-sky py-3 text-sm font-semibold text-[#0A1428] transition-opacity hover:opacity-90 disabled:opacity-60"
           >
             {busy && <Loader2 size={16} className="animate-spin" aria-hidden="true" />}
             {busy ? "Signing in…" : "Sign in"}

@@ -1,424 +1,530 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, animate, useInView } from "framer-motion";
-import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
-  ArrowUpRight,
-  BadgeDollarSign,
-  CalendarCheck,
-  Clock,
-  Info,
-  LineChart,
+  ArrowLeft,
+  ArrowRight,
+  Building2,
+  CalendarClock,
+  Check,
+  CheckCircle2,
+  FlaskConical,
+  Mail,
+  Rocket,
+  Sparkles,
+  User,
   Users,
   Wallet,
+  Wrench,
 } from "lucide-react";
+import PhoneField from "../components/PhoneField";
+import FieldError from "../components/FieldError";
+import HoneypotField from "../components/HoneypotField";
+import { DEFAULT_COUNTRY } from "../data/countryCodes";
+import { submitContact } from "../lib/contactApi";
+import { BOOKING_URL } from "../lib/booking";
+import { useSpamGuard } from "../lib/useSpamGuard";
+import { COMPLEXITY, PROJECT_TYPES, SIZE, TIMELINE, estimate, money } from "../lib/costEstimate";
+import {
+  formatPhone,
+  validateCompany,
+  validateEmail,
+  validateName,
+  validatePhone,
+} from "../lib/validation";
 
-/** Interactive savings estimator. */
-const WORKING_WEEKS = 52;
-/** Annual run cost as a share of the build: hosting, monitoring, retraining. */
-const RUN_RATE_SHARE = 0.15;
+const TYPE_ICONS = { new: Sparkles, poc: FlaskConical, mvp: Rocket, upgrade: Wrench };
 
-const AREAS = [
-  {
-    id: "support",
-    label: "Customer Support",
-    efficiency: 0.72,
-    note: "Handle routine support enquiries, draft responses, and update CRM records.",
-    preset: { people: 14, rate: 28, hours: 12, investment: 45 },
-  },
-  {
-    id: "documents",
-    label: "Document Processing",
-    efficiency: 0.78,
-    note: "Invoice, claim and contract extraction with human review on exceptions only.",
-    preset: { people: 8, rate: 32, hours: 16, investment: 60 },
-  },
-  {
-    id: "sales",
-    label: "Sales & Lead Ops",
-    efficiency: 0.6,
-    note: "Lead enrichment, scoring, proposal drafts and pipeline hygiene.",
-    preset: { people: 10, rate: 40, hours: 9, investment: 50 },
-  },
-  {
-    id: "reporting",
-    label: "Reporting & Analytics",
-    efficiency: 0.65,
-    note: "Recurring dashboards, variance commentary and data reconciliation.",
-    preset: { people: 6, rate: 55, hours: 10, investment: 55 },
-  },
-  {
-    id: "backoffice",
-    label: "Back-Office RPA",
-    efficiency: 0.8,
-    note: "Data entry, reconciliation and system-to-system handoffs.",
-    preset: { people: 20, rate: 24, hours: 14, investment: 70 },
-  },
-];
+const STEPS = ["Project Type", "Estimation", "Schedule a Call"];
 
-const INPUTS = [
-  {
-    key: "people",
-    icon: Users,
-    label: "People Involved in This Workflow",
-    hint: "Headcount touching the workflow today",
-    min: 1,
-    max: 200,
-    step: 1,
-    format: (v) => String(v),
-  },
-  {
-    key: "rate",
-    icon: BadgeDollarSign,
-    label: "Total Hourly Employment Cost",
-    hint: "Salary, benefits and overhead per hour",
-    min: 10,
-    max: 150,
-    step: 5,
-    format: (v) => `$${v}`,
-  },
-  {
-    key: "hours",
-    icon: Clock,
-    label: "Hours per Person Available for Automation Each Week",
-    hint: "Repetitive work a system could take over",
-    min: 1,
-    max: 30,
-    step: 1,
-    format: (v) => `${v}h`,
-  },
-  {
-    key: "investment",
-    icon: Wallet,
-    // Stored in thousands so the slider step stays readable; the model multiplies back up to dollars.
-    label: "Est Implementation Cost",
-    hint: "One-off build cost for the first production release",
-    min: 10,
-    max: 250,
-    step: 5,
-    format: (v) => `$${v}k`,
-  },
-];
+// Sky blue for fills and borders; the deeper shade is used for text so labels
+// on the frosted card keep AA contrast.
+const BLUE = "#4FA8E0";
 
-const usd = (n) => `$${Math.round(n).toLocaleString("en-US")}`;
+const FIELD =
+  "w-full rounded-xl border border-line bg-surface py-3.5 pl-11 pr-4 text-base text-content outline-none transition-all placeholder:text-content-faint/70 focus:border-[#4FA8E0] focus:ring-4 focus:ring-[#4FA8E0]/20";
 
-function AnimatedNumber({ value, prefix = "", suffix = "", decimals = 0, className = "" }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const from = useRef(0);
-  const [display, setDisplay] = useState(0);
+const PRIMARY_BTN =
+  "focus-ring inline-flex items-center gap-2 rounded-xl bg-[#4FA8E0] px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-all hover:bg-[#3A96D1] disabled:opacity-60";
 
-  const render = (n) => {
-    const body =
-      decimals > 0
-        ? Math.abs(n).toFixed(decimals)
-        : Math.round(Math.abs(n)).toLocaleString("en-US");
-    return `${n < 0 ? "-" : ""}${prefix}${body}${suffix}`;
-  };
+const BACK_BTN =
+  "focus-ring inline-flex items-center gap-2 rounded-xl border border-[#4FA8E0] bg-surface/70 px-6 py-3.5 text-base font-medium text-content transition-colors hover:bg-[#4FA8E0]/10";
 
-  useEffect(() => {
-    if (!inView) return;
-    const controls = animate(from.current, value, {
-      duration: 0.55,
-      ease: "easeOut",
-      onUpdate: (v) => {
-        from.current = v;
-        setDisplay(v);
-      },
-    });
-    return () => controls.stop();
-  }, [inView, value]);
+const EMPTY_LEAD = { name: "", company: "", email: "", phone: "" };
 
+/** A selectable tile; `wide` is the big icon card used on step one. */
+function Option({ active, onClick, label, hint, icon: Icon, wide = false }) {
   return (
-    <span ref={ref} className={className}>
-      <span aria-hidden="true">{render(display)}</span>
-      <span className="sr-only">{render(value)}</span>
-    </span>
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={`focus-ring group relative flex w-full flex-col rounded-xl border-2 text-left transition-all duration-300 ${
+        wide ? "items-center p-6 text-center" : "p-4"
+      } ${
+        active
+          ? "border-[#4FA8E0] bg-[#4FA8E0]/10"
+          : "border-[#4FA8E0]/30 bg-surface/70 hover:-translate-y-0.5 hover:border-[#4FA8E0]/70"
+      }`}
+    >
+      {active && (
+        <CheckCircle2
+          size={18}
+          className="absolute right-3 top-3 text-[#4FA8E0]"
+          aria-hidden="true"
+        />
+      )}
+      {Icon && (
+        <span
+          className={`mb-4 flex h-14 w-14 items-center justify-center rounded-2xl transition-colors ${
+            active ? "bg-[#4FA8E0] text-white" : "bg-[#4FA8E0]/15 text-[#1F78B4]"
+          }`}
+        >
+          <Icon size={26} strokeWidth={1.7} aria-hidden="true" />
+        </span>
+      )}
+      <span className={`font-display font-semibold text-content ${wide ? "text-lg" : "text-base"}`}>
+        {label}
+      </span>
+      <span className="mt-1 text-sm leading-snug text-content-dim">{hint}</span>
+    </button>
   );
 }
 
-/** One result tile in the 2x2 grid under the headline number. */
-function Metric({ icon: Icon, label, children, footnote }) {
+function Group({ title, options, value, onChange }) {
   return (
-    <div className="rounded-2xl border border-inverse-fg/10 bg-inverse/40 p-5">
-      <p className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-inverse-fg/55">
-        <Icon size={14} className="text-accent-vivid" aria-hidden="true" />
-        {label}
-      </p>
-      <p className="mt-3 font-display text-2xl font-semibold tabular-nums text-inverse-fg">
-        {children}
-      </p>
-      {footnote && <p className="mt-1.5 text-xs text-inverse-fg/45">{footnote}</p>}
+    <fieldset>
+      <legend className="mb-3 text-sm font-semibold text-[#1F78B4] dark:text-[#7CC2EE]">
+        {title}
+      </legend>
+      <div className="grid gap-3 sm:grid-cols-3">
+        {options.map((o) => (
+          <Option
+            key={o.id}
+            active={value === o.id}
+            onClick={() => onChange(o.id)}
+            label={o.label}
+            hint={o.hint}
+          />
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
+/** The live budget panel shown on step two and beside the step three form. */
+function Estimate({ result }) {
+  const stats = [
+    { icon: CalendarClock, label: "Est. duration", value: `${result.weeks} weeks` },
+    { icon: Users, label: "Team size", value: `${result.team} specialists` },
+    { icon: Wallet, label: "Run cost / month", value: `~${money(result.monthlyRun)}` },
+  ];
+  return (
+    <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#1E3A8A] via-[#1D4ED8] to-[#2563EB] p-6 text-white md:p-8">
+      <p className="text-center text-sm text-white/80">Your Estimated Budget Range</p>
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={`${result.low}-${result.high}`}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.25 }}
+          className="mt-3 text-center font-display text-5xl font-bold tabular-nums md:text-6xl"
+          aria-live="polite"
+        >
+          {money(result.low)} – {money(result.high)}
+        </motion.p>
+      </AnimatePresence>
+      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+        {stats.map(({ icon: Icon, label, value }) => (
+          <div key={label} className="rounded-lg bg-white/10 px-4 py-3 text-center">
+            <p className="flex items-center justify-center gap-1.5 text-xs uppercase tracking-[0.14em] text-white/65">
+              <Icon size={13} className="text-[#9FD3F5]" aria-hidden="true" />
+              {label}
+            </p>
+            <p className="mt-1 font-display text-lg font-semibold">{value}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
+const VALIDATORS = {
+  name: (f) => validateName(f.name),
+  company: (f) =>
+    f.company.trim() ? validateCompany(f.company) : "Please enter your company name.",
+  email: (f) => validateEmail(f.email),
+  phone: (f, country) => validatePhone(f.phone, country, { required: true }),
+};
+
 export default function RoiCalculator() {
-  const [areaId, setAreaId] = useState(AREAS[0].id);
-  const [values, setValues] = useState(AREAS[0].preset);
+  const [step, setStep] = useState(0);
+  const [sel, setSel] = useState({
+    type: "new",
+    complexity: "moderate",
+    size: "medium",
+    timeline: "standard",
+  });
+  const [lead, setLead] = useState(EMPTY_LEAD);
+  const [country, setCountry] = useState(DEFAULT_COUNTRY);
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState("");
+  const formRef = useRef(null);
+  const { honeypotRef, signals, restart } = useSpamGuard();
 
-  const area = AREAS.find((a) => a.id === areaId);
+  const result = estimate(sel);
+  const pick = (key) => (id) => setSel((s) => ({ ...s, [key]: id }));
+  const done = status === "success";
 
-  const model = useMemo(() => {
-    const investment = values.investment * 1000;
-    const manualHours = values.people * values.hours * WORKING_WEEKS;
-    const recoveredHours = manualHours * area.efficiency;
-
-    const manualCost = manualHours * values.rate;
-    const grossSavings = recoveredHours * values.rate;
-    const runRate = investment * RUN_RATE_SHARE;
-    const netAnnual = grossSavings - runRate;
-
-    const paybackMonths = netAnnual > 0 ? investment / (netAnnual / 12) : null;
-    const threeYearNet = netAnnual * 3 - investment;
-    const roiMultiple = threeYearNet / investment;
-
-    return {
-      investment,
-      recoveredHours,
-      manualCost,
-      grossSavings,
-      runRate,
-      netAnnual,
-      paybackMonths,
-      threeYearNet,
-      roiMultiple,
-      afterCost: manualCost - grossSavings + runRate,
-    };
-  }, [values, area]);
-
-  const set = (key) => (e) => setValues((v) => ({ ...v, [key]: Number(e.target.value) }));
-
-  const selectArea = (next) => {
-    setAreaId(next.id);
-    setValues(next.preset);
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setLead((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => {
+      if (!prev[name]) return prev;
+      const msg = VALIDATORS[name]({ ...lead, [name]: value }, country);
+      const copy = { ...prev };
+      if (msg) copy[name] = msg;
+      else delete copy[name];
+      return copy;
+    });
   };
 
-  const afterPct = model.manualCost > 0 ? (model.afterCost / model.manualCost) * 100 : 0;
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const found = Object.fromEntries(
+      Object.entries(VALIDATORS)
+        .map(([k, fn]) => [k, fn(lead, country)])
+        .filter(([, m]) => m)
+    );
+    setErrors(found);
+    if (Object.keys(found).length) {
+      const first = Object.keys(VALIDATORS).find((k) => found[k]);
+      formRef.current?.querySelector(`[name="${first}"]`)?.focus();
+      return;
+    }
 
+    // Goes through the same /api/contact intake as the contact form, so the
+    // booking lands in the admin Leads panel and triggers the email alert.
+    const range = `${money(result.low)} – ${money(result.high)}`;
+    const payload = {
+      name: lead.name,
+      email: lead.email,
+      company: lead.company,
+      phone: formatPhone(lead.phone, country),
+      subject: `Scoping call request: ${result.type.label} (${range})`,
+      service: result.type.label,
+      message: [
+        "Book my call request from the homepage AI cost calculator.",
+        `Project type: ${result.type.label}`,
+        `AI complexity: ${result.complexity.label}`,
+        `Project size: ${result.size.label}`,
+        `Timeline: ${result.timeline.label}`,
+        `Estimated budget: ${range}`,
+        `Estimated duration: ${result.weeks} weeks, team of ${result.team}`,
+      ].join("\n"),
+    };
+
+    setStatus("loading");
+    setError("");
+    try {
+      await submitContact({ ...payload, ...signals() });
+      setStatus("success");
+      setLead(EMPTY_LEAD);
+      setCountry(DEFAULT_COUNTRY);
+      restart();
+    } catch (err) {
+      setError(err.message);
+      setStatus("error");
+    }
+  };
+
+  const startOver = () => {
+    setStatus("idle");
+    setErrors({});
+    setStep(0);
+  };
+
+  const describe = (f) => (errors[f] ? `est-${f}-error` : undefined);
+  const cls = (f) => `${FIELD} ${errors[f] ? "!border-danger" : ""}`;
+
+  const panel = {
+    initial: { opacity: 0, x: 30 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -30 },
+    transition: { duration: 0.3, ease: "easeOut" },
+  };
+
+  // The bar fills one third per finished step and completes once the call is booked.
+  const progress = done ? 100 : (step / STEPS.length) * 100;
+
+  // overflow-clip, not hidden: the light pools overhang the edges, and a hidden
+  // box can still be scrolled sideways when a field inside it takes focus.
   return (
-    <section id="roi-calculator" className="relative overflow-hidden bg-inverse px-4 py-24 sm:px-6">
-      {/* Ambient blooms, matched to the dark CTA bands so the page keeps one visual language for its inverse sections. */}
-      <div className="pointer-events-none absolute -left-24 top-10 h-80 w-80 animate-float rounded-full bg-accent-vivid/10 blur-3xl" />
-      <div
-        className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 animate-float rounded-full bg-brand/10 blur-3xl"
-        style={{ animationDelay: "2.5s" }}
-      />
+    <section id="roi-calculator" className="calc-glass relative overflow-clip px-4 py-24 sm:px-6">
+      {/* Soft purple light pools behind the frosted card give the glass
+          something to blur, which is what reads as "glossy". */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <span className="absolute -left-24 top-10 h-80 w-80 rounded-full bg-[#B79CFF]/40 blur-3xl" />
+        <span className="absolute -right-20 top-1/3 h-96 w-96 rounded-full bg-[#9FB7FF]/35 blur-3xl" />
+        <span className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-[#D6B8FF]/40 blur-3xl" />
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 mx-auto max-w-8xl"
-      >
+      <div className="relative z-10 mx-auto max-w-6xl">
         <div className="text-center">
-          <p className="mb-4 inline-flex items-center gap-2 font-mono text-sm uppercase tracking-[0.2em] text-accent-vivid md:text-base">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-vivid" />
-            AI ROI Calculator
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/40 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-[#5B3FB8] backdrop-blur-md dark:border-white/15 dark:bg-white/5 dark:text-[#C9B6FF]">
+            AI Cost Calculator
           </p>
-          <h2 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-inverse-fg md:text-5xl lg:text-6xl">
-            Estimate the Annual Value of{" "}
-            <span className="text-accent-vivid">Workflow Automation</span>
+          <h2 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-content md:text-5xl lg:text-6xl">
+            Estimate The Cost Of{" "}
+            <span className="text-[#1F78B4] dark:text-[#7CC2EE]">Your AI Project</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-inverse-fg/70 md:text-xl">
-            Select a workflow and adjust the inputs to reflect your team. Explore potential savings,
-            time recovered, and payback using the assumptions shown below.
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-content-dim md:text-xl">
+            Pick what you want to build, tune complexity, size and timeline, and see a budget range
+            instantly. Then book a free 30-minute scoping call to turn it into a fixed quote.
           </p>
         </div>
 
-        {/* Workflow selector */}
-        <div className="mt-12">
-          <p className="mb-4 text-center font-mono text-xs uppercase tracking-[0.18em] text-inverse-fg/45">
-            Which workflow would you like to automate?
-          </p>
-          <div
-            role="tablist"
-            aria-label="Automation workflow"
-            className="flex flex-wrap justify-center gap-2.5"
-          >
-            {AREAS.map((a) => {
-              const active = a.id === areaId;
-              return (
-                <button
-                  key={a.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
-                  onClick={() => selectArea(a)}
-                  className={`focus-ring rounded-full border px-5 py-2.5 text-sm font-medium transition-all duration-300 md:text-base ${
-                    active
-                      ? "border-accent-vivid bg-accent-vivid text-inverse shadow-glow"
-                      : "border-inverse-fg/15 bg-inverse-fg/5 text-inverse-fg/70 hover:border-accent-vivid/50 hover:text-inverse-fg"
-                  }`}
-                >
-                  {a.label}
-                </button>
-              );
-            })}
-          </div>
-          <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-inverse-fg/50">
-            {area.note}
-          </p>
-        </div>
+        <div className="relative mt-12 overflow-clip rounded-2xl border border-white/70 bg-white/55 p-5 shadow-[0_1px_2px_rgba(16,24,40,0.05),0_6px_16px_-8px_rgba(16,24,40,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3)] md:p-10">
+          {/* Glossy sheen across the top of the glass. */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/60 to-transparent dark:from-white/[0.06]"
+          />
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
-          {/* Inputs */}
-          <div className="rounded-[1.75rem] border border-inverse-fg/10 bg-inverse-soft/70 p-6 backdrop-blur-sm md:p-9">
-            <div className="space-y-8">
-              {INPUTS.map(({ key, icon: Icon, label, hint, min, max, step, format }) => {
-                const pct = ((values[key] - min) / (max - min)) * 100;
-                return (
-                  <div key={key}>
-                    <div className="mb-2.5 flex items-start justify-between gap-4">
-                      <label htmlFor={`roi-${key}`} className="flex items-start gap-2.5">
-                        <Icon
-                          size={18}
-                          strokeWidth={1.7}
-                          className="mt-0.5 shrink-0 text-accent-vivid"
-                          aria-hidden="true"
-                        />
-                        <span>
-                          <span className="block text-base text-inverse-fg/80">{label}</span>
-                          <span className="block text-xs text-inverse-fg/40">{hint}</span>
-                        </span>
-                      </label>
-                      <span className="shrink-0 font-display text-xl font-semibold tabular-nums text-inverse-fg">
-                        {format(values[key])}
-                      </span>
-                    </div>
-
-                    <input
-                      id={`roi-${key}`}
-                      type="range"
-                      min={min}
-                      max={max}
-                      step={step}
-                      value={values[key]}
-                      onChange={set(key)}
-                      className="roi-slider focus-ring w-full"
-                      style={{ "--roi-fill": `${pct}%` }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Before / after */}
-            <div className="mt-9 border-t border-inverse-fg/10 pt-7">
-              <p className="mb-5 font-mono text-xs uppercase tracking-[0.18em] text-inverse-fg/45">
-                Annual cost of this workflow
-              </p>
-
-              <div className="space-y-5">
-                <div>
-                  <div className="mb-2 flex items-baseline justify-between text-sm">
-                    <span className="text-inverse-fg/70">Manual today</span>
-                    <span className="font-semibold tabular-nums text-inverse-fg">
-                      {usd(model.manualCost)}
-                    </span>
-                  </div>
-                  <div className="h-2.5 overflow-hidden rounded-full bg-inverse-fg/10">
-                    <div className="h-full w-full rounded-full bg-inverse-fg/35" />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="mb-2 flex items-baseline justify-between text-sm">
-                    <span className="text-inverse-fg/70">With Axiomra automation</span>
-                    <span className="font-semibold tabular-nums text-accent-vivid">
-                      {usd(model.afterCost)}
-                    </span>
-                  </div>
-                  <div className="h-2.5 overflow-hidden rounded-full bg-inverse-fg/10">
-                    <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-accent-vivid to-brand"
-                      initial={false}
-                      animate={{ width: `${Math.max(0, Math.min(100, afterPct))}%` }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                    />
-                  </div>
-                  <p className="mt-2 text-xs text-inverse-fg/45">
-                    Includes {usd(model.runRate)}/yr to run and retrain the system.
-                  </p>
-                </div>
+          <div className="relative">
+            {/* Stepper: one continuous bar with the step names underneath. */}
+            <div className="mb-10">
+              <div className="h-2 overflow-hidden rounded-full bg-black/[0.06] dark:bg-white/10">
+                <motion.div
+                  className="h-full rounded-full"
+                  style={{ backgroundColor: BLUE }}
+                  initial={false}
+                  animate={{ width: `${progress}%` }}
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                />
               </div>
-            </div>
-          </div>
-
-          {/* Results */}
-          <div className="flex flex-col rounded-[1.75rem] border border-accent-vivid/25 bg-gradient-to-br from-accent-vivid/10 via-inverse-card/60 to-brand/10 p-6 md:p-9">
-            <div className="text-center">
-              <p className="font-mono text-xs uppercase tracking-[0.2em] text-inverse-fg/60 md:text-sm">
-                Est Annual Savings After Running Costs
-              </p>
-
-              <AnimatedNumber
-                value={Math.max(0, model.netAnnual)}
-                prefix="$"
-                className="mt-4 block font-display text-5xl font-semibold tabular-nums text-accent-vivid md:text-6xl"
-              />
-
-              <p className="mt-3 text-base text-inverse-fg/70">
-                after the {Math.round(RUN_RATE_SHARE * 100)}% annual run cost, at a{" "}
-                {Math.round(area.efficiency * 100)}% automation rate
-              </p>
+              <ol className="mt-3 grid grid-cols-3 text-sm">
+                {STEPS.map((label, i) => (
+                  <li
+                    key={label}
+                    aria-current={i === step ? "step" : undefined}
+                    className={`${i === 0 ? "text-left" : i === 1 ? "text-center" : "text-right"} ${
+                      i === step
+                        ? "font-semibold text-[#1F78B4] dark:text-[#7CC2EE]"
+                        : "text-content-faint"
+                    }`}
+                  >
+                    {label}
+                  </li>
+                ))}
+              </ol>
             </div>
 
-            <div className="mt-8 grid gap-3.5 sm:grid-cols-2">
-              <Metric icon={Clock} label="Est Hours Recovered" footnote="per year, across the team">
-                <AnimatedNumber value={model.recoveredHours} suffix=" h" />
-              </Metric>
+            <AnimatePresence mode="wait" initial={false}>
+              {step === 0 && (
+                <motion.div key="s0" {...panel}>
+                  <h3 className="mb-6 font-display text-2xl font-semibold text-content">
+                    What Would You Like to Do?
+                  </h3>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    {PROJECT_TYPES.map((t) => (
+                      <Option
+                        key={t.id}
+                        wide
+                        icon={TYPE_ICONS[t.id]}
+                        active={sel.type === t.id}
+                        onClick={() => pick("type")(t.id)}
+                        label={t.label}
+                        hint={t.hint}
+                      />
+                    ))}
+                  </div>
+                  <div className="mt-8 flex justify-end">
+                    <button type="button" onClick={() => setStep(1)} className={PRIMARY_BTN}>
+                      Next step <ArrowRight size={18} />
+                    </button>
+                  </div>
+                </motion.div>
+              )}
 
-              <Metric icon={CalendarCheck} label="Est Payback Period" footnote="to earn the build back">
-                {model.paybackMonths === null ? (
-                  <span className="text-inverse-fg/50">Not in year 1</span>
-                ) : model.paybackMonths < 1 ? (
-                  <span>Under a month</span>
-                ) : (
-                  <AnimatedNumber value={model.paybackMonths} decimals={1} suffix=" mo" />
-                )}
-              </Metric>
+              {step === 1 && (
+                <motion.div key="s1" {...panel}>
+                  <h3 className="mb-6 font-display text-2xl font-semibold text-content">
+                    Configure Your Project
+                  </h3>
+                  <div className="space-y-7">
+                    <Group
+                      title="AI Complexity"
+                      options={COMPLEXITY}
+                      value={sel.complexity}
+                      onChange={pick("complexity")}
+                    />
+                    <Group
+                      title="Project Size"
+                      options={SIZE}
+                      value={sel.size}
+                      onChange={pick("size")}
+                    />
+                    <Group
+                      title="Timeline"
+                      options={TIMELINE}
+                      value={sel.timeline}
+                      onChange={pick("timeline")}
+                    />
+                    <div>
+                      <Estimate result={result} />
+                      <p className="mt-3 text-xs leading-relaxed text-content-faint">
+                        Directional range based on similar Axiomra projects. Final pricing is fixed
+                        after a scoping call.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-8 flex flex-wrap justify-end gap-3">
+                    <button type="button" onClick={() => setStep(0)} className={BACK_BTN}>
+                      <ArrowLeft size={18} /> Back
+                    </button>
+                    <button type="button" onClick={() => setStep(2)} className={PRIMARY_BTN}>
+                      Schedule a Free 30-min Scoping Call <ArrowRight size={18} />
+                    </button>
+                  </div>
+                </motion.div>
+              )}
 
-              <Metric icon={LineChart} label="Est Three Year Net Value" footnote="net of build and run cost">
-                <AnimatedNumber value={model.threeYearNet} prefix="$" />
-              </Metric>
+              {step === 2 && !done && (
+                <motion.div key="s2" {...panel}>
+                  <div className="grid gap-8 lg:grid-cols-2">
+                    <div>
+                      <Estimate result={result} />
+                    </div>
+                    <form ref={formRef} noValidate onSubmit={onSubmit} className="relative">
+                      <HoneypotField inputRef={honeypotRef} />
+                      <h3 className="mb-6 font-display text-2xl font-semibold text-content">
+                        Great! There&rsquo;s only{" "}
+                        <span className="text-[#1F78B4] dark:text-[#7CC2EE]">one step left</span>.
+                      </h3>
+                      <div className="space-y-4">
+                        {[
+                          { name: "name", icon: User, placeholder: "Full name*", auto: "name" },
+                          {
+                            name: "company",
+                            icon: Building2,
+                            placeholder: "Company name*",
+                            auto: "organization",
+                          },
+                          {
+                            name: "email",
+                            icon: Mail,
+                            placeholder: "Business email*",
+                            auto: "email",
+                            type: "email",
+                          },
+                        ].map(({ name, icon: Icon, placeholder, auto, type = "text" }) => (
+                          <div key={name}>
+                            <div className="relative">
+                              <Icon
+                                size={17}
+                                className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#4FA8E0]"
+                                aria-hidden="true"
+                              />
+                              <input
+                                name={name}
+                                type={type}
+                                autoComplete={auto}
+                                value={lead[name]}
+                                onChange={onChange}
+                                aria-label={placeholder.replace("*", "")}
+                                aria-invalid={errors[name] ? true : undefined}
+                                aria-describedby={describe(name)}
+                                placeholder={placeholder}
+                                className={cls(name)}
+                              />
+                            </div>
+                            <FieldError id={`est-${name}-error`} message={errors[name]} />
+                          </div>
+                        ))}
+                        <div className="calc-field-blue">
+                          <PhoneField
+                            id="est-phone"
+                            variant="light"
+                            country={country}
+                            onCountryChange={setCountry}
+                            value={lead.phone}
+                            onChange={onChange}
+                            invalid={Boolean(errors.phone)}
+                            describedBy={describe("phone")}
+                          />
+                          <FieldError id="est-phone-error" message={errors.phone} />
+                        </div>
+                      </div>
 
-              <Metric icon={BadgeDollarSign} label="Est Three Year ROI" footnote="net return over build cost">
-                <AnimatedNumber value={model.roiMultiple} decimals={1} suffix="x" />
-              </Metric>
-            </div>
+                      <p role="status" aria-live="polite" className="mt-3 min-h-[1.25rem] text-sm">
+                        {status === "error" && <span className="text-danger">{error}</span>}
+                      </p>
 
-            <div className="mt-7 flex items-start gap-2.5 rounded-2xl border border-inverse-fg/10 bg-inverse/40 p-4">
-              <Info size={16} className="mt-0.5 shrink-0 text-inverse-fg/40" aria-hidden="true" />
-              <p className="text-xs leading-relaxed text-inverse-fg/50">
-                Model: {values.people} people × {values.hours}h/week × {WORKING_WEEKS} weeks ×{" "}
-                {Math.round(area.efficiency * 100)}% automatable = {" "}
-                {Math.round(model.recoveredHours).toLocaleString("en-US")} hours at $
-                {values.rate}/hour. Build cost {usd(model.investment)}, run cost{" "}
-                {Math.round(RUN_RATE_SHARE * 100)}% of build per year. Directional only: we
-                replace these with your real numbers in the scoping call.
-              </p>
-            </div>
+                      <div className="mt-3 flex flex-wrap justify-between gap-3">
+                        <button type="button" onClick={() => setStep(1)} className={BACK_BTN}>
+                          <ArrowLeft size={18} /> Back
+                        </button>
+                        <button
+                          type="submit"
+                          disabled={status === "loading"}
+                          className={PRIMARY_BTN}
+                        >
+                          {status === "loading" ? "Booking..." : "Book my call"}
+                          {status !== "loading" && <ArrowRight size={18} />}
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </motion.div>
+              )}
 
-            <Link
-              to="/contact"
-              className="group mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-accent-vivid px-7 py-4 text-base font-semibold text-inverse transition-all hover:shadow-glow focus-ring"
-            >
-              Get a Tailored Automation Assessment
-              <ArrowUpRight
-                size={18}
-                className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </Link>
-
-            <p className="mt-5 text-center text-xs leading-relaxed text-inverse-fg/50">
-              These estimates use the inputs and assumptions shown. Actual results depend on
-              implementation scope, adoption, operating costs, and the proportion of work
-              successfully automated.
-            </p>
+              {step === 2 && done && (
+                <motion.div
+                  key="done"
+                  initial={{ opacity: 0, scale: 0.97 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="flex flex-col items-center py-6 text-center"
+                  role="status"
+                >
+                  <span className="flex h-32 w-32 items-center justify-center rounded-full bg-[#4FA8E0]/20">
+                    <motion.span
+                      initial={{ scale: 0.6 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                      className="flex h-[6.5rem] w-[6.5rem] items-center justify-center rounded-full bg-[#4FA8E0] text-white"
+                    >
+                      <Check size={54} strokeWidth={2.5} aria-hidden="true" />
+                    </motion.span>
+                  </span>
+                  <h3 className="mt-6 font-display text-2xl font-semibold text-content">
+                    Thanks for Your Message!
+                  </h3>
+                  <p className="mt-4 max-w-2xl text-base text-content-dim">
+                    Our team will contact you soon to discuss the cost and initial plan for your AI
+                    solution development.
+                  </p>
+                  <div className="mt-8 flex flex-wrap justify-center gap-3">
+                    <a
+                      href={BOOKING_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={PRIMARY_BTN}
+                    >
+                      Pick a time now <CalendarClock size={18} />
+                    </a>
+                    <button type="button" onClick={startOver} className={BACK_BTN}>
+                      Start a new estimate
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

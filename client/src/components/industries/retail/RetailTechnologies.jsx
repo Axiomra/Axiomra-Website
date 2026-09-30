@@ -27,7 +27,6 @@ export default function RetailTechnologies() {
         className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-inverse via-inverse/85 to-inverse/70" />
-      <div aria-hidden="true" className="retail-bloom opacity-50" />
 
       <div className="relative z-10 mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
@@ -59,7 +58,11 @@ export default function RetailTechnologies() {
             </Link>
           </div>
 
-          <Stagger as="ol" step={0.1} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-7">
+          <Stagger
+            as="ol"
+            step={0.1}
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-7"
+          >
             {technologies.items.map((item, i) => (
               <StaggerItem
                 as="li"

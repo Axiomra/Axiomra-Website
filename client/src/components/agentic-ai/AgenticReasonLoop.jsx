@@ -51,7 +51,7 @@ export default function AgenticReasonLoop() {
                 {/* Connector between cards, the loop, drawn flat. */}
                 {i < reactLoop.steps.length - 1 && (
                   <span
-                    className="pointer-events-none absolute -right-3 top-1/2 hidden h-px w-6 bg-gradient-to-r from-brand/60 to-transparent lg:block"
+                    className="pointer-events-none absolute -right-3 top-1/2 hidden h-px w-6 bg-gradient-to-r from-grad-blue/60 to-transparent lg:block"
                     aria-hidden="true"
                   />
                 )}

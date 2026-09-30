@@ -14,11 +14,11 @@ const defaultFaqs = [
   },
   {
     q: "Why should I choose an AI development company for my global project?",
-    a: "You get access to elite engineering talent at a competitive price point, with 300+ successful projects delivered globally.",
+    a: "You get access to elite engineering talent at a competitive price point, with 500+ successful projects delivered globally.",
   },
   {
     q: "What industries does your AI development company have experience in?",
-    a: "Extensive experience across healthcare, fashion, sports, education, real estate, and more, 300+ projects delivered or in progress.",
+    a: "Extensive experience across healthcare, fashion, sports, education, real estate, and more, 500+ projects delivered or in progress.",
   },
   {
     q: "Does Axiomra offer post-development support?",

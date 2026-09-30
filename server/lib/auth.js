@@ -19,6 +19,9 @@ import User from "../models/User.js";
 
 const COOKIE_NAME = "axiomra_admin";
 const TOKEN_TTL_SECONDS = 8 * 60 * 60; // One working day, then re-auth.
+// Pinned on both sign and verify, so a token claiming another algorithm (none,
+// or an asymmetric one keyed with the shared secret) is refused outright.
+const JWT_ALGORITHM = "HS256";
 
 function secret() {
   const value = process.env.JWT_SECRET;
@@ -55,11 +58,10 @@ function cookieOptions() {
 }
 
 export function issueSession(res, user) {
-  const token = jwt.sign(
-    { sub: String(user._id), role: user.role },
-    secret(),
-    { expiresIn: TOKEN_TTL_SECONDS }
-  );
+  const token = jwt.sign({ sub: String(user._id), role: user.role }, secret(), {
+    algorithm: JWT_ALGORITHM,
+    expiresIn: TOKEN_TTL_SECONDS,
+  });
   res.cookie(COOKIE_NAME, token, cookieOptions());
   return TOKEN_TTL_SECONDS;
 }
@@ -96,7 +98,7 @@ export async function requireAuth(req, res, next) {
 
   let payload;
   try {
-    payload = jwt.verify(token, secret());
+    payload = jwt.verify(token, secret(), { algorithms: [JWT_ALGORITHM] });
   } catch {
     // Signature failures and expiry are the same answer to the client: the
     // distinction only helps someone probing for a forgery that nearly worked.

@@ -27,7 +27,10 @@ export default function TransportationBuild() {
         decoding="async"
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-70"
       />
-      <div aria-hidden="true" className="tr-lane-markings pointer-events-none absolute inset-0 -z-10" />
+      <div
+        aria-hidden="true"
+        className="tr-lane-markings pointer-events-none absolute inset-0 -z-10"
+      />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-24 top-10 -z-10 h-[30rem] w-[30rem] rounded-full bg-brand/25 blur-[150px]"
@@ -56,13 +59,16 @@ export default function TransportationBuild() {
           >
             {build.title}
           </h2>
-          <p data-reveal className="mt-6 max-w-xl text-base leading-relaxed text-inverse-fg/75 md:text-lg">
+          <p
+            data-reveal
+            className="mt-6 max-w-xl text-base leading-relaxed text-inverse-fg/75 md:text-lg"
+          >
             {build.body}
           </p>
           <div data-reveal className="mt-9">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
+              className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {build.ctaText}
               <span className="flex h-11 w-11 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">
@@ -73,10 +79,7 @@ export default function TransportationBuild() {
         </div>
 
         <figure data-reveal className="relative lg:col-span-6">
-          <div
-            aria-hidden="true"
-            className="clip-trailer absolute -inset-3 bg-gradient-to-br from-brand/30 to-accent-vivid/30"
-          />
+          <div aria-hidden="true" className="clip-trailer absolute -inset-3 bg-[#BFDBFE]" />
           <img
             src={build.image}
             alt={build.alt}

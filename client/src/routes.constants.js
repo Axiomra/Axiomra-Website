@@ -27,3 +27,6 @@ export const GENERATIVE_AI_SLUG = "generative-ai-services";
 export const AGENTIC_AI_SLUG = "agentic-ai-services";
 export const COMPUTER_VISION_SLUG = "computer-vision-services";
 export const NLP_SLUG = "natural-language-processing-services";
+
+export const BLOG_PATH = "/blogs";
+export const blogPostPath = (slug) => `${BLOG_PATH}/${slug}`;

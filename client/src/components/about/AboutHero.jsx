@@ -1,14 +1,18 @@
 import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { hero } from "../../data/aboutData";
 
 const NetworkBackground = lazy(() => import("../NetworkBackground"));
 
 const fadeUp = {
   hidden: { opacity: 0, y: 26 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.12, ease: "easeOut" } }),
+  show: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.12, ease: "easeOut" },
+  }),
 };
 
 /** Dark hero, three.js core behind the copy. */
@@ -39,7 +43,6 @@ export default function AboutHero() {
             custom={0}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-5 py-2 font-mono text-sm uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm"
           >
-            <Sparkles size={15} className="text-accent-vivid" aria-hidden="true" />
             {hero.eyebrow}
           </motion.p>
 
@@ -64,10 +67,16 @@ export default function AboutHero() {
             {hero.body}
           </motion.p>
 
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="mt-10">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={3}
+            className="mt-10"
+          >
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-cta-gradient px-8 py-4 text-lg font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring"
+              className="group inline-flex items-center gap-2 rounded-full bg-grad-sky px-8 py-4 text-lg font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring"
             >
               {hero.ctaText}
               <ArrowUpRight

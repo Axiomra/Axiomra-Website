@@ -8,17 +8,17 @@
 export const FIELD_VARIANTS = {
   dark: {
     shell:
-      "border-line-strong bg-inverse-soft focus-within:border-gold/70 focus-within:ring-4 focus-within:ring-gold/15",
-    text: "text-inverse-fg",
-    placeholder: "placeholder:text-inverse-fg/35",
-    divider: "bg-inverse-fg/15",
-    accent: "text-gold",
-    trigger: "hover:bg-inverse-fg/5",
-    panel: "border-line-strong bg-inverse-card shadow-[0_24px_60px_-20px_rgba(0,0,0,0.75)]",
-    search: "border-line-strong bg-inverse-soft text-inverse-fg placeholder:text-inverse-fg/35",
-    option: "text-inverse-fg/85 hover:bg-inverse-fg/10",
-    optionActive: "bg-gold/15 text-inverse-fg",
-    muted: "text-inverse-fg/45",
+      "border-white/10 bg-field-dark focus-within:border-accent-vivid focus-within:ring-4 focus-within:ring-accent-vivid/15",
+    text: "text-white",
+    placeholder: "placeholder:text-white/55",
+    divider: "bg-white/15",
+    accent: "text-accent-vivid",
+    trigger: "hover:bg-white/5",
+    panel: "border-white/10 bg-field-dark shadow-[0_24px_60px_-20px_rgba(0,0,0,0.75)]",
+    search: "border-white/10 bg-field-dark-deep text-white placeholder:text-white/55",
+    option: "text-white/85 hover:bg-white/10",
+    optionActive: "bg-accent-vivid/15 text-white",
+    muted: "text-white/45",
   },
   light: {
     shell:

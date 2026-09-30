@@ -27,6 +27,7 @@ import logoLight from "@/assets/logo-light.webp";
 import logoDark from "@/assets/logo-dark.webp";
 import ThemeToggle from "@/components/ThemeToggle";
 import { HeroToneContext } from "@/seo/prerender-context";
+import { BOOKING_URL } from "@/lib/booking";
 
 /** Bar height in px, `h-16`. Used to decide when the hero is fully behind it. */
 const NAV_HEIGHT = 64;
@@ -114,8 +115,16 @@ function useNavTone() {
     const raf = requestAnimationFrame(measure);
     window.addEventListener("scroll", measure, { passive: true });
     window.addEventListener("resize", measure);
+    // A hero carousel flips its tone per slide without any scroll.
+    const toneObserver = new MutationObserver(measure);
+    toneObserver.observe(document.body, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["data-nav-tone"],
+    });
     return () => {
       cancelAnimationFrame(raf);
+      toneObserver.disconnect();
       window.removeEventListener("scroll", measure);
       window.removeEventListener("resize", measure);
     };
@@ -353,9 +362,11 @@ function FullWidthDropdown({
           <h4 className="font-display text-lg font-semibold text-inverse-fg">{cfg.ctaTitle}</h4>
           <p className="text-base leading-relaxed text-inverse-fg/60">{cfg.ctaSubtitle}</p>
           <NavLink
-            href="/contact"
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noreferrer"
             onClick={onNavigate}
-            className="mt-auto inline-flex w-fit items-center gap-1.5 rounded-full bg-gradient-to-r from-accent-vivid to-brand px-5 py-2.5 text-base font-medium text-inverse-fg transition-opacity hover:opacity-90 focus-ring"
+            className="mt-auto inline-flex w-fit items-center gap-1.5 rounded-full bg-[#2563EB] px-5 py-2.5 text-base font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-ring"
           >
             Book a call
             <ArrowRight className="h-4 w-4" />
@@ -369,7 +380,7 @@ function FullWidthDropdown({
 const NAV_ITEM =
   "relative flex items-center gap-1 rounded-full px-4 py-2 text-base font-medium transition-all duration-300 hover:-translate-y-0.5 focus-ring " +
   "after:absolute after:bottom-0.5 after:left-4 after:right-4 after:h-[2px] after:origin-left " +
-  "after:bg-gradient-to-r after:from-accent-vivid after:to-brand after:transition-transform after:duration-300 " +
+  "after:bg-accent-vivid after:transition-transform after:duration-300 " +
   "hover:after:scale-x-100 focus-visible:after:scale-x-100";
 
 function DesktopNav({
@@ -431,17 +442,44 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
   const [open, setOpen] = useState(false);
   const [openSection, setOpenSection] = useState<MegaSection | null>(null);
 
+  const rootRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
   const close = () => {
     setOpen(false);
     setOpenSection(null);
   };
 
+  // Tap outside or Escape closes the panel; the toggle button handles taps on itself.
+  useEffect(() => {
+    if (!open) return;
+    const close = () => {
+      setOpen(false);
+      setOpenSection(null);
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) close();
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      close();
+      buttonRef.current?.focus();
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
   const panelFg = TONE.dark;
 
   return (
-    <div className="flex items-center gap-2 lg:hidden">
+    <div ref={rootRef} className="flex items-center gap-2 lg:hidden">
       <ThemeToggle className={open ? undefined : cn(fg.border, fg.link)} />
       <button
+        ref={buttonRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
@@ -525,9 +563,11 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
                 Contact us
               </NavLink>
               <NavLink
-                href="/contact"
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noreferrer"
                 onClick={close}
-                className="w-full rounded-full bg-gradient-to-r from-accent-vivid to-brand px-5 py-2.5 text-center text-base font-medium text-inverse-fg hover:opacity-90 focus-ring"
+                className="w-full rounded-full bg-[#2563EB] px-5 py-2.5 text-center text-base font-semibold text-white hover:bg-[#1D4ED8] focus-ring"
               >
                 Book a call
               </NavLink>
@@ -550,7 +590,8 @@ export function Navbar({ className }: { className?: string }) {
 
   // On the contact page the whole bar is hidden until the cursor reaches the
   // top edge, so the glass form stays the clear focus. Everywhere else it
-  // behaves as before (fixed, always visible).
+  // behaves as before (fixed, always visible). Touch screens have no hover to
+  // reveal it with, so there the bar stays visible.
   const hoverReveal = pathname === "/contact";
 
   useEffect(() => {
@@ -577,7 +618,7 @@ export function Navbar({ className }: { className?: string }) {
         className={cn(
           "relative w-full border-b transition-all duration-300",
           hoverReveal &&
-            "-translate-y-full opacity-0 group-hover/rev:translate-y-0 group-hover/rev:opacity-100 group-focus-within/rev:translate-y-0 group-focus-within/rev:opacity-100",
+            "[@media(hover:hover)]:-translate-y-full [@media(hover:hover)]:opacity-0 group-hover/rev:translate-y-0 group-hover/rev:opacity-100 group-focus-within/rev:translate-y-0 group-focus-within/rev:opacity-100",
           transparent
             ? "border-transparent bg-transparent"
             : "border-inverse-fg/10 bg-inverse/95 shadow-card backdrop-blur",
@@ -605,8 +646,10 @@ export function Navbar({ className }: { className?: string }) {
               Contact us
             </NavLink>
             <NavLink
-              href="/contact"
-              className="rounded-full bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid bg-[length:200%_100%] bg-left px-6 py-2.5 text-base font-medium text-inverse-fg transition-all duration-500 hover:-translate-y-0.5 hover:bg-right hover:shadow-glow focus-ring"
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-[#2563EB] px-6 py-2.5 text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1D4ED8] hover:shadow-[0_12px_28px_-12px_rgba(37,99,235,0.8)] focus-ring"
             >
               Book a call
             </NavLink>

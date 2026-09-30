@@ -1,44 +1,56 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/src/assets/icon-teal.png" />
-  <title>Axiomra: Result-Driven AI Development Company</title>
-  <meta data-rh="true" name="description" content="Axiomra builds production-grade AI systems that automate operations and deliver measurable ROI for SMBs and enterprises." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/src/assets/icon-teal.png" />
+    <title>Axiomra: Result-Driven AI Development Company</title>
+    <meta
+      data-rh="true"
+      name="description"
+      content="Axiomra builds production-grade AI systems that automate operations and deliver measurable ROI for SMBs and enterprises."
+    />
 
-  <!-- data-rh lets react-helmet-async replace these crawler defaults once a
+    <!-- data-rh lets react-helmet-async replace these crawler defaults once a
        page mounts, instead of leaving duplicates behind. -->
-  <meta data-rh="true" property="og:type" content="website" />
-  <meta data-rh="true" property="og:title" content="Axiomra, Result-Driven AI Development Company" />
-  <meta data-rh="true" property="og:description" content="Production-grade AI systems that automate operations and deliver measurable ROI. 300+ projects delivered." />
-  <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+    <meta data-rh="true" property="og:type" content="website" />
+    <meta
+      data-rh="true"
+      property="og:title"
+      content="Axiomra, Result-Driven AI Development Company"
+    />
+    <meta
+      data-rh="true"
+      property="og:description"
+      content="Production-grade AI systems that automate operations and deliver measurable ROI. 500+ projects delivered."
+    />
+    <meta data-rh="true" name="twitter:card" content="summary_large_image" />
 
-  <!-- Matches the browser chrome to the active theme. -->
-  <meta name="theme-color" content="#0A1428" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#070E1C" media="(prefers-color-scheme: dark)" />
+    <!-- Matches the browser chrome to the active theme. -->
+    <meta name="theme-color" content="#0A1428" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#070E1C" media="(prefers-color-scheme: dark)" />
 
-  <!--
+    <!--
     Theme boot script: must run BEFORE first paint, otherwise the page
     renders light and then snaps to dark ("flash of wrong theme"). It is
     inline and synchronous for exactly that reason.
     The storage key here mirrors THEME_STORAGE_KEY in src/theme/theme-context.js.
   -->
-  <script>
-    (function () {
-      try {
-        var stored = localStorage.getItem("axiomra-theme");
-        var isDark =
-          stored === "dark" ||
-          (stored !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
-        document.documentElement.classList.toggle("dark", isDark);
-      } catch (e) {
-        /* Storage blocked: fall through to the light default. */
-      }
-    })();
-  </script>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("axiomra-theme");
+          var isDark =
+            stored === "dark" ||
+            (stored !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.classList.toggle("dark", isDark);
+        } catch (e) {
+          /* Storage blocked: fall through to the light default. */
+        }
+      })();
+    </script>
 
-  <!--
+    <!--
     Fonts are served from our own origin. The CDN versions cost two extra DNS
     lookups and TLS handshakes before the first heading can paint, which is the
     single worst offender on a shared host.
@@ -46,12 +58,18 @@
     The two faces below carry the above-the-fold copy, so they are fetched in
     parallel with the stylesheet rather than after it.
   -->
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/satoshi-400.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/clash-grotesk-600.woff2" crossorigin>
-  <link rel="stylesheet" href="/fonts/fonts.css">
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/satoshi-400.woff2" crossorigin />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/clash-grotesk-600.woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

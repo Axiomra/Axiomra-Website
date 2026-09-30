@@ -27,9 +27,9 @@ function prefersStaticField() {
 
 function StaticField({ variant, className = "" }) {
   const swarm =
-    "radial-gradient(30% 30% at 50% 50%, rgba(20,216,196,0.28), transparent 68%), radial-gradient(circle, rgba(120,139,227,0.5) 1.4px, transparent 1.4px)";
+    "radial-gradient(30% 30% at 50% 50%, rgba(96,165,250,0.28), transparent 68%), radial-gradient(circle, rgba(120,139,227,0.5) 1.4px, transparent 1.4px)";
   const loop =
-    "radial-gradient(closest-side, transparent 58%, rgba(20,216,196,0.22) 60%, transparent 66%), radial-gradient(circle, rgba(120,139,227,0.4) 1.2px, transparent 1.2px)";
+    "radial-gradient(closest-side, transparent 58%, rgba(96,165,250,0.22) 60%, transparent 66%), radial-gradient(circle, rgba(120,139,227,0.4) 1.2px, transparent 1.2px)";
 
   return (
     <div

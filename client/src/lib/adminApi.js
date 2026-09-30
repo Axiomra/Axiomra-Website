@@ -61,7 +61,8 @@ export function leadQuery(params = {}) {
 
 /* --- Auth --- */
 export const adminAuth = {
-  login: (email, password) => request("/api/auth/login", { method: "POST", body: { email, password } }),
+  login: (email, password) =>
+    request("/api/auth/login", { method: "POST", body: { email, password } }),
   logout: () => request("/api/auth/logout", { method: "POST" }),
   me: (signal) => request("/api/auth/me", { signal }),
   forgotPassword: (email) =>
@@ -75,7 +76,10 @@ export const adminAuth = {
   resetRequirements: (token, signal) =>
     request(`/api/auth/reset-requirements?token=${encodeURIComponent(token)}`, { signal }),
   changePassword: (currentPassword, newPassword) =>
-    request("/api/auth/change-password", { method: "POST", body: { currentPassword, newPassword } }),
+    request("/api/auth/change-password", {
+      method: "POST",
+      body: { currentPassword, newPassword },
+    }),
 };
 
 /* --- Leads --- */
@@ -121,6 +125,14 @@ export const leadFieldsApi = {
   create: (field) => request("/api/lead-fields", { method: "POST", body: field }),
   patch: (id, changes) => request(`/api/lead-fields/${id}`, { method: "PATCH", body: changes }),
   remove: (id) => request(`/api/lead-fields/${id}`, { method: "DELETE" }),
+};
+
+/* --- Blog posts --- */
+export const blogsApi = {
+  list: (signal) => request("/api/blogs/admin/all", { signal }),
+  create: (post) => request("/api/blogs", { method: "POST", body: post }),
+  patch: (id, changes) => request(`/api/blogs/${id}`, { method: "PATCH", body: changes }),
+  remove: (id) => request(`/api/blogs/${id}`, { method: "DELETE" }),
 };
 
 export const PROGRESS_STAGES = [

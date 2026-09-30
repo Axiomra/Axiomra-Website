@@ -1,6 +1,6 @@
 import { Suspense, lazy, useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Megaphone, Star } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import { gsap, MOTION_OK } from "../../../lib/gsap";
 import { hero } from "../../../data/marketingData";
 
@@ -23,7 +23,11 @@ export default function MarketingHero() {
         gsap
           .timeline({ defaults: { ease: "power3.out" } })
           .from("[data-hero]", { autoAlpha: 0, y: 28, duration: 0.9, stagger: 0.12 }, 0.1)
-          .from("[data-hero-img]", { autoAlpha: 0, scale: 1.06, duration: 1.6, ease: "power2.out" }, 0);
+          .from(
+            "[data-hero-img]",
+            { autoAlpha: 0, scale: 1.06, duration: 1.6, ease: "power2.out" },
+            0
+          );
       }, scope);
       return () => ctx.revert();
     });
@@ -68,7 +72,6 @@ export default function MarketingHero() {
             data-hero
             className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2 font-mono text-sm uppercase tracking-[0.18em] text-white/75 backdrop-blur-sm"
           >
-            <Megaphone size={15} strokeWidth={1.5} className="text-accent-vivid" aria-hidden="true" />
             {hero.eyebrow}
           </p>
 
@@ -76,17 +79,21 @@ export default function MarketingHero() {
             data-hero
             className="font-display text-4xl font-semibold leading-[1.06] tracking-tight text-inverse-fg sm:text-5xl lg:text-[3.4rem] xl:text-[4rem]"
           >
-            {hero.titleLead} <span className="text-gradient">{hero.titleAccent}</span> {hero.titleTail}
+            {hero.titleLead} <span className="text-gradient">{hero.titleAccent}</span>{" "}
+            {hero.titleTail}
           </h1>
 
-          <p data-hero className="mt-8 max-w-2xl text-lg leading-relaxed text-inverse-fg/70 md:text-xl">
+          <p
+            data-hero
+            className="mt-8 max-w-2xl text-lg leading-relaxed text-inverse-fg/70 md:text-xl"
+          >
             {hero.body}
           </p>
 
           <div data-hero className="mt-10 flex flex-wrap items-center gap-6">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-lg font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring"
+              className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-lg font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring"
             >
               {hero.ctaText}
               <span className="flex h-11 w-11 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-[1px] group-hover:scale-105">

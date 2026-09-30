@@ -8,8 +8,7 @@ import { explorer, stackGroups } from "../../data/techStackData";
 gsap.registerPlugin(ScrollTrigger);
 
 const prefersReducedMotion = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
 /** Scroll target id for a group. Kept in one place so the rail and the list agree. */
 const anchorId = (id) => `stack-${id}`;
@@ -142,7 +141,7 @@ export default function TechExplorer() {
                 <span
                   ref={progressRef}
                   aria-hidden="true"
-                  className="absolute left-0 top-1 h-[calc(100%-0.5rem)] w-px origin-top bg-gradient-to-b from-accent-vivid to-brand"
+                  className="absolute left-0 top-1 h-[calc(100%-0.5rem)] w-px origin-top bg-gradient-to-b from-grad-sky to-grad-blue"
                 />
                 <ul className="space-y-1">
                   {stackGroups.map((group) => {

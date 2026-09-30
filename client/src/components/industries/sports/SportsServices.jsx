@@ -42,7 +42,7 @@ export default function SportsServices() {
                 {/* Tinted wash so twelve different photos still read as one set. */}
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand/45 via-brand/10 to-transparent mix-blend-multiply"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-grad-blue/45 via-grad-blue/10 to-transparent mix-blend-multiply"
                 />
               </div>
 

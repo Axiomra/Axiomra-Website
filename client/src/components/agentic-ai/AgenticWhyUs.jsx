@@ -53,7 +53,7 @@ export default function AgenticWhyUs() {
 
             <Link
               to="/contact"
-              className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-cta-gradient px-7 py-4 text-base font-semibold text-inverse-fg shadow-glow transition-transform hover:-translate-y-0.5 focus-ring md:text-lg"
+              className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-grad-sky px-7 py-4 text-base font-semibold text-[#0A1428] shadow-glow transition-transform hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {whyUs.ctaText}
               <ArrowRight size={19} className="transition-transform group-hover:translate-x-1" />

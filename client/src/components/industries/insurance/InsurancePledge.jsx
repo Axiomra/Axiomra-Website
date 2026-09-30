@@ -26,7 +26,6 @@ export default function InsurancePledge() {
       data-nav-tone="dark"
       className="relative isolate overflow-hidden border-y border-inverse-fg/10 bg-inverse py-24 md:py-32"
     >
-      <div aria-hidden="true" className="ins-liquid pointer-events-none absolute inset-0 -z-10 opacity-60" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-inverse via-inverse/70 to-inverse"
@@ -42,14 +41,8 @@ export default function InsurancePledge() {
 
         {/* The floats must precede the text they shape, and must live in the
             same block formatting context, hence both wings before the copy. */}
-        <div
-          aria-hidden="true"
-          className="ins-wing ins-wing-left lg lg-dark lg-sheen"
-        />
-        <div
-          aria-hidden="true"
-          className="ins-wing ins-wing-right lg lg-dark lg-sheen"
-        />
+        <div aria-hidden="true" className="ins-wing ins-wing-left lg lg-dark lg-sheen" />
+        <div aria-hidden="true" className="ins-wing ins-wing-right lg lg-dark lg-sheen" />
 
         <div data-reveal className="text-center lg:text-balance">
           {pledge.lines.map((line) => (

@@ -18,7 +18,6 @@ export default function RetailAppTypes() {
       data-nav-tone="dark"
       className="on-dark relative overflow-hidden bg-inverse py-24 md:py-32"
     >
-      <div aria-hidden="true" className="retail-bloom opacity-60" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-40 top-1/3 h-[32rem] w-[32rem] rounded-full bg-accent/20 blur-[150px]"

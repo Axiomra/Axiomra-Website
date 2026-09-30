@@ -51,7 +51,7 @@ export default function TransportationSolutions() {
                 {/* Tinted wash so eight different photos still read as one set. */}
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-brand/40 to-transparent mix-blend-multiply sm:h-72"
+                  className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-grad-blue/40 to-transparent mix-blend-multiply sm:h-72"
                 />
 
                 <div className="lg lg-strong lg-sheen relative -mt-16 px-8 py-7 md:px-9 md:py-8">

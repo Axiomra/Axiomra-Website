@@ -1,6 +1,19 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HeartPulse, GraduationCap, Shirt, Building2, Trophy, ShoppingBag, Truck, Boxes, Landmark, ShieldCheck, Scale, Megaphone } from "lucide-react";
+import {
+  HeartPulse,
+  GraduationCap,
+  Shirt,
+  Building2,
+  Trophy,
+  ShoppingBag,
+  Truck,
+  Boxes,
+  Landmark,
+  ShieldCheck,
+  Scale,
+  Megaphone,
+} from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import ConnectingDots from "../components/ConnectingDots";
 import { INDUSTRY_IMAGES } from "../lib/media";
@@ -122,7 +135,7 @@ export default function Industries({ showHeading = true, showStats = true }) {
           {/* Scrim kept light: the tile labels sit on their own gradient, so the
               photo stays sharp and reads as the subject of the panel. */}
           <div className="absolute inset-0 bg-inverse/35" />
-          <div className="absolute inset-0 bg-gradient-to-br from-inverse/55 via-transparent to-brand-strong/35" />
+          <div className="absolute inset-0 bg-inverse/15" />
 
           {/* The network field: drifting dots wired to their neighbours. */}
           <ConnectingDots className="pointer-events-none" />
@@ -185,12 +198,14 @@ export default function Industries({ showHeading = true, showStats = true }) {
         <div className="relative mx-auto mt-16 max-w-none border-y border-line bg-surface-card px-4 py-12 backdrop-blur-sm sm:px-6">
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 text-center sm:grid-cols-3">
             {[
-              { value: "12+", label: "Verticals served end to end" },
-              { value: "300+", label: "Production deployments shipped" },
-              { value: "24", label: "Countries with live systems" },
+              { value: "25+", label: "Verticals served end to end" },
+              { value: "500+", label: "Production deployments shipped" },
+              { value: "30+", label: "Countries with live systems" },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="font-display text-5xl font-semibold text-brand md:text-6xl">{stat.value}</p>
+                <p className="font-display text-5xl font-semibold text-brand md:text-6xl">
+                  {stat.value}
+                </p>
                 <p className="mt-2 text-base text-ink-dim md:text-lg">{stat.label}</p>
               </div>
             ))}

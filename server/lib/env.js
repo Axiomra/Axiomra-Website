@@ -22,10 +22,10 @@ const optional = z
 const url = (name) =>
   optional.refine((v) => v === undefined || URL.canParse(v), `${name} must be an absolute URL`);
 
-// An origin is scheme://host[:port] with no path. `*` may stand in for part of
-// one hostname label (see originMatcher in app.js); a bare `*` is refused, because
-// with credentialed CORS it would let any site act as the signed-in admin.
-const ORIGIN_RE = /^https?:\/\/[a-z0-9*]([a-z0-9*.-]*[a-z0-9*])?(:\d{1,5})?$/i;
+// An origin is scheme://host[:port] with no path, and no wildcards at all:
+// app.js matches exactly, and any `*.vercel.app` pattern could be satisfied by
+// a project in someone else's Vercel account (see the note in app.js).
+const ORIGIN_RE = /^https?:\/\/[a-z0-9]([a-z0-9.-]*[a-z0-9])?(:\d{1,5})?$/i;
 
 const originList = z
   .string()
@@ -36,18 +36,22 @@ const originList = z
       .filter(Boolean)
   )
   .superRefine((list, ctx) => {
-    if (list.length === 0) ctx.addIssue({ code: "custom", message: "must list at least one origin" });
+    if (list.length === 0)
+      ctx.addIssue({ code: "custom", message: "must list at least one origin" });
     for (const origin of list) {
       if (!ORIGIN_RE.test(origin)) {
         ctx.addIssue({
           code: "custom",
-          message: `"${origin}" is not an origin (expected e.g. https://axiomra.co; a bare * is not allowed)`,
+          message: `"${origin}" is not an exact origin (expected e.g. https://axiomra.co; wildcards are not allowed)`,
         });
       }
     }
   });
 
-const schema = z.object({
+// Vercel sets NODE_ENV=production for preview and production deployments alike.
+const isDeployed = (e) => e.NODE_ENV === "production" || Boolean(e.VERCEL);
+
+const baseSchema = z.object({
   MONGO_URI: z.string().trim().min(1, "MONGO_URI is required"),
   // ALLOWED_ORIGINS is the new name; CLIENT_ORIGIN is still read so existing
   // deployments keep working without an env change.
@@ -65,6 +69,37 @@ const schema = z.object({
     (v) => v === undefined || /^rediss?:\/\//.test(v),
     "REDIS_URL must start with redis:// or rediss://"
   ),
+  OPENAI_API_KEY: optional,
+  // Hard ceiling on the chat assistant's model spend per UTC day, in USD.
+  CHAT_DAILY_USD_CAP: optional
+    .transform((v) => (v === undefined ? undefined : Number(v)))
+    .refine(
+      (v) => v === undefined || (Number.isFinite(v) && v > 0),
+      "CHAT_DAILY_USD_CAP must be a positive number of US dollars"
+    ),
+  NODE_ENV: optional,
+  VERCEL: optional,
+});
+
+// Deployed, the rate limiters (login brute-force above all) must count in one
+// shared store. Per-instance memory on serverless resets on every cold start
+// and splits across concurrent instances, so there is no silent fallback.
+const schema = baseSchema.superRefine((e, ctx) => {
+  if (isDeployed(e) && !e.REDIS_URL) {
+    ctx.addIssue({
+      code: "custom",
+      path: ["REDIS_URL"],
+      message: "REDIS_URL is required in production (rate limits need a shared store)",
+    });
+  }
+  // A paid model with no spend ceiling is not a configuration to start with.
+  if (e.OPENAI_API_KEY && e.CHAT_DAILY_USD_CAP === undefined) {
+    ctx.addIssue({
+      code: "custom",
+      path: ["CHAT_DAILY_USD_CAP"],
+      message: "CHAT_DAILY_USD_CAP is required when OPENAI_API_KEY is set",
+    });
+  }
 });
 
 function load() {
@@ -74,7 +109,9 @@ function load() {
     : parsed.error.issues.map((i) => `${i.path.join(".") || "env"}: ${i.message}`);
 
   const rawOrigins =
-    process.env.ALLOWED_ORIGINS?.trim() || process.env.CLIENT_ORIGIN?.trim() || "http://localhost:5173";
+    process.env.ALLOWED_ORIGINS?.trim() ||
+    process.env.CLIENT_ORIGIN?.trim() ||
+    "http://localhost:5173";
   const origins = originList.safeParse(rawOrigins);
   if (!origins.success) {
     for (const i of origins.error.issues) issues.push(`ALLOWED_ORIGINS: ${i.message}`);

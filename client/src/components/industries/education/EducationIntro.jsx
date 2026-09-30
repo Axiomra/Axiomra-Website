@@ -49,7 +49,7 @@ export default function EducationIntro() {
           {/* Offset fold behind the photo, and a translucent arch over it. */}
           <span
             aria-hidden="true"
-            className="clip-page pointer-events-none absolute -bottom-5 -right-5 h-full w-full bg-gradient-to-br from-brand/35 to-accent-vivid/35"
+            className="clip-page pointer-events-none absolute -bottom-5 -right-5 h-full w-full bg-[#BFDBFE]"
           />
           <img
             src={intro.image}

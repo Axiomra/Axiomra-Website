@@ -53,7 +53,7 @@ export default function CvStack() {
                 onClick={() => setActive(i)}
                 className={`rounded-full px-6 py-3 text-sm font-medium transition-colors focus-ring md:text-base ${
                   selected
-                    ? "bg-cta-gradient text-inverse"
+                    ? "bg-grad-sky text-inverse"
                     : "border border-white/20 text-white/70 hover:border-brand/60 hover:text-white"
                 }`}
               >

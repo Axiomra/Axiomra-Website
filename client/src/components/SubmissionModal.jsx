@@ -80,7 +80,7 @@ export default function SubmissionModal({ open, submission, onClose }) {
           >
             <span
               aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-accent-vivid via-brand to-accent-vivid"
+              className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-grad-sky via-grad-blue to-grad-sky"
             />
 
             <button

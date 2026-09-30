@@ -85,7 +85,7 @@ export default function EducationServices() {
                   {/* Tinted wash so five different stock photos still read as one set. */}
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand/35 via-brand/10 to-transparent mix-blend-multiply"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-grad-blue/35 via-grad-blue/10 to-transparent mix-blend-multiply"
                   />
                 </figure>
 
@@ -106,7 +106,10 @@ export default function EducationServices() {
                     {item.body}
                   </p>
 
-                  <ul data-row-item className="mt-7 grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
+                  <ul
+                    data-row-item
+                    className="mt-7 grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2"
+                  >
                     {item.points.map((point) => (
                       <li key={point} className="flex items-start gap-3 text-base text-content">
                         <span

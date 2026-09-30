@@ -27,7 +27,7 @@ export default function AiDevIndustries() {
         <div className="mb-12 flex justify-center">
           <Link
             to="/#industries"
-            className="group inline-flex items-center gap-2.5 rounded-full border border-line px-6 py-3 text-lg font-semibold transition-colors hover:border-brand/50 hover:text-brand focus-ring"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-[#2563EB] px-6 py-3 text-lg font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-ring"
           >
             {industries.ctaText}
             <ArrowUpRight
@@ -55,7 +55,7 @@ export default function AiDevIndustries() {
                 onClick={() => setActive(i)}
                 className={`rounded-xl2 px-5 py-3 text-base font-semibold transition-colors focus-ring md:text-lg ${
                   selected
-                    ? "bg-assistant text-assistant-ink-soft"
+                    ? "bg-[#2563EB] text-white"
                     : "bg-inverse text-inverse-fg hover:opacity-90"
                 }`}
               >
@@ -103,7 +103,7 @@ export default function AiDevIndustries() {
 
               <Link
                 to="/contact"
-                className="group mt-9 inline-flex items-center gap-2.5 rounded-full border border-line px-6 py-3.5 text-lg font-semibold transition-colors hover:border-brand/50 hover:text-brand focus-ring"
+                className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-[#2563EB] px-6 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-ring"
               >
                 Read more
                 <ArrowUpRight

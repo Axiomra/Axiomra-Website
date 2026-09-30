@@ -30,7 +30,10 @@ export default function RealEstateBuild() {
         decoding="async"
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-40 mix-blend-multiply dark:opacity-[0.18] dark:mix-blend-screen"
       />
-      <div aria-hidden="true" className="re-blueprint-grid pointer-events-none absolute inset-0 -z-10" />
+      <div
+        aria-hidden="true"
+        className="re-blueprint-grid pointer-events-none absolute inset-0 -z-10"
+      />
 
       {/* Loose towers, echoing the clipped edges that bracket the page. */}
       <span
@@ -54,7 +57,10 @@ export default function RealEstateBuild() {
           >
             {build.title}
           </h2>
-          <p data-reveal className="mt-6 max-w-xl text-base leading-relaxed text-content-dim md:text-lg">
+          <p
+            data-reveal
+            className="mt-6 max-w-xl text-base leading-relaxed text-content-dim md:text-lg"
+          >
             {build.body}
           </p>
 
@@ -66,12 +72,16 @@ export default function RealEstateBuild() {
                 data-reveal-group="build-points"
                 className="flex gap-5"
               >
-                <span className="font-mono text-sm text-accent">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-sm text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <div>
                   <h3 className="font-display text-lg font-semibold tracking-tight text-content">
                     {point.title}
                   </h3>
-                  <p className="mt-1.5 max-w-lg text-base leading-relaxed text-content-dim">{point.body}</p>
+                  <p className="mt-1.5 max-w-lg text-base leading-relaxed text-content-dim">
+                    {point.body}
+                  </p>
                 </div>
               </li>
             ))}
@@ -80,7 +90,7 @@ export default function RealEstateBuild() {
           <div data-reveal className="mt-10">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
+              className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {build.ctaText}
               <span className="flex h-11 w-11 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">
@@ -91,10 +101,7 @@ export default function RealEstateBuild() {
         </div>
 
         <figure data-reveal className="relative lg:col-span-6">
-          <div
-            aria-hidden="true"
-            className="clip-plot absolute -inset-3 bg-gradient-to-br from-brand/30 to-accent-vivid/30"
-          />
+          <div aria-hidden="true" className="clip-plot absolute -inset-3 bg-[#BFDBFE]" />
           <img
             src={build.image}
             alt={build.alt}

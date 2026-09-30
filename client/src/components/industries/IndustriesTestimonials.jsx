@@ -54,8 +54,7 @@ export default function IndustriesTestimonials({ data = testimonials }) {
             eyebrow={data.eyebrow}
             title={
               <>
-                {data.titleLead}{" "}
-                <span className="text-gradient">{data.titleAccent}</span>
+                {data.titleLead} <span className="text-gradient">{data.titleAccent}</span>
               </>
             }
           />
@@ -94,7 +93,7 @@ export default function IndustriesTestimonials({ data = testimonials }) {
                   >
                     <span
                       aria-hidden="true"
-                      className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-accent-vivid to-brand font-display text-xl font-semibold text-inverse"
+                      className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-grad-sky to-grad-blue font-display text-xl font-semibold text-inverse"
                     >
                       {initials(current.name)}
                     </span>
@@ -120,7 +119,9 @@ export default function IndustriesTestimonials({ data = testimonials }) {
                     </blockquote>
 
                     <figcaption className="mt-8">
-                      <span className="block text-base font-medium text-content">{current.name}</span>
+                      <span className="block text-base font-medium text-content">
+                        {current.name}
+                      </span>
                       <span className="block text-sm text-content-faint">{current.role}</span>
                     </figcaption>
                   </motion.figure>
@@ -138,7 +139,11 @@ export default function IndustriesTestimonials({ data = testimonials }) {
                 <ChevronLeft size={20} aria-hidden="true" />
               </button>
 
-              <div className="flex items-center gap-2" role="tablist" aria-label="Choose testimonial">
+              <div
+                className="flex items-center gap-2"
+                role="tablist"
+                aria-label="Choose testimonial"
+              >
                 {items.map((t, i) => (
                   <button
                     key={t.name}
@@ -151,7 +156,7 @@ export default function IndustriesTestimonials({ data = testimonials }) {
                       setIndex(i);
                     }}
                     className={`h-2 rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] focus-ring ${
-                      i === index ? "w-8 bg-gradient-to-r from-accent-vivid to-brand" : "w-2 bg-line-strong"
+                      i === index ? "w-8 bg-grad-sky" : "w-2 bg-line-strong"
                     }`}
                   />
                 ))}

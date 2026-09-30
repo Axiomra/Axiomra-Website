@@ -149,7 +149,7 @@ function ColumnForm({ onClose, onCreate }) {
             <button
               type="submit"
               disabled={busy}
-              className="focus-ring rounded-xl bg-cta-gradient px-5 py-2.5 text-sm font-semibold text-[#0A1428] transition-opacity hover:opacity-90 disabled:opacity-60"
+              className="focus-ring rounded-xl bg-grad-sky px-5 py-2.5 text-sm font-semibold text-[#0A1428] transition-opacity hover:opacity-90 disabled:opacity-60"
             >
               {busy ? "Adding…" : "Add column"}
             </button>
@@ -162,6 +162,8 @@ function ColumnForm({ onClose, onCreate }) {
 
 export default function NewColumnDialog({ open, onClose, onCreate }) {
   return (
-    <AnimatePresence>{open && <ColumnForm onClose={onClose} onCreate={onCreate} />}</AnimatePresence>
+    <AnimatePresence>
+      {open && <ColumnForm onClose={onClose} onCreate={onCreate} />}
+    </AnimatePresence>
   );
 }

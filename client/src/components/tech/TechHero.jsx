@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Cpu } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { hero } from "../../data/techStackData";
 import heroImage from "../../assets/tech-hero-stack.webp";
 
@@ -63,7 +63,6 @@ export default function TechHero() {
             custom={0}
             className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2 font-mono text-sm uppercase tracking-[0.18em] text-white/75 backdrop-blur-sm"
           >
-            <Cpu size={15} strokeWidth={1.5} className="text-accent-vivid" aria-hidden="true" />
             {hero.eyebrow}
           </motion.p>
 
@@ -88,10 +87,16 @@ export default function TechHero() {
             {hero.body}
           </motion.p>
 
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="mt-10">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={3}
+            className="mt-10"
+          >
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-lg font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring"
+              className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-lg font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:scale-[0.98] focus-ring"
             >
               {hero.ctaText}
               {/* Button-in-button: the arrow gets its own well so the pill reads

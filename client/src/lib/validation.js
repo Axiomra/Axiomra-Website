@@ -10,6 +10,13 @@
  * feedback, not to be the only gate.
  */
 
+import {
+  getCountryCallingCode,
+  parsePhoneNumberFromString,
+  validatePhoneNumberLength,
+} from "libphonenumber-js/min";
+import { COUNTRIES } from "../data/countryCodes";
+
 /* A name is letters plus the punctuation that appears inside real names
    (O'Brien, Jean-Luc, Dr. Ana). Digits and symbols are what bot submissions
    and pasted junk actually contain, so they are the thing to reject. */
@@ -18,7 +25,8 @@ const NAME_LETTER = /\p{L}/gu;
 
 /* Deliberately stricter than the browser's type="email" check, which happily
    accepts "a@b"; a TLD-less address bounces and the lead is lost. */
-const EMAIL_RE = /^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,24}$/;
+const EMAIL_RE =
+  /^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,24}$/;
 
 /** Digits only; the visitor may type spaces, dashes or brackets. */
 const digitsOf = (value) => String(value ?? "").replace(/\D/g, "");
@@ -28,6 +36,24 @@ const digitsOf = (value) => String(value ?? "").replace(/\D/g, "");
  * at home ("0300 1234567"), but the dial code makes the leading 0 redundant.
  */
 const stripTrunk = (digits) => digits.replace(/^0+/, "");
+
+/** "+1809" -> "+1": a few picker entries fold the area code into the dial code. */
+const callingCodeOf = (country) => `+${getCountryCallingCode(country.iso)}`;
+
+/**
+ * Parse what the visitor typed against the selected country. The picker lists
+ * some countries with the area code folded into the dial code ("+1809" for the
+ * Dominican Republic), so when the plain national parse fails the number is
+ * retried with the full dial code in front.
+ */
+function parsePhone(value, country) {
+  const raw = String(value ?? "").trim();
+  if (!raw || !country) return undefined;
+  const parsed = parsePhoneNumberFromString(raw, country.iso);
+  if (parsed?.isValid() || raw.startsWith("+")) return parsed;
+  const withDial = parsePhoneNumberFromString(`${country.dial}${stripTrunk(digitsOf(raw))}`);
+  return withDial?.isValid() ? withDial : parsed;
+}
 
 export function validateName(value) {
   const name = String(value ?? "").trim();
@@ -54,25 +80,32 @@ export function validateEmail(value) {
 }
 
 /**
- * Check the national number against the selected country's numbering plan.
- * `country` is a COUNTRIES entry, so switching the picker re-validates against
- * a different digit count without any extra wiring.
+ * Check the number against the selected country's real numbering plan, not
+ * just a digit count: with "+1" picked, a Pakistani mobile or a made-up
+ * "555 000 0000" is rejected even though both have ten digits.
  */
 export function validatePhone(value, country, { required = false } = {}) {
   const raw = String(value ?? "").trim();
   if (!raw) return required ? "Please enter your phone number." : "";
   if (/[^\d\s()+.-]/.test(raw)) return "Phone number can only contain digits.";
+  if (!digitsOf(raw)) return "Enter the digits of your phone number.";
 
-  const digits = stripTrunk(digitsOf(raw));
-  if (!digits) return "Enter the digits of your phone number.";
-
-  const min = country?.min ?? 6;
-  const max = country?.max ?? 15;
   const label = country?.name ? `${country.name} (${country.dial})` : "this country";
+  const parsed = parsePhone(raw, country);
 
-  if (digits.length < min || digits.length > max) {
-    const expected = min === max ? `${min} digits` : `${min}-${max} digits`;
-    return `A ${label} number needs ${expected}; you entered ${digits.length}.`;
+  // Typed their own "+92 ..." while a different code is selected.
+  if (parsed && country && `+${parsed.countryCallingCode}` !== callingCodeOf(country)) {
+    const other = COUNTRIES.find((c) => c.iso === parsed.country);
+    const name = other
+      ? `${other.name} (+${parsed.countryCallingCode})`
+      : `+${parsed.countryCallingCode}`;
+    return `This is a ${name} number. Select that country, or enter a ${label} number.`;
+  }
+  if (!parsed?.isValid()) {
+    const length = validatePhoneNumberLength(raw, country?.iso);
+    if (length === "TOO_SHORT") return `This is too short for a ${label} number.`;
+    if (length === "TOO_LONG") return `This is too long for a ${label} number.`;
+    return `Enter a valid ${label} number.`;
   }
   return "";
 }
@@ -117,8 +150,10 @@ export function validateContactForm(form, country, { fields, requirePhone = fals
   return Object.fromEntries(Object.entries(errors).filter(([, msg]) => msg));
 }
 
-/** The one dialable string the team gets, e.g. "+92 3001234567". */
+/** The one dialable string the team gets, e.g. "+92 300 1234567". */
 export function formatPhone(value, country) {
+  const parsed = parsePhone(value, country);
+  if (parsed?.isValid()) return parsed.formatInternational();
   const digits = stripTrunk(digitsOf(value));
   return digits ? `${country.dial} ${digits}` : "";
 }

@@ -79,7 +79,7 @@ export default function CvWhyUs() {
                   {/* Back, pre-rotated so it reads upright once the tile lands. */}
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 flex flex-col items-center justify-center rounded-xl2 border border-brand bg-gradient-to-br from-brand/10 via-surface-card to-accent-vivid/10 px-5 text-center [backface-visibility:hidden] [transform:rotateX(180deg)]"
+                    className="absolute inset-0 flex flex-col items-center justify-center rounded-xl2 border border-brand bg-surface-wash px-5 text-center [backface-visibility:hidden] [transform:rotateX(180deg)]"
                   >
                     <span className="font-display text-lg font-semibold text-brand md:text-xl">
                       {s.label}
@@ -125,7 +125,7 @@ export default function CvWhyUs() {
               {/* Brand wash that fades up on hover, kept behind the copy. */}
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-accent-vivid/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                className="pointer-events-none absolute inset-0 bg-grad-sky/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
               />
 
               <span className="relative font-display text-4xl font-semibold text-brand transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:scale-110 md:text-5xl">

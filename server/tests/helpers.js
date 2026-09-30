@@ -2,6 +2,8 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 
 export const ORIGIN = "http://localhost:5173";
+// A client branch-preview URL, listed exactly as a real deployment would.
+export const PREVIEW_ORIGIN = "https://axiomra-git-staging-hamzajiis-projects.vercel.app";
 
 /**
  * Boot the app against a throwaway in-memory Mongo. The environment has to be
@@ -12,13 +14,15 @@ export async function startApp(overrides = {}) {
   const mongo = await MongoMemoryServer.create();
   Object.assign(process.env, {
     MONGO_URI: mongo.getUri("axiomra-test"),
-    ALLOWED_ORIGINS: `${ORIGIN},https://axiomra-*-hamzajiis-projects.vercel.app`,
+    ALLOWED_ORIGINS: `${ORIGIN},${PREVIEW_ORIGIN}`,
     CLIENT_ORIGIN: "",
     JWT_SECRET: "t".repeat(40),
     GMAIL: "",
     APP_PASSWORD: "",
     REDIS_URL: "",
     ADMIN_PANEL_URL: "",
+    OPENAI_API_KEY: "",
+    CHAT_DAILY_USD_CAP: "",
     ...overrides,
   });
 

@@ -62,9 +62,7 @@ export default function AgenticProcess() {
 
                   <div
                     className={
-                      right
-                        ? "md:col-start-2 md:pl-4"
-                        : "md:col-start-1 md:pr-4 md:text-right"
+                      right ? "md:col-start-2 md:pl-4" : "md:col-start-1 md:pr-4 md:text-right"
                     }
                   >
                     <span className="font-mono text-sm text-brand/70 md:text-base">
@@ -86,7 +84,7 @@ export default function AgenticProcess() {
         <div className="mt-12 text-center">
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-2.5 rounded-full bg-cta-gradient px-7 py-4 text-base font-semibold text-inverse-fg shadow-glow transition-transform hover:-translate-y-0.5 focus-ring md:text-lg"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-grad-sky px-7 py-4 text-base font-semibold text-[#0A1428] shadow-glow transition-transform hover:-translate-y-0.5 focus-ring md:text-lg"
           >
             {process.ctaText}
             <ArrowRight size={19} className="transition-transform group-hover:translate-x-1" />

@@ -44,7 +44,9 @@ function Badge({ icon: Icon, name, note }) {
         <Icon size={24} strokeWidth={1.6} className="text-brand" />
       </span>
       <span className="min-w-0">
-        <span className="block whitespace-nowrap font-display text-lg font-semibold text-content">{name}</span>
+        <span className="block whitespace-nowrap font-display text-lg font-semibold text-content">
+          {name}
+        </span>
         <span className="block whitespace-nowrap font-mono text-xs uppercase tracking-[0.12em] text-content-faint">
           {note}
         </span>
@@ -59,8 +61,7 @@ function Lane({ reverse = false }) {
     <div
       className="group overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
       style={{
-        WebkitMaskImage:
-          "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+        WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
       }}
     >
       <div

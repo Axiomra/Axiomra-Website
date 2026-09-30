@@ -54,3 +54,6 @@ id_*
 *_rsa
 *_ed25519
 *.pub
+
+# Reference documents (SEO reviews, briefs). Kept local, never committed.
+*.pdf

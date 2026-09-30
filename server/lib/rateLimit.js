@@ -4,8 +4,9 @@
  * On Vercel every function instance has its own memory, so an in-memory
  * counter resets on each cold start and is split across concurrent instances;
  * a login limit of 5 becomes 5 per instance. With REDIS_URL set (Upstash or any
- * Redis) all instances count against the same keys. Without it we fall back to
- * memory, which is correct for local development and warned about when deployed.
+ * Redis) all instances count against the same keys. lib/env.js refuses to start
+ * a deployed instance without REDIS_URL, so the in-memory store below is only
+ * ever used in local development and tests.
  */
 import { rateLimit, ipKeyGenerator } from "express-rate-limit";
 import { RedisStore } from "rate-limit-redis";
@@ -14,8 +15,6 @@ import { env } from "./env.js";
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
-
-const deployed = process.env.NODE_ENV === "production" || Boolean(process.env.VERCEL);
 
 // One connection per function instance, reused across warm invocations (same
 // pattern as the Mongo connection in db.js).
@@ -35,12 +34,7 @@ function redisClient() {
   return globalThis.__axiomraRedis;
 }
 
-const redis = redisClient();
-if (!redis && deployed) {
-  console.warn(
-    "REDIS_URL is not set: rate limits are per function instance and reset on cold start."
-  );
-}
+export const redis = redisClient();
 
 // Each limiter needs its own store instance and key prefix.
 function store(name) {
@@ -53,8 +47,10 @@ function store(name) {
 
 const byIp = (req) => ipKeyGenerator(req.ip);
 
+const STORE_DOWN = { error: "Service temporarily unavailable. Please try again shortly." };
+
 function limiter(name, { windowMs, limit, message, failOpen, ...rest }) {
-  return rateLimit({
+  const middleware = rateLimit({
     windowMs,
     limit,
     standardHeaders: "draft-7",
@@ -63,10 +59,20 @@ function limiter(name, { windowMs, limit, message, failOpen, ...rest }) {
     store: store(name),
     message: { error: message },
     // Store outage: the general API and contact form stay up, while
-    // credential endpoints refuse rather than go unlimited.
+    // credential endpoints and the paid chat refuse rather than go unlimited.
     passOnStoreError: failOpen,
     ...rest,
   });
+  if (failOpen) return middleware;
+
+  // Fail closed with an explicit 503. express-rate-limit hands a store error
+  // to next(err), which would otherwise surface as a generic 500.
+  return (req, res, next) =>
+    middleware(req, res, (err) => {
+      if (!err) return next();
+      console.error(`Rate limit store unavailable (${name}):`, err.message);
+      return res.status(503).json(STORE_DOWN);
+    });
 }
 
 export const apiLimiter = limiter("api", {
@@ -127,4 +133,14 @@ export const contactLimiter = limiter("contact", {
   limit: 5,
   message: "Too many messages from this network. Please try again later or email us directly.",
   failOpen: true,
+});
+
+// Every chat turn is a paid model call, so it gets its own, tighter bucket on
+// top of the general API limit, and fails closed: an unmetered chat during a
+// store outage is an open tap on the OpenAI bill.
+export const chatLimiter = limiter("chat", {
+  windowMs: 15 * MINUTE,
+  limit: 30,
+  message: "You're sending messages quickly. Please wait a few minutes and try again.",
+  failOpen: false,
 });

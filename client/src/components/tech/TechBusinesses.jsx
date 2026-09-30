@@ -11,10 +11,22 @@ import enterpriseImg from "../../assets/biz-enterprise.webp";
 /* Kept beside the component rather than in the data file: these are art
    direction for this layout, not copy that another page could reuse. */
 const SEGMENT_IMAGES = {
-  startups: { src: startupsImg, alt: "Two founders reviewing early product notes at a shared desk" },
-  "scale-ups": { src: scaleupsImg, alt: "Engineers working across several screens in an open studio" },
-  "mid-market": { src: midMarketImg, alt: "A product team reviewing documents around a meeting table" },
-  enterprise: { src: enterpriseImg, alt: "Two colleagues presenting at a whiteboard in a corporate office" },
+  startups: {
+    src: startupsImg,
+    alt: "Two founders reviewing early product notes at a shared desk",
+  },
+  "scale-ups": {
+    src: scaleupsImg,
+    alt: "Engineers working across several screens in an open studio",
+  },
+  "mid-market": {
+    src: midMarketImg,
+    alt: "A product team reviewing documents around a meeting table",
+  },
+  enterprise: {
+    src: enterpriseImg,
+    alt: "Two colleagues presenting at a whiteboard in a corporate office",
+  },
 };
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -44,8 +56,7 @@ export default function TechBusinesses() {
           onInverse
           title={
             <>
-              {businesses.titleLead}{" "}
-              <span className="text-gradient">{businesses.titleAccent}</span>
+              {businesses.titleLead} <span className="text-gradient">{businesses.titleAccent}</span>
             </>
           }
           subtitle={businesses.body}
@@ -76,7 +87,7 @@ export default function TechBusinesses() {
                   // layoutId slides the marker between tabs instead of cross-fading it.
                   <motion.span
                     layoutId="segment-underline"
-                    className="absolute inset-x-3 -bottom-px h-[2px] rounded-full bg-gradient-to-r from-accent-vivid to-brand"
+                    className="absolute inset-x-3 -bottom-px h-[2px] rounded-full bg-gradient-to-r from-grad-sky to-grad-blue"
                     transition={{ duration: 0.5, ease: EASE }}
                   />
                 )}

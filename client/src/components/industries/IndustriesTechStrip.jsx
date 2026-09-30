@@ -73,7 +73,7 @@ export default function IndustriesTechStrip({ data = techStrip }) {
                   // layoutId slides the marker between tabs instead of cross-fading it.
                   <motion.span
                     layoutId="tech-tab-underline"
-                    className="absolute inset-x-3 -bottom-px h-[2px] rounded-full bg-gradient-to-r from-accent-vivid to-brand"
+                    className="absolute inset-x-3 -bottom-px h-[2px] rounded-full bg-gradient-to-r from-grad-sky to-grad-blue"
                     transition={{ duration: 0.5, ease: EASE }}
                   />
                 )}
@@ -99,7 +99,9 @@ export default function IndustriesTechStrip({ data = techStrip }) {
           <ul
             key={active.id}
             className={`flex w-max gap-3 ${
-              reduced ? "" : "animate-marquee hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]"
+              reduced
+                ? ""
+                : "animate-marquee hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]"
             }`}
           >
             {pills.map((item, i) => (

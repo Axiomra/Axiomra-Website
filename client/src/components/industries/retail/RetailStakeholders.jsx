@@ -9,9 +9,7 @@ import { stakeholders } from "../../../data/retailData";
  */
 export default function RetailStakeholders() {
   return (
-    <section className="relative overflow-hidden bg-surface py-24 md:py-32">
-      <div aria-hidden="true" className="retail-bloom opacity-30" />
-
+    <section className="relative overflow-hidden bg-surface-wash py-24 md:py-32">
       <div className="relative z-10 mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow={stakeholders.eyebrow}
@@ -23,7 +21,11 @@ export default function RetailStakeholders() {
           }
         />
 
-        <Stagger as="ul" step={0.1} className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <Stagger
+          as="ul"
+          step={0.1}
+          className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4"
+        >
           {stakeholders.items.map((item) => (
             <StaggerItem as="li" key={item.label} className="group relative">
               <figure className="clip-basket relative overflow-hidden">

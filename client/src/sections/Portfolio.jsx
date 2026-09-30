@@ -127,7 +127,7 @@ export default function Portfolio({ showHeading = true, compact = false }) {
             {/* Light sweep that crosses the card on hover. */}
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-brand/10 to-transparent transition-transform duration-[900ms] ease-out group-hover:translate-x-full"
+              className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-grad-blue/10 to-transparent transition-transform duration-[900ms] ease-out group-hover:translate-x-full"
             />
             <div className="relative">
               <h3 className="font-display text-2xl font-semibold text-content transition-colors duration-300 group-hover:text-brand">

@@ -177,8 +177,44 @@
   border-radius: 8px;
 }
 
+/* Homepage contact card: re-points the form tokens at a blue palette so the
+   inputs, phone/select dropdowns and accents all follow without per-field edits. */
+.form-blue {
+  --field-dark: 22 52 120;
+  --field-dark-deep: 12 30 78;
+  --field-label: 165 200 255;
+  --accent-vivid: 77 148 255;
+  --accent-vivid-hover: 110 170 255;
+  --on-accent: 255 255 255;
+}
+
+/* Homepage cost calculator: transparent light-blue glass. The gradient stays
+   translucent so the page shows through, and the card on top frosts it. */
+.calc-glass {
+  background: linear-gradient(
+    135deg,
+    rgb(219 234 254 / 0.75),
+    rgb(191 219 254 / 0.45) 45%,
+    rgb(239 246 255 / 0.7)
+  );
+}
+
+.dark .calc-glass {
+  background: linear-gradient(
+    135deg,
+    rgb(30 64 175 / 0.28),
+    rgb(23 50 130 / 0.18) 45%,
+    rgb(37 99 235 / 0.25)
+  );
+}
+
+/* Points the light field variant's accent at the calculator's sky blue. */
+.calc-field-blue {
+  --accent: 79 168 224;
+}
+
 .text-gradient {
-  background: linear-gradient(90deg, #14d8c4 0%, #788be3 100%);
+  background: linear-gradient(90deg, rgb(var(--grad-sky)) 0%, #2563eb 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -212,112 +248,19 @@
   position: relative;
 }
 
-.ai-dev-page .bg-surface {
-  background-color: rgb(var(--surface) / 0.84);
-}
-
+.ai-dev-page .bg-surface,
 .ai-dev-page .bg-surface-subtle {
-  background-color: rgb(var(--surface-subtle) / 0.84);
+  background-color: transparent;
 }
 
+/* One flat light blue behind the whole page. */
 .ai-dev-bg {
   position: fixed;
   inset: 0;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-}
-
-/* Drifting colour blooms. */
-.ai-dev-bg::before {
-  content: "";
-  position: absolute;
-  inset: -25%;
-  background:
-    radial-gradient(40% 40% at 18% 22%, rgb(var(--accent-vivid) / 0.28), transparent 66%),
-    radial-gradient(36% 36% at 84% 16%, rgb(var(--brand) / 0.26), transparent 68%),
-    radial-gradient(44% 44% at 62% 86%, rgb(var(--brand-strong) / 0.22), transparent 70%);
-  background-size:
-    160% 160%,
-    150% 150%,
-    180% 180%;
-  filter: blur(10px);
-  animation: ai-dev-aurora 32s ease-in-out infinite alternate;
-}
-
-/* Slow circuit grid, faded out at the edges so it never meets the viewport. */
-.ai-dev-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgb(var(--brand) / 0.22) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--brand) / 0.22) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(72% 72% at 50% 40%, #000 8%, transparent 78%);
-  -webkit-mask-image: radial-gradient(72% 72% at 50% 40%, #000 8%, transparent 78%);
-  animation: ai-dev-grid 48s linear infinite;
-}
-
-@keyframes ai-dev-aurora {
-  0% {
-    background-position:
-      0% 25%,
-      100% 0%,
-      50% 100%;
-  }
-  50% {
-    background-position:
-      35% 65%,
-      65% 35%,
-      25% 65%;
-  }
-  100% {
-    background-position:
-      65% 15%,
-      20% 70%,
-      75% 90%;
-  }
-}
-
-@keyframes ai-dev-grid {
-  to {
-    background-position: 72px 72px;
-  }
-}
-
-.tech-aurora {
-  background:
-    radial-gradient(60% 55% at 12% 20%, rgb(var(--accent-vivid) / 0.18), transparent 62%),
-    radial-gradient(55% 50% at 82% 12%, rgb(var(--brand) / 0.2), transparent 65%),
-    radial-gradient(70% 60% at 50% 95%, rgb(var(--brand-strong) / 0.14), transparent 70%);
-  background-size:
-    180% 180%,
-    170% 170%,
-    200% 200%;
-  filter: blur(6px);
-  animation: tech-aurora-drift 26s ease-in-out infinite alternate;
-}
-
-@keyframes tech-aurora-drift {
-  0% {
-    background-position:
-      0% 30%,
-      100% 0%,
-      50% 100%;
-  }
-  50% {
-    background-position:
-      30% 60%,
-      70% 30%,
-      30% 70%;
-  }
-  100% {
-    background-position:
-      60% 20%,
-      20% 60%,
-      70% 90%;
-  }
+  background-color: rgb(var(--wash));
 }
 
 .tech-grid {
@@ -340,8 +283,8 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgb(var(--accent-vivid) / 0.9) 45%,
-    rgb(var(--brand) / 0.9) 55%,
+    rgb(var(--grad-sky) / 0.9) 45%,
+    rgb(var(--grad-blue) / 0.9) 55%,
     transparent 100%
   );
   animation: tech-sweep-slide 9s ease-in-out infinite;
@@ -489,10 +432,7 @@
    designed surface rather than a stock background. */
 
 .mk-texture {
-  background-color: rgb(var(--surface-subtle));
-  background-image:
-    radial-gradient(60% 70% at 15% 20%, rgb(var(--accent-vivid) / 0.16), transparent 60%),
-    radial-gradient(55% 60% at 85% 80%, rgb(var(--brand) / 0.14), transparent 65%);
+  background-color: rgb(var(--wash));
 }
 
 .mk-hex-lattice {
@@ -572,10 +512,7 @@
    as a planning surface rather than a stock background. */
 
 .sc-texture {
-  background-color: rgb(var(--surface-subtle));
-  background-image:
-    radial-gradient(55% 65% at 12% 18%, rgb(var(--brand) / 0.16), transparent 62%),
-    radial-gradient(60% 70% at 88% 78%, rgb(var(--accent-vivid) / 0.14), transparent 66%);
+  background-color: rgb(var(--wash));
 }
 
 .sc-lane-grid {
@@ -657,10 +594,7 @@
    surface rather than a stock background. */
 
 .sp-texture {
-  background-color: rgb(var(--surface-subtle));
-  background-image:
-    radial-gradient(58% 68% at 18% 22%, rgb(var(--accent-vivid) / 0.16), transparent 62%),
-    radial-gradient(58% 65% at 82% 78%, rgb(var(--brand) / 0.15), transparent 66%);
+  background-color: rgb(var(--wash));
 }
 
 .sp-pitch-lines {
@@ -784,10 +718,7 @@
    reads as a drawing board rather than a stock texture. */
 
 .re-texture {
-  background-color: rgb(var(--surface-subtle));
-  background-image:
-    radial-gradient(56% 66% at 16% 20%, rgb(var(--brand) / 0.16), transparent 62%),
-    radial-gradient(58% 68% at 84% 80%, rgb(var(--accent-vivid) / 0.15), transparent 66%);
+  background-color: rgb(var(--wash));
 }
 
 .re-blueprint-grid {
@@ -894,10 +825,7 @@
    rather than a stock background. */
 
 .edu-texture {
-  background-color: rgb(var(--surface-subtle));
-  background-image:
-    radial-gradient(58% 68% at 14% 18%, rgb(var(--accent-vivid) / 0.15), transparent 62%),
-    radial-gradient(56% 66% at 86% 82%, rgb(var(--brand) / 0.15), transparent 66%);
+  background-color: rgb(var(--wash));
 }
 
 .edu-ruled-lines {
@@ -1010,10 +938,7 @@
    rather than a stock background. */
 
 .fin-texture {
-  background-color: rgb(var(--surface-subtle));
-  background-image:
-    radial-gradient(60% 70% at 12% 16%, rgb(var(--brand) / 0.16), transparent 62%),
-    radial-gradient(56% 64% at 88% 84%, rgb(var(--accent-vivid) / 0.16), transparent 66%);
+  background-color: rgb(var(--wash));
 }
 
 .fin-grid-lines {
@@ -1249,52 +1174,6 @@
     rgb(var(--glass-rim) / 0.1) 42%,
     transparent 68%
   );
-}
-
-/* Colour blooms behind the glass. Without something saturated underneath, a
-   frosted panel on a white page just reads as a grey box. */
-.retail-bloom {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.retail-bloom::before {
-  content: "";
-  position: absolute;
-  inset: -20%;
-  background:
-    radial-gradient(38% 38% at 16% 24%, rgb(var(--accent-vivid) / 0.3), transparent 66%),
-    radial-gradient(34% 34% at 86% 18%, rgb(var(--brand) / 0.28), transparent 68%),
-    radial-gradient(42% 42% at 58% 88%, rgb(var(--brand-strong) / 0.22), transparent 70%);
-  background-size:
-    160% 160%,
-    150% 150%,
-    180% 180%;
-  filter: blur(14px);
-  animation: retail-bloom-drift 34s ease-in-out infinite alternate;
-}
-
-@keyframes retail-bloom-drift {
-  0% {
-    background-position:
-      0% 25%,
-      100% 0%,
-      50% 100%;
-  }
-  50% {
-    background-position:
-      38% 62%,
-      62% 38%,
-      22% 62%;
-  }
-  100% {
-    background-position:
-      68% 12%,
-      18% 72%,
-      78% 92%;
-  }
 }
 
 /* ── Retail page: clip-path shapes ─────────────────────────────────────────
@@ -1675,10 +1554,7 @@
    than a stock background. */
 
 .med-texture {
-  background-color: rgb(var(--surface-subtle));
-  background-image:
-    radial-gradient(60% 70% at 14% 16%, rgb(var(--accent-vivid) / 0.16), transparent 62%),
-    radial-gradient(56% 64% at 86% 84%, rgb(var(--brand) / 0.16), transparent 66%);
+  background-color: rgb(var(--wash));
 }
 
 .med-ecg-paper {
@@ -1896,10 +1772,7 @@
    surface rather than a stock background. */
 
 .legal-texture {
-  background-color: rgb(var(--surface-subtle));
-  background-image:
-    radial-gradient(58% 68% at 14% 18%, rgb(var(--accent-vivid) / 0.16), transparent 62%),
-    radial-gradient(56% 64% at 86% 82%, rgb(var(--brand) / 0.16), transparent 66%);
+  background-color: rgb(var(--wash));
 }
 
 .legal-rule-lines {
@@ -2052,52 +1925,6 @@
      cut-out a readable border, so it goes back to a solid pane. */
   .legal-cutout {
     clip-path: none;
-  }
-}
-
-/* ── Insurance page: the liquid ground ─────────────────────────────────────
-   The frosted panels on this page use the shared kit in styles/liquid-glass.css
-   (`.lg`, `.lg-dark`, `.lg-soft`, `.lg-strong`, `.lg-sheen`) rather than a
-   second one. What the page adds is something for those panes to refract:
-   without a ground that moves, a backdrop-filter over flat colour costs a
-   compositing layer and buys nothing. */
-
-.ins-liquid {
-  background:
-    radial-gradient(42% 44% at 18% 24%, rgb(var(--accent-vivid) / 0.3), transparent 66%),
-    radial-gradient(38% 40% at 82% 18%, rgb(var(--brand) / 0.32), transparent 68%),
-    radial-gradient(46% 46% at 58% 88%, rgb(var(--brand-strong) / 0.26), transparent 70%);
-  background-size:
-    165% 165%,
-    155% 155%,
-    185% 185%;
-  animation: ins-liquid-drift 34s ease-in-out infinite alternate;
-}
-
-@keyframes ins-liquid-drift {
-  0% {
-    background-position:
-      0% 28%,
-      100% 0%,
-      50% 100%;
-  }
-  50% {
-    background-position:
-      38% 66%,
-      62% 34%,
-      22% 62%;
-  }
-  100% {
-    background-position:
-      68% 12%,
-      18% 72%,
-      78% 92%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ins-liquid {
-    animation: none;
   }
 }
 
@@ -2279,10 +2106,7 @@
    over the top, so it reads as a worked surface rather than a stock texture. */
 
 .ins-texture {
-  background-color: rgb(var(--surface-subtle));
-  background-image:
-    radial-gradient(58% 68% at 14% 18%, rgb(var(--accent-vivid) / 0.16), transparent 62%),
-    radial-gradient(56% 66% at 86% 82%, rgb(var(--brand) / 0.16), transparent 66%);
+  background-color: rgb(var(--wash));
 }
 
 .ins-grid-lines {
@@ -2420,4 +2244,358 @@
     1.25rem 94%;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
+}
+
+/* Axiomra Assistant launcher; see components/chat/ChatWidget.jsx. All of it
+   is decorative and the reduced-motion rule above switches it off. */
+@keyframes chat-glow {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+.chat-glow {
+  animation: chat-glow 2.8s ease-in-out infinite;
+}
+
+/* Re-points the assistant tokens at a light blue for the chat widget only. */
+.chat-blue {
+  --assistant: 147 197 253;
+  --assistant-ink: 30 58 138;
+  --assistant-ink-soft: 30 64 175;
+}
+
+/* Pixel mascot: a gentle hover. Whole-pixel moves only, so the sprite never
+   lands between device pixels. */
+@keyframes chat-bot-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+.chat-bot-bob {
+  animation: chat-bot-bob 2.4s steps(2, jump-none) infinite;
+}
+
+@keyframes chat-typing {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+.chat-typing-dot {
+  animation: chat-typing 1s ease-in-out infinite;
+}
+
+/* Home hero carousel: slow push-in on the active slide, and the indicator fill. */
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+.hero-kenburns {
+  animation: hero-kenburns 7s ease-out both;
+}
+
+/* Home expertise orbit: rings spin, their chips counter-spin to stay upright. */
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes orbit-spin-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes orbit-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+.orbit-spin {
+  animation: orbit-spin linear infinite;
+}
+.orbit-spin-rev {
+  animation: orbit-spin-rev linear infinite;
+}
+.orbit-pulse {
+  animation: orbit-pulse 2.4s ease-out infinite;
+}
+.orbit:hover .orbit-ring,
+.orbit:hover .orbit-item {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit-spin,
+  .orbit-spin-rev,
+  .orbit-pulse,
+  .hero-kenburns {
+    animation: none;
+  }
+}
+
+/* Glossy card: sheen on top, soft accent glow underneath (Contact page project examples). */
+.glossy-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      160deg,
+      rgb(255 255 255 / 0.9) 0%,
+      rgb(255 255 255 / 0.35) 38%,
+      transparent 60%
+    ),
+    rgb(var(--surface-card));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 2px 6px -2px rgb(10 20 40 / 0.08),
+    0 14px 30px -12px rgb(var(--accent-vivid) / 0.45);
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease;
+}
+.glossy-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 45%;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.55), transparent);
+}
+.glossy-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 4px 10px -4px rgb(10 20 40 / 0.1),
+    0 22px 40px -14px rgb(var(--accent-vivid) / 0.55);
+}
+.dark .glossy-card {
+  background:
+    linear-gradient(
+      160deg,
+      rgb(255 255 255 / 0.08) 0%,
+      rgb(255 255 255 / 0.02) 40%,
+      transparent 60%
+    ),
+    rgb(var(--surface-card));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.1),
+    0 14px 30px -12px rgb(var(--accent-vivid) / 0.35);
+}
+.dark .glossy-card::before {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.05), transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .glossy-card,
+  .glossy-card:hover {
+    transform: none;
+  }
+}
+
+/* Footer social icons; see components/Footer.jsx. Each link sets its brand
+   gradient (--social-fill) and glow colour (--social-glow). On hover the brand
+   fill blooms out from the centre, a glossy sheen sweeps across, the disc lifts
+   with a coloured glow and the glyph pops. */
+.social-btn {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 9999px;
+  border: 1px solid rgb(var(--on-inverse) / 0.15);
+  background: rgb(var(--on-inverse) / 0.04);
+  color: rgb(var(--on-inverse) / 0.65);
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    color 0.25s ease;
+}
+.social-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--social-fill);
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.social-btn::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(
+    115deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+.social-btn svg {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.social-btn:hover,
+.social-btn:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgb(255 255 255 / 0.5);
+  color: #fff;
+  box-shadow:
+    0 12px 26px -8px rgb(var(--social-glow) / 0.75),
+    0 0 0 4px rgb(var(--social-glow) / 0.18);
+}
+.social-btn:hover::before,
+.social-btn:focus-visible::before {
+  transform: scale(1);
+}
+.social-btn:hover::after,
+.social-btn:focus-visible::after {
+  transform: translateX(100%);
+  transition: transform 0.7s ease;
+}
+.social-btn:hover svg,
+.social-btn:focus-visible svg {
+  transform: scale(1.18) rotate(-8deg);
+}
+
+/* Footer "Discuss Your Project": dark blue pill with white text. Hover turns
+   it glossy (brighter gradient plus a top highlight), sweeps a shine across,
+   adds a blue glow and swaps the label to a light-blue gradient. */
+.discuss-btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(180deg, #1e3a8a 0%, #172554 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.14),
+    0 8px 20px -10px rgb(15 23 42 / 0.8);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.discuss-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.35) 0%,
+      rgb(255 255 255 / 0.08) 48%,
+      transparent 52%
+    ),
+    linear-gradient(135deg, #1d4ed8 0%, #2563eb 45%, #0ea5e9 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.discuss-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 35%,
+    rgb(255 255 255 / 0.45) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+.discuss-btn__label {
+  position: relative;
+  transition: letter-spacing 0.3s ease;
+}
+.discuss-btn:hover,
+.discuss-btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.35),
+    0 14px 34px -10px rgb(37 99 235 / 0.85),
+    0 0 40px -8px rgb(56 189 248 / 0.55);
+}
+.discuss-btn:hover::before,
+.discuss-btn:focus-visible::before {
+  opacity: 1;
+}
+.discuss-btn:hover::after,
+.discuss-btn:focus-visible::after {
+  transform: translateX(120%);
+  transition: transform 0.8s ease;
+}
+.discuss-btn:hover .discuss-btn__label,
+.discuss-btn:focus-visible .discuss-btn__label {
+  letter-spacing: 0.02em;
+  background: linear-gradient(90deg, #fff 0%, #e0f2fe 50%, #fff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+/* Certificates marquee; see sections/Awards.jsx. It never pauses: not on
+   hover, and not under reduced motion either (by request), which is why the
+   duration and iteration count are restated over the global rule above. */
+@keyframes cert-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.cert-marquee {
+  animation: cert-marquee 45s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cert-marquee {
+    animation-duration: 45s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+@media (max-width: 767px) {
+  .cert-marquee {
+    animation-duration: 32s;
+  }
 }

@@ -14,7 +14,7 @@ export default function SupplyChainIntro() {
   return (
     <section
       ref={scope}
-      className="clip-chevron-bottom relative -mt-px bg-gradient-to-b from-brand/20 via-brand/10 to-accent-vivid/12 pb-44 pt-20 md:pb-56 md:pt-28"
+      className="clip-chevron-bottom relative -mt-px bg-surface-wash pb-44 pt-20 md:pb-56 md:pt-28"
     >
       <div
         aria-hidden="true"
@@ -44,7 +44,7 @@ export default function SupplyChainIntro() {
           <div data-reveal className="mt-9">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
+              className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {intro.ctaText}
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">
@@ -57,10 +57,7 @@ export default function SupplyChainIntro() {
         {/* The photo takes the docket shape used for cards further down the
             page rather than sitting in another rounded rectangle. */}
         <figure data-reveal className="relative lg:col-span-5">
-          <div
-            aria-hidden="true"
-            className="clip-docket absolute -inset-3 bg-gradient-to-br from-brand/35 to-accent-vivid/35"
-          />
+          <div aria-hidden="true" className="clip-docket absolute -inset-3 bg-[#BFDBFE]" />
           <img
             src={intro.image}
             alt={intro.alt}

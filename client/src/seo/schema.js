@@ -13,6 +13,7 @@ const WEBSITE_ID = `${SITE_URL}/#website`;
 
 // Same profiles the footer links to.
 const SOCIAL_PROFILES = [
+  "https://www.facebook.com/share/19cPggERYa",
   "https://www.instagram.com/axiomra.co",
   "https://www.linkedin.com/company/axiomra.co",
   "https://x.com/Axiomra_co",
@@ -50,7 +51,12 @@ export function websiteSchema() {
 
 // Pages other than Home carry a short Organization node so the @id reference
 // still resolves when a page is validated on its own.
-const orgRef = () => ({ "@type": "Organization", "@id": ORG_ID, name: SITE_NAME, url: `${SITE_URL}/` });
+const orgRef = () => ({
+  "@type": "Organization",
+  "@id": ORG_ID,
+  name: SITE_NAME,
+  url: `${SITE_URL}/`,
+});
 
 export function serviceSchema({ name, description, path }) {
   return {
@@ -106,5 +112,8 @@ export function breadcrumbSchema(crumbs, currentPath) {
 
 /** Serialises nodes into one @graph, escaped for an inline <script>. */
 export function toJsonLd(nodes) {
-  return JSON.stringify({ "@context": "https://schema.org", "@graph": nodes }).replace(/</g, "\\u003c");
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": nodes }).replace(
+    /</g,
+    "\\u003c"
+  );
 }

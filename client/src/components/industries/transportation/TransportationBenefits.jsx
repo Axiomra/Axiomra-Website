@@ -9,7 +9,7 @@ import { benefits } from "../../../data/transportationData";
  */
 export default function TransportationBenefits() {
   return (
-    <section className="relative isolate overflow-hidden bg-gradient-to-b from-surface via-brand/[0.07] to-surface py-24 md:py-32">
+    <section className="relative isolate overflow-hidden bg-surface-wash py-24 md:py-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/3 top-1/4 -z-10 h-[34rem] w-[34rem] rounded-full bg-accent-vivid/12 blur-[160px]"
@@ -29,7 +29,11 @@ export default function TransportationBenefits() {
           }
         />
 
-        <Stagger as="ul" step={0.08} className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <Stagger
+          as="ul"
+          step={0.08}
+          className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+        >
           {benefits.items.map((item, i) => (
             <StaggerItem as="li" key={item.title} className="lg-hover [--nose:1.5rem]">
               <div className="lg-rim clip-chevron h-full">

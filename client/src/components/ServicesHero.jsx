@@ -1,19 +1,23 @@
 import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const NetworkBackground = lazy(() => import("./NetworkBackground"));
 
 const fadeUp = {
   hidden: { opacity: 0, y: 26 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.12, ease: "easeOut" } }),
+  show: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.12, ease: "easeOut" },
+  }),
 };
 
 const stats = [
-  { value: "300+", label: "Projects delivered" },
-  { value: "25+", label: "In-house experts" },
-  { value: "20+", label: "AI service lines" },
-  { value: "6-10", label: "Weeks to pilot" },
+  { value: "500+", label: "Projects delivered" },
+  { value: "170+", label: "In-house experts" },
+  { value: "30+", label: "AI service lines" },
+  { value: "85+", label: "Clients served" },
 ];
 
 export default function ServicesHero() {
@@ -45,7 +49,6 @@ export default function ServicesHero() {
             custom={0}
             className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-medium text-white/80 backdrop-blur-sm"
           >
-            <Sparkles size={15} className="text-accent-vivid" aria-hidden="true" />
             AI Services and Solutions
           </motion.p>
 
@@ -68,9 +71,9 @@ export default function ServicesHero() {
             custom={2}
             className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-white/70 md:text-xl md:leading-relaxed"
           >
-            From AI strategy to development and integration, Axiomra helps you turn
-            business challenges into practical solutions. Explore services that simplify
-            work, improve access to information, and support your growth.
+            From AI strategy to development and integration, Axiomra helps you turn business
+            challenges into practical solutions. Explore services that simplify work, improve access
+            to information, and support your growth.
           </motion.p>
 
           <motion.div
@@ -82,7 +85,7 @@ export default function ServicesHero() {
           >
             <a
               href="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-cta-gradient px-9 py-4 text-base font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring"
+              className="group inline-flex items-center gap-2 rounded-full bg-grad-sky px-9 py-4 text-base font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring"
             >
               Book a Free Consultation
               <ArrowUpRight

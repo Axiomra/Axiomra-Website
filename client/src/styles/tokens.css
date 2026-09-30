@@ -1,10 +1,15 @@
-
 :root {
+  /* Gradient stops, the same in both themes: deep blue into sky blue. */
+  --grad-blue: 37 99 235;
+  --grad-sky: 96 165 250;
+
   /* Elevation */
   --surface: 255 255 255;
   --surface-subtle: 245 248 252;
   --surface-card: 255 255 255;
   --surface-inset: 245 248 252;
+  /* Flat light-blue band used wherever a section once had a gradient. */
+  --wash: 239 246 255;
 
   --content: 15 23 41;
   --content-dim: 74 84 104;
@@ -18,7 +23,19 @@
   --brand-strong: 74 78 176;
   --accent: 15 118 110;
   --accent-vivid: 20 216 196;
+  /* Hover shade of accent-vivid, and the dark ink that stays readable on both. */
+  --accent-vivid-hover: 46 230 211;
+  --on-accent: 10 20 40;
+  /* Contact form surfaces: the same dark teal in both themes. */
+  --field-dark: 15 44 58;
+  --field-dark-deep: 10 31 43;
+  --field-label: 143 239 229;
   --gold: 224 150 16;
+
+  /* Chat widget accent and the dark inks that stay readable on it. */
+  --assistant: 0 209 209;
+  --assistant-ink: 5 59 63;
+  --assistant-ink-soft: 8 77 81;
 
   /* Always-dark blocks */
   --inverse: 10 20 40;
@@ -40,6 +57,7 @@
   --surface-subtle: 20 17 44;
   --surface-card: 27 22 56;
   --surface-inset: 20 17 44;
+  --wash: 20 17 44;
 
   --content: 234 232 248;
   --content-dim: 169 165 198;
@@ -53,6 +71,13 @@
   --brand-strong: 140 156 233;
   --accent: 45 232 213;
   --accent-vivid: 20 216 196;
+  /* Hover shade of accent-vivid, and the dark ink that stays readable on both. */
+  --accent-vivid-hover: 46 230 211;
+  --on-accent: 10 20 40;
+  /* Contact form surfaces: the same dark teal in both themes. */
+  --field-dark: 15 44 58;
+  --field-dark-deep: 10 31 43;
+  --field-label: 143 239 229;
   --gold: 255 190 71;
 
   --inverse: 19 15 42;

@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   ChevronLeft,
   ChevronRight,
   Download,
+  FileText,
   LogOut,
   PanelLeftClose,
   Plus,
@@ -167,10 +169,7 @@ export default function AdminLeadsPage() {
   useEffect(() => {
     const controller = new AbortController();
 
-    Promise.all([
-      leadsApi.list(query, controller.signal),
-      leadsApi.stats(query, controller.signal),
-    ])
+    Promise.all([leadsApi.list(query, controller.signal), leadsApi.stats(query, controller.signal)])
       .then(([list, s]) => {
         setLeads(list.items);
         setMeta({ total: list.total, pages: list.pages, page: list.page });
@@ -224,40 +223,43 @@ export default function AdminLeadsPage() {
    */
   const rollback = useRef(new Map());
 
-  const onPatch = useCallback(async (id, changes) => {
-    setLeads((prev) =>
-      prev.map((l) => {
-        if (l._id !== id) return l;
-        rollback.current.set(id, l);
-        // A custom-column edit carries one key, so it has to merge into the
-        // existing bag, since spreading it would blank every other custom column
-        // on the row until the server's answer landed.
-        return changes.custom
-          ? { ...l, ...changes, custom: { ...l.custom, ...changes.custom } }
-          : { ...l, ...changes };
-      })
-    );
+  const onPatch = useCallback(
+    async (id, changes) => {
+      setLeads((prev) =>
+        prev.map((l) => {
+          if (l._id !== id) return l;
+          rollback.current.set(id, l);
+          // A custom-column edit carries one key, so it has to merge into the
+          // existing bag, since spreading it would blank every other custom column
+          // on the row until the server's answer landed.
+          return changes.custom
+            ? { ...l, ...changes, custom: { ...l.custom, ...changes.custom } }
+            : { ...l, ...changes };
+        })
+      );
 
-    try {
-      const updated = await leadsApi.patch(id, changes);
-      setLeads((prev) => prev.map((l) => (l._id === id ? updated : l)));
-      rollback.current.delete(id);
-      // A stage change moves the footer counts, so refresh them.
-      if ("progress" in changes) {
-        leadsApi
-          .stats(query)
-          .then(setStats)
-          .catch(() => {});
+      try {
+        const updated = await leadsApi.patch(id, changes);
+        setLeads((prev) => prev.map((l) => (l._id === id ? updated : l)));
+        rollback.current.delete(id);
+        // A stage change moves the footer counts, so refresh them.
+        if ("progress" in changes) {
+          leadsApi
+            .stats(query)
+            .then(setStats)
+            .catch(() => {});
+        }
+      } catch (err) {
+        const previous = rollback.current.get(id);
+        if (previous) setLeads((prev) => prev.map((l) => (l._id === id ? previous : l)));
+        rollback.current.delete(id);
+        setError(err.message);
+        // Rethrown so EditableCell can show its own inline error marker.
+        throw err;
       }
-    } catch (err) {
-      const previous = rollback.current.get(id);
-      if (previous) setLeads((prev) => prev.map((l) => (l._id === id ? previous : l)));
-      rollback.current.delete(id);
-      setError(err.message);
-      // Rethrown so EditableCell can show its own inline error marker.
-      throw err;
-    }
-  }, [query]);
+    },
+    [query]
+  );
 
   const onCreate = useCallback(async (lead) => {
     await leadsApi.create(lead);
@@ -363,6 +365,11 @@ export default function AdminLeadsPage() {
                 <Plus size={15} aria-hidden="true" />
                 <span className="hidden sm:inline">Add lead</span>
               </button>
+
+              <Link to="/admin/blogs" className={actionButton}>
+                <FileText size={15} aria-hidden="true" />
+                <span className="hidden sm:inline">Blog</span>
+              </Link>
 
               <button type="button" onClick={onExport} className={actionButton}>
                 <Download size={15} aria-hidden="true" />
@@ -549,11 +556,7 @@ export default function AdminLeadsPage() {
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-y-0 left-0 w-full max-w-sm border-r border-line bg-surface-card"
           >
-            <LeadSidebar
-              lead={selected}
-              onClose={() => setSidebarOpen(false)}
-              onPatch={onPatch}
-            />
+            <LeadSidebar lead={selected} onClose={() => setSidebarOpen(false)} onPatch={onPatch} />
           </motion.div>
         </div>
       )}

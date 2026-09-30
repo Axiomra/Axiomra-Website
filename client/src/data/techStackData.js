@@ -7,8 +7,7 @@ export const hero = {
   eyebrow: "What we build with",
   titleLead: "The AI Tech Stack Behind",
   titleAccent: "Every System We Ship",
-  body:
-    "Models, frameworks and infrastructure chosen against your data and your load, never by fashion.",
+  body: "Models, frameworks and infrastructure chosen against your data and your load, never by fashion.",
   ctaText: "Talk to our engineers",
 };
 
@@ -44,8 +43,7 @@ export const explorer = {
   eyebrow: "The full inventory",
   titleLead: "Nine Layers, One",
   titleAccent: "Production System",
-  body:
-    "Every engagement draws from the same nine layers. What changes is which pieces we reach for, and we will tell you why before a line of code is written.",
+  body: "Every engagement draws from the same nine layers. What changes is which pieces we reach for, and we will tell you why before a line of code is written.",
 };
 
 /**
@@ -264,39 +262,34 @@ export const stackGroups = [
 export const businesses = {
   titleLead: "Who This Stack",
   titleAccent: "Actually Fits",
-  body:
-    "The same engineering standard applies at every size. What changes is how much of it you need on day one.",
+  body: "The same engineering standard applies at every size. What changes is how much of it you need on day one.",
   segments: [
     {
       id: "startups",
       label: "Startups",
       headline: "Prove the idea before the runway runs out",
-      body:
-        "We help founders find the smallest system that validates the bet: a scoped MVP, a model that clears the bar on real data, and a deployment you can demo to investors without a rehearsal.",
+      body: "We help founders find the smallest system that validates the bet: a scoped MVP, a model that clears the bar on real data, and a deployment you can demo to investors without a rehearsal.",
       tags: ["MVP scoping", "Model feasibility", "Investor-ready demos"],
     },
     {
       id: "scale-ups",
       label: "Scale-ups",
       headline: "Take the load without rewriting everything",
-      body:
-        "Growth exposes the shortcuts. We profile what is breaking, move the hot paths onto infrastructure that holds, and add the observability your team needs to sleep through a launch week.",
+      body: "Growth exposes the shortcuts. We profile what is breaking, move the hot paths onto infrastructure that holds, and add the observability your team needs to sleep through a launch week.",
       tags: ["Performance work", "Cost control", "Observability"],
     },
     {
       id: "mid-market",
       label: "Mid-market",
       headline: "Automate the work nobody wants to do",
-      body:
-        "Established teams usually sit on years of unstructured data. We turn that into document pipelines, internal copilots and forecasting that replace spreadsheets people maintain by hand.",
+      body: "Established teams usually sit on years of unstructured data. We turn that into document pipelines, internal copilots and forecasting that replace spreadsheets people maintain by hand.",
       tags: ["Document AI", "Internal copilots", "Legacy integration"],
     },
     {
       id: "enterprise",
       label: "Enterprise",
       headline: "Ship AI your compliance team will sign off on",
-      body:
-        "Audit trails, access control, data residency and human review built in from the first sprint, plus the documentation your risk and procurement functions will ask for.",
+      body: "Audit trails, access control, data residency and human review built in from the first sprint, plus the documentation your risk and procurement functions will ask for.",
       tags: ["Governance", "Private deployment", "Audit trails"],
     },
   ],
@@ -309,8 +302,7 @@ export const partner = {
   cards: [
     {
       title: "The people who scope it are the people who build it",
-      body:
-        "No handover from a sales engineer to an offshore pool. The engineer in your kickoff call is the one writing the code, and they stay on the project until it is in production.",
+      body: "No handover from a sales engineer to an offshore pool. The engineer in your kickoff call is the one writing the code, and they stay on the project until it is in production.",
     },
     {
       title: "Weekly demos, not status decks",
@@ -322,7 +314,7 @@ export const partner = {
     },
   ],
   stats: [
-    { value: "300+", label: "Projects delivered" },
+    { value: "500+", label: "Projects delivered" },
     { value: "25+", label: "In-house experts" },
     { value: "12+", label: "Industries served" },
     { value: "20+", label: "Countries shipped to" },

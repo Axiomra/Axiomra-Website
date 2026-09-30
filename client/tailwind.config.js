@@ -10,16 +10,17 @@ export default {
         // The chat widget's accent, with a dark ink that stays readable on it
         // (white text on #00D1D1 is under 2:1 contrast).
         assistant: {
-          DEFAULT: "#00D1D1",
-          ink: "#053B3F",
+          DEFAULT: token("assistant"),
+          ink: token("assistant-ink"),
           // Lighter ink for the AI dev page; still 5:1 on the teal.
-          "ink-soft": "#084D51",
+          "ink-soft": token("assistant-ink-soft"),
         },
         surface: {
           DEFAULT: token("surface"),
           subtle: token("surface-subtle"),
           card: token("surface-card"),
           inset: token("surface-inset"),
+          wash: token("wash"),
         },
         content: {
           DEFAULT: token("content"),
@@ -37,12 +38,25 @@ export default {
         accent: {
           DEFAULT: token("accent"),
           vivid: token("accent-vivid"),
+          "vivid-hover": token("accent-vivid-hover"),
+        },
+        // Text on accent-vivid: the same dark ink in both themes (--inverse is not).
+        "on-accent": token("on-accent"),
+        // Contact form surfaces, dark teal in both themes.
+        field: {
+          dark: token("field-dark"),
+          "dark-deep": token("field-dark-deep"),
+          label: token("field-label"),
         },
         inverse: {
           DEFAULT: token("inverse"),
           soft: token("inverse-soft"),
           card: token("inverse-card"),
           fg: token("on-inverse"),
+        },
+        grad: {
+          blue: token("grad-blue"),
+          sky: token("grad-sky"),
         },
         gold: token("gold"),
         danger: token("danger"),
@@ -67,7 +81,8 @@ export default {
       },
       backgroundImage: {
         // Brand gradients are fixed by identity, they do not flip per theme.
-        "cta-gradient": "linear-gradient(120deg, #14D8C4 0%, #788BE3 55%, #777ACF 100%)",
+        "cta-gradient":
+          "linear-gradient(120deg, rgb(var(--grad-sky)) 0%, #3B82F6 55%, rgb(var(--grad-blue)) 100%)",
       },
       animation: {
         marquee: "marquee 30s linear infinite",

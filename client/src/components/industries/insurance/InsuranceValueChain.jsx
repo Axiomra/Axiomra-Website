@@ -43,7 +43,7 @@ export default function InsuranceValueChain() {
                 {/* Tinted wash so eight different stock photos still read as one set. */}
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand/40 via-brand/10 to-transparent mix-blend-multiply"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-grad-blue/40 via-grad-blue/10 to-transparent mix-blend-multiply"
                 />
               </div>
 

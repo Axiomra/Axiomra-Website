@@ -54,13 +54,16 @@ export default function SupplyChainBuild() {
           >
             {build.title}
           </h2>
-          <p data-reveal className="mt-6 max-w-xl text-base leading-relaxed text-content-dim md:text-lg">
+          <p
+            data-reveal
+            className="mt-6 max-w-xl text-base leading-relaxed text-content-dim md:text-lg"
+          >
             {build.body}
           </p>
           <div data-reveal className="mt-9">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-cta-gradient py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
+              className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {build.ctaText}
               <span className="flex h-11 w-11 items-center justify-center rounded-full bg-inverse/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">
@@ -71,10 +74,7 @@ export default function SupplyChainBuild() {
         </div>
 
         <figure data-reveal className="relative lg:col-span-6">
-          <div
-            aria-hidden="true"
-            className="clip-docket absolute -inset-3 bg-gradient-to-br from-brand/30 to-accent-vivid/30"
-          />
+          <div aria-hidden="true" className="clip-docket absolute -inset-3 bg-[#BFDBFE]" />
           <img
             src={build.image}
             alt={build.alt}

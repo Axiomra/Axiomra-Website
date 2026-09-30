@@ -42,7 +42,7 @@ export const hero = {
     // Counted from the data, so it stays right as studies are added.
     { value: String(Object.keys(caseStudyPages).length), label: "Detailed case studies" },
     { value: "12+", label: "Industries served" },
-    { value: "300+", label: "AI projects delivered" },
+    { value: "500+", label: "AI projects delivered" },
     { value: "4.9/5", label: "Average client rating" },
   ],
 };
@@ -129,7 +129,7 @@ export const caseStudies = [
   },
   {
     slug: "healthcare-medical-imaging-disease-identification",
-    name: "Imaging Triage AI",
+    name: "Imaging Triage",
     tag: "Healthcare & Computer Vision",
     title: "Medical Imaging & Disease Identification",
     description:
@@ -148,7 +148,7 @@ export const caseStudies = [
   },
   {
     slug: "ai-physical-therapy-pose-estimation",
-    name: "Physio Coach AI",
+    name: "Physio Coach",
     tag: "Healthcare & Computer Vision",
     title: "AI Physical Therapy Coach",
     description:
@@ -167,7 +167,7 @@ export const caseStudies = [
   },
   {
     slug: "healthcare-readmission-risk-prediction",
-    name: "Readmission Risk AI",
+    name: "Readmission Risk",
     tag: "Healthcare & Predictive Analytics",
     title: "Readmission Risk Prediction",
     description:
@@ -186,7 +186,7 @@ export const caseStudies = [
   },
   {
     slug: "fintech-regulatory-document-analysis-compliance-nlp",
-    name: "Compliance Document AI",
+    name: "Compliance Document",
     tag: "FinTech & Language AI",
     title: "Regulatory Document Analysis",
     description:
@@ -205,7 +205,7 @@ export const caseStudies = [
   },
   {
     slug: "fintech-kyc-document-processing-onboarding-automation",
-    name: "Onboarding ID Checks AI",
+    name: "Onboarding ID Checks",
     tag: "FinTech & Document AI",
     title: "Customer ID Checks & Onboarding Automation",
     description:
@@ -243,7 +243,7 @@ export const caseStudies = [
   },
   {
     slug: "fintech-ai-fraud-detection-anomalous-transactions",
-    name: "Fraud Detection AI",
+    name: "Fraud Detection",
     tag: "FinTech & Predictive Analytics",
     title: "AI Fraud Detection for Payments",
     description:
@@ -262,7 +262,7 @@ export const caseStudies = [
   },
   {
     slug: "retail-ai-personalized-marketing",
-    name: "Personalized Marketing AI",
+    name: "Personalized Marketing",
     tag: "Retail & Generative AI",
     title: "AI-Powered Personalized Marketing",
     description:
@@ -274,14 +274,14 @@ export const caseStudies = [
     ],
     statsLabel: "Solution blueprint",
     image: personalizedMarketingImg,
-    width: 1574,
-    height: 976,
+    width: 1452,
+    height: 900,
     accent: "#DB2777",
     caseStudy: caseStudyPath("retail-ai-personalized-marketing"),
   },
   {
     slug: "fintech-machine-learning-credit-scoring",
-    name: "Credit Scoring AI",
+    name: "Credit Scoring",
     tag: "FinTech & Predictive Analytics",
     title: "AI Credit Scoring for Lenders",
     description:
@@ -297,9 +297,10 @@ export const caseStudies = [
     height: 976,
     accent: "#4F46E5",
     caseStudy: caseStudyPath("fintech-machine-learning-credit-scoring"),
-  },  {
+  },
+  {
     slug: "retail-ai-inventory-demand-forecasting",
-    name: "Inventory Forecasting AI",
+    name: "Inventory Forecasting",
     tag: "Retail & Predictive Analytics",
     title: "AI Inventory & Demand Forecasting",
     description:
@@ -318,7 +319,7 @@ export const caseStudies = [
   },
   {
     slug: "retail-dynamic-pricing-optimization",
-    name: "Smart Pricing AI",
+    name: "Smart Pricing",
     tag: "Retail & Predictive Analytics",
     title: "Smart Pricing for Retail",
     description:

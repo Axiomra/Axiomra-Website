@@ -77,7 +77,6 @@ export default function AiDevelopmentPage() {
 
       <GradientCTA
         compact
-        solid
         title={
           <>
             Have A Use Case In Mind?
@@ -108,7 +107,6 @@ export default function AiDevelopmentPage() {
 
       <GradientCTA
         compact
-        solid
         title="Bring Us Your Industry Challenge"
         subtitle="Whether you work in healthcare, finance, retail, or supply chain operations, we start by understanding your processes, data, and requirements. Together, we identify where AI can add practical value."
         buttonText="Book a Free AI Consultation"

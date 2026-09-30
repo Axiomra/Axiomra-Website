@@ -3,7 +3,9 @@ import GradientCTA from "../components/GradientCTA";
 import Hero from "../sections/Hero";
 import FoundersSay from "../sections/FoundersSay";
 import Transformation from "../sections/Transformation";
-import VideoTestimonials from "../sections/VideoTestimonials";
+// Hidden for now; FoundersSay ("What Our Clients Say") takes its slot.
+// import VideoTestimonials from "../sections/VideoTestimonials";
+import ExpertiseOrbit from "../sections/ExpertiseOrbit";
 import Services from "../sections/Services";
 import Industries from "../sections/Industries";
 import Portfolio from "../sections/Portfolio";
@@ -29,12 +31,13 @@ export default function HomePage() {
         jsonLd={[organizationSchema(), websiteSchema()]}
       />
       <Hero />
-      <FoundersSay />
+      <ExpertiseOrbit />
       <Transformation />
-      <VideoTestimonials />
+      {/* <VideoTestimonials /> */}
+      <FoundersSay />
       <GradientCTA
         title="Want These Results For Your Business?"
-        subtitle="We've done it for 300+ clients. Book a discovery call today, and our AI development partner team will map out a custom AI roadmap to eliminate manual overhead and boost your bottom line."
+        subtitle="We've done it for 500+ clients. Book a discovery call today, and our AI development partner team will map out a custom AI roadmap to eliminate manual overhead and boost your bottom line."
       />
       <Services />
       <GradientCTA

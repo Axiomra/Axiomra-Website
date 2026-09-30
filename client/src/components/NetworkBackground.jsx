@@ -31,7 +31,7 @@ function StaticNetworkBackground({ className = "" }) {
       aria-hidden="true"
       style={{
         backgroundImage:
-          "radial-gradient(circle, rgba(20,216,196,0.75) 3px, transparent 3px), radial-gradient(circle, rgba(120,139,227,0.6) 2px, transparent 2px)",
+          "radial-gradient(circle, rgb(var(--accent-vivid) / 0.75) 3px, transparent 3px), radial-gradient(circle, rgba(120,139,227,0.6) 2px, transparent 2px)",
         backgroundSize: "60px 60px, 40px 40px",
         backgroundPosition: "0 0, 20px 20px",
       }}
