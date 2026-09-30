@@ -75,10 +75,10 @@ export const adminAuth = {
   /** Whether this reset link's account has a recovery key to satisfy. */
   resetRequirements: (token, signal) =>
     request(`/api/auth/reset-requirements?token=${encodeURIComponent(token)}`, { signal }),
-  changePassword: (currentPassword, newPassword) =>
+  changePassword: (currentPassword, newPassword, recoveryKey) =>
     request("/api/auth/change-password", {
       method: "POST",
-      body: { currentPassword, newPassword },
+      body: { currentPassword, newPassword, recoveryKey },
     }),
 };
 

@@ -239,7 +239,7 @@ export default function AdminBlogsPage() {
         <div className="relative mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 pb-5 pt-6 sm:px-6">
           <div>
             <h1 className="font-display text-[clamp(1.25rem,2.2vw,1.65rem)] font-semibold leading-tight tracking-tight text-content">
-              Blog <span className="bg-cta-gradient bg-clip-text text-transparent">Posts</span>
+              Blog <span className="text-gradient">Posts</span>
             </h1>
             <p className="mt-0.5 text-[12px] text-content-dim">
               Published posts appear on the site, and the footer shows its Blogs link,
