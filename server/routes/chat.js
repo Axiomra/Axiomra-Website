@@ -5,6 +5,7 @@ import { CHAT_SYSTEM_PROMPT } from "../lib/chatKnowledge.js";
 import { reserve, settle } from "../lib/chatBudget.js";
 import { CHAT_MODEL } from "../lib/chatConfig.js";
 import { appendTurns, loadConversation } from "../lib/chatConversations.js";
+import { referenceContext } from "../rag/context.js";
 
 const router = Router();
 
@@ -49,9 +50,9 @@ const DAILY_CAP_REACHED =
   "Our assistant has reached its limit for today. Please try again tomorrow, " +
   "or reach us through the contact form and we'll get back to you.";
 
-const agent = new Agent({
+const agentConfig = (instructions) => ({
   name: "Axiomra Assistant",
-  instructions: INSTRUCTIONS,
+  instructions,
   model: CHAT_MODEL,
   modelSettings: {
     // Replies are short by instruction; the cap bounds cost per turn.
@@ -62,6 +63,13 @@ const agent = new Agent({
     ...(isReasoningModel ? { reasoning: { effort: "minimal" } } : { temperature: 0.3 }),
   },
 });
+
+const agent = new Agent(agentConfig(INSTRUCTIONS));
+
+// A turn with reference material runs on its own copy of the agent; the
+// static prompt stays first so OpenAI's prefix cache still hits.
+const agentFor = (instructions) =>
+  instructions === INSTRUCTIONS ? agent : new Agent(agentConfig(instructions));
 
 /**
  * Body: { message, conversationId? }. The conversation's id comes back in the
@@ -88,13 +96,26 @@ router.post("/", async (req, res) => {
   // Both checked before any header goes out, so a refusal is a plain JSON
   // error, and both fail closed: no store means no context and no spend cap.
   let conversation;
-  let reservation;
   try {
     conversation = await loadConversation(data.conversationId);
+  } catch (err) {
+    console.error("Chat: store unavailable:", err.message);
+    return res.status(503).json({ error: "The assistant is not available right now." });
+  }
+
+  // Never throws: on any retrieval failure the turn uses the static prompt.
+  const { instructions } = await referenceContext({
+    base: INSTRUCTIONS,
+    history: conversation.history,
+    text,
+  });
+
+  let reservation;
+  try {
     reservation = await reserve({
       model: CHAT_MODEL,
       inputChars:
-        INSTRUCTIONS.length +
+        instructions.length +
         text.length +
         conversation.history.reduce((n, t) => n + t.content.length, 0),
       maxOutputTokens: MAX_OUTPUT_TOKENS,
@@ -135,7 +156,7 @@ router.post("/", async (req, res) => {
   let usage;
   let reply = "";
   try {
-    const result = await run(agent, input, {
+    const result = await run(agentFor(instructions), input, {
       stream: true,
       maxTurns: 1,
       signal: controller.signal,

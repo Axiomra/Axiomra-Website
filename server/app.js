@@ -11,6 +11,7 @@ import leadRoutes from "./routes/leads.js";
 import leadFieldRoutes from "./routes/leadFields.js";
 import chatRoutes from "./routes/chat.js";
 import blogRoutes from "./routes/blogs.js";
+import ragDebugRoutes from "./routes/ragDebug.js";
 import { connectDB } from "./db.js";
 import { mailerConfigured } from "./mailer.js";
 import { mongoSanitize } from "./lib/sanitize.js";
@@ -117,6 +118,13 @@ app.use("/api", (req, res, next) => {
   }
   next();
 });
+
+// Development-only retrieval inspector, mounted ahead of the API rate limit so
+// tuning RAG_MIN_SCORE with a burst of queries is not throttled. Never mounted
+// in production (Vercel previews included: they run with NODE_ENV=production).
+if (process.env.NODE_ENV !== "production") {
+  app.use("/api/rag", ragDebugRoutes);
+}
 
 // Limits live in lib/rateLimit.js, backed by Redis when REDIS_URL is set.
 app.use("/api", apiLimiter);
