@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Linkedin, ArrowUp } from "lucide-react";
+import { Facebook, Instagram, Linkedin, ArrowUp, ArrowUpRight } from "lucide-react";
 import logoLight from "../assets/logo-light.webp";
 import iconTeal from "../assets/icon-teal.png";
 import NetworkBackground from "./NetworkBackground";
@@ -88,15 +88,42 @@ function WhatsAppIcon({ size = 26, fill = "#fff" }) {
 
 const WHATSAPP_URL = "https://wa.me/16575203444";
 
+// `fill` and `glow` are each network's brand colours, used by .social-btn on hover.
 const socials = [
-  { Icon: Facebook, label: "Facebook", href: "https://www.facebook.com/share/19cPggERYa" },
-  { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/axiomra.co" },
-  { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/axiomra.co" },
-  { Icon: XIcon, label: "X (Twitter)", href: "https://x.com/Axiomra_co" },
+  {
+    Icon: Facebook,
+    label: "Facebook",
+    href: "https://www.facebook.com/share/19cPggERYa",
+    fill: "linear-gradient(135deg, #4A9BFF, #1877F2 55%, #0B5BD3)",
+    glow: "24, 119, 242",
+  },
+  {
+    Icon: Instagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/axiomra.co",
+    fill: "linear-gradient(45deg, #F58529, #DD2A7B 45%, #8134AF 75%, #515BD4)",
+    glow: "221, 42, 123",
+  },
+  {
+    Icon: Linkedin,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/axiomra.co",
+    fill: "linear-gradient(135deg, #2D8CFF, #0A66C2 60%, #004182)",
+    glow: "10, 102, 194",
+  },
+  {
+    Icon: XIcon,
+    label: "X (Twitter)",
+    href: "https://x.com/Axiomra_co",
+    fill: "linear-gradient(135deg, #3B4252, #0F1115 70%)",
+    glow: "226, 232, 240",
+  },
   {
     Icon: (props) => <WhatsAppIcon {...props} fill="currentColor" />,
     label: "WhatsApp: +1 (657) 520-3444",
     href: WHATSAPP_URL,
+    fill: "linear-gradient(135deg, #5BE584, #25D366 55%, #128C7E)",
+    glow: "37, 211, 102",
   },
 ];
 
@@ -153,11 +180,13 @@ export default function Footer() {
               We build custom AI solutions that simplify workflows, support better decisions, and
               help businesses measure the value of automation.
             </p>
-            <Link
-              to="/contact"
-              className="mt-5 inline-block rounded-full bg-inverse-fg px-6 py-3 text-lg font-medium text-inverse transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow focus-ring"
-            >
-              Discuss Your Project
+            <Link to="/contact" className="discuss-btn group mt-5 focus-ring">
+              <span className="discuss-btn__label">Discuss Your Project</span>
+              <ArrowUpRight
+                size={20}
+                aria-hidden="true"
+                className="relative transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:rotate-12"
+              />
             </Link>
           </div>
           {columns.map((c) => (
@@ -184,15 +213,19 @@ export default function Footer() {
 
         <div className="relative z-10 mx-auto mt-14 flex max-w-6xl flex-col items-center justify-between gap-4 border-t border-inverse-fg/10 px-4 pt-6 sm:flex-row sm:px-6">
           <span className="text-base text-inverse-fg/60">© 2026 Axiomra. All Rights Reserved.</span>
-          <div className="flex gap-3">
-            {socials.map(({ Icon, label, href }) => (
+          {/* Kept clear of the fixed chat launcher (components/chat/ChatWidget.jsx):
+              room on the right from sm up, and below the row on phones. */}
+          <div className="flex gap-3 pb-20 sm:pb-0 sm:pr-24">
+            {socials.map(({ Icon, label, href, fill, glow }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={label}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-inverse-fg/15 text-inverse-fg/60 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid hover:bg-accent-vivid/15 hover:text-accent-vivid focus-ring"
+                title={label}
+                style={{ "--social-fill": fill, "--social-glow": glow }}
+                className="social-btn focus-ring"
               >
                 <Icon size={18} />
               </a>

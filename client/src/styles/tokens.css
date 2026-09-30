@@ -26,6 +26,11 @@
   --field-label: 143 239 229;
   --gold: 224 150 16;
 
+  /* Chat widget accent and the dark inks that stay readable on it. */
+  --assistant: 0 209 209;
+  --assistant-ink: 5 59 63;
+  --assistant-ink-soft: 8 77 81;
+
   /* Always-dark blocks */
   --inverse: 10 20 40;
   --inverse-soft: 16 27 51;

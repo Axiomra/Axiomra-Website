@@ -56,107 +56,90 @@ function loadHistory() {
   }
 }
 
-/**
- * The launcher's full-body robot. On a loop it sits down and stands back up,
- * blinks, and turns round once; the keyframes live in index.css.
- */
-function Robot({ className = "" }) {
-  return (
-    <span className={`chat-bot-spin inline-block ${className}`}>
-      <svg viewBox="0 0 48 48" className="h-full w-full overflow-visible" aria-hidden="true">
-        <g className="chat-bot-legs">
-          <rect x="18" y="33" width="4.5" height="10" rx="2.25" fill="currentColor" />
-          <rect x="25.5" y="33" width="4.5" height="10" rx="2.25" fill="currentColor" />
-        </g>
-        <g className="chat-bot-upper">
-          {/* Antenna */}
-          <line
-            x1="24"
-            y1="3.5"
-            x2="24"
-            y2="7.5"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-          />
-          <circle cx="24" cy="3" r="2" fill="currentColor" />
-          {/* Head */}
-          <rect x="13" y="7.5" width="22" height="15" rx="6" fill="currentColor" opacity="0.2" />
+// The assistant mascot as pixel art, one character per pixel:
+// O outline, L body, M shade, H highlight, V visor, T prompt ">", C cursor "_".
+const BOT_PIXELS = [
+  "......OOOOOO......",
+  "....OOLLLLLLOO....",
+  "...OLHHLLLLLLLO...",
+  "..OLHLLLLLLLLLLO..",
+  ".OLHLLLLLLLLLLLLO.",
+  ".OLLOOOOOOOOOOLLO.",
+  "OLLOVVVVVVVVVVOLLO",
+  "OLLOVTVVVVVVVVOLLO",
+  "OLLOVVTVVVVVVVOLLO",
+  "OLLOVTVVVCCCVVOLLO",
+  ".OLLOOOOOOOOOOLLO.",
+  ".OMLLLLLLLLLLLLMO.",
+  "..OOMMMMMMMMMMOO..",
+  "..OMLLLLLLLLLLMO..",
+  "..OMLLVTVCCVLLMO..",
+  "..OMLLLLLLLLLLMO..",
+  "...OOLLLLLLLLOO...",
+  "....OMMO..OMMO....",
+  "....OOOO..OOOO....",
+];
+
+const BOT_COLORS = {
+  O: "#16306E",
+  L: "#2EE6D3",
+  M: "#14D8C4",
+  H: "#E0F2FE",
+  V: "#0B1B3A",
+  T: "#8FEFE5",
+  C: "#8FEFE5",
+};
+
+// Rows 0-12 are the head; the cursor pixels blink on their own.
+const HEAD_ROWS = 13;
+
+function pixelsFor(rows, offset, test) {
+  const out = [];
+  rows.forEach((row, y) => {
+    [...row].forEach((c, x) => {
+      if (test(c)) {
+        out.push(
           <rect
-            x="13"
-            y="7.5"
-            width="22"
-            height="15"
-            rx="6"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
+            key={`${x}-${y + offset}`}
+            x={x}
+            y={y + offset}
+            width="1.02"
+            height="1.02"
+            fill={BOT_COLORS[c]}
           />
-          <g className="chat-eyes">
-            <circle cx="19.5" cy="14.5" r="2.2" fill="currentColor" />
-            <circle cx="28.5" cy="14.5" r="2.2" fill="currentColor" />
-          </g>
-          <path
-            d="M20.5 18.6 Q24 20.8 27.5 18.6"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-          />
-          {/* Body and arms */}
-          <rect x="16" y="23.5" width="16" height="11.5" rx="3.5" fill="currentColor" />
-          <circle cx="24" cy="29" r="2" className="fill-assistant" />
-          <rect x="11.5" y="24.5" width="3.5" height="8.5" rx="1.75" fill="currentColor" />
-          <rect x="33" y="24.5" width="3.5" height="8.5" rx="1.75" fill="currentColor" />
-        </g>
-      </svg>
-    </span>
-  );
+        );
+      }
+    });
+  });
+  return out;
 }
 
-/** The robot face used as the assistant's avatar and in the panel header. */
-function BotFace({ className = "", animated = false }) {
+const HEAD = BOT_PIXELS.slice(0, HEAD_ROWS);
+const BODY = BOT_PIXELS.slice(HEAD_ROWS);
+
+/**
+ * The pixel robot used on the launcher, in the header and as the avatar.
+ * `animated` bobs it, tilts the head now and then and blinks the cursor;
+ * the keyframes live in index.css.
+ */
+function PixelBot({ className = "", animated = false }) {
+  const isPixel = (c) => c !== "." && c !== "C";
+  const isCursor = (c) => c === "C";
   return (
-    <svg viewBox="0 0 40 40" className={className} aria-hidden="true">
-      {/* Antenna */}
-      <line
-        x1="20"
-        y1="4.5"
-        x2="20"
-        y2="10"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <circle cx="20" cy="4" r="2.6" fill="currentColor" />
-      {/* Head */}
-      <rect x="6" y="10" width="28" height="22" rx="9" fill="currentColor" opacity="0.18" />
-      <rect
-        x="6"
-        y="10"
-        width="28"
-        height="22"
-        rx="9"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      {/* Ears */}
-      <rect x="2.5" y="17" width="3" height="8" rx="1.5" fill="currentColor" />
-      <rect x="34.5" y="17" width="3" height="8" rx="1.5" fill="currentColor" />
-      {/* Eyes */}
-      <g className={animated ? "chat-eyes" : ""}>
-        <circle cx="15" cy="20" r="2.8" fill="currentColor" />
-        <circle cx="25" cy="20" r="2.8" fill="currentColor" />
+    <svg
+      viewBox="0 0 18 19"
+      shapeRendering="crispEdges"
+      className={`${animated ? "chat-bot-bob" : ""} overflow-visible ${className}`}
+      aria-hidden="true"
+    >
+      <g className={animated ? "chat-bot-body" : ""}>
+        {pixelsFor(BODY, HEAD_ROWS, isPixel)}
+        <g className={animated ? "chat-cursor" : ""}>{pixelsFor(BODY, HEAD_ROWS, isCursor)}</g>
       </g>
-      {/* Smile */}
-      <path
-        d="M15.5 26 Q20 29.5 24.5 26"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+      <g className={animated ? "chat-bot-head" : ""}>
+        {pixelsFor(HEAD, 0, isPixel)}
+        <g className={animated ? "chat-cursor" : ""}>{pixelsFor(HEAD, 0, isCursor)}</g>
+      </g>
     </svg>
   );
 }
@@ -177,8 +160,8 @@ function TypingDots() {
 
 function Avatar() {
   return (
-    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-assistant text-assistant-ink">
-      <BotFace className="h-[18px] w-[18px]" />
+    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-assistant/15 ring-1 ring-assistant/40">
+      <PixelBot className="h-5 w-5" />
     </span>
   );
 }
@@ -300,7 +283,7 @@ export default function ChatWidget() {
   const closeAfterNavigate = () => setOpen(false);
 
   return (
-    <>
+    <div>
       {/* Chat panel */}
       <AnimatePresence>
         {open && (
@@ -312,12 +295,12 @@ export default function ChatWidget() {
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             style={{ transformOrigin: "bottom right" }}
-            className="fixed bottom-[5.75rem] right-4 z-50 flex h-[min(600px,calc(100svh-7.5rem))] w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-line bg-surface-card shadow-[0_24px_70px_-20px_rgba(10,20,40,0.45)] sm:right-6 sm:w-[380px]"
+            className="fixed bottom-[5.75rem] right-4 z-50 flex h-[min(600px,calc(100svh-7.5rem))] w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-assistant/30 bg-surface-card/75 shadow-[0_24px_70px_-20px_rgba(14,116,144,0.55)] backdrop-blur-xl sm:right-6 sm:w-[380px]"
           >
             {/* Header */}
-            <header className="relative flex items-center gap-3 overflow-hidden bg-assistant px-4 py-3.5 text-assistant-ink">
-              <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white/35 ring-1 ring-assistant-ink/20">
-                <BotFace className="h-6 w-6" animated />
+            <header className="relative flex items-center gap-3 overflow-hidden bg-gradient-to-r from-[#8FEFE5] via-[#2EE6D3] to-[#14D8C4] px-4 py-3.5 text-assistant-ink">
+              <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white/40 ring-1 ring-assistant-ink/20">
+                <PixelBot className="h-7 w-7" animated />
                 <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-[#22c55e] ring-2 ring-white" />
               </span>
               <div className="min-w-0 flex-1">
@@ -348,7 +331,7 @@ export default function ChatWidget() {
             {/* Messages */}
             <div
               ref={listRef}
-              className="flex-1 space-y-3 overflow-y-auto overscroll-contain bg-surface-subtle px-4 py-4 text-sm leading-relaxed"
+              className="flex-1 space-y-3 overflow-y-auto overscroll-contain bg-transparent px-4 py-4 text-sm leading-relaxed"
               aria-live="polite"
             >
               <div className="flex gap-2">
@@ -361,7 +344,7 @@ export default function ChatWidget() {
               {messages.map((m, i) =>
                 m.role === "user" ? (
                   <div key={i} className="flex justify-end">
-                    <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-tr-sm bg-assistant px-3.5 py-2.5 text-assistant-ink shadow-sm">
+                    <div className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-tr-sm bg-gradient-to-br from-[#2EE6D3] to-[#14D8C4] px-3.5 py-2.5 text-assistant-ink shadow-sm">
                       {m.content}
                     </div>
                   </div>
@@ -399,7 +382,7 @@ export default function ChatWidget() {
             {/* Composer */}
             <form
               onSubmit={onSubmit}
-              className="border-t border-line bg-surface-card px-3 pb-2 pt-3"
+              className="border-t border-line/60 bg-surface-card/60 px-3 pb-2 pt-3"
             >
               <div className="flex items-end gap-2 rounded-2xl border border-line bg-surface-subtle px-3 py-2 transition-colors focus-within:border-assistant">
                 <label htmlFor="axiomra-chat-input" className="sr-only">
@@ -450,19 +433,18 @@ export default function ChatWidget() {
         className="group fixed bottom-6 right-4 z-50 h-16 w-16 rounded-full focus-ring sm:right-6"
       >
         {!open && (
-          <>
-            <span
-              className="chat-ping absolute inset-0 rounded-full bg-assistant/50"
-              aria-hidden="true"
-            />
-            <span
-              className="chat-ping absolute inset-0 rounded-full bg-assistant/30"
-              style={{ animationDelay: "1.2s" }}
-              aria-hidden="true"
-            />
-          </>
+          <span
+            className="chat-glow absolute inset-1 rounded-full bg-assistant/35 blur-xl"
+            aria-hidden="true"
+          />
         )}
-        <span className="relative flex h-full w-full items-center justify-center rounded-full bg-assistant text-assistant-ink shadow-[0_10px_30px_-8px_rgba(0,209,209,0.75)] ring-2 ring-white/60 transition-transform duration-300 group-hover:scale-110 group-active:scale-95">
+        <span
+          className={`relative flex h-full w-full items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110 group-active:scale-95 ${
+            open
+              ? "bg-assistant text-assistant-ink shadow-[0_10px_30px_-8px_rgba(20,216,196,0.8)]"
+              : ""
+          }`}
+        >
           <AnimatePresence mode="wait" initial={false}>
             {open ? (
               <motion.span
@@ -477,12 +459,13 @@ export default function ChatWidget() {
             ) : (
               <motion.span
                 key="bot"
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.5, opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                initial={{ scale: 0.5, opacity: 0, y: 8 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.5, opacity: 0, y: 8 }}
+                transition={{ type: "spring", stiffness: 420, damping: 22 }}
+                className="drop-shadow-[0_8px_14px_rgba(14,116,144,0.45)]"
               >
-                <Robot className="h-11 w-11" />
+                <PixelBot className="h-14 w-14" animated />
               </motion.span>
             )}
           </AnimatePresence>
@@ -496,6 +479,6 @@ export default function ChatWidget() {
           </span>
         )}
       </button>
-    </>
+    </div>
   );
 }

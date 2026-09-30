@@ -10,10 +10,10 @@ export default {
         // The chat widget's accent, with a dark ink that stays readable on it
         // (white text on #00D1D1 is under 2:1 contrast).
         assistant: {
-          DEFAULT: "#00D1D1",
-          ink: "#053B3F",
+          DEFAULT: token("assistant"),
+          ink: token("assistant-ink"),
           // Lighter ink for the AI dev page; still 5:1 on the teal.
-          "ink-soft": "#084D51",
+          "ink-soft": token("assistant-ink-soft"),
         },
         surface: {
           DEFAULT: token("surface"),
@@ -76,7 +76,8 @@ export default {
       },
       backgroundImage: {
         // Brand gradients are fixed by identity, they do not flip per theme.
-        "cta-gradient": "linear-gradient(120deg, #14D8C4 0%, #788BE3 55%, #777ACF 100%)",
+        "cta-gradient":
+          "linear-gradient(120deg, rgb(var(--accent-vivid)) 0%, #788BE3 55%, #777ACF 100%)",
       },
       animation: {
         marquee: "marquee 30s linear infinite",
