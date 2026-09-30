@@ -6,6 +6,7 @@
  * a component. Section order in the page mirrors this file.
  */
 
+import { companyStats } from "./companyStats.js";
 import heroImg from "../assets/industries/transportation/hero.webp";
 import introImg from "../assets/industries/transportation/intro.webp";
 
@@ -54,8 +55,7 @@ export const hero = {
   titleLead: "Custom",
   titleAccent: "Transportation Software Development",
   titleTail: "For Networks That Never Stop",
-  body:
-    "Fleet telematics, route optimisation, freight visibility and mobility platforms, engineered for operations where a delayed load, an idling truck or a missed slot is measured in money the same day.",
+  body: "Fleet telematics, route optimisation, freight visibility and mobility platforms, engineered for operations where a delayed load, an idling truck or a missed slot is measured in money the same day.",
   ctaText: "Request a free consultation",
   image: heroImg,
   alt: "An aerial night view of a multi-level motorway interchange traced by traffic light trails",
@@ -77,8 +77,7 @@ export const intro = {
 export const impact = {
   titleLead: "What Digitalisation Is Actually Worth",
   titleAccent: "In Transport And Logistics",
-  body:
-    "The pressure on transport networks is not theoretical: demand is rising faster than capacity, and the margin sits in the miles, minutes and empty space nobody currently measures. These are the numbers that frame most of the projects we are asked to build.",
+  body: "The pressure on transport networks is not theoretical: demand is rising faster than capacity, and the margin sits in the miles, minutes and empty space nobody currently measures. These are the numbers that frame most of the projects we are asked to build.",
   stats: [
     {
       value: "$1.54T",
@@ -112,38 +111,31 @@ export const challenges = {
   items: [
     {
       title: "Nobody Can Say Where The Load Is",
-      body:
-        "Telematics says one thing, the carrier portal another, and the customer is asking a third party. We build the tracking layer that reconciles GPS, EDI, ELD and carrier APIs into one shipment record with a single status, so a service call is answered in seconds instead of escalated to a planner.",
+      body: "Telematics says one thing, the carrier portal another, and the customer is asking a third party. We build the tracking layer that reconciles GPS, EDI, ELD and carrier APIs into one shipment record with a single status, so a service call is answered in seconds instead of escalated to a planner.",
     },
     {
       title: "Routes Planned On Yesterday's Map",
-      body:
-        "Static routes ignore traffic, weather, dock congestion and driver hours, then blow up at 3pm. Our optimisation engines replan continuously against live conditions and real constraints (HOS, vehicle class, cold-chain windows, tolls) and hand the driver a sequence that survives the day.",
+      body: "Static routes ignore traffic, weather, dock congestion and driver hours, then blow up at 3pm. Our optimisation engines replan continuously against live conditions and real constraints (HOS, vehicle class, cold-chain windows, tolls) and hand the driver a sequence that survives the day.",
     },
     {
       title: "Empty Miles Nobody Prices",
-      body:
-        "Deadhead and half-full trailers are the largest silent cost in most road networks. We build load-matching, backhaul and consolidation models on top of your own order book, so the second leg is sold before the first one finishes rather than written off as an operating fact.",
+      body: "Deadhead and half-full trailers are the largest silent cost in most road networks. We build load-matching, backhaul and consolidation models on top of your own order book, so the second leg is sold before the first one finishes rather than written off as an operating fact.",
     },
     {
       title: "Maintenance That Happens After The Breakdown",
-      body:
-        "Fixed-interval servicing replaces parts too early and still misses the failure. We combine engine fault codes, duty cycles and sensor drift into predictive maintenance that schedules a vehicle into a workshop slot while it is still earning, with the evidence behind every recommendation.",
+      body: "Fixed-interval servicing replaces parts too early and still misses the failure. We combine engine fault codes, duty cycles and sensor drift into predictive maintenance that schedules a vehicle into a workshop slot while it is still earning, with the evidence behind every recommendation.",
     },
     {
       title: "Compliance Assembled By Hand",
-      body:
-        "Hours of service, tachograph data, dangerous-goods paperwork, customs and emissions reporting all arrive in different formats and get stitched together by someone on a Friday. We automate capture, validation and submission, and keep an audit trail that answers a regulator without a week of retrieval.",
+      body: "Hours of service, tachograph data, dangerous-goods paperwork, customs and emissions reporting all arrive in different formats and get stitched together by someone on a Friday. We automate capture, validation and submission, and keep an audit trail that answers a regulator without a week of retrieval.",
     },
     {
       title: "Customers Who Only Hear From You When It's Late",
-      body:
-        "Shippers churn over visibility more than price. We build the customer-facing layer of predictive ETAs, exception alerts, proof of delivery and self-service booking, so your account team spends its day selling rather than reading tracking numbers down a phone line.",
+      body: "Shippers churn over visibility more than price. We build the customer-facing layer of predictive ETAs, exception alerts, proof of delivery and self-service booking, so your account team spends its day selling rather than reading tracking numbers down a phone line.",
     },
     {
       title: "Systems That Cannot Absorb Another Integration",
-      body:
-        "A decade-old TMS with bolt-ons becomes the reason you cannot onboard a carrier or a customer quickly. We modernise in stages behind a stable API layer, migrating what earns its place and retiring the rest, without taking dispatch offline for a single shift.",
+      body: "A decade-old TMS with bolt-ons becomes the reason you cannot onboard a carrier or a customer quickly. We modernise in stages behind a stable API layer, migrating what earns its place and retiring the rest, without taking dispatch offline for a single shift.",
     },
   ],
 };
@@ -152,62 +144,53 @@ export const solutions = {
   eyebrow: "What transportation solutions do we offer?",
   titleLead: "Tailored Transportation Software Solutions",
   titleAccent: "For Every Part Of The Network",
-  body:
-    "From a transport management system that finally reflects how your dispatchers work, to the rider app that has to load on a weak signal at a bus stop: these are the platforms operators ask us for most.",
+  body: "From a transport management system that finally reflects how your dispatchers work, to the rider app that has to load on a weak signal at a bus stop: these are the platforms operators ask us for most.",
   items: [
     {
       title: "Transport Management Systems (TMS)",
-      body:
-        "One operating picture for orders, planning, dispatch, carrier selection, rating and settlement. We build TMS platforms around the way your planners actually sequence a day, with automated tendering, live exception handling and the reporting your finance team stops rebuilding in spreadsheets.",
+      body: "One operating picture for orders, planning, dispatch, carrier selection, rating and settlement. We build TMS platforms around the way your planners actually sequence a day, with automated tendering, live exception handling and the reporting your finance team stops rebuilding in spreadsheets.",
       image: solTmsImg,
       alt: "An operator at a control desk facing a wall of live monitoring screens",
     },
     {
       title: "Fleet Management & Telematics",
-      body:
-        "Vehicle health, utilisation, fuel, driver behaviour and compliance in one view. We ingest telematics, CAN bus and ELD feeds, then surface the handful of signals that change a decision today: which asset is idle, which is due, which driver needs coaching, which route is burning fuel.",
+      body: "Vehicle health, utilisation, fuel, driver behaviour and compliance in one view. We ingest telematics, CAN bus and ELD feeds, then surface the handful of signals that change a decision today: which asset is idle, which is due, which driver needs coaching, which route is burning fuel.",
       image: solFleetImg,
       alt: "A line of semi trucks parked in a carrier yard",
     },
     {
       title: "Freight Forwarding & Brokerage Platforms",
-      body:
-        "Quoting, capacity sourcing, documentation and multi-modal tracking for forwarders and brokers. Automated rating across lanes and modes, carrier scorecards, margin visibility per load, and customs paperwork generated from the shipment record rather than retyped from it.",
+      body: "Quoting, capacity sourcing, documentation and multi-modal tracking for forwarders and brokers. Automated rating across lanes and modes, carrier scorecards, margin visibility per load, and customs paperwork generated from the shipment record rather than retyped from it.",
       image: solFreightImg,
       alt: "A loaded container ship under way on open water",
     },
     {
       title: "Asset & Container Tracking",
-      body:
-        "IoT-backed visibility for trailers, containers, reefers, swap bodies and high-value cargo. Geofencing, dwell analytics, tamper and temperature alerting, and a utilisation model that tells you how many assets you genuinely need before you lease more.",
+      body: "IoT-backed visibility for trailers, containers, reefers, swap bodies and high-value cargo. Geofencing, dwell analytics, tamper and temperature alerting, and a utilisation model that tells you how many assets you genuinely need before you lease more.",
       image: solAssetImg,
       alt: "A gantry crane lowering a shipping container onto a stack at a terminal",
     },
     {
       title: "Public Transit & Mobility Platforms",
-      body:
-        "Scheduling, AVL, passenger information, ticketing and demand-responsive services for operators and authorities. Real-time arrival prediction that holds up in traffic, accessible journey planning, and the ridership analytics that justify the next timetable change.",
+      body: "Scheduling, AVL, passenger information, ticketing and demand-responsive services for operators and authorities. Real-time arrival prediction that holds up in traffic, accessible journey planning, and the ridership analytics that justify the next timetable change.",
       image: solMobilityImg,
       alt: "An articulated trolleybus moving along a tree-lined city road",
     },
     {
       title: "Micromobility & Vehicle Sharing",
-      body:
-        "End-to-end platforms for scooter, bike, car and van sharing: onboarding and identity checks, geofenced operating zones, dynamic pricing, battery and rebalancing operations, and the field-ops app the street team uses all day.",
+      body: "End-to-end platforms for scooter, bike, car and van sharing: onboarding and identity checks, geofenced operating zones, dynamic pricing, battery and rebalancing operations, and the field-ops app the street team uses all day.",
       image: solSharingImg,
       alt: "A row of shared e-scooters parked at a kerbside bay",
     },
     {
       title: "Ride-Hailing & Taxi Dispatch",
-      body:
-        "Matching, dispatch, surge, driver supply and payments built for the density you actually operate at. We handle the hard parts properly: dispatch latency, fair allocation, fraud and driver earnings transparency. Those are what decide retention on both sides of the market.",
+      body: "Matching, dispatch, surge, driver supply and payments built for the density you actually operate at. We handle the hard parts properly: dispatch latency, fair allocation, fraud and driver earnings transparency. Those are what decide retention on both sides of the market.",
       image: solTaxiImg,
       alt: "A yellow ride-hailing taxi seen from above on asphalt",
     },
     {
       title: "Airport, Port & Terminal Operations",
-      body:
-        "Slot management, turnaround tracking, yard and gate optimisation, and ground-handling coordination. We connect the planning system to what is actually happening on the apron or the quay, so a delay is re-sequenced in minutes rather than absorbed across the shift.",
+      body: "Slot management, turnaround tracking, yard and gate optimisation, and ground-handling coordination. We connect the planning system to what is actually happening on the apron or the quay, so a delay is re-sequenced in minutes rather than absorbed across the shift.",
       image: solAirportImg,
       alt: "A widebody aircraft being serviced by ground handlers at the gate",
     },
@@ -216,8 +199,7 @@ export const solutions = {
 
 export const midCta = {
   title: "Looking For Something Else?",
-  body:
-    "These are the transportation solutions we get asked for most. If you have a lane, a terminal or a legacy TMS that nobody wants to touch, that is usually the conversation worth having first.",
+  body: "These are the transportation solutions we get asked for most. If you have a lane, a terminal or a legacy TMS that nobody wants to touch, that is usually the conversation worth having first.",
   ctaText: "Get in touch",
   background: midCtaBgImg,
 };
@@ -226,13 +208,11 @@ export const services = {
   eyebrow: "How we deliver",
   titleLead: "Transportation Software Development Services",
   titleAccent: "Sized To Your Operation",
-  body:
-    "Five ways we engage, from a scoped pilot on one lane to a multi-year platform partnership across a national network. Every engagement is staged so the first useful capability reaches dispatch early, not at the end.",
+  body: "Five ways we engage, from a scoped pilot on one lane to a multi-year platform partnership across a national network. Every engagement is staged so the first useful capability reaches dispatch early, not at the end.",
   items: [
     {
       title: "Custom Transportation Software Development",
-      body:
-        "End-to-end delivery of the platform itself: domain model, services, integrations, interfaces and the release process behind them. We start with the workflow costing your team the most hours, usually planning or exception handling, ship it, and grow the system outward from something already in daily use.",
+      body: "End-to-end delivery of the platform itself: domain model, services, integrations, interfaces and the release process behind them. We start with the workflow costing your team the most hours, usually planning or exception handling, ship it, and grow the system outward from something already in daily use.",
       extra:
         "You get working software in weekly increments, with the first usable capability live long before the full scope lands. Nothing is built behind a curtain for a quarter and unveiled at the end, which is how transport projects usually miss a peak season.",
       points: [
@@ -245,8 +225,7 @@ export const services = {
     },
     {
       title: "MVP & Proof Of Concept Builds",
-      body:
-        "A narrow, honest first version that proves the idea against real loads and real drivers before anyone commits a platform budget. We pick the one hypothesis that carries the business case and build only what tests it.",
+      body: "A narrow, honest first version that proves the idea against real loads and real drivers before anyone commits a platform budget. We pick the one hypothesis that carries the business case and build only what tests it.",
       extra:
         "You leave with a working product and a decision, including the version of the decision that says stop. We would rather tell you an idea does not clear the bar in eight weeks than in eighteen months.",
       points: [
@@ -259,8 +238,7 @@ export const services = {
     },
     {
       title: "Integration, Telematics & API Engineering",
-      body:
-        "The unglamorous layer that decides whether anything else works: telematics providers, ELD, EDI (204/214/990), TMS and WMS, carrier and customs APIs, payment and fuel-card feeds, all reconciled into one schema with retries, backfill and monitoring.",
+      body: "The unglamorous layer that decides whether anything else works: telematics providers, ELD, EDI (204/214/990), TMS and WMS, carrier and customs APIs, payment and fuel-card feeds, all reconciled into one schema with retries, backfill and monitoring.",
       extra:
         "We build to the failure cases, because in transport the interesting path is the one where a provider goes dark mid-shift. Every feed has a defined behaviour when it degrades, and an alert that reaches a human before a customer does.",
       points: [
@@ -273,8 +251,7 @@ export const services = {
     },
     {
       title: "Driver, Rider & Field Mobile Apps",
-      body:
-        "The apps used in a cab, on a platform or at a loading bay. Offline-first, low-bandwidth, glove-friendly, and built so a scan, a signature or a proof of delivery survives the twenty minutes with no signal that your network definitely has.",
+      body: "The apps used in a cab, on a platform or at a loading bay. Offline-first, low-bandwidth, glove-friendly, and built so a scan, a signature or a proof of delivery survives the twenty minutes with no signal that your network definitely has.",
       extra:
         "We instrument the field experience properly, so product decisions come from what drivers and riders actually do rather than from what a workshop assumed they would do.",
       points: [
@@ -287,8 +264,7 @@ export const services = {
     },
     {
       title: "Legacy Modernisation & Cloud Migration",
-      body:
-        "Most operators do not start from nothing; they start from a TMS older than half the fleet. We wrap it in a stable API, move capability out module by module, and retire the original only once its replacement has run a full peak.",
+      body: "Most operators do not start from nothing; they start from a TMS older than half the fleet. We wrap it in a stable API, move capability out module by module, and retire the original only once its replacement has run a full peak.",
       extra:
         "The work is staged so every step is independently useful and independently reversible. If we stop halfway, you are still better off than when we started. That is the only honest way to modernise a system dispatch depends on.",
       points: [
@@ -310,21 +286,80 @@ export const modes = {
   eyebrow: "Which modes do we serve?",
   titleLead: "We Build Custom Transportation Software",
   titleAccent: "For Every Way Things Move",
-  body:
-    "The planning, visibility and compliance problems rhyme across modes; the constraints and the data models do not. These are the networks we have shipped against.",
+  body: "The planning, visibility and compliance problems rhyme across modes; the constraints and the data models do not. These are the networks we have shipped against.",
   items: [
-    { label: "Road Freight", body: "Dispatch, HOS-aware routing and lane profitability.", image: modeTruckingImg, alt: "A tipper truck travelling along an open highway" },
-    { label: "Rail", body: "Wagon tracking, yard planning and intermodal handover.", image: modeRailImg, alt: "Freight wagons standing in a marshalling yard" },
-    { label: "Ocean", body: "Container visibility, demurrage control and booking flows.", image: modeOceanImg, alt: "A container ship at sea carrying stacked containers" },
-    { label: "Air Cargo", body: "Capacity, ULD tracking and time-definite handling.", image: modeAirImg, alt: "A cargo aircraft on the taxiway at an airport" },
-    { label: "Last Mile", body: "Route density, ePOD and live customer ETAs.", image: modeLastmileImg, alt: "A courier unloading parcels from the back of a delivery van" },
-    { label: "Public Transit", body: "Scheduling, AVL and real-time passenger information.", image: modeTransitImg, alt: "A city bus at a stop on a European street" },
-    { label: "Ride-Hailing", body: "Matching, dispatch latency and driver supply balance.", image: modeRideshareImg, alt: "A passenger in the back of a taxi checking a phone" },
-    { label: "Ports & Terminals", body: "Yard moves, gate flow and quay-side sequencing.", image: modePortsImg, alt: "Quay cranes working at a container terminal" },
-    { label: "Cold Chain", body: "Reefer telemetry, excursion alerting and audit trails.", image: modeColdchainImg, alt: "Refrigerated trailers parked in a yard" },
-    { label: "Fleet Maintenance", body: "Predictive servicing, parts and workshop scheduling.", image: modeMaintenanceImg, alt: "Mechanics working on a truck cab in a workshop" },
-    { label: "Warehousing", body: "Dock scheduling, yard management and WMS integration.", image: modeWarehouseImg, alt: "An overhead view of two warehouse workers checking a tablet beside pallets" },
-    { label: "Bulk & Tanker", body: "Hazmat compliance, load planning and site telemetry.", image: modeTankerImg, alt: "A stainless steel tanker trailer parked at a depot" },
+    {
+      label: "Road Freight",
+      body: "Dispatch, HOS-aware routing and lane profitability.",
+      image: modeTruckingImg,
+      alt: "A tipper truck travelling along an open highway",
+    },
+    {
+      label: "Rail",
+      body: "Wagon tracking, yard planning and intermodal handover.",
+      image: modeRailImg,
+      alt: "Freight wagons standing in a marshalling yard",
+    },
+    {
+      label: "Ocean",
+      body: "Container visibility, demurrage control and booking flows.",
+      image: modeOceanImg,
+      alt: "A container ship at sea carrying stacked containers",
+    },
+    {
+      label: "Air Cargo",
+      body: "Capacity, ULD tracking and time-definite handling.",
+      image: modeAirImg,
+      alt: "A cargo aircraft on the taxiway at an airport",
+    },
+    {
+      label: "Last Mile",
+      body: "Route density, ePOD and live customer ETAs.",
+      image: modeLastmileImg,
+      alt: "A courier unloading parcels from the back of a delivery van",
+    },
+    {
+      label: "Public Transit",
+      body: "Scheduling, AVL and real-time passenger information.",
+      image: modeTransitImg,
+      alt: "A city bus at a stop on a European street",
+    },
+    {
+      label: "Ride-Hailing",
+      body: "Matching, dispatch latency and driver supply balance.",
+      image: modeRideshareImg,
+      alt: "A passenger in the back of a taxi checking a phone",
+    },
+    {
+      label: "Ports & Terminals",
+      body: "Yard moves, gate flow and quay-side sequencing.",
+      image: modePortsImg,
+      alt: "Quay cranes working at a container terminal",
+    },
+    {
+      label: "Cold Chain",
+      body: "Reefer telemetry, excursion alerting and audit trails.",
+      image: modeColdchainImg,
+      alt: "Refrigerated trailers parked in a yard",
+    },
+    {
+      label: "Fleet Maintenance",
+      body: "Predictive servicing, parts and workshop scheduling.",
+      image: modeMaintenanceImg,
+      alt: "Mechanics working on a truck cab in a workshop",
+    },
+    {
+      label: "Warehousing",
+      body: "Dock scheduling, yard management and WMS integration.",
+      image: modeWarehouseImg,
+      alt: "An overhead view of two warehouse workers checking a tablet beside pallets",
+    },
+    {
+      label: "Bulk & Tanker",
+      body: "Hazmat compliance, load planning and site telemetry.",
+      image: modeTankerImg,
+      alt: "A stainless steel tanker trailer parked at a depot",
+    },
   ],
 };
 
@@ -335,41 +370,34 @@ export const benefits = {
   items: [
     {
       title: "Cut Cost Per Mile",
-      body:
-        "Continuous route optimisation, load consolidation and backhaul matching attack the three costs that dominate a road network: fuel, empty running and overtime built into a badly sequenced day.",
+      body: "Continuous route optimisation, load consolidation and backhaul matching attack the three costs that dominate a road network: fuel, empty running and overtime built into a badly sequenced day.",
     },
     {
       title: "Deliver On Promises You Can Keep",
-      body:
-        "Predictive ETAs built on your own historical performance, not a straight-line average, let you quote windows you hit, and flag the exceptions early enough that a customer hears from you first.",
+      body: "Predictive ETAs built on your own historical performance, not a straight-line average, let you quote windows you hit, and flag the exceptions early enough that a customer hears from you first.",
     },
     {
       title: "Keep Assets Earning",
-      body:
-        "Predictive maintenance and utilisation analytics move work from roadside breakdown to a planned workshop slot, and answer honestly whether the next ten vehicles need to be bought at all.",
+      body: "Predictive maintenance and utilisation analytics move work from roadside breakdown to a planned workshop slot, and answer honestly whether the next ten vehicles need to be bought at all.",
     },
     {
       title: "Automate The Compliance Load",
-      body:
-        "Hours of service, tachograph, dangerous goods, customs and emissions reporting generated from operational data as it happens, with an audit trail that holds up without a week of retrieval.",
+      body: "Hours of service, tachograph, dangerous goods, customs and emissions reporting generated from operational data as it happens, with an audit trail that holds up without a week of retrieval.",
     },
     {
       title: "Scale Without Scaling Headcount",
-      body:
-        "Automated tendering, exception-based dispatch and self-service booking mean volume growth stops translating directly into another planner, another phone and another spreadsheet.",
+      body: "Automated tendering, exception-based dispatch and self-service booking mean volume growth stops translating directly into another planner, another phone and another spreadsheet.",
     },
     {
       title: "Report Emissions With Evidence",
-      body:
-        "Per-shipment CO2e calculated from real distance, load factor and vehicle profile, so sustainability reporting and customer scope-3 requests come from your operational data rather than an estimate.",
+      body: "Per-shipment CO2e calculated from real distance, load factor and vehicle profile, so sustainability reporting and customer scope-3 requests come from your operational data rather than an estimate.",
     },
   ],
 };
 
 export const build = {
   title: "Build The Transportation Platform Your Network Deserves",
-  body:
-    "Bring us the bottleneck, whether that is planning, visibility, maintenance or a customer portal that has stopped scaling. We will scope it honestly, build it in increments your team can use, and tell you which parts are not worth building at all.",
+  body: "Bring us the bottleneck, whether that is planning, visibility, maintenance or a customer portal that has stopped scaling. We will scope it honestly, build it in increments your team can use, and tell you which parts are not worth building at all.",
   ctaText: "Get in touch now",
   texture: textureBgImg,
   image: buildVisualImg,
@@ -380,54 +408,128 @@ export const techStrip = {
   eyebrow: "Technologies we work with",
   titleLead: "Expertise In Advanced",
   titleAccent: "Development Technologies",
-  body:
-    "The same production-grade toolchain sits under every transportation platform we ship. Pick a layer to see what it is made of.",
+  body: "The same production-grade toolchain sits under every transportation platform we ship. Pick a layer to see what it is made of.",
   ctaText: "View all tech stack",
   tabs: [
     {
       id: "ai",
       label: "Artificial Intelligence",
       items: [
-        "GPT-4o", "Claude", "Gemini", "PyTorch", "TensorFlow", "scikit-learn", "XGBoost",
-        "Prophet", "OR-Tools", "VROOM", "OSRM", "Valhalla", "YOLO", "OpenCV",
-        "Vertex AI", "LangChain", "OpenAI Embeddings", "MLflow",
+        "GPT-4o",
+        "Claude",
+        "Gemini",
+        "PyTorch",
+        "TensorFlow",
+        "scikit-learn",
+        "XGBoost",
+        "Prophet",
+        "OR-Tools",
+        "VROOM",
+        "OSRM",
+        "Valhalla",
+        "YOLO",
+        "OpenCV",
+        "Vertex AI",
+        "LangChain",
+        "OpenAI Embeddings",
+        "MLflow",
       ],
     },
     {
       id: "backend",
       label: "Backend & Databases",
       items: [
-        "Node.js", "NestJS", "FastAPI", "Django", "Go", "GraphQL", "PostgreSQL", "PostGIS",
-        "TimescaleDB", "MongoDB", "Redis", "ClickHouse", "Kafka", "MQTT", "Airflow", "dbt", "Snowflake",
+        "Node.js",
+        "NestJS",
+        "FastAPI",
+        "Django",
+        "Go",
+        "GraphQL",
+        "PostgreSQL",
+        "PostGIS",
+        "TimescaleDB",
+        "MongoDB",
+        "Redis",
+        "ClickHouse",
+        "Kafka",
+        "MQTT",
+        "Airflow",
+        "dbt",
+        "Snowflake",
       ],
     },
     {
       id: "frontend",
       label: "Frontend",
       items: [
-        "React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js", "GSAP",
-        "Mapbox GL", "MapLibre", "Deck.gl", "D3.js", "Vite",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Three.js",
+        "GSAP",
+        "Mapbox GL",
+        "MapLibre",
+        "Deck.gl",
+        "D3.js",
+        "Vite",
       ],
     },
     {
       id: "mobile",
       label: "Mobile & IoT",
-      items: ["React Native", "Flutter", "Swift", "Kotlin", "WatermelonDB", "AWS IoT Core", "Azure IoT Hub", "Geotab", "Samsara APIs"],
+      items: [
+        "React Native",
+        "Flutter",
+        "Swift",
+        "Kotlin",
+        "WatermelonDB",
+        "AWS IoT Core",
+        "Azure IoT Hub",
+        "Geotab",
+        "Samsara APIs",
+      ],
     },
     {
       id: "cloud",
       label: "Cloud",
-      items: ["AWS", "Google Cloud", "Azure", "Vercel", "Cloudflare", "Firebase", "Supabase", "Fly.io"],
+      items: [
+        "AWS",
+        "Google Cloud",
+        "Azure",
+        "Vercel",
+        "Cloudflare",
+        "Firebase",
+        "Supabase",
+        "Fly.io",
+      ],
     },
     {
       id: "devops",
       label: "DevOps",
-      items: ["Docker", "Kubernetes", "Terraform", "GitHub Actions", "GitLab CI", "Nginx", "Prometheus", "Grafana", "Sentry"],
+      items: [
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "GitHub Actions",
+        "GitLab CI",
+        "Nginx",
+        "Prometheus",
+        "Grafana",
+        "Sentry",
+      ],
     },
     {
       id: "design",
       label: "UI / UX",
-      items: ["Figma", "Design Tokens", "Prototyping", "WCAG 2.2 Audits", "Field Usability Testing"],
+      items: [
+        "Figma",
+        "Design Tokens",
+        "Prototyping",
+        "WCAG 2.2 Audits",
+        "Field Usability Testing",
+      ],
     },
   ],
 };
@@ -436,8 +538,7 @@ export const businessTypes = {
   eyebrow: "Who do we work with?",
   titleLead: "Explore The Range Of",
   titleAccent: "Transport Operators We Support",
-  body:
-    "From a regional haulier digitising dispatch for the first time to an authority running a metropolitan network, the engagement shape changes but the standard does not.",
+  body: "From a regional haulier digitising dispatch for the first time to an authority running a metropolitan network, the engagement shape changes but the standard does not.",
   rows: [
     {
       label: "Carriers, hauliers and fleet owners",
@@ -491,8 +592,7 @@ export const showcase = {
   eyebrow: "Our portfolio",
   titleLead: "Proven Results Across",
   titleAccent: "Transportation And Logistics",
-  body:
-    "A selection of the platforms and models we have shipped, including the real-time tracking, optimisation and computer-vision work transport operators come to us for.",
+  body: "A selection of the platforms and models we have shipped, including the real-time tracking, optimisation and computer-vision work transport operators come to us for.",
   ctaText: "Check Out Our Full Portfolio",
 };
 
@@ -504,35 +604,31 @@ export const partner = {
     {
       icon: "Route",
       title: "We Build For Operations, Not Demos",
-      body:
-        "Our engineers have shipped against peak season, driver shortages and dock windows. Systems are designed for the 5am shift and the bad-signal cab, which is why staff still use them in month six.",
+      body: "Our engineers have shipped against peak season, driver shortages and dock windows. Systems are designed for the 5am shift and the bad-signal cab, which is why staff still use them in month six.",
     },
     {
       icon: "Layers",
       title: "Integrates With What You Already Run",
-      body:
-        "Telematics vendors, ELD, EDI, legacy TMS, WMS and carrier APIs each have their own idea of a schema. We build the layer that reconciles them, modular enough to survive the next vendor change.",
+      body: "Telematics vendors, ELD, EDI, legacy TMS, WMS and carrier APIs each have their own idea of a schema. We build the layer that reconciles them, modular enough to survive the next vendor change.",
     },
     {
       icon: "ShieldCheck",
       title: "Safety And Compliance Designed In",
-      body:
-        "Driver hours, tachograph records, hazmat documentation and location data carry real obligations. Consent, retention, residency and access control are set in the first architecture session, with post-launch support for up to 60 days within the agreed scope.",
+      body: "Driver hours, tachograph records, hazmat documentation and location data carry real obligations. Consent, retention, residency and access control are set in the first architecture session, with post-launch support for up to 60 days within the agreed scope.",
     },
   ],
   stats: [
-    { value: "205+", label: "Projects Delivered" },
-    { value: "5+", label: "Valuable Partnerships" },
-    { value: "20+", label: "Countries Served" },
-    { value: "20+", label: "Tech Experts" },
+    { value: `${companyStats.projects}+`, label: "Projects Delivered" },
+    { value: `${companyStats.partnerships}+`, label: "Valuable Partnerships" },
+    { value: `${companyStats.countries}+`, label: "Countries Served" },
+    { value: `${companyStats.experts}+`, label: "Tech Experts" },
   ],
 };
 
 export const blogs = {
   eyebrow: "What can our expertise teach you?",
   title: "Insights On AI, Fleets And The Business Of Moving Things",
-  body:
-    "Field notes from the platforms we build: where route optimisation genuinely pays, what telematics data is good for once the novelty fades, and which parts of the logistics AI pitch do not survive a peak season.",
+  body: "Field notes from the platforms we build: where route optimisation genuinely pays, what telematics data is good for once the novelty fades, and which parts of the logistics AI pitch do not survive a peak season.",
   posts: [
     {
       title: "Route Optimisation In Practice: What Actually Cuts Cost Per Mile",

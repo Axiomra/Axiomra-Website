@@ -5,6 +5,7 @@
  * a component. Section order in the page mirrors this file.
  */
 
+import { companyStats } from "./companyStats.js";
 import heroImg from "../assets/industries/sports/hero.webp";
 import introImg from "../assets/industries/sports/intro.webp";
 
@@ -64,8 +65,7 @@ export const hero = {
   titleLead: "Custom",
   titleAccent: "Sports Software Development",
   titleTail: "For High-Performance Teams",
-  body:
-    "We design and build sports software that turns athlete performance, operations and fan attention into systems you can actually run. From real-time match data and injury prevention to ticketing, broadcast and fan engagement platforms, our work keeps sports organisations ahead in a season that never really stops.",
+  body: "We design and build sports software that turns athlete performance, operations and fan attention into systems you can actually run. From real-time match data and injury prevention to ticketing, broadcast and fan engagement platforms, our work keeps sports organisations ahead in a season that never really stops.",
   ctaText: "Request a free consultation",
   image: heroImg,
   alt: "A packed football stadium under floodlights on a match night",
@@ -87,12 +87,12 @@ export const intro = {
 export const impact = {
   titleLead: "How AI Is Reshaping Performance, Revenue",
   titleAccent: "And Safety In Sports",
-  body:
-    "AI sports software is redefining how teams manage training load, reduce injury risk and open new revenue by unifying wearables, video, ticketing and CRM into real-time workflows that scale from academies to professional leagues.",
+  body: "AI sports software is redefining how teams manage training load, reduce injury risk and open new revenue by unifying wearables, video, ticketing and CRM into real-time workflows that scale from academies to professional leagues.",
   stats: [
     {
       value: "$10.4B",
-      label: "global AI in sports market size in 2025, on its way to roughly ten times that by the mid-2030s.",
+      label:
+        "global AI in sports market size in 2025, on its way to roughly ten times that by the mid-2030s.",
       source: "Precedence Research, AI In Sports Market 2025",
     },
     {
@@ -120,38 +120,31 @@ export const challenges = {
   items: [
     {
       title: "Performance Data Nobody Reads",
-      body:
-        "GPS vests, force plates, wellness questionnaires and video all land in different exports, and by the time anyone has merged them the session they describe is a week old. We build the ingestion layer and the one screen that sits on top of it, so a coach sees load, readiness and risk for the whole squad before training starts rather than after it.",
+      body: "GPS vests, force plates, wellness questionnaires and video all land in different exports, and by the time anyone has merged them the session they describe is a week old. We build the ingestion layer and the one screen that sits on top of it, so a coach sees load, readiness and risk for the whole squad before training starts rather than after it.",
     },
     {
       title: "Injury Risk Spotted Too Late",
-      body:
-        "Soft-tissue injuries rarely arrive without warning; the warning is just spread across sources nobody correlates. We combine workload history, movement asymmetry and self-reported wellness into a risk model with an audit trail, so medical staff get a flag they can act on and a record that stands up when someone asks why a player was rested.",
+      body: "Soft-tissue injuries rarely arrive without warning; the warning is just spread across sources nobody correlates. We combine workload history, movement asymmetry and self-reported wellness into a risk model with an audit trail, so medical staff get a flag they can act on and a record that stands up when someone asks why a player was rested.",
     },
     {
       title: "Video Reviewed Once, Then Lost",
-      body:
-        "Match footage gets watched on Monday and never again, because nothing in it is searchable. Our computer-vision pipelines tag events, players and phases automatically, so a decade of footage becomes a queryable archive for coaching, scouting, broadcast highlights and sponsorship reporting.",
+      body: "Match footage gets watched on Monday and never again, because nothing in it is searchable. Our computer-vision pipelines tag events, players and phases automatically, so a decade of footage becomes a queryable archive for coaching, scouting, broadcast highlights and sponsorship reporting.",
     },
     {
       title: "Match-Day Operations That Break Under Load",
-      body:
-        "Ticketing, access control, retail and stewarding usually come from four vendors who have never spoken. We build the integration layer and the real-time operations view so gate throughput, capacity and incidents are visible during the match, not reconstructed from four reports the following week.",
+      body: "Ticketing, access control, retail and stewarding usually come from four vendors who have never spoken. We build the integration layer and the real-time operations view so gate throughput, capacity and incidents are visible during the match, not reconstructed from four reports the following week.",
     },
     {
       title: "Fans Who Only Show Up Twice A Season",
-      body:
-        "Declining attendance is a retention problem, and retention needs identity. We unify ticketing, OTT, merchandise and app behaviour into one supporter profile, then build the personalisation, live polling and second-screen features that turn an occasional attendee into a season-ticket renewal.",
+      body: "Declining attendance is a retention problem, and retention needs identity. We unify ticketing, OTT, merchandise and app behaviour into one supporter profile, then build the personalisation, live polling and second-screen features that turn an occasional attendee into a season-ticket renewal.",
     },
     {
       title: "Sponsorship You Cannot Price",
-      body:
-        "Rights holders still sell exposure on estimates. We instrument broadcast and social video with brand-detection models, so perimeter boards, shirt fronts and digital placements report measured seconds of visibility and audience reach per asset, which is what a renewal conversation needs.",
+      body: "Rights holders still sell exposure on estimates. We instrument broadcast and social video with brand-detection models, so perimeter boards, shirt fronts and digital placements report measured seconds of visibility and audience reach per asset, which is what a renewal conversation needs.",
     },
     {
       title: "Compliance, NIL And Wearable Privacy",
-      body:
-        "Athlete biometrics are among the most sensitive data a club holds, and NIL, concussion protocols and image rights each carry their own obligations. We design consent capture, retention and access control into the schema, so the security review and the league audit both find what they are looking for.",
+      body: "Athlete biometrics are among the most sensitive data a club holds, and NIL, concussion protocols and image rights each carry their own obligations. We design consent capture, retention and access control into the schema, so the security review and the league audit both find what they are looking for.",
     },
   ],
 };
@@ -160,90 +153,77 @@ export const services = {
   eyebrow: "What sports solutions do we offer?",
   titleLead: "Tailored Sports Software Solutions",
   titleAccent: "For Every Organisation",
-  body:
-    "We build custom sports software that removes the manual, repetitive work modern sports organisations still run on: in-person-only coaching, fragmented medical records, batch-processed performance data and fan engagement that stops at the final whistle.",
+  body: "We build custom sports software that removes the manual, repetitive work modern sports organisations still run on: in-person-only coaching, fragmented medical records, batch-processed performance data and fan engagement that stops at the final whistle.",
   items: [
     {
       title: "Kinesiology & Motion Analysis Software",
-      body:
-        "Manual posture analysis and movement tracking are slow and inconsistent between assessors. Our motion analysis software uses pose estimation to break down biomechanics, quantify asymmetry and track technique changes session over session, so coaching decisions rest on measurement rather than memory.",
+      body: "Manual posture analysis and movement tracking are slow and inconsistent between assessors. Our motion analysis software uses pose estimation to break down biomechanics, quantify asymmetry and track technique changes session over session, so coaching decisions rest on measurement rather than memory.",
       image: svcMotionImg,
       alt: "A motion-capture session with reflective markers in a biomechanics lab",
     },
     {
       title: "Fitness Club & Gym Management Software",
-      body:
-        "Running a club by hand produces double bookings, membership errors and hours lost to admin. We automate memberships, billing, class scheduling and trainer coordination into one platform that staff and members both actually want to use.",
+      body: "Running a club by hand produces double bookings, membership errors and hours lost to admin. We automate memberships, billing, class scheduling and trainer coordination into one platform that staff and members both actually want to use.",
       image: svcGymImg,
       alt: "The interior of a modern gym lined with training machines",
     },
     {
       title: "Sports Mobile App Development",
-      body:
-        "Fans and athletes drop off when the experience is disconnected from live data. Our sports apps deliver performance tracking, instant analytics and real-time engagement in one place, so athletes, coaches and supporters stay connected between fixtures rather than only during them.",
+      body: "Fans and athletes drop off when the experience is disconnected from live data. Our sports apps deliver performance tracking, instant analytics and real-time engagement in one place, so athletes, coaches and supporters stay connected between fixtures rather than only during them.",
       image: svcMobileImg,
       alt: "A runner checking a smartwatch mid-session",
     },
     {
       title: "League & Tournament Management Software",
-      body:
-        "Running a competition manually creates fixture clashes, disputed results and a mountain of administration. We automate scheduling, bracket generation, eligibility checks and live score distribution so organisers run a professional competition without a war room.",
+      body: "Running a competition manually creates fixture clashes, disputed results and a mountain of administration. We automate scheduling, bracket generation, eligibility checks and live score distribution so organisers run a professional competition without a war room.",
       image: svcLeagueImg,
       alt: "A referee signalling during a football match",
     },
     {
       title: "Sports Medicine Software",
-      body:
-        "Injury and medical records scattered across paper, spreadsheets and clinic systems make continuity of care impossible. Our sports medicine platforms centralise injury logs, rehab plans and medical history with the access control that health data requires, and surface the recovery signal staff need.",
+      body: "Injury and medical records scattered across paper, spreadsheets and clinic systems make continuity of care impossible. Our sports medicine platforms centralise injury logs, rehab plans and medical history with the access control that health data requires, and surface the recovery signal staff need.",
       image: svcMedicineImg,
       alt: "A physiotherapist treating an athlete's knee",
     },
     {
       title: "Sports Training Software",
-      body:
-        "Coaching that depends on in-person sessions caps how many athletes a programme can develop well. We build personalised training plans, progress tracking and performance analytics into one system, so a coach's method scales past the number of people in the room.",
+      body: "Coaching that depends on in-person sessions caps how many athletes a programme can develop well. We build personalised training plans, progress tracking and performance analytics into one system, so a coach's method scales past the number of people in the room.",
       image: svcTrainingImg,
       alt: "A youth football squad working through a cone drill",
     },
     {
       title: "Sports Event App",
-      body:
-        "Event day exposes every gap in planning, ticketing and communication at once. Our event apps handle digital ticketing, wayfinding, schedules and live updates, so attendees stay informed and your operations team stops firefighting over radio.",
+      body: "Event day exposes every gap in planning, ticketing and communication at once. Our event apps handle digital ticketing, wayfinding, schedules and live updates, so attendees stay informed and your operations team stops firefighting over radio.",
       image: svcEventImg,
       alt: "A stadium stand packed with cheering spectators",
     },
     {
       title: "Team Management App",
-      body:
-        "Squads run on spreadsheets and group chats until something important gets missed. We centralise availability, selection, travel, player data and communication so coaches, players and managers work from the same source through a long season.",
+      body: "Squads run on spreadsheets and group chats until something important gets missed. We centralise availability, selection, travel, player data and communication so coaches, players and managers work from the same source through a long season.",
       image: svcTeamImg,
       alt: "A coach giving instructions to a huddled team",
     },
     {
       title: "Streaming & Broadcasting Software",
-      body:
-        "Broadcast usually means high cost, latency and no analytics worth the name. We build live streaming, automated highlight generation and in-stream video analytics that cut delivery cost while opening direct-to-fan revenue you own rather than rent.",
+      body: "Broadcast usually means high cost, latency and no analytics worth the name. We build live streaming, automated highlight generation and in-stream video analytics that cut delivery cost while opening direct-to-fan revenue you own rather than rent.",
       image: svcStreamingImg,
       alt: "A broadcast camera operator covering a match from the touchline",
     },
     {
       title: "Fan Engagement Software",
-      body:
-        "Generic updates and once-a-fortnight contact are why loyalty erodes. Our fan engagement platforms deliver personalised content, live polls, predictions and interactive second-screen experiences that lift retention and give you first-party data worth having.",
+      body: "Generic updates and once-a-fortnight contact are why loyalty erodes. Our fan engagement platforms deliver personalised content, live polls, predictions and interactive second-screen experiences that lift retention and give you first-party data worth having.",
       image: svcFanImg,
       alt: "Supporters holding scarves and flags in a stadium stand",
     },
     {
       title: "Ticketing & Venue Operations",
-      body:
-        "Match-day systems from four vendors become one queue at gate three. We integrate ticketing, access control, retail and stewarding into a real-time operations view, with dynamic pricing and demand forecasting that fill seats before the day rather than discount them after.",
+      body: "Match-day systems from four vendors become one queue at gate three. We integrate ticketing, access control, retail and stewarding into a real-time operations view, with dynamic pricing and demand forecasting that fill seats before the day rather than discount them after.",
       image: svcTicketingImg,
       alt: "Spectators passing through a stadium entrance gate",
     },
     {
       title: "Scouting & Recruitment Analytics",
-      body:
-        "Recruitment still turns on the games a scout could physically attend. We build data pipelines and similarity models across competitions and age groups, so a shortlist reflects the whole market and every recommendation carries the evidence behind it.",
+      body: "Recruitment still turns on the games a scout could physically attend. We build data pipelines and similarity models across competitions and age groups, so a shortlist reflects the whole market and every recommendation carries the evidence behind it.",
       image: svcScoutingImg,
       alt: "An analyst reviewing play from the sideline on a tablet",
     },
@@ -252,8 +232,7 @@ export const services = {
 
 export const midCta = {
   title: "Looking For Something Else?",
-  body:
-    "These are the sports solutions we get asked for most. If you have a specific idea, an existing platform that needs rescuing, or a requirement nobody has built yet, that is the conversation we most want to have.",
+  body: "These are the sports solutions we get asked for most. If you have a specific idea, an existing platform that needs rescuing, or a requirement nobody has built yet, that is the conversation we most want to have.",
   ctaText: "Get in touch",
   background: midCtaBgImg,
 };
@@ -262,13 +241,11 @@ export const solutions = {
   eyebrow: "How we deliver",
   titleLead: "Sports Software Development Services",
   titleAccent: "Built Around Your Season",
-  body:
-    "Five ways we engage, from a scoped pilot before pre-season to a long-running platform partnership across competitions and venues. Every engagement is sized to a calendar you do not control, so delivery lands between fixtures rather than across them.",
+  body: "Five ways we engage, from a scoped pilot before pre-season to a long-running platform partnership across competitions and venues. Every engagement is sized to a calendar you do not control, so delivery lands between fixtures rather than across them.",
   items: [
     {
       title: "Sports Product Engineering",
-      body:
-        "End-to-end delivery of the platform itself: architecture, data model, services, interfaces and the release process behind them. We start with the one workflow that costs your staff the most hours, ship it, and grow the system outward from something already in daily use.",
+      body: "End-to-end delivery of the platform itself: architecture, data model, services, interfaces and the release process behind them. We start with the one workflow that costs your staff the most hours, ship it, and grow the system outward from something already in daily use.",
       extra:
         "You get working software in weekly increments, with the first usable capability live long before the full scope lands. Nothing is built behind a curtain for three months and revealed at the end, which is how sports projects usually miss a season.",
       points: [
@@ -281,8 +258,7 @@ export const solutions = {
     },
     {
       title: "AI & Data Consulting",
-      body:
-        "A short, honest engagement that maps your data estate, names the models worth building, and says plainly which ideas will not pay for themselves. Most organisations already hold more signal than they use; far fewer hold enough for the model somebody sold them.",
+      body: "A short, honest engagement that maps your data estate, names the models worth building, and says plainly which ideas will not pay for themselves. Most organisations already hold more signal than they use; far fewer hold enough for the model somebody sold them.",
       extra:
         "You leave with a costed roadmap rather than a proposal: what to build first, what it needs from your data, what it will cost to run, and the measurement that tells you whether it worked.",
       points: [
@@ -295,8 +271,7 @@ export const solutions = {
     },
     {
       title: "Video & Computer Vision Pipelines",
-      body:
-        "Automated event tagging, player tracking, pose estimation and brand detection, running on live feeds or a decade of archive. The output is structured data your other systems can query, not another video player nobody logs into.",
+      body: "Automated event tagging, player tracking, pose estimation and brand detection, running on live feeds or a decade of archive. The output is structured data your other systems can query, not another video player nobody logs into.",
       extra:
         "We train on your competition rather than a public dataset, because camera angles, kit colours and pitch markings are exactly what breaks a generic model. Accuracy is reported per event type, so you know which outputs to trust and which still need a human.",
       points: [
@@ -309,8 +284,7 @@ export const solutions = {
     },
     {
       title: "Platform Integration & Modernisation",
-      body:
-        "Most organisations do not start from nothing; they start from six systems that do not talk. We build the integration layer, migrate what deserves to survive, and retire the rest without taking match day offline.",
+      body: "Most organisations do not start from nothing; they start from six systems that do not talk. We build the integration layer, migrate what deserves to survive, and retire the rest without taking match day offline.",
       extra:
         "The work is staged so every step is independently useful and independently reversible. If we stop halfway, you are still better off than when we started, which is the only honest way to modernise a system a season depends on.",
       points: [
@@ -323,8 +297,7 @@ export const solutions = {
     },
     {
       title: "Cloud & Real-Time Infrastructure",
-      body:
-        "Match day is a traffic spike with a fixed start time. We build the streaming, caching and autoscaling layer that survives it, plus the observability to prove it held and the cost controls to keep the quiet weeks cheap.",
+      body: "Match day is a traffic spike with a fixed start time. We build the streaming, caching and autoscaling layer that survives it, plus the observability to prove it held and the cost controls to keep the quiet weeks cheap.",
       extra:
         "Capacity is load-tested against your own peak, not a vendor benchmark, and the same architecture scales down between fixtures so you are not paying stadium-day rates on a Tuesday in February.",
       points: [
@@ -345,43 +318,37 @@ export const stakeholders = {
   items: [
     {
       title: "Coaches & Analysts",
-      body:
-        "Load management, opposition analysis and selection evidence in one place, so the week's plan is built on the squad's actual state rather than last week's impression of it.",
+      body: "Load management, opposition analysis and selection evidence in one place, so the week's plan is built on the squad's actual state rather than last week's impression of it.",
       image: stkCoachesImg,
       alt: "A coach working through a tactics board with the team",
     },
     {
       title: "Athletes",
-      body:
-        "Personal dashboards covering training load, recovery, nutrition and rehab progress, with clear control over who sees which part of their own data.",
+      body: "Personal dashboards covering training load, recovery, nutrition and rehab progress, with clear control over who sees which part of their own data.",
       image: stkAthletesImg,
       alt: "An athlete on the podium after a medal ceremony",
     },
     {
       title: "Teams & Clubs",
-      body:
-        "One operating system for the organisation: squad administration, medical, performance, ticketing and commercial, reporting into the same numbers the board reviews.",
+      body: "One operating system for the organisation: squad administration, medical, performance, ticketing and commercial, reporting into the same numbers the board reviews.",
       image: stkClubsImg,
       alt: "A team lined up on the pitch before kick-off",
     },
     {
       title: "Broadcasters & Journalists",
-      body:
-        "Automated highlight generation, searchable archives and live statistical feeds, so a package ships during the match instead of the morning after it.",
+      body: "Automated highlight generation, searchable archives and live statistical feeds, so a package ships during the match instead of the morning after it.",
       image: stkBroadcastersImg,
       alt: "A reporter interviewing an athlete with a microphone",
     },
     {
       title: "Marketing & Sponsorship Agencies",
-      body:
-        "Measured brand exposure across broadcast and social, audience segmentation from first-party data, and valuation models that make a renewal negotiation an evidence-based one.",
+      body: "Measured brand exposure across broadcast and social, audience segmentation from first-party data, and valuation models that make a renewal negotiation an evidence-based one.",
       image: stkSponsorshipImg,
       alt: "Perimeter advertising boards around a stadium pitch",
     },
     {
       title: "Trainers & Physiotherapists",
-      body:
-        "Rehab protocols, return-to-play criteria and objective movement assessment in a shared record, so handovers between medical and coaching staff stop losing detail.",
+      body: "Rehab protocols, return-to-play criteria and objective movement assessment in a shared record, so handovers between medical and coaching staff stop losing detail.",
       image: stkPhysioImg,
       alt: "A therapist working on an athlete's leg",
     },
@@ -396,21 +363,80 @@ export const sportsWeServe = {
   eyebrow: "Which sports do we serve?",
   titleLead: "We Build Custom Sports Software",
   titleAccent: "For Every Game You Play",
-  body:
-    "The performance, operations and fan problems rhyme across codes; the data model and the rules do not. These are the sports we have shipped against.",
+  body: "The performance, operations and fan problems rhyme across codes; the data model and the rules do not. These are the sports we have shipped against.",
   items: [
-    { label: "Football", body: "Match analysis, academy pathways and matchday operations.", image: sportSoccerImg, alt: "A football resting in the back of a goal net" },
-    { label: "Cricket", body: "Ball-by-ball data, workload tracking and multi-format scheduling.", image: sportCricketImg, alt: "A batsman playing a shot during a cricket match" },
-    { label: "Basketball", body: "Possession analytics, rotation planning and arena engagement.", image: sportBasketballImg, alt: "A basketball player rising to the hoop" },
-    { label: "Tennis", body: "Shot and rally analysis, tour scheduling and coaching review.", image: sportTennisImg, alt: "A tennis player serving on a hard court" },
-    { label: "Baseball", body: "Pitch tracking, biomechanics and minor-league player development.", image: sportBaseballImg, alt: "A pitcher mid-delivery on the mound" },
-    { label: "Golf", body: "Swing analysis, course management data and club operations.", image: sportGolfImg, alt: "A golfer following through on a fairway shot" },
-    { label: "Badminton", body: "Rally analytics, court scheduling and federation administration.", image: sportBadmintonImg, alt: "A badminton player striking a shuttlecock" },
-    { label: "Athletics", body: "Split timing, sprint mechanics and meet management.", image: sportAthleticsImg, alt: "A sprinter set in the starting blocks" },
-    { label: "Swimming", body: "Stroke rate analysis, session planning and gala administration.", image: sportSwimmingImg, alt: "A swimmer mid-stroke in a competition lane" },
-    { label: "Cycling", body: "Power data, route telemetry and race logistics.", image: sportCyclingImg, alt: "A cyclist racing on an open road" },
-    { label: "American Football", body: "Play tagging, snap counts and collision-load monitoring.", image: sportFootballImg, alt: "An American football player in helmet and pads" },
-    { label: "Hockey", body: "Shift tracking, puck and ball possession data, rink operations.", image: sportHockeyImg, alt: "A hockey player driving forward with the puck" },
+    {
+      label: "Football",
+      body: "Match analysis, academy pathways and matchday operations.",
+      image: sportSoccerImg,
+      alt: "A football resting in the back of a goal net",
+    },
+    {
+      label: "Cricket",
+      body: "Ball-by-ball data, workload tracking and multi-format scheduling.",
+      image: sportCricketImg,
+      alt: "A batsman playing a shot during a cricket match",
+    },
+    {
+      label: "Basketball",
+      body: "Possession analytics, rotation planning and arena engagement.",
+      image: sportBasketballImg,
+      alt: "A basketball player rising to the hoop",
+    },
+    {
+      label: "Tennis",
+      body: "Shot and rally analysis, tour scheduling and coaching review.",
+      image: sportTennisImg,
+      alt: "A tennis player serving on a hard court",
+    },
+    {
+      label: "Baseball",
+      body: "Pitch tracking, biomechanics and minor-league player development.",
+      image: sportBaseballImg,
+      alt: "A pitcher mid-delivery on the mound",
+    },
+    {
+      label: "Golf",
+      body: "Swing analysis, course management data and club operations.",
+      image: sportGolfImg,
+      alt: "A golfer following through on a fairway shot",
+    },
+    {
+      label: "Badminton",
+      body: "Rally analytics, court scheduling and federation administration.",
+      image: sportBadmintonImg,
+      alt: "A badminton player striking a shuttlecock",
+    },
+    {
+      label: "Athletics",
+      body: "Split timing, sprint mechanics and meet management.",
+      image: sportAthleticsImg,
+      alt: "A sprinter set in the starting blocks",
+    },
+    {
+      label: "Swimming",
+      body: "Stroke rate analysis, session planning and gala administration.",
+      image: sportSwimmingImg,
+      alt: "A swimmer mid-stroke in a competition lane",
+    },
+    {
+      label: "Cycling",
+      body: "Power data, route telemetry and race logistics.",
+      image: sportCyclingImg,
+      alt: "A cyclist racing on an open road",
+    },
+    {
+      label: "American Football",
+      body: "Play tagging, snap counts and collision-load monitoring.",
+      image: sportFootballImg,
+      alt: "An American football player in helmet and pads",
+    },
+    {
+      label: "Hockey",
+      body: "Shift tracking, puck and ball possession data, rink operations.",
+      image: sportHockeyImg,
+      alt: "A hockey player driving forward with the puck",
+    },
   ],
 };
 
@@ -421,41 +447,34 @@ export const benefits = {
   items: [
     {
       title: "Elevate Athlete Performance",
-      body:
-        "Athletes get training prescribed against their own measured state: load history, movement quality and recovery, rather than a squad-wide plan that fits the average and nobody in particular.",
+      body: "Athletes get training prescribed against their own measured state: load history, movement quality and recovery, rather than a squad-wide plan that fits the average and nobody in particular.",
     },
     {
       title: "Integrate With The Tools You Already Run",
-      body:
-        "Wearables, optical tracking, AR and VR training environments and league data feeds all land in one model, so a new sensor becomes an input rather than another platform to log into.",
+      body: "Wearables, optical tracking, AR and VR training environments and league data feeds all land in one model, so a new sensor becomes an input rather than another platform to log into.",
     },
     {
       title: "Optimise Club Operations",
-      body:
-        "Scheduling, squad administration, medical records and facility management run off shared data with real-time reporting, which removes most of the manual coordination a season currently demands.",
+      body: "Scheduling, squad administration, medical records and facility management run off shared data with real-time reporting, which removes most of the manual coordination a season currently demands.",
     },
     {
       title: "Deepen Fan Engagement",
-      body:
-        "Personalised content, live interaction and second-screen features keep supporters engaged between fixtures, and give you the first-party data that makes the next campaign cheaper.",
+      body: "Personalised content, live interaction and second-screen features keep supporters engaged between fixtures, and give you the first-party data that makes the next campaign cheaper.",
     },
     {
       title: "Grow Revenue",
-      body:
-        "Automated billing, subscriptions, dynamic ticket pricing and measured sponsorship exposure turn commercial guesswork into forecastable, defensible numbers.",
+      body: "Automated billing, subscriptions, dynamic ticket pricing and measured sponsorship exposure turn commercial guesswork into forecastable, defensible numbers.",
     },
     {
       title: "Protect Health And Availability",
-      body:
-        "Monitoring physical and mental load reduces avoidable injury and keeps more of the squad available, which is the single cheapest performance gain most organisations have left.",
+      body: "Monitoring physical and mental load reduces avoidable injury and keeps more of the squad available, which is the single cheapest performance gain most organisations have left.",
     },
   ],
 };
 
 export const build = {
   title: "Craft Your Ideal Sports Software Solution",
-  body:
-    "Bring us the bottleneck, whether that is performance analysis, match-day operations or a fan platform that has stopped scaling. We will scope it honestly, build it in increments you can use, and tell you which parts are not worth building at all.",
+  body: "Bring us the bottleneck, whether that is performance analysis, match-day operations or a fan platform that has stopped scaling. We will scope it honestly, build it in increments you can use, and tell you which parts are not worth building at all.",
   ctaText: "Get in touch now",
   texture: textureBgImg,
   image: buildVisualImg,
@@ -466,33 +485,73 @@ export const techStrip = {
   eyebrow: "Technologies we work with",
   titleLead: "Expertise In Advanced",
   titleAccent: "Development Technologies",
-  body:
-    "The same production-grade toolchain sits under every sports platform we ship. Pick a layer to see what it is made of.",
+  body: "The same production-grade toolchain sits under every sports platform we ship. Pick a layer to see what it is made of.",
   ctaText: "View all tech stack",
   tabs: [
     {
       id: "ai",
       label: "Artificial Intelligence",
       items: [
-        "GPT-4o", "Claude", "Gemini", "Llama 3", "MediaPipe", "OpenPose", "YOLO", "Detectron2",
-        "SAM", "DeepSORT", "Whisper", "PyTorch", "TensorFlow", "scikit-learn", "XGBoost",
-        "OpenCV", "Vertex AI", "Guardrails", "LangChain", "OpenAI Embeddings",
+        "GPT-4o",
+        "Claude",
+        "Gemini",
+        "Llama 3",
+        "MediaPipe",
+        "OpenPose",
+        "YOLO",
+        "Detectron2",
+        "SAM",
+        "DeepSORT",
+        "Whisper",
+        "PyTorch",
+        "TensorFlow",
+        "scikit-learn",
+        "XGBoost",
+        "OpenCV",
+        "Vertex AI",
+        "Guardrails",
+        "LangChain",
+        "OpenAI Embeddings",
       ],
     },
     {
       id: "backend",
       label: "Backend & Databases",
       items: [
-        "Node.js", "NestJS", "FastAPI", "Django", "Go", "GraphQL", "PostgreSQL", "TimescaleDB",
-        "MongoDB", "Redis", "ClickHouse", "Elasticsearch", "Kafka", "Airflow", "dbt", "Snowflake",
+        "Node.js",
+        "NestJS",
+        "FastAPI",
+        "Django",
+        "Go",
+        "GraphQL",
+        "PostgreSQL",
+        "TimescaleDB",
+        "MongoDB",
+        "Redis",
+        "ClickHouse",
+        "Elasticsearch",
+        "Kafka",
+        "Airflow",
+        "dbt",
+        "Snowflake",
       ],
     },
     {
       id: "frontend",
       label: "Frontend",
       items: [
-        "React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js", "GSAP",
-        "React Native", "Flutter", "Vite", "D3.js", "Deck.gl",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Three.js",
+        "GSAP",
+        "React Native",
+        "Flutter",
+        "Vite",
+        "D3.js",
+        "Deck.gl",
       ],
     },
     {
@@ -503,12 +562,31 @@ export const techStrip = {
     {
       id: "cloud",
       label: "Cloud",
-      items: ["AWS", "Google Cloud", "Azure", "Vercel", "Cloudflare", "Firebase", "Supabase", "Fly.io"],
+      items: [
+        "AWS",
+        "Google Cloud",
+        "Azure",
+        "Vercel",
+        "Cloudflare",
+        "Firebase",
+        "Supabase",
+        "Fly.io",
+      ],
     },
     {
       id: "devops",
       label: "DevOps",
-      items: ["Docker", "Kubernetes", "Terraform", "GitHub Actions", "GitLab CI", "Nginx", "Prometheus", "Grafana", "Sentry"],
+      items: [
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "GitHub Actions",
+        "GitLab CI",
+        "Nginx",
+        "Prometheus",
+        "Grafana",
+        "Sentry",
+      ],
     },
     {
       id: "design",
@@ -522,8 +600,7 @@ export const businessTypes = {
   eyebrow: "Who do we work with?",
   titleLead: "Explore The Range Of",
   titleAccent: "Sports Organisations We Support",
-  body:
-    "From a single academy digitising its first season to a federation running a national competition, the engagement shape changes but the standard does not.",
+  body: "From a single academy digitising its first season to a federation running a national competition, the engagement shape changes but the standard does not.",
   rows: [
     {
       label: "Academies and grassroots clubs",
@@ -577,8 +654,7 @@ export const showcase = {
   eyebrow: "Our portfolio",
   titleLead: "Proven Results Across",
   titleAccent: "The Sports Industry",
-  body:
-    "A selection of the platforms and models we have shipped, including the video analytics and real-time data work that sports organisations come to us for.",
+  body: "A selection of the platforms and models we have shipped, including the video analytics and real-time data work that sports organisations come to us for.",
   ctaText: "Check Out Our Full Portfolio",
 };
 
@@ -590,35 +666,31 @@ export const partner = {
     {
       icon: "Target",
       title: "We Speak Sport, Not Just Software",
-      body:
-        "Our engineers have shipped against training weeks, transfer windows and match-day constraints. Every system we design fits how a season actually runs, which is why staff use it past the first month.",
+      body: "Our engineers have shipped against training weeks, transfer windows and match-day constraints. Every system we design fits how a season actually runs, which is why staff use it past the first month.",
     },
     {
       icon: "Layers",
       title: "Integrates With What You Already Run",
-      body:
-        "GPS vendors, optical tracking, ticketing platforms, CRM and league feeds each have their own idea of a schema. We build the layer that reconciles them, modular enough to survive the next vendor change.",
+      body: "GPS vendors, optical tracking, ticketing platforms, CRM and league feeds each have their own idea of a schema. We build the layer that reconciles them, modular enough to survive the next vendor change.",
     },
     {
       icon: "ShieldCheck",
       title: "Athlete Data Handled Properly",
-      body:
-        "Biometrics, medical records and minors' data carry real obligations. Consent, retention, residency and access control are designed in from the first architecture session, with post-launch support for up to 60 days within the agreed scope.",
+      body: "Biometrics, medical records and minors' data carry real obligations. Consent, retention, residency and access control are designed in from the first architecture session, with post-launch support for up to 60 days within the agreed scope.",
     },
   ],
   stats: [
-    { value: "205+", label: "Projects Delivered" },
-    { value: "5+", label: "Valuable Partnerships" },
-    { value: "20+", label: "Countries Served" },
-    { value: "20+", label: "Tech Experts" },
+    { value: `${companyStats.projects}+`, label: "Projects Delivered" },
+    { value: `${companyStats.partnerships}+`, label: "Valuable Partnerships" },
+    { value: `${companyStats.countries}+`, label: "Countries Served" },
+    { value: `${companyStats.experts}+`, label: "Tech Experts" },
   ],
 };
 
 export const blogs = {
   eyebrow: "What can our expertise teach you?",
   title: "Insights On AI, Performance And The Business Of Sport",
-  body:
-    "Field notes from the platforms we build: what video analysis is genuinely good at, where athlete monitoring earns its keep, and which parts of the sports AI pitch do not survive contact with a season.",
+  body: "Field notes from the platforms we build: what video analysis is genuinely good at, where athlete monitoring earns its keep, and which parts of the sports AI pitch do not survive contact with a season.",
   posts: [
     {
       title: "How AI And Video Analysis Are Reshaping Modern Football",

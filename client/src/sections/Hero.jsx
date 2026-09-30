@@ -1,3 +1,4 @@
+import { companyStats } from "../data/companyStats.js";
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Star } from "lucide-react";
@@ -329,7 +330,7 @@ export default function Hero() {
 
       <div className="relative z-10 border-y border-line bg-surface py-10">
         <p className="mb-8 text-center font-mono text-sm uppercase tracking-[0.35em] text-content-faint md:text-base">
-          Trusted by 500+ teams
+          Trusted across {companyStats.projects}+ projects
         </p>
         <div
           className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"

@@ -1,3 +1,4 @@
+import { companyStats } from "../data/companyStats.js";
 import AboutHero from "../components/about/AboutHero";
 import AboutJourney from "../components/about/AboutJourney";
 import AboutVisionMission from "../components/about/AboutVisionMission";
@@ -13,8 +14,8 @@ import { faqs } from "../data/aboutData";
 import Seo from "../seo/Seo";
 
 const META_DESCRIPTION =
-  "About Axiomra: an AI development company founded in 2021, with 25+ in-house experts " +
-  "and 500+ production AI projects delivered across 12+ industries.";
+  `About Axiomra: an AI development company founded in 2021, with ${companyStats.experts}+ in-house experts ` +
+  `and ${companyStats.projects}+ production AI projects delivered across ${companyStats.industries}+ industries.`;
 
 export default function AboutPage() {
   return (

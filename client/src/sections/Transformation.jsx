@@ -1,3 +1,4 @@
+import { companyStats } from "../data/companyStats.js";
 import { motion } from "framer-motion";
 import { ArrowUpRight, TrendingUp } from "lucide-react";
 import teamImg from "../assets/ai-team-collab.webp";
@@ -72,10 +73,10 @@ export default function Transformation() {
           create impact.
         </p>
         <p className="mt-5 text-justify text-base leading-relaxed text-content-dim md:text-lg">
-          Axiomra is powered by a dedicated team of 25+ AI engineers, data scientists, and solution
-          architects who have been building production-grade systems since 2021. We provide an
-          elite, in-house engine that specializes in converting complex business challenges into
-          scalable AI products.
+          Axiomra is powered by a dedicated team of {companyStats.experts}+ AI engineers, data
+          scientists, and solution architects who have been building production-grade systems since
+          2021. We provide an elite, in-house engine that specializes in converting complex business
+          challenges into scalable AI products.
         </p>
         <p className="mt-5 text-justify text-base leading-relaxed text-content-dim md:text-lg">
           We connect process automation and predictive insights to clear goals, such as reducing

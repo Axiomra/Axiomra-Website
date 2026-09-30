@@ -1,4 +1,5 @@
 /** Every string rendered by the AI Development detail page lives here. */
+import { companyStats } from "./companyStats.js";
 import heroAiTeam from "../assets/ai-dev/hero-ai-team.jpg";
 import enterpriseAiStrategy from "../assets/ai-dev/enterprise-ai-strategy.jpg";
 import aiSoftwareDevelopment from "../assets/ai-dev/ai-software-development.jpg";
@@ -483,9 +484,9 @@ export const benefits = {
     },
   ],
   stats: [
-    { value: "500+", label: "Projects delivered" },
-    { value: "25+", label: "In-house experts" },
-    { value: "20+", label: "Countries served" },
+    { value: `${companyStats.projects}+`, label: "Projects delivered" },
+    { value: `${companyStats.experts}+`, label: "In-house experts" },
+    { value: `${companyStats.countries}+`, label: "Countries served" },
     { value: "12+", label: "Industries covered" },
   ],
 };
@@ -529,6 +530,6 @@ export const faqs = [
   },
   {
     q: "What industries do you specialize in?",
-    a: "Healthcare, finance and fintech, retail and e-commerce, education, fashion, real estate, transportation and logistics, insurance, marketing, and legal, 12+ verticals with delivered projects in each.",
+    a: `Healthcare, finance and fintech, retail and e-commerce, education, fashion, real estate, transportation and logistics, insurance, marketing, and legal, ${companyStats.industries}+ verticals with delivered projects in each.`,
   },
 ];

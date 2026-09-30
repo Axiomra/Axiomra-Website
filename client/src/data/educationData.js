@@ -5,6 +5,7 @@
  * a component. Section order in the page mirrors this file.
  */
 
+import { companyStats } from "./companyStats.js";
 import heroImg from "../assets/industries/education/hero.webp";
 import introImg from "../assets/industries/education/intro.webp";
 
@@ -38,8 +39,7 @@ export const hero = {
   titleLead: "Rebuilding EdTech With AI-Powered",
   titleAccent: "Education Software Development",
   titleTail: "Services",
-  body:
-    "As a leading education app development company, Axiomra builds intelligent, AI-powered learning products that give educators and students better tools. Our custom education software development services deliver tools that improve learning engagement, cut administrative work and support digital transformation across K-12 schools, colleges and universities.",
+  body: "As a leading education app development company, Axiomra builds intelligent, AI-powered learning products that give educators and students better tools. Our custom education software development services deliver tools that improve learning engagement, cut administrative work and support digital transformation across K-12 schools, colleges and universities.",
   ctaText: "Request a free consultation",
   image: heroImg,
   alt: "The reading room of a historic library lined with books",
@@ -61,8 +61,7 @@ export const intro = {
 export const impact = {
   titleLead: "AI's Measurable Impact On",
   titleAccent: "Global Education Outcomes",
-  body:
-    "AI is rapidly reshaping K-12, higher education and workforce training: speeding up instruction, grading and student support while personalising learning journeys, improving accessibility and delivering real-time insight that boosts engagement, equity and completion.",
+  body: "AI is rapidly reshaping K-12, higher education and workforce training: speeding up instruction, grading and student support while personalising learning journeys, improving accessibility and delivering real-time insight that boosts engagement, equity and completion.",
   stats: [
     {
       value: "92%",
@@ -93,38 +92,31 @@ export const challenges = {
   items: [
     {
       title: "Digital Divide & Access Barriers",
-      body:
-        "Many students have limited access to devices, bandwidth and online resources, which quietly decides who keeps up and who falls behind. We build inclusive platforms that run on low-end devices and poor networks, with offline sync and mobile-first flows, so every learner can take part fully.",
+      body: "Many students have limited access to devices, bandwidth and online resources, which quietly decides who keeps up and who falls behind. We build inclusive platforms that run on low-end devices and poor networks, with offline sync and mobile-first flows, so every learner can take part fully.",
     },
     {
       title: "Inadequate Teacher Training",
-      body:
-        "New tools fail when the staff using them are handed a login and left alone. We embed guided onboarding, in-product coaching and role-based training paths into the platform itself, so teachers build confidence while they work instead of in a one-off workshop they forget by term two.",
+      body: "New tools fail when the staff using them are handed a login and left alone. We embed guided onboarding, in-product coaching and role-based training paths into the platform itself, so teachers build confidence while they work instead of in a one-off workshop they forget by term two.",
     },
     {
       title: "Data Privacy & Security",
-      body:
-        "Student records are among the most sensitive data any organisation holds, and the rules differ by country and by age group. We design for GDPR, FERPA and COPPA from the first architecture session: least-privilege access, encryption in transit and at rest, audit trails and clear consent and retention policies.",
+      body: "Student records are among the most sensitive data any organisation holds, and the rules differ by country and by age group. We design for GDPR, FERPA and COPPA from the first architecture session: least-privilege access, encryption in transit and at rest, audit trails and clear consent and retention policies.",
     },
     {
       title: "Student Engagement",
-      body:
-        "Attendance is not attention. Courses lose learners in the middle, long before anyone sees it in the results. We build adaptive content, gamified progress, timely nudges and interactive assessment so engagement is designed in and, just as importantly, measured week by week rather than at the end.",
+      body: "Attendance is not attention. Courses lose learners in the middle, long before anyone sees it in the results. We build adaptive content, gamified progress, timely nudges and interactive assessment so engagement is designed in and, just as importantly, measured week by week rather than at the end.",
     },
     {
       title: "Limited Personalisation",
-      body:
-        "One syllabus at one pace suits almost nobody. Our AI models read performance signals to identify each learner's gaps and recommend the next best activity, so stronger students keep moving and struggling students get help while it still matters.",
+      body: "One syllabus at one pace suits almost nobody. Our AI models read performance signals to identify each learner's gaps and recommend the next best activity, so stronger students keep moving and struggling students get help while it still matters.",
     },
     {
       title: "Poor Platform Integration",
-      body:
-        "LMS, SIS, assessment tools and content libraries rarely talk to each other, so staff re-key the same data and no one trusts the reports. We build integration layers on LTI, xAPI, OneRoster and SIS APIs that make one record the source of truth across every system.",
+      body: "LMS, SIS, assessment tools and content libraries rarely talk to each other, so staff re-key the same data and no one trusts the reports. We build integration layers on LTI, xAPI, OneRoster and SIS APIs that make one record the source of truth across every system.",
     },
     {
       title: "Administrative Overload",
-      body:
-        "Registration, timetabling, attendance, grading and reporting consume the hours that should go to teaching. We automate the repeatable parts and give leadership live dashboards, so the admin load drops and the decisions get faster and better evidenced.",
+      body: "Registration, timetabling, attendance, grading and reporting consume the hours that should go to teaching. We automate the repeatable parts and give leadership live dashboards, so the admin load drops and the decisions get faster and better evidenced.",
     },
   ],
 };
@@ -137,37 +129,36 @@ export const services = {
   eyebrow: "What types of education apps are we experts in?",
   titleLead: "Education Software Development Services",
   titleAccent: "For Digital Transformation",
-  body:
-    "Our team of expert education software developers builds custom software for K-12 schools and universities, ensuring each solution aligns with your institutional goals. Whether you want to enhance remote learning, improve student engagement or cut down administrative processes, our EdTech software development services deliver measurable results.",
+  body: "Our team of expert education software developers builds custom software for K-12 schools and universities, ensuring each solution aligns with your institutional goals. Whether you want to enhance remote learning, improve student engagement or cut down administrative processes, our EdTech software development services deliver measurable results.",
   items: [
     {
       title: "Educational Operations and Analytics Tools",
-      body:
-        "Simplify administration and boost performance with advanced back-office solutions. Our e-learning software development services enable smooth operations, accurate reporting and informed decision-making across every department.",
-      points: ["Learning Management Systems (LMS)", "Student Information Systems (SIS)", "Performance Analytics"],
+      body: "Simplify administration and boost performance with advanced back-office solutions. Our e-learning software development services enable smooth operations, accurate reporting and informed decision-making across every department.",
+      points: [
+        "Learning Management Systems (LMS)",
+        "Student Information Systems (SIS)",
+        "Performance Analytics",
+      ],
       image: svcOperationsImg,
       alt: "An analytics dashboard open on a laptop at a study desk",
     },
     {
       title: "Collaboration and Communication Platforms",
-      body:
-        "Enhance connectivity with tools that support remote learning and group projects. As a trusted EdTech app development company, we deliver solutions that improve teamwork and keep parents, tutors and students in the same loop.",
+      body: "Enhance connectivity with tools that support remote learning and group projects. As a trusted EdTech app development company, we deliver solutions that improve teamwork and keep parents, tutors and students in the same loop.",
       points: ["Online Collaboration Platforms", "Discussion Forums", "Video Conferencing Tools"],
       image: svcCollaborationImg,
       alt: "Two participants smiling during a live video lesson",
     },
     {
       title: "Assessment and Feedback Systems",
-      body:
-        "Our AI-based educational app development services offer powerful tools for quizzes, automated grading and performance analytics, shortening the feedback process and giving teachers back the evenings they currently spend marking.",
+      body: "Our AI-based educational app development services offer powerful tools for quizzes, automated grading and performance analytics, shortening the feedback process and giving teachers back the evenings they currently spend marking.",
       points: ["Online Assessment Tools", "Automated Grading Systems", "Performance Analytics"],
       image: svcAssessmentImg,
       alt: "A pencil resting on a multiple-choice answer sheet",
     },
     {
       title: "Content Creation and Accessibility Tools",
-      body:
-        "Create interactive and multimedia-rich educational materials. Our EdTech app development services support inclusive learning experiences, so the same course works for a screen reader, a slow connection and a second language.",
+      body: "Create interactive and multimedia-rich educational materials. Our EdTech app development services support inclusive learning experiences, so the same course works for a screen reader, a slow connection and a second language.",
       points: [
         "E-Learning Authoring Tools",
         "Digital Content Repositories",
@@ -181,8 +172,7 @@ export const services = {
     },
     {
       title: "Interactive Learning and Engagement Solutions",
-      body:
-        "Engage students with adaptive learning platforms, AI-powered virtual teaching and gamified experiences. Our educational app development services create personalised learning paths that improve motivation and understanding.",
+      body: "Engage students with adaptive learning platforms, AI-powered virtual teaching and gamified experiences. Our educational app development services create personalised learning paths that improve motivation and understanding.",
       points: [
         "Adaptive Learning Platforms",
         "Gamified Learning",
@@ -205,28 +195,23 @@ export const specialisms = {
   items: [
     {
       label: "Mobile learning apps",
-      body:
-        "Learning that survives a commute and a weak signal. We build offline-first mobile apps with synced progress, push nudges and bite-sized lessons, so study time fits the gaps in a student's day instead of competing with them.",
+      body: "Learning that survives a commute and a weak signal. We build offline-first mobile apps with synced progress, push nudges and bite-sized lessons, so study time fits the gaps in a student's day instead of competing with them.",
     },
     {
       label: "School management software",
-      body:
-        "Admissions, timetabling, attendance, fees and reporting in one system rather than six spreadsheets. Role-based access keeps staff, parents and leadership on the same record without exposing anything they should not see.",
+      body: "Admissions, timetabling, attendance, fees and reporting in one system rather than six spreadsheets. Role-based access keeps staff, parents and leadership on the same record without exposing anything they should not see.",
     },
     {
       label: "Tutor apps",
-      body:
-        "Marketplace or in-house, the mechanics are the same: matching, scheduling, payments, live sessions and a shared progress history that makes the next session start where the last one ended.",
+      body: "Marketplace or in-house, the mechanics are the same: matching, scheduling, payments, live sessions and a shared progress history that makes the next session start where the last one ended.",
     },
     {
       label: "E-learning apps",
-      body:
-        "Course authoring, media delivery, assessment and certification, built to keep working when a cohort of ten thousand all log in on the same Monday evening.",
+      body: "Course authoring, media delivery, assessment and certification, built to keep working when a cohort of ten thousand all log in on the same Monday evening.",
     },
     {
       label: "LMS software",
-      body:
-        "A learning management system shaped around your curriculum, integrated with your SIS and content libraries through LTI and OneRoster, with analytics leadership will actually open.",
+      body: "A learning management system shaped around your curriculum, integrated with your SIS and content libraries through LTI and OneRoster, with analytics leadership will actually open.",
     },
   ],
 };
@@ -236,30 +221,25 @@ export const technologies = {
   eyebrow: "Which technologies do we use for education solutions?",
   titleLead: "Modern Technologies For Reliable",
   titleAccent: "EdTech And E-Learning Tools",
-  body:
-    "As a leading e-learning development company, we specialise in EdTech software development and educational app development services to create dependable educational applications. Our approach integrates various tech solutions to enhance user experiences, simplify operations and provide real value in the education sector.",
+  body: "As a leading e-learning development company, we specialise in EdTech software development and educational app development services to create dependable educational applications. Our approach integrates various tech solutions to enhance user experiences, simplify operations and provide real value in the education sector.",
   ctaText: "View all services",
   background: techBgImg,
   items: [
     {
       title: "Artificial Intelligence",
-      body:
-        "AI drives smarter decision-making and automation in education. Machine learning algorithms analyse student data to identify gaps, predict performance and provide personalised learning paths, so institutions raise engagement, optimise resources and improve outcomes.",
+      body: "AI drives smarter decision-making and automation in education. Machine learning algorithms analyse student data to identify gaps, predict performance and provide personalised learning paths, so institutions raise engagement, optimise resources and improve outcomes.",
     },
     {
       title: "Data Analytics",
-      body:
-        "Data analytics uncovers trends and insight, supporting better instructional strategies and operational decisions. Advanced reporting tools help administrators monitor performance, evaluate programmes and make decisions backed by evidence rather than instinct.",
+      body: "Data analytics uncovers trends and insight, supporting better instructional strategies and operational decisions. Advanced reporting tools help administrators monitor performance, evaluate programmes and make decisions backed by evidence rather than instinct.",
     },
     {
       title: "Generative AI",
-      body:
-        "Generative AI accelerates content creation, automates curriculum design and supports personalised learning experiences. With this technology, educators focus on teaching while the software handles repetitive tasks and content adaptation.",
+      body: "Generative AI accelerates content creation, automates curriculum design and supports personalised learning experiences. With this technology, educators focus on teaching while the software handles repetitive tasks and content adaptation.",
     },
     {
       title: "Machine Learning",
-      body:
-        "Machine learning converts large datasets into insight teachers can act on. It helps tailor learning modules, improve student interactions and optimise administrative workflows, allowing schools to operate more efficiently and scale effectively.",
+      body: "Machine learning converts large datasets into insight teachers can act on. It helps tailor learning modules, improve student interactions and optimise administrative workflows, allowing schools to operate more efficiently and scale effectively.",
     },
   ],
 };
@@ -273,41 +253,34 @@ export const streamline = {
   items: [
     {
       title: "Increased Student Retention",
-      body:
-        "Low engagement and one-size-fits-all learning lead to high dropout rates. AI-powered platforms tailor learning experiences to each student's needs, improving motivation, boosting retention and lifting overall educational outcomes.",
+      body: "Low engagement and one-size-fits-all learning lead to high dropout rates. AI-powered platforms tailor learning experiences to each student's needs, improving motivation, boosting retention and lifting overall educational outcomes.",
     },
     {
       title: "Improved Student Learning",
-      body:
-        "Identifying knowledge gaps is difficult at scale. Machine learning analyses student data to provide personalised feedback and targeted learning paths, helping learners achieve better results without waiting for the end-of-term report.",
+      body: "Identifying knowledge gaps is difficult at scale. Machine learning analyses student data to provide personalised feedback and targeted learning paths, helping learners achieve better results without waiting for the end-of-term report.",
     },
     {
       title: "Enhanced Efficiency",
-      body:
-        "Administrative tasks like grading and reporting consume significant time. Automation through AI and smart analytics simplifies these processes, saving time and resources while reducing errors.",
+      body: "Administrative tasks like grading and reporting consume significant time. Automation through AI and smart analytics simplifies these processes, saving time and resources while reducing errors.",
     },
     {
       title: "Optimised Product Development",
-      body:
-        "Building effective educational tools requires insight into user behaviour and outcomes. AI-driven analytics reveal trends and preferences, guiding the development of solutions that meet real-world needs.",
+      body: "Building effective educational tools requires insight into user behaviour and outcomes. AI-driven analytics reveal trends and preferences, guiding the development of solutions that meet real-world needs.",
     },
     {
       title: "Enhanced Marketing And Student Acquisition",
-      body:
-        "Understanding student and institutional needs helps EdTech providers target effectively. Data insights support tailored marketing strategies, attracting the right users and improving adoption rates.",
+      body: "Understanding student and institutional needs helps EdTech providers target effectively. Data insights support tailored marketing strategies, attracting the right users and improving adoption rates.",
     },
     {
       title: "Strategic Advantage",
-      body:
-        "Staying competitive requires innovation. Integrating AI and machine learning into educational solutions provides unique capabilities, improving learning outcomes, operational efficiency and market positioning.",
+      body: "Staying competitive requires innovation. Integrating AI and machine learning into educational solutions provides unique capabilities, improving learning outcomes, operational efficiency and market positioning.",
     },
   ],
 };
 
 export const midCta = {
   title: "Craft Your Ideal AI-Powered EdTech Software Solution",
-  body:
-    "Our AI-powered platforms enhance teaching, engage students and take the weight out of administrative processes, enabling schools, universities and training centres to thrive in a digital-first world.",
+  body: "Our AI-powered platforms enhance teaching, engage students and take the weight out of administrative processes, enabling schools, universities and training centres to thrive in a digital-first world.",
   ctaText: "Get in touch now",
   background: midCtaBgImg,
 };
@@ -319,43 +292,37 @@ export const stakeholders = {
   items: [
     {
       title: "School Administrators",
-      body:
-        "Live dashboards for enrolment, attendance, staffing and spend, so decisions are made on this week's numbers rather than last term's report.",
+      body: "Live dashboards for enrolment, attendance, staffing and spend, so decisions are made on this week's numbers rather than last term's report.",
       image: stkAdminsImg,
       alt: "Three school staff members reviewing paperwork together at a desk",
     },
     {
       title: "Teachers & Instructors",
-      body:
-        "Automated grading, lesson planning support and a clear view of which students need help this week, giving teaching hours back to teaching.",
+      body: "Automated grading, lesson planning support and a clear view of which students need help this week, giving teaching hours back to teaching.",
       image: stkTeachersImg,
       alt: "A teacher guiding a young pupil writing on a classroom blackboard",
     },
     {
       title: "Students",
-      body:
-        "Adaptive paths, instant feedback and mobile access, so the course meets each learner at their own pace and on the device they actually use.",
+      body: "Adaptive paths, instant feedback and mobile access, so the course meets each learner at their own pace and on the device they actually use.",
       image: stkStudentsImg,
       alt: "Two university students smiling in a lecture hall",
     },
     {
       title: "Parents",
-      body:
-        "Progress, attendance and communication in one portal, so families see how a child is doing without waiting for a parents' evening.",
+      body: "Progress, attendance and communication in one portal, so families see how a child is doing without waiting for a parents' evening.",
       image: stkParentsImg,
       alt: "A parent reading with a child at home",
     },
     {
       title: "K-12 Institutions",
-      body:
-        "Safeguarded, age-appropriate platforms that handle timetabling, assessment and reporting for a whole school without a dedicated IT department.",
+      body: "Safeguarded, age-appropriate platforms that handle timetabling, assessment and reporting for a whole school without a dedicated IT department.",
       image: stkK12Img,
       alt: "A young pupil with a school backpack on the first day of term",
     },
     {
       title: "Higher Education & Universities",
-      body:
-        "Research-grade analytics, credentialing and SIS integration built for scale, multi-campus structures and the compliance reviews that come with them.",
+      body: "Research-grade analytics, credentialing and SIS integration built for scale, multi-campus structures and the compliance reviews that come with them.",
       image: stkHigherEdImg,
       alt: "A university campus quad on a clear day",
     },
@@ -365,8 +332,7 @@ export const stakeholders = {
 export const blogs = {
   eyebrow: "What can our expertise teach you?",
   title: "Explore Insights On AI And EdTech Innovation",
-  body:
-    "We share what we learn building education platforms: practical guidance, architecture decisions and real-world case studies for institutions and EdTech founders.",
+  body: "We share what we learn building education platforms: practical guidance, architecture decisions and real-world case studies for institutions and EdTech founders.",
   posts: [
     {
       title: "How To Develop Custom Language Learning Software In 2026",
@@ -393,53 +359,126 @@ export const techStrip = {
   eyebrow: "Our tech stack",
   titleLead: "Proven Technology",
   titleAccent: "Solutions For Your Institution",
-  body:
-    "The same production-grade toolchain sits under every learning platform we ship. Pick a layer to see what it is made of.",
+  body: "The same production-grade toolchain sits under every learning platform we ship. Pick a layer to see what it is made of.",
   ctaText: "View all tech stack",
   tabs: [
     {
       id: "ai",
       label: "Artificial Intelligence",
       items: [
-        "GPT-4o", "Claude", "Gemini", "Llama 3", "Mistral", "Phi-2", "Groq", "PaLM", "Whisper",
-        "Stable Diffusion", "MediaPipe", "Guardrails", "Vertex AI", "OpenAI Embeddings", "LangChain", "RAG Pipelines",
+        "GPT-4o",
+        "Claude",
+        "Gemini",
+        "Llama 3",
+        "Mistral",
+        "Phi-2",
+        "Groq",
+        "PaLM",
+        "Whisper",
+        "Stable Diffusion",
+        "MediaPipe",
+        "Guardrails",
+        "Vertex AI",
+        "OpenAI Embeddings",
+        "LangChain",
+        "RAG Pipelines",
       ],
     },
     {
       id: "backend",
       label: "Backend & Databases",
       items: [
-        "Node.js", "NestJS", "Express", "FastAPI", "Django", "GraphQL", "PostgreSQL", "MongoDB",
-        "Redis", "Elasticsearch", "Qdrant", "Pinecone", "Kafka", "Airflow", "dbt", "BigQuery",
+        "Node.js",
+        "NestJS",
+        "Express",
+        "FastAPI",
+        "Django",
+        "GraphQL",
+        "PostgreSQL",
+        "MongoDB",
+        "Redis",
+        "Elasticsearch",
+        "Qdrant",
+        "Pinecone",
+        "Kafka",
+        "Airflow",
+        "dbt",
+        "BigQuery",
       ],
     },
     {
       id: "frontend",
       label: "Frontend",
       items: [
-        "React", "Next.js", "Vue", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js",
-        "React Native", "Flutter", "Vite", "Radix UI", "D3.js",
+        "React",
+        "Next.js",
+        "Vue",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Three.js",
+        "React Native",
+        "Flutter",
+        "Vite",
+        "Radix UI",
+        "D3.js",
       ],
     },
     {
       id: "cloud",
       label: "Cloud",
-      items: ["AWS", "Google Cloud", "Azure", "Vercel", "Cloudflare", "Firebase", "Supabase", "DigitalOcean"],
+      items: [
+        "AWS",
+        "Google Cloud",
+        "Azure",
+        "Vercel",
+        "Cloudflare",
+        "Firebase",
+        "Supabase",
+        "DigitalOcean",
+      ],
     },
     {
       id: "devops",
       label: "DevOps",
-      items: ["Docker", "Kubernetes", "Terraform", "GitHub Actions", "GitLab CI", "Nginx", "Prometheus", "Grafana", "Sentry"],
+      items: [
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "GitHub Actions",
+        "GitLab CI",
+        "Nginx",
+        "Prometheus",
+        "Grafana",
+        "Sentry",
+      ],
     },
     {
       id: "edtech",
       label: "EdTech Standards",
-      items: ["LTI 1.3", "xAPI", "SCORM", "QTI", "OneRoster", "Ed-Fi", "Open Badges", "WCAG 2.2", "Moodle", "Canvas API"],
+      items: [
+        "LTI 1.3",
+        "xAPI",
+        "SCORM",
+        "QTI",
+        "OneRoster",
+        "Ed-Fi",
+        "Open Badges",
+        "WCAG 2.2",
+        "Moodle",
+        "Canvas API",
+      ],
     },
     {
       id: "design",
       label: "UI / UX",
-      items: ["Figma", "Design Tokens", "Prototyping", "Accessibility Audits", "Usability Testing With Learners"],
+      items: [
+        "Figma",
+        "Design Tokens",
+        "Prototyping",
+        "Accessibility Audits",
+        "Usability Testing With Learners",
+      ],
     },
   ],
 };
@@ -448,8 +487,7 @@ export const businessTypes = {
   eyebrow: "Who do we work with?",
   titleLead: "Explore The Range Of",
   titleAccent: "Education Organisations We Support",
-  body:
-    "We build AI-powered education software for the people responsible for learning outcomes, whether that is a single campus, a multi-academy trust or an EdTech product serving thousands of institutions.",
+  body: "We build AI-powered education software for the people responsible for learning outcomes, whether that is a single campus, a multi-academy trust or an EdTech product serving thousands of institutions.",
   rows: [
     {
       label: "EdTech startups",
@@ -503,8 +541,7 @@ export const showcase = {
   eyebrow: "What innovations have we delivered to businesses?",
   titleLead: "Showcasing Our",
   titleAccent: "AI Development Projects",
-  body:
-    "Explore the platforms we have shipped as an AI development company, built to solve the operational and learning problems institutions actually face.",
+  body: "Explore the platforms we have shipped as an AI development company, built to solve the operational and learning problems institutions actually face.",
   ctaText: "Check out our full portfolio",
 };
 
@@ -516,27 +553,24 @@ export const partner = {
     {
       icon: "Target",
       title: "Enhanced Training Adaptability",
-      body:
-        "Educators need effective tools to convey concepts and reinforce learning. Our educational app development services integrate cleanly with classroom and online programmes, providing interactive training modules that support teaching and assessment.",
+      body: "Educators need effective tools to convey concepts and reinforce learning. Our educational app development services integrate cleanly with classroom and online programmes, providing interactive training modules that support teaching and assessment.",
     },
     {
       icon: "Layers",
       title: "Enhanced Cost Efficiency",
-      body:
-        "Investing in custom education software helps institutions maximise resources. By partnering with digital content providers and using AI solutions, schools and universities expand what they offer while reducing operational costs.",
+      body: "Investing in custom education software helps institutions maximise resources. By partnering with digital content providers and using AI solutions, schools and universities expand what they offer while reducing operational costs.",
     },
     {
       icon: "ShieldCheck",
       title: "Flexibility With Modern Teaching Methods",
-      body:
-        "Learning methods evolve rapidly. Our mobile EdTech apps support interactive modules, job aids and updated teaching methodologies. Scalable and adaptable, these solutions ensure learners always access effective, up-to-date educational content.",
+      body: "Learning methods evolve rapidly. Our mobile EdTech apps support interactive modules, job aids and updated teaching methodologies. Scalable and adaptable, these solutions ensure learners always access effective, up-to-date educational content.",
     },
   ],
   stats: [
-    { value: "200+", label: "Projects Delivered" },
-    { value: "5+", label: "Valuable Partnerships" },
-    { value: "20+", label: "Countries Served" },
-    { value: "25+", label: "Tech Experts" },
+    { value: `${companyStats.projects}+`, label: "Projects Delivered" },
+    { value: `${companyStats.partnerships}+`, label: "Valuable Partnerships" },
+    { value: `${companyStats.countries}+`, label: "Countries Served" },
+    { value: `${companyStats.experts}+`, label: "Tech Experts" },
   ],
 };
 

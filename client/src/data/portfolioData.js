@@ -11,6 +11,7 @@
  * `accent` is the hue those rows borrow for numbers, pills and glows.
  */
 
+import { companyStats } from "./companyStats.js";
 import salesAgentImg from "../assets/case-studies/axiomra-ai-sales-agent/card.webp";
 import intakeAgentImg from "../assets/case-studies/healthcare-patient-intake-triage-ai-agent/card.webp";
 import chatbotImg from "../assets/case-studies/healthcare-chatbot-virtual-assistant/card.webp";
@@ -42,7 +43,7 @@ export const hero = {
     // Counted from the data, so it stays right as studies are added.
     { value: String(Object.keys(caseStudyPages).length), label: "Detailed case studies" },
     { value: "12+", label: "Industries served" },
-    { value: "500+", label: "AI projects delivered" },
+    { value: `${companyStats.projects}+`, label: "AI projects delivered" },
     { value: "4.9/5", label: "Average client rating" },
   ],
 };

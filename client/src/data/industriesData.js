@@ -6,6 +6,7 @@
  * the child route (`/industries/<slug>`) that the detail pages will occupy.
  */
 
+import { companyStats } from "./companyStats.js";
 import heroImg from "../assets/industries/hero.webp";
 import fashionImg from "../assets/industries/fashion.webp";
 import sportsImg from "../assets/industries/sports.webp";
@@ -25,8 +26,7 @@ export const hero = {
   titleLead: "Advanced",
   titleAccent: "AI Solutions",
   titleTail: "for Industries",
-  body:
-    "Every sector carries its own bottlenecks, its own data and its own rules. We build AI that fits how your industry actually operates, from the first workflow we automate to the system your whole team runs on.",
+  body: "Every sector carries its own bottlenecks, its own data and its own rules. We build AI that fits how your industry actually operates, from the first workflow we automate to the system your whole team runs on.",
   ctaText: "Request a Proposal",
   image: heroImg,
 };
@@ -103,7 +103,10 @@ export const industries = [
       { problem: "Patients waiting too long", solution: "Smart scheduling systems" },
       { problem: "EHR and lab systems in silos", solution: "AI integration layers" },
       { problem: "Costs rising faster than budgets", solution: "Predictive cost analytics" },
-      { problem: "Sensitive data under constant threat", solution: "AI-driven security monitoring" },
+      {
+        problem: "Sensitive data under constant threat",
+        solution: "AI-driven security monitoring",
+      },
     ],
   },
   {
@@ -133,7 +136,10 @@ export const industries = [
     image: retailImg,
     alt: "A modern retail store interior with folded garments on wooden shelving",
     pains: [
-      { problem: "Stock-outs and overstock in the same week", solution: "Inventory management software" },
+      {
+        problem: "Stock-outs and overstock in the same week",
+        solution: "Inventory management software",
+      },
       { problem: "Shoppers browsing without buying", solution: "Recommendation engines" },
       { problem: "Errors in every transaction batch", solution: "Reliable payment software" },
       { problem: "Expenses reconciled by hand", solution: "Expense report automation" },
@@ -151,9 +157,18 @@ export const industries = [
     alt: "A laptop on a desk showing marketing analytics dashboards",
     pains: [
       { problem: "Reports assembled by hand every Monday", solution: "AI analytics tools" },
-      { problem: "Campaigns judged after the budget is gone", solution: "Predictive performance models" },
-      { problem: "Content volume outrunning quality", solution: "AI content generation with review" },
-      { problem: "Personalisation that stops at first names", solution: "Smart audience segmentation" },
+      {
+        problem: "Campaigns judged after the budget is gone",
+        solution: "Predictive performance models",
+      },
+      {
+        problem: "Content volume outrunning quality",
+        solution: "AI content generation with review",
+      },
+      {
+        problem: "Personalisation that stops at first names",
+        solution: "Smart audience segmentation",
+      },
       { problem: "Ad spend leaking to the wrong channels", solution: "AI budget optimisation" },
     ],
   },
@@ -221,7 +236,10 @@ export const industries = [
       { problem: "Documents reviewed line by line", solution: "AI document processing" },
       { problem: "Billable hours leaking untracked", solution: "Smart time tracking" },
       { problem: "Clients chasing for updates", solution: "AI client portals" },
-      { problem: "Compliance deadlines tracked by memory", solution: "Intelligent compliance monitoring" },
+      {
+        problem: "Compliance deadlines tracked by memory",
+        solution: "Intelligent compliance monitoring",
+      },
       { problem: "Overheads eating the margin", solution: "Workflow automation" },
     ],
   },
@@ -248,56 +266,129 @@ export const techStrip = {
   eyebrow: "What we build with",
   titleLead: "One Stack,",
   titleAccent: "Every Vertical",
-  body:
-    "The same production-grade toolchain sits under every industry solution we ship. Pick a layer to see what it is made of.",
+  body: "The same production-grade toolchain sits under every industry solution we ship. Pick a layer to see what it is made of.",
   tabs: [
     {
       id: "ai",
       label: "Artificial Intelligence",
       items: [
-        "GPT-4o", "Claude", "Gemini", "Llama 3", "Mistral", "Stable Diffusion", "Flux", "Whisper",
-        "LangChain", "LlamaIndex", "Hugging Face", "PyTorch", "TensorFlow", "Scikit-learn",
-        "OpenCV", "YOLO", "spaCy", "RAG", "Vector Search", "Fine-tuning",
+        "GPT-4o",
+        "Claude",
+        "Gemini",
+        "Llama 3",
+        "Mistral",
+        "Stable Diffusion",
+        "Flux",
+        "Whisper",
+        "LangChain",
+        "LlamaIndex",
+        "Hugging Face",
+        "PyTorch",
+        "TensorFlow",
+        "Scikit-learn",
+        "OpenCV",
+        "YOLO",
+        "spaCy",
+        "RAG",
+        "Vector Search",
+        "Fine-tuning",
       ],
     },
     {
       id: "backend",
       label: "Backend & Databases",
       items: [
-        "Node.js", "NestJS", "Express", "FastAPI", "Django", "GraphQL", "PostgreSQL", "MongoDB",
-        "Redis", "Elasticsearch", "Qdrant", "Pinecone", "Kafka", "Airflow", "WebSockets",
+        "Node.js",
+        "NestJS",
+        "Express",
+        "FastAPI",
+        "Django",
+        "GraphQL",
+        "PostgreSQL",
+        "MongoDB",
+        "Redis",
+        "Elasticsearch",
+        "Qdrant",
+        "Pinecone",
+        "Kafka",
+        "Airflow",
+        "WebSockets",
       ],
     },
     {
       id: "frontend",
       label: "Frontend",
       items: [
-        "React", "Next.js", "Vue", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js",
-        "React Native", "Vite", "Radix UI", "TanStack Query", "Storybook",
+        "React",
+        "Next.js",
+        "Vue",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Three.js",
+        "React Native",
+        "Vite",
+        "Radix UI",
+        "TanStack Query",
+        "Storybook",
       ],
     },
     {
       id: "cloud",
       label: "Cloud",
-      items: ["AWS", "Google Cloud", "Azure", "Vercel", "Cloudflare", "Firebase", "Supabase", "DigitalOcean"],
+      items: [
+        "AWS",
+        "Google Cloud",
+        "Azure",
+        "Vercel",
+        "Cloudflare",
+        "Firebase",
+        "Supabase",
+        "DigitalOcean",
+      ],
     },
     {
       id: "devops",
       label: "DevOps",
       items: [
-        "Docker", "Kubernetes", "Terraform", "GitHub Actions", "GitLab CI", "Nginx", "Prometheus",
-        "Grafana", "Sentry", "ArgoCD",
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "GitHub Actions",
+        "GitLab CI",
+        "Nginx",
+        "Prometheus",
+        "Grafana",
+        "Sentry",
+        "ArgoCD",
       ],
     },
     {
       id: "sqa",
       label: "SQA",
-      items: ["Playwright", "Cypress", "Vitest", "Jest", "Pytest", "Postman", "k6", "Burp Suite", "OWASP ZAP"],
+      items: [
+        "Playwright",
+        "Cypress",
+        "Vitest",
+        "Jest",
+        "Pytest",
+        "Postman",
+        "k6",
+        "Burp Suite",
+        "OWASP ZAP",
+      ],
     },
     {
       id: "design",
       label: "UI / UX",
-      items: ["Figma", "Design Tokens", "Prototyping", "WCAG 2.2 Audits", "Usability Testing", "Design Systems"],
+      items: [
+        "Figma",
+        "Design Tokens",
+        "Prototyping",
+        "WCAG 2.2 Audits",
+        "Usability Testing",
+        "Design Systems",
+      ],
     },
   ],
 };
@@ -306,8 +397,7 @@ export const showcase = {
   eyebrow: "Proof of work",
   titleLead: "Built for",
   titleAccent: "Real Industries",
-  body:
-    "A slice of the systems we have shipped. Each one started as a bottleneck in someone's business.",
+  body: "A slice of the systems we have shipped. Each one started as a bottleneck in someone's business.",
   ctaText: "Check Out Our Full Portfolio",
 };
 
@@ -343,7 +433,7 @@ export const partner = {
     {
       icon: "Layers",
       title: "Vertical expertise, not a template",
-      body: "We have shipped in twelve industries. The patterns transfer, the data does not, so every build starts from your workflow and your constraints.",
+      body: `We have shipped in ${companyStats.industries} industries. The patterns transfer, the data does not, so every build starts from your workflow and your constraints.`,
     },
     {
       icon: "ShieldCheck",
@@ -357,10 +447,10 @@ export const partner = {
     },
   ],
   stats: [
-    { value: "5+", label: "Partnerships" },
-    { value: "200+", label: "Projects" },
-    { value: "20+", label: "Countries Served" },
-    { value: "25+", label: "Tech Experts" },
+    { value: `${companyStats.partnerships}+`, label: "Partnerships" },
+    { value: `${companyStats.projects}+`, label: "Projects" },
+    { value: `${companyStats.countries}+`, label: "Countries Served" },
+    { value: `${companyStats.experts}+`, label: "Tech Experts" },
   ],
 };
 

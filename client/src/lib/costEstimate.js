@@ -7,6 +7,8 @@
  * Directional only: the scoping call replaces it with a real quote.
  */
 
+import { companyStats } from "../data/companyStats.js";
+
 export const PROJECT_TYPES = [
   {
     id: "new",
@@ -20,7 +22,7 @@ export const PROJECT_TYPES = [
     id: "poc",
     label: "Proof of Concept",
     hint: "Validate an idea fast",
-    base: [11, 21],
+    base: [companyStats.pocRange.min, companyStats.pocRange.max],
     weeks: 6,
     team: 2,
   },

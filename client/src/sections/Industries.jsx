@@ -1,3 +1,4 @@
+import { companyStats } from "../data/companyStats.js";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -198,9 +199,9 @@ export default function Industries({ showHeading = true, showStats = true }) {
         <div className="relative mx-auto mt-16 max-w-none border-y border-line bg-surface-card px-4 py-12 backdrop-blur-sm sm:px-6">
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 text-center sm:grid-cols-3">
             {[
-              { value: "25+", label: "Verticals served end to end" },
-              { value: "500+", label: "Production deployments shipped" },
-              { value: "30+", label: "Countries with live systems" },
+              { value: `${companyStats.industries}+`, label: "Verticals served end to end" },
+              { value: `${companyStats.projects}+`, label: "Production deployments shipped" },
+              { value: `${companyStats.countries}+`, label: "Countries with live systems" },
             ].map((stat) => (
               <div key={stat.label}>
                 <p className="font-display text-5xl font-semibold text-brand md:text-6xl">

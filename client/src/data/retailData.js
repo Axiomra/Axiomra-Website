@@ -7,6 +7,7 @@
  * because they are rendered on the card.
  */
 
+import { companyStats } from "./companyStats.js";
 import { caseStudyPath } from "../routes.constants";
 import heroImg from "../assets/industries/retail/hero.webp";
 import introImg from "../assets/industries/retail/intro.webp";
@@ -35,8 +36,7 @@ export const hero = {
   titleLead: "Personalised Retail Software for",
   titleAccent: "Resilient, Omnichannel",
   titleTail: "Growth",
-  body:
-    "We build AI retail platforms that sense demand before it moves, keep the right stock in the right store and make every basket feel picked by hand. Fewer stockouts, less shrink, faster checkout, and margin you can trace to a decision.",
+  body: "We build AI retail platforms that sense demand before it moves, keep the right stock in the right store and make every basket feel picked by hand. Fewer stockouts, less shrink, faster checkout, and margin you can trace to a decision.",
   ctaText: "Request a Proposal",
   image: heroImg,
   alt: "A modern clothing store interior with garments displayed on racks and shelving",
@@ -61,12 +61,12 @@ export const intro = {
 export const impact = {
   titleLead: "AI Retail Software",
   titleAccent: "Driving Measurable Impact",
-  body:
-    "Merchandising, supply chains and omnichannel journeys are being rebuilt around production-grade AI. The retailers unifying their data first are the ones already turning forecasting, pricing, labour and CX into a compounding advantage.",
+  body: "Merchandising, supply chains and omnichannel journeys are being rebuilt around production-grade AI. The retailers unifying their data first are the ones already turning forecasting, pricing, labour and CX into a compounding advantage.",
   stats: [
     {
       value: "89%",
-      label: "of retailers are using or assessing AI across their operations, signalling mainstream adoption.",
+      label:
+        "of retailers are using or assessing AI across their operations, signalling mainstream adoption.",
       source: "NVIDIA, State of AI in Retail and CPG, 2025",
     },
     {
@@ -76,7 +76,8 @@ export const impact = {
     },
     {
       value: "51%",
-      label: "of global shoppers now use AI for price comparison, reshaping discovery and value shopping.",
+      label:
+        "of global shoppers now use AI for price comparison, reshaping discovery and value shopping.",
       source: "Forbes, How AI Is Reshaping Retail, 2025",
     },
   ],
@@ -86,8 +87,7 @@ export const challenges = {
   eyebrow: "What retail actually breaks on",
   titleLead: "The Problems We",
   titleAccent: "Engineer Away",
-  body:
-    "Every retailer we meet is losing money in the same six places. None of them are solved by a dashboard. They are solved by models wired into the systems that already take the decisions.",
+  body: "Every retailer we meet is losing money in the same six places. None of them are solved by a dashboard. They are solved by models wired into the systems that already take the decisions.",
   items: [
     {
       icon: "PackageX",
@@ -132,13 +132,11 @@ export const services = {
   eyebrow: "What types of retail software are we experts in?",
   titleLead: "Transforming Business Through Advanced",
   titleAccent: "Retail Software Development",
-  body:
-    "Six product families, each shipped as production software with your data, your integrations and your compliance requirements built in from the first sprint.",
+  body: "Six product families, each shipped as production software with your data, your integrations and your compliance requirements built in from the first sprint.",
   items: [
     {
       title: "Retail Operations and Analytics",
-      body:
-        "Simplify operations and take smarter decisions with AI-driven retail platforms. Real-time visibility across inventory, supply and production, so cost, stockouts and idle capital all come down together.",
+      body: "Simplify operations and take smarter decisions with AI-driven retail platforms. Real-time visibility across inventory, supply and production, so cost, stockouts and idle capital all come down together.",
       image: svcOperationsImg,
       alt: "A long supermarket aisle stocked with packaged goods on both sides",
       points: [
@@ -152,8 +150,7 @@ export const services = {
     },
     {
       title: "Customer Experience and Engagement",
-      body:
-        "Personalise every interaction and automate the service work behind it. Recommendations, loyalty and assisted selling that raise basket size without raising headcount.",
+      body: "Personalise every interaction and automate the service work behind it. Recommendations, loyalty and assisted selling that raise basket size without raising headcount.",
       image: svcExperienceImg,
       alt: "A shop assistant taking a card payment at a tablet point-of-sale counter",
       points: [
@@ -172,8 +169,7 @@ export const services = {
     },
     {
       title: "E-commerce and Digital Retail",
-      body:
-        "Grow online sales with storefronts built for conversion. Predictive merchandising, faster product discovery and a checkout that holds up on peak trading days.",
+      body: "Grow online sales with storefronts built for conversion. Predictive merchandising, faster product discovery and a checkout that holds up on peak trading days.",
       image: svcCommerceImg,
       alt: "A shopper entering card details on a laptop while shopping online",
       points: [
@@ -187,8 +183,7 @@ export const services = {
     },
     {
       title: "Security, Loss Prevention and Compliance",
-      body:
-        "Protect margin and customer data at the same time. Fraud detection across transactions and returns, tax and regulatory reporting that reconciles itself, and access control that survives an audit.",
+      body: "Protect margin and customer data at the same time. Fraud detection across transactions and returns, tax and regulatory reporting that reconciles itself, and access control that survives an audit.",
       image: svcSecurityImg,
       alt: "A cluster of surveillance cameras mounted under a glass roof",
       points: [
@@ -202,8 +197,7 @@ export const services = {
     },
     {
       title: "Operational Efficiency and Workforce",
-      body:
-        "Automate the repeatable work in the back office and on the floor. Fewer manual touches, fewer errors, and rosters that match the footfall you actually get.",
+      body: "Automate the repeatable work in the back office and on the floor. Fewer manual touches, fewer errors, and rosters that match the footfall you actually get.",
       image: svcEfficiencyImg,
       alt: "Two colleagues reviewing stock on a tablet inside a store stockroom",
       points: [
@@ -222,8 +216,7 @@ export const services = {
     },
     {
       title: "Demand Forecasting and Replenishment",
-      body:
-        "Predict demand at store-SKU level and let replenishment follow it. Reduce stockouts, avoid dead stock, and hand planners a number they can defend.",
+      body: "Predict demand at store-SKU level and let replenishment follow it. Reduce stockouts, avoid dead stock, and hand planners a number they can defend.",
       image: svcForecastImg,
       alt: "An analytics dashboard showing usage and performance charts on a dark screen",
       points: [
@@ -252,41 +245,61 @@ export const appTypes = {
       id: "order",
       label: "Order management software",
       title: "Order management that never loses a line",
-      body:
-        "One order record from cart to doorstep, with allocation logic that picks the cheapest fulfilling node and tells the customer the truth about the date.",
-      points: ["Distributed order orchestration", "Ship-from-store and BOPIS", "Automated exceptions handling", "Carrier and 3PL integrations"],
+      body: "One order record from cart to doorstep, with allocation logic that picks the cheapest fulfilling node and tells the customer the truth about the date.",
+      points: [
+        "Distributed order orchestration",
+        "Ship-from-store and BOPIS",
+        "Automated exceptions handling",
+        "Carrier and 3PL integrations",
+      ],
     },
     {
       id: "pos",
       label: "POS and payment software",
       title: "A till that keeps trading when the line drops",
-      body:
-        "Offline-first point of sale with tokenised payments, split tenders and a reconciliation report that matches the bank without a spreadsheet.",
-      points: ["Offline-capable POS", "Tokenised and contactless payments", "Automated end-of-day reconciliation", "Queue-busting mobile checkout"],
+      body: "Offline-first point of sale with tokenised payments, split tenders and a reconciliation report that matches the bank without a spreadsheet.",
+      points: [
+        "Offline-capable POS",
+        "Tokenised and contactless payments",
+        "Automated end-of-day reconciliation",
+        "Queue-busting mobile checkout",
+      ],
     },
     {
       id: "crm",
       label: "Retail CRM software",
       title: "Customer data that actually reaches the floor",
-      body:
-        "A single customer profile across channels, feeding segmentation, loyalty and clienteling tools that associates use in the aisle, not after the shift.",
-      points: ["Unified customer profiles", "Segmentation and lifecycle journeys", "Loyalty and rewards engines", "Clienteling for store associates"],
+      body: "A single customer profile across channels, feeding segmentation, loyalty and clienteling tools that associates use in the aisle, not after the shift.",
+      points: [
+        "Unified customer profiles",
+        "Segmentation and lifecycle journeys",
+        "Loyalty and rewards engines",
+        "Clienteling for store associates",
+      ],
     },
     {
       id: "inventory",
       label: "Inventory management software",
       title: "One stock truth behind every channel",
-      body:
-        "Live positions across stores, warehouses and in-transit, with safety stock and reorder points recalculated by model rather than by habit.",
-      points: ["Real-time multi-location stock", "Automated reorder points", "Cycle counting and shrink tracking", "Supplier lead-time modelling"],
+      body: "Live positions across stores, warehouses and in-transit, with safety stock and reorder points recalculated by model rather than by habit.",
+      points: [
+        "Real-time multi-location stock",
+        "Automated reorder points",
+        "Cycle counting and shrink tracking",
+        "Supplier lead-time modelling",
+      ],
     },
     {
       id: "mobile",
       label: "Retail mobile apps",
       title: "The store in the shopper's pocket",
-      body:
-        "Native and cross-platform apps with visual search, scan-and-go, personalised offers and push that is timed by behaviour rather than by calendar.",
-      points: ["Visual and voice search", "Scan-and-go checkout", "Personalised offers and wallets", "In-app support assistants"],
+      body: "Native and cross-platform apps with visual search, scan-and-go, personalised offers and push that is timed by behaviour rather than by calendar.",
+      points: [
+        "Visual and voice search",
+        "Scan-and-go checkout",
+        "Personalised offers and wallets",
+        "In-app support assistants",
+      ],
     },
   ],
 };
@@ -295,35 +308,29 @@ export const technologies = {
   eyebrow: "Which technologies do we use for retail solutions?",
   titleLead: "Leading Technologies For",
   titleAccent: "Efficient and Secure Retail Tools",
-  body:
-    "The stack under every retail build, chosen for what it has to survive: peak trading, messy master data and audits.",
+  body: "The stack under every retail build, chosen for what it has to survive: peak trading, messy master data and audits.",
   background: techBgImg,
   ctaText: "View all services",
   items: [
     {
       title: "Artificial Intelligence",
-      body:
-        "AI powers smarter decisioning and tighter operations, optimising inventory, pricing and service quality across the estate rather than one store at a time.",
+      body: "AI powers smarter decisioning and tighter operations, optimising inventory, pricing and service quality across the estate rather than one store at a time.",
     },
     {
       title: "Data Analytics",
-      body:
-        "We turn fragmented POS, e-commerce and supply data into a modelled warehouse, so trend, margin and cohort questions get answered in seconds.",
+      body: "We turn fragmented POS, e-commerce and supply data into a modelled warehouse, so trend, margin and cohort questions get answered in seconds.",
     },
     {
       title: "Generative AI",
-      body:
-        "Product content, personalised recommendations and assortment briefs generated at catalogue scale, with human review where brand voice and claims matter.",
+      body: "Product content, personalised recommendations and assortment briefs generated at catalogue scale, with human review where brand voice and claims matter.",
     },
     {
       title: "Machine Learning",
-      body:
-        "Forecasting, elasticity, churn and propensity models trained on your history, retrained on a schedule and monitored for drift in production.",
+      body: "Forecasting, elasticity, churn and propensity models trained on your history, retrained on a schedule and monitored for drift in production.",
     },
     {
       title: "Computer Vision",
-      body:
-        "Shelf monitoring, planogram compliance, queue analytics and checkout automation from the camera estate you already have installed.",
+      body: "Shelf monitoring, planogram compliance, queue analytics and checkout automation from the camera estate you already have installed.",
     },
   ],
 };
@@ -336,41 +343,34 @@ export const solutions = {
   items: [
     {
       title: "Boosted sales and revenue",
-      body:
-        "AI reads customer data to deliver personalised product recommendations, upsell opportunities and targeted promotions, lifting conversion and revenue per visit.",
+      body: "AI reads customer data to deliver personalised product recommendations, upsell opportunities and targeted promotions, lifting conversion and revenue per visit.",
     },
     {
       title: "Optimised inventory management",
-      body:
-        "Forecast demand, adjust stock levels automatically and prevent stockouts or overstock before they reach the shelf. Less waste, more availability, better working capital.",
+      body: "Forecast demand, adjust stock levels automatically and prevent stockouts or overstock before they reach the shelf. Less waste, more availability, better working capital.",
     },
     {
       title: "Enhanced customer engagement",
-      body:
-        "Tailored suggestions, smarter search, responsive assistants and loyalty programmes that adapt. Engagement that keeps shoppers coming back to you, not the marketplace.",
+      body: "Tailored suggestions, smarter search, responsive assistants and loyalty programmes that adapt. Engagement that keeps shoppers coming back to you, not the marketplace.",
     },
     {
       title: "Mitigated fraud and risk",
-      body:
-        "Models detect suspicious patterns and anomalies across transactions and returns, protecting margin while keeping legitimate customers out of the friction.",
+      body: "Models detect suspicious patterns and anomalies across transactions and returns, protecting margin while keeping legitimate customers out of the friction.",
     },
     {
       title: "A tighter supply chain",
-      body:
-        "AI refines supplier planning, forecasts delivery timelines and optimises replenishment schedules, cutting cost and preventing the delays customers actually notice.",
+      body: "AI refines supplier planning, forecasts delivery timelines and optimises replenishment schedules, cutting cost and preventing the delays customers actually notice.",
     },
     {
       title: "Enhanced operational efficiency",
-      body:
-        "Repetitive tasks automated, forecasting accuracy improved, and pricing and workforce allocation optimised across every store in the estate.",
+      body: "Repetitive tasks automated, forecasting accuracy improved, and pricing and workforce allocation optimised across every store in the estate.",
     },
   ],
 };
 
 export const midCta = {
   title: "Rebuild Your Retail Operation with AI",
-  body:
-    "Tell us the number that hurts, whether that is shrink, stockouts, return rate or conversion, and we will come back with the system, the timeline and the metric it has to hit.",
+  body: "Tell us the number that hurts, whether that is shrink, stockouts, return rate or conversion, and we will come back with the system, the timeline and the metric it has to hit.",
   buttonText: "Get in Touch Now",
   background: midCtaBgImg,
 };
@@ -410,8 +410,7 @@ export const stakeholders = {
 export const blogs = {
   eyebrow: "What can our expertise teach you?",
   title: "Insights on AI and Retail Innovation",
-  body:
-    "What we have learned shipping retail AI into live estates, written for the people who have to run the store on Monday.",
+  body: "What we have learned shipping retail AI into live estates, written for the people who have to run the store on Monday.",
   posts: [
     {
       title: "How to use AI for beauty and cosmetics e-commerce",
@@ -447,48 +446,106 @@ export const techStrip = {
   eyebrow: "Technologies we work with",
   titleLead: "Expertise in Advanced",
   titleAccent: "Retail Technologies",
-  body:
-    "The production toolchain behind our retail builds. Pick a layer to see what it is made of.",
+  body: "The production toolchain behind our retail builds. Pick a layer to see what it is made of.",
   tabs: [
     {
       id: "ai",
       label: "Artificial Intelligence",
       items: [
-        "GPT-4o", "Claude", "Gemini", "Llama 3", "Mistral", "Whisper", "Stable Diffusion",
-        "LangChain", "LlamaIndex", "Hugging Face", "PyTorch", "TensorFlow", "Prophet",
-        "XGBoost", "Scikit-learn", "OpenCV", "YOLO", "RAG", "Vector Search", "Fine-tuning",
+        "GPT-4o",
+        "Claude",
+        "Gemini",
+        "Llama 3",
+        "Mistral",
+        "Whisper",
+        "Stable Diffusion",
+        "LangChain",
+        "LlamaIndex",
+        "Hugging Face",
+        "PyTorch",
+        "TensorFlow",
+        "Prophet",
+        "XGBoost",
+        "Scikit-learn",
+        "OpenCV",
+        "YOLO",
+        "RAG",
+        "Vector Search",
+        "Fine-tuning",
       ],
     },
     {
       id: "backend",
       label: "Backend & Databases",
       items: [
-        "Node.js", "NestJS", "FastAPI", "Django", "GraphQL", "PostgreSQL", "MongoDB", "Redis",
-        "Elasticsearch", "Snowflake", "BigQuery", "Kafka", "Airflow", "dbt", "WebSockets",
+        "Node.js",
+        "NestJS",
+        "FastAPI",
+        "Django",
+        "GraphQL",
+        "PostgreSQL",
+        "MongoDB",
+        "Redis",
+        "Elasticsearch",
+        "Snowflake",
+        "BigQuery",
+        "Kafka",
+        "Airflow",
+        "dbt",
+        "WebSockets",
       ],
     },
     {
       id: "commerce",
       label: "Commerce",
       items: [
-        "Shopify", "Shopify Hydrogen", "Medusa", "commercetools", "Magento", "WooCommerce",
-        "Stripe", "Adyen", "Klarna", "Algolia", "Contentful", "Sanity",
+        "Shopify",
+        "Shopify Hydrogen",
+        "Medusa",
+        "commercetools",
+        "Magento",
+        "WooCommerce",
+        "Stripe",
+        "Adyen",
+        "Klarna",
+        "Algolia",
+        "Contentful",
+        "Sanity",
       ],
     },
     {
       id: "frontend",
       label: "Frontend",
       items: [
-        "React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js",
-        "React Native", "Expo", "Vite", "Radix UI", "TanStack Query",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Three.js",
+        "React Native",
+        "Expo",
+        "Vite",
+        "Radix UI",
+        "TanStack Query",
       ],
     },
     {
       id: "cloud",
       label: "Cloud & DevOps",
       items: [
-        "AWS", "Google Cloud", "Azure", "Vercel", "Cloudflare", "Docker", "Kubernetes",
-        "Terraform", "GitHub Actions", "Prometheus", "Grafana", "Sentry",
+        "AWS",
+        "Google Cloud",
+        "Azure",
+        "Vercel",
+        "Cloudflare",
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "GitHub Actions",
+        "Prometheus",
+        "Grafana",
+        "Sentry",
       ],
     },
     {
@@ -563,8 +620,7 @@ export const showcase = {
   eyebrow: "What have we delivered to businesses?",
   titleLead: "Showcasing Our",
   titleAccent: "AI Development Projects",
-  body:
-    "A slice of the systems we have shipped. Each one started as a bottleneck somebody was working around by hand.",
+  body: "A slice of the systems we have shipped. Each one started as a bottleneck somebody was working around by hand.",
   ctaText: "Check Out Our Full Portfolio",
 };
 
@@ -590,10 +646,10 @@ export const partner = {
     },
   ],
   stats: [
-    { value: "200+", label: "Projects Delivered" },
-    { value: "5+", label: "Valuable Partnerships" },
-    { value: "20+", label: "Countries Served" },
-    { value: "25+", label: "Tech Experts" },
+    { value: `${companyStats.projects}+`, label: "Projects Delivered" },
+    { value: `${companyStats.partnerships}+`, label: "Valuable Partnerships" },
+    { value: `${companyStats.countries}+`, label: "Countries Served" },
+    { value: `${companyStats.experts}+`, label: "Tech Experts" },
   ],
 };
 

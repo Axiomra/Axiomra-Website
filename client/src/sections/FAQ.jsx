@@ -1,3 +1,4 @@
+import { companyStats } from "../data/companyStats.js";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
@@ -10,15 +11,15 @@ const defaultFaqs = [
   },
   {
     q: "What makes Axiomra different from other AI development companies?",
-    a: "We focus on production-grade engineering, not prototypes. A 100% in-house team of 25+ experts ensures every solution is scalable, secure, and delivers measurable ROI within two quarters.",
+    a: `We focus on production-grade engineering, not prototypes. A 100% in-house team of ${companyStats.experts}+ experts ensures every solution is scalable, secure, and delivers measurable ROI within two quarters.`,
   },
   {
     q: "Why should I choose an AI development company for my global project?",
-    a: "You get access to elite engineering talent at a competitive price point, with 500+ successful projects delivered globally.",
+    a: `You get access to elite engineering talent at a competitive price point, with ${companyStats.projects}+ successful projects delivered globally.`,
   },
   {
     q: "What industries does your AI development company have experience in?",
-    a: "Extensive experience across healthcare, fashion, sports, education, real estate, and more, 500+ projects delivered or in progress.",
+    a: `Extensive experience across healthcare, fashion, sports, education, real estate, and more, ${companyStats.projects}+ projects delivered or in progress.`,
   },
   {
     q: "Does Axiomra offer post-development support?",

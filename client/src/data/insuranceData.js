@@ -5,6 +5,7 @@
  * a component. Section order in the page mirrors this file.
  */
 
+import { companyStats } from "./companyStats.js";
 import heroImg from "../assets/industries/insurance/hero.webp";
 import introImg from "../assets/industries/insurance/intro.webp";
 
@@ -54,8 +55,7 @@ export const hero = {
   titleLead: "Custom AI Insurance Software",
   titleAccent: "Development Services",
   titleTail: "For Modern Carriers",
-  body:
-    "We build the systems that decide faster and pay sooner: straight-through underwriting, automated claims triage, fraud scoring that survives a regulator's question and policy administration that does not depend on a spreadsheet. Every model ships with the rationale attached, because in insurance an unexplainable decision is not a decision.",
+  body: "We build the systems that decide faster and pay sooner: straight-through underwriting, automated claims triage, fraud scoring that survives a regulator's question and policy administration that does not depend on a spreadsheet. Every model ships with the rationale attached, because in insurance an unexplainable decision is not a decision.",
   ctaText: "Request a free consultation",
   image: heroImg,
   alt: "An insurance professional working across live risk data on a tablet",
@@ -77,8 +77,7 @@ export const intro = {
 export const impact = {
   titleLead: "The Role Of AI In",
   titleAccent: "Modern Insurance Operations",
-  body:
-    "Insurance was always a data business; what changed is that the data now arrives faster than a manual process can read it. Telematics, imagery, medical records and open claims feeds only pay back when something can act on them in the moment, which is what AI insurance software development services are actually for.",
+  body: "Insurance was always a data business; what changed is that the data now arrives faster than a manual process can read it. Telematics, imagery, medical records and open claims feeds only pay back when something can act on them in the moment, which is what AI insurance software development services are actually for.",
   stats: [
     {
       value: "34%",
@@ -123,38 +122,31 @@ export const challenges = {
   items: [
     {
       title: "Claims cycle times measured in weeks",
-      body:
-        "First notice of loss arrives as a phone call, a form and a folder of photographs, and then waits for an adjuster with capacity. We build intake that reads the documents and imagery on arrival, scores severity and complexity, settles the clean low-value claims straight through and routes the rest to the adjuster whose caseload and licence actually fit. The queue stops being first-in-first-out and starts being worst-first.",
+      body: "First notice of loss arrives as a phone call, a form and a folder of photographs, and then waits for an adjuster with capacity. We build intake that reads the documents and imagery on arrival, scores severity and complexity, settles the clean low-value claims straight through and routes the rest to the adjuster whose caseload and licence actually fit. The queue stops being first-in-first-out and starts being worst-first.",
     },
     {
       title: "Fraud detection that only catches yesterday's pattern",
-      body:
-        "A static rule set flags the schemes it was written for and floods the SIU with false positives on everything else. We deploy network and behavioural models that score a claim against the claimant, the repairer, the medical provider and the ring behind them, then feed every investigator decision back into the model, so the hit rate rises instead of the queue.",
+      body: "A static rule set flags the schemes it was written for and floods the SIU with false positives on everything else. We deploy network and behavioural models that score a claim against the claimant, the repairer, the medical provider and the ring behind them, then feed every investigator decision back into the model, so the hit rate rises instead of the queue.",
     },
     {
       title: "Underwriting bottlenecked on manual review",
-      body:
-        "Submissions land as PDFs, spreadsheets and broker emails, and a qualified underwriter spends the morning retyping them. We build ingestion that extracts, normalises and enriches the submission automatically, applies appetite rules and hands the underwriter a priced, triaged risk with the exposures already flagged. The judgement stays human; the data entry does not.",
+      body: "Submissions land as PDFs, spreadsheets and broker emails, and a qualified underwriter spends the morning retyping them. We build ingestion that extracts, normalises and enriches the submission automatically, applies appetite rules and hands the underwriter a priced, triaged risk with the exposures already flagged. The judgement stays human; the data entry does not.",
     },
     {
       title: "Pricing built on stale tables",
-      body:
-        "Rating factors refreshed annually cannot see a hardening market or a deteriorating segment until the loss ratio says so. We build the analytics layer that monitors experience continuously, surfaces segment drift while it is still small and lets the actuarial team test a rate change against the live book before it is filed.",
+      body: "Rating factors refreshed annually cannot see a hardening market or a deteriorating segment until the loss ratio says so. We build the analytics layer that monitors experience continuously, surfaces segment drift while it is still small and lets the actuarial team test a rate change against the live book before it is filed.",
     },
     {
       title: "Policy administration that blocks every new product",
-      body:
-        "When a product change needs a core release, the roadmap is set by the vendor, not the market. We wrap the policy admin system in an event-driven configuration and integration layer so new covers, endorsements and distribution channels ship at product speed while the system of record keeps running untouched underneath.",
+      body: "When a product change needs a core release, the roadmap is set by the vendor, not the market. We wrap the policy admin system in an event-driven configuration and integration layer so new covers, endorsements and distribution channels ship at product speed while the system of record keeps running untouched underneath.",
     },
     {
       title: "Regulatory and conduct exposure on automated decisions",
-      body:
-        "Automated pricing and claims decisions attract scrutiny on fairness, explainability and data use. We build the governance surface alongside the model: feature lineage, proxy-variable testing, challenger comparisons, decision reasons stored per outcome and an audit export a supervisor can read without our help.",
+      body: "Automated pricing and claims decisions attract scrutiny on fairness, explainability and data use. We build the governance surface alongside the model: feature lineage, proxy-variable testing, challenger comparisons, decision reasons stored per outcome and an audit export a supervisor can read without our help.",
     },
     {
       title: "Customer service running on hold music",
-      body:
-        "Most policyholder contact is status chasing that nobody enjoys on either end. We build assistants grounded in the policy wording and the live claim record, so they answer from the schedule rather than a guess, and escalate the moment the question turns into advice.",
+      body: "Most policyholder contact is status chasing that nobody enjoys on either end. We build assistants grounded in the policy wording and the live claim record, so they answer from the schedule rather than a guess, and escalate the moment the question turns into advice.",
     },
   ],
 };
@@ -167,69 +159,60 @@ export const valueChain = {
   eyebrow: "What insurance solutions do we offer?",
   titleLead: "How We Deliver Custom AI Insurance Solutions",
   titleAccent: "Across The Value Chain",
-  body:
-    "We build across the whole policy lifecycle rather than dropping a model into one step of it. Each stage below is a system we have shipped: integrated with the core, governed from day one and measured on the number it was meant to move.",
+  body: "We build across the whole policy lifecycle rather than dropping a model into one step of it. Each stage below is a system we have shipped: integrated with the core, governed from day one and measured on the number it was meant to move.",
   items: [
     {
       title: "Quote, Bind & Digital Distribution",
-      body:
-        "Embedded and direct quote journeys that price in real time, pre-fill from third-party data and bind without a callback. Broker and aggregator channels run off the same rating service, so a rate change lands everywhere at once.",
+      body: "Embedded and direct quote journeys that price in real time, pre-fill from third-party data and bind without a callback. Broker and aggregator channels run off the same rating service, so a rate change lands everywhere at once.",
       metric: "Quote-to-bind in one session",
       image: chainQuoteImg,
       alt: "A customer comparing insurance quotes on a laptop",
     },
     {
       title: "AI-Assisted Underwriting & Risk Selection",
-      body:
-        "Submission ingestion that reads broker packs, schedules and loss runs, enriches them with exposure data and applies appetite automatically. Underwriters open a triaged risk, not a mailbox.",
+      body: "Submission ingestion that reads broker packs, schedules and loss runs, enriches them with exposure data and applies appetite automatically. Underwriters open a triaged risk, not a mailbox.",
       metric: "Straight-through on clean risks",
       image: chainUnderwritingImg,
       alt: "An underwriter reviewing a submission pack at their desk",
     },
     {
       title: "Policy Administration & Servicing",
-      body:
-        "Configuration-driven products, endorsements and renewals sitting over your system of record, with an event layer that keeps every downstream service (billing, documents, reporting) in step without a nightly batch.",
+      body: "Configuration-driven products, endorsements and renewals sitting over your system of record, with an event layer that keeps every downstream service (billing, documents, reporting) in step without a nightly batch.",
       metric: "New product without a core release",
       image: chainPolicyImg,
       alt: "Organised policy documentation in a modern office",
     },
     {
       title: "FNOL Intake & Claims Triage",
-      body:
-        "Loss notification through any channel, with document and image understanding on arrival. Severity, complexity and coverage questions are scored before a human opens the file, and low-complexity claims settle straight through.",
+      body: "Loss notification through any channel, with document and image understanding on arrival. Severity, complexity and coverage questions are scored before a human opens the file, and low-complexity claims settle straight through.",
       metric: "Worst-first, not first-in-first-out",
       image: chainFnolImg,
       alt: "A driver photographing vehicle damage to report a claim",
     },
     {
       title: "Damage Assessment & Estimating",
-      body:
-        "Computer vision on claim imagery producing a first estimate and a repair-versus-total call, benchmarked against your own historical settlements rather than a vendor's national average.",
+      body: "Computer vision on claim imagery producing a first estimate and a repair-versus-total call, benchmarked against your own historical settlements rather than a vendor's national average.",
       metric: "Consistent estimates across adjusters",
       image: chainAssessmentImg,
       alt: "An assessor inspecting property damage on site",
     },
     {
       title: "Fraud, SIU & Claims Integrity",
-      body:
-        "Network analytics across claimants, repairers, providers and devices, with behavioural scoring at intake and at payment. Investigators get ranked referrals with the evidence assembled, not a list of rule hits.",
+      body: "Network analytics across claimants, repairers, providers and devices, with behavioural scoring at intake and at payment. Investigators get ranked referrals with the evidence assembled, not a list of rule hits.",
       metric: "Higher SIU hit rate, shorter queue",
       image: chainFraudImg,
       alt: "An analyst monitoring fraud detection dashboards",
     },
     {
       title: "Recovery, Subrogation & Litigation",
-      body:
-        "Automatic identification of recovery potential at first notice, document assembly for demand packs, and litigation-risk scoring so reserves and settlement authority reflect the actual exposure.",
+      body: "Automatic identification of recovery potential at first notice, document assembly for demand packs, and litigation-risk scoring so reserves and settlement authority reflect the actual exposure.",
       metric: "Recovery spotted at FNOL, not at close",
       image: chainRecoveryImg,
       alt: "Legal counsel reviewing a recovery file",
     },
     {
       title: "Policyholder Service & Retention",
-      body:
-        "Assistants grounded in the policy wording and live claim state, plus renewal and lapse models that tell the retention team which policyholder is worth a call this week.",
+      body: "Assistants grounded in the policy wording and live claim state, plus renewal and lapse models that tell the retention team which policyholder is worth a call this week.",
       metric: "Fewer status calls, better renewals",
       image: chainServiceImg,
       alt: "A service agent supporting a policyholder by phone",
@@ -240,8 +223,7 @@ export const valueChain = {
 export const midCta = {
   eyebrow: "Ready to level up?",
   title: "Settle Faster, Price Sharper, Explain Everything",
-  body:
-    "Bring us the process that costs you the most, whether that is the claims backlog, the referral queue or the submission mailbox, and we will scope what automation realistically moves, and what it will not. No pilot theatre.",
+  body: "Bring us the process that costs you the most, whether that is the claims backlog, the referral queue or the submission mailbox, and we will scope what automation realistically moves, and what it will not. No pilot theatre.",
   ctaText: "Get in touch",
   background: midCtaBgImg,
 };
@@ -254,34 +236,29 @@ export const solutions = {
   eyebrow: "What kinds of insurance systems do we build?",
   titleLead: "Our Custom Insurance Software Development Services",
   titleAccent: "& AI Automation",
-  body:
-    "End-to-end delivery, from the first workshop to the model monitoring dashboard your risk function signs off on. We work alongside your underwriting, claims, actuarial and compliance teams rather than around them.",
+  body: "End-to-end delivery, from the first workshop to the model monitoring dashboard your risk function signs off on. We work alongside your underwriting, claims, actuarial and compliance teams rather than around them.",
   items: [
     {
       title: "AI Consulting & Insurance Automation Strategy",
-      body:
-        "We map the policy lifecycle against where your cost and leakage actually sit, then rank the automation candidates by return rather than by how demonstrable they are. Expect us to name the processes that are not worth automating yet, usually the ones with the prettiest demos.",
+      body: "We map the policy lifecycle against where your cost and leakage actually sit, then rank the automation candidates by return rather than by how demonstrable they are. Expect us to name the processes that are not worth automating yet, usually the ones with the prettiest demos.",
       image: solConsultingImg,
       alt: "Consultants mapping an insurance process on a whiteboard",
     },
     {
       title: "Custom Insurance Platform Engineering",
-      body:
-        "Underwriting workbenches, claims platforms, broker portals and embedded distribution built to sit alongside Guidewire, Duck Creek, Sapiens or a legacy core you are not replacing this year. Event-driven, idempotent integrations, delivered in increments you can put in front of a regulator.",
+      body: "Underwriting workbenches, claims platforms, broker portals and embedded distribution built to sit alongside Guidewire, Duck Creek, Sapiens or a legacy core you are not replacing this year. Event-driven, idempotent integrations, delivered in increments you can put in front of a regulator.",
       image: solDevelopmentImg,
       alt: "Engineers building an insurance platform across multiple screens",
     },
     {
       title: "Portfolio Analytics & Actuarial Intelligence",
-      body:
-        "Governed data on top of policy, claims and third-party feeds, with loss-ratio monitoring, reserve analytics and segment drift detection. One set of figures that underwriting, actuarial and finance all read from, so the pricing conversation stops being a reconciliation.",
+      body: "Governed data on top of policy, claims and third-party feeds, with loss-ratio monitoring, reserve analytics and segment drift detection. One set of figures that underwriting, actuarial and finance all read from, so the pricing conversation stops being a reconciliation.",
       image: solAnalyticsImg,
       alt: "An analyst reviewing portfolio performance dashboards",
     },
     {
       title: "Intelligent Document & Workflow Automation",
-      body:
-        "Document understanding across submissions, medical records, loss runs and claim evidence, wired into workflows with human-in-the-loop checkpoints where the stakes justify one. Every automated step writes its own audit trail.",
+      body: "Document understanding across submissions, medical records, loss runs and claim evidence, wired into workflows with human-in-the-loop checkpoints where the stakes justify one. Every automated step writes its own audit trail.",
       image: solAutomationImg,
       alt: "Automated document processing in an insurance workflow",
     },
@@ -295,43 +272,37 @@ export const stakeholders = {
   items: [
     {
       title: "Brokers & MGAs",
-      body:
-        "Submission workbenches, delegated authority reporting and bordereaux automation, so binder compliance stops being a month-end spreadsheet exercise.",
+      body: "Submission workbenches, delegated authority reporting and bordereaux automation, so binder compliance stops being a month-end spreadsheet exercise.",
       image: stkBrokerImg,
       alt: "An insurance broker working with a client",
     },
     {
       title: "Underwriting Leaders",
-      body:
-        "Triaged submissions, appetite rules in one place and portfolio exposure visible before the quarter closes rather than after it.",
+      body: "Triaged submissions, appetite rules in one place and portfolio exposure visible before the quarter closes rather than after it.",
       image: stkUnderwriterImg,
       alt: "An underwriting lead reviewing portfolio exposure",
     },
     {
       title: "Claims & SIU Directors",
-      body:
-        "Severity-ranked queues, straight-through settlement on clean claims and referrals that arrive with the evidence already assembled.",
+      body: "Severity-ranked queues, straight-through settlement on clean claims and referrals that arrive with the evidence already assembled.",
       image: stkAdjusterImg,
       alt: "A claims assessor carrying out a site inspection",
     },
     {
       title: "Actuarial & Pricing Teams",
-      body:
-        "Governed experience data, challenger models and the ability to test a rate change against the live book before it is filed.",
+      body: "Governed experience data, challenger models and the ability to test a rate change against the live book before it is filed.",
       image: stkActuaryImg,
       alt: "An actuary working through experience data",
     },
     {
       title: "Insurtech Founders",
-      body:
-        "A ledger built to the rules your regulator applies, a rating service and the reporting asked for on day one, built to survive the first capacity partner's due diligence.",
+      body: "A ledger built to the rules your regulator applies, a rating service and the reporting asked for on day one, built to survive the first capacity partner's due diligence.",
       image: stkFounderImg,
       alt: "An insurtech founder in a modern workspace",
     },
     {
       title: "Carrier Executives",
-      body:
-        "One view of combined ratio, reserve adequacy and automation coverage that holds up in a board pack, refreshed continuously instead of assembled overnight.",
+      body: "One view of combined ratio, reserve adequacy and automation coverage that holds up in a board pack, refreshed continuously instead of assembled overnight.",
       image: stkExecImg,
       alt: "A carrier executive reviewing performance in a boardroom",
     },
@@ -346,8 +317,7 @@ export const lines = {
   eyebrow: "Which lines of business do we serve?",
   titleLead: "AI Insurance Solutions Across",
   titleAccent: "Every Line Of Business",
-  body:
-    "Every line carries its own regulator, its own data and its own definition of an acceptable loss. Hover any card to see what we build for it.",
+  body: "Every line carries its own regulator, its own data and its own definition of an acceptable loss. Hover any card to see what we build for it.",
   items: [
     {
       label: "Motor & Auto",
@@ -415,33 +385,27 @@ export const benefits = {
   items: [
     {
       title: "Shorter claims cycles",
-      body:
-        "Triage at intake and straight-through settlement on clean claims take the waiting out of the majority of files, so adjuster capacity goes to the ones that genuinely need judgement.",
+      body: "Triage at intake and straight-through settlement on clean claims take the waiting out of the majority of files, so adjuster capacity goes to the ones that genuinely need judgement.",
     },
     {
       title: "Less leakage and fraud",
-      body:
-        "Behavioural and network scoring catches the schemes a rule set was never written for, and evidence assembly means referrals arrive ready to investigate rather than ready to triage again.",
+      body: "Behavioural and network scoring catches the schemes a rule set was never written for, and evidence assembly means referrals arrive ready to investigate rather than ready to triage again.",
     },
     {
       title: "Sharper risk selection",
-      body:
-        "Enriched submissions and continuously monitored experience data let underwriters see segment drift while it is still small, instead of meeting it in next year's loss ratio.",
+      body: "Enriched submissions and continuously monitored experience data let underwriters see segment drift while it is still small, instead of meeting it in next year's loss ratio.",
     },
     {
       title: "Faster product launches",
-      body:
-        "Configuration over code, and an integration layer that isolates the core, means a new cover or channel is a product decision rather than a vendor release slot.",
+      body: "Configuration over code, and an integration layer that isolates the core, means a new cover or channel is a product decision rather than a vendor release slot.",
     },
     {
       title: "Defensible automation",
-      body:
-        "Decision reasons, feature lineage, bias testing and challenger comparisons are part of the build, so an automated outcome can be explained to a policyholder, an ombudsman or a supervisor.",
+      body: "Decision reasons, feature lineage, bias testing and challenger comparisons are part of the build, so an automated outcome can be explained to a policyholder, an ombudsman or a supervisor.",
     },
     {
       title: "Service that stops chasing",
-      body:
-        "Assistants grounded in the policy wording and the live claim record answer status questions immediately and escalate cleanly the moment a question becomes advice.",
+      body: "Assistants grounded in the policy wording and the live claim record answer status questions immediately and escalate cleanly the moment a question becomes advice.",
     },
   ],
 };
@@ -467,41 +431,97 @@ export const techStrip = {
   eyebrow: "Technologies we work with",
   titleLead: "Expertise In Advanced",
   titleAccent: "Insurance Development Technologies",
-  body:
-    "The same production-grade toolchain sits under every insurance platform we ship. Pick a layer to see what it is made of.",
+  body: "The same production-grade toolchain sits under every insurance platform we ship. Pick a layer to see what it is made of.",
   ctaText: "View all tech stack",
   tabs: [
     {
       id: "ai",
       label: "Artificial Intelligence",
       items: [
-        "GPT-4o", "Claude", "Gemini", "Llama 3", "Mistral", "LayoutLM", "Donut", "Tesseract",
-        "XGBoost", "LightGBM", "scikit-learn", "PyTorch", "TensorFlow", "SHAP", "Fairlearn",
-        "Evidently", "LangChain", "Vertex AI",
+        "GPT-4o",
+        "Claude",
+        "Gemini",
+        "Llama 3",
+        "Mistral",
+        "LayoutLM",
+        "Donut",
+        "Tesseract",
+        "XGBoost",
+        "LightGBM",
+        "scikit-learn",
+        "PyTorch",
+        "TensorFlow",
+        "SHAP",
+        "Fairlearn",
+        "Evidently",
+        "LangChain",
+        "Vertex AI",
       ],
     },
     {
       id: "vision",
       label: "Computer Vision",
-      items: ["YOLO", "Segment Anything", "Detectron2", "OpenCV", "Roboflow", "Depth Anything", "EXIF forensics"],
+      items: [
+        "YOLO",
+        "Segment Anything",
+        "Detectron2",
+        "OpenCV",
+        "Roboflow",
+        "Depth Anything",
+        "EXIF forensics",
+      ],
     },
     {
       id: "backend",
       label: "Backend & Data",
       items: [
-        "Node.js", "NestJS", "FastAPI", "Django", "Go", "Java Spring", "GraphQL", "PostgreSQL",
-        "MongoDB", "Redis", "Kafka", "Airflow", "dbt", "Snowflake", "Databricks", "Neo4j",
+        "Node.js",
+        "NestJS",
+        "FastAPI",
+        "Django",
+        "Go",
+        "Java Spring",
+        "GraphQL",
+        "PostgreSQL",
+        "MongoDB",
+        "Redis",
+        "Kafka",
+        "Airflow",
+        "dbt",
+        "Snowflake",
+        "Databricks",
+        "Neo4j",
       ],
     },
     {
       id: "frontend",
       label: "Frontend",
-      items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Three.js", "D3.js", "React Native", "Flutter", "Vite", "Radix UI"],
+      items: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Three.js",
+        "D3.js",
+        "React Native",
+        "Flutter",
+        "Vite",
+        "Radix UI",
+      ],
     },
     {
       id: "core",
       label: "Core & Integration",
-      items: ["Guidewire", "Duck Creek", "Sapiens", "Majesco", "ACORD standards", "EDI bordereaux", "Open API rating services", "Policy admin adapters"],
+      items: [
+        "Guidewire",
+        "Duck Creek",
+        "Sapiens",
+        "Majesco",
+        "ACORD standards",
+        "EDI bordereaux",
+        "Open API rating services",
+        "Policy admin adapters",
+      ],
     },
     {
       id: "cloud",
@@ -511,9 +531,17 @@ export const techStrip = {
     {
       id: "governance",
       label: "Security & Governance",
-      note:
-        "Standards and practices we design and build against, not certifications held by Axiomra. Which of them apply to your project, and what evidence your assessor will want, is confirmed with your compliance team before work starts.",
-      items: ["SOC 2", "ISO 27001", "GDPR", "Model risk management", "Bias & fairness testing", "Decision audit trails", "Zero-trust networking", "Penetration testing"],
+      note: "Standards and practices we design and build against, not certifications held by Axiomra. Which of them apply to your project, and what evidence your assessor will want, is confirmed with your compliance team before work starts.",
+      items: [
+        "SOC 2",
+        "ISO 27001",
+        "GDPR",
+        "Model risk management",
+        "Bias & fairness testing",
+        "Decision audit trails",
+        "Zero-trust networking",
+        "Penetration testing",
+      ],
     },
   ],
 };
@@ -522,8 +550,7 @@ export const businessTypes = {
   eyebrow: "Who do we work with?",
   titleLead: "Explore The Range Of",
   titleAccent: "Insurance Businesses We Support",
-  body:
-    "We build insurance software that stands up to a regulator, an auditor and a catastrophe week. Whether you are launching a licensed product or modernising a core that predates the API era, we turn it into a platform your team can actually run.",
+  body: "We build insurance software that stands up to a regulator, an auditor and a catastrophe week. Whether you are launching a licensed product or modernising a core that predates the API era, we turn it into a platform your team can actually run.",
   rows: [
     {
       label: "Insurtech start-ups",
@@ -577,8 +604,7 @@ export const showcase = {
   eyebrow: "What innovations have we delivered to businesses?",
   titleLead: "Showcasing Our",
   titleAccent: "AI Development Projects",
-  body:
-    "Work delivered for insurers, MGAs and brokers, with the number each build had to move.",
+  body: "Work delivered for insurers, MGAs and brokers, with the number each build had to move.",
   ctaText: "Check out our full portfolio",
 };
 
@@ -590,35 +616,31 @@ export const partner = {
     {
       icon: "Target",
       title: "We solve problems, not ship features",
-      body:
-        "Every system is scoped against a number it has to move: cycle time, leakage, loss ratio, straight-through rate. If a piece of work cannot name its number, we will tell you rather than build it.",
+      body: "Every system is scoped against a number it has to move: cycle time, leakage, loss ratio, straight-through rate. If a piece of work cannot name its number, we will tell you rather than build it.",
     },
     {
       icon: "Layers",
       title: "Built around your core, not against it",
-      body:
-        "Guidewire, Duck Creek, Sapiens or a legacy core nobody wants to touch: we integrate through an event layer that isolates the system of record, so new products ship without a core release.",
+      body: "Guidewire, Duck Creek, Sapiens or a legacy core nobody wants to touch: we integrate through an event layer that isolates the system of record, so new products ship without a core release.",
     },
     {
       icon: "ShieldCheck",
       title: "Governance is part of the build",
-      body:
-        "Decision reasons, feature lineage, bias testing and challenger models are delivered with the model, not retrofitted when a supervisor asks. Plus 60 days of technical support and team training after go-live.",
+      body: "Decision reasons, feature lineage, bias testing and challenger models are delivered with the model, not retrofitted when a supervisor asks. Plus 60 days of technical support and team training after go-live.",
     },
   ],
   stats: [
-    { value: "205+", label: "Projects Delivered" },
-    { value: "5+", label: "Valuable Partnerships" },
-    { value: "20+", label: "Countries Served" },
-    { value: "20+", label: "Tech Experts" },
+    { value: `${companyStats.projects}+`, label: "Projects Delivered" },
+    { value: `${companyStats.partnerships}+`, label: "Valuable Partnerships" },
+    { value: `${companyStats.countries}+`, label: "Countries Served" },
+    { value: `${companyStats.experts}+`, label: "Tech Experts" },
   ],
 };
 
 export const blogs = {
   eyebrow: "What can our expertise teach you?",
   title: "Expert Perspectives On AI And Automation In Insurance",
-  body:
-    "Explore our knowledge hub for practical reads on claims automation, underwriting intelligence and the governance that keeps automated decisions defensible.",
+  body: "Explore our knowledge hub for practical reads on claims automation, underwriting intelligence and the governance that keeps automated decisions defensible.",
   posts: [
     {
       title: "Claims Automation: Which 60% Of A Book Can Actually Settle Straight Through",

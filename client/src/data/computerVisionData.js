@@ -1,4 +1,5 @@
 /** Every string and image the Computer Vision detail page renders lives here. */
+import { companyStats } from "./companyStats.js";
 import heroFaceMesh from "../assets/opencv/hero-face-mesh.webp";
 import heroDetectionConsole from "../assets/opencv/hero-detection-console.webp";
 import heroVisionGraph from "../assets/opencv/hero-vision-graph.webp";
@@ -679,19 +680,19 @@ export const whyUs = {
         "Shipped across vision, AI, web, and mobile, from first prototype to production rollout.",
     },
     {
-      value: "30+",
+      value: `${companyStats.countries}+`,
       label: "Countries served",
       detail:
         "Delivery across time zones with clients in North America, Europe, the Gulf, and Asia.",
     },
     {
-      value: "18+",
+      value: `${companyStats.partnerships}+`,
       label: "Business partnerships",
       detail:
         "Long-term technology partners covering cloud, edge hardware, and data infrastructure.",
     },
     {
-      value: "40+",
+      value: `${companyStats.experts}+`,
       label: "Team of experts",
       detail: "ML engineers, data scientists, MLOps, and product specialists working in one team.",
     },

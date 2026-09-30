@@ -1,3 +1,4 @@
+import { companyStats } from "../data/companyStats.js";
 import GradientCTA from "../components/GradientCTA";
 
 import Hero from "../sections/Hero";
@@ -37,7 +38,7 @@ export default function HomePage() {
       <FoundersSay />
       <GradientCTA
         title="Want These Results For Your Business?"
-        subtitle="We've done it for 500+ clients. Book a discovery call today, and our AI development partner team will map out a custom AI roadmap to eliminate manual overhead and boost your bottom line."
+        subtitle={`We've done it across ${companyStats.projects}+ projects. Book a discovery call today, and our AI development partner team will map out a custom AI roadmap to eliminate manual overhead and boost your bottom line.`}
       />
       <Services />
       <GradientCTA

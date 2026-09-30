@@ -1,3 +1,4 @@
+import { companyStats } from "../data/companyStats.js";
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
@@ -60,7 +61,9 @@ export default function TestimonialWall({ showHeading = true }) {
             </span>
             <span className="font-display text-xl font-semibold text-content">4.9/5</span>
             <span className="h-5 w-px bg-line-strong" aria-hidden="true" />
-            <span className="text-base text-content-dim">from 500+ companies</span>
+            <span className="text-base text-content-dim">
+              across {companyStats.projects}+ projects
+            </span>
           </div>
         </SectionHeading>
       ) : (
@@ -73,7 +76,9 @@ export default function TestimonialWall({ showHeading = true }) {
             </span>
             <span className="font-display text-xl font-semibold text-content">4.9/5</span>
             <span className="h-5 w-px bg-line-strong" aria-hidden="true" />
-            <span className="text-base text-content-dim">from 500+ companies</span>
+            <span className="text-base text-content-dim">
+              across {companyStats.projects}+ projects
+            </span>
           </div>
         </div>
       )}

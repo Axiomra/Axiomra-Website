@@ -1,3 +1,4 @@
+import { companyStats } from "../data/companyStats.js";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, animate } from "framer-motion";
 import { Cpu, TrendingUp, Users, ShieldCheck } from "lucide-react";
@@ -17,7 +18,7 @@ const points = [
   {
     icon: Users,
     title: "100% In-House Expertise",
-    desc: "Our dedicated team of 25+ AI specialists works directly with you from strategy to launch.",
+    desc: `Our dedicated team of ${companyStats.experts}+ AI specialists works directly with you from strategy to launch.`,
   },
   {
     icon: ShieldCheck,
@@ -27,10 +28,10 @@ const points = [
 ];
 
 const stats = [
-  { label: "Projects Delivered", value: 500, suffix: "+" },
-  { label: "Partnerships", value: 170, suffix: "+" },
-  { label: "Countries Served", value: 30, suffix: "+" },
-  { label: "Tech Experts", value: 85, suffix: "+" },
+  { label: "Projects Delivered", value: companyStats.projects, suffix: "+" },
+  { label: "Partnerships", value: companyStats.partnerships, suffix: "+" },
+  { label: "Countries Served", value: companyStats.countries, suffix: "+" },
+  { label: "Tech Experts", value: companyStats.experts, suffix: "+" },
 ];
 
 function Counter({ value, suffix }) {

@@ -1,4 +1,5 @@
 /** Every string and image the Generative AI detail page renders lives here. */
+import { companyStats } from "./companyStats.js";
 import heroContent from "../assets/gen-ai/hero-content-generation.jpg";
 import heroCopilot from "../assets/gen-ai/hero-copilot-chat.jpg";
 import heroChip from "../assets/gen-ai/hero-model-chip.jpg";
@@ -510,9 +511,9 @@ export const whyUs = {
     "Hand holding an AI security shield surrounded by compliance and access icons",
   ctaText: "Book a Free Consultation",
   stats: [
-    { value: "500+", label: "AI and machine learning projects" },
-    { value: "50+", label: "Engineers and data scientists" },
-    { value: "20+", label: "Global markets served" },
+    { value: `${companyStats.projects}+`, label: "AI and machine learning projects" },
+    { value: `${companyStats.experts}+`, label: "Engineers and data scientists" },
+    { value: `${companyStats.countries}+`, label: "Global markets served" },
     { value: "4+", label: "Years building production AI" },
   ],
   reasons: [

@@ -3,6 +3,8 @@
  * must carry a `category` that exists in `faqCategories`.
  */
 
+import { companyStats } from "./companyStats.js";
+
 export const hero = {
   eyebrow: "Answers, not brochures",
   titleLead: "Everything People Ask Us",
@@ -31,7 +33,7 @@ export const faqItems = [
   {
     category: "About Axiomra",
     q: "Who is Axiomra and what do you actually do?",
-    a: "We are an AI development company founded in 2021, with 25+ in-house engineers, data scientists and product specialists. We build production AI systems end to end: the model, the service around it, the interface people use and the infrastructure it runs on.",
+    a: `We are an AI development company founded in 2021, with ${companyStats.experts}+ in-house engineers, data scientists and product specialists. We build production AI systems end to end: the model, the service around it, the interface people use and the infrastructure it runs on.`,
   },
   {
     category: "About Axiomra",
@@ -52,7 +54,7 @@ export const faqItems = [
   {
     category: "Services & Industries",
     q: "Which industries have you shipped into?",
-    a: "Healthcare, finance, retail, fashion, education, real estate and logistics, across 500+ projects delivered or in progress. Where we lack sector depth we say so, and we price the discovery work honestly rather than learning on your budget.",
+    a: `Healthcare, finance, retail, fashion, education, real estate and logistics, across ${companyStats.projects}+ projects delivered or in progress. Where we lack sector depth we say so, and we price the discovery work honestly rather than learning on your budget.`,
   },
   {
     category: "Services & Industries",
@@ -67,7 +69,7 @@ export const faqItems = [
   {
     category: "Services & Industries",
     q: "Do you work with companies outside your time zone?",
-    a: "We have shipped to clients in 20+ countries. Teams commit to four hours of daily overlap with your working day, and async written updates cover the rest.",
+    a: `We have shipped to clients in ${companyStats.countries}+ countries. Teams commit to four hours of daily overlap with your working day, and async written updates cover the rest.`,
   },
 
   {
@@ -115,7 +117,7 @@ export const faqItems = [
   {
     category: "Cost & ROI",
     q: "How much does an AI project cost?",
-    a: "It depends on scope, but for calibration: a proof of concept typically lands between $15k and $40k, and a production system between $60k and $250k. We give a fixed price per phase after discovery, so you are never signing an open-ended hourly commitment.",
+    a: `It depends on scope, but for calibration: a proof of concept typically lands between $${companyStats.pocRange.min}k and $${companyStats.pocRange.max}k, and a production system between $60k and $250k. We give a fixed price per phase after discovery, so you are never signing an open-ended hourly commitment.`,
   },
   {
     category: "Cost & ROI",

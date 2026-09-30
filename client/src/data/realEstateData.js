@@ -5,6 +5,7 @@
  * a component. Section order in the page mirrors this file.
  */
 
+import { companyStats } from "./companyStats.js";
 import heroImg from "../assets/industries/real-estate/hero.webp";
 import introImg from "../assets/industries/real-estate/intro.webp";
 
@@ -38,8 +39,7 @@ export const hero = {
   titleLead: "Rebuild Your Business With",
   titleAccent: "Custom Real Estate App Development",
   titleTail: "Services",
-  body:
-    "We build AI-powered real estate software that values property accurately, qualifies leads automatically and moves a transaction from first enquiry to signed contract without the paperwork bottleneck. Agencies, developers and property managers run their portfolio on one system instead of six.",
+  body: "We build AI-powered real estate software that values property accurately, qualifies leads automatically and moves a transaction from first enquiry to signed contract without the paperwork bottleneck. Agencies, developers and property managers run their portfolio on one system instead of six.",
   ctaText: "Book a proposal",
   image: heroImg,
   alt: "Blue glass towers rising above a city street, seen from below",
@@ -61,8 +61,7 @@ export const intro = {
 export const impact = {
   titleLead: "How AI Is Reshaping",
   titleAccent: "Real Estate Operations Today",
-  body:
-    "AI has moved from a pitch-deck slide to the thing that decides which agency wins the listing. Valuation, lead qualification, tenant screening and market forecasting all run faster and closer to the truth when the data behind them is unified and the models are tuned on real transactions.",
+  body: "AI has moved from a pitch-deck slide to the thing that decides which agency wins the listing. Valuation, lead qualification, tenant screening and market forecasting all run faster and closer to the truth when the data behind them is unified and the models are tuned on real transactions.",
   stats: [
     {
       value: "68%",
@@ -91,13 +90,11 @@ export const solutions = {
   eyebrow: "What types of real estate solutions are we experts in?",
   titleLead: "End-To-End AI-Powered",
   titleAccent: "Real Estate App Development Services",
-  body:
-    "Seven build areas cover the whole operating surface of a property business, from the analytics your leadership reads to the app your on-site team carries. Each one starts from a problem you can name and ends in software your team runs on.",
+  body: "Seven build areas cover the whole operating surface of a property business, from the analytics your leadership reads to the app your on-site team carries. Each one starts from a problem you can name and ends in software your team runs on.",
   items: [
     {
       title: "Real Estate Operations and Analytics Solutions",
-      body:
-        "Portfolio data stops living in exports. We unify listings, tenancies, maintenance and financials into one model, then put the analysis on top of it: occupancy, yield, arrears and market movement in a view leadership trusts enough to make decisions from.",
+      body: "Portfolio data stops living in exports. We unify listings, tenancies, maintenance and financials into one model, then put the analysis on top of it: occupancy, yield, arrears and market movement in a view leadership trusts enough to make decisions from.",
       image: solOperationsImg,
       alt: "A laptop showing property performance charts on a desk",
       pains: [
@@ -110,26 +107,30 @@ export const solutions = {
     },
     {
       title: "Client and Sales Management Systems",
-      body:
-        "A lead that waits four hours is usually a lead someone else closed. We build CRM and lead tooling that scores enquiries on intent, routes them to the right agent instantly and keeps the follow-up running without anyone remembering to send it.",
+      body: "A lead that waits four hours is usually a lead someone else closed. We build CRM and lead tooling that scores enquiries on intent, routes them to the right agent instantly and keeps the follow-up running without anyone remembering to send it.",
       image: solSalesImg,
       alt: "An agent walking a couple through property options at a table",
       pains: [
         { problem: "Inefficient lead tracking", solution: "Lead Management Software" },
         { problem: "Poor client engagement", solution: "Real Estate CRM Systems" },
         { problem: "Limited marketing reach", solution: "Real Estate Marketing Tools" },
-        { problem: "Difficulty showcasing properties", solution: "Listing Platforms With Search & Filter" },
+        {
+          problem: "Difficulty showcasing properties",
+          solution: "Listing Platforms With Search & Filter",
+        },
         { problem: "High client churn", solution: "AI-Driven Client Retention Tools" },
       ],
     },
     {
       title: "Transaction and Financial Management Tools",
-      body:
-        "Deals stall in the paperwork, not the negotiation. We automate contract generation, document extraction, milestone tracking and the financial reporting behind it, so a transaction moves on its own schedule instead of an inbox's.",
+      body: "Deals stall in the paperwork, not the negotiation. We automate contract generation, document extraction, milestone tracking and the financial reporting behind it, so a transaction moves on its own schedule instead of an inbox's.",
       image: solTransactionsImg,
       alt: "A model house, keys and a signed contract on a desk",
       pains: [
-        { problem: "Lengthy, error-prone transactions", solution: "Transaction Management Software" },
+        {
+          problem: "Lengthy, error-prone transactions",
+          solution: "Transaction Management Software",
+        },
         { problem: "Financial reporting inaccuracies", solution: "Financial Management Tools" },
         { problem: "Complex mortgage and cost maths", solution: "Cost & Mortgage Calculators" },
         { problem: "Investment analysis challenges", solution: "Investment Analysis Software" },
@@ -138,45 +139,50 @@ export const solutions = {
     },
     {
       title: "Communication and Collaboration Platforms",
-      body:
-        "Agents, site teams, contractors and legal all touch the same deal from different places. We give them one thread per property with the documents, photos and approvals attached, available on the phone they actually carry to a viewing.",
+      body: "Agents, site teams, contractors and legal all touch the same deal from different places. We give them one thread per property with the documents, photos and approvals attached, available on the phone they actually carry to a viewing.",
       image: solCollaborationImg,
       alt: "Two hard-hatted colleagues reviewing plans on a tablet on site",
       pains: [
         { problem: "Poor team communication", solution: "Unified Communication Platforms" },
-        { problem: "Collaborative projects hard to manage", solution: "Project Collaboration Tools" },
+        {
+          problem: "Collaborative projects hard to manage",
+          solution: "Project Collaboration Tools",
+        },
         { problem: "Limited access on the go", solution: "Mobile Real Estate Apps" },
         { problem: "Remote coordination challenges", solution: "Remote Collaboration Tools" },
       ],
     },
     {
       title: "Property Search and Optimisation Solutions",
-      body:
-        "Buyers abandon a portal that makes them work. We build search that understands intent rather than checkboxes, ranks results on what a given buyer has actually engaged with, and prices each listing against live comparables instead of last quarter's.",
+      body: "Buyers abandon a portal that makes them work. We build search that understands intent rather than checkboxes, ranks results on what a given buyer has actually engaged with, and prices each listing against live comparables instead of last quarter's.",
       image: solSearchImg,
       alt: "An agent holding a SOLD sign outside a property",
       pains: [
         { problem: "Time-consuming property search", solution: "Property Listing Platforms" },
         { problem: "Difficulty filtering properties", solution: "Search & Filter Solutions" },
         { problem: "Coordination issues between parties", solution: "Remote Collaboration Tools" },
-        { problem: "Uncertain property valuations", solution: "AI Valuation & Recommendation Engine" },
+        {
+          problem: "Uncertain property valuations",
+          solution: "AI Valuation & Recommendation Engine",
+        },
       ],
     },
     {
       title: "Regulatory and Compliance Solutions",
-      body:
-        "Rules change faster than a manual checklist survives. We track the obligations that apply to each property and jurisdiction, watch the dates, prepare the filing and tell the responsible person before a deadline becomes a penalty.",
+      body: "Rules change faster than a manual checklist survives. We track the obligations that apply to each property and jurisdiction, watch the dates, prepare the filing and tell the responsible person before a deadline becomes a penalty.",
       image: solComplianceImg,
       alt: "An architect's desk with blueprints, ruler and drawing tools",
       pains: [
-        { problem: "Changing regulations and compliance cost", solution: "AI Regulatory Compliance Tools" },
+        {
+          problem: "Changing regulations and compliance cost",
+          solution: "AI Regulatory Compliance Tools",
+        },
         { problem: "Manual permit tracking", solution: "Automated Permit Management Software" },
       ],
     },
     {
       title: "Tenant and Property Risk Management Tools",
-      body:
-        "Arrears and emergency repairs are both predictable if you read the signals early. We score tenant risk on payment history and verified affordability, and forecast maintenance from asset age, sensor data and work-order history before the failure happens.",
+      body: "Arrears and emergency repairs are both predictable if you read the signals early. We score tenant risk on payment history and verified affordability, and forecast maintenance from asset age, sensor data and work-order history before the failure happens.",
       image: solRiskImg,
       alt: "An apartment facade with rows of balconies",
       pains: [
@@ -191,8 +197,7 @@ export const apps = {
   eyebrow: "What real estate apps do we specialise in?",
   titleLead: "We Develop Custom AI-Powered Real Estate",
   titleAccent: "Software Built On Proven Technology",
-  body:
-    "Five product shapes cover most of what a property business asks us to build. Each is delivered as your own codebase, integrated with the portals, accounting and identity systems you already run.",
+  body: "Five product shapes cover most of what a property business asks us to build. Each is delivered as your own codebase, integrated with the portals, accounting and identity systems you already run.",
   background: appsBgImg,
   alt: "A team reviewing a property strategy at a whiteboard session",
   items: [
@@ -208,37 +213,31 @@ export const technologies = {
   eyebrow: "Which technologies do we use for real estate solutions?",
   titleLead: "Modern Technologies For Building",
   titleAccent: "Dependable Real Estate Tools",
-  body:
-    "Four capabilities carry most of the value in a property platform. We pick between them on evidence. The cheapest model that clears your accuracy bar wins.",
+  body: "Four capabilities carry most of the value in a property platform. We pick between them on evidence. The cheapest model that clears your accuracy bar wins.",
   ctaText: "View all services",
   items: [
     {
       title: "Artificial Intelligence",
-      body:
-        "Valuation, lead scoring, tenant screening and document understanding run as services behind your product, with confidence scores exposed so an agent knows when to trust the number and when to check it.",
+      body: "Valuation, lead scoring, tenant screening and document understanding run as services behind your product, with confidence scores exposed so an agent knows when to trust the number and when to check it.",
     },
     {
       title: "Data Analytics",
-      body:
-        "Listings, tenancies, transactions and market feeds land in one warehouse with a defined model, so occupancy, yield and pipeline mean the same thing in every report your leadership reads.",
+      body: "Listings, tenancies, transactions and market feeds land in one warehouse with a defined model, so occupancy, yield and pipeline mean the same thing in every report your leadership reads.",
     },
     {
       title: "Generative AI",
-      body:
-        "Listing copy, brochure text, contract drafts and buyer follow-ups generated from your own property data and tone, with a review step before anything reaches a client.",
+      body: "Listing copy, brochure text, contract drafts and buyer follow-ups generated from your own property data and tone, with a review step before anything reaches a client.",
     },
     {
       title: "Machine Learning",
-      body:
-        "Price forecasting, days-on-market prediction, churn and maintenance failure models trained on your transaction history and retrained on a schedule as the market moves.",
+      body: "Price forecasting, days-on-market prediction, churn and maintenance failure models trained on your transaction history and retrained on a schedule as the market moves.",
     },
   ],
 };
 
 export const midCta = {
   title: "Craft Your Ideal Real Estate Software Solution",
-  body:
-    "Bring us the part of the portfolio that costs you the most time (valuation, lead follow-up, transactions, maintenance) and we will map the fastest route to a working system, the integrations it needs and what it should return.",
+  body: "Bring us the part of the portfolio that costs you the most time (valuation, lead follow-up, transactions, maintenance) and we will map the fastest route to a working system, the integrations it needs and what it should return.",
   ctaText: "Get In Touch Now!",
   background: midCtaBgImg,
 };
@@ -250,33 +249,27 @@ export const benefits = {
   items: [
     {
       title: "Better Property Valuation",
-      body:
-        "Models read live comparables, condition, location signals and market movement together, so a valuation holds up in a negotiation instead of being argued down from a stale comp.",
+      body: "Models read live comparables, condition, location signals and market movement together, so a valuation holds up in a negotiation instead of being argued down from a stale comp.",
     },
     {
       title: "Enhanced Customer Experience",
-      body:
-        "Buyers get search that understands what they are actually looking for, instant answers out of hours and viewing slots they can book themselves, which is usually the difference between an enquiry and a viewing.",
+      body: "Buyers get search that understands what they are actually looking for, instant answers out of hours and viewing slots they can book themselves, which is usually the difference between an enquiry and a viewing.",
     },
     {
       title: "Improved Decision Making",
-      body:
-        "One dashboard carries occupancy, yield, arrears, pipeline and market trend on the same definitions, so investment and disposal calls are made on evidence rather than on whichever spreadsheet is newest.",
+      body: "One dashboard carries occupancy, yield, arrears, pipeline and market trend on the same definitions, so investment and disposal calls are made on evidence rather than on whichever spreadsheet is newest.",
     },
     {
       title: "Efficient Lead Generation",
-      body:
-        "Enquiries are scored on intent and routed to the right agent in seconds, follow-up runs itself, and marketing spend moves toward the channels that produced completions rather than clicks.",
+      body: "Enquiries are scored on intent and routed to the right agent in seconds, follow-up runs itself, and marketing spend moves toward the channels that produced completions rather than clicks.",
     },
     {
       title: "Automated Property Management",
-      body:
-        "Rent collection, renewals, inspections, work orders and compliance dates run on schedule with exceptions surfaced to a person, so a manager handles twice the doors without twice the hours.",
+      body: "Rent collection, renewals, inspections, work orders and compliance dates run on schedule with exceptions surfaced to a person, so a manager handles twice the doors without twice the hours.",
     },
     {
       title: "Insightful Market Analysis",
-      body:
-        "Price movement, absorption rate and supply pipeline are tracked per micro-market, so you know which streets are turning before the quarterly report says so.",
+      body: "Price movement, absorption rate and supply pipeline are tracked per micro-market, so you know which streets are turning before the quarterly report says so.",
     },
   ],
 };
@@ -288,22 +281,19 @@ export const stakeholders = {
   items: [
     {
       title: "Property Management Teams",
-      body:
-        "Tenancies, rent, inspections, work orders and compliance in one system with the routine chased automatically, so managers spend their day on exceptions rather than on reminders.",
+      body: "Tenancies, rent, inspections, work orders and compliance in one system with the routine chased automatically, so managers spend their day on exceptions rather than on reminders.",
       image: stkManagementImg,
       alt: "A property management team working together at a table",
     },
     {
       title: "Real Estate Agents",
-      body:
-        "Scored leads, instant valuations, generated listing copy and a mobile pipeline that is current at the viewing, not after it. The admin that eats a selling day is handled before the day starts.",
+      body: "Scored leads, instant valuations, generated listing copy and a mobile pipeline that is current at the viewing, not after it. The admin that eats a selling day is handled before the day starts.",
       image: stkAgentsImg,
       alt: "A real estate agent in a blue suit outside a property",
     },
     {
       title: "Management and Decision-Makers",
-      body:
-        "Portfolio performance, market exposure and forecast cash on one set of definitions, with the scenario tools to test an acquisition or disposal before it goes to the board.",
+      body: "Portfolio performance, market exposure and forecast cash on one set of definitions, with the scenario tools to test an acquisition or disposal before it goes to the board.",
       image: stkDecisionImg,
       alt: "A leadership team reviewing portfolio figures around a laptop",
     },
@@ -312,8 +302,7 @@ export const stakeholders = {
 
 export const build = {
   title: "Working With Us Is An Investment In Your Future",
-  body:
-    "We hold a deep bench across AI, data and property systems, deliver in increments your teams use from the first sprint, and keep communication direct: one team, your timezone overlap, no account layer between you and the engineers.",
+  body: "We hold a deep bench across AI, data and property systems, deliver in increments your teams use from the first sprint, and keep communication direct: one team, your timezone overlap, no account layer between you and the engineers.",
   ctaText: "Request a free consultation",
   texture: textureBgImg,
   image: buildVisualImg,
@@ -321,18 +310,15 @@ export const build = {
   points: [
     {
       title: "Maintain Large Inventory",
-      body:
-        "Our platforms are built to hold tens of thousands of units without search, reporting or media handling degrading as the portfolio grows.",
+      body: "Our platforms are built to hold tens of thousands of units without search, reporting or media handling degrading as the portfolio grows.",
     },
     {
       title: "Efficiency",
-      body:
-        "Every build targets a number you already track (days on market, cost per lead, arrears rate) and is measured against it after go-live on the same definition.",
+      body: "Every build targets a number you already track (days on market, cost per lead, arrears rate) and is measured against it after go-live on the same definition.",
     },
     {
       title: "Smooth Communication",
-      body:
-        "A named team, working sessions in your hours and demo-able progress every sprint, so you are never waiting on a status report to know where the project stands.",
+      body: "A named team, working sessions in your hours and demo-able progress every sprint, so you are never waiting on a status report to know where the project stands.",
     },
   ],
 };
@@ -341,33 +327,72 @@ export const techStrip = {
   eyebrow: "Our tech stack",
   titleLead: "Expertise In Advanced",
   titleAccent: "Development Technologies",
-  body:
-    "The same production-grade toolchain sits under every real estate platform we ship. Pick a layer to see what it is made of.",
+  body: "The same production-grade toolchain sits under every real estate platform we ship. Pick a layer to see what it is made of.",
   ctaText: "View all tech stack",
   tabs: [
     {
       id: "ai",
       label: "Artificial Intelligence",
       items: [
-        "GPT-4o", "Claude", "Gemini", "Llama 3", "Mistral", "PyTorch", "TensorFlow", "scikit-learn",
-        "XGBoost", "LightGBM", "Prophet", "SHAP", "YOLO", "Segment Anything", "Tesseract OCR",
-        "LangChain", "LlamaIndex", "Pinecone", "Vertex AI", "MLflow",
+        "GPT-4o",
+        "Claude",
+        "Gemini",
+        "Llama 3",
+        "Mistral",
+        "PyTorch",
+        "TensorFlow",
+        "scikit-learn",
+        "XGBoost",
+        "LightGBM",
+        "Prophet",
+        "SHAP",
+        "YOLO",
+        "Segment Anything",
+        "Tesseract OCR",
+        "LangChain",
+        "LlamaIndex",
+        "Pinecone",
+        "Vertex AI",
+        "MLflow",
       ],
     },
     {
       id: "backend",
       label: "Backend & Databases",
       items: [
-        "Node.js", "NestJS", "FastAPI", "Django", "GraphQL", "PostgreSQL", "PostGIS", "MongoDB",
-        "Redis", "Elasticsearch", "Kafka", "Airflow", "dbt", "Snowflake", "BigQuery",
+        "Node.js",
+        "NestJS",
+        "FastAPI",
+        "Django",
+        "GraphQL",
+        "PostgreSQL",
+        "PostGIS",
+        "MongoDB",
+        "Redis",
+        "Elasticsearch",
+        "Kafka",
+        "Airflow",
+        "dbt",
+        "Snowflake",
+        "BigQuery",
       ],
     },
     {
       id: "frontend",
       label: "Frontend",
       items: [
-        "React", "Next.js", "TypeScript", "Tailwind CSS", "Three.js", "React Three Fiber",
-        "Mapbox GL", "Deck.gl", "D3.js", "React Native", "Flutter", "Vite",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Three.js",
+        "React Three Fiber",
+        "Mapbox GL",
+        "Deck.gl",
+        "D3.js",
+        "React Native",
+        "Flutter",
+        "Vite",
       ],
     },
     {
@@ -378,12 +403,33 @@ export const techStrip = {
     {
       id: "devops",
       label: "DevOps",
-      items: ["Docker", "Kubernetes", "Terraform", "GitHub Actions", "GitLab CI", "Nginx", "Prometheus", "Grafana", "Sentry"],
+      items: [
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "GitHub Actions",
+        "GitLab CI",
+        "Nginx",
+        "Prometheus",
+        "Grafana",
+        "Sentry",
+      ],
     },
     {
       id: "proptech",
       label: "PropTech & Integrations",
-      items: ["MLS / RESO Web API", "Zillow", "Rightmove", "Yardi", "MRI", "DocuSign", "Stripe", "Plaid", "Matterport", "Twilio"],
+      items: [
+        "MLS / RESO Web API",
+        "Zillow",
+        "Rightmove",
+        "Yardi",
+        "MRI",
+        "DocuSign",
+        "Stripe",
+        "Plaid",
+        "Matterport",
+        "Twilio",
+      ],
     },
     {
       id: "sqa",
@@ -402,8 +448,7 @@ export const businessTypes = {
   eyebrow: "Who benefits from our expertise?",
   titleLead: "Explore The Range Of",
   titleAccent: "Real Estate Businesses We Can Work With",
-  body:
-    "We build custom AI-powered real estate software that drives measurable results, whether you are launching a first listing product or running a multi-country portfolio on legacy systems.",
+  body: "We build custom AI-powered real estate software that drives measurable results, whether you are launching a first listing product or running a multi-country portfolio on legacy systems.",
   rows: [
     {
       label: "Startups",
@@ -457,8 +502,7 @@ export const showcase = {
   eyebrow: "What innovations have we delivered to businesses?",
   titleLead: "Showcasing Our",
   titleAccent: "AI Development Projects",
-  body:
-    "Explore the portfolio behind our real estate work: platforms that value, list, transact and manage property at scale for agencies, developers and investors.",
+  body: "Explore the portfolio behind our real estate work: platforms that value, list, transact and manage property at scale for agencies, developers and investors.",
   ctaText: "Check Out Our Full Portfolio",
 };
 
@@ -470,35 +514,31 @@ export const partner = {
     {
       icon: "Target",
       title: "Built For You, No Vendor Lock-In",
-      body:
-        "You own the codebase, the data and the models. The platform runs where your policies require and integrates with the portals and accounting you already use, so nothing holds your portfolio hostage to a licence.",
+      body: "You own the codebase, the data and the models. The platform runs where your policies require and integrates with the portals and accounting you already use, so nothing holds your portfolio hostage to a licence.",
     },
     {
       icon: "Layers",
       title: "Integration That Fits",
-      body:
-        "MLS and RESO feeds, Yardi and MRI, DocuSign, payments, identity and accounting connect through APIs against a hardened property data model, which removes the re-keying that creates most listing and ledger errors.",
+      body: "MLS and RESO feeds, Yardi and MRI, DocuSign, payments, identity and accounting connect through APIs against a hardened property data model, which removes the re-keying that creates most listing and ledger errors.",
     },
     {
       icon: "ShieldCheck",
       title: "60-Day Support And Enablement",
-      body:
-        "We stay engaged for 60 days after launch to monitor performance, resolve issues and tune the models on live data, with role-based training for agents, managers and leadership so adoption does not stall after week one.",
+      body: "We stay engaged for 60 days after launch to monitor performance, resolve issues and tune the models on live data, with role-based training for agents, managers and leadership so adoption does not stall after week one.",
     },
   ],
   stats: [
-    { value: "200+", label: "Projects Delivered" },
-    { value: "5+", label: "Valuable Partnerships" },
-    { value: "20+", label: "Countries Served" },
-    { value: "25+", label: "Tech Experts" },
+    { value: `${companyStats.projects}+`, label: "Projects Delivered" },
+    { value: `${companyStats.partnerships}+`, label: "Valuable Partnerships" },
+    { value: `${companyStats.countries}+`, label: "Countries Served" },
+    { value: `${companyStats.experts}+`, label: "Tech Experts" },
   ],
 };
 
 export const blogs = {
   eyebrow: "What can our expertise teach you?",
   title: "Our Blogs",
-  body:
-    "Practical writing on where AI actually earns its place in a property business: agentic chatbots, automated CMA, investor reporting and the governance that keeps all three defensible.",
+  body: "Practical writing on where AI actually earns its place in a property business: agentic chatbots, automated CMA, investor reporting and the governance that keeps all three defensible.",
   posts: [
     {
       title: "A Complete Guide To Agentic AI Chatbot Development For Real Estate",

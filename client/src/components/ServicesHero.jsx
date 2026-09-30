@@ -1,3 +1,4 @@
+import { companyStats } from "../data/companyStats.js";
 import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
@@ -14,8 +15,8 @@ const fadeUp = {
 };
 
 const stats = [
-  { value: "500+", label: "Projects delivered" },
-  { value: "170+", label: "In-house experts" },
+  { value: `${companyStats.projects}+`, label: "Projects delivered" },
+  { value: `${companyStats.experts}+`, label: "In-house experts" },
   { value: "30+", label: "AI service lines" },
   { value: "85+", label: "Clients served" },
 ];

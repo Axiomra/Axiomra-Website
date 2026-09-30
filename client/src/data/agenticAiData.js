@@ -1,4 +1,5 @@
 /** Every string and image the Agentic AI detail page renders lives here. */
+import { companyStats } from "./companyStats.js";
 import heroAgent from "../assets/agentic-ai/hero-autonomous-agent.jpg";
 import heroGraph from "../assets/agentic-ai/hero-agent-graph.jpg";
 import heroChat from "../assets/agentic-ai/hero-agent-chat.jpg";
@@ -818,10 +819,10 @@ export const whyUs = {
   humanImage: humanInTheLoop,
   humanImageAlt: "Human hand and robotic hand meeting over a shared decision",
   stats: [
-    { value: "500+", label: "AI projects delivered" },
-    { value: "25+", label: "In-house engineers" },
+    { value: `${companyStats.projects}+`, label: "AI projects delivered" },
+    { value: `${companyStats.experts}+`, label: "In-house engineers" },
     { value: "60", label: "Days of post-launch support" },
-    { value: "4+", label: "Countries served" },
+    { value: `${companyStats.countries}+`, label: "Countries served" },
   ],
   reasons: [
     {

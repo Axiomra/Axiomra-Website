@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { COMPLEXITY, PROJECT_TYPES, SIZE, TIMELINE, estimate } from "./costEstimate";
+import { companyStats } from "../data/companyStats";
 
 const all = () =>
   PROJECT_TYPES.flatMap((t) =>
@@ -31,5 +32,16 @@ describe("estimate", () => {
     expect(estimate({ ...base, timeline: "rush" }).low).toBeGreaterThan(b.low);
     expect(estimate({ ...base, timeline: "rush" }).weeks).toBeLessThan(b.weeks);
     expect(estimate({ ...base, type: "poc" }).high).toBeLessThan(b.low);
+  });
+
+  it("prices a standard PoC at the published range", () => {
+    const e = estimate({
+      type: "poc",
+      complexity: "moderate",
+      size: "medium",
+      timeline: "standard",
+    });
+    expect([e.low, e.high]).toEqual([companyStats.pocRange.min, companyStats.pocRange.max]);
+    expect([e.low, e.high]).toEqual([11, 21]);
   });
 });

@@ -3,6 +3,8 @@
  * can edit wording without touching layout or animation code.
  */
 
+import { companyStats } from "./companyStats.js";
+
 export const hero = {
   eyebrow: "About Axiomra",
   titleLead: "AI Expertise Tailored To",
@@ -10,10 +12,10 @@ export const hero = {
   body: "Every business is different, and so are our AI solutions. Our team of AI engineers, data scientists and product specialists builds end-to-end systems around your specific constraints, so the result fits the way you already work instead of forcing a rewrite of it.",
   ctaText: "Get in touch",
   stats: [
-    { value: "500+", label: "Projects delivered" },
-    { value: "25+", label: "In-house experts" },
+    { value: `${companyStats.projects}+`, label: "Projects delivered" },
+    { value: `${companyStats.experts}+`, label: "In-house experts" },
     { value: "12+", label: "Industries served" },
-    { value: "20+", label: "Countries shipped to" },
+    { value: `${companyStats.countries}+`, label: "Countries shipped to" },
   ],
 };
 
@@ -23,7 +25,7 @@ export const journey = {
   titleAccent: "A Developing Venture",
   paragraphs: [
     "Axiomra began in 2021, when a small group of engineers recognised how much of artificial intelligence was still stuck in research notebooks. United by a shared idea, they set out to make AI usable for ordinary businesses, starting from a modest space and a single production deployment.",
-    "What began as a bootstrap startup has grown into a full AI development company. The team has expanded to 25+ in-house specialists across machine learning, computer vision, NLP and full-stack engineering, delivering client-centric solutions in healthcare, finance, retail and education.",
+    `What began as a bootstrap startup has grown into a full AI development company. The team has expanded to ${companyStats.experts}+ in-house specialists across machine learning, computer vision, NLP and full-stack engineering, delivering client-centric solutions in healthcare, finance, retail and education.`,
     "What distinguishes us is our approach to delivery. We do not hand over a model and disappear. Every engagement is a partnership built on understanding your data, your compliance requirements and the metric you are actually judged on.",
     "With a focus on scalability, reliability and efficiency, we turn complex challenges into systems that survive production. Every project, large or small, gets the same engineering attention, and that is why clients stay with us past the first launch.",
   ],
@@ -270,7 +272,7 @@ export const faqs = [
   },
   {
     q: "What sets Axiomra apart from other AI companies?",
-    a: "We are an engineering company, not a prototype shop. A 100% in-house team of 25+ specialists owns the full stack, from data engineering through deployment and monitoring, and the same named squad stays with your project from scoping to handover.",
+    a: `We are an engineering company, not a prototype shop. A 100% in-house team of ${companyStats.experts}+ specialists owns the full stack, from data engineering through deployment and monitoring, and the same named squad stays with your project from scoping to handover.`,
   },
   {
     q: "What makes Axiomra's company culture unique?",
@@ -282,6 +284,6 @@ export const faqs = [
   },
   {
     q: "What is the founding journey of Axiomra?",
-    a: "Axiomra started in 2021 as a bootstrap team of engineers who wanted AI to be usable outside research notebooks. It has since grown into a full AI development company with 500+ delivered projects across 12+ industries and 20+ countries, still without outside funding.",
+    a: `Axiomra started in 2021 as a bootstrap team of engineers who wanted AI to be usable outside research notebooks. It has since grown into a full AI development company with ${companyStats.projects}+ delivered projects across ${companyStats.industries}+ industries and ${companyStats.countries}+ countries, still without outside funding.`,
   },
 ];

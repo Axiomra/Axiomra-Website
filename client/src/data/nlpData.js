@@ -1,4 +1,5 @@
 /** Every string and image the Natural Language Processing detail page renders lives here. */
+import { companyStats } from "./companyStats.js";
 import languageMind from "../assets/nlp/nlp-language-mind.webp";
 import caseStudyTeam from "../assets/nlp/nlp-case-study-team.jpg";
 import industriesWorldMap from "../assets/nlp/nlp-industries-world-map.jpg";
@@ -594,9 +595,9 @@ export const whyUs = {
     "What clients tell us matters when they choose an NLP partner, and what we commit to on every engagement.",
   ctaText: "Book a Free Consultation",
   stats: [
-    { value: "450+", label: "AI and machine learning projects" },
-    { value: "40+", label: "Engineers and data scientists" },
-    { value: "30+", label: "Global markets" },
+    { value: `${companyStats.projects}+`, label: "AI and machine learning projects" },
+    { value: `${companyStats.experts}+`, label: "Engineers and data scientists" },
+    { value: `${companyStats.countries}+`, label: "Global markets" },
     { value: "4+", label: "Years building production AI" },
   ],
   reasons: [

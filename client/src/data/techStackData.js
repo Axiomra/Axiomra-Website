@@ -3,6 +3,8 @@
  * so the technology list can be edited without touching layout or motion code.
  */
 
+import { companyStats } from "./companyStats.js";
+
 export const hero = {
   eyebrow: "What we build with",
   titleLead: "The AI Tech Stack Behind",
@@ -314,10 +316,10 @@ export const partner = {
     },
   ],
   stats: [
-    { value: "500+", label: "Projects delivered" },
-    { value: "25+", label: "In-house experts" },
+    { value: `${companyStats.projects}+`, label: "Projects delivered" },
+    { value: `${companyStats.experts}+`, label: "In-house experts" },
     { value: "12+", label: "Industries served" },
-    { value: "20+", label: "Countries shipped to" },
+    { value: `${companyStats.countries}+`, label: "Countries shipped to" },
   ],
 };
 
