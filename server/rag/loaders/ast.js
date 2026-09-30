@@ -56,6 +56,7 @@ export function isNoise(value) {
   if (!v || !/[a-z]/i.test(v)) return true;
   if (URL_OR_PATH.test(v) || HEX.test(v)) return true;
   if (/^(rgb|hsl)a?\(/i.test(v)) return true;
+  if (/^(linear|radial|conic)-gradient\(/i.test(v)) return true;
   const tokens = v.split(/\s+/);
   // Tailwind-ish class lists: every token lower-case with no prose punctuation,
   // and most of them hyphenated or variant-prefixed.
@@ -217,6 +218,30 @@ function statLine(obj) {
   return `${normalize(label)}: ${pre}${value}${suf}${isTarget(obj) ? " (target figure, not yet measured)" : ""}`;
 }
 
+/** ["50X", "Match accuracy"] -> "Match accuracy: 50X"; null for anything else. */
+function tupleLine(el) {
+  if (el?.type !== "ArrayExpression" || el.elements.length !== 2) return null;
+  const [a, b] = el.elements.map(stringOf).map((v) => (v === null ? null : normalize(v)));
+  if (!a || !b || (isNoise(a) && isNoise(b))) return null;
+  const isFigure = (v) => /\d/.test(v) && v.length <= 12;
+  if (isFigure(a) && !isFigure(b)) return `${b}: ${a}`;
+  return `${a}: ${b}`;
+}
+
+/** { name: "SOC 2 Type II", note: "Audited Controls" } -> "SOC 2 Type II: Audited Controls". */
+function rowLine(obj) {
+  const values = obj.properties
+    .filter((p) => propKey(p) && !isSkippedKey(propKey(p)))
+    .map((p) => stringOf(p.value))
+    .filter((v) => v !== null)
+    .map(normalize);
+  if (values.length < 2 || values.length > 3) return null;
+  if (values.some((v) => v.length >= MIN_CHARS || isNoise(v))) return null;
+  const label = labelOf(obj)?.label;
+  const first = label && values.includes(label) ? label : values[0];
+  return `${first}: ${values.filter((v) => v !== first).join(", ")}`;
+}
+
 /**
  * Render an object/array expression to Markdown lines.
  * `depth` is the heading level for nested objects (capped at 6).
@@ -267,11 +292,23 @@ export function renderNode(node, ctx, depth, keyName) {
       return lines;
     }
 
+    // Tuple rows: [["50X", "Match accuracy"], …] -> "- Match accuracy: 50X".
+    const tuples = node.elements.map(tupleLine);
+    if (tuples.length && tuples.every(Boolean)) return tuples.map((t) => `- ${t}`);
+
     const stats = [];
     for (const obj of objects) {
       const stat = statLine(obj);
-      if (stat) stats.push(stat);
-      else lines.push(...renderObject(obj, ctx, depth), "");
+      if (stat) {
+        stats.push(stat);
+        continue;
+      }
+      const rendered = renderObject(obj, ctx, depth);
+      // A heading alone is dropped as layout; keep short rows as one line.
+      const headingOnly = rendered.every((l) => !l.trim() || l.startsWith("#"));
+      const row = headingOnly ? rowLine(obj) : null;
+      if (row) stats.push(row);
+      else lines.push(...rendered, "");
     }
     if (stats.length) lines.unshift(...stats.map((s) => `- ${s}`), "");
     return lines;

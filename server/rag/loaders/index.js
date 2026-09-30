@@ -17,6 +17,7 @@ import {
   COMPONENT_DIR_ROUTES,
   DATA_FILE_ROUTES,
   HOME_COMPONENTS,
+  SHARED_COMPONENT_ROUTES,
   PAGE_ROUTES,
   titleFor,
 } from "./routes.js";
@@ -46,6 +47,8 @@ export async function jsxFiles(root = CLIENT_SRC) {
   for (const f of await listJsx(path.join(root, "sections")))
     add(path.join(root, "sections", f), "/");
   for (const f of HOME_COMPONENTS) add(path.join(root, "components", f), "/");
+  for (const [f, route] of Object.entries(SHARED_COMPONENT_ROUTES))
+    add(path.join(root, "components", f), route);
   for (const f of await listJsx(path.join(root, "pages"))) {
     if (PAGE_ROUTES[f]) add(path.join(root, "pages", f), PAGE_ROUTES[f]);
   }

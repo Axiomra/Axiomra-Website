@@ -8,6 +8,7 @@ import {
 } from "../rag/loaders/ast.js";
 import { dataFileDocument } from "../rag/loaders/dataFiles.js";
 import { jsxDocument } from "../rag/loaders/jsxPages.js";
+import { jsxFiles } from "../rag/loaders/index.js";
 import { fillStats, markdownToText, splitTitle } from "../rag/loaders/markdown.js";
 
 const noDupes = { dupes: makeDupes(new Map()) };
@@ -107,6 +108,61 @@ describe("JSX page loader", () => {
     expect(doc.text).not.toContain("Get started today");
     expect(doc.text).not.toContain("Decorative screen reader");
     expect(doc.text).not.toContain("py-24");
+  });
+
+  it("reads inline arrays, JSX heading props and default copy props", () => {
+    const inline = jsxDocument(
+      { source: "/", title: "Home", component: "Strip.jsx" },
+      parseModule(`
+        export default function Strip({ title = "Frequently Asked Questions", deps }) {
+          useEffect(() => {}, [deps]);
+          return (
+            <section>
+              <SectionHeading title={<>Partner With <span>Expert AI Teams</span> Today</>} />
+              {[
+                { value: "12+", label: "Verticals served end to end" },
+                { value: "30+", label: "Countries with live systems" },
+              ].map((s) => <p key={s.label}>{s.value}</p>)}
+            </section>
+          );
+        }
+      `),
+      noDupes
+    );
+    expect(inline.text).toContain("- Verticals served end to end: 12+");
+    expect(inline.text).toContain("- Countries with live systems: 30+");
+    expect(inline.text).toContain("Partner With Expert AI Teams Today");
+    expect(inline.text).toMatch(/#+ Frequently Asked Questions/);
+    expect(inline.text).not.toMatch(/deps/);
+  });
+
+  it("reads tuple stats and short label rows", () => {
+    const rows = jsxDocument(
+      { source: "/", title: "Home", component: "Rows.jsx" },
+      parseModule(`
+        const cases = [{ name: "Konnect", stats: [["50X", "Match accuracy"], ["1M+", "Users connected"]] }];
+        const badges = [
+          { icon: Lock, name: "SOC 2 Type II", note: "Audited Controls" },
+          { icon: Cloud, name: "GDPR", note: "Data Compliance" },
+        ];
+        const socials = [{ label: "Facebook", fill: "linear-gradient(135deg, #4A9BFF, #1877F2 55%)" }];
+      `),
+      noDupes
+    );
+    expect(rows.text).toContain("- Match accuracy: 50X");
+    expect(rows.text).toContain("- Users connected: 1M+");
+    expect(rows.text).toContain("- SOC 2 Type II: Audited Controls");
+    expect(rows.text).toContain("- GDPR: Data Compliance");
+    expect(rows.text).not.toContain("linear-gradient");
+  });
+});
+
+describe("jsxFiles scope", () => {
+  it("includes the services hero and footer, not the case study page", async () => {
+    const files = (await jsxFiles()).map((f) => [f.component, f.source]);
+    expect(files).toContainEqual(["ServicesHero.jsx", "/ai-services-and-solutions"]);
+    expect(files).toContainEqual(["Footer.jsx", "/"]);
+    expect(files.map(([c]) => c)).not.toContain("CaseStudyPage.jsx");
   });
 });
 

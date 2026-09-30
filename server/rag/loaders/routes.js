@@ -107,4 +107,11 @@ export const COMPONENT_DIR_ROUTES = {
 /** Homepage sections plus the few shared components that carry real copy. */
 export const HOME_COMPONENTS = ["BookCallSection.jsx", "BusinessTypes.jsx"];
 
+/** Shared components with their own copy, by the page that owns it. */
+export const SHARED_COMPONENT_ROUTES = {
+  "ServicesHero.jsx": SERVICES,
+  // Rendered on every page; indexed once, under the homepage.
+  "Footer.jsx": "/",
+};
+
 export const titleFor = (route) => PAGE_TITLES[route] ?? route;
