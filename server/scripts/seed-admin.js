@@ -2,7 +2,11 @@
  * Create or repair the admin account for the lead panel. Run by hand:
  *
  *   node scripts/seed-admin.js
- *   node scripts/seed-admin.js --email someone@axiomra.com --name "Someone"
+ *   node scripts/seed-admin.js --name "Michael"
+ *
+ * There is exactly one admin (models/User.js#adminEmail); this script cannot
+ * create a second one. Resetting the existing account's password asks for the
+ * recovery key (PASS_KEY) first, the same as every other password change.
  *
  * The password is read from a hidden stdin prompt, hashed with bcrypt, and
  * only the hash is written. It is never taken from argv (visible in `ps` and
@@ -16,12 +20,11 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import readline from "readline";
 import { connectDB } from "../db.js";
-import User from "../models/User.js";
+import User, { adminEmail } from "../models/User.js";
 
 dotenv.config();
 dotenv.config({ path: ".env.local", override: true });
 
-const DEFAULT_EMAIL = "michael.axiomra@gmail.com";
 const MIN_PASSWORD = 10;
 
 function arg(flag, fallback) {
@@ -67,7 +70,10 @@ function passwordProblem(pw) {
 }
 
 async function main() {
-  const email = String(arg("--email", DEFAULT_EMAIL)).trim().toLowerCase();
+  const email = adminEmail();
+  if (process.argv.includes("--email")) {
+    throw new Error(`There is only one admin (${email}); --email is not supported.`);
+  }
   const name = arg("--name", "Michael");
 
   if (!process.env.MONGO_URI) {
@@ -82,12 +88,34 @@ async function main() {
 
   await connectDB();
 
-  const existing = await User.findOne({ email });
+  const existing = await User.findOne({ email }).select(
+    "+recoveryKeyHash +keyAttempts +keyLockedUntil"
+  );
+  if (!existing && (await User.exists({}))) {
+    throw new Error("Another admin account exists. Remove it first; there can only be one.");
+  }
   console.log(
     existing
       ? `\n  Account ${email} already exists. This will RESET its password and sign out all sessions.`
       : `\n  Creating admin account for ${email}.`
   );
+
+  if (existing) {
+    if (!existing.hasRecoveryKey()) {
+      throw new Error("No recovery key on file. Run scripts/set-recovery-key.js first.");
+    }
+    if (existing.keyLockMinutesLeft() > 0) {
+      throw new Error(
+        `Too many wrong keys. Try again in ${existing.keyLockMinutesLeft()} minutes.`
+      );
+    }
+    const key = await askHidden("  Recovery key (PASS_KEY): ");
+    if (!(await existing.verifyRecoveryKey(key))) {
+      existing.registerKeyFailure();
+      await existing.save();
+      throw new Error("That recovery key is not correct. The password was not changed.");
+    }
+  }
 
   const password = await askHidden("  New password: ");
   const problem = passwordProblem(password);

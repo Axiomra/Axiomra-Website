@@ -12,6 +12,8 @@ export default defineConfig({
       // Point dotenv at a file that does not exist, so tests never load
       // server/.env (the real database).
       DOTENV_CONFIG_PATH: "tests/no-such-dotenv-file",
+      // The one admin address the User model will accept (models/User.js).
+      ADMIN_EMAIL: "admin@example.com",
       // Retrieval calls OpenAI and Atlas; tests that cover it opt in and mock both.
       RAG_ENABLED: "false",
     },

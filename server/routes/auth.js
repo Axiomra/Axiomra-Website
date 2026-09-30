@@ -4,7 +4,7 @@ import User, {
   recoveryKeyProblem,
   KEY_LOCK_MINUTES,
   MAX_KEY_ATTEMPTS,
-  RECOVERY_KEY_LENGTH,
+  RECOVERY_KEY_MIN_LENGTH,
   RESET_TOKEN_TTL_MINUTES,
 } from "../models/User.js";
 import { issueSession, clearSession, requireAuth } from "../lib/auth.js";
@@ -20,12 +20,52 @@ const EMAIL_RE =
 const MIN_PASSWORD = 10;
 
 /**
- * Refuse a reset on an account that has no recovery key on file.
+ * Gate every password change on the recovery key (PASS_KEY). Sends the error
+ * response and returns false when the change must not go ahead; the caller
+ * returns straight away in that case. An account with no key on file cannot
+ * change its password from the web at all.
  *
- * Off by default, because turning it on before a key is set locks the only
- * admin out of their own reset flow. Set it once the key is in the database.
+ * `user` must be loaded with +recoveryKeyHash +keyAttempts +keyLockedUntil.
  */
-const KEY_REQUIRED_ALWAYS = process.env.ADMIN_RECOVERY_KEY_REQUIRED === "true";
+async function checkRecoveryKey(user, recoveryKey, res) {
+  const lockedFor = user.keyLockMinutesLeft();
+  if (lockedFor > 0) {
+    res.status(429).json({
+      error: `Too many incorrect recovery keys. Try again in ${lockedFor} minute${
+        lockedFor === 1 ? "" : "s"
+      }.`,
+    });
+    return false;
+  }
+
+  if (!user.hasRecoveryKey()) {
+    res.status(403).json({
+      error: "This account has no recovery key on file, so its password cannot be changed.",
+    });
+    return false;
+  }
+
+  // The shape check is not a security control; it just turns an obvious
+  // paste error into a clear message instead of a wasted attempt.
+  const keyProblem = recoveryKeyProblem(recoveryKey);
+  if (keyProblem) {
+    res.status(400).json({ error: keyProblem });
+    return false;
+  }
+
+  if (!(await user.verifyRecoveryKey(recoveryKey))) {
+    const left = user.registerKeyFailure();
+    await user.save();
+    res.status(401).json({
+      error: left
+        ? `That recovery key is not correct. ${left} attempt${left === 1 ? "" : "s"} left.`
+        : `That recovery key is not correct. Wait ${KEY_LOCK_MINUTES} minutes before trying again.`,
+      attemptsLeft: left,
+    });
+    return false;
+  }
+  return true;
+}
 
 function passwordProblem(value) {
   const pw = String(value ?? "");
@@ -166,42 +206,7 @@ router.post("/reset-password", async (req, res) => {
       return res.status(400).json({ error: "This reset link has expired or already been used." });
     }
 
-    const lockedFor = user.keyLockMinutesLeft();
-    if (lockedFor > 0) {
-      return res.status(429).json({
-        error: `Too many incorrect recovery keys. Try again in ${lockedFor} minute${
-          lockedFor === 1 ? "" : "s"
-        }, starting from a fresh reset email.`,
-      });
-    }
-
-    if (user.hasRecoveryKey()) {
-      // The shape check is not a security control; it just turns an obvious
-      // paste error into a clear message instead of a wasted attempt.
-      const keyProblem = recoveryKeyProblem(recoveryKey);
-      if (keyProblem) return res.status(400).json({ error: keyProblem });
-
-      if (!(await user.verifyRecoveryKey(recoveryKey))) {
-        const left = user.registerKeyFailure();
-        await user.save();
-        return res.status(401).json({
-          error: left
-            ? `That recovery key is not correct. ${left} attempt${
-                left === 1 ? "" : "s"
-              } left before this link is cancelled.`
-            : `That recovery key is not correct. This link has been cancelled. Wait ${KEY_LOCK_MINUTES} minutes, then request a new one.`,
-          attemptsLeft: left,
-        });
-      }
-    } else if (KEY_REQUIRED_ALWAYS) {
-      return res.status(403).json({
-        error: "This account has no recovery key on file, so it cannot be reset from the web.",
-      });
-    } else {
-      console.warn(
-        `Password reset for ${user.email} ran without a recovery key; none is set on the account.`
-      );
-    }
+    if (!(await checkRecoveryKey(user, recoveryKey, res))) return;
 
     // setPassword clears the token and moves sessionsValidFrom, so the link is
     // single-use and every session opened with the old password is dropped.
@@ -221,51 +226,34 @@ router.post("/reset-password", async (req, res) => {
 });
 
 /* GET /api/auth/reset-requirements
-   Lets the reset form know whether to ask for a key, without leaking anything:
-   the answer is the same for a valid token, an expired one and a forged one
-   whenever the account in question has a key, which is the intended state. */
-router.get("/reset-requirements", async (req, res) => {
-  try {
-    const token = cleanString(req.query?.token, 128);
-    const fallback = {
-      recoveryKeyRequired: true,
-      recoveryKeyLength: RECOVERY_KEY_LENGTH,
-      maxAttempts: MAX_KEY_ATTEMPTS,
-    };
-    if (!token) return res.json(fallback);
-
-    const user = await User.findOne({
-      resetTokenHash: hashResetToken(token),
-      resetTokenExpires: { $gt: new Date() },
-    }).select("+recoveryKeyHash");
-
-    return res.json({
-      ...fallback,
-      recoveryKeyRequired: user ? user.hasRecoveryKey() || KEY_REQUIRED_ALWAYS : true,
-    });
-  } catch (err) {
-    console.error("Reset requirements lookup failed:", err.message);
-    return res.json({
-      recoveryKeyRequired: true,
-      recoveryKeyLength: RECOVERY_KEY_LENGTH,
-      maxAttempts: MAX_KEY_ATTEMPTS,
-    });
-  }
-});
+   Tells the reset form what to ask for. The key is always required, so the
+   answer is the same for every token and leaks nothing about the account. */
+router.get("/reset-requirements", (req, res) =>
+  res.json({
+    recoveryKeyRequired: true,
+    recoveryKeyMinLength: RECOVERY_KEY_MIN_LENGTH,
+    maxAttempts: MAX_KEY_ATTEMPTS,
+  })
+);
 
 /* POST /api/auth/change-password: for a signed-in admin. */
 router.post("/change-password", requireAuth, async (req, res) => {
   try {
     const current = String(req.body?.currentPassword ?? "");
     const next = String(req.body?.newPassword ?? "");
+    const recoveryKey = String(req.body?.recoveryKey ?? "");
 
     const problem = passwordProblem(next);
     if (problem) return res.status(400).json({ error: problem });
 
-    const user = await User.findById(req.user._id).select("+passwordHash");
+    const user = await User.findById(req.user._id).select(
+      "+passwordHash +recoveryKeyHash +keyAttempts +keyLockedUntil"
+    );
     if (!user || !(await user.verifyPassword(current))) {
       return res.status(401).json({ error: "Your current password is incorrect." });
     }
+
+    if (!(await checkRecoveryKey(user, recoveryKey, res))) return;
 
     await user.setPassword(next);
     await user.save();

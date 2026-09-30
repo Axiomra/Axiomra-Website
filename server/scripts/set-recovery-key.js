@@ -1,11 +1,16 @@
 /**
  * Set the admin recovery key: the second factor on a password reset.
  *
+ *   node scripts/set-recovery-key.js --from-env            (PASS_KEY from server/.env)
  *   node scripts/set-recovery-key.js --generate
- *   node scripts/set-recovery-key.js                      (paste your own)
- *   node scripts/set-recovery-key.js --email a@b.com --clear
+ *   node scripts/set-recovery-key.js                       (paste your own)
+ *   node scripts/set-recovery-key.js --clear
  *
- * The key is 78 characters of mixed case, digits and symbols. Only its hash is
+ * Replacing or clearing a key that is already set asks for the current one
+ * first; otherwise this script would be a way around the rule that every
+ * password change needs the key.
+ *
+ * A generated key is 78 characters of mixed case, digits and symbols. Only its hash is
  * written, so this run is the one and only moment the key is readable, so copy it
  * into a password manager before closing the terminal. Losing it means the
  * emailed reset link stops working and the password can only be changed by
@@ -19,12 +24,12 @@ import mongoose from "mongoose";
 import readline from "readline";
 import { randomInt } from "crypto";
 import { connectDB } from "../db.js";
-import User, { RECOVERY_KEY_LENGTH, recoveryKeyProblem } from "../models/User.js";
+import User, { adminEmail, recoveryKeyProblem } from "../models/User.js";
 
 dotenv.config();
 dotenv.config({ path: ".env.local", override: true });
 
-const DEFAULT_EMAIL = "michael.axiomra@gmail.com";
+const GENERATED_LENGTH = 78;
 
 const LOWER = "abcdefghijkmnopqrstuvwxyz";
 const UPPER = "ABCDEFGHJKLMNPQRSTUVWXYZ";
@@ -40,11 +45,6 @@ function has(flag) {
   return process.argv.includes(flag);
 }
 
-function arg(flag, fallback) {
-  const i = process.argv.indexOf(flag);
-  return i !== -1 && process.argv[i + 1] ? process.argv[i + 1] : fallback;
-}
-
 /**
  * randomInt, not Math.random: this string is the whole second factor, and
  * Math.random is a predictable PRNG that has no business generating secrets.
@@ -57,7 +57,7 @@ function generateKey() {
   // Seeded with one of each class so the result always satisfies the validator,
   // then shuffled so those four are not pinned to the first four positions.
   const chars = [pick(LOWER), pick(UPPER), pick(DIGIT), pick(SYMBOL)];
-  while (chars.length < RECOVERY_KEY_LENGTH) chars.push(pick(ALPHABET));
+  while (chars.length < GENERATED_LENGTH) chars.push(pick(ALPHABET));
   for (let i = chars.length - 1; i > 0; i--) {
     const j = randomInt(i + 1);
     [chars[i], chars[j]] = [chars[j], chars[i]];
@@ -90,7 +90,7 @@ function askHidden(question) {
 }
 
 async function main() {
-  const email = String(arg("--email", DEFAULT_EMAIL)).trim().toLowerCase();
+  const email = adminEmail();
 
   if (!process.env.MONGO_URI) {
     throw new Error("MONGO_URI is not set. Add it to server/.env first.");
@@ -98,8 +98,17 @@ async function main() {
 
   await connectDB();
 
-  const user = await User.findOne({ email }).select("+recoveryKeyHash +keyAttempts +keyLockedUntil");
+  const user = await User.findOne({ email }).select(
+    "+recoveryKeyHash +keyAttempts +keyLockedUntil"
+  );
   if (!user) throw new Error(`No account found for ${email}. Run seed-admin.js first.`);
+
+  if (user.recoveryKeyHash) {
+    const current = await askHidden("  Current recovery key: ");
+    if (!(await user.verifyRecoveryKey(current))) {
+      throw new Error("That is not the current recovery key. Nothing was changed.");
+    }
+  }
 
   if (has("--clear")) {
     user.recoveryKeyHash = null;
@@ -119,10 +128,13 @@ async function main() {
   );
 
   let key;
-  if (has("--generate")) {
+  if (has("--from-env")) {
+    key = String(process.env.PASS_KEY ?? "");
+    if (!key) throw new Error("PASS_KEY is not set in server/.env.");
+  } else if (has("--generate")) {
     key = generateKey();
   } else {
-    key = await askHidden(`  Recovery key (${RECOVERY_KEY_LENGTH} chars): `);
+    key = await askHidden("  Recovery key: ");
     const confirm = await askHidden("  Confirm recovery key: ");
     if (confirm !== key) throw new Error("The two keys do not match.");
   }
@@ -142,9 +154,7 @@ async function main() {
     console.log(`\n  Recovery key saved for ${user.email}.\n`);
   }
 
-  console.log("  It is now required on every password reset for this account.");
-  console.log("  Set ADMIN_RECOVERY_KEY_REQUIRED=true to also block resets on");
-  console.log("  any account that has no key at all.\n");
+  console.log("  It is now required on every password change for this account.\n");
 }
 
 main()

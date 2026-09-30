@@ -7,16 +7,27 @@ const COST = 12;
 // link sitting in a mailbox is not a standing key to the account.
 const RESET_TTL_MS = 30 * 60 * 1000;
 
-/* --- Recovery key (the second factor on a password reset) ---
-   A long, high-entropy secret held only by the main admin, offline. The reset
-   email proves control of the mailbox; this proves the person is the admin.
-   One without the other resets nothing, so a compromised mailbox alone is no
-   longer enough to take the panel. */
-export const RECOVERY_KEY_LENGTH = 78;
+/* --- Recovery key (PASS_KEY) ---
+   A long, high-entropy secret held only by the admin, offline. It is required
+   for every password change: the emailed reset, the signed-in change and the
+   seed script. Knowing the password alone, or controlling the mailbox alone,
+   changes nothing. */
+export const RECOVERY_KEY_MIN_LENGTH = 20;
+export const RECOVERY_KEY_MAX_LENGTH = 200;
 // A wrong key is either a typo or a guess. Five is generous for the first and
 // useless for the second, given the key's entropy.
 export const MAX_KEY_ATTEMPTS = 5;
 const KEY_LOCK_MS = 15 * 60 * 1000;
+
+/**
+ * The panel has exactly one admin. Tests point this at their own fixture
+ * address; everywhere else it is the fixed account below.
+ */
+export function adminEmail() {
+  return String(process.env.ADMIN_EMAIL || "michael.axiomra@gmail.com")
+    .trim()
+    .toLowerCase();
+}
 
 /**
  * Admin accounts for the lead panel. There is no public sign-up: accounts are
@@ -63,6 +74,20 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+/**
+ * Single-admin rule, enforced at the model so no script or route can get
+ * around it: the only account that may exist is adminEmail(), and only once.
+ */
+userSchema.pre("save", async function enforceSingleAdmin() {
+  if (!this.isNew && !this.isModified("email")) return;
+  if (this.email !== adminEmail()) {
+    throw new Error(`Only ${adminEmail()} may be an admin.`);
+  }
+  if (this.isNew && (await this.constructor.exists({}))) {
+    throw new Error("An admin account already exists. There can only be one.");
+  }
+});
+
 /** Strip anything sensitive if a document is ever serialised by accident. */
 userSchema.set("toJSON", {
   transform(_doc, ret) {
@@ -97,8 +122,8 @@ userSchema.methods.setPassword = async function setPassword(plain) {
 
 /**
  * Why the key is folded through SHA-256 before bcrypt: bcrypt silently ignores
- * everything past the 72nd byte of its input. A 78-character key would have
- * its last six characters count for nothing. The digest is 44 characters, so
+ * everything past the 72nd byte of its input. A key longer than that would have
+ * its tail count for nothing. The digest is 44 characters, so
  * every character of the key reaches the hash.
  */
 function digestKey(raw) {
@@ -109,14 +134,14 @@ function digestKey(raw) {
 export function recoveryKeyProblem(value) {
   const key = String(value ?? "");
   if (!key) return "The recovery key is required.";
-  if (key.length !== RECOVERY_KEY_LENGTH) {
-    return `The recovery key must be exactly ${RECOVERY_KEY_LENGTH} characters.`;
+  if (key.length < RECOVERY_KEY_MIN_LENGTH) {
+    return `The recovery key must be at least ${RECOVERY_KEY_MIN_LENGTH} characters.`;
   }
+  if (key.length > RECOVERY_KEY_MAX_LENGTH) return "The recovery key is too long.";
   // Whitespace is rejected rather than trimmed: a key pasted out of an email
   // client often carries a stray newline, and silently "fixing" it would make
   // two different strings both count as the key.
   if (/\s/.test(key)) return "The recovery key cannot contain spaces or line breaks.";
-  if (/[^\x21-\x7E]/.test(key)) return "The recovery key contains an unsupported character.";
   if (!/[a-z]/.test(key)) return "The recovery key needs a lowercase letter.";
   if (!/[A-Z]/.test(key)) return "The recovery key needs an uppercase letter.";
   if (!/\d/.test(key)) return "The recovery key needs a number.";

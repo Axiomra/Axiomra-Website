@@ -90,17 +90,20 @@ message that names the variable.
 ## Admin panel
 
 The admin panel lives at `/admin` on the site. It lists, edits and exports leads. There is no
-sign-up. Accounts are created from `server/` with a MongoDB connection in the environment:
+sign-up and exactly one admin account, `michael.axiomra@gmail.com` (`adminEmail()` in
+`server/models/User.js`); the model refuses to save any other or a second one. From `server/`
+with a MongoDB connection in the environment:
 
 ```bash
-node scripts/seed-admin.js --email you@example.com --name "Your Name"   # prompts for the password
-node scripts/set-recovery-key.js --email you@example.com --generate     # prints a recovery key once
+node scripts/seed-admin.js                    # creates the admin, or resets its password
+node scripts/set-recovery-key.js --from-env   # stores PASS_KEY from server/.env as the key
 ```
 
-The recovery key is the second factor on a password reset: a 78-character secret kept offline
-by the main admin. Only its hash is stored, so it can only be set through the script. When
-`ADMIN_RECOVERY_KEY_REQUIRED=true`, an account without a key cannot be reset. Without
-`--generate`, the script prompts for a key you type yourself. `--clear` removes the key.
+The recovery key (`PASS_KEY`) is required for every password change: the emailed reset, the
+signed-in change (`POST /api/auth/change-password` takes `recoveryKey`) and `seed-admin.js`.
+Without it the password cannot be changed. Only its hash is stored. Replacing or clearing it
+with `set-recovery-key.js` asks for the current key; `--generate` prints a new random one.
+In `.env`, quote `PASS_KEY` with backticks if it contains `"` or `'`.
 
 ## Security
 

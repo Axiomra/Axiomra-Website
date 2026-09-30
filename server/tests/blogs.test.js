@@ -6,7 +6,7 @@ let app;
 let stop;
 let agent;
 
-const ADMIN = { email: "blog-admin@example.com", password: "correct horse battery staple" };
+const ADMIN = { email: "admin@example.com", password: "correct horse battery staple" };
 
 beforeAll(async () => {
   ({ app, stop } = await startApp());

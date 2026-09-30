@@ -8,13 +8,13 @@ import { adminAuth } from "../../lib/adminApi";
 import Seo from "../../seo/Seo";
 
 const MIN_LENGTH = 10;
-const KEY_LENGTH = 78;
+const KEY_MIN_LENGTH = 20;
 
 /** Mirrors models/User.js#recoveryKeyProblem, so a bad paste is caught here. */
 function keyProblem(key) {
   if (!key) return "Enter your recovery key.";
-  if (key.length !== KEY_LENGTH) {
-    return `The recovery key is ${KEY_LENGTH} characters; you have entered ${key.length}.`;
+  if (key.length < KEY_MIN_LENGTH) {
+    return `The recovery key is at least ${KEY_MIN_LENGTH} characters; you have entered ${key.length}.`;
   }
   if (/\s/.test(key)) return "The recovery key cannot contain spaces or line breaks.";
   if (!/[a-z]/.test(key) || !/[A-Z]/.test(key) || !/\d/.test(key) || !/[^A-Za-z0-9]/.test(key)) {
@@ -237,8 +237,8 @@ export default function AdminResetPasswordPage() {
                     Admin recovery key
                   </label>
                   <p className="mb-3 text-xs leading-relaxed text-content-dim">
-                    The email alone cannot change this password. Paste the {KEY_LENGTH}-character
-                    key held by the main admin.
+                    The email alone cannot change this password. Paste the recovery key (PASS_KEY)
+                    held by the admin.
                   </p>
                   <div className="relative">
                     <textarea
@@ -272,10 +272,10 @@ export default function AdminResetPasswordPage() {
                   </div>
                   <p
                     className={`mt-2 text-xs tabular-nums ${
-                      recoveryKey.length === KEY_LENGTH ? "text-success" : "text-content-faint"
+                      recoveryKey.length >= KEY_MIN_LENGTH ? "text-success" : "text-content-faint"
                     }`}
                   >
-                    {recoveryKey.length} / {KEY_LENGTH} characters
+                    {recoveryKey.length} characters
                   </p>
                 </div>
               )}

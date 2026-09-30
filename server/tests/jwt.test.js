@@ -16,7 +16,7 @@ let userId;
 beforeAll(async () => {
   ({ app, stop } = await startApp());
   const { default: User } = await import("../models/User.js");
-  const user = new User({ email: "jwt@example.com", name: "JWT", role: "admin" });
+  const user = new User({ email: "admin@example.com", name: "JWT", role: "admin" });
   await user.setPassword("correct horse battery staple");
   user.sessionsValidFrom = new Date(Date.now() - 60_000);
   await user.save();
