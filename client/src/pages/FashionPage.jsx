@@ -9,7 +9,6 @@ import FashionTechnologies from "../components/industries/fashion/FashionTechnol
 import FashionStreamline from "../components/industries/fashion/FashionStreamline";
 import FashionMidCta from "../components/industries/fashion/FashionMidCta";
 import FashionStakeholders from "../components/industries/fashion/FashionStakeholders";
-import FashionBlogs from "../components/industries/fashion/FashionBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -64,7 +63,6 @@ export default function FashionPage() {
       <IndustriesTestimonials data={testimonials} />
       <IndustriesPortfolio data={showcase} />
       <IndustriesPartner data={partner} />
-      <FashionBlogs />
       <FAQ id="fashion-faq" eyebrow="Fashion questions" items={faqs} />
       <GradientCTA
         dark

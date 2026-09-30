@@ -11,7 +11,6 @@ import MarketingStakeholders from "../components/industries/marketing/MarketingS
 import MarketingSubIndustries from "../components/industries/marketing/MarketingSubIndustries";
 import MarketingBenefits from "../components/industries/marketing/MarketingBenefits";
 import MarketingBuild from "../components/industries/marketing/MarketingBuild";
-import MarketingBlogs from "../components/industries/marketing/MarketingBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -68,7 +67,6 @@ export default function MarketingPage() {
       <IndustriesBusinessTypes data={businessTypes} />
       <IndustriesTestimonials data={testimonials} />
       <IndustriesPartner data={partner} />
-      <MarketingBlogs />
       <FAQ id="marketing-faq" eyebrow="Marketing questions" items={faqs} />
       <GradientCTA
         dark

@@ -12,7 +12,6 @@ import LegalStakeholders from "../components/industries/legal/LegalStakeholders"
 import LegalSectors from "../components/industries/legal/LegalSectors";
 import LegalBenefits from "../components/industries/legal/LegalBenefits";
 import LegalBuild from "../components/industries/legal/LegalBuild";
-import LegalBlogs from "../components/industries/legal/LegalBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -70,7 +69,6 @@ export default function LegalPage() {
       <IndustriesBusinessTypes data={businessTypes} />
       <IndustriesTestimonials data={testimonials} />
       <IndustriesPartner data={partner} />
-      <LegalBlogs />
       <FAQ id="legal-faq" eyebrow="Legal questions" items={faqs} />
       <GradientCTA
         dark

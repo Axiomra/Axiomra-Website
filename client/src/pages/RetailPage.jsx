@@ -10,7 +10,6 @@ import RetailTechnologies from "../components/industries/retail/RetailTechnologi
 import RetailSolutions from "../components/industries/retail/RetailSolutions";
 import RetailMidCta from "../components/industries/retail/RetailMidCta";
 import RetailStakeholders from "../components/industries/retail/RetailStakeholders";
-import RetailBlogs from "../components/industries/retail/RetailBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -68,7 +67,6 @@ export default function RetailPage() {
       <IndustriesBusinessTypes data={businessTypes} />
       <IndustriesTestimonials data={testimonials} />
       <IndustriesPartner data={partner} />
-      <RetailBlogs />
       <FAQ id="retail-faq" eyebrow="Retail questions" items={faqs} />
       <GradientCTA
         dark

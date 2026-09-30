@@ -12,7 +12,6 @@ import HealthcareStakeholders from "../components/industries/healthcare/Healthca
 import HealthcareSubIndustries from "../components/industries/healthcare/HealthcareSubIndustries";
 import HealthcareBenefits from "../components/industries/healthcare/HealthcareBenefits";
 import HealthcareBuild from "../components/industries/healthcare/HealthcareBuild";
-import HealthcareBlogs from "../components/industries/healthcare/HealthcareBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -70,7 +69,6 @@ export default function HealthcarePage() {
       <IndustriesBusinessTypes data={businessTypes} />
       <IndustriesTestimonials data={testimonials} />
       <IndustriesPartner data={partner} />
-      <HealthcareBlogs />
       <FAQ id="healthcare-faq" eyebrow="Healthcare questions" items={faqs} />
       <GradientCTA
         dark

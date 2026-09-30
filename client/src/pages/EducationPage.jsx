@@ -10,7 +10,6 @@ import EducationTechnologies from "../components/industries/education/EducationT
 import EducationStreamline from "../components/industries/education/EducationStreamline";
 import EducationStakeholders from "../components/industries/education/EducationStakeholders";
 import EducationMidCta from "../components/industries/education/EducationMidCta";
-import EducationBlogs from "../components/industries/education/EducationBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -66,7 +65,6 @@ export default function EducationPage() {
       <IndustriesBusinessTypes data={businessTypes} />
       <IndustriesTestimonials data={testimonials} />
       <IndustriesPartner data={partner} />
-      <EducationBlogs />
       <FAQ id="education-faq" eyebrow="Education questions" items={faqs} />
       <GradientCTA
         dark

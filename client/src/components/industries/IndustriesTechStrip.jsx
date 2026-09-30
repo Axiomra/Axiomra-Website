@@ -1,7 +1,10 @@
 import { useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../SectionHeading";
 import { techStrip } from "../../data/industriesData";
+import { TECH_PATH } from "../../routes.constants";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -120,6 +123,20 @@ export default function IndustriesTechStrip({ data = techStrip }) {
           <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-content-dim">
             {active.note}
           </p>
+        ) : null}
+
+        {data.ctaText ? (
+          <div className="mt-10 flex justify-center">
+            <Link
+              to={TECH_PATH}
+              className="group inline-flex items-center gap-3 rounded-full bg-inverse py-2 pl-7 pr-2 text-base font-medium text-inverse-fg transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring"
+            >
+              {data.ctaText}
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-inverse-fg/15 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-[1px]">
+                <ArrowUpRight size={18} aria-hidden="true" />
+              </span>
+            </Link>
+          </div>
         ) : null}
       </div>
     </section>

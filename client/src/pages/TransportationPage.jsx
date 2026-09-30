@@ -10,7 +10,6 @@ import TransportationServices from "../components/industries/transportation/Tran
 import TransportationModes from "../components/industries/transportation/TransportationModes";
 import TransportationBenefits from "../components/industries/transportation/TransportationBenefits";
 import TransportationBuild from "../components/industries/transportation/TransportationBuild";
-import TransportationBlogs from "../components/industries/transportation/TransportationBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -49,7 +48,10 @@ export default function TransportationPage() {
       <Seo
         title={TITLE}
         description={DESCRIPTION}
-        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Transportation" }]}
+        breadcrumbs={[
+          { name: "Industries", path: INDUSTRIES_PATH },
+          { name: "AI for Transportation" },
+        ]}
       />
       <TransportationHero />
       <TransportationIntro />
@@ -66,7 +68,6 @@ export default function TransportationPage() {
       <IndustriesBusinessTypes data={businessTypes} />
       <IndustriesTestimonials data={testimonials} />
       <IndustriesPartner data={partner} />
-      <TransportationBlogs />
       <FAQ id="transportation-faq" eyebrow="Transportation questions" items={faqs} />
       <GradientCTA
         dark

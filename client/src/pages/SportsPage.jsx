@@ -11,7 +11,6 @@ import SportsStakeholders from "../components/industries/sports/SportsStakeholde
 import SportsWeServe from "../components/industries/sports/SportsWeServe";
 import SportsBenefits from "../components/industries/sports/SportsBenefits";
 import SportsBuild from "../components/industries/sports/SportsBuild";
-import SportsBlogs from "../components/industries/sports/SportsBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -68,7 +67,6 @@ export default function SportsPage() {
       <IndustriesBusinessTypes data={businessTypes} />
       <IndustriesTestimonials data={testimonials} />
       <IndustriesPartner data={partner} />
-      <SportsBlogs />
       <FAQ id="sports-faq" eyebrow="Sports questions" items={faqs} />
       <GradientCTA
         dark

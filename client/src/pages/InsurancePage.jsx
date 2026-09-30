@@ -12,7 +12,6 @@ import InsuranceStakeholders from "../components/industries/insurance/InsuranceS
 import InsuranceLines from "../components/industries/insurance/InsuranceLines";
 import InsuranceBenefits from "../components/industries/insurance/InsuranceBenefits";
 import InsuranceBuild from "../components/industries/insurance/InsuranceBuild";
-import InsuranceBlogs from "../components/industries/insurance/InsuranceBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -70,7 +69,6 @@ export default function InsurancePage() {
       <IndustriesBusinessTypes data={businessTypes} />
       <IndustriesTestimonials data={testimonials} />
       <IndustriesPartner data={partner} />
-      <InsuranceBlogs />
       <FAQ id="insurance-faq" eyebrow="Insurance questions" items={faqs} />
       <GradientCTA
         dark

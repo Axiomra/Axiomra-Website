@@ -1,5 +1,6 @@
 import { companyStats } from "../data/companyStats.js";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   HeartPulse,
@@ -18,6 +19,7 @@ import {
 import SectionHeading from "../components/SectionHeading";
 import ConnectingDots from "../components/ConnectingDots";
 import { INDUSTRY_IMAGES } from "../lib/media";
+import { industryPath } from "../routes.constants";
 
 // `blurb` is the flip side of each tile: four or five short lines, so the card
 // reads as an answer to "what do you actually build for us" and still fits the
@@ -25,72 +27,84 @@ import { INDUSTRY_IMAGES } from "../lib/media";
 const industries = [
   {
     name: "Healthcare",
+    slug: "healthcare",
     icon: HeartPulse,
     blurb:
       "Clinical notes transcribed and coded automatically. Imaging models that flag what a tired eye misses. Triage and scheduling that clear the waiting list. Patient data handled to HIPAA rules end to end.",
   },
   {
     name: "Education",
+    slug: "education",
     icon: GraduationCap,
     blurb:
       "Learning paths that adapt to each student's pace. Grading and feedback returned in minutes, not weekends. Dropout risk flagged while there is still time to act. Admin work pulled off teachers' desks.",
   },
   {
     name: "Fashion",
+    slug: "fashion",
     icon: Shirt,
     blurb:
       "AI sizing and virtual try-ons that cut returns. Trend forecasting before the season commits. Recommendations tuned to each shopper, not the catalogue. Inventory that neither sells out nor sits.",
   },
   {
     name: "Real Estate",
+    slug: "real-estate",
     icon: Building2,
     blurb:
       "Automated valuations from live market data. Lead scoring so agents chase the buyers who close. Listings, photos and copy generated at scale. Document review and due diligence in hours.",
   },
   {
     name: "Sports",
+    slug: "sports",
     icon: Trophy,
     blurb:
       "Computer vision that tracks every player and possession. Injury risk modelled from load and movement data. Tactical insight from footage the same night. Fan experiences built on live match data.",
   },
   {
     name: "Retail",
+    slug: "retail",
     icon: ShoppingBag,
     blurb:
       "Demand forecasting per store and per SKU. Dynamic pricing that protects the margin. Personalised search and recommendations online. Checkout, stock and support agents that run themselves.",
   },
   {
     name: "Transportation",
+    slug: "transportation",
     icon: Truck,
     blurb:
       "Route optimisation that cuts fuel and idle hours. Predictive maintenance before a vehicle strands a job. Fleet telematics turned into decisions, not dashboards. ETAs your customers can actually trust.",
   },
   {
     name: "Supply Chain",
+    slug: "supply-chain",
     icon: Boxes,
     blurb:
       "Demand and lead-time forecasting across the network. Supplier risk scored before it becomes a delay. Warehouse and inventory planning automated. Full traceability from raw material to doorstep.",
   },
   {
     name: "Finance",
+    slug: "finance",
     icon: Landmark,
     blurb:
       "Fraud detection that scores a transaction in real time. Credit and risk models built on your own book. KYC, AML and reporting automated end to end. Document processing that clears the back office.",
   },
   {
     name: "Insurance",
+    slug: "insurance",
     icon: ShieldCheck,
     blurb:
       "Claims triaged and settled without the paperwork loop. Damage assessed from photos in seconds. Underwriting priced on richer, cleaner signals. Fraud patterns caught across the whole portfolio.",
   },
   {
     name: "Legal Business",
+    slug: "legal",
     icon: Scale,
     blurb:
       "Contract review and clause extraction at volume. Case law research answered with citations. Discovery sorted before the billable hours burn. Drafting assistants trained on your own precedents.",
   },
   {
     name: "Marketing",
+    slug: "marketing",
     icon: Megaphone,
     blurb:
       "Campaign copy and creative generated on brand. Audience segments built from behaviour, not guesses. Spend reallocated to what is converting today. Attribution and reporting without the spreadsheet week.",
@@ -100,6 +114,7 @@ const industries = [
 export default function Industries({ showHeading = true, showStats = true }) {
   // Hovering a tile floods the whole panel with that industry's photo.
   const [active, setActive] = useState(industries[0].name);
+  const navigate = useNavigate();
 
   return (
     <section id="industries" className="py-24">
@@ -154,7 +169,7 @@ export default function Industries({ showHeading = true, showStats = true }) {
                   transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
                   onMouseEnter={() => setActive(ind.name)}
                   onFocus={() => setActive(ind.name)}
-                  aria-pressed={isActive}
+                  onClick={() => navigate(industryPath(ind.slug))}
                   className={`group relative min-h-[280px] cursor-pointer border border-inverse-fg/10 text-center transition-colors duration-300 [perspective:1200px] focus-ring sm:min-h-[360px] lg:min-h-[420px] ${
                     isActive ? "bg-accent-vivid/15" : "hover:bg-accent-vivid/10"
                   }`}

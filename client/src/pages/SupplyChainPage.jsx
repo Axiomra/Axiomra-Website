@@ -11,7 +11,6 @@ import SupplyChainStakeholders from "../components/industries/supply-chain/Suppl
 import SupplyChainSubIndustries from "../components/industries/supply-chain/SupplyChainSubIndustries";
 import SupplyChainBenefits from "../components/industries/supply-chain/SupplyChainBenefits";
 import SupplyChainBuild from "../components/industries/supply-chain/SupplyChainBuild";
-import SupplyChainBlogs from "../components/industries/supply-chain/SupplyChainBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -50,7 +49,10 @@ export default function SupplyChainPage() {
       <Seo
         title={TITLE}
         description={DESCRIPTION}
-        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Supply Chain" }]}
+        breadcrumbs={[
+          { name: "Industries", path: INDUSTRIES_PATH },
+          { name: "AI for Supply Chain" },
+        ]}
       />
       <SupplyChainHero />
       <SupplyChainIntro />
@@ -68,7 +70,6 @@ export default function SupplyChainPage() {
       <IndustriesBusinessTypes data={businessTypes} />
       <IndustriesTestimonials data={testimonials} />
       <IndustriesPartner data={partner} />
-      <SupplyChainBlogs />
       <FAQ id="supply-chain-faq" eyebrow="Supply chain questions" items={faqs} />
       <GradientCTA
         dark

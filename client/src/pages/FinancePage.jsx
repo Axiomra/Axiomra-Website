@@ -12,7 +12,6 @@ import FinanceStakeholders from "../components/industries/finance/FinanceStakeho
 import FinanceSubIndustries from "../components/industries/finance/FinanceSubIndustries";
 import FinanceBenefits from "../components/industries/finance/FinanceBenefits";
 import FinanceBuild from "../components/industries/finance/FinanceBuild";
-import FinanceBlogs from "../components/industries/finance/FinanceBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -70,7 +69,6 @@ export default function FinancePage() {
       <IndustriesBusinessTypes data={businessTypes} />
       <IndustriesTestimonials data={testimonials} />
       <IndustriesPartner data={partner} />
-      <FinanceBlogs />
       <FAQ id="finance-faq" eyebrow="Finance questions" items={faqs} />
       <GradientCTA
         dark

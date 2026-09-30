@@ -10,7 +10,6 @@ import RealEstateBenefits from "../components/industries/real-estate/RealEstateB
 import RealEstateMidCta from "../components/industries/real-estate/RealEstateMidCta";
 import RealEstateStakeholders from "../components/industries/real-estate/RealEstateStakeholders";
 import RealEstateBuild from "../components/industries/real-estate/RealEstateBuild";
-import RealEstateBlogs from "../components/industries/real-estate/RealEstateBlogs";
 import IndustriesTechStrip from "../components/industries/IndustriesTechStrip";
 import IndustriesBusinessTypes from "../components/industries/IndustriesBusinessTypes";
 import IndustriesTestimonials from "../components/industries/IndustriesTestimonials";
@@ -49,7 +48,10 @@ export default function RealEstatePage() {
       <Seo
         title={TITLE}
         description={DESCRIPTION}
-        breadcrumbs={[{ name: "Industries", path: INDUSTRIES_PATH }, { name: "AI for Real Estate" }]}
+        breadcrumbs={[
+          { name: "Industries", path: INDUSTRIES_PATH },
+          { name: "AI for Real Estate" },
+        ]}
       />
       <RealEstateHero />
       <RealEstateIntro />
@@ -66,7 +68,6 @@ export default function RealEstatePage() {
       <IndustriesPortfolio data={showcase} />
       <RealEstateBuild />
       <IndustriesPartner data={partner} />
-      <RealEstateBlogs />
       <FAQ id="real-estate-faq" eyebrow="Real estate questions" items={faqs} />
       <GradientCTA
         dark
