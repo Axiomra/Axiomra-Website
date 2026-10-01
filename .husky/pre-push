@@ -4,5 +4,6 @@ if git rev-parse -q --verify '@{push}' >/dev/null && git diff --quiet '@{push}' 
   exit 0
 fi
 # The build refuses to run without an API origin; the value only matters for
-# what gets inlined, not for the measurements.
-VITE_API_URL="${VITE_API_URL:-https://axiomra-server.vercel.app}" npm --prefix client run perf
+# what gets inlined, not for the measurements. VITE_LIGHTHOUSE keeps the
+# preview from calling that API (it rejects localhost via CORS).
+VITE_LIGHTHOUSE=1 VITE_API_URL="${VITE_API_URL:-https://axiomra-server.vercel.app}" npm --prefix client run perf
