@@ -16,6 +16,16 @@ const ROUTES = [
   "/case-studies/retail-dynamic-pricing-optimization",
 ];
 
+const BUDGETS = {
+  "categories:performance": ["error", { minScore: 0.65 }],
+  "categories:accessibility": ["error", { minScore: 0.95 }],
+  "categories:best-practices": ["error", { minScore: 1 }],
+  "categories:seo": ["error", { minScore: 1 }],
+  "largest-contentful-paint": ["error", { maxNumericValue: 7000 }],
+  "cumulative-layout-shift": ["error", { maxNumericValue: 0.05 }],
+  "total-blocking-time": ["error", { maxNumericValue: 400 }],
+};
+
 module.exports = {
   ci: {
     collect: {
@@ -31,15 +41,15 @@ module.exports = {
       // for why. These fail a push that makes things clearly worse than the
       // measured state (with room for run-to-run noise); tighten them as the
       // numbers improve. A11y, best practices, SEO and CLS are at target.
-      assertions: {
-        "categories:performance": ["error", { minScore: 0.65 }],
-        "categories:accessibility": ["error", { minScore: 0.95 }],
-        "categories:best-practices": ["error", { minScore: 1 }],
-        "categories:seo": ["error", { minScore: 1 }],
-        "largest-contentful-paint": ["error", { maxNumericValue: 7000 }],
-        "cumulative-layout-shift": ["error", { maxNumericValue: 0.05 }],
-        "total-blocking-time": ["error", { maxNumericValue: 400 }],
-      },
+      // The home page has its own, tighter LCP budget: measured 4835 ms after
+      // the below-the-fold image work, plus ~500 ms of noise margin.
+      assertMatrix: [
+        {
+          matchingUrlPattern: `^http://localhost:${PORT}/$`,
+          assertions: { ...BUDGETS, "largest-contentful-paint": ["error", { maxNumericValue: 5300 }] },
+        },
+        { matchingUrlPattern: `^http://localhost:${PORT}/.+`, assertions: BUDGETS },
+      ],
     },
     upload: { target: "filesystem", outputDir: ".lighthouseci" },
   },
