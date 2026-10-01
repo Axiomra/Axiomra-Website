@@ -13,7 +13,13 @@ async function get(path, signal) {
   return data;
 }
 
-export const listPosts = (limit, signal) => get(`/api/blogs?limit=${limit}`, signal);
+// Lighthouse preview builds (VITE_LIGHTHOUSE=1, set by the pre-push hook) list
+// no posts instead of calling the production API, which rejects the localhost
+// origin; that CORS error would otherwise fail the best-practices budget.
+const SKIP_API = import.meta.env.VITE_LIGHTHOUSE === "1";
+
+export const listPosts = (limit, signal) =>
+  SKIP_API ? Promise.resolve({ items: [], total: 0 }) : get(`/api/blogs?limit=${limit}`, signal);
 export const getPost = (slug, signal) => get(`/api/blogs/${encodeURIComponent(slug)}`, signal);
 
 let publishedCheck;
