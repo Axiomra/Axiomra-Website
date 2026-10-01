@@ -57,3 +57,6 @@ id_*
 
 # Reference documents (SEO reviews, briefs). Kept local, never committed.
 *.pdf
+
+# Local working plan. Kept local, never committed.
+PLAN.md
