@@ -4,7 +4,6 @@ import clutchAi2025 from "../assets/certificates/clutch-ai-uae-2025.webp";
 import clutchMl2025 from "../assets/certificates/clutch-ml-uae-2025.webp";
 import corporateVision from "../assets/certificates/corporate-vision-2024.webp";
 import globee from "../assets/certificates/globee-bronze-2024.webp";
-import goodfirms from "../assets/certificates/goodfirms-mobile-app.webp";
 import marfest from "../assets/certificates/marfest-nlp-uae.webp";
 import techBehemoths from "../assets/certificates/tech-behemoths.webp";
 import topfirms from "../assets/certificates/topfirms-web-dev.webp";
@@ -24,7 +23,6 @@ const CERTIFICATES = [
   { src: corporateVision, w: 316, alt: "Corporate Vision Technology Awards 2024" },
   { src: techBehemoths, w: 469, alt: "Axiomra as seen on Tech Behemoths", ink: true },
   { src: clutchAi2024, w: 297, alt: "Clutch Top Artificial Intelligence Company, UAE 2024" },
-  { src: goodfirms, w: 355, alt: "GoodFirms Top Mobile App Development Company" },
   { src: marfest, w: 218, alt: "The Marfest Most Reviewed NLP Company, UAE" },
   { src: clutchAi2023, w: 298, alt: "Clutch Top Artificial Intelligence Company, UAE 2023" },
   { src: topfirms, w: 424, alt: "Top Firms Top Web Development Company" },
