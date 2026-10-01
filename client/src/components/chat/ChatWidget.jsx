@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, RotateCcw, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { streamChat } from "../../lib/chatApi";
 import RichText from "./richText";
-import botPixel from "../../assets/chat-bot-pixel.png";
+import mascotHead from "../../assets/chat-mascot-head.webp";
+import { mountMascot } from "./mascot";
 
 const NAME = "Axiomra Assistant";
 
@@ -57,21 +58,18 @@ function loadHistory() {
   }
 }
 
-/**
- * The pixel robot used on the launcher, in the header and as the avatar.
- * A 32px sprite on a transparent background, scaled with nearest-neighbour
- * so its pixels stay crisp; `animated` bobs it (keyframes in index.css).
- */
-function PixelBot({ className = "", animated = false }) {
+/** The mascot's head (face drawn on), used in the header and as the avatar. */
+function BotHead({ className = "" }) {
   return (
     <img
-      src={botPixel}
+      src={mascotHead}
       alt=""
       aria-hidden="true"
       draggable="false"
-      width="32"
-      height="32"
-      className={`[image-rendering:pixelated] ${animated ? "chat-bot-bob" : ""} ${className}`}
+      width="96"
+      height="96"
+      decoding="async"
+      className={className}
     />
   );
 }
@@ -92,15 +90,16 @@ function TypingDots() {
 
 function Avatar() {
   return (
-    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#DBEAFE] ring-1 ring-[#93C5FD]">
-      <PixelBot className="h-5 w-5" />
+    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#DBEAFE] ring-1 ring-[#93C5FD]">
+      <BotHead className="h-6 w-6" />
     </span>
   );
 }
 
 /**
- * "Axiomra Assistant": a floating launcher that draws the eye (pulse rings and
- * an animated robot) and opens a streaming chat panel backed by /api/chat.
+ * "Axiomra Assistant": an animated robot mascot in the corner that opens a
+ * streaming chat panel backed by /api/chat. The mascot waves on arrival and
+ * when the chat opens, hops on route changes and wiggles while unread.
  */
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -114,6 +113,34 @@ export default function ChatWidget() {
   const inputRef = useRef(null);
   const launcherRef = useRef(null);
   const abortRef = useRef(null);
+  const mascotSlotRef = useRef(null);
+  const mascotRef = useRef(null);
+  const { pathname } = useLocation();
+  const firstPathRef = useRef(pathname);
+
+  useEffect(() => {
+    const mascot = mountMascot(mascotSlotRef.current, { width: 80 });
+    mascotRef.current = mascot;
+    const greet = setTimeout(() => mascot.wave(), 600);
+    return () => {
+      clearTimeout(greet);
+      mascot.destroy();
+      mascotRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (pathname === firstPathRef.current) return;
+    firstPathRef.current = pathname;
+    mascotRef.current?.pageChange();
+  }, [pathname]);
+
+  // Nudge first-time visitors until they open the chat.
+  useEffect(() => {
+    if (!unread || open) return;
+    const id = setInterval(() => mascotRef.current?.attention(), 15000);
+    return () => clearInterval(id);
+  }, [unread, open]);
 
   useEffect(() => {
     storage.set(STORAGE_KEY, JSON.stringify(messages));
@@ -145,6 +172,8 @@ export default function ChatWidget() {
 
   const toggle = () => {
     setUnread(false);
+    // Clicking the mascot already hops it; greet when the chat opens.
+    if (!open) mascotRef.current?.wave();
     setOpen((v) => !v);
   };
 
@@ -227,12 +256,12 @@ export default function ChatWidget() {
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             style={{ transformOrigin: "bottom right" }}
-            className="fixed bottom-[5.75rem] right-4 z-50 flex h-[min(600px,calc(100svh-7.5rem))] w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-[#BFDBFE] bg-[#EFF6FF] shadow-[0_24px_70px_-20px_rgba(37,99,235,0.4)] sm:right-6 sm:w-[380px]"
+            className="fixed bottom-[9.75rem] right-4 z-50 flex h-[min(600px,calc(100svh-11.5rem))] w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-[#BFDBFE] bg-[#EFF6FF] shadow-[0_24px_70px_-20px_rgba(37,99,235,0.4)] sm:right-6 sm:w-[380px]"
           >
             {/* Header */}
             <header className="relative flex items-center gap-3 overflow-hidden border-b border-[#BFDBFE] bg-[#EFF6FF] px-4 py-3.5 text-assistant-ink">
               <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-[#DBEAFE] ring-1 ring-[#93C5FD]">
-                <PixelBot className="h-8 w-8" animated />
+                <BotHead className="h-9 w-9" />
                 <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-[#22c55e] ring-2 ring-white" />
               </span>
               <div className="min-w-0 flex-1">
@@ -344,50 +373,19 @@ export default function ChatWidget() {
         )}
       </AnimatePresence>
 
-      {/* Launcher */}
+      {/* Launcher: the mascot stays in the corner whether or not the chat is open. */}
       <button
         ref={launcherRef}
         type="button"
         onClick={toggle}
         aria-expanded={open}
         aria-label={open ? "Close chat" : `Chat with ${NAME}`}
-        className="group fixed bottom-6 right-4 z-50 h-16 w-16 rounded-full focus-ring sm:right-6"
+        className="fixed bottom-6 right-6 z-50 rounded-2xl focus-ring"
       >
-        {!open && (
-          <span
-            className="chat-glow absolute inset-1 rounded-full bg-assistant/35 blur-xl"
-            aria-hidden="true"
-          />
-        )}
-        <span className="relative flex h-full w-full items-center justify-center rounded-full bg-[#DBEAFE] text-[#1E3A8A] shadow-[0_10px_30px_-8px_rgba(37,99,235,0.5)] ring-1 ring-[#93C5FD] transition-transform duration-300 group-hover:scale-110 group-active:scale-95">
-          <AnimatePresence mode="wait" initial={false}>
-            {open ? (
-              <motion.span
-                key="close"
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <X size={26} />
-              </motion.span>
-            ) : (
-              <motion.span
-                key="bot"
-                initial={{ scale: 0.5, opacity: 0, y: 8 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.5, opacity: 0, y: 8 }}
-                transition={{ type: "spring", stiffness: 420, damping: 22 }}
-                className="flex h-full w-full items-center justify-center drop-shadow-[0_4px_6px_rgba(37,99,235,0.35)]"
-              >
-                <PixelBot className="h-11 w-11" animated />
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </span>
+        <span ref={mascotSlotRef} className="block" />
         {unread && !open && (
           <span
-            className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#ef4444] text-[11px] font-bold text-white ring-2 ring-surface"
+            className="absolute right-0 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#ef4444] text-[11px] font-bold text-white ring-2 ring-surface"
             aria-hidden="true"
           >
             1

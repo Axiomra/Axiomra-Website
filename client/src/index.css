@@ -2250,43 +2250,11 @@
   mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
 }
 
-/* Axiomra Assistant launcher; see components/chat/ChatWidget.jsx. All of it
-   is decorative and the reduced-motion rule above switches it off. */
-@keyframes chat-glow {
-  0%,
-  100% {
-    transform: scale(0.9);
-    opacity: 0.55;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 1;
-  }
-}
-.chat-glow {
-  animation: chat-glow 2.8s ease-in-out infinite;
-}
-
 /* Re-points the assistant tokens at a light blue for the chat widget only. */
 .chat-blue {
   --assistant: 147 197 253;
   --assistant-ink: 30 58 138;
   --assistant-ink-soft: 30 64 175;
-}
-
-/* Pixel mascot: a gentle hover. Whole-pixel moves only, so the sprite never
-   lands between device pixels. */
-@keyframes chat-bot-bob {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
-}
-.chat-bot-bob {
-  animation: chat-bot-bob 2.4s steps(2, jump-none) infinite;
 }
 
 @keyframes chat-typing {
