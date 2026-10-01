@@ -29,7 +29,7 @@ const NS = "http://www.w3.org/2000/svg";
 const CSS =
   `.rm{position:relative;width:var(--rm-w,160px);aspect-ratio:${W}/${H};pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}` +
   ".rm *{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;user-select:none}" +
-  ".rm img{display:block;-webkit-user-drag:none}" +
+  ".rm canvas{display:block}" +
   ".rm-arm{transform-origin:70.6% 56.4%}" +
   ".rm-breath{transform-origin:50% 92%}.rm-jump{transform-origin:50% 92%}" +
   ".rm-face{filter:drop-shadow(0 0 3px #4fd8ff) drop-shadow(0 0 7px rgba(79,216,255,.7))}" +
@@ -43,13 +43,21 @@ function el(tag, cls, parent, ns) {
   return e;
 }
 
-function img(cls, src, parent) {
-  const e = el("img", cls, parent);
-  e.src = src;
-  e.alt = "";
-  e.decoding = "async";
-  e.draggable = false;
-  return e;
+// The artwork is painted onto canvases rather than <img>: the mascot loads
+// lazily and paints late, and as an image it became the page's Largest
+// Contentful Paint (pushing the home page over its LCP budget). Canvas paints
+// are not LCP candidates.
+function picture(cls, src, parent) {
+  const canvas = el("canvas", cls, parent);
+  const image = new Image();
+  image.decoding = "async";
+  image.onload = () => {
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    canvas.getContext("2d")?.drawImage(image, 0, 0);
+  };
+  image.src = src;
+  return canvas;
 }
 
 export function mountMascot(host, { width = 160 } = {}) {
@@ -69,8 +77,8 @@ export function mountMascot(host, { width = 160 } = {}) {
   const shadow = el("div", "rm-shadow", root);
   const jump = el("div", "rm-jump", float);
   const breath = el("div", "rm-breath", jump);
-  img("", bodySrc, breath);
-  const arm = img("rm-arm", armSrc, breath);
+  picture("", bodySrc, breath);
+  const arm = picture("rm-arm", armSrc, breath);
 
   const svg = el("svg", "rm-face", breath, NS);
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
