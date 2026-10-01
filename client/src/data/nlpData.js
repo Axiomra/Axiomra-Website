@@ -31,7 +31,7 @@ export const hero = {
   body: "Axiomra develops NLP solutions that analyse documents, support tickets, and transcribed conversations. Extract key information, identify intent and sentiment, and route requests more efficiently so your team can act on relevant insights.",
   ctaText: "Book a Free NLP Consultation",
   secondaryCtaText: "Explore NLP Solutions",
-  proof: { rating: "4.9", reviews: "300+ companies", source: "Reviewed on Clutch" },
+  proof: { rating: "4.9", reviews: "500+ companies", source: "Reviewed on Clutch" },
   stats: [
     { value: "120+", label: "NLP models in production" },
     { value: "40+", label: "Languages supported" },

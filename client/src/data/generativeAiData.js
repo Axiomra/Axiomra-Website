@@ -30,7 +30,7 @@ export const hero = {
   body: "We build generative AI solutions that help your team create content, find information, and automate routine work. By combining suitable models with your business data and existing tools, we develop applications designed for daily use, with evaluation and review controls matched to your needs.",
   ctaText: "Book a Free Consultation",
   secondaryCtaText: "Explore Our Solutions",
-  proof: { rating: "4.8", reviews: "300+ companies", source: "Reviewed on Clutch" },
+  proof: { rating: "4.9", reviews: "500+ companies", source: "Reviewed on Clutch" },
   /**
    * The PDF review asked for verified figures with context, or these non-numeric
    * labels where evidence is not available. Items with no `value` render as a

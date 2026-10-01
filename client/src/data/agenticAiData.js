@@ -31,7 +31,7 @@ export const hero = {
   body: "Axiomra builds AI agents that plan tasks, use approved tools, and coordinate multi-step workflows. We define permissions, human approval points, and activity logging so your team can delegate routine work with appropriate oversight.",
   ctaText: "Book a Free Consultation",
   secondaryCtaText: "Explore Agent Solutions",
-  proof: { rating: "4.8", reviews: "300+ companies", source: "Reviewed on Clutch" },
+  proof: { rating: "4.9", reviews: "500+ companies", source: "Reviewed on Clutch" },
   stats: [
     { value: "60%", label: "Less manual workload" },
     { value: "24/7", label: "Agents on shift" },

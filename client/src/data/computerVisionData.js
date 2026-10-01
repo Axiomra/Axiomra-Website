@@ -47,7 +47,7 @@ export const hero = {
   body: "Axiomra builds computer vision systems that read images, video, and camera feeds and turn them into information your team can act on. We assess what your existing cameras and data can support, agree accuracy and latency targets before development, and deploy to the edge or the cloud to suit your environment.",
   ctaText: "Book a Free Consultation",
   secondaryCtaText: "Explore Our Capabilities",
-  proof: { rating: "4.8", reviews: "300+ companies", source: "Reviewed on Clutch" },
+  proof: { rating: "4.9", reviews: "500+ companies", source: "Reviewed on Clutch" },
   /**
    * Capability labels rather than statistics. Entries with no `value` render as a
    * single label, so verified figures can be reinstated by adding `value:` here.
