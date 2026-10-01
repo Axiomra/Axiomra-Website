@@ -3,7 +3,13 @@
  * `mascot.js` drop-in: the embedded base64 PNGs now live in src/assets as
  * resized WebP files so they cache and stay out of the JS bundle.
  *
- * Idle float/breathing and blinking run on their own. Triggers return a
+ * Idle float/breathing, blinking and (with the default round eyes) looking
+ * left/right run on their own. Options:
+ *   width       CSS width (number = px); height follows the 408x612 artwork
+ *   face        "eyes" (default, two round glowing eyes) or "terminal" (>_)
+ *   lookAround  false stops the eyes wandering; look() still works
+ *
+ * look("left" | "right" | "center") points the eyes. Triggers return a
  * Promise that resolves when the move finishes:
  *   wave()       greeting (visitor arrives / chat opens)
  *   jump()       small hop (also fires when the mascot is clicked)
@@ -30,6 +36,7 @@ const CSS =
   `.rm{position:relative;width:var(--rm-w,160px);aspect-ratio:${W}/${H};pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}` +
   ".rm *{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;user-select:none}" +
   ".rm canvas{display:block}" +
+  ".rm-face *{position:static;inset:auto;width:auto;height:auto}" +
   ".rm-arm{transform-origin:70.6% 56.4%}" +
   ".rm-breath{transform-origin:50% 92%}.rm-jump{transform-origin:50% 92%}" +
   ".rm-face{filter:drop-shadow(0 0 3px #4fd8ff) drop-shadow(0 0 7px rgba(79,216,255,.7))}" +
@@ -60,7 +67,7 @@ function picture(cls, src, parent) {
   return canvas;
 }
 
-export function mountMascot(host, { width = 160 } = {}) {
+export function mountMascot(host, { width = 160, face = "eyes", lookAround = true } = {}) {
   if (!document.getElementById("rm-css")) {
     const s = el("style");
     s.id = "rm-css";
@@ -83,18 +90,34 @@ export function mountMascot(host, { width = 160 } = {}) {
   const svg = el("svg", "rm-face", breath, NS);
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
   const eyes = el("g", "rm-eyes", svg, NS);
-  const stroke = {
-    fill: "none",
-    stroke: "#8cecff",
-    "stroke-width": 11,
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-  };
-  for (const d of ["M152 162 L186 187 L152 212", "M205 226 H238"]) {
-    const p = el("path", "", eyes, NS);
-    p.setAttribute("d", d);
-    for (const k in stroke) p.setAttribute(k, stroke[k]);
+  const terminal = face === "terminal";
+  if (terminal) {
+    const stroke = {
+      fill: "none",
+      stroke: "#8cecff",
+      "stroke-width": 11,
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+    };
+    for (const d of ["M152 162 L186 187 L152 212", "M205 226 H238"]) {
+      const p = el("path", "", eyes, NS);
+      p.setAttribute("d", d);
+      for (const k in stroke) p.setAttribute(k, stroke[k]);
+    }
+  } else {
+    for (const cx of [168, 242]) {
+      const eye = el("circle", "rm-eye", eyes, NS);
+      eye.setAttribute("cx", cx);
+      eye.setAttribute("cy", 198);
+      eye.setAttribute("r", 19);
+      eye.setAttribute("fill", "#8cecff");
+      eye.style.transformBox = "fill-box";
+      eye.style.transformOrigin = "center";
+    }
   }
+  eyes.style.transition = "transform .35s cubic-bezier(.4,0,.2,1)";
+  // Round eyes blink one by one about their own centres; >_ squashes as a group.
+  const blinkTargets = terminal ? [eyes] : [...eyes.querySelectorAll(".rm-eye")];
 
   // No Web Animations API (jsdom, very old browsers) behaves like reduced motion.
   const still =
@@ -115,14 +138,37 @@ export function mountMascot(host, { width = 160 } = {}) {
   };
 
   const blinkOnce = () =>
-    eyes.animate(
-      [
-        { transform: "scaleY(1)" },
-        { transform: "scaleY(.08)", offset: 0.45 },
-        { transform: "scaleY(1)" },
-      ],
-      { duration: 220, easing: "ease-in-out" }
-    );
+    Promise.all(
+      blinkTargets.map(
+        (t) =>
+          t.animate(
+            [
+              { transform: "scaleY(1)" },
+              { transform: "scaleY(.06)", offset: 0.5 },
+              { transform: "scaleY(1)" },
+            ],
+            { duration: 380, easing: "ease-in-out" }
+          ).finished
+      )
+    ).catch(() => {});
+
+  // Eyes glance around (CSS transition on the group, in artwork units).
+  const look = (x, y = 0) => {
+    eyes.style.transform = `translate(${x}px,${y}px)`;
+  };
+  const SPOTS = [
+    [-17, 0],
+    [17, 0],
+    [0, 0],
+    [-10, -3],
+    [10, -3],
+    [0, 0],
+  ];
+  const wander = () => {
+    if (dead) return;
+    look(...SPOTS[Math.floor(Math.random() * SPOTS.length)]);
+    timers.push(setTimeout(wander, 1400 + Math.random() * 2200));
+  };
 
   if (!still) {
     const loop = { iterations: Infinity, easing: "ease-in-out" };
@@ -159,10 +205,14 @@ export function mountMascot(host, { width = 160 } = {}) {
       );
     };
     timers.push(setTimeout(blink, 1800));
+    if (!terminal && lookAround) timers.push(setTimeout(wander, 1200));
   }
 
   const mascot = {
     element: root,
+    look(dir) {
+      look(dir === "left" ? -17 : dir === "right" ? 17 : 0);
+    },
     wave() {
       if (still) return done;
       armAnim?.cancel();
@@ -248,7 +298,7 @@ export function mountMascot(host, { width = 160 } = {}) {
       if (still) return done;
       blinkOnce();
       return new Promise((resolve) => {
-        timers.push(setTimeout(() => blinkOnce().finished.then(resolve, resolve), 260));
+        timers.push(setTimeout(() => blinkOnce().then(resolve), 420));
       });
     },
     walk() {
