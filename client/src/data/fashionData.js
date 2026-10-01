@@ -198,9 +198,9 @@ export const solutions = {
   tabs: [
     {
       id: "apparel",
-      label: "Apparel and Store Apps",
-      title: "Apparel and store apps that sell on every screen",
-      body: "Native and cross-platform storefronts with AI product discovery, size guidance and one-tap checkout. Built to keep the brand experience consistent from the feed to the fitting room.",
+      label: "Apparel and Online Stores",
+      title: "Apparel storefronts that sell on every screen",
+      body: "Responsive web storefronts with AI product discovery, size guidance and one-tap checkout. Built to keep the brand experience consistent from the feed to the fitting room.",
       bullets: [
         "Personalised catalogue feeds",
         "Size and fit guidance at add-to-cart",
@@ -358,8 +358,6 @@ export const techStrip = {
         "Tailwind CSS",
         "Framer Motion",
         "Three.js",
-        "React Native",
-        "Flutter",
         "Vite",
         "Radix UI",
       ],
@@ -397,18 +395,6 @@ export const techStrip = {
       id: "sqa",
       label: "SQA",
       items: ["Playwright", "Cypress", "Vitest", "Jest", "Pytest", "Postman", "k6", "Burp Suite"],
-    },
-    {
-      id: "design",
-      label: "UI / UX",
-      items: [
-        "Figma",
-        "CLO 3D",
-        "Design Tokens",
-        "Prototyping",
-        "WCAG 2.2 Audits",
-        "Usability Testing",
-      ],
     },
   ],
 };

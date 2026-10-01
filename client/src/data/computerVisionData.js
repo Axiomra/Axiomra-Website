@@ -676,8 +676,7 @@ export const whyUs = {
     {
       value: "400+",
       label: "Business apps developed",
-      detail:
-        "Shipped across vision, AI, web, and mobile, from first prototype to production rollout.",
+      detail: "Shipped across vision, AI and web, from first prototype to production rollout.",
     },
     {
       value: `${companyStats.countries}+`,

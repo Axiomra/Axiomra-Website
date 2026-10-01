@@ -11,7 +11,6 @@ import introImg from "../assets/industries/sports/intro.webp";
 
 import svcMotionImg from "../assets/industries/sports/svc-motion.webp";
 import svcGymImg from "../assets/industries/sports/svc-gym.webp";
-import svcMobileImg from "../assets/industries/sports/svc-mobile.webp";
 import svcLeagueImg from "../assets/industries/sports/svc-league.webp";
 import svcMedicineImg from "../assets/industries/sports/svc-medicine.webp";
 import svcTrainingImg from "../assets/industries/sports/svc-training.webp";
@@ -166,12 +165,6 @@ export const services = {
       body: "Running a club by hand produces double bookings, membership errors and hours lost to admin. We automate memberships, billing, class scheduling and trainer coordination into one platform that staff and members both actually want to use.",
       image: svcGymImg,
       alt: "The interior of a modern gym lined with training machines",
-    },
-    {
-      title: "Sports Mobile App Development",
-      body: "Fans and athletes drop off when the experience is disconnected from live data. Our sports apps deliver performance tracking, instant analytics and real-time engagement in one place, so athletes, coaches and supporters stay connected between fixtures rather than only during them.",
-      image: svcMobileImg,
-      alt: "A runner checking a smartwatch mid-session",
     },
     {
       title: "League & Tournament Management Software",
@@ -547,8 +540,6 @@ export const techStrip = {
         "Framer Motion",
         "Three.js",
         "GSAP",
-        "React Native",
-        "Flutter",
         "Vite",
         "D3.js",
         "Deck.gl",
@@ -587,11 +578,6 @@ export const techStrip = {
         "Grafana",
         "Sentry",
       ],
-    },
-    {
-      id: "design",
-      label: "UI / UX",
-      items: ["Figma", "Design Tokens", "Prototyping", "WCAG 2.2 Audits", "Usability Testing"],
     },
   ],
 };
@@ -716,7 +702,7 @@ export const blogs = {
 export const faqs = [
   {
     q: "What types of sports software development do you offer?",
-    a: "Performance and motion analysis, sports medicine and injury tracking, team and league management, ticketing and venue operations, streaming and broadcast tooling, fan engagement platforms, and the mobile apps that sit on top of all of it. Most engagements start with one of those and grow into the data layer underneath.",
+    a: "Performance and motion analysis, sports medicine and injury tracking, team and league management, ticketing and venue operations, streaming and broadcast tooling, fan engagement platforms, and the web portals that sit on top of all of it. Most engagements start with one of those and grow into the data layer underneath.",
   },
   {
     q: "How does AI actually enhance sports software?",
@@ -741,10 +727,6 @@ export const faqs = [
   {
     q: "How long does a sports platform build take?",
     a: "A scoped MVP with one capability, such as a performance dashboard or a league management module, typically runs eight to twelve weeks. A full platform spanning performance, operations and fan engagement runs four to nine months, delivered in weekly increments you can use from the first sprint.",
-  },
-  {
-    q: "Can you develop mobile apps for sports teams?",
-    a: "Yes. Athlete apps, coaching apps and supporter apps, native or cross-platform depending on what the feature set needs. We build offline-first where venue connectivity cannot be assumed, and instrument everything so product decisions rest on behaviour rather than opinion.",
   },
 ];
 

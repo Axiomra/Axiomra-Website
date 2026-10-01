@@ -258,7 +258,7 @@ export const paths = {
     {
       titleAccent: "Scaling Businesses",
       titleLead: "Through Automation",
-      body: "If you are building an AI product or SaaS platform, we become your dedicated AI and software development team. We handle everything from product architecture and UI design to AI model development and deployment, so founders focus on product vision and market growth while our engineers build and scale the technology behind it.",
+      body: "If you are building an AI product or SaaS platform, we become your dedicated AI and software development team. We handle everything from product architecture and engineering to AI model development and deployment, so founders focus on product vision and market growth while our engineers build and scale the technology behind it.",
       ctaText: "Get started",
       tone: "brand",
     },

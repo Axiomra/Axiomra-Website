@@ -503,8 +503,6 @@ export const techStrip = {
         "Tailwind CSS",
         "Three.js",
         "D3.js",
-        "React Native",
-        "Flutter",
         "Vite",
         "Radix UI",
       ],

@@ -289,18 +289,6 @@ export const appTypes = {
         "Supplier lead-time modelling",
       ],
     },
-    {
-      id: "mobile",
-      label: "Retail mobile apps",
-      title: "The store in the shopper's pocket",
-      body: "Native and cross-platform apps with visual search, scan-and-go, personalised offers and push that is timed by behaviour rather than by calendar.",
-      points: [
-        "Visual and voice search",
-        "Scan-and-go checkout",
-        "Personalised offers and wallets",
-        "In-app support assistants",
-      ],
-    },
   ],
 };
 
@@ -523,7 +511,6 @@ export const techStrip = {
         "Tailwind CSS",
         "Framer Motion",
         "Three.js",
-        "React Native",
         "Expo",
         "Vite",
         "Radix UI",
@@ -632,7 +619,7 @@ export const partner = {
     {
       icon: "Layers",
       title: "Commerce development",
-      body: "End-to-end retail and e-commerce delivery: architecture, UX, back end, front end, QA and the support that follows the launch.",
+      body: "End-to-end retail and e-commerce delivery: architecture, back end, front end, QA and the support that follows the launch.",
     },
     {
       icon: "ShieldCheck",

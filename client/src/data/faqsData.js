@@ -59,7 +59,7 @@ export const faqItems = [
   {
     category: "Services & Industries",
     q: "Do you only build AI, or full products too?",
-    a: "Full products. A model is rarely the deliverable. Most engagements include the backend service, the web or mobile interface, the data pipeline feeding it and the deployment story around all of it.",
+    a: "Full products. A model is rarely the deliverable. Most engagements include the backend service, the web interface, the data pipeline feeding it and the deployment story around all of it.",
   },
   {
     category: "Services & Industries",

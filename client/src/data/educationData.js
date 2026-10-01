@@ -194,10 +194,6 @@ export const specialisms = {
   background: specBgImg,
   items: [
     {
-      label: "Mobile learning apps",
-      body: "Learning that survives a commute and a weak signal. We build offline-first mobile apps with synced progress, push nudges and bite-sized lessons, so study time fits the gaps in a student's day instead of competing with them.",
-    },
-    {
       label: "School management software",
       body: "Admissions, timetabling, attendance, fees and reporting in one system rather than six spreadsheets. Role-based access keeps staff, parents and leadership on the same record without exposing anything they should not see.",
     },
@@ -417,8 +413,6 @@ export const techStrip = {
         "Tailwind CSS",
         "Framer Motion",
         "Three.js",
-        "React Native",
-        "Flutter",
         "Vite",
         "Radix UI",
         "D3.js",
@@ -467,17 +461,6 @@ export const techStrip = {
         "WCAG 2.2",
         "Moodle",
         "Canvas API",
-      ],
-    },
-    {
-      id: "design",
-      label: "UI / UX",
-      items: [
-        "Figma",
-        "Design Tokens",
-        "Prototyping",
-        "Accessibility Audits",
-        "Usability Testing With Learners",
       ],
     },
   ],
@@ -563,7 +546,7 @@ export const partner = {
     {
       icon: "ShieldCheck",
       title: "Flexibility With Modern Teaching Methods",
-      body: "Learning methods evolve rapidly. Our mobile EdTech apps support interactive modules, job aids and updated teaching methodologies. Scalable and adaptable, these solutions ensure learners always access effective, up-to-date educational content.",
+      body: "Learning methods evolve rapidly. Our EdTech platforms support interactive modules, job aids and updated teaching methodologies. Scalable and adaptable, these solutions ensure learners always access effective, up-to-date educational content.",
     },
   ],
   stats: [
