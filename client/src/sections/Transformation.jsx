@@ -2,6 +2,8 @@ import { companyStats } from "../data/companyStats.js";
 import { motion } from "framer-motion";
 import { ArrowUpRight, TrendingUp } from "lucide-react";
 import teamImg from "../assets/ai-team-collab.webp";
+import teamImg800 from "../assets/ai-team-collab-800.webp";
+import teamImg1200 from "../assets/ai-team-collab-1200.webp";
 import { METRIC_IMAGE } from "../lib/media";
 
 export default function Transformation() {
@@ -17,6 +19,10 @@ export default function Transformation() {
         <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl2 bg-inverse">
           <img
             src={teamImg}
+            // Same crop at 800/1200/1600w (q85, matching the original): phones
+            // get the 800w file instead of the full 1600w one.
+            srcSet={`${teamImg800} 800w, ${teamImg1200} 1200w, ${teamImg} 1600w`}
+            sizes="(min-width: 1024px) min(46vw, 828px), (min-width: 768px) 44vw, 92vw"
             alt="Engineers working together on laptops to build an AI solution"
             width={1600}
             height={1200}

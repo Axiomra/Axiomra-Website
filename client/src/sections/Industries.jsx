@@ -141,6 +141,10 @@ export default function Industries({ showHeading = true, showStats = true }) {
               src={INDUSTRY_IMAGES[active]}
               alt=""
               aria-hidden="true"
+              // Far below the fold: without this the 200 KB photo is fetched
+              // before first paint and counts against the home page LCP.
+              loading="lazy"
+              decoding="async"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
