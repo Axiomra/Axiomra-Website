@@ -12,6 +12,11 @@ const NAME = "Axiomra Assistant";
 const WELCOME =
   "Hi there! I'm Axiomra Assistant. Ask me about our AI services, pricing, timelines or how we work, and I'll point you in the right direction.";
 
+// Mascot idle routine; see the effect in ChatWidget.
+const IDLE_ROUTINE = ["wave", "spin", "blink", "walk"];
+const FIRST_IDLE_MS = 12000;
+const IDLE_GAP_MS = 10000;
+
 const STORAGE_KEY = "axiomra-chat";
 // The server-side conversation the transcript above belongs to. Kept for the
 // same browser session as the transcript, so the two never drift apart.
@@ -99,7 +104,8 @@ function Avatar() {
 /**
  * "Axiomra Assistant": an animated robot mascot in the corner that opens a
  * streaming chat panel backed by /api/chat. The mascot waves on arrival and
- * when the chat opens, hops on route changes and wiggles while unread.
+ * when the chat opens, hops on route changes and loops through an idle
+ * routine (wave, turn, blink, walk) while the chat is closed.
  */
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -135,12 +141,21 @@ export default function ChatWidget() {
     mascotRef.current?.pageChange();
   }, [pathname]);
 
-  // Nudge first-time visitors until they open the chat.
+  // While the chat is closed the mascot runs a slow routine, one move every
+  // 10s: wave, turn round, blink, walk. Opening the chat pauses it; closing
+  // starts it again from the wave.
   useEffect(() => {
-    if (!unread || open) return;
-    const id = setInterval(() => mascotRef.current?.attention(), 15000);
-    return () => clearInterval(id);
-  }, [unread, open]);
+    if (open) return;
+    let i = 0;
+    let timer;
+    const next = () => {
+      mascotRef.current?.[IDLE_ROUTINE[i % IDLE_ROUTINE.length]]();
+      i += 1;
+      timer = setTimeout(next, IDLE_GAP_MS);
+    };
+    timer = setTimeout(next, FIRST_IDLE_MS);
+    return () => clearTimeout(timer);
+  }, [open]);
 
   useEffect(() => {
     storage.set(STORAGE_KEY, JSON.stringify(messages));

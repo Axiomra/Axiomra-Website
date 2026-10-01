@@ -7,8 +7,15 @@
  * Promise that resolves when the move finishes:
  *   wave()       greeting (visitor arrives / chat opens)
  *   jump()       small hop (also fires when the mascot is clicked)
- *   pageChange() hops right and back on route change
+ *   pageChange() hops left and back on route change
  *   attention()  head/body wiggle to draw the eye
+ *   spin()       turns all the way round with a small hop
+ *   blink()      a deliberate double blink
+ *   walk()       waddles left, back, a short step right and home
+ *
+ * Moves on the body layer are exclusive: a new one cancels the running one.
+ * The mascot sits in the right-hand corner with ~24px to spare, so every
+ * move travels left and keeps any rightward step under that margin.
  */
 import bodySrc from "../../assets/chat-mascot-body.webp";
 import armSrc from "../../assets/chat-mascot-arm.webp";
@@ -92,12 +99,22 @@ export function mountMascot(host, { width = 160 } = {}) {
   let armAnim = null;
 
   // Exclusive "action" on the jump layer: a new move cancels the running one.
-  const run = (keyframes, duration) => {
+  const run = (keyframes, duration, easing = EASE) => {
     if (still) return done;
     current?.cancel();
-    current = jump.animate(keyframes, { duration, easing: EASE });
+    current = jump.animate(keyframes, { duration, easing });
     return current.finished.catch(() => {});
   };
+
+  const blinkOnce = () =>
+    eyes.animate(
+      [
+        { transform: "scaleY(1)" },
+        { transform: "scaleY(.08)", offset: 0.45 },
+        { transform: "scaleY(1)" },
+      ],
+      { duration: 220, easing: "ease-in-out" }
+    );
 
   if (!still) {
     const loop = { iterations: Infinity, easing: "ease-in-out" };
@@ -128,14 +145,7 @@ export function mountMascot(host, { width = 160 } = {}) {
 
     const blink = (double) => {
       if (dead) return;
-      eyes.animate(
-        [
-          { transform: "scaleY(1)" },
-          { transform: "scaleY(.08)", offset: 0.45 },
-          { transform: "scaleY(1)" },
-        ],
-        { duration: 220, easing: "ease-in-out" }
-      );
+      blinkOnce();
       timers.push(
         setTimeout(() => blink(Math.random() < 0.2), double ? 180 : 2200 + Math.random() * 3200)
       );
@@ -182,11 +192,11 @@ export function mountMascot(host, { width = 160 } = {}) {
         [
           { transform: "translate(0,0) rotate(0) scale(1,1)" },
           { transform: "translate(0,0) rotate(0) scale(1.07,.9)", offset: 0.1 },
-          { transform: "translate(25%,-7%) rotate(6deg) scale(.97,1.05)", offset: 0.26 },
-          { transform: "translate(50%,0) rotate(3deg) scale(1.06,.92)", offset: 0.4 },
-          { transform: "translate(50%,0) rotate(0) scale(1,1)", offset: 0.5 },
-          { transform: "translate(25%,-5%) rotate(-5deg) scale(.98,1.04)", offset: 0.7 },
-          { transform: "translate(0,0) rotate(-2deg) scale(1.05,.94)", offset: 0.88 },
+          { transform: "translate(-25%,-7%) rotate(-6deg) scale(.97,1.05)", offset: 0.26 },
+          { transform: "translate(-50%,0) rotate(-3deg) scale(1.06,.92)", offset: 0.4 },
+          { transform: "translate(-50%,0) rotate(0) scale(1,1)", offset: 0.5 },
+          { transform: "translate(-25%,-5%) rotate(5deg) scale(.98,1.04)", offset: 0.7 },
+          { transform: "translate(0,0) rotate(2deg) scale(1.05,.94)", offset: 0.88 },
           { transform: "translate(0,0) rotate(0) scale(1,1)" },
         ],
         1500
@@ -203,6 +213,65 @@ export function mountMascot(host, { width = 160 } = {}) {
           { transform: "rotate(0)" },
         ],
         1100
+      );
+    },
+    spin() {
+      return run(
+        [
+          { transform: "perspective(600px) translateY(0) rotateY(0) scale(1,1)" },
+          {
+            transform: "perspective(600px) translateY(0) rotateY(0) scale(1.06,.92)",
+            offset: 0.15,
+          },
+          {
+            transform: "perspective(600px) translateY(-6%) rotateY(180deg) scale(1,1)",
+            offset: 0.5,
+          },
+          {
+            transform: "perspective(600px) translateY(0) rotateY(360deg) scale(1.05,.94)",
+            offset: 0.85,
+          },
+          { transform: "perspective(600px) translateY(0) rotateY(360deg) scale(1,1)" },
+        ],
+        1300
+      );
+    },
+    blink() {
+      if (still) return done;
+      blinkOnce();
+      return new Promise((resolve) => {
+        timers.push(setTimeout(() => blinkOnce().finished.then(resolve, resolve), 260));
+      });
+    },
+    walk() {
+      // Alternating lean + bob per step reads as a waddle. Linear timeline,
+      // eased per step, so the travel speed stays even.
+      const step = (x, up, lean) => ({
+        transform: `translate(${x}%,${up ? -2.5 : 0}%) rotate(${lean}deg)`,
+        easing: "ease-in-out",
+      });
+      return run(
+        [
+          step(0, false, 0),
+          step(-12, true, -5),
+          step(-24, false, 4),
+          step(-36, true, -5),
+          step(-48, false, 4),
+          step(-60, true, -5),
+          step(-60, false, 0),
+          step(-60, false, 0),
+          step(-46, true, 5),
+          step(-32, false, -4),
+          step(-18, true, 5),
+          step(-4, false, -4),
+          step(10, true, 5),
+          step(20, false, 0),
+          step(20, false, 0),
+          step(10, true, -5),
+          step(0, false, 0),
+        ],
+        4200,
+        "linear"
       );
     },
     destroy() {
