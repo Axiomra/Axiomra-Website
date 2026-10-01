@@ -122,6 +122,8 @@ export default function TransportationChallenges() {
 
                 <Link
                   to="/contact"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-9 inline-flex items-center gap-3 rounded-full border border-inverse-fg/20 py-2 pl-6 pr-2 text-base font-medium text-inverse-fg transition-colors duration-300 hover:border-accent-vivid focus-ring"
                 >
                   Solve this with us

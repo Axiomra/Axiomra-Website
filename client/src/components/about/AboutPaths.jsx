@@ -53,10 +53,15 @@ export default function AboutPaths() {
                   </p>
                   <Link
                     to="/contact"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="mt-8 inline-flex items-center gap-2 rounded-full bg-inverse-fg px-7 py-3.5 text-base font-medium text-inverse transition-all hover:shadow-glow focus-ring"
                   >
                     {p.ctaText}
-                    <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight
+                      size={18}
+                      className="transition-transform group-hover:translate-x-0.5"
+                    />
                   </Link>
                 </div>
 

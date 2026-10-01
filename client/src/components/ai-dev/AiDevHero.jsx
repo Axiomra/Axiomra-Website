@@ -61,6 +61,8 @@ export default function AiDevHero() {
           >
             <Link
               to="/contact"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 rounded-full bg-[#2563EB] px-8 py-4 text-lg font-semibold text-white transition-transform hover:bg-[#1D4ED8] hover:scale-[1.02] focus-ring"
             >
               {hero.ctaText}

@@ -31,7 +31,7 @@ export default function NlpProcess() {
               end: "bottom 75%",
               scrub: 0.4,
             },
-          },
+          }
         );
 
         steps.forEach((step, i) => {
@@ -88,11 +88,7 @@ export default function NlpProcess() {
   const total = process.steps.length;
 
   return (
-    <section
-      id="nlp-process"
-      ref={root}
-      className="scroll-mt-24 bg-surface-subtle py-20 md:py-28"
-    >
+    <section id="nlp-process" ref={root} className="scroll-mt-24 bg-surface-subtle py-20 md:py-28">
       <div className="mx-auto max-w-8xl px-6">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
           {/* Sticky side: what the section is, and where you are in it */}
@@ -131,6 +127,8 @@ export default function NlpProcess() {
 
             <Link
               to="/contact"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group mt-8 inline-flex items-center gap-2 rounded-full border border-line-strong px-7 py-3.5 text-base font-medium text-content transition-colors hover:border-brand hover:text-brand focus-ring md:text-lg"
             >
               {process.ctaText}
@@ -143,10 +141,7 @@ export default function NlpProcess() {
 
           {/* Scrolling side: the eight stages */}
           <ol data-steps className="relative pl-10 md:pl-14">
-            <span
-              aria-hidden="true"
-              className="absolute bottom-6 left-[7px] top-6 w-px bg-line"
-            />
+            <span aria-hidden="true" className="absolute bottom-6 left-[7px] top-6 w-px bg-line" />
             <span
               data-rail-fill
               aria-hidden="true"

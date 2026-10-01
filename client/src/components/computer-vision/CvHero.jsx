@@ -101,6 +101,8 @@ export default function CvHero() {
               </a>
               <Link
                 to="/contact"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-white/25 px-8 py-4 text-base font-medium text-white transition-colors hover:bg-white/10 focus-ring md:text-lg"
               >
                 {hero.secondaryCtaText}

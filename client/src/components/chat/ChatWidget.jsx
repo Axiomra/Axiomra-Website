@@ -302,6 +302,8 @@ export default function ChatWidget() {
                   {error}{" "}
                   <Link
                     to="/contact"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={closeAfterNavigate}
                     className="font-semibold underline"
                   >

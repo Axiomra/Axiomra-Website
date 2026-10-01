@@ -175,6 +175,8 @@ export default function NlpIntro() {
               <Link
                 data-intro-cta
                 to="/contact"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-line-strong px-8 py-4 text-base font-medium text-content transition-colors hover:border-brand hover:text-brand focus-ring md:text-lg"
               >
                 {hero.secondaryCtaText}

@@ -66,6 +66,8 @@ export default function MarketingBuild() {
           <div data-reveal className="mt-9">
             <Link
               to="/contact"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 rounded-full bg-grad-sky py-2 pl-7 pr-2 text-base font-semibold text-inverse transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 focus-ring md:text-lg"
             >
               {build.ctaText}

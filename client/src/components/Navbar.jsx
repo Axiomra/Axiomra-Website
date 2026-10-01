@@ -303,6 +303,8 @@ export default function Navbar() {
           <ThemeToggle />
           <Link
             to="/contact"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm font-medium px-4 py-2.5 rounded-full border border-white/25 text-white hover:bg-white/10 transition-colors focus-ring"
           >
             Contact us

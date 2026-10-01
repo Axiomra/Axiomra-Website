@@ -38,7 +38,7 @@ export default function NotFoundPage() {
           <Link to={SERVICES_BASE_PATH} className={SECONDARY_LINK}>
             Explore our services
           </Link>
-          <Link to="/contact" className={SECONDARY_LINK}>
+          <Link to="/contact" target="_blank" rel="noopener noreferrer" className={SECONDARY_LINK}>
             Contact us
           </Link>
         </div>

@@ -16,8 +16,7 @@ export default function NlpPotential() {
               eyebrow={potential.eyebrow}
               title={
                 <>
-                  <span className="text-brand">{potential.titleAccent}</span>{" "}
-                  {potential.titleLead}
+                  <span className="text-brand">{potential.titleAccent}</span> {potential.titleLead}
                 </>
               }
               subtitle={potential.intro}
@@ -59,6 +58,8 @@ export default function NlpPotential() {
 
             <Link
               to="/contact"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group mt-9 inline-flex items-center gap-2 rounded-full border border-line-strong px-7 py-3.5 text-base font-medium text-content transition-colors hover:border-brand hover:text-brand focus-ring md:text-lg"
             >
               {potential.ctaText}
@@ -103,7 +104,9 @@ export default function NlpPotential() {
                     <span className="block font-display text-2xl font-semibold text-brand md:text-3xl">
                       {m.value}
                     </span>
-                    <span className="mt-1 block text-xs text-content-dim md:text-sm">{m.label}</span>
+                    <span className="mt-1 block text-xs text-content-dim md:text-sm">
+                      {m.label}
+                    </span>
                   </dd>
                 </div>
               ))}

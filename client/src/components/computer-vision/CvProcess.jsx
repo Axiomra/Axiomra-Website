@@ -26,8 +26,7 @@ export default function CvProcess() {
               {process.eyebrow}
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold leading-[1.12] tracking-tight text-content sm:text-4xl md:text-5xl">
-              {process.titleLead}{" "}
-              <span className="text-brand">{process.titleAccent}</span>
+              {process.titleLead} <span className="text-brand">{process.titleAccent}</span>
               {process.titleTail ? <span className="mt-2 block">{process.titleTail}</span> : null}
             </h2>
           </div>
@@ -39,6 +38,8 @@ export default function CvProcess() {
 
             <Link
               to="/contact"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group mt-7 inline-flex items-center gap-2 rounded-full border border-line-strong px-7 py-3.5 text-base font-medium text-content transition-colors hover:border-brand hover:text-brand focus-ring md:text-lg"
             >
               {process.ctaText}

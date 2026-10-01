@@ -104,6 +104,8 @@ export default function AiDevIndustries() {
 
               <Link
                 to="/contact"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-[#2563EB] px-6 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-ring"
               >
                 Read more

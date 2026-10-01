@@ -60,6 +60,8 @@ export default function SupplyChainServices() {
 
                 <Link
                   to="/contact"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-medium text-brand transition-colors duration-300 hover:text-accent focus-ring"
                 >
                   Contact us
