@@ -84,6 +84,8 @@ export default function AgenticProcess() {
         <div className="mt-12 text-center">
           <Link
             to="/contact"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center gap-2.5 rounded-full bg-grad-sky px-7 py-4 text-base font-semibold text-[#0A1428] shadow-glow transition-transform hover:-translate-y-0.5 focus-ring md:text-lg"
           >
             {process.ctaText}

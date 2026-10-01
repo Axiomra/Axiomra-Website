@@ -76,6 +76,8 @@ export default function AboutHero() {
           >
             <Link
               to="/contact"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 rounded-full bg-grad-sky px-8 py-4 text-lg font-semibold text-inverse transition-transform hover:scale-[1.02] focus-ring"
             >
               {hero.ctaText}

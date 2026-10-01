@@ -25,6 +25,8 @@ import {
  * page yet and renders as plain text rather than an `href="#"` link, which is
  * what used to leave a bare `#` hanging off the current URL.
  */
+const NEW_TAB = { target: "_blank", rel: "noopener noreferrer" };
+
 const LINK_ROUTES = {
   "Artificial Intelligence": `${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`,
   "Computer Vision": `${SERVICES_BASE_PATH}/${COMPUTER_VISION_SLUG}`,
@@ -180,7 +182,12 @@ export default function Footer() {
               We build custom AI solutions that simplify workflows, support better decisions, and
               help businesses measure the value of automation.
             </p>
-            <Link to="/contact" className="discuss-btn group mt-5 focus-ring">
+            <Link
+              to="/contact"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="discuss-btn group mt-5 focus-ring"
+            >
               <span className="discuss-btn__label">Discuss Your Project</span>
               <ArrowUpRight
                 size={20}
@@ -198,7 +205,11 @@ export default function Footer() {
                 {c.links.map((l) => (
                   <li key={l}>
                     {LINK_ROUTES[l] ? (
-                      <Link to={LINK_ROUTES[l]} className={UNDERLINE_LINK}>
+                      <Link
+                        to={LINK_ROUTES[l]}
+                        {...(LINK_ROUTES[l] === "/contact" && NEW_TAB)}
+                        className={UNDERLINE_LINK}
+                      >
                         {l}
                       </Link>
                     ) : (

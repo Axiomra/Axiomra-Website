@@ -118,7 +118,6 @@ export const services = {
         "Implementation roadmap",
         "KPIs and evaluation criteria",
       ],
-      ctaText: "Explore AI Consulting",
       image: consultingStrategy,
       imageAlt:
         "Hand presenting an AI strategy board of planning, forecasting and evaluation panels",
@@ -133,7 +132,6 @@ export const services = {
         "Model monitoring setup",
         "Performance and cost optimisation",
       ],
-      ctaText: "Explore AI Integration",
       image: genAiIntegration,
       imageAlt:
         "Hands typing on a laptop while an AI brain connects out to surrounding API endpoints",
@@ -148,7 +146,6 @@ export const services = {
         "Fine-tuning where appropriate",
         "Quality evaluation and benchmarks",
       ],
-      ctaText: "Explore Custom LLM Solutions",
       image: customLlm,
       imageAlt:
         "Phone held in an open palm showing a generative AI console for text, image, voice, video and code",
@@ -163,7 +160,6 @@ export const services = {
         "Custom AI product capabilities",
         "APIs designed for growth and maintenance",
       ],
-      ctaText: "Explore AI App Development",
       to: `${SERVICES_BASE_PATH}/${AI_DEVELOPMENT_SLUG}`,
       image: appDevelopment,
       imageAlt:
@@ -179,7 +175,6 @@ export const services = {
         "Workflow orchestration",
         "Integration with collaboration and business tools",
       ],
-      ctaText: "Explore AI Agents",
       to: `${SERVICES_BASE_PATH}/${AGENTIC_AI_SLUG}`,
       image: copilotAgents,
       imageAlt: "Developer working with an AI chat assistant docked beside their code editor",
@@ -194,7 +189,6 @@ export const services = {
         "Context-aware search and Q&A",
         "Source references and answer-quality evaluation",
       ],
-      ctaText: "Explore RAG Solutions",
       image: ragDevelopment,
       imageAlt:
         "Laptop feeding charts, records and documents into a central AI profile that returns one answer",
@@ -209,7 +203,6 @@ export const services = {
         "Customer support assistance",
         "Integration with business tools",
       ],
-      ctaText: "Explore Workflow Automation",
       image: workflowAutomation,
       imageAlt:
         "Business user triggering an automated AI workflow across a chain of connected task cards",

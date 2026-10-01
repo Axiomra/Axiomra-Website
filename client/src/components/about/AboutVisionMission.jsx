@@ -61,10 +61,14 @@ function Copy({ block, cta, outline = false }) {
           </>
         )}
       </h2>
-      <p className="copy-justify mt-6 max-w-2xl text-lg leading-relaxed text-content-dim">{block.body}</p>
+      <p className="copy-justify mt-6 max-w-2xl text-lg leading-relaxed text-content-dim">
+        {block.body}
+      </p>
 
       <Link
         to="/contact"
+        target="_blank"
+        rel="noopener noreferrer"
         className="group mt-9 inline-flex items-center gap-2 rounded-full border border-line-strong px-7 py-3.5 text-base font-medium text-content transition-colors hover:border-brand hover:text-brand focus-ring"
       >
         {cta}

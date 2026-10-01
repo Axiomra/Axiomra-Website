@@ -24,7 +24,10 @@ export default function GradientCTA({
   const CtaTag = external ? "a" : Link;
   const ctaProps = external
     ? { href: target, target: "_blank", rel: "noopener noreferrer" }
-    : { to: target };
+    : {
+        to: target,
+        ...(target === "/contact" && { target: "_blank", rel: "noopener noreferrer" }),
+      };
   const button = dark ? "bg-inverse-fg text-inverse" : "bg-[#2563EB] text-white hover:bg-[#1D4ED8]";
 
   return (

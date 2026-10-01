@@ -14,8 +14,7 @@ export default function IndustriesBusinessTypes({ data = businessTypes }) {
           eyebrow={data.eyebrow}
           title={
             <>
-              {data.titleLead}{" "}
-              <span className="text-gradient">{data.titleAccent}</span>
+              {data.titleLead} <span className="text-gradient">{data.titleAccent}</span>
             </>
           }
         />
@@ -38,6 +37,8 @@ export default function IndustriesBusinessTypes({ data = businessTypes }) {
               </p>
               <Link
                 to="/contact"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={`Talk to us about ${row.label}`}
                 className="hidden h-10 w-10 items-center justify-center justify-self-end rounded-full border border-line text-content-faint transition-all duration-300 group-hover:border-brand group-hover:text-brand focus-ring md:col-span-1 md:flex"
               >

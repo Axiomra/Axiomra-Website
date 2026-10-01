@@ -14,8 +14,7 @@ export default function AgenticCaseStudies() {
           eyebrow={caseStudies.eyebrow}
           title={
             <>
-              {caseStudies.titleLead}{" "}
-              <span className="text-brand">{caseStudies.titleAccent}</span>
+              {caseStudies.titleLead} <span className="text-brand">{caseStudies.titleAccent}</span>
             </>
           }
           subtitle={caseStudies.subtitle}
@@ -60,7 +59,9 @@ export default function AgenticCaseStudies() {
                   </dl>
                 </div>
 
-                <div className={`flex flex-col justify-center ${imageFirst ? "lg:order-2" : "lg:order-1"}`}>
+                <div
+                  className={`flex flex-col justify-center ${imageFirst ? "lg:order-2" : "lg:order-1"}`}
+                >
                   <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent md:text-sm">
                     {String(i + 1).padStart(2, "0")}: {item.name}
                   </p>
@@ -89,6 +90,8 @@ export default function AgenticCaseStudies() {
 
                   <Link
                     to="/contact"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group mt-8 inline-flex items-center gap-2 self-start font-medium text-brand transition-colors hover:text-accent focus-ring md:text-lg"
                   >
                     Talk about a system like this

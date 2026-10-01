@@ -34,6 +34,8 @@ export default function AiDevProcess() {
 
           <Link
             to="/contact"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group mt-9 inline-flex items-center gap-2.5 rounded-full bg-[#2563EB] px-7 py-4 text-lg font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-ring"
           >
             {process.ctaText}

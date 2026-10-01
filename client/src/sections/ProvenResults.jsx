@@ -113,6 +113,8 @@ export default function ProvenResults() {
 
           <Link
             to="/contact"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group mt-9 inline-flex items-center gap-2.5 rounded-full border border-line px-7 py-4 text-base font-semibold text-content transition-colors hover:border-brand/50 hover:text-brand focus-ring md:text-lg"
           >
             Discuss Your Challenge

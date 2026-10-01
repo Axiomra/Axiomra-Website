@@ -35,6 +35,7 @@ function inline(text, onNavigate) {
         <Link
           key={i}
           to={path}
+          {...(path === "/contact" && { target: "_blank", rel: "noopener noreferrer" })}
           onClick={onNavigate}
           className="font-medium text-brand underline underline-offset-2"
         >
