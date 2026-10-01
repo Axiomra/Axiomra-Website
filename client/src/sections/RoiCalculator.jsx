@@ -12,8 +12,6 @@ import {
   Rocket,
   Sparkles,
   User,
-  Users,
-  Wallet,
   Wrench,
 } from "lucide-react";
 import PhoneField from "../components/PhoneField";
@@ -113,14 +111,9 @@ function Group({ title, options, value, onChange }) {
 
 /** The live budget panel shown on step two and beside the step three form. */
 function Estimate({ result }) {
-  const stats = [
-    { icon: CalendarClock, label: "Est. duration", value: `${result.weeks} weeks` },
-    { icon: Users, label: "Team size", value: `${result.team} specialists` },
-    { icon: Wallet, label: "Run cost / month", value: `~${money(result.monthlyRun)}` },
-  ];
   return (
-    <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#1E3A8A] via-[#1D4ED8] to-[#2563EB] p-6 text-white md:p-8">
-      <p className="text-center text-sm text-white/80">Your Estimated Budget Range</p>
+    <div className="rounded-xl border-2 border-[#4FA8E0]/40 bg-[#4FA8E0]/10 p-6 md:p-8">
+      <p className="text-center text-sm text-content-dim">Your Estimated Budget Range</p>
       <AnimatePresence mode="wait">
         <motion.p
           key={`${result.low}-${result.high}`}
@@ -128,23 +121,12 @@ function Estimate({ result }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.25 }}
-          className="mt-3 text-center font-display text-5xl font-bold tabular-nums md:text-6xl"
+          className="mt-3 text-center font-display text-5xl font-bold tabular-nums text-[#1F78B4] dark:text-[#7CC2EE] md:text-6xl"
           aria-live="polite"
         >
           {money(result.low)} – {money(result.high)}
         </motion.p>
       </AnimatePresence>
-      <div className="mt-6 grid gap-3 sm:grid-cols-3">
-        {stats.map(({ icon: Icon, label, value }) => (
-          <div key={label} className="rounded-lg bg-white/10 px-4 py-3 text-center">
-            <p className="flex items-center justify-center gap-1.5 text-xs uppercase tracking-[0.14em] text-white/65">
-              <Icon size={13} className="text-[#9FD3F5]" aria-hidden="true" />
-              {label}
-            </p>
-            <p className="mt-1 font-display text-lg font-semibold">{value}</p>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }

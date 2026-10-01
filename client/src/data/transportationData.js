@@ -24,7 +24,6 @@ import midCtaBgImg from "../assets/industries/transportation/midcta-bg.webp";
 import svcCustomImg from "../assets/industries/transportation/svc-custom.webp";
 import svcMvpImg from "../assets/industries/transportation/svc-mvp.webp";
 import svcApiImg from "../assets/industries/transportation/svc-api.webp";
-import svcMobileImg from "../assets/industries/transportation/svc-mobile.webp";
 import svcModernImg from "../assets/industries/transportation/svc-modern.webp";
 
 import modeTruckingImg from "../assets/industries/transportation/mode-trucking.webp";
@@ -250,19 +249,6 @@ export const services = {
       alt: "Server racks lit in blue inside a data centre aisle",
     },
     {
-      title: "Driver, Rider & Field Mobile Apps",
-      body: "The apps used in a cab, on a platform or at a loading bay. Offline-first, low-bandwidth, glove-friendly, and built so a scan, a signature or a proof of delivery survives the twenty minutes with no signal that your network definitely has.",
-      extra:
-        "We instrument the field experience properly, so product decisions come from what drivers and riders actually do rather than from what a workshop assumed they would do.",
-      points: [
-        "Offline-first sync with conflict handling, not a spinner over a dead connection",
-        "Navigation, ePOD, scanning and messaging in one app, not four",
-        "Battery, data and one-handed use treated as hard requirements",
-      ],
-      image: svcMobileImg,
-      alt: "Hands on a steering wheel with a navigation app running on a dash-mounted phone",
-    },
-    {
       title: "Legacy Modernisation & Cloud Migration",
       body: "Most operators do not start from nothing; they start from a TMS older than half the fleet. We wrap it in a stable API, move capability out module by module, and retire the original only once its replacement has run a full peak.",
       extra:
@@ -478,18 +464,8 @@ export const techStrip = {
     },
     {
       id: "mobile",
-      label: "Mobile & IoT",
-      items: [
-        "React Native",
-        "Flutter",
-        "Swift",
-        "Kotlin",
-        "WatermelonDB",
-        "AWS IoT Core",
-        "Azure IoT Hub",
-        "Geotab",
-        "Samsara APIs",
-      ],
+      label: "IoT & Telematics",
+      items: ["AWS IoT Core", "Azure IoT Hub", "Geotab", "Samsara APIs"],
     },
     {
       id: "cloud",
@@ -518,17 +494,6 @@ export const techStrip = {
         "Prometheus",
         "Grafana",
         "Sentry",
-      ],
-    },
-    {
-      id: "design",
-      label: "UI / UX",
-      items: [
-        "Figma",
-        "Design Tokens",
-        "Prototyping",
-        "WCAG 2.2 Audits",
-        "Field Usability Testing",
       ],
     },
   ],

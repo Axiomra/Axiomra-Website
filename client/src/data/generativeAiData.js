@@ -156,10 +156,10 @@ export const services = {
     {
       id: "generative-ai-app-development",
       title: "Generative AI Application Development",
-      body: "Turn your idea into a usable AI application for web or mobile. We develop writing assistants, AI search tools, content generation applications, and AI features for SaaS products.",
+      body: "Turn your idea into a usable AI web application. We develop writing assistants, AI search tools, content generation applications, and AI features for SaaS products.",
       bullets: [
         "Application design and development",
-        "Web and mobile integration",
+        "Web and SaaS integration",
         "Custom AI product capabilities",
         "APIs designed for growth and maintenance",
       ],

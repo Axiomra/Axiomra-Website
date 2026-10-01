@@ -138,10 +138,10 @@ app.post("/api/chat", chatLimiter);
 // dashboard instead of a bare 404. `/status.json` deliberately sits outside
 // `/api` so the page's polling is not charged against the API rate limit.
 app.get("/", (req, res) => {
-  res.type("html").send(renderStatusPage());
+  res.type("html").send(renderStatusPage(req.app));
 });
 
-app.get("/status.json", (req, res) => res.json(statusPayload()));
+app.get("/status.json", (req, res) => res.json(statusPayload(req.app)));
 
 // `mailer` makes a missing GMAIL/APP_PASSWORD visible without submitting a
 // real lead and waiting to see whether an email lands.

@@ -208,7 +208,6 @@ export const stackGroups = [
       { name: "Tailwind CSS", slug: "tailwindcss" },
       { name: "Framer Motion", slug: "framer" },
       { name: "Three.js", slug: "threedotjs" },
-      { name: "React Native", slug: "react" },
       { name: "Vite", slug: "vite" },
       { name: "Radix UI", slug: "radixui" },
       { name: "TanStack Query", slug: "reactquery" },
@@ -240,10 +239,10 @@ export const stackGroups = [
   },
   {
     id: "quality-design",
-    label: "Quality & Design",
-    title: "Quality & Product Design",
+    label: "Quality & Testing",
+    title: "Quality Assurance & Testing",
     description:
-      "Test coverage that catches regressions and interface work that starts from the task, not from a template.",
+      "Test coverage that catches regressions before your users do, with accessibility checked as part of every release.",
     items: [
       { name: "Cypress", slug: "cypress" },
       { name: "Vitest", slug: "vitest" },
@@ -252,11 +251,8 @@ export const stackGroups = [
       { name: "Postman", slug: "postman" },
       { name: "k6", slug: "k6" },
       { name: "Burp Suite", slug: "burpsuite" },
-      { name: "Figma", slug: "figma" },
       { name: "Playwright" },
-      { name: "Design Tokens" },
       { name: "WCAG 2.2 Audits" },
-      { name: "Usability Testing" },
     ],
   },
 ];

@@ -390,8 +390,6 @@ export const techStrip = {
         "Mapbox GL",
         "Deck.gl",
         "D3.js",
-        "React Native",
-        "Flutter",
         "Vite",
       ],
     },
@@ -435,11 +433,6 @@ export const techStrip = {
       id: "sqa",
       label: "SQA",
       items: ["Playwright", "Cypress", "Vitest", "Jest", "pytest", "k6", "Lighthouse CI", "Axe"],
-    },
-    {
-      id: "uiux",
-      label: "UI / UX",
-      items: ["Figma", "Design tokens", "WCAG 2.2 AA", "Storybook", "Maze", "Hotjar"],
     },
   ],
 };

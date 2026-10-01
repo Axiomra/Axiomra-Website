@@ -504,8 +504,6 @@ export const techStrip = {
         "Three.js",
         "D3.js",
         "TradingView Charts",
-        "React Native",
-        "Flutter",
         "Vite",
         "Radix UI",
       ],
@@ -554,11 +552,6 @@ export const techStrip = {
         "Zero-trust networking",
         "Penetration testing",
       ],
-    },
-    {
-      id: "design",
-      label: "UI / UX",
-      items: ["Figma", "Design Tokens", "Prototyping", "WCAG 2.2 Audits", "Usability Testing"],
     },
   ],
 };

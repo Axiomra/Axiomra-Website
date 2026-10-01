@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { mailerConfigured } from "./mailer.js";
+import { requireAuth } from "./lib/auth.js";
 
 // The process start is captured at module load. On Vercel this resets with
 // every cold start, which is exactly what the page should report: it is the
@@ -13,56 +14,87 @@ const DB_STATES = {
   3: { label: "Disconnecting", tone: "warn" },
 };
 
-const ENDPOINTS = [
-  {
-    method: "GET",
-    path: "/api/health",
-    desc: "Liveness probe with mailer configuration state.",
-    auth: null,
-  },
-  {
-    method: "POST",
-    path: "/api/contact",
-    desc: "Persist a contact enquiry and email the team.",
-    auth: null,
-  },
-  {
-    method: "POST",
-    path: "/api/auth/login",
-    desc: "Admin sign-in. Sets an httpOnly session cookie.",
-    auth: null,
-  },
-  {
-    method: "POST",
-    path: "/api/auth/forgot-password",
-    desc: "Email a single-use password reset link.",
-    auth: null,
-  },
-  {
-    method: "GET",
-    path: "/api/leads",
-    desc: "Search, filter and page through leads.",
-    auth: "Admin JWT",
-  },
-  {
-    method: "POST",
-    path: "/api/leads",
-    desc: "Create a lead by hand from the admin panel.",
-    auth: "Admin JWT",
-  },
-  {
-    method: "PATCH",
-    path: "/api/leads/:id",
-    desc: "Update one or more fields on a lead.",
-    auth: "Admin JWT",
-  },
-  {
-    method: "DELETE",
-    path: "/api/leads/:id",
-    desc: "Permanently remove a lead.",
-    auth: "Admin JWT",
-  },
-];
+// Descriptions for the endpoint list. The list itself is read from the
+// mounted routes (see listEndpoints), so a new route shows up on its own; add
+// a line here to give it a description.
+const DESCRIPTIONS = {
+  "GET /api/health": "Liveness probe with mailer configuration state.",
+  "POST /api/contact": "Persist a contact enquiry and email the team.",
+  "POST /api/chat": "Site assistant. Streams the reply as server-sent events.",
+  "POST /api/auth/login": "Admin sign-in. Sets an httpOnly session cookie.",
+  "POST /api/auth/logout": "Clear the admin session cookie.",
+  "GET /api/auth/me": "Session probe the admin panel runs on load.",
+  "POST /api/auth/forgot-password": "Email a single-use password reset link.",
+  "POST /api/auth/reset-password": "Set a new password from a reset link.",
+  "GET /api/auth/reset-requirements": "What a password reset asks for.",
+  "POST /api/auth/change-password": "Change the signed-in admin's password.",
+  "GET /api/leads": "Search, filter and page through leads.",
+  "GET /api/leads/stats": "Lead counts for the dashboard.",
+  "GET /api/leads/export": "Download leads as a file.",
+  "GET /api/leads/:id": "Fetch one lead.",
+  "GET /api/leads/:id/related": "Other leads from the same contact.",
+  "POST /api/leads": "Create a lead by hand from the admin panel.",
+  "PUT /api/leads/:id": "Replace a lead's fields.",
+  "PATCH /api/leads/:id": "Update one or more fields on a lead.",
+  "DELETE /api/leads/:id": "Permanently remove a lead.",
+  "GET /api/lead-fields": "Custom lead columns, in display order.",
+  "POST /api/lead-fields": "Add a custom lead column.",
+  "PATCH /api/lead-fields/:id": "Rename or resize a custom column.",
+  "DELETE /api/lead-fields/:id": "Drop a custom column and its values.",
+  "GET /api/blogs": "Published posts, newest first.",
+  "GET /api/blogs/admin/all": "Every post, drafts included.",
+  "POST /api/blogs": "Create a blog post.",
+  "PATCH /api/blogs/:id": "Edit, publish or unpublish a post.",
+  "DELETE /api/blogs/:id": "Delete a blog post.",
+  "GET /api/blogs/:slug": "One published post.",
+  "GET /api/rag/debug": "Development-only retrieval inspector.",
+};
+
+// Express 4 keeps a mount path only as a compiled regexp, e.g.
+// /^\/api\/chat\/?(?=\/|$)/i. Turn that back into "/api/chat".
+function mountPath(layer) {
+  if (layer.regexp.fast_slash) return "";
+  return layer.regexp.source
+    .replace(/^\^/, "")
+    .replace(/\\\/\?\(\?=\\\/\|\$\)$/, "")
+    .replace(/\\\//g, "/");
+}
+
+/**
+ * Every /api route the app actually mounts, in registration order. A route is
+ * marked admin-only when requireAuth sits in its own handler chain or was
+ * applied with router.use() ahead of it.
+ */
+function listEndpoints(app) {
+  const seen = new Map();
+  const walk = (stack, prefix, guarded) => {
+    for (const layer of stack) {
+      if (layer.handle === requireAuth) {
+        guarded = true;
+      } else if (layer.route) {
+        const path = prefix + (layer.route.path === "/" && prefix ? "" : layer.route.path);
+        if (!path.startsWith("/api/")) continue;
+        const auth = guarded || layer.route.stack.some((l) => l.handle === requireAuth);
+        for (const method of Object.keys(layer.route.methods)) {
+          const key = `${method.toUpperCase()} ${path}`;
+          const prev = seen.get(key);
+          // Rate limiters are attached as app-level routes on the same path;
+          // keep the first entry but let the real handler's auth win.
+          if (prev) prev.auth ||= auth ? "Admin JWT" : null;
+          else
+            seen.set(key, { method: method.toUpperCase(), path, auth: auth ? "Admin JWT" : null });
+        }
+      } else if (layer.name === "router") {
+        walk(layer.handle.stack, prefix + mountPath(layer), guarded);
+      }
+    }
+  };
+  walk(app._router?.stack || [], "", false);
+  return [...seen.values()].map((e) => ({
+    ...e,
+    desc: DESCRIPTIONS[`${e.method} ${e.path}`] || "",
+  }));
+}
 
 // A deployed backend answers to anyone who knows its URL, and the client
 // bundle inlines that URL at build time, so treat every deployment as public.
@@ -71,7 +103,7 @@ function isPublicDeployment() {
 }
 
 /** Machine-readable snapshot, shared by the HTML page and /status.json. */
-export function statusPayload() {
+export function statusPayload(app) {
   const db = DB_STATES[mongoose.connection.readyState] || DB_STATES[0];
   const mem = process.memoryUsage();
   // The Atlas hostname is infrastructure detail with no reason to be on a
@@ -91,18 +123,22 @@ export function statusPayload() {
       ? { state: "Configured", tone: "up" }
       : { state: "Disabled", tone: "warn" },
     memoryMb: Math.round((mem.rss / 1024 / 1024) * 10) / 10,
-    endpoints: ENDPOINTS,
+    endpoints: listEndpoints(app),
   };
 }
 
 function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, (c) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;",
-  })[c]);
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    (c) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      })[c]
+  );
 }
 
 function statCard(label, value, sub, tone) {
@@ -120,14 +156,14 @@ function endpointRow(e) {
     <li class="endpoint">
       <span class="verb verb-${e.method.toLowerCase()}">${e.method}</span>
       <code class="path">${escapeHtml(e.path)}</code>
-      <span class="endpoint-desc">${escapeHtml(e.desc)}</span>
+      ${e.desc ? `<span class="endpoint-desc">${escapeHtml(e.desc)}</span>` : ""}
       ${e.auth ? `<span class="lock">${escapeHtml(e.auth)}</span>` : ""}
     </li>`;
 }
 
 /** Full HTML landing page rendered at the API root. */
-export function renderStatusPage() {
-  const s = statusPayload();
+export function renderStatusPage(app) {
+  const s = statusPayload(app);
   return `<!doctype html>
 <html lang="en" data-uptime="${s.uptimeMs}">
 <head>

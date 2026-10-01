@@ -28,7 +28,6 @@ import midCtaBgImg from "../assets/industries/marketing/midcta-bg.webp";
 import solTransformationImg from "../assets/industries/marketing/sol-transformation.webp";
 import solConsultingImg from "../assets/industries/marketing/sol-consulting.webp";
 import solProductImg from "../assets/industries/marketing/sol-product.webp";
-import solMobileImg from "../assets/industries/marketing/sol-mobile.webp";
 import solCmsImg from "../assets/industries/marketing/sol-cms.webp";
 import solIntegrationImg from "../assets/industries/marketing/sol-integration.webp";
 
@@ -290,19 +289,6 @@ export const solutions = {
       alt: "A product team mapping a build on a studio whiteboard",
     },
     {
-      title: "Marketing Mobile App Development",
-      body: "Our team designs and develops mobile-first marketing applications that enhance engagement, speed up campaign execution and deliver real-time insights on the go. From customer engagement tools to campaign performance trackers, our apps let marketers manage, monitor and optimise digital activities anytime and anywhere.",
-      extra:
-        "Approvals, budget shifts and creative sign-off are the moments that stall a campaign while someone is away from a desk, so those are the flows we build for the phone first. Everything else stays where it belongs, on the web.",
-      points: [
-        "Native or cross-platform builds sharing one API with your web tooling",
-        "Push-driven approvals, alerts and budget controls for time-critical calls",
-        "Offline-tolerant reporting with store release and update management included",
-      ],
-      image: solMobileImg,
-      alt: "Hands holding a smartphone above a desk with a keyboard",
-    },
-    {
       title: "Custom CMS Integration",
       body: "We integrate and customise CMS platforms to align content operations with AI-powered insights and automated workflows. Our CMS integration services enhance content governance, speed up publishing cycles and improve personalisation across digital channels, whether you work with WordPress, Magento, Shopify, Contentful or a headless stack.",
       extra:
@@ -555,8 +541,6 @@ export const techStrip = {
         "Tailwind CSS",
         "Framer Motion",
         "Three.js",
-        "React Native",
-        "Flutter",
         "Vite",
         "Radix UI",
         "D3.js",
@@ -606,11 +590,6 @@ export const techStrip = {
         "Shopify",
         "Contentful",
       ],
-    },
-    {
-      id: "design",
-      label: "UI / UX",
-      items: ["Figma", "Design Tokens", "Prototyping", "WCAG 2.2 Audits", "Usability Testing"],
     },
   ],
 };
@@ -747,7 +726,7 @@ export const faqs = [
   },
   {
     q: "What services does a marketing software development company provide?",
-    a: "Strategy and AI consulting, custom product development, mobile apps, CMS and CRM integration, data engineering, and the analytics layer on top. We also take on modernisation work where an existing platform needs to keep running while it changes underneath.",
+    a: "Strategy and AI consulting, custom product development, CMS and CRM integration, data engineering, and the analytics layer on top. We also take on modernisation work where an existing platform needs to keep running while it changes underneath.",
   },
   {
     q: "How much does it cost to develop custom marketing management software?",

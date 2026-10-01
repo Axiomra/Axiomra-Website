@@ -20,7 +20,6 @@ import svcLogisticsImg from "../assets/industries/supply-chain/svc-logistics.web
 import svcProcurementImg from "../assets/industries/supply-chain/svc-procurement.webp";
 import svcSupplierImg from "../assets/industries/supply-chain/svc-supplier.webp";
 import svcAnalyticsImg from "../assets/industries/supply-chain/svc-analytics.webp";
-import svcMobileImg from "../assets/industries/supply-chain/svc-mobile.webp";
 
 import midCtaBgImg from "../assets/industries/supply-chain/midcta-bg.webp";
 
@@ -28,7 +27,6 @@ import solConsultingImg from "../assets/industries/supply-chain/sol-consulting.w
 import solEndToEndImg from "../assets/industries/supply-chain/sol-endtoend.webp";
 import solIntegrationImg from "../assets/industries/supply-chain/sol-integration.webp";
 import solControlTowerImg from "../assets/industries/supply-chain/sol-controltower.webp";
-import solMobileImg from "../assets/industries/supply-chain/sol-mobile.webp";
 import solModerniseImg from "../assets/industries/supply-chain/sol-modernise.webp";
 
 import stkDirectorsImg from "../assets/industries/supply-chain/stk-directors.webp";
@@ -219,12 +217,6 @@ export const services = {
       image: svcAnalyticsImg,
       alt: "Interlocking gears representing an analytics pipeline",
     },
-    {
-      title: "Mobile Application Development",
-      body: "We create mobile apps that put key warehouse, logistics and field workflows in the hands of frontline teams to remove paper and delays. It works by enabling scanning, task updates, approvals and issue capture on any device with offline support and push alerts. Our team builds cross-platform apps with Python backends, on-device OCR and computer vision, so actions are simple and timely.",
-      image: svcMobileImg,
-      alt: "A field team reviewing a 3D logistics map on a mobile device",
-    },
   ],
 };
 
@@ -264,12 +256,6 @@ export const solutions = {
       body: "We build a single operating picture across suppliers, plants, carriers and customers, with exception queues instead of static reports. Live ETAs, inventory positions and risk scores sit next to the action each owner can take, so escalations are resolved in the tower rather than over email. Leaders get one number everyone trusts at the daily stand-up.",
       image: solControlTowerImg,
       alt: "A control tower dashboard tracking shipments in real time",
-    },
-    {
-      title: "Mobile and frontline supply chain apps",
-      body: "Warehouse, yard and field teams work on handhelds, not desktops. We ship cross-platform apps for scanning, task updates, proof of delivery and issue capture, with offline support and push alerts so a lost connection never stops the shift. Data lands in your core systems immediately rather than at end of day.",
-      image: solMobileImg,
-      alt: "A driver capturing proof of delivery on a rugged handheld",
     },
     {
       title: "Legacy SCM modernisation",
@@ -528,8 +514,6 @@ export const techStrip = {
         "Deck.gl",
         "Mapbox GL",
         "AG Grid",
-        "React Native",
-        "Flutter",
         "Vite",
       ],
     },
@@ -715,7 +699,7 @@ export const blogs = {
 export const faqs = [
   {
     q: "What services do you offer in supply chain software development?",
-    a: "Strategy and AI consulting, custom platform development across ERP, MRP, WMS, TMS and OMS, AI integration into the systems you already run, mobile apps for frontline teams, data engineering and the analytics layer on top. We also take on modernisation work where a legacy stack has to keep running while it changes underneath.",
+    a: "Strategy and AI consulting, custom platform development across ERP, MRP, WMS, TMS and OMS, AI integration into the systems you already run, data engineering and the analytics layer on top. We also take on modernisation work where a legacy stack has to keep running while it changes underneath.",
   },
   {
     q: "How do you measure ROI for a new platform or AI feature?",

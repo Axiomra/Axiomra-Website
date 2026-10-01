@@ -27,7 +27,7 @@ const tabs = {
     "Celery",
     "NestJS",
   ],
-  Frontend: ["React", "Next.js", "Vue.js", "TypeScript", "React Native", "HTML5", "CSS3"],
+  Frontend: ["React", "Next.js", "Vue.js", "TypeScript", "HTML5", "CSS3"],
   Cloud: ["AWS", "GCP", "Azure", "Docker", "Digital Ocean", "Nginx", "EC2"],
   DevOps: ["GitHub", "GitLab", "CI/CD", "Docker", "Gunicorn"],
   SQA: ["Cypress", "Postman", "Selenium", "Playwright", "JMeter", "Burpsuite"],

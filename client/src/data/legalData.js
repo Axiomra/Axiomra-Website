@@ -274,7 +274,7 @@ export const solutions = {
     },
     {
       title: "Legal App Development",
-      body: "We build secure, intuitive mobile and web applications that bring agility to legal operations. These apps simplify client communication, matter tracking and document sharing while keeping legal data management inside the controls your firm is accountable for, so counsel has access to the file without carrying it on a laptop.",
+      body: "We build secure, intuitive web applications and client portals that bring agility to legal operations. These apps simplify client communication, matter tracking and document sharing while keeping legal data management inside the controls your firm is accountable for, so counsel can reach the file from any browser without carrying it around.",
       image: solAppsImg,
       alt: "A tablet showing a secure legal application",
     },
@@ -508,8 +508,6 @@ export const techStrip = {
         "Slate",
         "PDF.js",
         "TanStack Table",
-        "React Native",
-        "Flutter",
         "Radix UI",
       ],
     },
@@ -560,11 +558,6 @@ export const techStrip = {
         "Zero-trust networking",
         "Penetration testing",
       ],
-    },
-    {
-      id: "design",
-      label: "UI / UX",
-      items: ["Figma", "Design Tokens", "Prototyping", "WCAG 2.2 Audits", "Usability Testing"],
     },
   ],
 };
