@@ -8,6 +8,8 @@
  *     would bring back the flash of the wrong theme.
  *  2. A VITE_API_URL origin missing from connect-src, which would block the
  *     contact form and the admin panel.
+ *  3. A Content-Security-Policy in public/_headers (Cloudflare Pages) that has
+ *     drifted from the one in vercel.json.
  */
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
@@ -33,6 +35,17 @@ const directive = (name) =>
     ?.slice(1) ?? [];
 
 const problems = [];
+
+// public/_headers carries the same headers for Cloudflare Pages. Its CSP must
+// stay byte-identical to vercel.json's, or the two hosts enforce different
+// policies and the checks below only cover one of them.
+const headersFile = readFileSync(path.join(root, "public", "_headers"), "utf8");
+const headersCsp = headersFile.match(/^\s*Content-Security-Policy:\s*(.*?)\s*$/m)?.[1];
+if (!headersCsp) {
+  problems.push("public/_headers has no Content-Security-Policy line");
+} else if (headersCsp !== csp) {
+  problems.push("public/_headers Content-Security-Policy differs from vercel.json");
+}
 
 const html = readFileSync(path.join(root, "dist", "index.html"), "utf8");
 const scriptSrc = directive("script-src");
@@ -60,4 +73,4 @@ if (problems.length) {
   console.error("csp: vercel.json Content-Security-Policy is out of date:\n  " + problems.join("\n  "));
   process.exit(1);
 }
-console.log("csp: inline script hashes and API origin match vercel.json");
+console.log("csp: inline script hashes, API origin and public/_headers match vercel.json");

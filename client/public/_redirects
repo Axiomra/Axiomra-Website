@@ -1,0 +1,9 @@
+# SPA fallback for routes that are not prerendered. Cloudflare Pages applies
+# these rules even when a static file matches, so prerendered routes (/about,
+# /contact, /industries/*, /case-studies/*, ...) must NOT be listed here or
+# their static HTML would be replaced by the empty shell.
+/blogs           /spa  200
+/blogs/:slug     /spa  200
+/service/nlp     /spa  200
+/admin           /spa  200
+/admin/*         /spa  200
