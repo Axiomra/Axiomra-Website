@@ -62,8 +62,8 @@ const baseSchema = z.object({
     "JWT_SECRET must be at least 32 characters when set"
   ),
   ADMIN_PANEL_URL: url("ADMIN_PANEL_URL"),
-  GMAIL: optional,
-  APP_PASSWORD: optional,
+  RESEND_API_KEY: optional,
+  MAIL_FROM: optional,
   CONTACT_NOTIFY_TO: optional,
   REDIS_URL: optional.refine(
     (v) => v === undefined || /^rediss?:\/\//.test(v),
@@ -90,6 +90,15 @@ const schema = baseSchema.superRefine((e, ctx) => {
       code: "custom",
       path: ["REDIS_URL"],
       message: "REDIS_URL is required in production (rate limits need a shared store)",
+    });
+  }
+  // Deployed, a silent no-op mailer loses lead notifications and makes password
+  // reset impossible, so a missing key fails startup instead.
+  if (isDeployed(e) && !e.RESEND_API_KEY) {
+    ctx.addIssue({
+      code: "custom",
+      path: ["RESEND_API_KEY"],
+      message: "RESEND_API_KEY is required in production (lead and password-reset email)",
     });
   }
   // A paid model with no spend ceiling is not a configuration to start with.
@@ -119,6 +128,9 @@ function load() {
 
   if (issues.length) {
     throw new Error(`Invalid environment configuration:\n  - ${issues.join("\n  - ")}`);
+  }
+  if (!parsed.data.RESEND_API_KEY) {
+    console.warn("RESEND_API_KEY is not set: contact and password-reset email are disabled.");
   }
   return { ...parsed.data, allowedOrigins: origins.data };
 }

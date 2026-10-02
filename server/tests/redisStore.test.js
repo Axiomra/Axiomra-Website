@@ -15,7 +15,11 @@ let stop;
 // Boots the way a Vercel deployment does: production mode, shared Redis.
 beforeAll(async () => {
   delete globalThis.__axiomraRedis;
-  ({ app, stop } = await startApp({ NODE_ENV: "production", REDIS_URL: "redis://fake:6379" }));
+  ({ app, stop } = await startApp({
+    NODE_ENV: "production",
+    REDIS_URL: "redis://fake:6379",
+    RESEND_API_KEY: "re_test",
+  }));
 });
 afterAll(() => stop());
 beforeEach(() => fake.reset());

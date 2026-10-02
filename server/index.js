@@ -31,10 +31,7 @@ app.listen(PORT, () => {
   line("Health", dim(`${url}/api/health`));
   line("Snapshot", dim(`${url}/status.json`));
   line("Env", process.env.NODE_ENV || "development");
-  line(
-    "Mailer",
-    mailerConfigured() ? teal("configured") : amber("disabled - set GMAIL / APP_PASSWORD")
-  );
+  line("Mailer", mailerConfigured() ? teal("configured") : amber("disabled - set RESEND_API_KEY"));
 });
 
 connectDB()

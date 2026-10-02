@@ -4,6 +4,7 @@ const BASE = {
   MONGO_URI: "mongodb://127.0.0.1:1/unused",
   CLIENT_ORIGIN: "",
   REDIS_URL: "",
+  RESEND_API_KEY: "",
   OPENAI_API_KEY: "",
   CHAT_DAILY_USD_CAP: "",
 };
@@ -61,6 +62,7 @@ describe("REDIS_URL in production", () => {
       ALLOWED_ORIGINS: "https://a.example",
       NODE_ENV: "production",
       REDIS_URL: "rediss://default:x@example.upstash.io:6379",
+      RESEND_API_KEY: "re_test",
     });
     expect(env.REDIS_URL).toMatch(/^rediss:/);
   });
@@ -68,6 +70,35 @@ describe("REDIS_URL in production", () => {
   it("allows the in-memory store in local development", async () => {
     const env = await loadEnv({ ALLOWED_ORIGINS: "https://a.example", NODE_ENV: "development" });
     expect(env.REDIS_URL).toBeUndefined();
+  });
+});
+
+describe("RESEND_API_KEY", () => {
+  const PROD = {
+    ALLOWED_ORIGINS: "https://a.example",
+    REDIS_URL: "rediss://default:x@example.upstash.io:6379",
+  };
+
+  it.each([
+    ["NODE_ENV=production", { NODE_ENV: "production" }],
+    ["on Vercel", { VERCEL: "1" }],
+  ])("refuses to start without it (%s)", async (_label, vars) => {
+    await expect(loadEnv({ ...PROD, ...vars })).rejects.toThrow(
+      /RESEND_API_KEY is required in production/
+    );
+  });
+
+  it("starts in production when it is set", async () => {
+    const env = await loadEnv({ ...PROD, NODE_ENV: "production", RESEND_API_KEY: "re_test" });
+    expect(env.RESEND_API_KEY).toBe("re_test");
+  });
+
+  it("only warns in local development", async () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const env = await loadEnv({ ALLOWED_ORIGINS: "https://a.example", NODE_ENV: "development" });
+    expect(env.RESEND_API_KEY).toBeUndefined();
+    expect(warn).toHaveBeenCalledWith(expect.stringMatching(/RESEND_API_KEY is not set/));
+    warn.mockRestore();
   });
 });
 

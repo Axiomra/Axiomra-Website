@@ -143,7 +143,7 @@ app.get("/", (req, res) => {
 
 app.get("/status.json", (req, res) => res.json(statusPayload(req.app)));
 
-// `mailer` makes a missing GMAIL/APP_PASSWORD visible without submitting a
+// `mailer` makes a missing RESEND_API_KEY visible without submitting a
 // real lead and waiting to see whether an email lands.
 app.get("/api/health", (req, res) =>
   res.json({ status: "ok", mailer: mailerConfigured() ? "configured" : "disabled" })

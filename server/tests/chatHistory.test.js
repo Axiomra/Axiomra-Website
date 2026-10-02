@@ -40,6 +40,7 @@ beforeAll(async () => {
   delete globalThis.__axiomraRedis;
   ({ app, stop } = await startApp({
     NODE_ENV: "production",
+    RESEND_API_KEY: "re_test",
     REDIS_URL: "redis://fake:6379",
     OPENAI_API_KEY: "test-key",
     CHAT_DAILY_USD_CAP: "100",

@@ -62,7 +62,7 @@ describe("ContactPage form", () => {
       name: "Jane Cooper",
       email: "jane@example.com",
       message: "We need a support chatbot.",
-      website: "",
+      hp_q7v: "",
     });
     expect(typeof body.elapsedMs).toBe("number");
     expect(await screen.findByText("Message sent.")).toBeInTheDocument();
@@ -86,7 +86,7 @@ describe("ContactPage form", () => {
 
   it("keeps the honeypot out of the accessible form", () => {
     setup();
-    const trap = document.querySelector('input[name="website"]');
+    const trap = document.querySelector('input[name="hp_q7v"]');
     expect(trap).toHaveAttribute("tabindex", "-1");
     expect(trap.closest('[aria-hidden="true"]')).not.toBeNull();
   });

@@ -1,44 +1,58 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-// Gmail SMTP with an App Password. Both values live in the environment so the
-// same code works locally and on Vercel; if either is missing we degrade to a
-// no-op rather than breaking the submission.
+// Resend's HTTP API rather than SMTP: hosts like Render block outbound SMTP
+// ports, and an HTTPS call needs no connection pool. With no RESEND_API_KEY we
+// degrade to a no-op rather than breaking the submission (lib/env.js makes the
+// key mandatory once deployed).
 // Read lazily, never at module scope: ESM evaluates this file before app.js
 // reaches its dotenv.config() call, so top-level process.env reads would be
 // undefined in local development.
-function credentials() {
-  return { user: process.env.GMAIL, pass: process.env.APP_PASSWORD };
+const DEFAULT_FROM = "Axiomra <onboarding@resend.dev>";
+
+function apiKey() {
+  return process.env.RESEND_API_KEY?.trim() || undefined;
+}
+
+function sender() {
+  return process.env.MAIL_FROM?.trim() || DEFAULT_FROM;
 }
 
 export function mailerConfigured() {
-  const { user, pass } = credentials();
-  return Boolean(user && pass);
+  return Boolean(apiKey());
 }
 
-// Reuse the transport across warm serverless invocations; building one per
-// request would open a new SMTP handshake every time.
+// Reuse the client across warm serverless invocations.
 let cached = globalThis.__axiomraMailer;
 
-function getTransporter() {
-  const { user, pass } = credentials();
-  if (!user || !pass) return null;
-  if (!cached) {
-    cached = globalThis.__axiomraMailer = nodemailer.createTransport({
-      service: "gmail",
-      auth: { user, pass },
-    });
+function getClient() {
+  const key = apiKey();
+  if (!key) return null;
+  if (!cached || cached.key !== key) {
+    cached = globalThis.__axiomraMailer = new Resend(key);
   }
   return cached;
 }
 
+// The SDK resolves to { data, error } instead of throwing on API errors
+// (bad key, unverified domain, rate limit), so turn those into throws for the
+// callers' catch blocks.
+async function deliver(client, payload) {
+  const { error } = await client.emails.send(payload);
+  if (error) throw new Error(`${error.name}: ${error.message}`);
+}
+
 function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, (c) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;",
-  })[c]);
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    (c) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      })[c]
+  );
 }
 
 function row(label, value) {
@@ -48,16 +62,20 @@ function row(label, value) {
 
 /**
  * Notify the team about a new contact submission.
- * Resolves to true when the mail was accepted by Gmail, false otherwise.
+ * Resolves to true when the mail was accepted by Resend, false otherwise.
  * Never throws; a mail failure must not lose a saved lead.
  */
 export async function sendContactNotification(contact) {
-  const transporter = getTransporter();
-  if (!transporter) return false;
+  const client = getClient();
+  if (!client) return false;
 
-  const from = process.env.GMAIL;
-  // The notification inbox defaults to the sending account itself.
-  const to = process.env.CONTACT_NOTIFY_TO || from;
+  // There is no sending mailbox to fall back to any more, so without an
+  // explicit inbox there is nobody to notify.
+  const to = process.env.CONTACT_NOTIFY_TO?.trim();
+  if (!to) {
+    console.error("Contact notification email skipped: CONTACT_NOTIFY_TO is not set.");
+    return false;
+  }
 
   const { name, email, phone, company, subject, service, message, _id } = contact;
 
@@ -68,8 +86,8 @@ export async function sendContactNotification(contact) {
     : `New enquiry from ${name}${company ? ` (${company})` : ""}`;
 
   try {
-    await transporter.sendMail({
-      from: `"Axiomra Website" <${from}>`,
+    await deliver(client, {
+      from: sender(),
       to,
       // Lets the team hit Reply and answer the lead directly.
       replyTo: email,
@@ -114,23 +132,22 @@ export async function sendContactNotification(contact) {
 
 /**
  * Send an admin password-reset link.
- * Resolves to true when Gmail accepted the message. The caller relies on that:
+ * Resolves to true when Resend accepted the message. The caller relies on that:
  * a false return means the token it just minted must be thrown away, because
  * nobody can have received it.
  */
 export async function sendPasswordResetEmail({ to, name, link, expiresInMinutes }) {
-  const transporter = getTransporter();
-  if (!transporter) {
+  const client = getClient();
+  if (!client) {
     console.error("Password reset email skipped: mailer is not configured.");
     return false;
   }
 
-  const from = process.env.GMAIL;
   const greeting = name ? `Hi ${escapeHtml(name)},` : "Hi,";
 
   try {
-    await transporter.sendMail({
-      from: `"Axiomra" <${from}>`,
+    await deliver(client, {
+      from: sender(),
       to,
       subject: "Reset your Axiomra admin password",
       text: [

@@ -78,7 +78,8 @@ message that names the variable.
 | `ALLOWED_ORIGINS` | yes in production | Comma-separated origins. `*` may stand for part of one hostname label; a bare `*` is refused. `CLIENT_ORIGIN` is the older name and is still read. |
 | `JWT_SECRET` | for the admin panel | At least 32 characters. If unset, admin sign-in answers 503 and the rest of the API keeps working. |
 | `ADMIN_PANEL_URL` | no | Base of the password-reset link. Defaults to the first non-wildcard allowed origin. |
-| `GMAIL`, `APP_PASSWORD`, `CONTACT_NOTIFY_TO` | no | Lead notification email. Leave unset to disable it. |
+| `RESEND_API_KEY` | yes in production | Resend key for lead and password-reset email. Required in production; locally, leave unset to disable email. |
+| `MAIL_FROM`, `CONTACT_NOTIFY_TO` | no | Sender (default `Axiomra <onboarding@resend.dev>`) and the inbox for lead notifications. |
 | `REDIS_URL` | recommended in production | Shared store for rate limits. Without it, each serverless instance counts on its own. |
 
 ### Client

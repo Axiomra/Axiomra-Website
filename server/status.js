@@ -351,7 +351,7 @@ export function renderStatusPage(app) {
   <section class="cards">
     ${statCard("Uptime", "-", "since " + new Date(Date.now() - s.uptimeMs).toUTCString(), "up")}
     ${statCard("Database", s.database.state, s.database.host ? "MongoDB · " + s.database.host : "MongoDB Atlas", s.database.tone)}
-    ${statCard("Mail transport", s.mailer.state, "Gmail SMTP", s.mailer.tone)}
+    ${statCard("Mail transport", s.mailer.state, "Resend API", s.mailer.tone)}
     ${statCard("Environment", s.environment, s.platform, null)}
     ${statCard("Runtime", "Node " + s.node.replace(/^v/, ""), "Express 4 · ESM", null)}
     ${statCard("Memory", s.memoryMb + " MB", "resident set size", null)}

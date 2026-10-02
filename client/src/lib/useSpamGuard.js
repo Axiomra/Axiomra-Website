@@ -17,7 +17,7 @@ export function useSpamGuard() {
 
   /** Extra payload fields for the submission. */
   const signals = () => ({
-    website: honeypotRef.current?.value ?? "",
+    hp_q7v: honeypotRef.current?.value ?? "",
     elapsedMs: Date.now() - openedAt.current,
   });
 

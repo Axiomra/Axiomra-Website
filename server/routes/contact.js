@@ -37,11 +37,11 @@ function validate({ name, email, phone, company, subject, message }) {
   return "";
 }
 
-// Spam traps. `website` is a field real visitors never see (it is positioned off
+// Spam traps. `hp_q7v` is a field real visitors never see (it is positioned off
 // screen and hidden from assistive tech), so any value in it came from a bot
 // filling every input. `elapsedMs` is how long the form was open; a person
 // cannot fill it in under three seconds.
-const HONEYPOT_FIELD = "website";
+const HONEYPOT_FIELD = "hp_q7v";
 const MIN_FILL_MS = 3000;
 
 function looksAutomated(body) {
@@ -68,7 +68,15 @@ router.post("/", async (req, res) => {
     // signal to adapt to, but store nothing and send no email.
     const trapped = looksAutomated(body);
     if (trapped) {
-      console.warn(`Contact submission dropped (${trapped}).`);
+      // Enough to spot a real lead caught by the trap (and reach them), without
+      // logging the honeypot value or the message itself.
+      const email = typeof body.email === "string" ? body.email.trim().slice(0, 254) : "";
+      const hpLength = String(body[HONEYPOT_FIELD] ?? "").length;
+      const elapsed = body.elapsedMs === undefined ? "n/a" : `${body.elapsedMs}ms`;
+      console.warn(
+        `Contact submission dropped (${trapped}): email=${JSON.stringify(email || "none")} ` +
+          `hpLength=${hpLength} elapsed=${JSON.stringify(elapsed)}`
+      );
       return res
         .status(201)
         .json({ success: true, id: new mongoose.Types.ObjectId(), notified: true });

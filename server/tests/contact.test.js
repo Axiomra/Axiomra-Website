@@ -58,7 +58,7 @@ describe("POST /api/contact", () => {
   });
 
   it.each([
-    ["a filled honeypot", { website: "http://spam.example" }],
+    ["a filled honeypot", { hp_q7v: "http://spam.example" }],
     ["a form sent too fast", { elapsedMs: 800 }],
     ["a non-numeric timing value", { elapsedMs: "abc" }],
   ])("answers %s like a success but stores nothing", async (_label, extra) => {
