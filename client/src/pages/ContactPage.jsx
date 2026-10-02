@@ -610,7 +610,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <RoiCalculator />
+      <RoiCalculator solid />
 
       {/* Operations */}
       <section className="relative overflow-hidden px-4 py-24 sm:px-6">
@@ -699,8 +699,6 @@ export default function ContactPage() {
         title="Find the Right AI Opportunity for Your Business"
         subtitle="Book a free AI strategy session to discuss your goals, assess relevant use cases, and identify a practical next step."
         buttonText="Book Your Free AI Strategy Session"
-        dark
-        three
       />
     </>
   );

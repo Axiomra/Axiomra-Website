@@ -139,7 +139,7 @@ const VALIDATORS = {
   phone: (f, country) => validatePhone(f.phone, country, { required: true }),
 };
 
-export default function RoiCalculator() {
+export default function RoiCalculator({ solid = false }) {
   const [step, setStep] = useState(0);
   const [sel, setSel] = useState({
     type: "new",
@@ -243,14 +243,20 @@ export default function RoiCalculator() {
   // overflow-clip, not hidden: the light pools overhang the edges, and a hidden
   // box can still be scrolled sideways when a field inside it takes focus.
   return (
-    <section id="roi-calculator" className="calc-glass relative overflow-clip px-4 py-24 sm:px-6">
+    <section
+      id="roi-calculator"
+      className={`${solid ? "bg-[#E8F1FD] dark:bg-[#12244A]" : "calc-glass"} relative overflow-clip px-4 py-24 sm:px-6`}
+    >
       {/* Soft purple light pools behind the frosted card give the glass
-          something to blur, which is what reads as "glossy". */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <span className="absolute -left-24 top-10 h-80 w-80 rounded-full bg-[#B79CFF]/40 blur-3xl" />
-        <span className="absolute -right-20 top-1/3 h-96 w-96 rounded-full bg-[#9FB7FF]/35 blur-3xl" />
-        <span className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-[#D6B8FF]/40 blur-3xl" />
-      </div>
+          something to blur, which is what reads as "glossy". The solid
+          variant drops them for one flat background colour. */}
+      {!solid && (
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <span className="absolute -left-24 top-10 h-80 w-80 rounded-full bg-[#B79CFF]/40 blur-3xl" />
+          <span className="absolute -right-20 top-1/3 h-96 w-96 rounded-full bg-[#9FB7FF]/35 blur-3xl" />
+          <span className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-[#D6B8FF]/40 blur-3xl" />
+        </div>
+      )}
 
       <div className="relative z-10 mx-auto max-w-6xl">
         <div className="text-center">
