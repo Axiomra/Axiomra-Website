@@ -4,6 +4,6 @@
 # their static HTML would be replaced by the empty shell.
 /blogs           /spa  200
 /blogs/:slug     /spa  200
-/service/nlp     /spa  200
+/service/nlp  /ai-services-and-solutions/natural-language-processing-services  301
 /admin           /spa  200
 /admin/*         /spa  200
