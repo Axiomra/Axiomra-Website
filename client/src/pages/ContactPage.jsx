@@ -35,6 +35,7 @@ import {
   validatePhone,
   validateSubject,
 } from "../lib/validation";
+import RoiCalculator from "../sections/RoiCalculator";
 import Seo from "../seo/Seo";
 import { contactPageSchema } from "../seo/schema";
 
@@ -608,6 +609,8 @@ export default function ContactPage() {
           <ContactForm />
         </div>
       </section>
+
+      <RoiCalculator />
 
       {/* Operations */}
       <section className="relative overflow-hidden px-4 py-24 sm:px-6">

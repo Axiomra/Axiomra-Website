@@ -3,7 +3,7 @@ import logoLight from "../assets/logo-light.webp";
 import iconTeal from "../assets/icon-teal.png";
 import NetworkBackground from "./NetworkBackground";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { afterLoadIdle } from "../lib/idle";
 import { hasPublishedPosts } from "../lib/blogApi";
 import {
@@ -152,11 +152,52 @@ function useHasBlogPosts() {
   return has;
 }
 
+/**
+ * Visibility of the floating buttons. Back to top appears once the visitor is
+ * a screen down. On phones the floating buttons also step aside while the
+ * visitor scrolls down, so they never sit on the content being read, and come
+ * back as soon as they scroll up or reach the end of the page.
+ */
+function useFloatingButtons() {
+  const [state, setState] = useState({ pastFold: false, scrollingDown: false });
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const y = window.scrollY;
+      const delta = y - lastY;
+      // Ignore small jitters (momentum scrolling, address-bar resizes).
+      if (Math.abs(delta) > 8) lastY = y;
+      const nearBottom = window.innerHeight + y >= document.documentElement.scrollHeight - 80;
+      setState((s) => {
+        const pastFold = y > window.innerHeight;
+        let scrollingDown = Math.abs(delta) > 8 ? delta > 0 : s.scrollingDown;
+        if (y < 80 || nearBottom) scrollingDown = false;
+        return s.pastFold === pastFold && s.scrollingDown === scrollingDown
+          ? s
+          : { pastFold, scrollingDown };
+      });
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return state;
+}
+
+// Phones only: slide a floating button out of the way while scrolling down.
+const STEP_ASIDE = "max-sm:pointer-events-none max-sm:translate-y-24 max-sm:opacity-0";
+
 export default function Footer() {
-  // The contact page shows no footer at all, not even on hover.
-  const { pathname } = useLocation();
   const showBlogs = useHasBlogPosts();
-  if (pathname === "/contact") return null;
+  const { pastFold, scrollingDown } = useFloatingButtons();
 
   const columns = showBlogs
     ? cols.map((c) => (c.title === "Quick Links" ? { ...c, links: ["Blogs", ...c.links] } : c))
@@ -246,13 +287,14 @@ export default function Footer() {
       </footer>
 
       {/* Floating buttons live outside the footer body so they stay on screen
-          on every page; the whole footer (these included) renders only when
-          the view is not /contact. */}
+          on every page. */}
       <a
         href={WHATSAPP_URL}
         target="_blank"
         rel="noreferrer"
-        className="fixed bottom-6 left-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-glow transition-transform hover:scale-105 focus-ring"
+        className={`fixed bottom-4 left-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] shadow-glow transition-[transform,opacity] duration-300 hover:scale-105 focus-ring sm:bottom-6 sm:left-6 sm:h-14 sm:w-14 ${
+          scrollingDown ? STEP_ASIDE : ""
+        }`}
         aria-label="Chat on WhatsApp: +1 (657) 520-3444"
       >
         <WhatsAppIcon />
@@ -262,11 +304,20 @@ export default function Footer() {
       </a>
 
       {/* Stacked above the chat mascot (components/chat/ChatWidget.jsx: 80x120 at
-          right 24px, bottom 24px), centred on it. */}
+          right 24px, bottom 24px), centred on it. Hidden until there is
+          somewhere to go back to. */}
       <button
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="fixed bottom-[9.75rem] right-[2.625rem] z-40 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-surface-card text-content shadow-card backdrop-blur transition-colors hover:bg-surface-subtle focus-ring"
+        aria-hidden={!pastFold}
+        tabIndex={pastFold ? undefined : -1}
+        className={`fixed bottom-[9.75rem] right-[2.625rem] z-40 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-surface-card text-content shadow-card backdrop-blur transition-[transform,opacity,background-color] duration-300 hover:bg-surface-subtle focus-ring ${
+          !pastFold
+            ? "pointer-events-none translate-y-2 opacity-0"
+            : scrollingDown
+              ? STEP_ASIDE
+              : ""
+        }`}
         aria-label="Back to top"
       >
         <ArrowUp size={18} />
