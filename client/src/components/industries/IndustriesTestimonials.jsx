@@ -139,11 +139,8 @@ export default function IndustriesTestimonials({ data = testimonials }) {
                 <ChevronLeft size={20} aria-hidden="true" />
               </button>
 
-              <div
-                className="flex items-center gap-2"
-                role="tablist"
-                aria-label="Choose testimonial"
-              >
+              <div className="flex items-center" role="tablist" aria-label="Choose testimonial">
+                {/* 24px touch targets around the small visible dots. */}
                 {items.map((t, i) => (
                   <button
                     key={t.name}
@@ -155,10 +152,14 @@ export default function IndustriesTestimonials({ data = testimonials }) {
                       setDirection(i > index ? 1 : -1);
                       setIndex(i);
                     }}
-                    className={`h-2 rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] focus-ring ${
-                      i === index ? "w-8 bg-grad-sky" : "w-2 bg-line-strong"
-                    }`}
-                  />
+                    className="flex h-6 items-center justify-center rounded-full px-2 focus-ring"
+                  >
+                    <span
+                      className={`h-2 rounded-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+                        i === index ? "w-8 bg-grad-sky" : "w-2 bg-line-strong"
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
 

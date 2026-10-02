@@ -500,15 +500,21 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
           className="absolute inset-x-0 top-full border-b border-inverse-fg/10 bg-inverse shadow-lg"
         >
           <nav className="max-h-[calc(100vh-4rem)] overflow-y-auto px-4 py-4">
-            <NavLink
-              href="/"
-              onClick={close}
-              className="block rounded-md px-3 py-2.5 text-base font-medium text-inverse-fg/85 hover:bg-inverse-fg/10 hover:text-accent-vivid focus-ring"
-            >
-              Home
-            </NavLink>
-
-            {(["services", "industries", "company"] as const).map((section) => {
+            {/* Same items, same order as the desktop bar. */}
+            {NAV_LINKS.map((l) => {
+              if (!("mega" in l) || !l.mega) {
+                return (
+                  <NavLink
+                    key={l.label}
+                    href={l.href}
+                    onClick={close}
+                    className="block rounded-md px-3 py-2.5 text-base font-medium text-inverse-fg/85 hover:bg-inverse-fg/10 hover:text-accent-vivid focus-ring"
+                  >
+                    {l.label}
+                  </NavLink>
+                );
+              }
+              const section = l.mega;
               const cfg = megaConfigs[section];
               const isOpen = openSection === section;
               return (
@@ -519,7 +525,7 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
                     aria-expanded={isOpen}
                     className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-base font-medium text-inverse-fg/85 hover:bg-inverse-fg/10 hover:text-accent-vivid focus-ring"
                   >
-                    {section === "services" ? "Services" : "Industries"}
+                    {l.label}
                     <ChevronDown
                       className={cn(
                         "h-4 w-4 transition-transform duration-200",
@@ -545,14 +551,6 @@ function MobileNav({ fg }: { fg: (typeof TONE)[Tone] }) {
                 </div>
               );
             })}
-
-            <NavLink
-              href={PORTFOLIO_PATH}
-              onClick={close}
-              className="block rounded-md px-3 py-2.5 text-base font-medium text-inverse-fg/85 hover:bg-inverse-fg/10 hover:text-accent-vivid focus-ring"
-            >
-              Portfolio
-            </NavLink>
 
             <div className="mt-2 flex flex-col gap-2 border-t border-inverse-fg/15 pt-3">
               <NavLink

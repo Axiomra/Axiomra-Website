@@ -59,7 +59,7 @@ export default function PortfolioPage() {
       <GradientCTA
         dark
         three
-        title="Stop guessing and start growing with a proven AI partner"
+        title="Stop Guessing And Start Growing With A Proven AI Partner"
         subtitle="Every project on this page started with one conversation. Book a free strategy session and we will map the fastest path from your workflow to a working system."
         buttonText="Get your project done"
       />

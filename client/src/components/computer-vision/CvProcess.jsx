@@ -52,6 +52,7 @@ export default function CvProcess() {
         </div>
 
         {/* Progress rail doubles as a jump control. */}
+        {/* The buttons are 24px tall for touch; the thin bar inside is what shows. */}
         <div className="mt-12 flex gap-2" role="group" aria-label="Jump to a process step">
           {process.steps.map((s, i) => (
             <button
@@ -60,10 +61,14 @@ export default function CvProcess() {
               onClick={() => setStep(i)}
               aria-label={`Step ${i + 1}: ${s.title}`}
               aria-current={i === step ? "step" : undefined}
-              className={`h-1.5 flex-1 rounded-full transition-colors focus-ring ${
-                i <= step ? "bg-brand" : "bg-line"
-              }`}
-            />
+              className="flex h-6 flex-1 items-center rounded-full focus-ring"
+            >
+              <span
+                className={`h-1.5 w-full rounded-full transition-colors ${
+                  i <= step ? "bg-brand" : "bg-line"
+                }`}
+              />
+            </button>
           ))}
         </div>
 
