@@ -28,7 +28,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'sha256-ULwqZKBqXcuHjmIThOjMtIPdX7K+GueRe29yCqBddNU='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com https://i.ytimg.com; font-src 'self'; media-src 'self'; connect-src 'self' https://axiomra-server.vercel.app https://axiomra-backend-server.onrender.com; frame-src https://www.youtube-nocookie.com https://calendar.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' 'sha256-ULwqZKBqXcuHjmIThOjMtIPdX7K+GueRe29yCqBddNU=' 'sha256-VGqCQmOKnxkUCFzsGqw9eXciE35BrduAh+mqmsjTXwQ=' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com https://i.ytimg.com https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self'; media-src 'self'; connect-src 'self' https://axiomra-server.vercel.app https://axiomra-backend-server.onrender.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://www.youtube-nocookie.com https://calendar.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
         },
         { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" },
         { "key": "X-Frame-Options", "value": "DENY" },
